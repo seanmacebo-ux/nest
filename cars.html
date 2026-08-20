@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cars · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="cars.html" aria-current="page">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> 2020+ · automatic · Japanese &amp; Chinese · real prices</div>
+    <h1>The <em>Six-Four</em> Shortlist.</h1>
+    <p class="sub">Every "from" price is a real current AutoTrader listing (Gauteng, automatic, Aug 2026) — not an estimate. 🇯🇵 for reliability, 🇨🇳 for modern-tech value. Rated for your 6'4 frame + a baby seat, with pros and cons on each.</p>
+    <div class="callout car">📷 <b>See it</b> opens real photos of that model · <b>🔎 Find it</b> searches all sellers (AutoTrader, Cars.co.za, WeBuyCars, Gumtree). Tap a car, look, tell me <b>yes/no</b> — that's how we lock your taste. ⚠️ Honda WR-V dropped: it's manual-only in SA.</div>
+  </header>
+
+  <div class="filterbar">
+    <div class="fgroup"><span class="lbl">Origin</span>
+      <button class="chip" data-f="origin" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="origin" data-v="jp" aria-pressed="false">🇯🇵 Japanese</button>
+      <button class="chip" data-f="origin" data-v="cn" aria-pressed="false">🇨🇳 Chinese</button>
+    </div>
+    <div class="fgroup"><span class="lbl">Body</span>
+      <button class="chip" data-f="body" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="body" data-v="suv" aria-pressed="false">SUV</button>
+      <button class="chip" data-f="body" data-v="hatch" aria-pressed="false">Hatch</button>
+      <button class="chip" data-f="body" data-v="sedan" aria-pressed="false">Sedan</button>
+    </div>
+    <div class="fgroup"><span class="lbl">Budget</span>
+      <button class="chip" data-f="tier" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="tier" data-v="cash" aria-pressed="false">From ≤R260k</button>
+      <button class="chip" data-f="tier" data-v="finance" aria-pressed="false">Finance</button>
+    </div>
+    <span class="count" id="count">25 cars</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">No cars match that combo — widen a filter.</div>
+
+  <div class="note">
+    <h4>How to use this + the honest trade</h4>
+    <p><b>The one test that beats every rating:</b> sit in the car with the seat all the way back to where you'd drive, then fit a rear-facing baby seat behind you. Knees clear + seat still fits = it passes. At 6'4 the brochure lies; your legs don't.</p>
+    <p><b>Japanese vs Chinese:</b> Japanese = proven + best resale. Chinese = more car, tech and warranty for less, but softer resale and a shorter track record — the transferable warranties (Haval 7yr, Chery 5yr+) cover the baby years. Both smart; it's a priorities call.</p>
+    <p><b>Real-value standouts right now:</b> Nissan Magnite (2025, from R219,900), MG ZS (2026, from R229,900), Chery Tiggo 4 Pro (from R229,900), and the cheap-runners Mazda2 / Swift / Starlet under R220k.</p>
+  </div>
+
+  <div class="foot">CARS · real AutoTrader prices, Gauteng, Aug 2026 · prices move — re-check when buying · The Nest</div>
+</div>
+
+<script>
+const CARS = [
+  // CHINESE
+  {o:"cn",b:"suv",t:"finance",pick:1,brand:"🇨🇳 Haval",name:"Jolion",body:"Crossover · 2021+",from:"R289,995",note:"from · 2024, 27k km",r:["gd","ex","au"],pro:["Huge screen + tech","7yr warranty transfers"],con:["Softer resale","Newer brand record"],img:"2022 Haval Jolion South Africa",find:"Haval Jolion 2022 for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",brand:"🇨🇳 Haval",name:"H6",body:"Mid SUV · 2021+",from:"R319,880",note:"from · 2022",r:["ex","ex","au"],pro:["Plush, premium feel","Very spacious"],con:["Thirstier","Resale unproven"],img:"2022 Haval H6 South Africa",find:"Haval H6 2022 for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",pick:1,brand:"🇨🇳 Chery",name:"Tiggo 4 Pro",body:"Compact SUV · 2022+",from:"R229,900",note:"from · 2024",r:["gd","gd","au"],pro:["Best-value SUV here","Long warranty"],con:["CVT drone","Brand resale"],img:"2023 Chery Tiggo 4 Pro South Africa",find:"Chery Tiggo 4 Pro 2023 for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",brand:"🇨🇳 Chery",name:"Tiggo 7 Pro",body:"SUV · 2022+",from:"R289,900",note:"from · 2024",r:["ex","ex","au"],pro:["Big, plush cabin","Twin screens"],con:["Heavier on fuel","Resale"],img:"2023 Chery Tiggo 7 Pro South Africa",find:"Chery Tiggo 7 Pro 2023 for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",brand:"🇨🇳 Chery",name:"Tiggo Cross",body:"Crossover · 2023+",from:"R288,900",note:"from · 2026, 800km",r:["gd","gd","au"],pro:["Newest, hybrid options","Frugal"],con:["Very new","Thin used history"],img:"2024 Chery Tiggo Cross South Africa",find:"Chery Tiggo Cross for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",pick:1,brand:"🇨🇳 Omoda",name:"C5",body:"Crossover · 2022+",from:"R288,890",note:"from · 2025, 16k km",r:["gd","gd","au"],pro:["Best-looking Chinese car","Loaded with tech"],con:["Firm ride","Resale unknown"],img:"2023 Omoda C5 South Africa",find:"Omoda C5 2023 for sale South Africa"},
+  {o:"cn",b:"suv",t:"cash",pick:1,brand:"🇨🇳 MG",name:"ZS",body:"Compact SUV · 2021+",from:"R229,900",note:"from · 2026, 9.7k km 🔥",r:["gd","gd","au"],pro:["Near-new for R230k","Established dealers"],con:["Older tech vs rivals","Modest power"],img:"2022 MG ZS South Africa",find:"MG ZS 2022 for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",brand:"🇨🇳 Jaecoo",name:"J7",body:"SUV · 2023+",from:"~R400k",note:"premium · thin stock",r:["ex","ex","au"],pro:["Range-Rover looks","Premium + spacious"],con:["Top of budget","Very new brand"],img:"2024 Jaecoo J7 South Africa",find:"Jaecoo J7 for sale South Africa"},
+  {o:"cn",b:"suv",t:"finance",brand:"🇨🇳 Jetour",name:"Dashing",body:"SUV · 2023+",from:"~R350k",note:"premium · thin stock",r:["ex","ex","au"],pro:["Bold big SUV","Loads of space + tech"],con:["Newest brand, unproven","Pricey"],img:"2024 Jetour Dashing South Africa",find:"Jetour Dashing for sale South Africa"},
+  // JAPANESE SUV
+  {o:"jp",b:"suv",t:"finance",pick:1,brand:"🇯🇵 Toyota",name:"Corolla Cross",body:"Crossover · 2021+",from:"R274,999",note:"from · 2023 (private)",r:["gd","ex","au"],pro:["Toyota reliability + resale","Hybrid options, big boot"],con:["Pricier","A bit plain"],img:"2022 Toyota Corolla Cross South Africa",find:"Toyota Corolla Cross 2022 for sale South Africa"},
+  {o:"jp",b:"suv",t:"cash",pick:1,brand:"🇯🇵 Suzuki",name:"Fronx",body:"Crossover-coupé · 2023+",from:"R259,900",note:"from · 2024",r:["gd","gd","au"],pro:["Fresh coupé-SUV looks","Very cheap to run"],con:["Small boot","Firm-ish ride"],img:"2024 Suzuki Fronx South Africa",find:"Suzuki Fronx for sale South Africa"},
+  {o:"jp",b:"suv",t:"cash",brand:"🇯🇵 Toyota",name:"Urban Cruiser",body:"Compact SUV · 2021+",from:"R253,505",note:"from · 2022",r:["gd","gd","au"],pro:["Toyota badge + backup","Frugal"],con:["Suzuki-basic inside","Modest power"],img:"2022 Toyota Urban Cruiser South Africa",find:"Toyota Urban Cruiser 2022 for sale South Africa"},
+  {o:"jp",b:"suv",t:"cash",pick:1,brand:"🇯🇵 Nissan",name:"Magnite",body:"Compact SUV · 2021+",from:"R219,900",note:"from · 2025, 14k km 🔥",r:["gd","gd","au"],pro:["Cheapest near-new here","Bold styling"],con:["Tight cabin for 6'4","Small"],img:"2022 Nissan Magnite South Africa",find:"Nissan Magnite 2022 for sale South Africa"},
+  {o:"jp",b:"suv",t:"finance",brand:"🇯🇵 Mitsubishi",name:"Xpander",body:"MPV · 7-seat · 2021+",from:"R289,950",note:"from",r:["ex","ex","au"],pro:["SUV looks, MPV space, 7-seat","Tall + easy capsule"],con:["Soft handling","Not premium"],img:"2022 Mitsubishi Xpander South Africa",find:"Mitsubishi Xpander 2022 for sale South Africa"},
+  {o:"jp",b:"suv",t:"finance",brand:"🇯🇵 Suzuki",name:"Grand Vitara",body:"SUV · 2022+",from:"R304,500",note:"from",r:["gd","gd","au"],pro:["Hybrid options, frugal","Roomy"],con:["Pricey","Base kit modest"],img:"2023 Suzuki Grand Vitara South Africa",find:"Suzuki Grand Vitara for sale South Africa"},
+  {o:"jp",b:"suv",t:"cash",pick:1,brand:"🇯🇵 Mazda",name:"CX-30",body:"Crossover · 2020+",from:"R245,900",note:"from · 2022 Active",r:["gd","gd","au"],pro:["Best-looking on the list","Near-premium cabin"],con:["Small boot","Top trims pricey"],img:"2021 Mazda CX-30 South Africa",find:"Mazda CX-30 for sale South Africa"},
+  {o:"jp",b:"suv",t:"cash",brand:"🇯🇵 Mazda",name:"CX-3",body:"Crossover · 2020+",from:"R249,800",note:"from · 2020",r:["gd","gd","au"],pro:["Gorgeous small SUV","Sweet to drive"],con:["Tight rear + boot","Ageing model"],img:"2021 Mazda CX-3 South Africa",find:"Mazda CX-3 for sale South Africa"},
+  {o:"jp",b:"suv",t:"finance",brand:"🇯🇵 Toyota",name:"Rumion",body:"MPV · 7-seat · 2023+",from:"R359,900",note:"from · pricey now",r:["gd","ex","au"],pro:["7-seat, tall, Toyota badge","Easy capsule access"],con:["Expensive now","Plain"],img:"2023 Toyota Rumion South Africa",find:"Toyota Rumion for sale South Africa"},
+  // JAPANESE HATCH
+  {o:"jp",b:"hatch",t:"cash",brand:"🇯🇵 Toyota",name:"Starlet",body:"Hatchback · 2020+",from:"R218,800",note:"from · 2023",r:["gd","gd","au"],pro:["Roomy, Toyota backup","Cheap to run"],con:["Suzuki-basic","Modest power"],img:"2022 Toyota Starlet South Africa",find:"Toyota Starlet 2022 for sale South Africa"},
+  {o:"jp",b:"hatch",t:"cash",brand:"🇯🇵 Suzuki",name:"Baleno",body:"Hatchback · 2022+",from:"R229,995",note:"from · 2024, 18k km",r:["gd","gd","au"],pro:["Roomiest small hatch","Cheapest to run"],con:["Light feel","Basic kit"],img:"2023 Suzuki Baleno South Africa",find:"Suzuki Baleno 2023 for sale South Africa"},
+  {o:"jp",b:"hatch",t:"cash",brand:"🇯🇵 Mazda",name:"Mazda2",body:"Hatchback · 2020+",from:"R189,890",note:"from · cheapest here",r:["gd","gd","au"],pro:["Prettiest supermini","Premium feel inside"],con:["Small","Tight rear"],img:"2021 Mazda2 South Africa",find:"Mazda2 for sale South Africa"},
+  {o:"jp",b:"hatch",t:"cash",brand:"🇯🇵 Suzuki",name:"Swift",body:"Hatchback · 2021+",from:"R199,899",note:"from",r:["tt","tt","au"],pro:["Cheeky modern look","Cheapest to run"],con:["Tight for 6'4 — sit in it","Small rear"],img:"2022 Suzuki Swift South Africa",find:"Suzuki Swift 2022 for sale South Africa"},
+  // JAPANESE SEDAN
+  {o:"jp",b:"sedan",t:"cash",pick:1,brand:"🇯🇵 Toyota",name:"Corolla",body:"Sedan · 2020+ 12th gen",from:"R259,800",note:"from · 2021 (higher km)",r:["gd","ex","au"],pro:["Safe all-rounder","Easiest capsule fit"],con:["Cheap ones high-km","A bit dull"],img:"2021 Toyota Corolla sedan South Africa",find:"Toyota Corolla sedan 2021 for sale South Africa"},
+  {o:"jp",b:"sedan",t:"cash",brand:"🇯🇵 Honda",name:"Ballade",body:"Sedan · 2020+",from:"R240,000",note:"from · 2024 ~R246k",r:["gd","ex","au"],pro:["Roomy + sharp","Reliable"],con:["Parts pricier than Toyota","CVT drone"],img:"2021 Honda Ballade South Africa",find:"Honda Ballade 2021 for sale South Africa"},
+  {o:"jp",b:"sedan",t:"cash",pick:1,brand:"🇯🇵 Mazda",name:"Mazda3",body:"Sedan · 2020+",from:"R259,899",note:"from · 2020/2023",r:["gd","ex","au"],pro:["Genuinely beautiful","Premium cabin"],con:["Firm ride","Cheap ones high-km"],img:"2021 Mazda3 sedan South Africa",find:"Mazda3 sedan for sale South Africa"}
+];
+const RK = {r6:"6'4",baby:"baby",au:"⚙"}, RLAB={ex:"Excellent",gd:"Good",tt:"Tight",au:"Auto"};
+function rating(cls, idx){
+  const keys=["6'4","baby","⚙"]; const labs=[cls[0],cls[1],cls[2]];
+  return `<span class="rt ${cls[0]}"><span class="rk">6'4</span>${RLAB[cls[0]]||''}</span>
+  <span class="rt ${cls[1]}"><span class="rk">baby</span>${RLAB[cls[1]]||''}</span>
+  <span class="rt au"><span class="rk">⚙</span>Auto</span>`;
+}
+const grid=document.getElementById("grid");
+grid.innerHTML = CARS.map(c=>`
+  <div class="cc ${c.pick?'pick':''}" data-origin="${c.o}" data-body="${c.b}" data-tier="${c.t}">
+    <div class="cc-top"><span class="brand">${c.brand}</span><span class="tier ${c.t}">${c.t==='cash'?'From ≤R260k':'Finance'}</span></div>
+    <div class="model">${c.name} ${c.pick?'<span class="star">★</span>':''}</div>
+    <div class="bodytag">${c.body}</div>
+    <div class="price">${c.from}<small>${c.note}</small></div>
+    <div class="ratings">${rating(c.r)}</div>
+    <div class="pc">
+      <div class="pro"><div class="h">For</div><ul>${c.pro.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+      <div class="con"><div class="h">Against</div><ul>${c.con.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+    </div>
+    <div class="cardlinks">
+      <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
+      <a class="clink list" href="https://www.google.com/search?q=${encodeURIComponent(c.find)}" target="_blank" rel="noopener noreferrer">🔎 Find it <span class="h">all sellers</span></a>
+    </div>
+  </div>`).join('');
+
+(function(){
+  const state={origin:"all",body:"all",tier:"all"};
+  const chips=document.querySelectorAll(".chip");
+  const cards=document.querySelectorAll(".cc");
+  const countEl=document.getElementById("count");
+  const emptyEl=document.getElementById("empty");
+  function apply(){
+    let shown=0;
+    cards.forEach(c=>{
+      const ok=(state.origin==="all"||c.dataset.origin===state.origin)
+        &&(state.body==="all"||c.dataset.body===state.body)
+        &&(state.tier==="all"||c.dataset.tier===state.tier);
+      c.classList.toggle("hide",!ok); if(ok)shown++;
+    });
+    countEl.textContent=shown+(shown===1?" car":" cars");
+    emptyEl.classList.toggle("show",shown===0);
+  }
+  chips.forEach(chip=>chip.addEventListener("click",()=>{
+    const f=chip.dataset.f,v=chip.dataset.v; state[f]=v;
+    document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));
+    apply();
+  }));
+  apply();
+})();
+</script>
+</body>
+</html>

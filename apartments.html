@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Apartments · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html" aria-current="page">Apartments</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Modern secure estates · 2-bed · ground floor · move by Nov 2026</div>
+    <h1>The <em>car-less</em> move.</h1>
+    <p class="sub">Modern complexes and estates, 2-bed, ground floor (no stairs). You can spend R4–6k/month on Uber while there's no car — every option here fits well inside that.</p>
+    <div class="callout car" style="background:var(--home-soft);border-color:color-mix(in srgb,var(--home) 30%,transparent);color:var(--home-ink)">🧭 <b>Expanding next:</b> you asked for more options across the <b>East</b> (Greenstone, Edenvale, Bedfordview, Kempton) and the <b>North</b> (Sandton, Bryanston, Morningside) — I'm pulling those deals in next and they'll land right here. Below is the modern-estate set near your Glenhazel work so far.</p>
+  </header>
+
+  <div class="filterbar">
+    <div class="fgroup"><span class="lbl">Area</span>
+      <button class="chip" data-f="area" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="area" data-v="norwood" aria-pressed="false">Norwood</button>
+      <button class="chip" data-f="area" data-v="waverley" aria-pressed="false">Waverley</button>
+      <button class="chip" data-f="area" data-v="highlands" aria-pressed="false">Highlands N</button>
+      <button class="chip" data-f="area" data-v="sandringham" aria-pressed="false">Sandringham</button>
+    </div>
+    <div class="fgroup"><span class="lbl">Budget</span>
+      <button class="chip" data-f="budget" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="budget" data-v="in" aria-pressed="false">In budget (≤R12k)</button>
+      <button class="chip" data-f="budget" data-v="stretch" aria-pressed="false">Stretch</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">No places match — widen a filter.</div>
+
+  <div class="note">
+    <h4>Ranking so far (near-work modern estates)</h4>
+    <p><b>1. Norwood Garden Village (Unit 2, R12k)</b> — the only one with modern-complex + confirmed ground floor + in-budget all together. Call this agent first.<br>
+    <b>2. The Georgia, Waverley (R9,990)</b> — newest build + lowest rent; confirm a ground-floor unit.<br>
+    <b>3. Highlands North (R12,500)</b> — closest to work, cheapest Uber.</p>
+    <p><b>Commute check:</b> all of these are ~R1.5–3k/month Uber to Glenhazel — well inside your R4–6k ceiling. Use <b>Bolt</b> (10–20% cheaper than Uber). Verify floor level on every listing before viewing.</p>
+  </div>
+
+  <div class="foot">APARTMENTS · Property24 live pull, Aug 2026 · East + North expansion incoming · verify floor + availability before viewing · The Nest</div>
+</div>
+
+<script>
+const FLATS=[
+  {a:"norwood",bud:"in",pick:1,name:"Norwood Garden Village · Unit 2",area:"Norwood",rent:"R12,000",spec:"2 bed · 2.5 bath",floor:"ground",uber:"~R2.5–3k/mo",desc:"The standout — modern complex, confirmed ground floor, in budget, near Saxonwold.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117396470"},
+  {a:"waverley",bud:"in",pick:1,name:"The Georgia",area:"Waverley",rent:"R9,990",spec:"2 bed · 1 bath",floor:"verify",uber:"~R2.5–3.2k/mo",desc:"Newest build + lowest rent (1 Scott St). Confirm a ground-floor unit.",url:"https://www.property24.com/to-rent/waverley/johannesburg/gauteng/12704/116359579"},
+  {a:"highlands",bud:"stretch",name:"Highlands North 2-bed",area:"Highlands N",rent:"R12,500",spec:"2 bed · 2 bath · 100m²",floor:"verify",uber:"~R2–2.8k/mo",desc:"Closest to work = cheapest Uber. Spacious modern unit. Just over R12k.",url:"https://www.property24.com/to-rent/highlands-north/johannesburg/gauteng/4340/117505784"},
+  {a:"waverley",bud:"in",name:"Modern 2/2 (Waverley)",area:"Waverley",rent:"R11,000",spec:"2 bed · 2 bath · 58m²",floor:"verify",uber:"~R2.5–3.2k/mo",desc:"\"Modern styled\" 2-bath in a quiet, leafy suburb near work.",url:"https://www.property24.com/to-rent/waverley/johannesburg/gauteng/12704/116101754"},
+  {a:"norwood",bud:"in",name:"Modern Lock-Up Complex",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",floor:"verify",uber:"~R2.5–3k/mo",desc:"Cheapest in Norwood — open-plan modern secure complex.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
+  {a:"norwood",bud:"in",name:"Houghton Edge",area:"Norwood",rent:"R10,000",spec:"2 bed · 1 bath · 55m²",floor:"verify",uber:"~R2.5–3k/mo",desc:"Modern Norwood-edge complex, tidy 2-bed at a fair rent.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117445403"},
+  {a:"norwood",bud:"in",name:"Norwood Central",area:"Norwood",rent:"R12,000",spec:"2 bed · 2 bath · 110m²",floor:"verify",uber:"~R2.5–3k/mo",desc:"Biggest for the money — walkable central Norwood, close to Saxonwold.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117488095"},
+  {a:"norwood",bud:"stretch",pick:1,name:"Norwood Garden Village · Unit 1",area:"Norwood",rent:"R13,500",spec:"2 bed · 2.5 bath",floor:"ground",uber:"~R2.5–3k/mo",desc:"Second confirmed-ground-floor unit in the standout complex — the backup if Unit 2 goes.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117399163"},
+  {a:"sandringham",bud:"stretch",name:"Brookfield at Royal",area:"Sandringham",rent:"R20–27k",spec:"2–3 bed · garden units",floor:"ground",uber:"~R1.5–2k/mo",desc:"The dream — high-end golf-estate precinct, 24hr security, closest to work. Well over budget for now.",url:"https://www.property24.com/to-rent/sandringham/johannesburg/gauteng/4374/117451401"}
+];
+const grid=document.getElementById("grid");
+grid.innerHTML=FLATS.map(f=>`
+  <div class="cc ${f.pick?'pick':''}" data-area="${f.a}" data-budget="${f.bud}">
+    <div class="cc-top"><span class="brand">${f.area}</span><span class="tier ${f.floor==='ground'?'cash':'finance'}">${f.floor==='ground'?'✅ Ground':'❓ Verify'}</span></div>
+    <div class="model" style="font-size:17px">${f.name} ${f.pick?'<span class="star">★</span>':''}</div>
+    <div class="price">${f.rent}<small>${f.spec}</small></div>
+    <div class="ratings"><span class="rt gd">🚗 ${f.uber}</span></div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:12px 0 0;line-height:1.45">${f.desc}</p>
+    <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
+  </div>`).join('');
+(function(){
+  const state={area:"all",budget:"all"};
+  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc");
+  const countEl=document.getElementById("count"),emptyEl=document.getElementById("empty");
+  function apply(){let s=0;cards.forEach(c=>{const ok=(state.area==="all"||c.dataset.area===state.area)&&(state.budget==="all"||c.dataset.budget===state.budget);c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
+  chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
+  apply();
+})();
+</script>
+</body>
+</html>
