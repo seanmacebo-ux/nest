@@ -10,6 +10,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="style.css">
+<style>
+  .zonekey { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .zk { font-size: 12.5px; font-weight: 600; padding: 8px 13px; border-radius: 20px; display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); }
+  .zk.ok { background: var(--home-soft); color: var(--home-ink); }
+  .zk.mid { background: var(--car-soft); color: var(--car-ink); }
+  .zk.far { background: var(--red-soft); color: var(--red); }
+  .ub { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 20px; letter-spacing: .03em; }
+  .ub.ok { background: var(--home-soft); color: var(--home-ink); }
+  .ub.mid { background: var(--car-soft); color: var(--car-ink); }
+  .ub.far { background: var(--red-soft); color: var(--red); }
+  .hunt { margin-top: 34px; }
+  .hunt h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 20px; margin: 0 0 4px; color: var(--home-ink); }
+  .huntgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
+  @media (max-width: 780px) { .huntgrid { grid-template-columns: 1fr; } }
+  .hcol { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .hcol h5 { margin: 0 0 12px; font-size: 14px; }
+  .hlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .hlist a { text-decoration: none; display: block; }
+  .hlist .nm { font-weight: 600; font-size: 13.5px; }
+  .hlist .nm .arr { color: var(--home); font-family: "IBM Plex Mono", monospace; }
+  .hlist .dd { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .hlist a:hover .nm { text-decoration: underline; }
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav-in">
@@ -21,24 +44,29 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow"><span class="dot"></span> Modern secure estates · 2-bed · ground floor · move by Nov 2026</div>
+    <div class="eyebrow"><span class="dot"></span> Modern secure estates · 2-bed · ground floor · East + North</div>
     <h1>The <em>car-less</em> move.</h1>
-    <p class="sub">Modern complexes and estates, 2-bed, ground floor (no stairs). You can spend R4–6k/month on Uber while there's no car — every option here fits well inside that.</p>
-    <div class="callout car" style="background:var(--home-soft);border-color:color-mix(in srgb,var(--home) 30%,transparent);color:var(--home-ink)">🧭 <b>Expanding next:</b> you asked for more options across the <b>East</b> (Greenstone, Edenvale, Bedfordview, Kempton) and the <b>North</b> (Sandton, Bryanston, Morningside) — I'm pulling those deals in next and they'll land right here. Below is the modern-estate set near your Glenhazel work so far.</p>
+    <p class="sub">Modern complexes and estates across the East and North — 2-bed, ground floor. Every area is labelled with its real Uber cost to your Glenhazel work, because until the car lands, that's the number that bites.</p>
   </header>
 
+  <div class="zonekey">
+    <span class="zk ok">🚶 Cheap Uber ~R2–3k/mo · Norwood · Highlands N · Waverley · Sandringham</span>
+    <span class="zk mid">🚗 Mid Uber ~R4–6k/mo · Bedfordview · Morningside</span>
+    <span class="zk far">🛑 Big Uber R8k+ · Greenstone · Bryanston · Fourways (needs the car)</span>
+  </div>
+
   <div class="filterbar">
-    <div class="fgroup"><span class="lbl">Area</span>
-      <button class="chip" data-f="area" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="area" data-v="norwood" aria-pressed="false">Norwood</button>
-      <button class="chip" data-f="area" data-v="waverley" aria-pressed="false">Waverley</button>
-      <button class="chip" data-f="area" data-v="highlands" aria-pressed="false">Highlands N</button>
-      <button class="chip" data-f="area" data-v="sandringham" aria-pressed="false">Sandringham</button>
+    <div class="fgroup"><span class="lbl">Uber cost</span>
+      <button class="chip" data-f="uber" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="uber" data-v="ok" aria-pressed="false">🚶 Cheap</button>
+      <button class="chip" data-f="uber" data-v="mid" aria-pressed="false">🚗 Mid</button>
+      <button class="chip" data-f="uber" data-v="far" aria-pressed="false">🛑 Needs car</button>
     </div>
-    <div class="fgroup"><span class="lbl">Budget</span>
-      <button class="chip" data-f="budget" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="budget" data-v="in" aria-pressed="false">In budget (≤R12k)</button>
-      <button class="chip" data-f="budget" data-v="stretch" aria-pressed="false">Stretch</button>
+    <div class="fgroup"><span class="lbl">Side</span>
+      <button class="chip" data-f="side" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="side" data-v="near" aria-pressed="false">Near work</button>
+      <button class="chip" data-f="side" data-v="east" aria-pressed="false">East</button>
+      <button class="chip" data-f="side" data-v="north" aria-pressed="false">North</button>
     </div>
     <span class="count" id="count"></span>
   </div>
@@ -46,44 +74,77 @@
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty">No places match — widen a filter.</div>
 
-  <div class="note">
-    <h4>Ranking so far (near-work modern estates)</h4>
-    <p><b>1. Norwood Garden Village (Unit 2, R12k)</b> — the only one with modern-complex + confirmed ground floor + in-budget all together. Call this agent first.<br>
-    <b>2. The Georgia, Waverley (R9,990)</b> — newest build + lowest rent; confirm a ground-floor unit.<br>
-    <b>3. Highlands North (R12,500)</b> — closest to work, cheapest Uber.</p>
-    <p><b>Commute check:</b> all of these are ~R1.5–3k/month Uber to Glenhazel — well inside your R4–6k ceiling. Use <b>Bolt</b> (10–20% cheaper than Uber). Verify floor level on every listing before viewing.</p>
+  <div class="hunt">
+    <h4>Where to hunt — beyond Property24</h4>
+    <p class="sub" style="margin-top:4px">Different stock sits on different sites and agency books. Cross-check these — the small private-landlord gems especially hide on Gumtree + Facebook.</p>
+    <div class="huntgrid">
+      <div class="hcol"><h5>🌐 Portals</h5><ul class="hlist">
+        <li><a href="https://www.privateproperty.co.za/to-rent/gauteng" target="_blank" rel="noopener noreferrer"><div class="nm">Private Property <span class="arr">↗</span></div><div class="dd">SA's 2nd-biggest portal — lots not on Property24.</div></a></li>
+        <li><a href="https://www.immoafrica.net/rentals/" target="_blank" rel="noopener noreferrer"><div class="nm">ImmoAfrica <span class="arr">↗</span></div><div class="dd">Aggregates across portals + agencies in one search.</div></a></li>
+        <li><a href="https://property.mg.co.za/" target="_blank" rel="noopener noreferrer"><div class="nm">property.mg.co.za <span class="arr">↗</span></div><div class="dd">M&amp;G property aggregator.</div></a></li>
+      </ul></div>
+      <div class="hcol"><h5>🤝 Private + direct</h5><ul class="hlist">
+        <li><a href="https://www.gumtree.co.za/s-property-to-rent/v1c9235p1" target="_blank" rel="noopener noreferrer"><div class="nm">Gumtree Property <span class="arr">↗</span></div><div class="dd">Private landlords, no agent fees — the bargains.</div></a></li>
+        <li><a href="https://www.facebook.com/marketplace/category/propertyrentals" target="_blank" rel="noopener noreferrer"><div class="nm">FB Marketplace <span class="arr">↗</span></div><div class="dd">Direct-from-owner + suburb rental groups.</div></a></li>
+        <li><a href="https://www.rentals.co.za/" target="_blank" rel="noopener noreferrer"><div class="nm">Rentals.co.za <span class="arr">↗</span></div><div class="dd">Rentals-only listing site.</div></a></li>
+      </ul></div>
+      <div class="hcol"><h5>🏢 Agencies (rental books)</h5><ul class="hlist">
+        <li><a href="https://www.justproperty.co.za/to-rent/" target="_blank" rel="noopener noreferrer"><div class="nm">Just Property <span class="arr">↗</span></div><div class="dd">Big rental-focused agency.</div></a></li>
+        <li><a href="https://www.rawson.co.za/property-to-rent" target="_blank" rel="noopener noreferrer"><div class="nm">Rawson Rentals <span class="arr">↗</span></div><div class="dd">Strong in Sandton/North estates.</div></a></li>
+        <li><a href="https://www.seeff.com/results/residential/to-let/" target="_blank" rel="noopener noreferrer"><div class="nm">Seeff / RE/MAX <span class="arr">↗</span></div><div class="dd">Established agency rental stock.</div></a></li>
+      </ul></div>
+    </div>
   </div>
 
-  <div class="foot">APARTMENTS · Property24 live pull, Aug 2026 · East + North expansion incoming · verify floor + availability before viewing · The Nest</div>
+  <div class="note">
+    <h4>My read — balancing the place vs the Uber</h4>
+    <p><b>Cheapest all-in (until the car):</b> the near-work modern estates — <b>Norwood Garden Village</b> (R12k, confirmed ground floor) and Highlands North. ~R2–3k Uber.</p>
+    <p><b>Best of the East:</b> <b>Bedfordview</b> — genuinely good modern complexes from R9,500, ~R4–5k Uber (fits your budget), and it's upmarket + close-ish to Greenstone if you like the area.</p>
+    <p><b>North (Bryanston / Fourways):</b> lovely lifestyle estates from ~R10,850, <b>but ~R9k+/month Uber to Glenhazel</b> — only makes sense once your guy sorts the licence and the car's in. If the car comes fast, the whole North opens up.</p>
+    <p><b>Verify floor level + availability</b> on every listing, and use <b>Bolt</b> (10–20% cheaper than Uber).</p>
+  </div>
+  <div class="foot">APARTMENTS · Property24 + web pull, Aug 2026 · Uber figures are distance estimates — check the app · The Nest</div>
 </div>
 
 <script>
-const FLATS=[
-  {a:"norwood",bud:"in",pick:1,name:"Norwood Garden Village · Unit 2",area:"Norwood",rent:"R12,000",spec:"2 bed · 2.5 bath",floor:"ground",uber:"~R2.5–3k/mo",desc:"The standout — modern complex, confirmed ground floor, in budget, near Saxonwold.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117396470"},
-  {a:"waverley",bud:"in",pick:1,name:"The Georgia",area:"Waverley",rent:"R9,990",spec:"2 bed · 1 bath",floor:"verify",uber:"~R2.5–3.2k/mo",desc:"Newest build + lowest rent (1 Scott St). Confirm a ground-floor unit.",url:"https://www.property24.com/to-rent/waverley/johannesburg/gauteng/12704/116359579"},
-  {a:"highlands",bud:"stretch",name:"Highlands North 2-bed",area:"Highlands N",rent:"R12,500",spec:"2 bed · 2 bath · 100m²",floor:"verify",uber:"~R2–2.8k/mo",desc:"Closest to work = cheapest Uber. Spacious modern unit. Just over R12k.",url:"https://www.property24.com/to-rent/highlands-north/johannesburg/gauteng/4340/117505784"},
-  {a:"waverley",bud:"in",name:"Modern 2/2 (Waverley)",area:"Waverley",rent:"R11,000",spec:"2 bed · 2 bath · 58m²",floor:"verify",uber:"~R2.5–3.2k/mo",desc:"\"Modern styled\" 2-bath in a quiet, leafy suburb near work.",url:"https://www.property24.com/to-rent/waverley/johannesburg/gauteng/12704/116101754"},
-  {a:"norwood",bud:"in",name:"Modern Lock-Up Complex",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",floor:"verify",uber:"~R2.5–3k/mo",desc:"Cheapest in Norwood — open-plan modern secure complex.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
-  {a:"norwood",bud:"in",name:"Houghton Edge",area:"Norwood",rent:"R10,000",spec:"2 bed · 1 bath · 55m²",floor:"verify",uber:"~R2.5–3k/mo",desc:"Modern Norwood-edge complex, tidy 2-bed at a fair rent.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117445403"},
-  {a:"norwood",bud:"in",name:"Norwood Central",area:"Norwood",rent:"R12,000",spec:"2 bed · 2 bath · 110m²",floor:"verify",uber:"~R2.5–3k/mo",desc:"Biggest for the money — walkable central Norwood, close to Saxonwold.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117488095"},
-  {a:"norwood",bud:"stretch",pick:1,name:"Norwood Garden Village · Unit 1",area:"Norwood",rent:"R13,500",spec:"2 bed · 2.5 bath",floor:"ground",uber:"~R2.5–3k/mo",desc:"Second confirmed-ground-floor unit in the standout complex — the backup if Unit 2 goes.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117399163"},
-  {a:"sandringham",bud:"stretch",name:"Brookfield at Royal",area:"Sandringham",rent:"R20–27k",spec:"2–3 bed · garden units",floor:"ground",uber:"~R1.5–2k/mo",desc:"The dream — high-end golf-estate precinct, 24hr security, closest to work. Well over budget for now.",url:"https://www.property24.com/to-rent/sandringham/johannesburg/gauteng/4374/117451401"}
+const F=[
+ // NEAR WORK (cheap uber)
+ {s:"near",u:"ok",pick:1,name:"Norwood Garden Village · Unit 2",area:"Norwood",rent:"R12,000",spec:"2 bed · 2.5 bath",fl:"✅ Ground",desc:"The standout — modern complex, confirmed ground floor, in budget, near Saxonwold.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117396470"},
+ {s:"near",u:"ok",pick:1,name:"The Georgia",area:"Waverley",rent:"R9,990",spec:"2 bed · 1 bath",fl:"❓ Verify",desc:"Newest build + lowest rent. Confirm a ground-floor unit.",url:"https://www.property24.com/to-rent/waverley/johannesburg/gauteng/12704/116359579"},
+ {s:"near",u:"ok",name:"Highlands North 2-bed",area:"Highlands N",rent:"R12,500",spec:"2 bed · 2 bath · 100m²",fl:"❓ Verify",desc:"Closest to work, cheapest Uber. Spacious modern unit.",url:"https://www.property24.com/to-rent/highlands-north/johannesburg/gauteng/4340/117505784"},
+ {s:"near",u:"ok",name:"Modern Lock-Up Complex",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",fl:"❓ Verify",desc:"Cheapest in Norwood — modern secure lock-up.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
+ // EAST — Bedfordview (mid uber ~R4-5k)
+ {s:"east",u:"mid",pick:1,name:"Ground-floor garden unit",area:"Bedfordview",rent:"R12,500",spec:"2 bed · 1 bath · patio + garden",fl:"✅ Ground",desc:"Ag De Witt St — ground-floor garden in upmarket Bedfordview. ~R4–5k Uber, fits budget.",url:"https://www.property24.com/apartments-to-rent/bedfordview/gauteng/767"},
+ {s:"east",u:"mid",name:"Secure complex 2-bed",area:"Bedfordview",rent:"R9,500",spec:"2 bed · 1 bath",fl:"❓ Verify",desc:"Well-kept unit in a sought-after secure complex — great price for the area.",url:"https://www.property24.com/apartments-to-rent/bedfordview/gauteng/767"},
+ {s:"east",u:"mid",name:"Townhouse, Marais Rd",area:"Bedfordview",rent:"R12,000",spec:"2 bed · 2 bath townhouse",fl:"❓ Verify",desc:"Stylish 2-bath townhouse in a secure complex.",url:"https://www.property24.com/to-rent/bedfordview/bedfordview/gauteng/11758/116079373"},
+ // EAST — Greenstone (far uber, current area)
+ {s:"east",u:"far",name:"Ground-floor 2/2 + garden",area:"Greenstone Hill",rent:"R12,500",spec:"2 bed · 2 bath · patio + garden",fl:"✅ Ground",desc:"Your current area — lovely modern ground-floor. But ~R8–12k Uber to Glenhazel until the car.",url:"https://www.property24.com/apartments-to-rent/greenstone-hill/edenvale/gauteng/11700"},
+ {s:"east",u:"far",name:"Emerald Skye (modern)",area:"Greenstone Hill",rent:"R15,000",spec:"2 bed · modern ground floor",fl:"✅ Ground",desc:"Sought-after modern development. Over budget + big Uber — car-dependent.",url:"https://www.property24.com/apartments-to-rent/greenstone-hill/edenvale/gauteng/11700"},
+ // NORTH — Morningside/Sandton (mid-high uber)
+ {s:"north",u:"mid",name:"3-bed ground + garden",area:"Morningside",rent:"R12,750",spec:"3 bed · ground floor · garden",fl:"✅ Ground",desc:"Rare in-budget Sandton find — 35 Cullinan Close. ~R5–7k Uber (edge of budget).",url:"https://www.property24.com/to-rent/morningside/sandton/gauteng/4258/117077572"},
+ {s:"north",u:"mid",name:"Modern 2/2 (Morningside)",area:"Morningside",rent:"R13,000+",spec:"2 bed · 2 bath",fl:"❓ Verify",desc:"Sandton-core modern — most stock here is R13–25k. Verify + expect a stretch.",url:"https://www.property24.com/apartments-to-rent/morningside/sandton/gauteng/4258"},
+ // NORTH — Bryanston (far uber unless car)
+ {s:"north",u:"far",name:"1 Vrede Ave · 24hr security",area:"Bryanston",rent:"R10,850",spec:"2 bed · gated, CCTV, access",fl:"❓ Verify",desc:"Fully gated modern complex, great price. But ~R9k+ Uber to Glenhazel — needs the car.",url:"https://www.property24.com/apartments-to-rent/bryanston/sandton/gauteng/5176"},
+ {s:"north",u:"far",name:"Valadares (modern secure)",area:"Bryanston",rent:"R14,000",spec:"2 bed · sought-after complex",fl:"❓ Verify",desc:"Highly-rated modern sectional-title in the heart of Bryanston. Car-dependent on Uber.",url:"https://www.property24.com/apartments-to-rent/bryanston/sandton/gauteng/5176"},
+ // NORTH — Fourways (far uber unless car)
+ {s:"north",u:"far",name:"Sibiti Private Estate",area:"Fourways",rent:"R12,500",spec:"2 bed · lifestyle estate",fl:"❓ Verify",desc:"Modern lifestyle estate. Great living, but far from Glenhazel — car needed.",url:"https://www.property24.com/apartments-to-rent/fourways/sandton/gauteng/5811"},
+ {s:"north",u:"far",name:"Garden apt, lifestyle complex",area:"Fourways",rent:"R14,000",spec:"2 bed · 2 bath · garden · secure",fl:"✅ Ground",desc:"Modern secure lifestyle complex with a private garden. Car-dependent on commute.",url:"https://www.property24.com/apartments-to-rent/fourways/sandton/gauteng/5811"},
+ {s:"north",u:"far",name:"Chartwell 2-bed",area:"Fourways",rent:"R10,000",spec:"2 bed",fl:"❓ Verify",desc:"Cheapest Fourways option (1 Birchwood Ave). Nice North value — but big Uber.",url:"https://www.property24.com/to-rent/fourways/sandton/gauteng/5811/117279343"}
 ];
 const grid=document.getElementById("grid");
-grid.innerHTML=FLATS.map(f=>`
-  <div class="cc ${f.pick?'pick':''}" data-area="${f.a}" data-budget="${f.bud}">
-    <div class="cc-top"><span class="brand">${f.area}</span><span class="tier ${f.floor==='ground'?'cash':'finance'}">${f.floor==='ground'?'✅ Ground':'❓ Verify'}</span></div>
-    <div class="model" style="font-size:17px">${f.name} ${f.pick?'<span class="star">★</span>':''}</div>
-    <div class="price">${f.rent}<small>${f.spec}</small></div>
-    <div class="ratings"><span class="rt gd">🚗 ${f.uber}</span></div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin:12px 0 0;line-height:1.45">${f.desc}</p>
-    <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
+grid.innerHTML=F.map(f=>`
+  <div class="cc ${f.pick?'pick':''}" data-side="${f.s}" data-uber="${f.u}">
+    <div class="cc-top"><span class="brand">${f.area}</span><span class="ub ${f.u}">${f.u==='ok'?'🚶 ~R2–3k':f.u==='mid'?'🚗 ~R4–6k':'🛑 R8k+ Uber'}</span></div>
+    <div class="model" style="font-size:16px">${f.name} ${f.pick?'<span class="star">★</span>':''}</div>
+    <div class="price">${f.rent}<small>${f.spec} · ${f.fl}</small></div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${f.desc}</p>
+    <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View / browse area ↗</a></div>
   </div>`).join('');
 (function(){
-  const state={area:"all",budget:"all"};
+  const state={uber:"all",side:"all"};
   const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc");
   const countEl=document.getElementById("count"),emptyEl=document.getElementById("empty");
-  function apply(){let s=0;cards.forEach(c=>{const ok=(state.area==="all"||c.dataset.area===state.area)&&(state.budget==="all"||c.dataset.budget===state.budget);c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
+  function apply(){let s=0;cards.forEach(c=>{const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side);c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
   chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
   apply();
 })();
