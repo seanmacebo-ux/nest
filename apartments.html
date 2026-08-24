@@ -127,7 +127,7 @@
 
   <div class="sec" style="margin-top:38px"><h2>👵 Mom in the same complex</h2></div>
   <div class="note" style="margin-top:0">
-    <p>Better than a separate cheap flat: these three complexes have <b>both a 2-bed for you + Mishka AND a smaller 1-bed for Mom, at the same address, same gate.</b> Modern, secure, walking distance within the complex. Rents shown are today's; call to confirm mom's unit is ground floor.</p>
+    <p>Better than a separate cheap flat: one complex with <b>a 2-bed for you + Mishka AND a smaller 1-bed for Mom, same address, same gate.</b> I dropped One on Anne (you flagged the management) and The Georgia (Waverley, plus a no-under-16s rule that kills it with a baby). Norwood Garden Village stays as the anchor; I'm hunting more in better-reputation areas.</p>
   </div>
   <div class="grid" id="cxgrid"></div>
 
@@ -169,14 +169,6 @@ const CX=[
    couple:{label:"You + Mishka",spec:"2-bed · ✅ Ground · renovated kitchen",rent:"R12,500",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR4719005"},
    mom:{label:"Mom",spec:"1-bed · 48m² · furnished · en-suite · avail 1 Sep",rent:"R9,000",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/121-norwood-garden-village/69-hamlin-street/RR4753042"},
    total:"≈ R21,500/mo for both units"},
- {name:"One on Anne",area:"Sandringham",pick:1,tone:"ok",star:"pet-friendly",desc:"Brand-new development. Gas stove, fingerprint access, CCTV, pool, braai, borehole for load-shedding. Warmer, communal feel, pet-friendly with permission. ~10–12 min to work.",
-   couple:{label:"You + Mishka",spec:"2-bed · en-suite · roof terrace",rent:"R10,600",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/sandringham/2-bed-at-one-on-anne/1-anne-street-in-sandringham/RR4342284"},
-   mom:{label:"Mom",spec:"1-bed · newly renovated",rent:"R8,060",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/sandringham/1bed-apart-one-on-anne/1-anne-street-in-sandringham/RR4342291"},
-   total:"≈ R18,660/mo for both units"},
- {name:"The Georgia",area:"Waverley",tone:"mid",star:"newest + slickest",warn:"⚠️ Complex rule says no under-16s — likely a dealbreaker with a baby. Confirm before anything else.",desc:"Purpose-built rental estate. Designer kitchen, granite tops, facial-recognition access, fibre, community events, pool. Slick but strict: no pets, paid parking. ~10 min to work.",
-   couple:{label:"You + Mishka",spec:"2-bed · launch special (1 month free)",rent:"R9,990",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/waverley/2-the-georgia/1-scott-street/RR4480781"},
-   mom:{label:"Mom",spec:"1-bed (studio R6,290 also available)",rent:"R7,740",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/waverley/1-the-georgia/1-scott-street/RR4451052"},
-   total:"≈ R17,730/mo for both units"}
 ];
 document.getElementById("cxgrid").innerHTML=CX.map(x=>`
   <div class="cc ${x.pick?'pick':''}">
