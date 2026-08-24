@@ -18,6 +18,10 @@ window.NEST = {
   isTicked(id) { return !!this.ticks()[id]; },
   toggleTick(id) { const t = this.ticks(); if (t[id]) delete t[id]; else t[id] = 1; this._set('nest_ticks', t); return !!t[id]; },
 
+  notes() { return this._get('nest_notes', {}); },
+  getNote(k) { return this.notes()[k] || ''; },
+  setNote(k, v) { const n = this.notes(); if (v && v.trim()) n[k] = v; else delete n[k]; this._set('nest_notes', n); },
+
   wire(root) {
     root = root || document;
     root.querySelectorAll('[data-save-kind]').forEach(btn => {
@@ -31,6 +35,22 @@ window.NEST = {
       };
       paint();
       btn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); NEST.toggleSave(kind, label, url); paint(); });
+    });
+    root.querySelectorAll('.notetoggle').forEach(btn => {
+      if (btn._wired) return; btn._wired = 1;
+      const wrap = btn.closest('.notewrap');
+      const box = wrap && wrap.querySelector('.notebox');
+      const label = () => { btn.textContent = (box && box.value.trim()) ? '💬 Notes ✓' : '💬 Notes'; };
+      if (box && box.value.trim()) wrap.classList.add('open');
+      label();
+      btn.addEventListener('click', () => { wrap.classList.toggle('open'); if (box) box.focus(); });
+      if (box) box.addEventListener('input', label);
+    });
+    root.querySelectorAll('.notebox[data-note-key]').forEach(box => {
+      if (box._wired) return; box._wired = 1;
+      box.value = NEST.getNote(box.dataset.noteKey);
+      let t;
+      box.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => NEST.setNote(box.dataset.noteKey, box.value), 300); });
     });
     root.querySelectorAll('[data-tick]').forEach(el => {
       if (el._wired) return; el._wired = 1;

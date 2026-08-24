@@ -32,6 +32,13 @@
   .hlist .nm .arr { color: var(--home); font-family: "IBM Plex Mono", monospace; }
   .hlist .dd { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
   .hlist a:hover .nm { text-decoration: underline; }
+  .notewrap { margin-top: 8px; }
+  .notetoggle { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
+  .notetoggle:hover { border-color: var(--home); color: var(--home-ink); }
+  .notebox { display: none; width: 100%; margin-top: 8px; min-height: 64px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
+  .notewrap.open .notebox { display: block; }
+  .copybar { margin: 16px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .copymsg { font-size: 12.5px; color: var(--home-ink); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -77,8 +84,10 @@
     <span class="count" id="count"></span>
   </div>
 
+  <p class="sub" style="margin:0 0 6px">💬 Tap <b>Notes</b> on any place to jot what you + Mishka think — it saves on your phone. Hit <b>Copy all our notes</b> to send the lot to each other (live shared sync arrives with Babybean).</p>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty">No places match — widen a filter.</div>
+  <div class="copybar"><button class="notetoggle" id="copynotes" type="button">📋 Copy all our notes</button><span class="copymsg" id="copymsg"></span></div>
 
   <div class="hunt">
     <h4>Where to hunt — beyond Property24</h4>
@@ -147,6 +156,7 @@ grid.innerHTML=F.map(f=>`
     <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${f.desc}</p>
     <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View / browse area ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
+    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="${f.url}" placeholder="You + Mishka: what you love / don't — light, noise, kitchen, security, the vibe."></textarea></div>
   </div>`).join('');
 const MOM=[
  {area:"Yeoville",rent:"R1,671",type:"Bachelor",safe:0,fl:"Floor: ask",desc:"Cheapest going. Crown Court, Minors St. Inner-city — check safety before you view.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/yeoville/434-crown-court/34-minors-street/RR3514894"},
@@ -164,6 +174,7 @@ document.getElementById("momgrid").innerHTML=MOM.map(m=>`
     <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${m.desc}</p>
     <div class="cardlinks"><a class="clink see" style="flex:1" href="${m.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="Mom: ${m.type} (${m.area})" data-save-url="${m.url}">♡ Save</button>
+    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="${m.url}" placeholder="Notes on Mom's place — is it safe? ground floor? close enough?"></textarea></div>
   </div>`).join('');
 if (window.NEST) window.NEST.wire();
 (function(){
@@ -173,6 +184,22 @@ if (window.NEST) window.NEST.wire();
   function apply(){let s=0;cards.forEach(c=>{const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side)&&(state.floor==="all"||c.dataset.floor==="g");c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
   chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
   apply();
+})();
+(function(){
+  const btn=document.getElementById('copynotes'),msg=document.getElementById('copymsg');
+  if(!btn) return;
+  const labels={};
+  F.forEach(f=>labels[f.url]=`${f.name} (${f.area}) ${f.rent}`);
+  MOM.forEach(m=>labels[m.url]=`Mom: ${m.type} (${m.area}) ${m.rent}`);
+  btn.addEventListener('click',()=>{
+    const notes=window.NEST.notes();
+    const lines=Object.keys(notes).map(k=>`• ${labels[k]||k}\n  ${notes[k]}`);
+    if(!lines.length){msg.textContent='No notes yet — tap 💬 Notes on a place first.';return;}
+    const text='Our apartment notes (The Nest):\n\n'+lines.join('\n\n');
+    const done=()=>{msg.textContent='Copied — paste it to Mishka 📲';};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>window.prompt('Copy your notes:',text));}
+    else window.prompt('Copy your notes:',text);
+  });
 })();
 </script>
 </body>
