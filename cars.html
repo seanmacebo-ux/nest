@@ -40,7 +40,7 @@
     <div class="eyebrow"><span class="dot"></span> Real options · by brand &amp; model · 2020+ · automatic</div>
     <h1>The <em>Six-Four</em> Shortlist.</h1>
     <p class="sub">Every model with its real current options — actual years, prices and mileage pulled live from AutoTrader (Gauteng, automatic, Aug 2026). Green row = best value in that model. Compare, then tell me your picks and we decide.</p>
-    <div class="callout car">📷 <b>See it</b> = real photos of that model · 🔎 <b>Find it</b> = all sellers (AutoTrader, Cars.co.za, WeBuyCars, Gumtree). ⚠️ Honda WR-V is manual-only in SA, so it's out.</div>
+    <div class="callout car">📷 <b>See it</b> = real photos of that model · 🔎 <b>Live stock</b> (or tap any table row) = that model's real current listings on AutoTrader, always up to date. The table below is a today's-market snapshot — used cars sell fast, so we re-pull fresh when you're ready to buy. ⚠️ Honda WR-V is manual-only in SA, so it's out.</div>
   </header>
 
   <div class="filterbar">
@@ -99,22 +99,25 @@ const CARS=[
 ];
 const RL={ex:"Excellent",gd:"Good",tt:"Tight"};
 const grid=document.getElementById("grid");
-grid.innerHTML=CARS.map(c=>`
+grid.innerHTML=CARS.map(c=>{
+  const at="https://www.autotrader.co.za/cars-for-sale/"+c.brand.replace(/[^\x00-\x7F]/g,'').trim().toLowerCase()+"/"+c.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  return `
   <div class="cc ${c.pick?'pick':''}" data-origin="${c.o}" data-body="${c.b}">
     <div class="cc-top"><span class="brand">${c.brand}</span>
       <span style="display:flex;gap:5px"><span class="rt gd"><span class="rk">6'4</span>${RL[c.r[0]]}</span><span class="rt au"><span class="rk">⚙</span>Auto</span></span></div>
     <div class="model">${c.name} ${c.pick?'<span class="star">★</span>':''}</div>
-    <div class="bodytag">${c.body} · ${c.L.length} options</div>
+    <div class="bodytag">${c.body} · ${c.L.length} recent options · tap a row for live stock</div>
     <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">${c.why}</p>
     <table class="lt"><thead><tr><th>Year</th><th>Price</th><th>km</th><th>Where</th></tr></thead><tbody>
-      ${c.L.map(l=>`<tr class="${l[4]?'best':''}"><td class="y">${l[0]}</td><td class="p">${l[1]}</td><td class="km">${l[2]}</td><td class="lo">${l[3]}${l[4]?' <span class="tag">best</span>':''}</td></tr>`).join('')}
+      ${c.L.map(l=>`<tr class="${l[4]?'best':''}" style="cursor:pointer" title="Open live ${c.name} stock on AutoTrader" onclick="window.open('${at}','_blank','noopener')"><td class="y">${l[0]}</td><td class="p">${l[1]}</td><td class="km">${l[2]}</td><td class="lo">${l[3]}${l[4]?' <span class="tag">best</span>':''}</td></tr>`).join('')}
     </tbody></table>
     <div class="cardlinks">
       <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
-      <a class="clink list" href="https://www.google.com/search?q=${encodeURIComponent(c.find)}" target="_blank" rel="noopener noreferrer">🔎 Find it <span class="h">all sellers</span></a>
+      <a class="clink list" href="${at}" target="_blank" rel="noopener noreferrer">🔎 Live stock <span class="h">on AutoTrader</span></a>
     </div>
-    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="https://www.google.com/search?q=${encodeURIComponent(c.find)}">♡ Save</button>
-  </div>`).join('');
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${at}">♡ Save</button>
+  </div>`;
+}).join('');
 if (window.NEST) window.NEST.wire();
 (function(){
   const state={origin:"all",body:"all"};
