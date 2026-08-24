@@ -46,13 +46,13 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow"><span class="dot"></span> Modern secure estates · 2-bed · ground floor · East + North</div>
+    <div class="eyebrow"><span class="dot"></span> 2-bed · ground floor · near-work + East + North</div>
     <h1>The <em>car-less</em> move.</h1>
-    <p class="sub">Modern complexes and estates across the East and North — 2-bed, ground floor. Every area is labelled with its real Uber cost to your Glenhazel work, because until the car lands, that's the number that bites.</p>
+    <p class="sub">2-bed places, ground floor. Each shows its real Uber cost to your Glenhazel work, because until the car lands that's the number that bites. <b>✅ Ground = the ad actually says ground floor</b> (most agents never list the floor, so the rest need one call to confirm). Filter to ground-confirmed only up top.</p>
   </header>
 
   <div class="zonekey">
-    <span class="zk ok">🚶 Cheap Uber ~R2–3k/mo · Norwood · Highlands N · Waverley · Sandringham</span>
+    <span class="zk ok">🚶 Cheap Uber ~R2–3k/mo · Norwood · Orange Grove · Highlands N · Waverley · Sydenham</span>
     <span class="zk mid">🚗 Mid Uber ~R4–6k/mo · Bedfordview · Morningside</span>
     <span class="zk far">🛑 Big Uber R8k+ · Greenstone · Bryanston · Fourways (needs the car)</span>
   </div>
@@ -69,6 +69,10 @@
       <button class="chip" data-f="side" data-v="near" aria-pressed="false">Near work</button>
       <button class="chip" data-f="side" data-v="east" aria-pressed="false">East</button>
       <button class="chip" data-f="side" data-v="north" aria-pressed="false">North</button>
+    </div>
+    <div class="fgroup"><span class="lbl">Floor</span>
+      <button class="chip" data-f="floor" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="floor" data-v="g" aria-pressed="false">✅ Ground confirmed</button>
     </div>
     <span class="count" id="count"></span>
   </div>
@@ -99,44 +103,44 @@
   </div>
 
   <div class="note">
-    <h4>My read — balancing the place vs the Uber</h4>
-    <p><b>Cheapest all-in (until the car):</b> the near-work modern estates — <b>Norwood Garden Village</b> (R12k, confirmed ground floor) and Highlands North. ~R2–3k Uber.</p>
-    <p><b>Best of the East:</b> <b>Bedfordview</b> — genuinely good modern complexes from R9,500, ~R4–5k Uber (fits your budget), and it's upmarket + close-ish to Greenstone if you like the area.</p>
-    <p><b>North (Bryanston / Fourways):</b> real 2-beds from ~R10,500 (Fourways) and ~R12k (Bryanston), <b>but ~R9k+/month Uber to Glenhazel</b> — only makes sense once your guy sorts the licence and the car's in. If the car comes fast, the whole North opens up.</p>
-    <p><b>Verify floor level + availability</b> on every listing, and use <b>Bolt</b> (10–20% cheaper than Uber).</p>
+    <h4>My read</h4>
+    <p><b>Cheapest all-in near work:</b> Orange Grove (R8,500) and Sydenham (R10,000), both confirmed ground floor with a garden, ~R2–3k Uber. That's the sweet spot until the car.</p>
+    <p><b>East:</b> the Bedfordview garden unit (R12,500, ground floor) is upmarket at ~R4–5k Uber.</p>
+    <p><b>North (Fourways / Bryanston / Morningside):</b> real ground-floor 2-beds from R10,500, but ~R5–9k+ Uber to Glenhazel. Only worth it once the licence and car are sorted.</p>
+    <p><b>Two things:</b> listings sell fast (3 dropped off this list in a day), and use <b>Bolt</b> (10–20% cheaper than Uber).</p>
   </div>
-  <div class="foot">APARTMENTS · Property24 + web pull, Aug 2026 · Uber figures are distance estimates — check the app · The Nest</div>
+
+  <div class="sec" style="margin-top:38px"><h2>👵 For Mom — cheap + ground floor, close by</h2></div>
+  <div class="note" style="margin-top:0">
+    <p><b>Straight talk:</b> the truly cheap bachelors (R1,700–R2,500) sit in inner-city Yeoville and Bellevue. They're close to the near-work suburbs but rougher on safety, which for your mom matters more than saving a few hundred rand. Kensington and Bez Valley are a safer step up for a bit more. Like the flats above, none of these ads state the floor, so it's one call first: "ground floor, no stairs to the door?" before viewing. Cheapest first.</p>
+  </div>
+  <div class="grid" id="momgrid"></div>
+
+  <div class="foot">APARTMENTS · Private Property + Property24, Aug 2026 · listings sell fast · Uber figures are estimates · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
 <script>
 const F=[
- // NEAR WORK (cheap uber)
- {s:"near",u:"ok",pick:1,name:"Norwood Garden Village · Unit 2",area:"Norwood",rent:"R12,000",spec:"2 bed · 2.5 bath",fl:"✅ Ground",desc:"The standout — modern complex, confirmed ground floor, in budget, near Saxonwold.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/117396470"},
- {s:"near",u:"ok",pick:1,name:"The Georgia",area:"Waverley",rent:"R9,990",spec:"2 bed · 1 bath",fl:"❓ Verify",desc:"Newest build + lowest rent. Confirm a ground-floor unit.",url:"https://www.property24.com/to-rent/waverley/johannesburg/gauteng/12704/116359579"},
- {s:"near",u:"ok",name:"Highlands North 2-bed",area:"Highlands N",rent:"R12,500",spec:"2 bed · 2 bath · 100m²",fl:"❓ Verify",desc:"Closest to work, cheapest Uber. Spacious modern unit.",url:"https://www.property24.com/to-rent/highlands-north/johannesburg/gauteng/4340/117505784"},
- {s:"near",u:"ok",name:"Modern Lock-Up Complex",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",fl:"❓ Verify",desc:"Cheapest in Norwood — modern secure lock-up.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
- // EAST — Bedfordview (mid uber ~R4-5k)
- {s:"east",u:"mid",pick:1,name:"1 Smith Rd · neat 2-bed",area:"Bedfordview",rent:"R11,000",spec:"2 bed · 1 bath",fl:"❓ Verify floor",desc:"Neat, well-maintained 2-bed in upmarket Bedfordview — in budget, ~R4–5k Uber. (Wendy D Real Estate)",url:"https://www.property24.com/to-rent/bedfordview/bedfordview/gauteng/11758/117460809"},
- {s:"east",u:"mid",name:"80 SS The Nicol · corporate lock-up",area:"Bedford Gardens",rent:"R17,000",spec:"2 bed · lock-up-and-go",fl:"❓ Verify floor",desc:"Modern corporate rental in Bedford Gardens — the premium/stretch pick if you want turnkey. (Clockwork Properties)",url:"https://www.property24.com/to-rent/bedford-gardens/bedfordview/gauteng/11764/117545482"},
- {s:"east",u:"mid",name:"Townhouse, Marais Rd",area:"Bedfordview",rent:"R12,000",spec:"2 bed · 2 bath townhouse",fl:"❓ Verify",desc:"Stylish 2-bath townhouse in a secure complex.",url:"https://www.property24.com/to-rent/bedfordview/bedfordview/gauteng/11758/116079373"},
- // EAST — Greenstone (far uber, current area)
- {s:"east",u:"far",pick:1,name:"4 Stone Close · modern 2-bed",area:"Greenstone Hill",rent:"R9,499",spec:"2 bed",fl:"❓ Verify floor",desc:"Cheapest of the lot + modern — your current area. But ~R8–12k Uber to Glenhazel until the car. (Propertyze)",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117554076"},
- {s:"east",u:"far",name:"The Isle · 2/2 open-plan",area:"Greenstone Hill",rent:"R11,000",spec:"2 bed · 2 bath · open-plan",fl:"❓ Verify floor",desc:"Spacious 2-bath open-plan in Greenstone. Nice unit, but car-dependent on the Uber. (Seeff)",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117547222"},
- // NORTH — Morningside/Sandton (mid-high uber)
- {s:"north",u:"mid",name:"3-bed ground + garden",area:"Morningside",rent:"R12,750",spec:"3 bed · ground floor · garden",fl:"✅ Ground",desc:"Rare in-budget Sandton find — 35 Cullinan Close. ~R5–7k Uber (edge of budget).",url:"https://www.property24.com/to-rent/morningside/sandton/gauteng/4258/117077572"},
- {s:"north",u:"mid",name:"8 Lower Rd · Abbotsbury",area:"Morningside",rent:"R14,000",spec:"2 bed",fl:"❓ Verify floor",desc:"Modern, well-kept 2-bed in the sought-after Abbotsbury complex. ~R5–7k Uber (edge of budget). (Beno Properties)",url:"https://www.property24.com/to-rent/morningside/sandton/gauteng/4258/117542452"},
- // NORTH — Bryanston (far uber unless car)
- {s:"north",u:"far",name:"4 Vlok Rd · sophisticated 2-bed",area:"Bryanston",rent:"R12,000",spec:"2 bed",fl:"❓ Verify floor",desc:"Best-value Bryanston 2-bed. Modern + secure, but ~R9k+ Uber to Glenhazel — needs the car. (Rebel Realtor)",url:"https://www.property24.com/to-rent/bryanston/sandton/gauteng/5176/117531691"},
- {s:"north",u:"far",name:"Lincoln Place · new development",area:"Bryanston",rent:"R14,000",spec:"2 bed · modern new build",fl:"❓ Verify floor",desc:"Modern new development on Bryanston Drive, central. Lovely — car-dependent on commute. (Century 21)",url:"https://www.property24.com/to-rent/bryanston/sandton/gauteng/5176/117539452"},
- // NORTH — Fourways (far uber unless car)
- {s:"north",u:"far",name:"1 Broadacres Dr · 2-bed value",area:"Fourways",rent:"R10,500",spec:"2 bed",fl:"❓ Verify floor",desc:"Great-value modern 2-bed in Fourways. Big Uber to Glenhazel — car needed. (Rebel Realtor)",url:"https://www.property24.com/to-rent/fourways/sandton/gauteng/5811/117530970"},
- {s:"north",u:"far",name:"221 Maroela View · avail Sep",area:"Fourways",rent:"R11,000",spec:"2 bed · avail 1 Sep 2026",fl:"❓ Verify floor",desc:"Modern 2-bed, available 1 Sept 2026 — timing fits the move. Car-dependent on the commute. (Renprop)",url:"https://www.property24.com/to-rent/fourways/sandton/gauteng/5811/117499443"},
- {s:"north",u:"far",name:"Chartwell 2-bed",area:"Fourways",rent:"R10,000",spec:"2 bed",fl:"❓ Verify",desc:"Cheapest Fourways option (1 Birchwood Ave). Nice North value — but big Uber.",url:"https://www.property24.com/to-rent/fourways/sandton/gauteng/5811/117279343"}
+ // ===== CONFIRMED GROUND FLOOR (ad states ground floor / garden unit) =====
+ {s:"near",u:"ok",g:1,pick:1,name:"Orange Grove garden flat",area:"Orange Grove",rent:"R8,500",spec:"2 bed · 1 bath · garden",fl:"✅ Ground",desc:"Cheapest here and a ground-floor garden flat, minutes from work. The value pick.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/johannesburg-central/orange-grove/RR4691601"},
+ {s:"near",u:"ok",g:1,pick:1,name:"Sydenham garden unit",area:"Sydenham",rent:"R10,000",spec:"2 bed · 2 bath · garden · garage",fl:"✅ Ground",desc:"Ground-level garden unit with a lock-up garage, pet-friendly. Strong value near work.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-cbd-and-bruma/sydenham/RR4566676"},
+ {s:"near",u:"ok",g:1,name:"Via Calabrio",area:"Waverley",rent:"R11,500",spec:"2 bed · 1 bath · 78m² · patio + garden",fl:"✅ Ground",desc:"Ground floor, opens onto a covered patio and garden. Cheap Uber to work.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/rosebank-and-parktown/waverley/RR4691907"},
+ {s:"near",u:"ok",g:1,pick:1,name:"Norwood Garden Village",area:"Norwood",rent:"R12,500",spec:"2 bed · 2.5 bath",fl:"✅ Ground",desc:"North-facing ground-floor unit in the sought-after Norwood Garden Village. Near Saxonwold.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR4719005"},
+ {s:"near",u:"ok",g:1,name:"Flex on Murray",area:"Waverley",rent:"R14,500",spec:"2 bed · 2 bath",fl:"✅ Ground",desc:"Ground-floor unit in the modern Flex on Murray complex. Top of the near-work budget.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/rosebank-and-parktown/waverley/RR4348047"},
+ {s:"east",u:"mid",g:1,pick:1,name:"Bedfordview garden unit",area:"Bedfordview",rent:"R12,500",spec:"2 bed · 2 bath · private garden",fl:"✅ Ground",desc:"Ground-floor garden unit in a secure Bedfordview complex. Upmarket, ~R4–5k Uber.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/bedfordview/bedfordview/RR4064879"},
+ {s:"north",u:"far",g:1,name:"Craigavon Park",area:"Fourways",rent:"R10,500",spec:"2 bed · 2 bath",fl:"✅ Ground",desc:"Modern ground-floor unit in Craigavon Park. Big Uber until the car lands.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/fourways-sunninghill-and-lonehill/craigavon/RR4754549"},
+ {s:"north",u:"far",g:1,name:"Cedar Acres Estate",area:"Fourways",rent:"R11,500",spec:"2 bed · 2 bath · communal gardens",fl:"✅ Ground",desc:"Spacious ground-floor apartment in Cedar Acres Estate. Car-dependent on the commute.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/fourways-sunninghill-and-lonehill/craigavon/RR4744961"},
+ {s:"north",u:"mid",g:1,name:"The Jade · garden unit",area:"Morningside",rent:"R17,000",spec:"2 bed · 2 bath · garden",fl:"✅ Ground",desc:"Ground-floor garden unit in Sandton's Jade Apartments. Premium/stretch, ~R5–7k Uber.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/morningside/RR4746337"},
+ // ===== FLOOR NOT LISTED (ad doesn't say — one call to the agent confirms) =====
+ {s:"near",u:"ok",name:"Highlands North 2-bed",area:"Highlands N",rent:"R12,500",spec:"2 bed · 2 bath · 100m²",fl:"Floor: ask agent",desc:"Closest to work, cheapest Uber, spacious. Ad doesn't state the floor — quick call to confirm.",url:"https://www.property24.com/to-rent/highlands-north/johannesburg/gauteng/4340/117505784"},
+ {s:"near",u:"ok",name:"Modern lock-up",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",fl:"Floor: ask agent",desc:"Cheapest in Norwood, modern secure lock-up. Ad doesn't state the floor — confirm with the agent.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
+ {s:"east",u:"far",name:"4 Stone Close",area:"Greenstone Hill",rent:"R9,499",spec:"2 bed",fl:"Floor: ask agent",desc:"Modern, your current area. Ad doesn't state the floor. Big Uber to Glenhazel until the car.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117554076"},
+ {s:"north",u:"far",name:"4 Vlok Rd",area:"Bryanston",rent:"R12,000",spec:"2 bed",fl:"Floor: ask agent",desc:"Best-value Bryanston 2-bed, modern + secure. Ad doesn't state the floor. Car needed.",url:"https://www.property24.com/to-rent/bryanston/sandton/gauteng/5176/117531691"}
 ];
 const grid=document.getElementById("grid");
 grid.innerHTML=F.map(f=>`
-  <div class="cc ${f.pick?'pick':''}" data-side="${f.s}" data-uber="${f.u}">
+  <div class="cc ${f.pick?'pick':''}" data-side="${f.s}" data-uber="${f.u}" data-floor="${f.g?'g':'u'}">
     <div class="cc-top"><span class="brand">${f.area}</span><span class="ub ${f.u}">${f.u==='ok'?'🚶 ~R2–3k':f.u==='mid'?'🚗 ~R4–6k':'🛑 R8k+ Uber'}</span></div>
     <div class="model" style="font-size:16px">${f.name} ${f.pick?'<span class="star">★</span>':''}</div>
     <div class="price">${f.rent}<small>${f.spec} · ${f.fl}</small></div>
@@ -144,12 +148,29 @@ grid.innerHTML=F.map(f=>`
     <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View / browse area ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
   </div>`).join('');
+const MOM=[
+ {area:"Yeoville",rent:"R1,671",type:"Bachelor",safe:0,fl:"Floor: ask",desc:"Cheapest going. Crown Court, Minors St. Inner-city — check safety before you view.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/yeoville/434-crown-court/34-minors-street/RR3514894"},
+ {area:"Bellevue",rent:"R1,878",type:"Studio",safe:0,fl:"Floor: ask",desc:"Mirna Court, Hunter St. Rock-bottom rent. Inner-city — safety is the real question.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/bellevue/1-mirna-court/131-hunter-street/RR2693389"},
+ {area:"Yeoville",rent:"R2,460",type:"Studio",safe:0,fl:"Floor: ask",desc:"Open-plan bachelor, 47 Dunbar St. Cheap. Inner-city — view in daylight, check security.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/yeoville/01-47-dunbar-street/47-dunbar-street/RR4726908"},
+ {area:"Kensington",rent:"R3,000",type:"Bachelor",safe:1,pick:1,fl:"Likely ground",desc:"Freestanding 'portable' unit, en-suite + own stove. Portable usually means ground-level. Safer area.",url:"https://www.gumtree.co.za/a-house-rentals-flat-rentals-offered/kensington/barchelor-39-s-flat/10013642434281012536857709"},
+ {area:"Bez Valley",rent:"R3,000",type:"Studio",safe:1,pick:1,fl:"Likely ground",desc:"Studio with its own private courtyard, 28 7th Ave. Courtyard hints ground-level. Safer than Yeoville.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/bezuidenhout-valley/2-28-7th/28-7th-avenue/RR4727623"},
+ {area:"Kensington",rent:"R7,500",type:"2-bed",safe:1,fl:"✅ Ground",desc:"The no-guesswork option: ad confirms ground floor, lounge, kitchen, patio garden. Bigger + pricier, zero stairs.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/kensington/RR4724804"}
+];
+document.getElementById("momgrid").innerHTML=MOM.map(m=>`
+  <div class="cc ${m.pick?'pick':''}">
+    <div class="cc-top"><span class="brand">${m.area}</span><span class="ub ${m.safe?'mid':'far'}">${m.safe?'🙂 Safer area':'⚠️ Inner-city'}</span></div>
+    <div class="model" style="font-size:16px">${m.type} ${m.pick?'<span class="star">★</span>':''}</div>
+    <div class="price">${m.rent}<small>${m.type} · ${m.fl}</small></div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${m.desc}</p>
+    <div class="cardlinks"><a class="clink see" style="flex:1" href="${m.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="Mom: ${m.type} (${m.area})" data-save-url="${m.url}">♡ Save</button>
+  </div>`).join('');
 if (window.NEST) window.NEST.wire();
 (function(){
-  const state={uber:"all",side:"all"};
-  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc");
+  const state={uber:"all",side:"all",floor:"all"};
+  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll("#grid .cc");
   const countEl=document.getElementById("count"),emptyEl=document.getElementById("empty");
-  function apply(){let s=0;cards.forEach(c=>{const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side);c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
+  function apply(){let s=0;cards.forEach(c=>{const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side)&&(state.floor==="all"||c.dataset.floor==="g");c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
   chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
   apply();
 })();
