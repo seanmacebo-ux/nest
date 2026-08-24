@@ -61,13 +61,13 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> 2-bed · ground floor · near-work + East + North</div>
     <h1>The <em>car-less</em> move.</h1>
-    <p class="sub">2-bed places, ground floor. Each shows its real Uber cost to your Glenhazel work, because until the car lands that's the number that bites. <b>✅ Ground</b> means the ad says so and, where photos existed, I checked them (some show a staircase, so it matters). <b>Floor: ask agent</b> means the ad is silent. Filter to ground-confirmed only up top.</p>
+    <p class="sub">2-bed places in <b>good-reputation areas only</b> (Parkwood, Killarney, Norwood, Craighall, Bedfordview, Morningside), with the managing agent noted so we don't land another dodgy landlord. Each shows its real Uber cost to your Glenhazel work. <b>✅ Ground</b> = the ad says so and, where photos existed, I checked them. <b>Floor: ask agent</b> = the ad is silent. Filter to ground-confirmed up top.</p>
   </header>
 
   <div class="zonekey">
-    <span class="zk ok">🚶 Cheap Uber ~R2–3k/mo · Norwood · Orange Grove · Highlands N · Waverley · Sydenham</span>
+    <span class="zk ok">🚶 Cheap Uber ~R2–3k/mo · Parkwood · Killarney · Norwood · Craighall</span>
     <span class="zk mid">🚗 Mid Uber ~R4–6k/mo · Bedfordview · Morningside</span>
-    <span class="zk far">🛑 Big Uber R8k+ · Greenstone · Bryanston · Fourways (needs the car)</span>
+    <span class="zk far">🛑 Big Uber R8k+ · Bryanston · Fourways (needs the car)</span>
   </div>
 
   <div class="filterbar">
@@ -119,7 +119,7 @@
 
   <div class="note">
     <h4>My read</h4>
-    <p><b>Cheapest step-free near work:</b> Sydenham (R10,000) — ground garden unit, ~R2–3k Uber. Orange Grove is cheaper (R8,500) but the photos show a staircase up to the door, so I'd skip it for a ground-floor move. Norwood GV and Flex on Murray (Waverley) are both photo-confirmed step-free.</p>
+    <p><b>Top picks near work:</b> Parkwood Manor (R13,750, confirmed ground, furnished, safe leafy Parkwood) and Norwood Garden Village (R12,500, photo-confirmed step-free, and Mom can take a 1-bed in the same complex). Both good-rep areas.</p>
     <p><b>East:</b> the Bedfordview garden unit (R12,500, ground floor) is upmarket at ~R4–5k Uber.</p>
     <p><b>North (Fourways / Bryanston / Morningside):</b> real ground-floor 2-beds from R10,500, but ~R5–9k+ Uber to Glenhazel. Only worth it once the licence and car are sorted.</p>
     <p><b>Two things:</b> listings sell fast (3 dropped off this list in a day), and use <b>Bolt</b> (10–20% cheaper than Uber).</p>
@@ -137,21 +137,23 @@
 <script src="nest.js"></script>
 <script>
 const F=[
- // ===== CONFIRMED GROUND FLOOR (ad states ground floor / garden unit) =====
- {s:"near",u:"ok",g:1,pick:1,name:"Sydenham garden unit",area:"Sydenham",rent:"R10,000",spec:"2 bed · 2 bath · garden · garage",fl:"✅ Ground (few steps to patio)",desc:"Photo-checked: ground garden unit with a lock-up garage, pet-friendly. Just a couple of steps up to the patio. Best value near work.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-cbd-and-bruma/sydenham/RR4566676"},
- {s:"near",u:"ok",g:1,name:"Via Calabrio",area:"Waverley",rent:"R11,500",spec:"2 bed · 1 bath · 78m² · patio + garden",fl:"✅ Ground",desc:"Ground floor (ad states it), opens onto a covered patio and garden. Complex is double-storey; this is a base unit. Cheap Uber to work.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/rosebank-and-parktown/waverley/RR4691907"},
- {s:"near",u:"ok",g:1,pick:1,name:"Norwood Garden Village",area:"Norwood",rent:"R12,500",spec:"2 bed · 2.5 bath",fl:"✅ Ground (step-free)",desc:"Photo-checked: living room opens flush onto the patio and garden, step-free. Sought-after complex near Saxonwold.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR4719005"},
- {s:"near",u:"ok",g:1,pick:1,name:"Flex on Murray",area:"Waverley",rent:"R14,500",spec:"2 bed · 2 bath",fl:"✅ Ground (step-free)",desc:"Photo-checked: opens straight onto the lawn, step-free. Modern Flex on Murray complex. Top of the near-work budget.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/rosebank-and-parktown/waverley/RR4348047"},
- {s:"near",u:"ok",name:"Orange Grove garden flat",area:"Orange Grove",rent:"R8,500",spec:"2 bed · 1 bath · garden",fl:"⚠️ Stairs up to door",desc:"Cheapest here BUT photo-checked: a full staircase up to the front door, with a lower level below. Not step-free — skip if you want true ground floor.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/johannesburg-central/orange-grove/RR4691601"},
- {s:"east",u:"mid",g:1,pick:1,name:"Bedfordview garden unit",area:"Bedfordview",rent:"R12,500",spec:"2 bed · 2 bath · private garden",fl:"✅ Ground (garden unit)",desc:"Ground-floor garden unit in a secure Bedfordview complex (ad states garden unit). Upmarket, ~R4–5k Uber.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/bedfordview/bedfordview/RR4064879"},
+ // ===== NEAR-WORK · GOOD-REPUTATION SUBURBS (cheap Uber) =====
+ {s:"near",u:"ok",g:1,pick:1,name:"Parkwood Manor",area:"Parkwood",rent:"R13,750",spec:"2 bed · 2 bath · 82m² · furnished",fl:"✅ Ground",desc:"Ad-confirmed + photo-checked ground floor. Furnished, opens to a private patio, 24/7 access control. Managed by Jawitz. Leafy, safe Parkwood by Rosebank.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/parkwood/RR4749966"},
+ {s:"near",u:"ok",g:1,pick:1,name:"Norwood Garden Village",area:"Norwood",rent:"R12,500",spec:"2 bed · 2.5 bath",fl:"✅ Ground (step-free)",desc:"Photo-checked step-free onto the patio. Cozy secure garden village — and it has a 1-bed for Mom too (see below). Good-rep Norwood.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR4719005"},
+ {s:"near",u:"ok",name:"2 Interlaken",area:"Killarney",rent:"R12,500",spec:"2 bed · 2 bath · 132m²",fl:"Floor: ask agent",desc:"Massive unit in a characterful, secure Killarney block near Houghton. Floor not stated. Agent eXp. Killarney is safe + established.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/killarney/2-interlaken/32-8th-street/RR4750259"},
+ {s:"near",u:"ok",name:"Lock-up-and-go",area:"Killarney",rent:"R13,000",spec:"2 bed · 2 bath · enclosed balcony",fl:"Likely upper — ask",desc:"Modern open-plan, security post at entrance. Enclosed balcony hints at an upper floor — confirm. Agent Zareena Kara (20+ yr Killarney specialist).",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/killarney/RR3436484"},
+ {s:"near",u:"ok",name:"Tuscan Place",area:"Craighall",rent:"R8,599",spec:"2 bed · 1 bath",fl:"⚠️ 2nd floor",desc:"Cheapest good-rep option. Modern kitchen, secure underground parking, free wifi. BUT ad says 2nd floor — not for a ground-floor move.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/craighall/204-tuscan-place/373-jan-smuts-avenue/RR4730176"},
+ {s:"near",u:"ok",name:"Modern lock-up",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",fl:"Floor: ask agent",desc:"Cheapest in Norwood, modern secure lock-up. Floor not stated — confirm with the agent.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
+ // ===== EAST · Bedfordview (good rep, ~R4–5k Uber) =====
+ {s:"east",u:"mid",g:1,pick:1,name:"Bedfordview garden unit",area:"Bedfordview",rent:"R12,500",spec:"2 bed · 2 bath · private garden",fl:"✅ Ground (garden unit)",desc:"Ground-floor garden unit in a secure Bedfordview complex. Upmarket area, ~R4–5k Uber.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/bedfordview/bedfordview/RR4064879"},
+ {s:"east",u:"mid",name:"Bedfordview Frontier",area:"Bedfordview",rent:"R12,000",spec:"2 bed · 2 bath · gated estate",fl:"Likely upper — ask",desc:"Modern gated estate — gym, pool, crèche, clubhouse, 24hr patrols. Photo suggests an upper floor; confirm. Agent RE/MAX.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg-metro/bedfordview/bedfordview/RR4569397"},
+ // ===== NORTH · Morningside/Sandton (good rep, mid Uber) =====
+ {s:"north",u:"mid",g:1,name:"The Jade · garden unit",area:"Morningside",rent:"R17,000",spec:"2 bed · 2 bath · garden",fl:"✅ Ground (garden unit)",desc:"Ground-floor garden unit in Sandton's Jade Apartments. Premium/stretch, ~R5–7k Uber.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/morningside/RR4746337"},
+ {s:"north",u:"mid",name:"Morningside Village Estate",area:"Morningside",rent:"R11,750",spec:"2 bed · 1 bath · 107m²",fl:"Likely upper — ask",desc:"Estate with 24hr security, pool, tennis, on-site restaurant. Has a loft / double-volume, so likely not ground. Agent Clockwork (mixed reviews — ask around).",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/morningside/RR4500669"},
+ // ===== NORTH · Bryanston/Fourways (good rep, big Uber till the car) =====
+ {s:"north",u:"far",name:"4 Vlok Rd",area:"Bryanston",rent:"R12,000",spec:"2 bed",fl:"Floor: ask agent",desc:"Best-value Bryanston 2-bed, modern + secure. Floor not stated. Car needed (big Uber).",url:"https://www.property24.com/to-rent/bryanston/sandton/gauteng/5176/117531691"},
  {s:"north",u:"far",g:1,name:"Craigavon Park",area:"Fourways",rent:"R10,500",spec:"2 bed · 2 bath",fl:"✅ Ground",desc:"Ground-floor unit in Craigavon Park (ad states ground floor). Big Uber until the car lands.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/fourways-sunninghill-and-lonehill/craigavon/RR4754549"},
- {s:"north",u:"far",g:1,name:"Cedar Acres Estate",area:"Fourways",rent:"R11,500",spec:"2 bed · 2 bath · communal gardens",fl:"✅ Ground (few steps to block)",desc:"Photo-checked: ground-floor unit, a few steps up to the block entrance. Cedar Acres Estate. Car-dependent commute.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/fourways-sunninghill-and-lonehill/craigavon/RR4744961"},
- {s:"north",u:"mid",g:1,name:"The Jade · garden unit",area:"Morningside",rent:"R17,000",spec:"2 bed · 2 bath · garden",fl:"✅ Ground (garden unit)",desc:"Ground-floor garden unit in Sandton's Jade Apartments (ad states garden unit). Premium/stretch, ~R5–7k Uber.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/morningside/RR4746337"},
- // ===== FLOOR NOT LISTED (ad doesn't say — one call to the agent confirms) =====
- {s:"near",u:"ok",name:"Highlands North 2-bed",area:"Highlands N",rent:"R12,500",spec:"2 bed · 2 bath · 100m²",fl:"Floor: ask agent",desc:"Closest to work, cheapest Uber, spacious. Ad doesn't state the floor — quick call to confirm.",url:"https://www.property24.com/to-rent/highlands-north/johannesburg/gauteng/4340/117505784"},
- {s:"near",u:"ok",name:"Modern lock-up",area:"Norwood",rent:"R9,000",spec:"2 bed · 1 bath",fl:"Floor: ask agent",desc:"Cheapest in Norwood, modern secure lock-up. Ad doesn't state the floor — confirm with the agent.",url:"https://www.property24.com/to-rent/norwood/johannesburg/gauteng/4363/111028347"},
- {s:"east",u:"far",name:"4 Stone Close",area:"Greenstone Hill",rent:"R9,499",spec:"2 bed",fl:"Floor: ask agent",desc:"Modern, your current area. Ad doesn't state the floor. Big Uber to Glenhazel until the car.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117554076"},
- {s:"north",u:"far",name:"4 Vlok Rd",area:"Bryanston",rent:"R12,000",spec:"2 bed",fl:"Floor: ask agent",desc:"Best-value Bryanston 2-bed, modern + secure. Ad doesn't state the floor. Car needed.",url:"https://www.property24.com/to-rent/bryanston/sandton/gauteng/5176/117531691"}
+ {s:"north",u:"far",g:1,name:"Cedar Acres Estate",area:"Fourways",rent:"R11,500",spec:"2 bed · 2 bath · communal gardens",fl:"✅ Ground (few steps to block)",desc:"Photo-checked ground-floor unit, a few steps up to the block. Cedar Acres Estate. Car-dependent commute.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/fourways-sunninghill-and-lonehill/craigavon/RR4744961"}
 ];
 const grid=document.getElementById("grid");
 grid.innerHTML=F.map(f=>`
