@@ -1,28 +1,32 @@
 /* The Nest — shared design system */
 :root {
-  --ground: #F3F5EF; --surface: #FBFCF9; --surface-2: #EDF0E8;
-  --ink: #23261F; --ink-soft: #5C6153; --line: #E0E4D9;
-  --baby: #B85C74; --baby-soft: #F1DFE4;
-  --home: #4F7A5B; --home-soft: #DDE9E0;
-  --car: #A9762F; --car-soft: #EEE3CF; --car-ink: #7A5417;
-  --good: #4F7A5B; --good-soft: #DEEAE0;
+  --ground: #F4F3EA; --surface: #FCFBF5; --surface-2: #EAEADE;
+  --ink: #1E2A22; --ink-soft: #5A685E; --line: #E1E3D8;
+  --baby: #B4657A; --baby-soft: #F1E1E5;
+  --home: #2F6B4F; --home-soft: #DAE7DD; --home-ink: #234F3B;
+  --car: #BE6F4C; --car-soft: #F1E2D7; --car-ink: #8A4E33;
+  --good: #2F6B4F; --good-soft: #DAE7DD;
   --warn: #B4442E; --warn-soft: #F3DED8;
-  --hot: #C4442A; --hot-soft: #F6DDD5;
-  --star: #C99A2E;
-  --accent: #4F7A5B;
-  --shadow: 0 1px 2px rgba(35,38,31,.05), 0 8px 24px -12px rgba(35,38,31,.15);
+  --red: #B4442E; --red-soft: #F3DED8;
+  --amber: #B08636; --amber-soft: #EEE4CF;
+  --hot: #C0522E; --hot-soft: #F5DFD6;
+  --star: #C79A4E;
+  --accent: #2F6B4F;
+  --shadow: 0 1px 2px rgba(30,42,34,.04), 0 6px 16px -8px rgba(30,42,34,.10), 0 14px 34px -18px rgba(30,42,34,.14);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --ground: #17190F; --surface: #20231A; --surface-2: #272B20;
-    --ink: #ECEEE4; --ink-soft: #9EA492; --line: #333829;
-    --baby: #E491A6; --baby-soft: #382830;
-    --home: #83B990; --home-soft: #23312A;
-    --car: #D3A862; --car-soft: #33291A; --car-ink: #E9C688;
-    --good: #83B990; --good-soft: #23312A;
-    --warn: #E8836B; --warn-soft: #3A241E;
-    --hot: #F0836A; --hot-soft: #3C241D;
-    --star: #E9C167; --accent: #83B990;
+    --ground: #12160F; --surface: #1A2016; --surface-2: #232A1F;
+    --ink: #E9EEE2; --ink-soft: #9AA791; --line: #2C3528;
+    --baby: #E091A2; --baby-soft: #37262B;
+    --home: #7FB596; --home-soft: #1E2E24; --home-ink: #A6D3B4;
+    --car: #DA8E6B; --car-soft: #33261C; --car-ink: #E9B792;
+    --good: #7FB596; --good-soft: #1E2E24;
+    --warn: #E8836B; --warn-soft: #37231D;
+    --red: #E8836B; --red-soft: #37231D;
+    --amber: #D3A862; --amber-soft: #302819;
+    --hot: #F0836A; --hot-soft: #3A231D;
+    --star: #E9C167; --accent: #7FB596;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
   }
 }
