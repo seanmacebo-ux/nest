@@ -26,6 +26,15 @@
   .sellers { margin-top: 8px; font-size: 11.5px; color: var(--ink-soft); }
   .sellers a { color: var(--car-ink); text-decoration: none; font-weight: 600; }
   .sellers a:hover { text-decoration: underline; }
+  .brandlist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 720px) { .brandlist { grid-template-columns: 1fr; } }
+  .br { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--surface); }
+  .brn { font-weight: 600; font-size: 14.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .brd { font-size: 12.5px; color: var(--ink-soft); margin-top: 5px; line-height: 1.45; }
+  .btag { font-size: 9.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
+  .btag.s { background: var(--good-soft); color: var(--good); }
+  .btag.a { background: var(--car-soft); color: var(--car-ink); }
+  .btag.w { background: var(--red-soft); color: var(--red); }
 </style>
 </head>
 <body>
@@ -42,7 +51,7 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Real options · by brand &amp; model · 2020+ · automatic</div>
     <h1>The <em>Six-Four</em> Shortlist.</h1>
-    <p class="sub">Every model with its real current options — actual years, prices and mileage pulled live from AutoTrader (Gauteng, automatic, Aug 2026). Green row = best value in that model. Compare, then tell me your picks and we decide.</p>
+    <p class="sub">37 models now, automatic and 2020+, sized for a 6'4 driver and a baby seat. The original list shows real listings pulled from AutoTrader; the newer additions show a price range (tap any row for live stock). Filter by origin or body, then tell me your picks. Brand-by-brand reliability, warranty and resale are in <b>The brands</b> section at the bottom.</p>
     <div class="callout car">📷 <b>See it</b> = real photos · 🔎 <b>AutoTrader</b> (or tap any table row) + <b>Cars.co.za</b> + <b>WeBuyCars</b> = that model's real current listings, always up to date. The table below is a today's-market snapshot — used cars sell fast, so we re-pull fresh when you're ready to buy. ⚠️ Honda WR-V is manual-only in SA, so it's out.</div>
   </header>
 
@@ -50,7 +59,9 @@
     <div class="fgroup"><span class="lbl">Origin</span>
       <button class="chip" data-f="origin" data-v="all" aria-pressed="true">All</button>
       <button class="chip" data-f="origin" data-v="jp" aria-pressed="false">🇯🇵 Japanese</button>
+      <button class="chip" data-f="origin" data-v="kr" aria-pressed="false">🇰🇷 Korean</button>
       <button class="chip" data-f="origin" data-v="cn" aria-pressed="false">🇨🇳 Chinese</button>
+      <button class="chip" data-f="origin" data-v="eu" aria-pressed="false">🇪🇺 European</button>
     </div>
     <div class="fgroup"><span class="lbl">Body</span>
       <button class="chip" data-f="body" data-v="all" aria-pressed="true">All</button>
@@ -70,7 +81,29 @@
     <p><b>The one test at 6'4:</b> sit in it with the seat all the way back, fit a rear-facing seat behind you. Knees clear + seat fits = pass. Send me the models you like (tap 📷) and I'll narrow to a final 3–4 to go view.</p>
     <p><b>Prices move</b> — these are today's cars, a read on real value. We re-run fresh when your licence is sorted and you're ready to buy.</p>
   </div>
-  <div class="foot">CARS · real AutoTrader options, Gauteng, Aug 2026 · The Nest</div>
+  <div class="sec" style="margin-top:40px"><h2>🏢 The brands — before you commit</h2>
+    <p>Reliability, warranty, parts and resale in SA. The Chinese brands aren't a blanket risk anymore — it's brand-by-brand now, and Haval is the one with real evidence behind it.</p></div>
+  <div class="panel">
+    <div class="brandlist">
+      <div class="br"><div class="brn">🇯🇵 Toyota <span class="btag s">Resale strong</span></div><div class="brd">The benchmark. Parts everywhere and cheap. Pay a premium up front, get it back at resale. The safe default.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Suzuki <span class="btag s">Resale strong</span></div><div class="brd">Simple, cheap to run and fix, few gremlins. Punches way above its price. The budget can't-go-wrong pick.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Mazda <span class="btag s">Resale strong</span></div><div class="brd">A notch more premium for little reliability trade-off. Parts moderate. CX models hold value well.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Honda <span class="btag s">Resale good</span></div><div class="brd">Durable and comfy. Thinner dealer network, so servicing takes a bit more planning.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Nissan <span class="btag a">Resale average</span></div><div class="brd">Solid now, but check the CVT gearbox service history carefully on anything pre-2020.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Mitsubishi <span class="btag a">Resale avg–strong</span></div><div class="brd">Underrated durability (Xpander/Pajero). Smaller network outside the metros.</div></div>
+      <div class="br"><div class="brn">🇰🇷 Kia <span class="btag a">Resale improving</span></div><div class="brd">No longer a budget risk. Long warranty that actually protects you into the used-car years.</div></div>
+      <div class="br"><div class="brn">🇰🇷 Hyundai <span class="btag s">Resale good</span></div><div class="brd">The 7-yr/200,000km warranty is transferable — you inherit real cover, not just a used car. Big win.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Volkswagen <span class="btag s">Resale good</span></div><div class="brd">Great to drive, but budget for DSG gearbox + electrical repairs once the plan runs out. That's the trap.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Ford <span class="btag a">Resale average</span></div><div class="brd">Engines fine, but confirm the gearbox on pre-2018 autos — the PowerShift dual-clutch is a known landmine.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Renault <span class="btag w">Resale weak–avg</span></div><div class="brd">Cheap to buy, but faster depreciation and French electrical risk once out of warranty.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Peugeot <span class="btag w">Resale weak</span></div><div class="brd">Nice cabins, but the smallest network here — resale and confidence reflect that.</div></div>
+      <div class="br"><div class="brn">🇨🇳 Haval / GWM <span class="btag s">Resale strong (for Chinese)</span></div><div class="brd">Safest Chinese bet: 10+ yrs in SA, long warranty, parts 30–40% cheaper than German. Resale now backs it up.</div></div>
+      <div class="br"><div class="brn">🇨🇳 Chery / Omoda <span class="btag a">Resale avg–strong</span></div><div class="brd">Best warranty on paper (up to 10yr/1m km engine). Newer Tiggo Pro range is good; network still maturing.</div></div>
+      <div class="br"><div class="brn">🇨🇳 MG <span class="btag w">Resale weak–avg</span></div><div class="brd">Newest and least proven here. The long warranty is exactly the insurance you want given the short track record.</div></div>
+    </div>
+    <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)"><b style="color:var(--ink)">Bottom line:</b> none of the Chinese brands carry Toyota-level resale certainty yet, but "risky Chinese car" is outdated — Haval has the most evidence behind it, Chery/Omoda the best warranty, MG the thinnest track record.</p>
+  </div>
+  <div class="foot">CARS · AutoTrader + Cars.co.za + WeBuyCars · brand research Aug 2026 · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
@@ -98,7 +131,22 @@ const CARS=[
  {o:"jp",b:"hatch",brand:"🇯🇵 Suzuki",name:"Swift",body:"Hatchback",r:["tt","tt"],why:"Cheeky, cheapest to run. Tight for 6'4.",L:[[2021,"R199,899","77k","Gezina",1],[2026,"R209,900","100","Sandton"],[2024,"R219,500","32k","Benoni"],[2024,"R239,999","46k","—"]],img:"2022 Suzuki Swift South Africa",find:"Suzuki Swift for sale South Africa"},
  {o:"jp",b:"sedan",pick:1,brand:"🇯🇵 Toyota",name:"Corolla",body:"Sedan · 12th gen",r:["gd","ex"],why:"Safe all-rounder, easiest capsule fit.",L:[[2021,"R259,800","118k","Pretoria",1],[2020,"R289,900","113k","Gezina"],[2022,"R339,900","51k","JHB"]],img:"2021 Toyota Corolla sedan South Africa",find:"Toyota Corolla sedan for sale South Africa"},
  {o:"jp",b:"sedan",brand:"🇯🇵 Honda",name:"Ballade",body:"Sedan",r:["gd","ex"],why:"Roomy, sharp, reliable.",L:[[2020,"R187,500","78k","—",1],[2020,"R219,900","63k","Randburg"],[2024,"R246,500","50k","Centurion"],[2024,"R259,900","34k","Pretoria"]],img:"2021 Honda Ballade South Africa",find:"Honda Ballade for sale South Africa"},
- {o:"jp",b:"sedan",pick:1,brand:"🇯🇵 Mazda",name:"Mazda3",body:"Sedan",r:["gd","ex"],why:"Genuinely beautiful, premium cabin.",L:[[2023,"R259,899","110k","Gezina",1],[2020,"R259,900","83k","Pretoria"],[2021,"R289,950","101k","Pta North"]],img:"2021 Mazda3 sedan South Africa",find:"Mazda3 sedan for sale South Africa"}
+ {o:"jp",b:"sedan",pick:1,brand:"🇯🇵 Mazda",name:"Mazda3",body:"Sedan",r:["gd","ex"],why:"Genuinely beautiful, premium cabin.",L:[[2023,"R259,899","110k","Gezina",1],[2020,"R259,900","83k","Pretoria"],[2021,"R289,950","101k","Pta North"]],img:"2021 Mazda3 sedan South Africa",find:"Mazda3 sedan for sale South Africa"},
+ // ===== EXPANDED SHORTLIST — tap a row for live stock (prices are ranges, not pinned listings) =====
+ {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Kia",name:"Seltos",body:"Compact SUV",r:["ex","ex"],why:"Roomiest cabin in class, tall-friendly headroom. Kia's long warranty carries to you.",L:[["2020+","R270–400k","—","see live ↗"]],img:"2022 Kia Seltos South Africa",find:"Kia Seltos for sale South Africa"},
+ {o:"kr",b:"suv",brand:"🇰🇷 Hyundai",name:"Creta",body:"Compact SUV",r:["ex","ex"],why:"Boxy, upright cabin — strong rear head + legroom. 7-yr transferable warranty.",L:[["2020+","R290–385k","—","see live ↗"]],img:"2022 Hyundai Creta South Africa",find:"Hyundai Creta for sale South Africa"},
+ {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Kia",name:"Sonet",body:"Sub-compact SUV",r:["gd","gd"],why:"Value sweet spot — tall seating in a smaller, cheaper-to-run body.",L:[["2021+","R230–270k","—","see live ↗"]],img:"2022 Kia Sonet South Africa",find:"Kia Sonet for sale South Africa"},
+ {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Hyundai",name:"Venue",body:"Sub-compact SUV",r:["gd","gd"],why:"Cheapest Korean SUV here, tall seating, 7-yr warranty carries over.",L:[["2020+","R200–260k","—","see live ↗"]],img:"2022 Hyundai Venue South Africa",find:"Hyundai Venue for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Volkswagen",name:"T-Cross",body:"Compact SUV",r:["gd","gd"],why:"Tallest seat in VW's small range, German feel. Budget for DSG risk out of plan.",L:[["2020+","R230–330k","—","see live ↗"]],img:"2022 Volkswagen T-Cross South Africa",find:"Volkswagen T-Cross for sale South Africa"},
+ {o:"eu",b:"hatch",brand:"🇪🇺 Volkswagen",name:"Polo",body:"Hatchback",r:["gd","gd"],why:"Best ride + refinement for the money. Rear tighter than an SUV. Buy the TSI, not the Vivo.",L:[["2020+","R230–320k","—","see live ↗"]],img:"2022 Volkswagen Polo South Africa",find:"Volkswagen Polo TSI for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Ford",name:"EcoSport",body:"Compact SUV",r:["ex","ex"],why:"Van-like tall cabin, easy seat fit. ⚠️ Buy ONLY the post-2018 torque-converter auto, never the PowerShift.",L:[["2020+","R230–300k","—","see live ↗"]],img:"2020 Ford EcoSport South Africa",find:"Ford EcoSport automatic for sale South Africa"},
+ {o:"eu",b:"hatch",brand:"🇪🇺 Ford",name:"Figo",body:"Hatch / sedan",r:["gd","gd"],why:"Cheapest way into a 2020+ auto. ⚠️ Same PowerShift caveat — buy the torque-converter auto only.",L:[["2020+","R180–260k","—","see live ↗"]],img:"2021 Ford Figo South Africa",find:"Ford Figo automatic for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Renault",name:"Duster",body:"Rugged SUV",r:["ex","ex"],why:"Highest ground clearance here, commanding seat. Weaker resale + French electrical risk.",L:[["2020+","R230–320k","—","see live ↗"]],img:"2021 Renault Duster South Africa",find:"Renault Duster automatic for sale South Africa"},
+ {o:"eu",b:"suv",pick:1,brand:"🇪🇺 Renault",name:"Triber",body:"MPV · 7-seat",r:["ex","ex"],why:"Cheapest 7-seat here — tall boxy cabin, sliding middle row. Big space per Rand; weaker resale.",L:[["2020+","R200–240k","—","see live ↗"]],img:"2022 Renault Triber South Africa",find:"Renault Triber automatic for sale South Africa"},
+ {o:"jp",b:"suv",brand:"🇯🇵 Honda",name:"BR-V",body:"SUV · 7-seat",r:["ex","ex"],why:"Genuine 7-seater with SUV clearance for compact-SUV money. Big boot even with the 3rd row up.",L:[["2020+","R240–280k","—","see live ↗"]],img:"2021 Honda BR-V South Africa",find:"Honda BR-V for sale South Africa"},
+ {o:"jp",b:"sedan",brand:"🇯🇵 Honda",name:"Amaze",body:"Sedan",r:["gd","gd"],why:"Tall glasshouse for a budget sedan, big separate boot for pram + shopping.",L:[["2020+","R230–270k","—","see live ↗"]],img:"2022 Honda Amaze South Africa",find:"Honda Amaze for sale South Africa"},
+ {o:"jp",b:"suv",brand:"🇯🇵 Toyota",name:"Yaris Cross",body:"Compact SUV",r:["gd","gd"],why:"Toyota resale + network in a small SUV. ⚠️ Thin used stock — mostly 2021–22, watch the market.",L:[["2021+","R250–330k","—","see live ↗"]],img:"2022 Toyota Yaris Cross South Africa",find:"Toyota Yaris Cross for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Peugeot",name:"2008",body:"Compact SUV",r:["gd","gd"],why:"Raised i-Cockpit driving position + classy cabin. Smallest network here hurts resale.",L:[["2020+","R230–320k","—","see live ↗"]],img:"2021 Peugeot 2008 South Africa",find:"Peugeot 2008 for sale South Africa"}
 ];
 const RL={ex:"Excellent",gd:"Good",tt:"Tight"};
 const grid=document.getElementById("grid");
