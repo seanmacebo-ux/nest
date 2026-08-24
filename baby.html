@@ -30,6 +30,26 @@
   .contacts td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
   .contacts td:last-child { font-family: "IBM Plex Mono", monospace; color: var(--ink-soft); text-align: right; }
   .bank { font-family: "IBM Plex Mono", monospace; font-size: 13px; line-height: 1.7; }
+  .how { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .how li { font-size: 13.5px; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+  .how .n { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--baby-soft); color: var(--baby); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .how b { color: var(--ink); }
+  .mwbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0 2px; }
+  .mwbar .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); }
+  .mwbar .chip { font-size: 12px; }
+  .mwgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 15px; }
+  @media (max-width: 720px) { .mwgrid { grid-template-columns: 1fr; } }
+  .mw { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 15px 17px; display: flex; flex-direction: column; }
+  .mw.star { border-color: var(--baby); box-shadow: 0 0 0 1px var(--baby) inset; }
+  .mw .nm { font-family: "Fraunces", serif; font-weight: 600; font-size: 16.5px; }
+  .mw .nm .s { color: var(--baby); font-size: 13px; }
+  .mw .mt { font-size: 11.5px; color: var(--ink-soft); font-family: "IBM Plex Mono", monospace; margin-top: 2px; }
+  .mw .sp { font-size: 12.5px; margin: 8px 0 0; line-height: 1.4; }
+  .mw .acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .mw .acts a { font-size: 12px; font-weight: 600; text-decoration: none; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); }
+  .mw .acts a:hover { border-color: var(--baby); }
+  .mw .acts a.em { background: var(--baby-soft); color: var(--baby); border-color: transparent; }
+  .mw .savebtn { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -68,30 +88,51 @@
     <p style="margin:16px 0 0;font-size:13.5px;color:var(--ink-soft)"><b style="color:var(--ink)">How the deposit works:</b> you float R45,000 by week 36. For a normal birth the actual costs (R18k + R2.8k paed + any extras) are deducted and the <b>balance (~R24,000) is refunded within a week</b> of going home. The deposit is really there to cover an emergency C-section (anaesthetist ~R8k + paed ~R4.4k paid from it). Your gynae (if used) bills separately.</p>
   </div>
 
-  <div class="sec"><h2>👩‍⚕️ The midwife — your next action</h2>
-    <p>You <b>must</b> be under an independent midwife to birth at Genesis. She's your main carer through pregnancy + birth, and <b>she charges separately</b> — this is the last unknown in the budget. Pick a few you connect with and ask their fees.</p></div>
+  <div class="sec"><h2>👩‍⚕️ The midwife — how to choose</h2>
+    <p>You <b>must</b> be under an independent midwife to birth at Genesis. She's your main carer through pregnancy + birth, and <b>she charges separately</b> — this is the last unknown in the budget. Below is how to pick, then all 19 affiliated midwives with tap-to-contact. Shortlist a few (♡), meet them, then tell me who to push on pricing.</p></div>
   <div class="panel">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px">21 affiliated midwives</div>
-    <div class="mid">
-      <span class="known">Lilo Mthembu ·site</span><span class="known">Dikeledi Mhlanga ·PMBcare</span>
-      <span>Gail de Vos</span><span>Xoli Makabane</span><span>Marilyn Sher</span><span>Veronica Park</span><span>Victoria Black</span><span>Ayanda Ngidi</span><span>Deidre Nel</span><span>Sharon Marsay</span><span>Lindsay Massel</span><span>Karen van der Merwe</span><span>Phindi Mashinini</span><span>Ruwaida Moola</span><span>Connie Nyabana</span><span>Ester Naude</span><span>Mmashadi Daisy Kgokane</span><span>Ntombi Broadley</span><span>Sarah Hentschel</span><span>Noma Mataka-Gumede</span>
+    <div style="font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--baby);margin-bottom:12px">What to weigh up</div>
+    <ul class="how">
+      <li><span class="n">1</span><span><b>Availability first.</b> Ask straight away if she has room for a late-Feb 2027 birth — no point falling in love with someone who's booked.</span></li>
+      <li><span class="n">2</span><span><b>First-timer fit.</b> As first-timers you want someone patient who <b>teaches</b> — antenatal classes, breastfeeding help, explains everything. That matters more than raw years.</span></li>
+      <li><span class="n">3</span><span><b>Philosophy match.</b> Most here lean natural / low-intervention / water birth. Make sure her style fits the birth you and Mishka picture.</span></li>
+      <li><span class="n">4</span><span><b>Experience &amp; safety.</b> Years and births attended — and a low C-section referral rate is a good sign for a first natural birth.</span></li>
+      <li><span class="n">5</span><span><b>What's included &amp; the fee.</b> You're self-funding, so get the all-in number: antenatal visits + the birth + postnatal follow-ups. That's the enquiry.</span></li>
+      <li><span class="n">6</span><span><b>Location.</b> Nearly all practise at Genesis in Saxonwold — but check where her antenatal visits happen (some have home offices further out).</span></li>
+      <li><span class="n">7</span><span><b>Backup.</b> Ask who covers your birth if she's unavailable on the day — you want to be comfortable with the plan B too.</span></li>
+      <li><span class="n">8</span><span><b>The click.</b> This is intimate care for months — book a meet and trust the gut feel. That's the real deciding factor.</span></li>
+    </ul>
+    <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)">The <span style="color:var(--baby);font-weight:600">★</span> ones are my read for first-time parents — they lean into teaching + guidance. Your call, not gospel.</p>
+  </div>
+
+  <div class="sec"><h2>📇 The 19 midwives — tap to contact</h2>
+    <p>Every button pre-fills our enquiry (first-timers, 15 weeks, need a first check-up, want a regular cadence, self-funding). Just tap and send. Filter by what matters, ♡ your shortlist — they'll show on the Tracker.</p></div>
+  <div class="panel">
+    <div class="filterbar">
+      <div class="fgroup"><span class="lbl">Show</span>
+        <button class="chip" data-mf="all" aria-pressed="true">All 19</button>
+        <button class="chip" data-mf="star" aria-pressed="false">★ First-timer picks</button>
+        <button class="chip" data-mf="vbac" aria-pressed="false">Water birth</button>
+      </div>
     </div>
-    <p style="margin:16px 0 8px;font-size:13.5px"><b>Enquiry template</b> — send to a few:</p>
-    <div class="tpl">Subject: Midwife enquiry — baby due end Feb 2027, birthing at Genesis
+    <div class="mwgrid" id="mwgrid"></div>
+    <p style="margin:16px 0 8px;font-size:13.5px"><b>The message they'll get</b> (email version — WhatsApp is a shorter take):</p>
+    <div class="tpl">Subject: Midwife enquiry - first-time parents, 15 weeks, birthing at Genesis
 
-Hi [Midwife name],
+Hi [name],
 
-My wife Mishka and I are expecting our first baby, due end of February 2027 (we're 15 weeks now). We're planning to birth at Genesis Clinic, Saxonwold, and we're looking for an independent midwife to care for us through pregnancy and the birth.
+My wife Mishka and I are expecting our first baby (due end of February 2027) and we're 15 weeks along now. As first-time parents we're looking for an independent midwife to guide us through the pregnancy and birth at Genesis Clinic in Saxonwold, someone we can learn from and lean on.
 
-Could you let us know:
-1. Your availability for a late-February 2027 birth
-2. Your fees for full antenatal, birth and postnatal care (we're self-funding, no medical aid)
-3. What's included (antenatal visits, the birth, postnatal follow-ups)
-4. Whether we can book an initial consultation to meet you
+We'd love to:
+- Book an initial check-up soon (we haven't had one with a midwife yet)
+- Set up a regular appointment schedule with you through the pregnancy
+- Understand your fees for full antenatal, birth and postnatal care (we're self-funding, no medical aid)
 
-Thank you so much — looking forward to hearing from you.
+Could you also let us know your availability for a late-February 2027 birth, and when we could come in to meet you?
+
+Thank you so much, we're excited to get started.
 Warmly, Sean &amp; Mishka</div>
-    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft)">Contacts are on each midwife's profile at <a href="https://genesis-clinic.co.za/meet-the-midwives/" target="_blank" rel="noopener noreferrer">genesis-clinic.co.za/meet-the-midwives</a>.</p>
+    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft)">Data pulled from each midwife's profile at <a href="https://genesis-clinic.co.za/meet-the-midwives/" target="_blank" rel="noopener noreferrer">genesis-clinic.co.za/meet-the-midwives</a> (Aug 2026). Double-check the number before you send.</p>
   </div>
 
   <div class="sec"><h2>🎒 What to bring &amp; what's provided</h2></div>
@@ -138,5 +179,56 @@ Warmly, Sean &amp; Mishka</div>
   <div class="foot">BABY · from Genesis welcome pack + email, 24 Aug 2026 · fees subject to change · The Nest</div>
 </div>
 <script src="nest.js"></script>
+<script>
+const MW=[
+ {n:"Karen van der Merwe",ph:"27823357731",e:"karenvdm61@gmail.com",exp:"39 yrs · C-section rate <10%",sp:"Water birth, VBAC, active birth + antenatal classes",area:"Saxonwold + Sundowner",f:1,w:1},
+ {n:"Lilo Mthembu",ph:"27812348804",e:"tenntenbirthing@gmail.com",site:"lilomidwife.co.za",exp:"20+ yrs · nurse educator",sp:"VBAC, birth coaching, breastfeeding support",area:"Saxonwold",f:1},
+ {n:"Sharon Marsay",ph:"27828533445",e:"sharonmarsay@gmail.com",exp:"UK-trained · lactation consultant",sp:"Family prep, breastfeeding, physiological birth",area:"Saxonwold",f:1},
+ {n:"Deidre Nel",ph:"27724617867",e:"deidre@belliesandbeyond.co.za",site:"belliesandbeyond.co.za",exp:"Advanced midwife since 2011",sp:"VBAC, informed-choice guidance",area:"Saxonwold",f:1},
+ {n:"Ester Naude",ph:"27827433625",e:"midwifeester@gmail.com",site:"midwifeoncall.co.za",exp:"10+ yrs · 500+ births",sp:"Water birth, twins, breech, VBAC",area:"Saxonwold",w:1},
+ {n:"Xoli Makabane",ph:"27826677947",e:"xolimakabane@gmail.com",site:"xolimakabane.co.za",exp:"36 yrs (22 private)",sp:"VBAC, advanced midwifery, neonatal",area:"Saxonwold"},
+ {n:"Ayanda Ngidi",ph:"27732549491",e:"ngidipune411@gmail.com",exp:"17 yrs",sp:"VBAC, twins, high-risk pregnancies",area:"Saxonwold"},
+ {n:"Veronica Park",ph:"27827419281",e:"privatebirthing@hotmail.com",exp:"~40 yrs",sp:"Natural &amp; water birth, midwife-led care",area:"Saxonwold",w:1},
+ {n:"Phindi Mashinini",ph:"27849107730",e:"phindimidwife@gmail.com",exp:"4 decades",sp:"Low-risk, water birth, VBAC",area:"Oxford Midwifery Unit",w:1},
+ {n:"Ruwaida Moola",ph:"27827847949",e:"ruwaida.moola@gmail.com",site:"miraclebirths.co.za",exp:"25+ yrs",sp:"Natural pain relief, fertility, neonatal",area:"Saxonwold"},
+ {n:"Victoria Black",ph:"27727569746",e:"proteanurse@outlook.com",site:"proteanurse.co.za",exp:"Private practice since 2017",sp:"Physiological birth, VBAC",area:"Joburg (Protea Midwifery)"},
+ {n:"Marilyn Sher",ph:"27832685422",e:"marilyn.sher@midwives-online.net",exp:"25+ yrs · pioneer independent",sp:"Fitness in pregnancy, physiological birth",area:"Saxonwold"},
+ {n:"Dikeledi Mhlanga",ph:"27722662842",e:"mhlangamidwife@gmail.com",exp:"Qualified 2001 (~25 yrs)",sp:"VBAC, natural birth",area:"Saxonwold"},
+ {n:"Connie Nyabana",ph:"27823014868",e:"connie.midwife@gmail.com",exp:"18+ yrs",sp:"VBAC",area:"Saxonwold"},
+ {n:"Lindsay Massel",ph:"27835011424",e:"lindsayvanderwalt@gmail.com",site:"infinitybabies.co.za",exp:"Private practice since 2010",sp:"Natural birth, VBAC",area:"Saxonwold"},
+ {n:"Sarah Hentschel",ph:"27833263921",e:"great.expectations.midwives@gmail.com",site:"greatexpectationsmidwives.co.za",exp:"Experienced · a mum herself",sp:"VBAC, low-intervention birth",area:"Saxonwold"},
+ {n:"Ntombi Broadley",ph:"27729496058",e:"info@littlearrivals.co.za",site:"littlearrivals.co.za",exp:"UK + SA trained",sp:"All settings; LGBTI+ friendly care",area:"Joburg"},
+ {n:"Gail de Vos",ph:"27828555684",e:"midwifegld@gmail.com",site:"frombumptobirth.co.za",exp:"Experienced",sp:"Birth-of-your-choice focus",area:"Saxonwold"},
+ {n:"Mmashadi Daisy Kgokane",ph:"27739074693",e:"dkgokane@gmail.com",exp:"Experienced",sp:"Antenatal to postpartum care",area:"Saxonwold"}
+];
+const SUBJ="Midwife enquiry - first-time parents, 15 weeks, birthing at Genesis";
+const BODY=n=>`Hi ${n},\n\nMy wife Mishka and I are expecting our first baby (due end of February 2027) and we're 15 weeks along now. As first-time parents we're looking for an independent midwife to guide us through the pregnancy and birth at Genesis Clinic in Saxonwold, someone we can learn from and lean on.\n\nWe'd love to:\n- Book an initial check-up soon (we haven't had one with a midwife yet)\n- Set up a regular appointment schedule with you through the pregnancy\n- Understand your fees for full antenatal, birth and postnatal care (we're self-funding, no medical aid)\n\nCould you also let us know your availability for a late-February 2027 birth, and when we could come in to meet you?\n\nThank you so much, we're excited to get started.\nWarmly,\nSean & Mishka`;
+const WA=n=>`Hi ${n}, my wife Mishka & I are first-time parents, 15 weeks along, planning to birth at Genesis Clinic (baby due end Feb 2027). As first-timers we're after a midwife to guide us. We'd love to book a first check-up soon, set up regular appointments, and hear your fees for full antenatal/birth/postnatal care (we're self-funding). When could we come meet you? Thanks so much! Sean & Mishka`;
+const fmt=p=>"+"+p.slice(0,2)+" "+p.slice(2,4)+" "+p.slice(4,7)+" "+p.slice(7);
+const grid=document.getElementById("mwgrid");
+grid.innerHTML=MW.map(m=>{
+  const mail="mailto:"+m.e+"?subject="+encodeURIComponent(SUBJ)+"&body="+encodeURIComponent(BODY(m.n));
+  const wa="https://wa.me/"+m.ph+"?text="+encodeURIComponent(WA(m.n));
+  const site=m.site?`<a href="https://${m.site}" target="_blank" rel="noopener noreferrer">🌐 Site</a>`:"";
+  return `<div class="mw ${m.f?'star':''}" data-star="${m.f?1:0}" data-water="${m.w?1:0}">
+    <div class="nm">${m.n} ${m.f?'<span class="s">★</span>':''}</div>
+    <div class="mt">${m.exp} · ${m.area}</div>
+    <p class="sp">${m.sp}</p>
+    <div class="acts">
+      <a href="tel:+${m.ph}">📞 Call</a>
+      <a class="wa" href="${wa}" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+      <a class="em" href="${mail}">✉️ Email</a>
+      ${site}
+    </div>
+    <button class="savebtn" data-save-kind="midwife" data-save-label="${m.n}" data-save-url="${wa}">♡ Save</button>
+  </div>`;
+}).join('');
+if (window.NEST) window.NEST.wire();
+(function(){
+  const chips=document.querySelectorAll(".chip[data-mf]"),cards=document.querySelectorAll(".mw");
+  function apply(v){cards.forEach(c=>{const ok=v==="all"||(v==="star"&&c.dataset.star==="1")||(v==="vbac"&&c.dataset.water==="1");c.style.display=ok?"":"none";});}
+  chips.forEach(ch=>ch.addEventListener("click",()=>{chips.forEach(o=>o.setAttribute("aria-pressed",o===ch?"true":"false"));apply(ch.dataset.mf);}));
+})();
+</script>
 </body>
 </html>

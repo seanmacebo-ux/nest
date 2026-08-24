@@ -34,10 +34,10 @@
   .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
   .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
 
-  .saved { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 640px) { .saved { grid-template-columns: 1fr; } }
+  .saved { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 860px) { .saved { grid-template-columns: 1fr; } }
   .savecol h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
-  .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); }
+  .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); } .savecol.mid h4 { color: var(--baby); }
   .savelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
   .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
   .savelist li a:hover { border-color: var(--accent); }
@@ -95,7 +95,7 @@
   </div>
 
   <div class="sec"><h2>❤️ Your saved picks</h2>
-    <p>Cars and flats you ❤️ across the site land here.</p></div>
+    <p>Cars, flats and midwives you ❤️ across the site land here.</p></div>
   <div class="saved">
     <div class="savecol car">
       <h4>🚗 Cars</h4>
@@ -104,6 +104,10 @@
     <div class="savecol flat">
       <h4>🏡 Flats</h4>
       <ul class="savelist" id="savedflats"></ul>
+    </div>
+    <div class="savecol mid">
+      <h4>👩‍⚕️ Midwives</h4>
+      <ul class="savelist" id="savedmidwives"></ul>
     </div>
   </div>
 
@@ -152,6 +156,7 @@
   }
   render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
   render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
+  render('midwife', 'savedmidwives', 'No midwives shortlisted yet — tap ♡ on the Baby page.');
 })();
 </script>
 </body>
