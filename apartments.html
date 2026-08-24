@@ -37,6 +37,12 @@
   .notetoggle:hover { border-color: var(--home); color: var(--home-ink); }
   .notebox { display: none; width: 100%; margin-top: 8px; min-height: 64px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
   .notewrap.open .notebox { display: block; }
+  .cx-units { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  @media (max-width: 480px) { .cx-units { grid-template-columns: 1fr; } }
+  .cx-unit { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .cx-who { font-size: 13px; font-weight: 600; color: var(--home-ink); }
+  .cx-spec { font-size: 12px; color: var(--ink-soft); margin: 4px 0 8px; line-height: 1.4; }
+  .cx-total { margin-top: 10px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; font-weight: 600; color: var(--ink); }
   .copybar { margin: 16px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .copymsg { font-size: 12.5px; color: var(--home-ink); font-weight: 600; }
 </style>
@@ -119,11 +125,11 @@
     <p><b>Two things:</b> listings sell fast (3 dropped off this list in a day), and use <b>Bolt</b> (10–20% cheaper than Uber).</p>
   </div>
 
-  <div class="sec" style="margin-top:38px"><h2>👵 For Mom — cheap + ground floor, close by</h2></div>
+  <div class="sec" style="margin-top:38px"><h2>👵 Mom in the same complex</h2></div>
   <div class="note" style="margin-top:0">
-    <p><b>Straight talk:</b> the truly cheap bachelors (R1,700–R2,500) sit in inner-city Yeoville and Bellevue. They're close to the near-work suburbs but rougher on safety, which for your mom matters more than saving a few hundred rand. Kensington and Bez Valley are a safer step up for a bit more. Like the flats above, none of these ads state the floor, so it's one call first: "ground floor, no stairs to the door?" before viewing. Cheapest first.</p>
+    <p>Better than a separate cheap flat: these three complexes have <b>both a 2-bed for you + Mishka AND a smaller 1-bed for Mom, at the same address, same gate.</b> Modern, secure, walking distance within the complex. Rents shown are today's; call to confirm mom's unit is ground floor.</p>
   </div>
-  <div class="grid" id="momgrid"></div>
+  <div class="grid" id="cxgrid"></div>
 
   <div class="foot">APARTMENTS · Private Property + Property24, Aug 2026 · listings sell fast · Uber figures are estimates · The Nest</div>
 </div>
@@ -158,23 +164,32 @@ grid.innerHTML=F.map(f=>`
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
     <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="${f.url}" placeholder="You + Mishka: what you love / don't — light, noise, kitchen, security, the vibe."></textarea></div>
   </div>`).join('');
-const MOM=[
- {area:"Yeoville",rent:"R1,671",type:"Bachelor",safe:0,fl:"Floor: ask",desc:"Cheapest going. Crown Court, Minors St. Inner-city — check safety before you view.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/yeoville/434-crown-court/34-minors-street/RR3514894"},
- {area:"Bellevue",rent:"R1,878",type:"Studio",safe:0,fl:"Floor: ask",desc:"Mirna Court, Hunter St. Rock-bottom rent. Inner-city — safety is the real question.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/bellevue/1-mirna-court/131-hunter-street/RR2693389"},
- {area:"Yeoville",rent:"R2,460",type:"Studio",safe:0,fl:"Floor: ask",desc:"Open-plan bachelor, 47 Dunbar St. Cheap. Inner-city — view in daylight, check security.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/yeoville/01-47-dunbar-street/47-dunbar-street/RR4726908"},
- {area:"Kensington",rent:"R3,000",type:"Bachelor",safe:1,pick:1,fl:"Likely ground",desc:"Freestanding 'portable' unit, en-suite + own stove. Portable usually means ground-level. Safer area.",url:"https://www.gumtree.co.za/a-house-rentals-flat-rentals-offered/kensington/barchelor-39-s-flat/10013642434281012536857709"},
- {area:"Bez Valley",rent:"R3,000",type:"Studio",safe:1,pick:1,fl:"Likely ground",desc:"Studio with its own private courtyard, 28 7th Ave. Courtyard hints ground-level. Safer than Yeoville.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/bezuidenhout-valley/2-28-7th/28-7th-avenue/RR4727623"},
- {area:"Kensington",rent:"R7,500",type:"2-bed",safe:1,fl:"✅ Ground",desc:"The no-guesswork option: ad confirms ground floor, lounge, kitchen, patio garden. Bigger + pricier, zero stairs.",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/kensington/RR4724804"}
+const CX=[
+ {name:"Norwood Garden Village",area:"Norwood",pick:1,tone:"ok",star:"⭐ closest · both ground",desc:"Low-rise garden village, not a tower. 24hr access, electric fence, cameras, two pools, braai areas, inverter backup. Cozy lock-up-and-go feel, ~5–8 min to work.",
+   couple:{label:"You + Mishka",spec:"2-bed · ✅ Ground · renovated kitchen",rent:"R12,500",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR4719005"},
+   mom:{label:"Mom",spec:"1-bed · 48m² · furnished · en-suite · avail 1 Sep",rent:"R9,000",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/121-norwood-garden-village/69-hamlin-street/RR4753042"},
+   total:"≈ R21,500/mo for both units"},
+ {name:"One on Anne",area:"Sandringham",pick:1,tone:"ok",star:"pet-friendly",desc:"Brand-new development. Gas stove, fingerprint access, CCTV, pool, braai, borehole for load-shedding. Warmer, communal feel, pet-friendly with permission. ~10–12 min to work.",
+   couple:{label:"You + Mishka",spec:"2-bed · en-suite · roof terrace",rent:"R10,600",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/sandringham/2-bed-at-one-on-anne/1-anne-street-in-sandringham/RR4342284"},
+   mom:{label:"Mom",spec:"1-bed · newly renovated",rent:"R8,060",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/sandringham/1bed-apart-one-on-anne/1-anne-street-in-sandringham/RR4342291"},
+   total:"≈ R18,660/mo for both units"},
+ {name:"The Georgia",area:"Waverley",tone:"mid",star:"newest + slickest",warn:"⚠️ Complex rule says no under-16s — likely a dealbreaker with a baby. Confirm before anything else.",desc:"Purpose-built rental estate. Designer kitchen, granite tops, facial-recognition access, fibre, community events, pool. Slick but strict: no pets, paid parking. ~10 min to work.",
+   couple:{label:"You + Mishka",spec:"2-bed · launch special (1 month free)",rent:"R9,990",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/waverley/2-the-georgia/1-scott-street/RR4480781"},
+   mom:{label:"Mom",spec:"1-bed (studio R6,290 also available)",rent:"R7,740",url:"https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/waverley/1-the-georgia/1-scott-street/RR4451052"},
+   total:"≈ R17,730/mo for both units"}
 ];
-document.getElementById("momgrid").innerHTML=MOM.map(m=>`
-  <div class="cc ${m.pick?'pick':''}">
-    <div class="cc-top"><span class="brand">${m.area}</span><span class="ub ${m.safe?'mid':'far'}">${m.safe?'🙂 Safer area':'⚠️ Inner-city'}</span></div>
-    <div class="model" style="font-size:16px">${m.type} ${m.pick?'<span class="star">★</span>':''}</div>
-    <div class="price">${m.rent}<small>${m.type} · ${m.fl}</small></div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${m.desc}</p>
-    <div class="cardlinks"><a class="clink see" style="flex:1" href="${m.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
-    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="Mom: ${m.type} (${m.area})" data-save-url="${m.url}">♡ Save</button>
-    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="${m.url}" placeholder="Notes on Mom's place — is it safe? ground floor? close enough?"></textarea></div>
+document.getElementById("cxgrid").innerHTML=CX.map(x=>`
+  <div class="cc ${x.pick?'pick':''}">
+    <div class="cc-top"><span class="brand">${x.name} · ${x.area}</span><span class="ub ${x.tone}">${x.star}</span></div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;line-height:1.45">${x.desc}</p>
+    ${x.warn?`<p style="font-size:12px;color:var(--red);font-weight:600;margin:9px 0 0;line-height:1.4">${x.warn}</p>`:''}
+    <div class="cx-units">
+      <div class="cx-unit"><div class="cx-who">${x.couple.label} · <b>${x.couple.rent}</b></div><div class="cx-spec">${x.couple.spec}</div><a class="clink see" href="${x.couple.url}" target="_blank" rel="noopener noreferrer">View ↗</a></div>
+      <div class="cx-unit"><div class="cx-who">${x.mom.label} · <b>${x.mom.rent}</b></div><div class="cx-spec">${x.mom.spec}</div><a class="clink see" href="${x.mom.url}" target="_blank" rel="noopener noreferrer">View ↗</a></div>
+    </div>
+    <div class="cx-total">${x.total}</div>
+    <button class="savebtn" style="width:100%;margin-top:10px" data-save-kind="flat" data-save-label="${x.name} (couple + mom)" data-save-url="${x.couple.url}">♡ Save</button>
+    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="cx-${x.name}" placeholder="You + Mishka on this complex — does it feel right for all of us? Mom close enough?"></textarea></div>
   </div>`).join('');
 if (window.NEST) window.NEST.wire();
 (function(){
@@ -190,7 +205,7 @@ if (window.NEST) window.NEST.wire();
   if(!btn) return;
   const labels={};
   F.forEach(f=>labels[f.url]=`${f.name} (${f.area}) ${f.rent}`);
-  MOM.forEach(m=>labels[m.url]=`Mom: ${m.type} (${m.area}) ${m.rent}`);
+  CX.forEach(x=>{labels[x.couple.url]=`${x.name} 2-bed ${x.couple.rent}`;labels[x.mom.url]=`${x.name} mom 1-bed ${x.mom.rent}`;labels['cx-'+x.name]=`${x.name} (complex)`;});
   btn.addEventListener('click',()=>{
     const notes=window.NEST.notes();
     const lines=Object.keys(notes).map(k=>`• ${labels[k]||k}\n  ${notes[k]}`);
