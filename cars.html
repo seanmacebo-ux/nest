@@ -29,6 +29,7 @@
 <nav class="nav"><div class="nav-in">
   <a class="brandmark" href="index.html">🪺 The Nest</a>
   <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
   <a class="tab" href="baby.html">Baby</a>
   <a class="tab" href="cars.html" aria-current="page">Cars</a>
   <a class="tab" href="apartments.html">Apartments</a>
@@ -69,6 +70,7 @@
   <div class="foot">CARS · real AutoTrader options, Gauteng, Aug 2026 · The Nest</div>
 </div>
 
+<script src="nest.js"></script>
 <script>
 const CARS=[
  {o:"cn",b:"suv",pick:1,brand:"🇨🇳 Haval",name:"Jolion",body:"Crossover",r:["gd","ex"],why:"Value benchmark — big screen, 7yr warranty.",L:[[2024,"R289,995","27k","Hatfield, Pta",1],[2024,"R319,900","71k","Randburg"],[2026,"R327,500","3k","Benoni"],[2026,"R339,900","8k","Boksburg"]],img:"2022 Haval Jolion South Africa",find:"Haval Jolion for sale South Africa"},
@@ -111,7 +113,9 @@ grid.innerHTML=CARS.map(c=>`
       <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
       <a class="clink list" href="https://www.google.com/search?q=${encodeURIComponent(c.find)}" target="_blank" rel="noopener noreferrer">🔎 Find it <span class="h">all sellers</span></a>
     </div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="https://www.google.com/search?q=${encodeURIComponent(c.find)}">♡ Save</button>
   </div>`).join('');
+if (window.NEST) window.NEST.wire();
 (function(){
   const state={origin:"all",body:"all"};
   const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc");

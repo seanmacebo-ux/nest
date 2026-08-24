@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Tracker · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  .ticker { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px,4vw,30px); box-shadow: var(--shadow); border-top: 4px solid var(--baby); }
+  .ticker .wk { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(38px,8vw,60px); line-height: 1; letter-spacing: -.02em; color: var(--baby); }
+  .ticker .meta { color: var(--ink-soft); font-size: 15px; margin-top: 8px; }
+  .bar { height: 12px; border-radius: 20px; background: var(--surface-2); margin-top: 18px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--home), var(--baby)); border-radius: 20px; transition: width .6s cubic-bezier(.2,.7,.3,1); }
+  .barlabels { display: flex; justify-content: space-between; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-soft); margin-top: 7px; letter-spacing: .04em; }
+
+  .mile { list-style: none; margin: 0; padding: 0; }
+  .mile li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dotted var(--line); align-items: baseline; }
+  .mile li:last-child { border-bottom: none; }
+  .mile .when { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; color: var(--home); flex: none; width: 92px; }
+  .mile .what { font-size: 14.5px; }
+  .mile .what small { color: var(--ink-soft); display: block; font-size: 12.5px; }
+  .mile li.past { opacity: .5; } .mile li.past .when { color: var(--ink-soft); }
+  .mile li.now { background: var(--baby-soft); margin: 0 -12px; padding: 12px; border-radius: 10px; border-bottom: none; }
+  .mile li.now .when { color: var(--baby); }
+
+  .todos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .todos li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; padding: 9px 8px; border-radius: 9px; }
+  .todos li:hover { background: var(--surface-2); }
+  .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
+  .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
+
+  .saved { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .saved { grid-template-columns: 1fr; } }
+  .savecol h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); }
+  .savelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+  .savelist li a:hover { border-color: var(--accent); }
+  .savelist .go { font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html" aria-current="page">Tracker</a>
+  <a class="tab" href="baby.html">Baby</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · live tracker</div>
+    <h1>Where <em>we're</em> at.</h1>
+    <p class="sub">Your pregnancy at a glance, the milestones ahead, and a to-do list you can tick off — it saves on your phone. (Syncing between you + Mishka comes with Babybean.)</p>
+  </header>
+
+  <div class="sec"><h2>🍼 Baby, week by week</h2></div>
+  <div class="ticker">
+    <div class="wk" id="wk">Week —</div>
+    <div class="meta" id="meta">calculating…</div>
+    <div class="bar"><span id="barfill" style="width:0%"></span></div>
+    <div class="barlabels"><span>Week 0</span><span>Trimester 2</span><span>Due · end Feb 2027</span></div>
+  </div>
+
+  <div class="sec"><h2>🗓️ Milestones ahead</h2>
+    <p>The fixed dates that drive everything. Deadlines are Genesis's.</p></div>
+  <div class="panel">
+    <ul class="mile" id="mile"></ul>
+  </div>
+
+  <div class="sec"><h2>✅ To-do — tap to tick off</h2>
+    <p>Ticks save on this device. Green when done.</p></div>
+  <div class="panel">
+    <ul class="todos">
+      <li data-tick="t-genesis"><span class="box"></span><span class="txt">Email Genesis to book <small>Done — they replied, booking this week</small></span></li>
+      <li data-tick="t-midwife"><span class="box"></span><span class="txt">Choose a midwife + get fee quotes <small>Send the template to a few (Baby page)</small></span></li>
+      <li data-tick="t-antenatal"><span class="box"></span><span class="txt">Book Mishka's antenatal check-up</span></li>
+      <li data-tick="t-account"><span class="box"></span><span class="txt">Open the "baby float" savings account <small>For the R45k in January</small></span></li>
+      <li data-tick="t-scan"><span class="box"></span><span class="txt">Book the 20-week scan <small>Maryke · 071 154 0223</small></span></li>
+      <li data-tick="t-booking"><span class="box"></span><span class="txt">Genesis booking-in by week 32 (~Dec) — pay R2,200</span></li>
+      <li data-tick="t-deposit"><span class="box"></span><span class="txt">R45,000 deposit by week 36 (~Jan)</span></li>
+      <li data-tick="t-learners"><span class="box"></span><span class="txt">Book learner's licence <small>Your guy / NaTIS — unlocks the car</small></span></li>
+      <li data-tick="t-alerts"><span class="box"></span><span class="txt">Set Property24 alerts for modern estates</span></li>
+      <li data-tick="t-move"><span class="box"></span><span class="txt">Secure rental + move <small>By November</small></span></li>
+      <li data-tick="t-bank"><span class="box"></span><span class="txt">Bank ~R12k this month <small>The spine — funds everything</small></span></li>
+    </ul>
+  </div>
+
+  <div class="sec"><h2>❤️ Your saved picks</h2>
+    <p>Cars and flats you ❤️ across the site land here.</p></div>
+  <div class="saved">
+    <div class="savecol car">
+      <h4>🚗 Cars</h4>
+      <ul class="savelist" id="savedcars"></ul>
+    </div>
+    <div class="savecol flat">
+      <h4>🏡 Flats</h4>
+      <ul class="savelist" id="savedflats"></ul>
+    </div>
+  </div>
+
+  <div class="foot">TRACKER · saves on this device · shared sync arrives with Babybean · The Nest</div>
+</div>
+
+<script src="nest.js"></script>
+<script>
+(function(){
+  // Pregnancy ticker — anchored to a known point: 15 weeks on 24 Aug 2026.
+  const REF = new Date('2026-08-24T00:00:00');
+  const REF_WEEK = 15;
+  const DUE = 40;
+  const now = new Date();
+  const daysSince = Math.floor((now - REF) / 86400000);
+  let week = REF_WEEK + Math.floor(daysSince / 7);
+  if (week < 0) week = 0; if (week > DUE) week = DUE;
+  const toGo = Math.max(0, DUE - week);
+  const tri = week < 13 ? 1 : week < 28 ? 2 : 3;
+  const triName = ['', 'First trimester', 'Second trimester', 'Third trimester'][tri];
+  document.getElementById('wk').textContent = 'Week ' + week;
+  document.getElementById('meta').textContent = triName + ' · ' + toGo + ' weeks to go · due end Feb 2027';
+  document.getElementById('barfill').style.width = Math.round(week / DUE * 100) + '%';
+
+  // Milestones
+  const M = [
+    { wk: 15, when: 'Now · wk 15', what: 'Antenatal check + choose a midwife', sub: '' },
+    { wk: 20, when: '~Oct · wk 20', what: 'The 20-week scan', sub: 'Anomaly scan — the big one' },
+    { wk: 30, when: 'November', what: 'Move into the new place', sub: 'Ground floor, before it gets heavy' },
+    { wk: 32, when: '~Dec · wk 32', what: 'Genesis booking-in + R2,200', sub: 'Must be done by wk 32' },
+    { wk: 36, when: '~Jan · wk 36', what: 'R45,000 deposit due', sub: 'Refunded after a normal birth' },
+    { wk: 40, when: 'end Feb', what: 'Baby 🎉', sub: '' }
+  ];
+  const ml = document.getElementById('mile');
+  ml.innerHTML = M.map(m => {
+    const cls = week >= m.wk + 1 ? 'past' : (week >= m.wk - 1 && week <= m.wk + 1) ? 'now' : '';
+    return `<li class="${cls}"><span class="when">${m.when}</span><span class="what">${m.what}${m.sub ? `<small>${m.sub}</small>` : ''}</span></li>`;
+  }).join('');
+
+  // Saved picks
+  function render(kind, elId, empty) {
+    const items = window.NEST.saves(kind);
+    const el = document.getElementById(elId);
+    if (!items.length) { el.innerHTML = `<div class="emptysave">${empty}</div>`; return; }
+    el.innerHTML = items.map(x => `<li><a href="${x.url || '#'}" target="_blank" rel="noopener noreferrer"><span>${x.label}</span><span class="go">↗</span></a></li>`).join('');
+  }
+  render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
+  render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
+})();
+</script>
+</body>
+</html>

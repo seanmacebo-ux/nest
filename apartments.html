@@ -38,6 +38,7 @@
 <nav class="nav"><div class="nav-in">
   <a class="brandmark" href="index.html">🪺 The Nest</a>
   <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
   <a class="tab" href="baby.html">Baby</a>
   <a class="tab" href="cars.html">Cars</a>
   <a class="tab" href="apartments.html" aria-current="page">Apartments</a>
@@ -107,6 +108,7 @@
   <div class="foot">APARTMENTS · Property24 + web pull, Aug 2026 · Uber figures are distance estimates — check the app · The Nest</div>
 </div>
 
+<script src="nest.js"></script>
 <script>
 const F=[
  // NEAR WORK (cheap uber)
@@ -140,7 +142,9 @@ grid.innerHTML=F.map(f=>`
     <div class="price">${f.rent}<small>${f.spec} · ${f.fl}</small></div>
     <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${f.desc}</p>
     <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View / browse area ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
   </div>`).join('');
+if (window.NEST) window.NEST.wire();
 (function(){
   const state={uber:"all",side:"all"};
   const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc");

@@ -130,4 +130,16 @@ h1 em { font-style: italic; color: var(--accent); }
 .tile .go { margin-top: 14px; font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; color: var(--accent); }
 
 a:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* interactivity — saves + ticks */
+.savebtn { font: inherit; cursor: pointer; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-soft); border-radius: 9px; padding: 8px 12px; font-size: 12px; font-weight: 600; transition: all .15s ease; white-space: nowrap; }
+.savebtn:hover { border-color: var(--baby); transform: translateY(-1px); }
+.savebtn.on { background: var(--baby-soft); color: var(--baby); border-color: var(--baby); }
+[data-tick] { cursor: pointer; user-select: none; }
+[data-tick] .b, [data-tick] .box { transition: background .15s ease, border-color .15s ease; position: relative; }
+[data-tick].done .b, [data-tick].done .box { background: var(--accent); border-color: var(--accent); }
+[data-tick].done .b::after, [data-tick].done .box::after { content: "✓"; color: #fff; font-size: 10px; line-height: 1; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+[data-tick].done .txt { color: var(--ink-soft); }
+[data-tick]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
