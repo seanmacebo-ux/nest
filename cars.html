@@ -23,6 +23,9 @@
   .lt .lo { color: var(--ink-soft); font-size: 11.5px; }
   .lt tr.best td { background: var(--good-soft); }
   .lt .tag { font-size: 8.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
+  .sellers { margin-top: 8px; font-size: 11.5px; color: var(--ink-soft); }
+  .sellers a { color: var(--car-ink); text-decoration: none; font-weight: 600; }
+  .sellers a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -40,7 +43,7 @@
     <div class="eyebrow"><span class="dot"></span> Real options · by brand &amp; model · 2020+ · automatic</div>
     <h1>The <em>Six-Four</em> Shortlist.</h1>
     <p class="sub">Every model with its real current options — actual years, prices and mileage pulled live from AutoTrader (Gauteng, automatic, Aug 2026). Green row = best value in that model. Compare, then tell me your picks and we decide.</p>
-    <div class="callout car">📷 <b>See it</b> = real photos of that model · 🔎 <b>Live stock</b> (or tap any table row) = that model's real current listings on AutoTrader, always up to date. The table below is a today's-market snapshot — used cars sell fast, so we re-pull fresh when you're ready to buy. ⚠️ Honda WR-V is manual-only in SA, so it's out.</div>
+    <div class="callout car">📷 <b>See it</b> = real photos · 🔎 <b>AutoTrader</b> (or tap any table row) + <b>Cars.co.za</b> + <b>WeBuyCars</b> = that model's real current listings, always up to date. The table below is a today's-market snapshot — used cars sell fast, so we re-pull fresh when you're ready to buy. ⚠️ Honda WR-V is manual-only in SA, so it's out.</div>
   </header>
 
   <div class="filterbar">
@@ -100,7 +103,10 @@ const CARS=[
 const RL={ex:"Excellent",gd:"Good",tt:"Tight"};
 const grid=document.getElementById("grid");
 grid.innerHTML=CARS.map(c=>{
-  const at="https://www.autotrader.co.za/cars-for-sale/"+c.brand.replace(/[^\x00-\x7F]/g,'').trim().toLowerCase()+"/"+c.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  const mk=c.brand.replace(/[^\x00-\x7F]/g,'').trim();
+  const at="https://www.autotrader.co.za/cars-for-sale/"+mk.toLowerCase()+"/"+c.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  const cz="https://www.cars.co.za/usedcars/Gauteng/"+mk+"/"+c.name.replace(/ /g,'-')+"/";
+  const wbc="https://www.webuycars.co.za/buy-a-car?search="+encodeURIComponent(mk+" "+c.name);
   return `
   <div class="cc ${c.pick?'pick':''}" data-origin="${c.o}" data-body="${c.b}">
     <div class="cc-top"><span class="brand">${c.brand}</span>
@@ -113,8 +119,9 @@ grid.innerHTML=CARS.map(c=>{
     </tbody></table>
     <div class="cardlinks">
       <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
-      <a class="clink list" href="${at}" target="_blank" rel="noopener noreferrer">🔎 Live stock <span class="h">on AutoTrader</span></a>
+      <a class="clink list" href="${at}" target="_blank" rel="noopener noreferrer">🔎 AutoTrader <span class="h">live stock</span></a>
     </div>
+    <div class="sellers">Also live on: <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a> · <a href="${wbc}" target="_blank" rel="noopener noreferrer">WeBuyCars ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${at}">♡ Save</button>
   </div>`;
 }).join('');
