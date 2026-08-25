@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2F6B4F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="robots" content="noindex, nofollow">
 <title>The Nest</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪺</text></svg>">
@@ -31,7 +38,8 @@
       <button id="shareBtn" type="button" style="font:inherit;font-weight:600;font-size:14px;cursor:pointer;border:none;border-radius:12px;padding:11px 18px;background:var(--accent);color:#fff">📤 Share with Mishka</button>
       <span id="shareMsg" style="font-size:13px;color:var(--ink-soft)"></span>
     </div>
-    <p style="margin:10px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch">Open this same link on Mishka's phone — it works for both of you. For now, ♡ saves and 💬 notes live on each phone separately (shared live-sync comes with Babybean); use the <b>Copy notes</b> buttons on each page to send each other your picks.</p>
+    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch"><b>📲 Install it as an app:</b> on <b>iPhone</b> open this in Safari → tap Share → <b>Add to Home Screen</b>. On <b>Android</b> open in Chrome → tap ⋮ → <b>Install app</b>. It then opens full-screen with its own icon, like a real app, and works offline.</p>
+    <p style="margin:8px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch">Same link works for both of you. For now, ♡ saves and 💬 notes live on each phone separately (shared live-sync comes with Babybean); use the <b>Copy notes</b> buttons to send each other your picks.</p>
   </header>
 
   <div class="sec"><h2>The one number that runs everything</h2></div>
@@ -103,6 +111,7 @@
 </div>
 <script>
 (function(){
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
   var btn=document.getElementById('shareBtn'),msg=document.getElementById('shareMsg');
   if(!btn) return;
   var url='https://seanmacebo-ux.github.io/nest/';

@@ -65,3 +65,7 @@ window.NEST = {
   }
 };
 document.addEventListener('DOMContentLoaded', () => window.NEST.wire());
+// Register the service worker so The Nest installs as an app + works offline.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
