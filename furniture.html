@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Furniture · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛋️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  .grid.two { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 780px) { .grid.two { grid-template-columns: 1fr; } }
+  .lt { width: 100%; border-collapse: collapse; margin: 11px 0 0; font-size: 12.5px; }
+  .lt th { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .lt td { padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .lt tr:last-child td { border-bottom: none; }
+  .lt .p { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
+  .lt .st { color: var(--ink-soft); font-size: 11px; white-space: nowrap; }
+  .lt .nm { font-weight: 600; }
+  .lt .wy { color: var(--ink-soft); font-size: 11px; display: block; margin-top: 2px; line-height: 1.4; }
+  .lt tr.best td { background: var(--good-soft); }
+  .lt .tag { font-size: 8.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
+  .lane { font-size: 9.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 8px; border-radius: 20px; background: var(--car-soft); color: var(--car-ink); }
+  .lane.a { background: var(--good-soft); color: var(--good); }
+  .tt-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .done-card { border-style: dashed; opacity: .82; }
+  .tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  @media (max-width: 720px) { .tiers { grid-template-columns: 1fr; } }
+  .tier { border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px; background: var(--surface); }
+  .tier.rec { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .tier .tn { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); font-weight: 600; }
+  .tier .tp { font-family: "Fraunces", serif; font-weight: 600; font-size: 30px; color: var(--accent); letter-spacing: -.02em; margin: 4px 0 0; }
+  .tier .tx { font-size: 12px; color: var(--ink-soft); margin: 7px 0 0; line-height: 1.5; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="baby.html">Baby</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="furniture.html" aria-current="page">Furniture</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Real stock · live SA prices · comfort feel, no luxury price</div>
+    <h1>Filling the <em>Nest</em>.</h1>
+    <p class="sub">The seven things we actually need for move-in: couch, coffee table, TV, main bed (frame + mattress), fridge and washer. Every one shows 3–5 real options with today's prices — tap any row to open the listing. The ★ row is my pick per item: the sweet spot where it feels plush or solid without overpaying. Filter by room, then ♡ Save the ones you and Mishka like.</p>
+    <div class="callout">🛠️ <b>The trick for luxury-on-a-budget:</b> spend on the touch points — a deep couch, a real pocket-spring mattress, a stone coffee table — and stay lean on the frame and the box appliances. That's what reads "expensive" without the price tag. Prices are live off Decofurn, Takealot, Hirsch's and co — they shift on weekly specials, so re-check the day you buy.</div>
+  </header>
+
+  <div class="filterbar">
+    <div class="fgroup"><span class="lbl">Room</span>
+      <button class="chip" data-f="lane" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="lane" data-v="living" aria-pressed="false">🛋️ Living</button>
+      <button class="chip" data-f="lane" data-v="bedroom" aria-pressed="false">🛏️ Bedroom</button>
+      <button class="chip" data-f="lane" data-v="appliance" aria-pressed="false">🔌 Appliances</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="grid two" id="grid"></div>
+
+  <div class="sec" style="margin-top:34px"><h2>✅ Already sorted</h2>
+    <p>Baby gear you've told me is handled — off the shopping list.</p></div>
+  <div class="grid two">
+    <div class="cc done-card"><div class="tt-row"><div class="model">🛁 Baby bath ✅</div></div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">Sorted — no spend needed.</p></div>
+    <div class="cc done-card"><div class="tt-row"><div class="model">🧷 Changing station ✅</div></div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">Sorted — no spend needed.</p></div>
+  </div>
+
+  <div class="sec" style="margin-top:34px"><h2>💰 What the whole set costs</h2>
+    <p>The honest total for all seven, three ways to play it. This is furniture + appliances only — baby gear (cot, pram) is separate.</p></div>
+  <div class="panel">
+    <div class="tiers">
+      <div class="tier"><div class="tn">Lean start</div><div class="tp">~R34k</div>
+        <div class="tx">Cheapest sensible pick per item, but keeping the two things not worth skipping: a <b>frost-free fridge</b> and a <b>front-loader washer</b>. Gets you fully set up, upgrade pieces later.</div></div>
+      <div class="tier rec"><div class="tn">★ Comfort-for-less</div><div class="tp">~R52k</div>
+        <div class="tx">My pick per item — the corner couch, stone table, tufted-headboard bed, real pocket-spring mattress, plus the value fridge/washer/TV. The plush feel, none of the designer markup.</div></div>
+      <div class="tier"><div class="tn">Spread it</div><div class="tp">Oct–Nov</div>
+        <div class="tx">Don't buy it all at once. Bed + fridge + washer first (day-one essentials), then couch + TV + coffee table once you're in. Watch Decofurn and Takealot specials — they run often.</div></div>
+    </div>
+    <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)"><b style="color:var(--red)">⚠️ Heads up on the plan:</b> the home page pencils in <b>~R25k</b> for "furniture + baby setup." Real furniture + appliances alone lands at <b>R34k–R52k</b> — so that line's light. Say the word and I'll re-sequence the month-by-month so nothing lands on top of the Genesis costs.</p>
+  </div>
+
+  <div class="note">
+    <h4>How to shop this</h4>
+    <p><b>Scan the green rows</b> — that's my best-value pick in each item. From there it's a simple trade: <b>go cheaper</b> on the frame, the coffee table and the TV (nobody feels the difference), and <b>hold the line</b> on the couch, the mattress, the fridge (frost-free) and the washer (front-loader). That's where comfort and daily hassle actually live.</p>
+    <p><b>Save what you both like</b> (tap ♡) and I'll pull it into one shortlist. When you're ready I'll re-check every price live — most of these are on rotating specials, so we time the buy to the discount.</p>
+  </div>
+
+  <div class="foot">FURNITURE · Decofurn · Takealot · Hirsch's · Coricraft · Rochester · live prices Aug 2026 · The Nest</div>
+</div>
+
+<script src="nest.js"></script>
+<script>
+const ITEMS=[
+ {lane:"living",icon:"🛋️",cat:"Couch",why:"Go plush here — this is the piece you feel every day. A corner shape gives the 'sink in' luxury look for the least money.",
+  O:[
+   ["Luna Fabric 3-Seater","Decofurn","R5,599","Cheapest in — pocket-coil + foam, but polyester pills faster under heavy use.","https://decofurnsa.co.za/products/luna-fabric-3-seater-couch-sofas"],
+   ["Joey Fabric Corner Chaise","Decofurn","R7,999","A real L-shape at the low end, reversible chaise. Budget-grade fabric.","https://decofurnsa.co.za/products/joey-fabric-corner-chaise-sofas"],
+   ["Lina Fabric 3-Seater","Decofurn","R9,999","Mid-century look — channel tufting + metal legs. Photographs 'designer'.","https://decofurnsa.co.za/products/lina-fabric-3-seater"],
+   ["Gia Fabric Corner Chaise","Decofurn","R12,499","Big 298cm corner — proper family-room sink-in. Measure the room, chaise side is fixed.","https://decofurnsa.co.za/products/sofas-gia-fabric-corner-chaise",1],
+   ["Kingsley Genuine Leather 3-Seater","Decofurn","R15,999","Real leather at this price is rare — wipes clean, no pilling, ages well. Firmer feel, straight 3-seater.","https://decofurnsa.co.za/products/kingsley-genuine-leather-3-seater-couch-sofas"]
+  ]},
+ {lane:"living",icon:"☕",cat:"Coffee table",why:"The cheapest 'looks expensive' swap in the room — real stone or solid wood beats a laminate print every time.",
+  O:[
+   ["Kaia 80cm Round","Decofurn","R2,099","Travertine-look — but it's laminate over MDF. Great in photos, scratches easier.","https://decofurnsa.co.za/products/kaia-80cm-round-coffee-table"],
+   ["Belle 80cm Round Stone Top","Decofurn","R2,499","Real 12mm sintered stone — cold to touch, marble-veined. The showroom trick.","https://decofurnsa.co.za/products/belle-80cm-round-stone-top-coffee-table",1],
+   ["Goa 80cm Round Solid Wood","Decofurn","R3,199","Actual solid mango wood — warm and tough, not veneer.","https://decofurnsa.co.za/products/goa-80cm-round-solid-wood-coffee-table"],
+   ["Veda 130×70cm Solid Wood","Decofurn","R4,399","Bigger rectangular surface for a proper lounge vs a small accent table.","https://decofurnsa.co.za/collections/coffee-tables"]
+  ]},
+ {lane:"living",icon:"📺",cat:"TV (50–55\")",why:"Fine to save here — a bigger, better panel for a little more beats the cheapest 50\". Go 55\" if the lounge can take it.",
+  O:[
+   ["Samsung 50\" U8000F Crystal UHD","Takealot","R5,999","Cleanest smart platform (Tizen), standard LED panel — solid for the price.","https://www.takealot.com/samsung-50-inch-u8000f-4k-crystal-uhd-smart-tv/PLID99729610"],
+   ["Hisense 50\" A6N Dolby Vision","Takealot","R5,998","Dolby Vision at the budget end, basic LED — great for a bedroom, ok as main.","https://www.takealot.com/hisense-50-a6n-4k-smart-uhd-tv-with-hdr-dolby-vision/PLID95872472"],
+   ["Hisense 55\" U6K ULED","Takealot","R7,894","Bigger 55\" + real Quantum-Dot/ULED step up in colour for ~R1.9k more. Best value.","https://www.takealot.com/hisense-55-u6k-4k-smart-uled-tv-with-quantum-dot-hdr/PLID95317780",1],
+   ["TCL 55\" C6KS Mini-LED","Takealot","R8,999","Best panel here — Mini-LED contrast + Quantum Dot. The stretch pick.","https://www.takealot.com/all?qsearch=TCL%2055%20C6KS%20Mini-LED"]
+  ]},
+ {lane:"bedroom",icon:"🛏️",cat:"Bed frame",why:"A tall tufted headboard is the single biggest 'expensive bedroom' cue you can buy. The frame is where a little spend shows most.",
+  O:[
+   ["Kim Fabric Bed","Decofurn","R2,499","Cheapest upholstered frame — plain headboard, won't carry the plush look alone.","https://decofurnsa.co.za/products/beds-bed-frames-kim-fabric"],
+   ["Lily Textured Fabric (Queen XL)","Decofurn","R6,999","Padded, soft rounded headboard — genuinely modern shape.","https://decofurnsa.co.za/products/lily-textured-fabric-bed"],
+   ["Eden Textured Fabric (Queen XL)","Decofurn","R7,699","Tall tufted, channel-panel headboard — boutique-hotel look. Undercuts Coricraft by ~R1.7k.","https://decofurnsa.co.za/products/eden-textured-fabric-bed",1],
+   ["Fletcher Bed","Coricraft","R9,449","Premium local build, 30+ fabric options. Top of budget, and pricier off-sale.","https://coricraft.co.za/products/fletcher-bed-_1788"]
+  ]},
+ {lane:"bedroom",icon:"🌙",cat:"Mattress",why:"Hold the line here — you spend a third of your life on it, and two people means motion isolation matters. Pocket springs are the real upgrade.",
+  O:[
+   ["Elegance","Decofurn","R3,899","Budget floor — coil spring + fibre, firm. Less contouring, more motion transfer.","https://decofurnsa.co.za/products/elegance-mattress"],
+   ["Ultra Support","Decofurn","R6,199","Denser comfort layer, aloe cover — a step up in support, still coil.","https://decofurnsa.co.za/products/ultra-support-mattress"],
+   ["MEELU Hybrid Pocket","Decofurn","R7,699","First with true pocket springs — best motion isolation for two, real contouring.","https://decofurnsa.co.za/products/meelu-hybrid-pocket-mattress",1],
+   ["St Regis Pocket","Decofurn","R9,999","Hotel-feel pillow-top + cooling gel. Mostly paying for the top layer vs MEELU.","https://decofurnsa.co.za/products/st-regis-pocket-mattress"]
+  ]},
+ {lane:"appliance",icon:"❄️",cat:"Fridge",why:"Don't skip frost-free — nobody wants to hand-defrost a freezer with a newborn. Defy has the widest SA parts network.",
+  O:[
+   ["Hisense 263L H370BIT-WD","Hirsch's","R5,499–6,499","Cheapest in — but confirm frost-free on the exact SKU before buying.","https://www.hirschs.co.za/hisense-263l-combi-fridge-h370bit-wd"],
+   ["Defy 302L DAC639","Takealot / Game","R7,999","Confirmed frost-free, right size for two + baby, best repair network. Don't skip frost-free.","https://www.takealot.com/defy-302l-dac639-bottom-freezer-fridge-water-dispenser-frost-fre/PLID93006116",1],
+   ["Defy 327L DAC675 NatureLight","Takealot","R8,399","A bit bigger, same frost-free reliability, small premium for LED lighting.","https://www.takealot.com/defy-327l-frost-free-naturelight-technology-fridge-freezer-with-/PLID73456960"],
+   ["Samsung 328L RB33J3011SA","Takealot / Hirsch's","R9,999","Digital Inverter compressor + brand trust — the nicer step-up if budget allows.","https://www.takealot.com/samsung-328l-top-fridge-bottom-freezer-with-cool-pack-rb33j3011s/PLID72929450"]
+  ]},
+ {lane:"appliance",icon:"🧺",cat:"Washer",why:"Go front-loader — gentler on fabric and far more water/energy efficient, which matters once baby laundry volume jumps.",
+  O:[
+   ["Defy 8kg DTL165 Top Loader","Rochester","R4,699","Cheapest, no bending — but harsher on fabric and thirstier on water.","https://www.rochester.co.za/defy-8kg-top-loader-manhattan-washing-machine-with-fountainwash-grey-dtl165"],
+   ["Samsung 8kg WW80T3040 Front Loader","Hirsch's","R5,999","Gentler on baby clothes + Digital Inverter motor. Best value, undercuts the steam Defy by ~R2k.","https://www.hirschs.co.za/samsung-8kg-front-loader-washing-machine-ww80t3040bs-fa",1],
+   ["Defy 8kg DAW408 Front Loader","Hirsch's","R5,899","Same class as the Samsung — Defy's stronger local repair network is the tiebreaker.","https://www.hirschs.co.za/catalogsearch/result/?q=Defy+DAW408"],
+   ["Defy 8kg DAW386 SteamCure","Takealot / Bradlows","R7,999","Steam helps with allergens/odours on baby laundry — but +R2k for that one feature.","https://www.takealot.com/defy-8kg-daw386-front-loader-washing-machine-with-steamcure-tech/PLID69278366"]
+  ]}
+];
+const grid=document.getElementById("grid");
+grid.innerHTML=ITEMS.map(it=>{
+  const best=it.O.find(o=>o[5]);
+  const laneName=it.lane==="appliance"?"Appliance":(it.lane==="bedroom"?"Bedroom":"Living");
+  return `
+  <div class="cc" data-lane="${it.lane}">
+    <div class="tt-row">
+      <div class="model">${it.icon} ${it.cat}</div>
+      <span class="lane ${it.lane==="appliance"?"a":""}">${laneName}</span>
+    </div>
+    <div class="bodytag">${it.O.length} real options · tap a row to open the listing</div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">${it.why}</p>
+    <table class="lt"><thead><tr><th>Option</th><th>Price</th><th>Store</th></tr></thead><tbody>
+      ${it.O.map(o=>`<tr class="${o[5]?'best':''}" style="cursor:pointer" title="Open on ${o[1]}" onclick="window.open('${o[4]}','_blank','noopener')"><td><span class="nm">${o[0]}</span>${o[5]?' <span class="tag">my pick</span>':''}<span class="wy">${o[3]}</span></td><td class="p">${o[2]}</td><td class="st">${o[1]} ↗</td></tr>`).join('')}
+    </tbody></table>
+    <button class="savebtn" style="width:100%;margin-top:10px" data-save-kind="furniture" data-save-label="${it.cat}: ${best?best[0]:''}" data-save-url="${best?best[4]:''}">♡ Save my pick</button>
+  </div>`;
+}).join('');
+if (window.NEST) window.NEST.wire();
+(function(){
+  const state={lane:"all"};
+  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc[data-lane]");
+  const countEl=document.getElementById("count");
+  function apply(){let s=0;cards.forEach(c=>{const ok=state.lane==="all"||c.dataset.lane===state.lane;c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+" items";}
+  chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
+  apply();
+})();
+</script>
+</body>
+</html>
