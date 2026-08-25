@@ -43,6 +43,28 @@
   .savelist li a:hover { border-color: var(--accent); }
   .savelist .go { font-family: "IBM Plex Mono", monospace; color: var(--accent); }
   .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; }
+
+  .pacer { border-top: 4px solid var(--home); }
+  .pacehead { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .pacehave { font-size: 14px; color: var(--ink-soft); font-weight: 600; display: flex; align-items: center; gap: 9px; }
+  .pacehave input { width: 118px; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 16px; border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; background: var(--surface-2); color: var(--ink); }
+  .paceleft { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(30px,6.5vw,46px); line-height: 1; letter-spacing: -.02em; color: var(--home); }
+  .paceleft small { font-size: 14px; color: var(--ink-soft); font-family: "IBM Plex Sans", sans-serif; font-weight: 600; }
+  .paceleft.warn { color: var(--car-ink); } .paceleft.over { color: var(--red); }
+  .pacelist { list-style: none; margin: 16px 0 0; padding: 0; }
+  .pacerow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dotted var(--line); }
+  .pacerow:last-child { border-bottom: none; }
+  .pacerow.off { opacity: .45; }
+  .pacetoggle { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 16px; text-align: center; user-select: none; }
+  .pacerow.on .pacetoggle { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .paceinfo { flex: 1; min-width: 0; }
+  .paceinfo .pl { font-weight: 600; font-size: 14.5px; }
+  .paceinfo .ps { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
+  .paceamt { flex: none; display: flex; align-items: center; gap: 3px; }
+  .paceamt > span { color: var(--ink-soft); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+  .paceamt input { width: 84px; text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); }
+  .pacesum { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13.5px; }
+  .pacesum b { font-family: "IBM Plex Mono", monospace; }
 </style>
 </head>
 <body>
@@ -71,6 +93,21 @@
     <div class="barlabels"><span>Week 0</span><span>Trimester 2</span><span>Due · end Feb 2027</span></div>
   </div>
 
+  <div class="sec"><h2>💸 This month's cash pacer</h2>
+    <p>You've got R60k this month. Set what each cost really is, tick the ones you're paying now, and watch what's left. It all saves on your phone — change the numbers anytime.</p></div>
+  <div class="panel pacer">
+    <div class="pacehead">
+      <label class="pacehave">You have <span style="font-family:'IBM Plex Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
+      <div class="paceleft" id="pace-left">R—<small> left</small></div>
+    </div>
+    <div class="bar"><span id="pace-bar" style="width:0%"></span></div>
+    <div class="barlabels"><span>Allocated <b id="pace-spent">R0</b></span><span id="pace-msg"></span></div>
+    <ul class="pacelist" id="pacelist"></ul>
+    <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
+    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'ask Lilo for her deposit amount', 'move R10k to the baby float this week'."></textarea></div>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Defaults are my estimates — the midwife deposit is Protea's ~R2,500 benchmark (get Lilo's real one), and "Genesis float" is money you set aside now toward the R45k due in January. Overwrite any number with your real one.</p>
+  </div>
+
   <div class="sec"><h2>🗓️ Milestones ahead</h2>
     <p>The fixed dates that drive everything. Deadlines are Genesis's.</p></div>
   <div class="panel">
@@ -92,6 +129,7 @@
       <li data-tick="t-alerts"><span class="box"></span><span class="txt">Set Property24 alerts for modern estates</span></li>
       <li data-tick="t-move"><span class="box"></span><span class="txt">Secure rental + move <small>By November</small></span></li>
       <li data-tick="t-bank"><span class="box"></span><span class="txt">Bank ~R12k this month <small>The spine — funds everything</small></span></li>
+      <li data-tick="t-babykit"><span class="box"></span><span class="txt">Start the baby-kit shopping list <small>Tick items as you buy — Baby page</small></span></li>
     </ul>
   </div>
 
@@ -158,6 +196,62 @@
   render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
   render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
   render('midwife', 'savedmidwives', 'No midwives shortlisted yet — tap ♡ on the Baby page.');
+})();
+
+// ===== Cash pacer =====
+(function(){
+  const KEY = 'nest_pacer';
+  const PACE = [
+    { k:'rent',        label:'Rent',                 sub:'This month — your place / the new one (target R13–15k)', amt:14000 },
+    { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
+    { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
+    { k:'midwife_dep', label:'Midwife deposit',      sub:'Booking deposit — ~R2,500 benchmark (Protea); get Lilo’s',amt:2500 },
+    { k:'genesis_dep', label:'Start the Genesis float', sub:'Set aside now toward the R45k facilities deposit (due Jan)', amt:10000 }
+  ];
+  const saved = window.NEST._get(KEY, {});
+  let have = (saved.have != null) ? saved.have : 60000;
+  const rs = saved.rows || {};
+  PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = (s.amt != null) ? s.amt : p.amt; });
+  function persist(){ window.NEST._set(KEY, { have: have, rows: Object.fromEntries(PACE.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }])) }); }
+  function fmt(n){ const s = Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); return (n < 0 ? '-R' : 'R') + s; }
+
+  const list = document.getElementById('pacelist');
+  list.innerHTML = PACE.map((p, i) => `
+    <li class="pacerow ${p.on ? 'on' : 'off'}" data-i="${i}">
+      <span class="pacetoggle" role="button" tabindex="0" aria-label="Toggle ${p.label}">✓</span>
+      <span class="paceinfo"><span class="pl">${p.label}</span><span class="ps">${p.sub}</span></span>
+      <span class="paceamt"><span>R</span><input type="number" inputmode="numeric" step="100" min="0" value="${p.amt}"></span>
+    </li>`).join('');
+
+  const haveInput = document.getElementById('pace-have');
+  haveInput.value = have;
+  haveInput.addEventListener('input', () => { have = +haveInput.value || 0; recalc(); persist(); });
+
+  list.querySelectorAll('.pacerow').forEach(row => {
+    const i = +row.dataset.i;
+    const tog = row.querySelector('.pacetoggle');
+    const inp = row.querySelector('.paceamt input');
+    const flip = () => { PACE[i].on = !PACE[i].on; row.classList.toggle('on', PACE[i].on); row.classList.toggle('off', !PACE[i].on); recalc(); persist(); };
+    tog.addEventListener('click', flip);
+    tog.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+    inp.addEventListener('input', () => { PACE[i].amt = +inp.value || 0; recalc(); persist(); });
+  });
+
+  function recalc(){
+    const alloc = PACE.filter(p => p.on).reduce((s, p) => s + (+p.amt || 0), 0);
+    const left = have - alloc;
+    const leftEl = document.getElementById('pace-left');
+    leftEl.innerHTML = fmt(left) + '<small> left</small>';
+    leftEl.className = 'paceleft ' + (left < 0 ? 'over' : left < 5000 ? 'warn' : '');
+    document.getElementById('pace-alloc').textContent = fmt(alloc);
+    document.getElementById('pace-spent').textContent = fmt(alloc);
+    const pct = have > 0 ? Math.min(100, Math.round(alloc / have * 100)) : 0;
+    const bar = document.getElementById('pace-bar');
+    bar.style.width = pct + '%';
+    bar.style.background = left < 0 ? 'var(--red)' : (left < 5000 ? 'var(--car-ink)' : 'linear-gradient(90deg, var(--home), var(--baby))');
+    document.getElementById('pace-msg').textContent = left < 0 ? ('Over by ' + fmt(-left)) : (left < 5000 ? 'Cutting it fine' : 'On track');
+  }
+  recalc();
 })();
 </script>
 </body>
