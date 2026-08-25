@@ -52,8 +52,8 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Real options · by brand &amp; model · 2020+ · automatic</div>
     <h1>The <em>Six-Four</em> Shortlist.</h1>
-    <p class="sub">37 models now, automatic and 2020+, sized for a 6'4 driver and a baby seat. The original list shows real listings pulled from AutoTrader; the newer additions show a price range (tap any row for live stock). Filter by origin or body, then tell me your picks. Brand-by-brand reliability, warranty and resale are in <b>The brands</b> section at the bottom.</p>
-    <div class="callout car">📷 <b>See it</b> = real photos · 🔎 <b>AutoTrader</b> (or tap any table row) + <b>Cars.co.za</b> + <b>WeBuyCars</b> = that model's real current listings, always up to date. The table below is a today's-market snapshot — used cars sell fast, so we re-pull fresh when you're ready to buy. ⚠️ Honda WR-V is manual-only in SA, so it's out.</div>
+    <p class="sub">43 models, automatic and 2020+, sized for a 6'4 driver and a baby seat. Prices are real <b>street bands</b> — what they actually sell for on <b>WeBuyCars + private (Gumtree/Facebook)</b>, which runs roughly <b>R20k–R50k under</b> the AutoTrader/Cars.co.za dealer asks. Filter by origin or body, ♡ your picks. Brand-by-brand reliability + resale in <b>The brands</b> at the bottom.</p>
+    <div class="callout car">📷 <b>See it</b> = real photos · 🔎 <b>WeBuyCars</b> (or tap any row) = fixed-price real value, the best public read on street price · 💸 <b>Gumtree + FB Marketplace</b> = the cheapest private deals · <b>AutoTrader/Cars.co.za</b> = dealer asks (pricier), there to compare. The green <b>street</b> row is the real going rate; a second row shows the dealer ask so you see the gap. ⚠️ Omoda C5 &amp; Suzuki Fronx are too new to have dropped into budget yet — revisit late 2027.</div>
   </header>
 
   <div class="filterbar">
@@ -78,9 +78,21 @@
 
   <div class="note">
     <h4>How to decide from here</h4>
-    <p><b>Scan the green rows</b> — that's the best-value listing in each model. Then it's a trade: <b>newer + lower km</b> (pay more) vs <b>cheaper + higher km</b> (save now). At your budget the value sits around <b>R220k–R290k</b> for a modern automatic.</p>
+    <p><b>The green "street" row</b> is the real going rate (WeBuyCars/private). At your budget the sweet spot sits around <b>R200k–R290k</b> for a modern automatic. For a proper private deal, aim for the <b>WeBuyCars price minus ~10–15%</b> on Gumtree/Facebook for the same year + spec.</p>
+    <p><b>Best value plays right now:</b> Ford EcoSport, Renault Duster, Honda BR-V (7-seat) and Suzuki Ertiga (7-seat) — soft resale or MPV space means you pay well under dealer. <b>Skip if budget's tight:</b> Toyota Yaris Cross (least discounted, the "Toyota tax").</p>
     <p><b>The one test at 6'4:</b> sit in it with the seat all the way back, fit a rear-facing seat behind you. Knees clear + seat fits = pass. Send me the models you like (tap 📷) and I'll narrow to a final 3–4 to go view.</p>
-    <p><b>Prices move</b> — these are today's cars, a read on real value. We re-run fresh when your licence is sorted and you're ready to buy.</p>
+  </div>
+
+  <div class="note" style="border-left:3px solid var(--red)">
+    <h4>⚠️ Buying private (no dealer warranty) — protect yourself</h4>
+    <p>Private (Gumtree/FB) is cheapest but there's zero comeback if something's wrong. Before any money changes hands:</p>
+    <ul style="margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13.5px">
+      <li><b>Check for outstanding finance</b> (TransUnion/Lightstone history check, a few hundred rand) — a financed car can be repossessed from you even after you've paid.</li>
+      <li><b>Independent inspection</b> — AA or an RMI workshop (~R1,000–R1,500) before you buy.</li>
+      <li><b>VIN on the car matches the papers</b>, and the NATIS reg doc is an <b>original</b>, not a copy.</li>
+      <li><b>Seller's ID matches the registered owner</b> (or a clear paper trail for estate/company sales).</li>
+      <li>Meet in <b>daylight, public place</b>. Never pay a deposit before seeing the car + papers in person. Rushed deal = walk away.</li>
+    </ul>
   </div>
   <div class="sec" style="margin-top:40px"><h2>🏢 The brands — before you commit</h2>
     <p>Reliability, warranty, parts and resale in SA. The Chinese brands aren't a blanket risk anymore — it's brand-by-brand now, and Haval is the one with real evidence behind it.</p></div>
@@ -104,7 +116,7 @@
     </div>
     <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)"><b style="color:var(--ink)">Bottom line:</b> none of the Chinese brands carry Toyota-level resale certainty yet, but "risky Chinese car" is outdated — Haval has the most evidence behind it, Chery/Omoda the best warranty, MG the thinnest track record.</p>
   </div>
-  <div class="foot">CARS · AutoTrader + Cars.co.za + WeBuyCars · brand research Aug 2026 · The Nest</div>
+  <div class="foot">CARS · street prices from WeBuyCars + private (Gumtree/FB) · dealer compare: AutoTrader + Cars.co.za · Aug 2026, re-check before buying · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
@@ -133,45 +145,55 @@ const CARS=[
  {o:"jp",b:"sedan",pick:1,brand:"🇯🇵 Toyota",name:"Corolla",body:"Sedan · 12th gen",r:["gd","ex"],why:"Safe all-rounder, easiest capsule fit.",L:[[2021,"R259,800","118k","Pretoria",1],[2020,"R289,900","113k","Gezina"],[2022,"R339,900","51k","JHB"]],img:"2021 Toyota Corolla sedan South Africa",find:"Toyota Corolla sedan for sale South Africa"},
  {o:"jp",b:"sedan",brand:"🇯🇵 Honda",name:"Ballade",body:"Sedan",r:["gd","ex"],why:"Roomy, sharp, reliable.",L:[[2020,"R187,500","78k","—",1],[2020,"R219,900","63k","Randburg"],[2024,"R246,500","50k","Centurion"],[2024,"R259,900","34k","Pretoria"]],img:"2021 Honda Ballade South Africa",find:"Honda Ballade for sale South Africa"},
  {o:"jp",b:"sedan",pick:1,brand:"🇯🇵 Mazda",name:"Mazda3",body:"Sedan",r:["gd","ex"],why:"Genuinely beautiful, premium cabin.",L:[[2023,"R259,899","110k","Gezina",1],[2020,"R259,900","83k","Pretoria"],[2021,"R289,950","101k","Pta North"]],img:"2021 Mazda3 sedan South Africa",find:"Mazda3 sedan for sale South Africa"},
- // ===== EXPANDED SHORTLIST — tap a row for live stock (prices are ranges, not pinned listings) =====
- {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Kia",name:"Seltos",body:"Compact SUV",r:["ex","ex"],why:"Roomiest cabin in class, tall-friendly headroom. Kia's long warranty carries to you.",L:[["2020+","R270–400k","—","see live ↗"]],img:"2022 Kia Seltos South Africa",find:"Kia Seltos for sale South Africa"},
- {o:"kr",b:"suv",brand:"🇰🇷 Hyundai",name:"Creta",body:"Compact SUV",r:["ex","ex"],why:"Boxy, upright cabin — strong rear head + legroom. 7-yr transferable warranty.",L:[["2020+","R290–385k","—","see live ↗"]],img:"2022 Hyundai Creta South Africa",find:"Hyundai Creta for sale South Africa"},
- {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Kia",name:"Sonet",body:"Sub-compact SUV",r:["gd","gd"],why:"Value sweet spot — tall seating in a smaller, cheaper-to-run body.",L:[["2021+","R230–270k","—","see live ↗"]],img:"2022 Kia Sonet South Africa",find:"Kia Sonet for sale South Africa"},
- {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Hyundai",name:"Venue",body:"Sub-compact SUV",r:["gd","gd"],why:"Cheapest Korean SUV here, tall seating, 7-yr warranty carries over.",L:[["2020+","R200–260k","—","see live ↗"]],img:"2022 Hyundai Venue South Africa",find:"Hyundai Venue for sale South Africa"},
- {o:"eu",b:"suv",brand:"🇪🇺 Volkswagen",name:"T-Cross",body:"Compact SUV",r:["gd","gd"],why:"Tallest seat in VW's small range, German feel. Budget for DSG risk out of plan.",L:[["2020+","R230–330k","—","see live ↗"]],img:"2022 Volkswagen T-Cross South Africa",find:"Volkswagen T-Cross for sale South Africa"},
- {o:"eu",b:"hatch",brand:"🇪🇺 Volkswagen",name:"Polo",body:"Hatchback",r:["gd","gd"],why:"Best ride + refinement for the money. Rear tighter than an SUV. Buy the TSI, not the Vivo.",L:[["2020+","R230–320k","—","see live ↗"]],img:"2022 Volkswagen Polo South Africa",find:"Volkswagen Polo TSI for sale South Africa"},
- {o:"eu",b:"suv",brand:"🇪🇺 Ford",name:"EcoSport",body:"Compact SUV",r:["ex","ex"],why:"Van-like tall cabin, easy seat fit. ⚠️ Buy ONLY the post-2018 torque-converter auto, never the PowerShift.",L:[["2020+","R230–300k","—","see live ↗"]],img:"2020 Ford EcoSport South Africa",find:"Ford EcoSport automatic for sale South Africa"},
- {o:"eu",b:"hatch",brand:"🇪🇺 Ford",name:"Figo",body:"Hatch / sedan",r:["gd","gd"],why:"Cheapest way into a 2020+ auto. ⚠️ Same PowerShift caveat — buy the torque-converter auto only.",L:[["2020+","R180–260k","—","see live ↗"]],img:"2021 Ford Figo South Africa",find:"Ford Figo automatic for sale South Africa"},
- {o:"eu",b:"suv",brand:"🇪🇺 Renault",name:"Duster",body:"Rugged SUV",r:["ex","ex"],why:"Highest ground clearance here, commanding seat. Weaker resale + French electrical risk.",L:[["2020+","R230–320k","—","see live ↗"]],img:"2021 Renault Duster South Africa",find:"Renault Duster automatic for sale South Africa"},
- {o:"eu",b:"suv",pick:1,brand:"🇪🇺 Renault",name:"Triber",body:"MPV · 7-seat",r:["ex","ex"],why:"Cheapest 7-seat here — tall boxy cabin, sliding middle row. Big space per Rand; weaker resale.",L:[["2020+","R200–240k","—","see live ↗"]],img:"2022 Renault Triber South Africa",find:"Renault Triber automatic for sale South Africa"},
- {o:"jp",b:"suv",brand:"🇯🇵 Honda",name:"BR-V",body:"SUV · 7-seat",r:["ex","ex"],why:"Genuine 7-seater with SUV clearance for compact-SUV money. Big boot even with the 3rd row up.",L:[["2020+","R240–280k","—","see live ↗"]],img:"2021 Honda BR-V South Africa",find:"Honda BR-V for sale South Africa"},
- {o:"jp",b:"sedan",brand:"🇯🇵 Honda",name:"Amaze",body:"Sedan",r:["gd","gd"],why:"Tall glasshouse for a budget sedan, big separate boot for pram + shopping.",L:[["2020+","R230–270k","—","see live ↗"]],img:"2022 Honda Amaze South Africa",find:"Honda Amaze for sale South Africa"},
- {o:"jp",b:"suv",brand:"🇯🇵 Toyota",name:"Yaris Cross",body:"Compact SUV",r:["gd","gd"],why:"Toyota resale + network in a small SUV. ⚠️ Thin used stock — mostly 2021–22, watch the market.",L:[["2021+","R250–330k","—","see live ↗"]],img:"2022 Toyota Yaris Cross South Africa",find:"Toyota Yaris Cross for sale South Africa"},
- {o:"eu",b:"suv",brand:"🇪🇺 Peugeot",name:"2008",body:"Compact SUV",r:["gd","gd"],why:"Raised i-Cockpit driving position + classy cabin. Smallest network here hurts resale.",L:[["2020+","R230–320k","—","see live ↗"]],img:"2021 Peugeot 2008 South Africa",find:"Peugeot 2008 for sale South Africa"}
+ // ===== EXPANDED SHORTLIST — real STREET bands (WeBuyCars/private, cheaper than dealer); green row = street, second row = dealer ask so you see the gap =====
+ {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Kia",name:"Seltos",body:"Compact SUV",r:["ex","ex"],why:"Roomiest cabin in class, tall-friendly. Kia warranty carries to you. Strong resale = only a modest dealer gap.",L:[["21–22","R240–300k","street","WeBuyCars/private",1],["2021","R319,800","50k","AutoTrader ↑dealer"]],img:"2022 Kia Seltos South Africa",find:"Kia Seltos for sale South Africa"},
+ {o:"kr",b:"suv",brand:"🇰🇷 Hyundai",name:"Creta",body:"Compact SUV",r:["ex","ex"],why:"Boxy, upright cabin — strong rear head + legroom, 7-yr transferable warranty. Trim matters more than year.",L:[["2021","R230–300k","street","WeBuyCars/private",1]],img:"2022 Hyundai Creta South Africa",find:"Hyundai Creta for sale South Africa"},
+ {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Kia",name:"Sonet",body:"Sub-compact SUV",r:["gd","gd"],why:"Value sweet spot — tall seating in a smaller, cheaper-to-run body.",L:[["21–22","R210–280k","street","WeBuyCars/private",1]],img:"2022 Kia Sonet South Africa",find:"Kia Sonet for sale South Africa"},
+ {o:"kr",b:"suv",pick:1,brand:"🇰🇷 Hyundai",name:"Venue",body:"Sub-compact SUV",r:["gd","gd"],why:"Cheapest Korean SUV here, 7-yr warranty carries over. ⚠️ Smallest cabin — check the seat + boot with a capsule.",L:[["21–22","R195–245k","street","WeBuyCars/private",1]],img:"2022 Hyundai Venue South Africa",find:"Hyundai Venue for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Volkswagen",name:"T-Cross",body:"Compact SUV",r:["gd","gd"],why:"Tall seat, German feel. VW resale is strong so dealers barely mark up — private sale is where you actually save. Budget DSG risk out of plan.",L:[["21–22","R240–300k","street","private = the saving",1],["2021","R249,995","81k","AutoTrader floor"]],img:"2022 Volkswagen T-Cross South Africa",find:"Volkswagen T-Cross for sale South Africa"},
+ {o:"eu",b:"hatch",brand:"🇪🇺 Volkswagen",name:"Polo",body:"Hatchback",r:["gd","gd"],why:"Best ride + refinement for the money. Holds value hard, so little give vs dealer. Buy the TSI, not the Vivo.",L:[["20–21","R220–280k","street","WeBuyCars/private",1]],img:"2022 Volkswagen Polo South Africa",find:"Volkswagen Polo TSI for sale South Africa"},
+ {o:"eu",b:"suv",pick:1,brand:"🇪🇺 Ford",name:"EcoSport",body:"Compact SUV",r:["ex","ex"],why:"Van-like tall cabin, easy fit. Soft Ford resale = genuinely one of the best value SUVs here. ⚠️ Post-2018 torque-converter auto only, never PowerShift.",L:[["20–21","R220–270k","street","soft resale = value",1]],img:"2020 Ford EcoSport South Africa",find:"Ford EcoSport automatic for sale South Africa"},
+ {o:"eu",b:"hatch",brand:"🇪🇺 Ford",name:"Figo",body:"Hatch / sedan",r:["gd","gd"],why:"Cheapest way into a 2020+ auto. ⚠️ Most Figos are manual — auto stock is thin, search wider. Torque-converter auto only.",L:[["2020","R170–220k","street","auto stock thin",1]],img:"2021 Ford Figo South Africa",find:"Ford Figo automatic for sale South Africa"},
+ {o:"eu",b:"suv",pick:1,brand:"🇪🇺 Renault",name:"Duster",body:"Rugged SUV",r:["ex","ex"],why:"Highest ground clearance, commanding seat, huge space-per-Rand. One of the best straight value plays. Weaker resale + French electrical risk.",L:[["21–22","R200–250k","street","best space-value",1],["2021","R239,950","93k","AutoTrader fair"]],img:"2021 Renault Duster South Africa",find:"Renault Duster automatic for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Renault",name:"Triber",body:"MPV · 7-seat",r:["ex","ex"],why:"Cheapest 7-seat(ish) here — tall boxy cabin, sliding middle row. ⚠️ Auto (AMT) is mostly 2022+.",L:[["2022+","R170–210k","street","auto = 2022+ only",1]],img:"2022 Renault Triber South Africa",find:"Renault Triber automatic for sale South Africa"},
+ {o:"jp",b:"suv",pick:1,brand:"🇯🇵 Honda",name:"BR-V",body:"SUV · 7-seat",r:["ex","ex"],why:"Genuine 7-seater with SUV clearance for compact-SUV money. Clean ~R30–70k dealer-vs-street gap — buy private.",L:[["2022","R210–260k","street","WeBuyCars",1],["2021","R261,300","—","dealer ↑"]],img:"2021 Honda BR-V South Africa",find:"Honda BR-V for sale South Africa"},
+ {o:"jp",b:"sedan",brand:"🇯🇵 Honda",name:"Amaze",body:"Sedan",r:["gd","gd"],why:"Tall glasshouse for a budget sedan, big separate boot for pram + shopping. Cheapest Honda auto here.",L:[["2022","R160–200k","street","cheapest sedan",1]],img:"2022 Honda Amaze South Africa",find:"Honda Amaze for sale South Africa"},
+ {o:"jp",b:"suv",brand:"🇯🇵 Toyota",name:"Yaris Cross",body:"Compact SUV",r:["gd","gd"],why:"Toyota resale + network in a small SUV. ⚠️ The Toyota tax is real — least discounted car on the list, private or not. Kia/Hyundai/Ford give more for less.",L:[["21–22","R270–330k","street","least discount",1]],img:"2022 Toyota Yaris Cross South Africa",find:"Toyota Yaris Cross for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Peugeot",name:"2008",body:"Compact SUV",r:["gd","gd"],why:"Raised i-Cockpit position + classy cabin. ⚠️ Active vs GT-Line is basically two cars on price — huge spread. Smallest network here, no warranty backup on a private buy.",L:[["21–22","R220–320k","street","trim spread huge",1]],img:"2021 Peugeot 2008 South Africa",find:"Peugeot 2008 for sale South Africa"},
+ // ===== MORE VALUE MODELS (added on your ask — street bands, cheaper channels) =====
+ {o:"jp",b:"suv",pick:1,brand:"🇯🇵 Suzuki",name:"Ertiga",body:"MPV · 7-seat",r:["ex","ex"],why:"Best grows-with-the-family pick under R250k — 3 rows, flat floor, tall doors for easy pram + capsule access, Suzuki running costs.",L:[["21–22","R190–240k","street","WeBuyCars/private",1]],img:"2022 Suzuki Ertiga South Africa",find:"Suzuki Ertiga automatic for sale South Africa"},
+ {o:"jp",b:"suv",brand:"🇯🇵 Toyota",name:"Avanza",body:"MPV · 7-seat",r:["gd","ex"],why:"Same 7-seat logic with Toyota reliability + resale (so less private discount, but bulletproof). Cavernous boot.",L:[["21–22","R195–230k","street","WeBuyCars/private",1]],img:"2022 Toyota Avanza South Africa",find:"Toyota Avanza automatic for sale South Africa"},
+ {o:"jp",b:"suv",pick:1,brand:"🇯🇵 Nissan",name:"Qashqai",body:"C-SUV",r:["ex","ex"],why:"Biggest genuinely-spacious cabin here — best room for a 6'4 driver + rear capsule. In budget on older/higher-km units.",L:[["2020","R230–290k","street","'20 CVT ~R250k seen",1]],img:"2021 Nissan Qashqai South Africa",find:"Nissan Qashqai automatic for sale South Africa"},
+ {o:"eu",b:"suv",brand:"🇪🇺 Renault",name:"Kiger",body:"Compact SUV",r:["gd","gd"],why:"Cheapest way into an SUV shape with real ground clearance. ⚠️ Auto (AMT) is 2022+. Renault parts network is the trade-off.",L:[["2022+","R150–190k","street","WeBuyCars/private",1]],img:"2022 Renault Kiger South Africa",find:"Renault Kiger automatic for sale South Africa"},
+ {o:"kr",b:"hatch",brand:"🇰🇷 Kia",name:"Rio",body:"Hatchback",r:["gd","gd"],why:"Roomy inside for its size, easy to trust second-hand. A way to stretch the budget down, not up.",L:[["2021","R220–270k","street","WeBuyCars/private",1]],img:"2021 Kia Rio South Africa",find:"Kia Rio automatic for sale South Africa"},
+ {o:"kr",b:"hatch",brand:"🇰🇷 Hyundai",name:"i20",body:"Hatchback",r:["gd","gd"],why:"Punches above its size inside, 7-yr warranty carries over. Good budget-down option.",L:[["2021","R190–240k","street","WeBuyCars/private",1]],img:"2021 Hyundai i20 South Africa",find:"Hyundai i20 automatic for sale South Africa"}
 ];
 const RL={ex:"Excellent",gd:"Good",tt:"Tight"};
 const grid=document.getElementById("grid");
 grid.innerHTML=CARS.map(c=>{
   const mk=c.brand.replace(/[^\x00-\x7F]/g,'').trim();
+  const q=encodeURIComponent(mk+" "+c.name);
   const at="https://www.autotrader.co.za/cars-for-sale/"+mk.toLowerCase()+"/"+c.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
   const cz="https://www.cars.co.za/usedcars/Gauteng/"+mk+"/"+c.name.replace(/ /g,'-')+"/";
-  const wbc="https://www.webuycars.co.za/buy-a-car?search="+encodeURIComponent(mk+" "+c.name);
+  const wbc="https://www.webuycars.co.za/buy-a-car?search="+q;
+  const gt="https://www.gumtree.co.za/s-cars-bakkies/v1c9077?q="+q;
+  const fb="https://www.facebook.com/marketplace/search/?query="+encodeURIComponent(mk+" "+c.name+" automatic");
   return `
   <div class="cc ${c.pick?'pick':''}" data-origin="${c.o}" data-body="${c.b}">
     <div class="cc-top"><span class="brand">${c.brand}</span>
       <span style="display:flex;gap:5px"><span class="rt gd"><span class="rk">6'4</span>${RL[c.r[0]]}</span><span class="rt au"><span class="rk">⚙</span>Auto</span></span></div>
     <div class="model">${c.name} ${c.pick?'<span class="star">★</span>':''}</div>
-    <div class="bodytag">${c.body} · ${c.L.length} recent options · tap a row for live stock</div>
+    <div class="bodytag">${c.body} · ${c.L.length} price ${c.L.length===1?'read':'reads'} · tap a row for real WeBuyCars stock</div>
     <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">${c.why}</p>
     <table class="lt"><thead><tr><th>Year</th><th>Price</th><th>km</th><th>Where</th></tr></thead><tbody>
-      ${c.L.map(l=>`<tr class="${l[4]?'best':''}" style="cursor:pointer" title="Open live ${c.name} stock on AutoTrader" onclick="window.open('${at}','_blank','noopener')"><td class="y">${l[0]}</td><td class="p">${l[1]}</td><td class="km">${l[2]}</td><td class="lo">${l[3]}${l[4]?' <span class="tag">best</span>':''}</td></tr>`).join('')}
+      ${c.L.map(l=>`<tr class="${l[4]?'best':''}" style="cursor:pointer" title="Open real ${c.name} stock on WeBuyCars" onclick="window.open('${wbc}','_blank','noopener')"><td class="y">${l[0]}</td><td class="p">${l[1]}</td><td class="km">${l[2]}</td><td class="lo">${l[3]}${l[4]?' <span class="tag">street</span>':''}</td></tr>`).join('')}
     </tbody></table>
     <div class="cardlinks">
       <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
-      <a class="clink list" href="${at}" target="_blank" rel="noopener noreferrer">🔎 AutoTrader <span class="h">live stock</span></a>
+      <a class="clink list" href="${wbc}" target="_blank" rel="noopener noreferrer">🔎 WeBuyCars <span class="h">real value</span></a>
     </div>
-    <div class="sellers">Also live on: <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a> · <a href="${wbc}" target="_blank" rel="noopener noreferrer">WeBuyCars ↗</a></div>
-    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${at}">♡ Save</button>
+    <div class="sellers">💸 Cheaper (private): <a href="${gt}" target="_blank" rel="noopener noreferrer">Gumtree ↗</a> · <a href="${fb}" target="_blank" rel="noopener noreferrer">FB Marketplace ↗</a> — Compare (dealer, pricier): <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${wbc}">♡ Save</button>
   </div>`;
 }).join('');
 if (window.NEST) window.NEST.wire();
