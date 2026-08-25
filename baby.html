@@ -90,7 +90,7 @@
   </div>
 
   <div class="sec"><h2>👩‍⚕️ The midwife — how to choose</h2>
-    <p>You <b>must</b> be under an independent midwife to birth at Genesis. She's your main carer through pregnancy + birth, and <b>she charges separately</b> — this is the last unknown in the budget. Below is how to pick, then all 19 affiliated midwives with tap-to-contact. Shortlist a few (♡), meet them, then tell me who to push on pricing.</p></div>
+    <p>You <b>must</b> be under an independent midwife to birth at Genesis. She's your main carer through pregnancy + birth, and <b>she charges separately</b> — this is the last unknown in the budget. Below is how to pick, then all 19 affiliated midwives with tap-to-contact (numbers gathered from the web — confirm before sending). Shortlist a few (♡), meet them, then tell me who to push on pricing.</p></div>
   <div class="panel">
     <div style="font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--baby);margin-bottom:12px">What to weigh up</div>
     <ul class="how">
@@ -130,7 +130,10 @@
   </div>
 
   <div class="sec"><h2>📇 The 19 midwives — tap to contact</h2>
-    <p>Every button pre-fills our enquiry (first-timers, 15 weeks, need a first check-up, want a regular cadence, self-funding). Just tap and send. Filter by what matters, ♡ your shortlist — they'll show on the Tracker.</p></div>
+    <p>Every button pre-fills our enquiry (first-timers, 15 weeks, need a first check-up, want a regular cadence, self-funding). Filter by what matters, ♡ your shortlist — they'll show on the Tracker.</p></div>
+  <div class="panel" style="border-left:3px solid var(--red);margin-bottom:14px">
+    <p style="margin:0;font-size:13px"><b style="color:var(--red)">⚠️ Read this first — contacts aren't officially verified.</b> The Genesis "Meet the Midwives" page only shows <b>names and photos</b> — no phone numbers or emails. The numbers and emails below were gathered from the midwives' own practice sites and public listings, so treat them as a <b>starting point, not gospel</b> — some may be outdated or wrong. Before you send: confirm on her own website (the ones marked <span style="color:var(--good);font-weight:600">✓ has own site</span>), or call <b>Genesis on 010 594 0177</b> and ask them to put you in touch. <b>Lilo's WhatsApp (081 234 8804) I did confirm on her site.</b></p>
+  </div>
   <div class="panel">
     <div class="filterbar">
       <div class="fgroup"><span class="lbl">Show</span>
@@ -156,7 +159,7 @@ Could you also let us know your availability for a late-February 2027 birth, and
 
 Thank you so much, we're excited to get started.
 Warmly, Sean &amp; Mishka</div>
-    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft)">Data pulled from each midwife's profile at <a href="https://genesis-clinic.co.za/meet-the-midwives/" target="_blank" rel="noopener noreferrer">genesis-clinic.co.za/meet-the-midwives</a> (Aug 2026). Double-check the number before you send.</p>
+    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft)">Genesis's <a href="https://genesis-clinic.co.za/meet-the-midwives/" target="_blank" rel="noopener noreferrer">Meet the Midwives</a> page lists names + photos only — no contact details. The numbers/emails here were gathered from each midwife's own website + public listings and are <b>not officially verified</b>. Confirm each before sending, or call Genesis on <b>010 594 0177</b> to be put in touch.</p>
   </div>
 
   <div class="sec"><h2>🍼 Baby kit — what's left to buy</h2>
@@ -278,6 +281,7 @@ grid.innerHTML=MW.map(m=>{
   return `<div class="mw ${m.f?'star':''}" data-star="${m.f?1:0}" data-water="${m.w?1:0}">
     <div class="nm">${m.n} ${m.f?'<span class="s">★</span>':''}</div>
     <div class="mt">${m.exp} · ${m.area}</div>
+    <div style="font-size:10.5px;font-weight:600;margin:3px 0 0;color:${m.site?'var(--good)':'var(--red)'}">${m.site?'✓ has own site — confirm details there':'⚠️ contact unverified — confirm before sending'}</div>
     <p class="sp">${m.sp}</p>
     <div class="acts">
       <a href="tel:+${m.ph}">📞 Call</a>
