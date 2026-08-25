@@ -34,6 +34,11 @@
   .tier .tn { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); font-weight: 600; }
   .tier .tp { font-family: "Fraunces", serif; font-weight: 600; font-size: 30px; color: var(--accent); letter-spacing: -.02em; margin: 4px 0 0; }
   .tier .tx { font-size: 12px; color: var(--ink-soft); margin: 7px 0 0; line-height: 1.5; }
+  .notewrap { margin-top: 8px; }
+  .notetoggle { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
+  .notetoggle:hover { border-color: var(--accent); color: var(--car-ink); }
+  .notebox { display: none; width: 100%; margin-top: 8px; min-height: 60px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
+  .notewrap.open .notebox { display: block; }
 </style>
 </head>
 <body>
@@ -170,6 +175,7 @@ grid.innerHTML=ITEMS.map(it=>{
       ${it.O.map(o=>`<tr class="${o[5]?'best':''}" style="cursor:pointer" title="Open on ${o[1]}" onclick="window.open('${o[4]}','_blank','noopener')"><td><span class="nm">${o[0]}</span>${o[5]?' <span class="tag">my pick</span>':''}<span class="wy">${o[3]}</span></td><td class="p">${o[2]}</td><td class="st">${o[1]} ↗</td></tr>`).join('')}
     </tbody></table>
     <button class="savebtn" style="width:100%;margin-top:10px" data-save-kind="furniture" data-save-label="${it.cat}: ${best?best[0]:''}" data-save-url="${best?best[4]:''}">♡ Save my pick</button>
+    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="furn-${it.cat.replace(/[^a-z0-9]/gi,'')}" placeholder="You + Mishka: which option, colour, when to buy, budget…"></textarea></div>
   </div>`;
 }).join('');
 if (window.NEST) window.NEST.wire();

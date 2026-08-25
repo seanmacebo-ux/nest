@@ -35,6 +35,11 @@
   .btag.s { background: var(--good-soft); color: var(--good); }
   .btag.a { background: var(--car-soft); color: var(--car-ink); }
   .btag.w { background: var(--red-soft); color: var(--red); }
+  .notewrap { margin-top: 8px; }
+  .notetoggle { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
+  .notetoggle:hover { border-color: var(--accent); color: var(--car-ink); }
+  .notebox { display: none; width: 100%; margin-top: 8px; min-height: 60px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
+  .notewrap.open .notebox { display: block; }
 </style>
 </head>
 <body>
@@ -194,6 +199,7 @@ grid.innerHTML=CARS.map(c=>{
     </div>
     <div class="sellers">💸 Cheaper (private): <a href="${gt}" target="_blank" rel="noopener noreferrer">Gumtree ↗</a> · <a href="${fb}" target="_blank" rel="noopener noreferrer">FB Marketplace ↗</a> — Compare (dealer, pricier): <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${wbc}">♡ Save</button>
+    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="car-${c.name.replace(/[^a-z0-9]/gi,'')}" placeholder="You + Mishka: like it? go see it? price to aim for…"></textarea></div>
   </div>`;
 }).join('');
 if (window.NEST) window.NEST.wire();

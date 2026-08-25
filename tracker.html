@@ -94,7 +94,7 @@
   </div>
 
   <div class="sec"><h2>💸 This month's cash pacer</h2>
-    <p>You've got R60k this month. Set what each cost really is, tick the ones you're paying now, and watch what's left. It all saves on your phone — change the numbers anytime.</p></div>
+    <p>You've got R60k this month. Set each cost — including your rent <b>and Mom's rent</b> — tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the baby float. It all saves on your phone — change the numbers anytime.</p></div>
   <div class="panel pacer">
     <div class="pacehead">
       <label class="pacehave">You have <span style="font-family:'IBM Plex Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
@@ -202,7 +202,8 @@
 (function(){
   const KEY = 'nest_pacer';
   const PACE = [
-    { k:'rent',        label:'Rent',                 sub:'This month — your place / the new one (target R13–15k)', amt:14000 },
+    { k:'rent',        label:'Our rent',             sub:'This month — your place / the new one (target R13–15k)', amt:14000 },
+    { k:'mom_rent',    label:"Mom's rent",           sub:'You cover this — ~R7–9k for a 1-bed near us',             amt:8000 },
     { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
     { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
     { k:'midwife_dep', label:'Midwife deposit',      sub:'Booking deposit — ~R2,500 benchmark (Protea); get Lilo’s',amt:2500 },
