@@ -27,6 +27,11 @@
     <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · Johannesburg · baby due Feb 2027</div>
     <h1>Three tracks,<br>one <em>February</em>.</h1>
     <p class="sub">Baby, home and car, all moving together. Built on R60k a month and sequenced so the big costs never land in the same month. Private link, not indexed.</p>
+    <div style="margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <button id="shareBtn" type="button" style="font:inherit;font-weight:600;font-size:14px;cursor:pointer;border:none;border-radius:12px;padding:11px 18px;background:var(--accent);color:#fff">📤 Share with Mishka</button>
+      <span id="shareMsg" style="font-size:13px;color:var(--ink-soft)"></span>
+    </div>
+    <p style="margin:10px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch">Open this same link on Mishka's phone — it works for both of you. For now, ♡ saves and 💬 notes live on each phone separately (shared live-sync comes with Babybean); use the <b>Copy notes</b> buttons on each page to send each other your picks.</p>
   </header>
 
   <div class="sec"><h2>The one number that runs everything</h2></div>
@@ -96,5 +101,19 @@
 
   <div class="foot">THE NEST · private hub for Sean &amp; Mishka · built with Claude · updated Aug 2026 · noindex</div>
 </div>
+<script>
+(function(){
+  var btn=document.getElementById('shareBtn'),msg=document.getElementById('shareMsg');
+  if(!btn) return;
+  var url='https://seanmacebo-ux.github.io/nest/';
+  btn.addEventListener('click',async function(){
+    try{
+      if(navigator.share){ await navigator.share({title:'The Nest',text:'Our baby, home & car plan',url:url}); }
+      else if(navigator.clipboard&&navigator.clipboard.writeText){ await navigator.clipboard.writeText(url); msg.textContent='Link copied — paste it to Mishka 📲'; }
+      else { window.prompt('Copy this link for Mishka:',url); }
+    }catch(e){}
+  });
+})();
+</script>
 </body>
 </html>
