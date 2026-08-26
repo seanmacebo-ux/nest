@@ -113,8 +113,11 @@
     <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)">The <span style="color:var(--baby);font-weight:600">★</span> ones are my read for first-time parents — they lean into teaching + guidance. Your call, not gospel.</p>
   </div>
 
+  <div class="panel" style="border-left:3px solid var(--good);margin-bottom:14px;background:rgba(120,170,120,.06)">
+    <p style="margin:0;font-size:13.5px"><b style="color:var(--good)">✅ Decided — you're going with Lilo.</b> She's the one. The number that <b>replied on WhatsApp is 074 703 0623</b> — that's her active line, message her there. Next step: get her all-in fee (antenatal + birth + postnatal) so we can lock the last unknown in the budget.</p>
+  </div>
   <div class="sec"><h2>🔎 Lilo Mthembu — read off her own site</h2>
-    <p>One of your top picks. I went through her website (lilomidwife.co.za) so you know how she works before you message her.</p></div>
+    <p><b style="color:var(--good)">Your chosen midwife.</b> I went through her website (lilomidwife.co.za) so you know how she works before you message her.</p></div>
   <div class="panel">
     <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:9px;font-size:14px">
       <li><b>Who she is:</b> practises as <b>Tén 'n Tén Birthing</b> — independent midwife, 20+ years, nurse educator. Birth at Genesis, Saxonwold.</li>
@@ -139,7 +142,7 @@
   <div class="sec"><h2>📇 The 19 midwives — tap to contact</h2>
     <p>Every button pre-fills our enquiry (first-timers, 15 weeks, need a first check-up, want a regular cadence, self-funding). Filter by what matters, ♡ your shortlist — they'll show on the Tracker.</p></div>
   <div class="panel" style="border-left:3px solid var(--red);margin-bottom:14px">
-    <p style="margin:0;font-size:13px"><b style="color:var(--red)">⚠️ Read this first — contacts aren't officially verified.</b> The Genesis "Meet the Midwives" page only shows <b>names and photos</b> — no phone numbers or emails. The numbers and emails below were gathered from the midwives' own practice sites and public listings, so treat them as a <b>starting point, not gospel</b> — some may be outdated or wrong. Before you send: confirm on her own website (the ones marked <span style="color:var(--good);font-weight:600">✓ has own site</span>), or call <b>Genesis on 010 594 0177</b> and ask them to put you in touch. <b>Lilo's WhatsApp (081 234 8804) I did confirm on her site.</b></p>
+    <p style="margin:0;font-size:13px"><b style="color:var(--red)">⚠️ Read this first — contacts aren't officially verified.</b> The Genesis "Meet the Midwives" page only shows <b>names and photos</b> — no phone numbers or emails. The numbers and emails below were gathered from the midwives' own practice sites and public listings, so treat them as a <b>starting point, not gospel</b> — some may be outdated or wrong. Before you send: confirm on her own website (the ones marked <span style="color:var(--good);font-weight:600">✓ has own site</span>), or call <b>Genesis on 010 594 0177</b> and ask them to put you in touch. <b style="color:var(--good)">Lilo's confirmed — she replied on WhatsApp from 074 703 0623. That's the one you're going with.</b></p>
   </div>
   <div class="panel">
     <div class="filterbar">
@@ -256,7 +259,7 @@ Warmly, Sean &amp; Mishka</div>
 <script>
 const MW=[
  {n:"Karen van der Merwe",ph:"27823357731",e:"karenvdm61@gmail.com",exp:"39 yrs · C-section rate <10%",sp:"Water birth, VBAC, active birth + antenatal classes",area:"Saxonwold + Sundowner",f:1,w:1},
- {n:"Lilo Mthembu",ph:"27812348804",e:"tenntenbirthing@gmail.com",site:"lilomidwife.co.za",exp:"20+ yrs · nurse educator",sp:"VBAC, birth coaching, breastfeeding support",area:"Saxonwold",f:1},
+ {n:"Lilo Mthembu",ph:"27747030623",e:"tenntenbirthing@gmail.com",site:"lilomidwife.co.za",exp:"20+ yrs · nurse educator",sp:"VBAC, birth coaching, breastfeeding support",area:"Saxonwold",f:1,chosen:1},
  {n:"Sharon Marsay",ph:"27828533445",e:"sharonmarsay@gmail.com",exp:"UK-trained · lactation consultant",sp:"Family prep, breastfeeding, physiological birth",area:"Saxonwold",f:1},
  {n:"Deidre Nel",ph:"27724617867",e:"deidre@belliesandbeyond.co.za",site:"belliesandbeyond.co.za",exp:"Advanced midwife since 2011",sp:"VBAC, informed-choice guidance",area:"Saxonwold",f:1},
  {n:"Ester Naude",ph:"27827433625",e:"midwifeester@gmail.com",site:"midwifeoncall.co.za",exp:"10+ yrs · 500+ births",sp:"Water birth, twins, breech, VBAC",area:"Saxonwold",w:1},
@@ -285,9 +288,9 @@ grid.innerHTML=MW.map(m=>{
   const wa="https://wa.me/"+m.ph+"?text="+encodeURIComponent(WA(m.n));
   const site=m.site?`<a href="https://${m.site}" target="_blank" rel="noopener noreferrer">🌐 Site</a>`:"";
   return `<div class="mw ${m.f?'star':''}" data-star="${m.f?1:0}" data-water="${m.w?1:0}">
-    <div class="nm">${m.n} ${m.f?'<span class="s">★</span>':''}</div>
+    <div class="nm">${m.n} ${m.chosen?'<span class="s" style="background:var(--good);color:#fff;border-radius:5px;padding:1px 6px;font-size:10px">✅ CHOSEN</span>':(m.f?'<span class="s">★</span>':'')}</div>
     <div class="mt">${m.exp} · ${m.area}</div>
-    <div style="font-size:10.5px;font-weight:600;margin:3px 0 0;color:${m.site?'var(--good)':'var(--red)'}">${m.site?'✓ has own site — confirm details there':'⚠️ contact unverified — confirm before sending'}</div>
+    <div style="font-size:10.5px;font-weight:600;margin:3px 0 0;color:${m.chosen?'var(--good)':(m.site?'var(--good)':'var(--red)')}">${m.chosen?'✅ confirmed — replied on WhatsApp':(m.site?'✓ has own site — confirm details there':'⚠️ contact unverified — confirm before sending')}</div>
     <p class="sp">${m.sp}</p>
     <div class="acts">
       <a href="tel:+${m.ph}">📞 Call</a>
