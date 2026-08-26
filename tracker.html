@@ -112,7 +112,7 @@
     <ul class="pacelist" id="pacelist"></ul>
     <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
     <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'ask Lilo for her deposit amount', 'move R10k to the baby float this week'."></textarea></div>
-    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Defaults are my estimates — the midwife deposit is Protea's ~R2,500 benchmark (get Lilo's real one), and "Genesis float" is money you set aside now toward the R45k due in January. Overwrite any number with your real one.</p>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Now with <b>Lilo's real numbers</b> — the booking deposit is her confirmed R3,000, and "Genesis float" is money you set aside now toward the ~R45k due at week 36. Overwrite any number with your real one.</p>
   </div>
 
   <div class="sec"><h2>🗓️ Milestones ahead</h2>
@@ -126,7 +126,10 @@
   <div class="panel">
     <ul class="todos">
       <li data-tick="t-genesis"><span class="box"></span><span class="txt">Email Genesis to book <small>Done — they replied, booking this week</small></span></li>
-      <li data-tick="t-midwife"><span class="box"></span><span class="txt">Choose a midwife + get fee quotes <small>Send the template to a few (Baby page)</small></span></li>
+      <li data-tick="t-midwife"><span class="box"></span><span class="txt">Choose a midwife <small>✅ Done — going with Lilo (Tèn 'n Tèn), fees confirmed</small></span></li>
+      <li data-tick="t-lilodep"><span class="box"></span><span class="txt">Pay Lilo's R3,000 booking deposit <small>Secures your slot — first come first served. Do this next.</small></span></li>
+      <li data-tick="t-medaid"><span class="box"></span><span class="txt">Put baby on medical aid <small>Mandatory for cash payers before birth (emergency transfers)</small></span></li>
+      <li data-tick="t-doula"><span class="box"></span><span class="txt">Book a doula <small>Mandatory for first-time mums — ask Lilo for recommendations</small></span></li>
       <li data-tick="t-antenatal"><span class="box"></span><span class="txt">Book Mishka's antenatal check-up</span></li>
       <li data-tick="t-account"><span class="box"></span><span class="txt">Open the "baby float" savings account <small>For the R45k in January</small></span></li>
       <li data-tick="t-scan"><span class="box"></span><span class="txt">Book the 20-week scan <small>Maryke · 071 154 0223</small></span></li>
@@ -180,11 +183,11 @@
 
   // Milestones
   const M = [
-    { wk: 15, when: 'Now · wk 15', what: 'Antenatal check + choose a midwife', sub: '' },
+    { wk: 15, when: 'Now · wk 15', what: 'Pay Lilo R3,000 to lock your slot', sub: 'Midwife chosen ✅ — deposit is first come first served' },
     { wk: 20, when: '~Oct · wk 20', what: 'The 20-week scan', sub: 'Anomaly scan — the big one' },
     { wk: 30, when: 'November', what: 'Move into the new place', sub: 'Ground floor, before it gets heavy' },
     { wk: 32, when: '~Dec · wk 32', what: 'Genesis booking-in + R2,200', sub: 'Must be done by wk 32' },
-    { wk: 36, when: '~Jan · wk 36', what: 'R45,000 deposit due', sub: 'Refunded after a normal birth' },
+    { wk: 36, when: '~Jan · wk 36', what: '~R45,000 due', sub: 'Facility R18k + refundable theatre float R18k + Lilo birth balance ~R8.5k' },
     { wk: 40, when: 'end Feb', what: 'Baby 🎉', sub: '' }
   ];
   const ml = document.getElementById('mile');
@@ -213,8 +216,8 @@
     { k:'mom_rent',    label:"Mom's rent",           sub:'You cover this — ~R7–9k for a 1-bed near us',             amt:8000 },
     { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
     { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
-    { k:'midwife_dep', label:'Midwife deposit',      sub:'Booking deposit — ~R2,500 benchmark (Protea); get Lilo’s',amt:2500 },
-    { k:'genesis_dep', label:'Start the Genesis float', sub:'Set aside now toward the R45k facilities deposit (due Jan)', amt:10000 }
+    { k:'midwife_dep', label:'Lilo booking deposit', sub:'R3,000 — secures your slot (first come first served). Comes off the birth fee. PAY THIS NEXT.', amt:3000 },
+    { k:'genesis_dep', label:'Start the Genesis float', sub:'Set aside now toward ~R45k due at wk 36 (facility R18k + refundable theatre float R18k + Lilo birth balance ~R8.5k)', amt:10000 }
   ];
   const saved = window.NEST._get(KEY, {});
   let have = (saved.have != null) ? saved.have : 60000;
