@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="style.css">
 <style>
   .ticker { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px,4vw,30px); box-shadow: var(--shadow); border-top: 4px solid var(--baby); }
+  .ticker.move { border-top-color: var(--home); }
+  .ticker.move .wk { color: var(--home); }
   .ticker .wk { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(38px,8vw,60px); line-height: 1; letter-spacing: -.02em; color: var(--baby); }
   .ticker .meta { color: var(--ink-soft); font-size: 15px; margin-top: 8px; }
   .bar { height: 12px; border-radius: 20px; background: var(--surface-2); margin-top: 18px; overflow: hidden; }
@@ -121,6 +123,29 @@
     <ul class="mile" id="mile"></ul>
   </div>
 
+  <div class="sec"><h2>🏡 The move — countdown to November</h2>
+    <p>Ground floor, in and settled before the bump gets heavy. Here's the runway and the steps.</p></div>
+  <div class="ticker move">
+    <div class="wk" id="movewk">— days</div>
+    <div class="meta" id="movemeta">calculating…</div>
+    <div class="bar"><span id="movebar" style="width:0%"></span></div>
+    <div class="barlabels"><span>Now</span><span>Oct · deposit + apply</span><span>Move · November</span></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <ul class="todos">
+      <li data-tick="m-alerts"><span class="box"></span><span class="txt">Set Property24 + Private Property alerts <small>Ground-floor, 2-bed, modern secure estates — East &amp; North</small></span></li>
+      <li data-tick="m-shortlist"><span class="box"></span><span class="txt">Shortlist 4–5 places <small>♡ them on the Apartments board — they land in your saved picks above</small></span></li>
+      <li data-tick="m-viewings"><span class="box"></span><span class="txt">Book viewings <small>See them in person before applying</small></span></li>
+      <li data-tick="m-apply"><span class="box"></span><span class="txt">Apply for the one you want <small>ID, 3 months' payslips/bank statements ready</small></span></li>
+      <li data-tick="m-deposit"><span class="box"></span><span class="txt">Pay deposit + first month (~R22k) <small>The October peak — hold this cash back</small></span></li>
+      <li data-tick="m-movers"><span class="box"></span><span class="txt">Book movers / bakkie <small>Get 2 quotes early — November is busy season</small></span></li>
+      <li data-tick="m-utilities"><span class="box"></span><span class="txt">Sort utilities + address change <small>Prepaid meter, wifi transfer, update your addresses</small></span></li>
+      <li data-tick="m-dayone"><span class="box"></span><span class="txt">Day-one furniture only: bed + fridge + washer (~R16k) <small>Rest follows as specials land — Furniture board</small></span></li>
+      <li data-tick="m-move"><span class="box"></span><span class="txt">MOVE IN <small>Target: November, before week 30</small></span></li>
+    </ul>
+    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Move notes</button><textarea class="notebox" data-note-key="move-notes" placeholder="Jot anything — e.g. 'call agent about the Greenstone place', 'movers quote R3.5k', 'lease starts 1 Nov'."></textarea></div>
+  </div>
+
   <div class="sec"><h2>✅ To-do — tap to tick off</h2>
     <p>Ticks save on this device. Green when done.</p></div>
   <div class="panel">
@@ -180,6 +205,25 @@
   document.getElementById('wk').textContent = 'Week ' + week;
   document.getElementById('meta').textContent = triName + ' · ' + toGo + ' weeks to go · due end Feb 2027';
   document.getElementById('barfill').style.width = Math.round(week / DUE * 100) + '%';
+
+  // Move countdown — target: move-in by November 2026. Runway opens 1 Sep.
+  const MOVE = new Date('2026-11-01T00:00:00');
+  const MOVE_START = new Date('2026-09-01T00:00:00');
+  const daysToMove = Math.ceil((MOVE - now) / 86400000);
+  const mwk = document.getElementById('movewk');
+  const mmeta = document.getElementById('movemeta');
+  const mbar = document.getElementById('movebar');
+  if (daysToMove > 0) {
+    const weeksToMove = Math.floor(daysToMove / 7);
+    mwk.textContent = daysToMove + (daysToMove === 1 ? ' day' : ' days');
+    mmeta.textContent = weeksToMove + ' weeks to go · target move-in November 2026';
+  } else {
+    mwk.textContent = 'Moved 🎉';
+    mmeta.textContent = 'Ground floor, done — before it got heavy';
+  }
+  const moveSpan = MOVE - MOVE_START;
+  const movePct = Math.max(0, Math.min(100, Math.round((now - MOVE_START) / moveSpan * 100)));
+  mbar.style.width = movePct + '%';
 
   // Milestones
   const M = [
