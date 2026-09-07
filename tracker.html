@@ -74,6 +74,12 @@
   .paceamt input { width: 84px; text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); }
   .pacesum { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13.5px; }
   .pacesum b { font-family: "IBM Plex Mono", monospace; }
+  .ct { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
+  .ct th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  .ct td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  .ct td.amt { text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--baby); white-space: nowrap; }
+  .ct tr:last-child td { border-bottom: none; }
+  .ct tr.hl td { background: var(--baby-soft); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -115,6 +121,28 @@
     <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
     <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'ask Lilo for her deposit amount', 'move R10k to the baby float this week'."></textarea></div>
     <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Now with <b>Lilo's real numbers</b> — the booking deposit is her confirmed R3,000, and "Genesis float" is money you set aside now toward the ~R45k due at week 36. Overwrite any number with your real one.</p>
+  </div>
+
+  <div class="sec"><h2>📆 The birth-cost cadence — never a wall</h2>
+    <p>The whole point of starting now: <b>spread it</b> so no single month eats half your salary. Bank the flat number below every month and the birth is fully funded — Genesis takes instalments (confirmed in writing), so you never pay R45k in one hit.</p></div>
+  <div class="panel pacer" style="border-top-color:var(--baby)">
+    <div class="pacehead">
+      <div class="pacehave">The one habit → bank this every month, Sep&nbsp;→&nbsp;Jan</div>
+      <div class="paceleft" style="color:var(--baby)">R14,000<small> / month</small></div>
+    </div>
+    <p style="margin:6px 0 0;font-size:13px;color:var(--ink-soft)">R9,000 straight to Genesis (× 5 = the R45k float) + R5,000 into a "birth pot" for Lilo, consults, gynae &amp; scans as they land. Do that and the biggest month you ever actually feel is ~R20k — not the R58k wall.</p>
+    <table class="ct" style="margin-top:16px">
+      <thead><tr><th>Month</th><th>What leaves your account</th><th style="text-align:right">Actual</th></tr></thead>
+      <tbody>
+        <tr><td><b>Sep</b></td><td>Genesis R9k + Lilo deposit R3k</td><td class="amt">~R12,000</td></tr>
+        <tr><td><b>Oct</b></td><td>Genesis R9k + sonar + 24w consult</td><td class="amt">~R11,450</td></tr>
+        <tr><td><b>Nov</b></td><td>Genesis R9k (pot builds)</td><td class="amt">~R9,000</td></tr>
+        <tr><td><b>Dec</b></td><td>Genesis R9k + booking + gynae + consults + ½ Lilo balance</td><td class="amt">~R20,100</td></tr>
+        <tr><td><b>Jan</b></td><td>Genesis R9k (final) + gynae + consults + ½ Lilo balance</td><td class="amt">~R18,700</td></tr>
+        <tr><td><b>Feb</b></td><td>3 consults · birth paid from the float</td><td class="amt" style="color:var(--good)">~R1,950</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:12px 0 0;font-size:13px;color:var(--ink-soft)"><b>Biggest single month ≈ R20k, not R60k.</b> And ~R24,800 of the R45k float refunds within a week of a normal birth — so the true net cost of the birth is ~R46,500. Full breakdown lives on the <a href="baby.html" style="color:var(--baby);font-weight:600">Baby page</a>.</p>
   </div>
 
   <div class="sec"><h2>🗓️ Milestones ahead</h2>
@@ -261,7 +289,7 @@
     { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
     { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
     { k:'midwife_dep', label:'Lilo booking deposit', sub:'R3,000 — secures your slot (first come first served). Comes off the birth fee. PAY THIS NEXT.', amt:3000 },
-    { k:'genesis_dep', label:'Start the Genesis float', sub:'Set aside now toward ~R45k due at wk 36 (facility R18k + refundable theatre float R18k + Lilo birth balance ~R8.5k)', amt:10000 }
+    { k:'genesis_dep', label:'Genesis instalment', sub:'R9,000/mo × 5 (Sep→Jan) = the R45k float, paid off by wk 36. Genesis confirmed instalments in writing — no lump sum needed.', amt:9000 }
   ];
   const saved = window.NEST._get(KEY, {});
   let have = (saved.have != null) ? saved.have : 60000;
