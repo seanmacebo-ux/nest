@@ -105,7 +105,7 @@
     <div class="wk" id="wk">Week —</div>
     <div class="meta" id="meta">calculating…</div>
     <div class="bar"><span id="barfill" style="width:0%"></span></div>
-    <div class="barlabels"><span>Week 0</span><span>Trimester 2</span><span>Due · end Feb 2027</span></div>
+    <div class="barlabels"><span>Week 0</span><span>Trimester 2</span><span>Due · 20 Feb 2027</span></div>
   </div>
 
   <div class="sec"><h2>💸 This month's cash pacer</h2>
@@ -219,19 +219,19 @@
 <script src="nest.js"></script>
 <script>
 (function(){
-  // Pregnancy ticker — anchored to a known point: 15 weeks on 24 Aug 2026.
-  const REF = new Date('2026-08-24T00:00:00');
-  const REF_WEEK = 15;
+  // Pregnancy ticker — anchored to the confirmed EDD (20 Feb 2027).
+  // Dating confirmed at first consult: 16w2d on 7 Sep 2026. Self-corrects off the due date.
+  const EDD = new Date('2027-02-20T00:00:00');
   const DUE = 40;
   const now = new Date();
-  const daysSince = Math.floor((now - REF) / 86400000);
-  let week = REF_WEEK + Math.floor(daysSince / 7);
+  const daysToDue = Math.max(0, Math.ceil((EDD - now) / 86400000));
+  let week = DUE - Math.ceil(daysToDue / 7);
   if (week < 0) week = 0; if (week > DUE) week = DUE;
   const toGo = Math.max(0, DUE - week);
   const tri = week < 13 ? 1 : week < 28 ? 2 : 3;
   const triName = ['', 'First trimester', 'Second trimester', 'Third trimester'][tri];
   document.getElementById('wk').textContent = 'Week ' + week;
-  document.getElementById('meta').textContent = triName + ' · ' + toGo + ' weeks to go · due end Feb 2027';
+  document.getElementById('meta').textContent = triName + ' · ' + toGo + ' weeks to go · due 20 Feb 2027';
   document.getElementById('barfill').style.width = Math.round(week / DUE * 100) + '%';
 
   // Move countdown — target: move-in by November 2026. Runway opens 1 Sep.
@@ -255,12 +255,12 @@
 
   // Milestones
   const M = [
-    { wk: 15, when: 'Now · wk 15', what: 'Pay Lilo R3,000 to lock your slot', sub: 'Midwife chosen ✅ — deposit is first come first served' },
-    { wk: 20, when: '~Oct · wk 20', what: 'The 20-week scan', sub: 'Anomaly scan — the big one' },
+    { wk: 16, when: 'Now · wk 16', what: 'Pay Lilo R3,000 to lock your slot', sub: 'Midwife chosen ✅ — deposit is first come first served' },
+    { wk: 20, when: '~3 Oct · wk 20', what: 'The 20/21-week anomaly sonar', sub: 'The big one — book with the sonographer' },
     { wk: 30, when: 'November', what: 'Move into the new place', sub: 'Ground floor, before it gets heavy' },
     { wk: 32, when: '~Dec · wk 32', what: 'Genesis booking-in + R2,200', sub: 'Must be done by wk 32' },
-    { wk: 36, when: '~Jan · wk 36', what: '~R45,000 due', sub: 'Facility R18k + refundable theatre float R18k + Lilo birth balance ~R8.5k' },
-    { wk: 40, when: 'end Feb', what: 'Baby 🎉', sub: '' }
+    { wk: 36, when: '~Jan · wk 36', what: '~R45,000 Genesis float due', sub: 'Refundable — for a normal birth ~R24,800 comes back within a week' },
+    { wk: 40, when: '20 Feb', what: 'Baby 🎉', sub: '' }
   ];
   const ml = document.getElementById('mile');
   ml.innerHTML = M.map(m => {
