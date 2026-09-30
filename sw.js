@@ -1,5 +1,7 @@
-// The Nest — service worker. HTML: network-first (fresh when online). Assets: cache-first.
-const CACHE = 'nest-v1';
+// The Nest — service worker. HTML: network-first (fresh when online).
+// Assets: stale-while-revalidate (serve cached fast, fetch fresh in background).
+// Bump CACHE on every deploy so old caches are purged and assets refetch.
+const CACHE = 'nest-2026-09-30a';
 const ASSETS = [
   './', './index.html', './tracker.html', './baby.html', './cars.html',
   './apartments.html', './furniture.html', './style.css', './nest.js',
@@ -31,15 +33,19 @@ self.addEventListener('fetch', e => {
       }).catch(() => caches.match(req).then(m => m || caches.match('./index.html')))
     );
   } else {
-    // Cache-first for static assets.
+    // Stale-while-revalidate: serve cache fast, fetch fresh in background so
+    // the next load has the latest asset. Never freezes on an old version.
     e.respondWith(
-      caches.match(req).then(cached => cached || fetch(req).then(res => {
-        if (res && res.status === 200) {
-          const cp = res.clone();
-          caches.open(CACHE).then(c => c.put(req, cp));
-        }
-        return res;
-      }))
+      caches.match(req).then(cached => {
+        const fresh = fetch(req).then(res => {
+          if (res && res.status === 200) {
+            const cp = res.clone();
+            caches.open(CACHE).then(c => c.put(req, cp));
+          }
+          return res;
+        }).catch(() => cached);
+        return cached || fresh;
+      })
     );
   }
 });
