@@ -105,10 +105,9 @@
     <span class="count" id="count"></span>
   </div>
 
-  <p class="sub" style="margin:0 0 6px">💬 Tap <b>Notes</b> on any place to jot what you + Mishka think — it saves on your phone. Hit <b>Copy all our notes</b> to send the lot to each other (live shared sync arrives with Babybean).</p>
+  <p class="sub" style="margin:0 0 6px">💬 Got a thought on a place? <b>Message Bean</b> (WhatsApp/Telegram) — "love the R9.8k Craighall one, book a viewing" or "kill the Paulshof one." Bean writes it straight onto the card here so <b>you and Mishka both see it</b>. No more notes trapped on one phone.</p>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty">No places match — widen a filter.</div>
-  <div class="copybar"><button class="notetoggle" id="copynotes" type="button">📋 Copy all our notes</button><span class="copymsg" id="copymsg"></span></div>
 
   <div class="hunt">
     <h4>Where to hunt — beyond Property24</h4>
@@ -242,7 +241,6 @@ grid.innerHTML=F.map(f=>`
     <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${f.desc}</p>
     <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View / browse area ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
-    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="${f.url}" placeholder="You + Mishka: what you love / don't — light, noise, kitchen, security, the vibe."></textarea></div>
   </div>`).join('');
 const CX=[
 ];
@@ -257,7 +255,6 @@ document.getElementById("cxgrid").innerHTML=CX.map(x=>`
     </div>
     <div class="cx-total">${x.total}</div>
     <button class="savebtn" style="width:100%;margin-top:10px" data-save-kind="flat" data-save-label="${x.name} (couple + mom)" data-save-url="${x.couple.url}">♡ Save</button>
-    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="cx-${x.name}" placeholder="You + Mishka on this complex — does it feel right for all of us? Mom close enough?"></textarea></div>
   </div>`).join('');
 if (window.NEST) window.NEST.wire();
 (function(){
@@ -267,22 +264,6 @@ if (window.NEST) window.NEST.wire();
   function apply(){let s=0;cards.forEach(c=>{const floorOk=state.floor==="all"||(state.floor==="g"&&c.dataset.floor==="g")||(state.floor==="garden"&&c.dataset.garden==="1");const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side)&&floorOk;c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
   chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
   apply();
-})();
-(function(){
-  const btn=document.getElementById('copynotes'),msg=document.getElementById('copymsg');
-  if(!btn) return;
-  const labels={};
-  F.forEach(f=>labels[f.url]=`${f.name} (${f.area}) ${f.rent}`);
-  CX.forEach(x=>{labels[x.couple.url]=`${x.name} 2-bed ${x.couple.rent}`;labels[x.mom.url]=`${x.name} mom 1-bed ${x.mom.rent}`;labels['cx-'+x.name]=`${x.name} (complex)`;});
-  btn.addEventListener('click',()=>{
-    const notes=window.NEST.notes();
-    const lines=Object.keys(notes).map(k=>`• ${labels[k]||k}\n  ${notes[k]}`);
-    if(!lines.length){msg.textContent='No notes yet — tap 💬 Notes on a place first.';return;}
-    const text='Our apartment notes (The Nest):\n\n'+lines.join('\n\n');
-    const done=()=>{msg.textContent='Copied — paste it to Mishka 📲';};
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>window.prompt('Copy your notes:',text));}
-    else window.prompt('Copy your notes:',text);
-  });
 })();
 </script>
 </body>

@@ -230,7 +230,6 @@ grid.innerHTML=CARS.map(c=>{
     </div>
     <div class="sellers">💸 Cheaper (private): <a href="${gt}" target="_blank" rel="noopener noreferrer">Gumtree ↗</a> · <a href="${fb}" target="_blank" rel="noopener noreferrer">FB Marketplace ↗</a> — Compare (dealer, pricier): <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${wbc}">♡ Save</button>
-    <div class="notewrap"><button class="notetoggle" type="button">💬 Notes</button><textarea class="notebox" data-note-key="car-${c.name.replace(/[^a-z0-9]/gi,'')}" placeholder="You + Mishka: like it? go see it? price to aim for…"></textarea></div>
   </div>`;
 }).join('');
 if (window.NEST) window.NEST.wire();
