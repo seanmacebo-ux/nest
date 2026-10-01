@@ -108,11 +108,14 @@
     </ul>
   </div>
 
-  <div class="foot">THE NEST · private hub for Sean &amp; Mishka · built with Claude · updated Aug 2026 · noindex</div>
+  <div class="foot">THE NEST · private hub for Sean &amp; Mishka · built with Claude · updated 1 Oct 2026 · no caching · noindex</div>
 </div>
 <script>
 (function(){
-  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+  // No service worker anymore — tear down any old one and wipe its caches so
+  // phones stop serving frozen copies. Runs on every load; cheap no-op once clean.
+  if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});}
+  if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});}).catch(function(){});}
   var btn=document.getElementById('shareBtn'),msg=document.getElementById('shareMsg');
   if(!btn) return;
   var url='https://seanmacebo-ux.github.io/nest/';
