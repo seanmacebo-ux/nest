@@ -1,51 +1,16 @@
-// The Nest — service worker. HTML: network-first (fresh when online).
-// Assets: stale-while-revalidate (serve cached fast, fetch fresh in background).
-// Bump CACHE on every deploy so old caches are purged and assets refetch.
-const CACHE = 'nest-2026-09-30a';
-const ASSETS = [
-  './', './index.html', './tracker.html', './baby.html', './cars.html',
-  './apartments.html', './furniture.html', './style.css', './nest.js',
-  './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'
-];
-
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
-});
+// The Nest — self-destructing service worker.
+// The old caching SW is what kept phones showing a frozen copy. This version
+// does the opposite: on activate it wipes every cache, unregisters itself, and
+// force-reloads any open tab onto the live network copy. After this runs once,
+// there is NO service worker and NO caching — every open hits GitHub Pages fresh.
+self.addEventListener('install', () => self.skipWaiting());
 
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', e => {
-  const req = e.request;
-  if (req.method !== 'GET') return;
-  const isHTML = req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html');
-  if (isHTML) {
-    // Network-first so content stays current; fall back to cache offline.
-    e.respondWith(
-      fetch(req).then(res => {
-        const cp = res.clone();
-        caches.open(CACHE).then(c => c.put(req, cp));
-        return res;
-      }).catch(() => caches.match(req).then(m => m || caches.match('./index.html')))
-    );
-  } else {
-    // Stale-while-revalidate: serve cache fast, fetch fresh in background so
-    // the next load has the latest asset. Never freezes on an old version.
-    e.respondWith(
-      caches.match(req).then(cached => {
-        const fresh = fetch(req).then(res => {
-          if (res && res.status === 200) {
-            const cp = res.clone();
-            caches.open(CACHE).then(c => c.put(req, cp));
-          }
-          return res;
-        }).catch(() => cached);
-        return cached || fresh;
-      })
-    );
-  }
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(k => caches.delete(k)));
+    await self.registration.unregister();
+    const clients = await self.clients.matchAll({ type: 'window' });
+    clients.forEach(c => c.navigate(c.url));
+  })());
 });
