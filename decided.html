@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2F6B4F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -40,16 +40,16 @@
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
+<header class="appbar"><div class="appbar-in">
   <a class="brandmark" href="index.html">🪺 The Nest</a>
-  <a class="tab" href="index.html">Plan</a>
-  <a class="tab" href="tracker.html">Tracker</a>
-  <a class="tab" href="baby.html">Baby</a>
-  <a class="tab" href="cars.html">Cars</a>
-  <a class="tab" href="apartments.html">Apartments</a>
-  <a class="tab" href="furniture.html">Furniture</a>
-  <a class="tab" href="decided.html" aria-current="page">Decided</a>
-</div></nav>
+  <nav class="tabbar" aria-label="Main">
+    <a class="t-today" href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></svg><span>Today</span></a>
+    <a class="t-baby" href="baby.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 5.1a5.2 5.2 0 0 0-7.4 0L12 6.1l-1-1a5.2 5.2 0 0 0-7.4 7.4l1 1L12 21l7.4-7.5 1-1a5.2 5.2 0 0 0 0-7.4z"/></svg><span>Baby</span></a>
+    <a class="t-home" href="apartments.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a class="t-car" href="cars.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-5.4A2 2 0 0 1 6.9 6.3h10.2a2 2 0 0 1 1.9 1.3L21 13v4.5h-2.3M3 13v4.5h2.3M3 13h18"/><circle cx="7.5" cy="17.5" r="1.9"/><circle cx="16.5" cy="17.5" r="1.9"/></svg><span>Car</span></a>
+    <a class="t-decided" href="decided.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.2 12.4 2.7 2.7 5-5.2"/></svg><span>Decided</span></a>
+  </nav>
+</div></header>
 
 <div class="wrap">
   <header>

@@ -206,7 +206,72 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(() => { if (!document.hidden) window.NEST._pull(false); }, 20000);
 });
 
-// Register the service worker so The Nest installs as an app + works offline.
+// No service worker: tear down any old one + its caches so phones never serve a
+// frozen copy. Cheap no-op once a phone is clean.
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
 }
+if (window.caches && caches.keys) caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(() => {});
+
+// "Jump to" strip under the page header, built from the page's own headings so
+// it stays right when content changes. Plus a back-to-top button on long pages.
+function nestJump() {
+  const wrap = document.querySelector('.wrap');
+  const header = wrap && wrap.querySelector(':scope > header');
+  if (!header) return;
+  const clean = t => {
+    t = t.replace(/^[^\p{L}\p{N}]+/u, '').split(/ [—–] | \(|:/)[0].trim();
+    return t.length > 28 ? t.slice(0, 27).trim() + '…' : t;
+  };
+  // Long intro paragraph → first 3 lines + "Read more". Legend callout → tucked into a fold.
+  const sub = header.querySelector('.sub');
+  if (sub && sub.textContent.length > 240) {
+    sub.classList.add('clamp');
+    const more = document.createElement('button');
+    more.type = 'button'; more.className = 'more-btn'; more.textContent = 'Read more';
+    more.addEventListener('click', () => { const open = sub.classList.toggle('clamp'); more.textContent = open ? 'Read more' : 'Show less'; });
+    sub.after(more);
+  }
+  header.querySelectorAll(':scope > .callout').forEach(c => {
+    const d = document.createElement('details');
+    d.className = 'fold';
+    d.innerHTML = '<summary>How to read this page</summary><div class="fb"></div>';
+    c.replaceWith(d);
+    d.querySelector('.fb').appendChild(c);
+  });
+
+  const targets = [];
+  wrap.querySelectorAll('.sec h2, .note > h4, .filterbar').forEach(el => {
+    const isBar = el.classList.contains('filterbar');
+    const anchor = isBar ? el : (el.closest('.sec') || el.closest('.note'));
+    let label = 'Browse all';
+    if (!isBar) { const h = el.cloneNode(true); h.querySelectorAll('span').forEach(x => x.remove()); label = clean(h.textContent); }
+    if (anchor && label) targets.push({ anchor, label });
+  });
+  if (targets.length < 3) return;
+  const strip = document.createElement('nav');
+  strip.className = 'jump';
+  strip.setAttribute('aria-label', 'Jump to');
+  strip.innerHTML = '<span class="jl">Jump to</span>';
+  targets.forEach((t, i) => {
+    if (!t.anchor.id) t.anchor.id = 'j' + i;
+    t.anchor.setAttribute('data-jump', '');
+    const a = document.createElement('a');
+    a.href = '#' + t.anchor.id;
+    a.textContent = t.label;
+    strip.appendChild(a);
+  });
+  header.after(strip);
+
+  if (document.body.scrollHeight < window.innerHeight * 3) return;
+  const top = document.createElement('button');
+  top.type = 'button';
+  top.className = 'totop';
+  top.textContent = '↑ Top';
+  top.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  document.body.appendChild(top);
+  const onScroll = () => top.classList.toggle('show', window.scrollY > 900);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+document.addEventListener('DOMContentLoaded', nestJump);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2F6B4F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -19,112 +19,221 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
+<header class="appbar"><div class="appbar-in">
   <a class="brandmark" href="index.html">🪺 The Nest</a>
-  <a class="tab" href="index.html" aria-current="page">Plan</a>
-  <a class="tab" href="tracker.html">Tracker</a>
-  <a class="tab" href="baby.html">Baby</a>
-  <a class="tab" href="cars.html">Cars</a>
-  <a class="tab" href="apartments.html">Apartments</a>
-  <a class="tab" href="furniture.html">Furniture</a>
-  <a class="tab" href="decided.html">Decided</a>
-</div></nav>
+  <nav class="tabbar" aria-label="Main">
+    <a class="t-today" href="index.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M16 2.5v4M8 2.5v4M3 10h18"/></svg><span>Today</span></a>
+    <a class="t-baby" href="baby.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 5.1a5.2 5.2 0 0 0-7.4 0L12 6.1l-1-1a5.2 5.2 0 0 0-7.4 7.4l1 1L12 21l7.4-7.5 1-1a5.2 5.2 0 0 0 0-7.4z"/></svg><span>Baby</span></a>
+    <a class="t-home" href="apartments.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a class="t-car" href="cars.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-5.4A2 2 0 0 1 6.9 6.3h10.2a2 2 0 0 1 1.9 1.3L21 13v4.5h-2.3M3 13v4.5h2.3M3 13h18"/><circle cx="7.5" cy="17.5" r="1.9"/><circle cx="16.5" cy="17.5" r="1.9"/></svg><span>Car</span></a>
+    <a class="t-decided" href="decided.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.2 12.4 2.7 2.7 5-5.2"/></svg><span>Decided</span></a>
+  </nav>
+</div></header>
 
 <div class="wrap">
-  <header>
-    <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · Johannesburg · baby due Feb 2027</div>
-    <h1>Three tracks,<br>one <em>February</em>.</h1>
-    <p class="sub">Baby, home and car, all moving together. Built on R60k a month and sequenced so the big costs never land in the same month. Private link, not indexed.</p>
-    <div style="margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <button id="shareBtn" type="button" style="font:inherit;font-weight:600;font-size:14px;cursor:pointer;border:none;border-radius:12px;padding:11px 18px;background:var(--accent);color:#fff">📤 Share with Mishka</button>
-      <span id="shareMsg" style="font-size:13px;color:var(--ink-soft)"></span>
-    </div>
-    <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch"><b>📲 Install it as an app:</b> on <b>iPhone</b> open this in Safari → tap Share → <b>Add to Home Screen</b>. On <b>Android</b> open in Chrome → tap ⋮ → <b>Install app</b>. It then opens full-screen with its own icon, like a real app, and works offline.</p>
-    <p style="margin:8px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch">Same link works for both of you. For now, ♡ saves and 💬 notes live on each phone separately (shared live-sync comes with Babybean); use the <b>Copy notes</b> buttons to send each other your picks.</p>
+  <nav class="subtabs" aria-label="Section"><a href="index.html" aria-current="page">Overview</a><a href="tracker.html">Money &amp; to-dos</a></nav>
+
+  <header class="dash-head">
+    <div class="eyebrow"><span class="dot"></span><span id="today">Sean &amp; Mishka</span></div>
+    <h1 id="greet">Hello, you two.</h1>
+    <p class="sub">Baby, home and car in one place. Here's where things stand and what's next.</p>
   </header>
 
-  <div class="sec"><h2>The one number that runs everything</h2></div>
-  <div class="panel">
-    <div class="num" style="font-family:'Fraunces',serif;font-weight:600;font-size:clamp(34px,6vw,48px);color:var(--accent);letter-spacing:-.02em;line-height:1">~R12k <span style="font-size:.5em;color:var(--ink-soft)">left over / month</span></div>
-    <p style="margin:12px 0 0;max-width:64ch">Living on about R49k of your R60k leaves ~R12k a month. It's <b>not spare cash</b> — every rand is already spoken for: the move, furniture, and the baby. The whole trick is <b>sequencing</b> so no two big costs land in the same month, not saving more. Here's the real pile it has to clear.</p>
-  </div>
-
-  <div class="sec"><h2>The pile it has to clear</h2>
-    <p>Every one-off cost between now and the birth. This is the honest total.</p></div>
-  <div class="panel">
-    <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14.5px">
-      <li><b>Move-in</b> (deposit + first month): ~R22k · Oct</li>
-      <li><b>Furniture + appliances</b> (couch, bed, fridge, washer, TV + more): <b>~R34k–R52k · Oct–Nov</b> — real prices now on the <a href="furniture.html">Furniture board</a>. Baby gear (cot, pram) is on top of this.</li>
-      <li><b>Genesis booking:</b> R2,200 · Dec</li>
-      <li><b>Genesis birth</b> real cost after refund: ~R18k · Jan (R45k float out, ~R27k back in Mar)</li>
-      <li><b>Midwife:</b> ~R18k–R20k (benchmark off Protea, a comparable Genesis midwife — details on the <a href="baby.html">Baby page</a>). Bills separately; get Lilo's real quote to lock it.</li>
-      <li style="border-top:1px solid var(--line,#e5e2da);padding-top:8px;margin-top:2px"><b>Real cost ≈ R94k–R114k</b> all-in, spread Aug→Feb — the swing is the furniture range and the midwife. At ~R12k banked/mo it only works <b>because it's sequenced, not because R12k is big.</b> The plan is timing, not extra cash.</li>
-    </ul>
-  </div>
-
-  <div class="sec"><h2>The three tracks</h2>
-    <p>Each one's live right now. Tap in.</p></div>
-  <div class="tiles">
-    <a class="tile baby" href="baby.html">
-      <div class="tt">🍼 Baby</div>
-      <div class="td">Genesis Clinic, Saxonwold — <b>confirmed open + taking bookings</b> (email 24 Aug). Clinic fee R18k (natural), R45k refundable deposit. <b>Next: get a midwife quote — she bills separately.</b></div>
-      <div class="go">Booking this week →</div>
+  <section class="hero">
+    <a class="stat baby" href="baby.html">
+      <div class="stat-k">Baby · due 20 Feb 2027</div>
+      <div class="stat-v" id="wk">Week —</div>
+      <div class="stat-s" id="wkmeta">&nbsp;</div>
+      <div class="bar"><span id="wkbar"></span></div>
+      <span class="go">Plan →</span>
     </a>
-    <a class="tile home" href="apartments.html">
-      <div class="tt">🏡 Home</div>
-      <div class="td">Modern secure estates, 2-bed, ground floor, across the East and North. Move by November.</div>
-      <div class="go">Open the Apartments board →</div>
+    <a class="stat home" href="tracker.html#move">
+      <div class="stat-k">The move · target November</div>
+      <div class="stat-v" id="mv">—</div>
+      <div class="stat-s" id="mvmeta">&nbsp;</div>
+      <div class="bar"><span id="mvbar"></span></div>
+      <span class="go">Steps →</span>
     </a>
-    <a class="tile car" href="cars.html">
-      <div class="tt">🚗 Car</div>
-      <div class="td">Modern (2020+), automatic, Japanese &amp; Chinese — 6'4-rated, with real live prices. Licence first (start now); buy Q2 2027.</div>
-      <div class="go">Open the Car Explorer →</div>
-    </a>
-  </div>
+  </section>
 
-  <div class="sec" id="baby"><h2>🍼 Baby — the numbers</h2>
-    <p>Self-funded at Genesis. The deposit is a float you get back, not a cost.</p></div>
-  <div class="panel">
-    <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14.5px">
-      <li>✅ <b>Confirmed operating &amp; taking bookings</b> — Genesis replied 24 Aug 2026. Fees below are as they quoted.</li>
-      <li><b>Booking fee:</b> R2,200, due by week 32 (~December)</li>
-      <li><b>Deposit:</b> R45,000 by week 36 — lump or instalments. Covers an emergency C-section (clinic + anaesthetist + paed).</li>
-      <li><b>Natural delivery:</b> R18,000 clinic fee + R2,800 paed check, deducted from the deposit; <b>~R24,200 refunded</b> after a normal birth.</li>
-      <li>⚠️ <b>Midwife is SEPARATE — not in the R45k.</b> Contact 1–2 midwives via <a href="https://genesis-clinic.co.za/meet-the-midwives/" target="_blank" rel="noopener noreferrer">Meet the Midwives</a> for their fees to finalise the budget. Gynae (if used) also bills separately.</li>
-      <li><b>Clinical card:</b> free at a public clinic. You're 15 weeks — book the antenatal check-up now.</li>
-    </ul>
-  </div>
+  <section class="dsec">
+    <div class="dsec-h"><h2>Next up</h2><a href="tracker.html#todo">All to-dos →</a></div>
+    <ul class="ticklist" id="next"></ul>
+  </section>
 
-  <div class="sec"><h2>The cash, month by month</h2></div>
-  <div class="panel">
-    <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:14px">
-      <li><b>Now–Sep:</b> bank ~R12k/mo · build the move pot · <b>message Lilo for her quote</b> — antenatal visits start about now</li>
-      <li><b>Oct:</b> ~R22k move-in (deposit + first month) — the first peak</li>
-      <li><b>Nov:</b> MOVE — ground floor, no strain · day-one furniture only: bed + fridge + washer (~R16k)</li>
-      <li><b>Dec:</b> R2,200 Genesis booking · the rest of the furniture as specials land — couch, TV, table (~R18k–R36k, no rush)</li>
-      <li><b>Jan:</b> quiet month — hold cash for the birth · midwife fee spreading across her antenatal visits</li>
-      <li><b>Late Jan–Feb:</b> R45k Genesis float (real cost ~R18k) · midwife birth fee (~R12k) · <b>BABY, end Feb</b></li>
-      <li><b>~Mar:</b> +R27k refunded → reserve rebuilt for the baby</li>
-    </ul>
-  </div>
+  <section class="dsec">
+    <div class="dsec-h"><h2>Coming up</h2><a href="tracker.html#dates">All dates →</a></div>
+    <div class="panel"><ul class="timeline" id="dates"></ul></div>
+  </section>
 
-  <div class="foot">THE NEST · private hub for Sean &amp; Mishka · built with Claude · updated 1 Oct 2026 · no caching · noindex</div>
+  <section class="dsec">
+    <div class="dsec-h"><h2>Money this month</h2><a href="tracker.html#money">Cash pacer →</a></div>
+    <div class="panel">
+      <div class="money">
+        <div>
+          <div class="stat-k" id="m1k">This month</div>
+          <div class="money-v" id="m1v">—</div>
+          <div class="stat-s" id="m1s"></div>
+        </div>
+        <div class="money-next" id="m2"></div>
+      </div>
+      <p class="fine">The birth costs are spread so no month is a wall: the biggest single month is about <b>R20k</b> (December). About <b>R24,800</b> of the Genesis float comes back within a week of a normal birth.</p>
+    </div>
+  </section>
+
+  <section class="dsec">
+    <div class="dsec-h"><h2>The tracks</h2></div>
+    <div class="tracks">
+      <a class="track baby" href="baby.html">
+        <div class="tk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 5.1a5.2 5.2 0 0 0-7.4 0L12 6.1l-1-1a5.2 5.2 0 0 0-7.4 7.4l1 1L12 21l7.4-7.5 1-1a5.2 5.2 0 0 0 0-7.4z"/></svg>Baby</div>
+        <div class="tv">Genesis + Sr Lilo</div>
+        <div class="ts">Clinic and midwife locked in</div>
+        <div class="ta">Birth plan →</div>
+      </a>
+      <a class="track home" href="apartments.html">
+        <div class="tk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</div>
+        <div class="tv">2-bed, ground floor</div>
+        <div class="ts">Garden if we can · in by November</div>
+        <div class="ta">Places + furniture →</div>
+      </a>
+      <a class="track car" href="cars.html">
+        <div class="tk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l2-5.4A2 2 0 0 1 6.9 6.3h10.2a2 2 0 0 1 1.9 1.3L21 13v4.5h-2.3M3 13v4.5h2.3M3 13h18"/><circle cx="7.5" cy="17.5" r="1.9"/><circle cx="16.5" cy="17.5" r="1.9"/></svg>Car</div>
+        <div class="tv">Automatic hatchback</div>
+        <div class="ts">Licence first, then buy</div>
+        <div class="ta">Shortlist →</div>
+      </a>
+      <a class="track" href="decided.html">
+        <div class="tk"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8.2 12.4 2.7 2.7 5-5.2"/></svg>Decided</div>
+        <div class="tv" id="decTotal">Locked-in buys</div>
+        <div class="ts" id="decSub">What we've committed to so far</div>
+        <div class="ta">See the list →</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="dsec">
+    <details class="fold">
+      <summary>How the money works</summary>
+      <div class="fb">
+        <p>About <b>R12k a month</b> is left after living costs on R60k. It isn't spare: it's already spoken for by the move, furniture and the baby.</p>
+        <p>The plan works because of <b>timing, not extra cash</b>. Big costs are spread so no two land in the same month, and Genesis takes the R45k float in instalments. The month-by-month detail is on <a href="tracker.html#money">Money &amp; to-dos</a>.</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>Share it, or install it on your phone</summary>
+      <div class="fb">
+        <p>Same link works for both of you. <button id="shareBtn" type="button" class="btn" style="margin-left:6px;padding:7px 14px;font-size:13px">Share with Mishka</button> <span id="shareMsg"></span></p>
+        <p><b>iPhone:</b> open in Safari, tap Share, then <b>Add to Home Screen</b>. <b>Android:</b> open in Chrome, tap ⋮, then <b>Install app</b>.</p>
+      </div>
+    </details>
+  </section>
+
+  <div class="foot">THE NEST · private hub for Sean &amp; Mishka · noindex</div>
 </div>
+
+<script src="nest.js"></script>
 <script>
 (function(){
-  // No service worker anymore — tear down any old one and wipe its caches so
-  // phones stop serving frozen copies. Runs on every load; cheap no-op once clean.
-  if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});}
-  if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});}).catch(function(){});}
-  var btn=document.getElementById('shareBtn'),msg=document.getElementById('shareMsg');
-  if(!btn) return;
-  var url='https://seanmacebo-ux.github.io/nest/';
-  btn.addEventListener('click',async function(){
-    try{
-      if(navigator.share){ await navigator.share({title:'The Nest',text:'Our baby, home & car plan',url:url}); }
-      else if(navigator.clipboard&&navigator.clipboard.writeText){ await navigator.clipboard.writeText(url); msg.textContent='Link copied — paste it to Mishka 📲'; }
-      else { window.prompt('Copy this link for Mishka:',url); }
-    }catch(e){}
+  const DAY = 86400000, now = new Date();
+  const fmtR = n => 'R' + Math.round(n).toLocaleString('en-ZA').replace(/\s/g, ',');
+  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const ddmm = d => DOW[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()];
+
+  // Header
+  const h = now.getHours();
+  document.getElementById('greet').textContent = (h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', you two.';
+  document.getElementById('today').textContent = 'Sean & Mishka · ' + ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][now.getDay()] + ' ' + now.getDate() + ' ' + now.toLocaleDateString('en-ZA', { month: 'long' });
+
+  // Baby — anchored to the confirmed due date (20 Feb 2027)
+  const EDD = new Date('2027-02-20T00:00:00');
+  const daysToDue = Math.max(0, Math.ceil((EDD - now) / DAY));
+  const week = Math.min(40, Math.max(0, 40 - Math.ceil(daysToDue / 7)));
+  const tri = week < 13 ? 'First' : week < 28 ? 'Second' : 'Third';
+  document.getElementById('wk').innerHTML = 'Week ' + week + '<small>of 40</small>';
+  document.getElementById('wkmeta').textContent = tri + ' trimester · ' + daysToDue + ' days to go';
+  document.getElementById('wkbar').style.width = (week / 40 * 100) + '%';
+
+  // Move — in by 1 Nov 2026, runway opened 1 Sep
+  const MOVE = new Date('2026-11-01T00:00:00'), MSTART = new Date('2026-09-01T00:00:00');
+  const dMove = Math.ceil((MOVE - now) / DAY);
+  document.getElementById('mv').innerHTML = dMove > 0 ? dMove + '<small>' + (dMove === 1 ? 'day' : 'days') + '</small>' : 'Moved';
+  document.getElementById('mvmeta').textContent = dMove > 0 ? Math.floor(dMove / 7) + ' weeks to find, sign and move' : 'In before it got heavy';
+  document.getElementById('mvbar').style.width = Math.max(0, Math.min(100, (now - MSTART) / (MOVE - MSTART) * 100)) + '%';
+
+  // Next up — first 4 not-yet-ticked. Same tick IDs as the Tracker, so ticking here ticks there.
+  const TODO = [
+    ['t-lilodep', 'Pay Sr Lilo\'s R3,000 booking deposit', 'Locks your birth slot. Comes off her fee.'],
+    ['t-scan', 'Book the 20-week anomaly scan', 'Maryke · 071 154 0223'],
+    ['t-medaid', 'Put the baby on medical aid', 'Required for cash payers, covers emergency transfers'],
+    ['t-doula', 'Book a doula', 'Required for first-time mums. Ask Lilo who she rates.'],
+    ['m-viewings', 'Book flat viewings', 'See shortlisted places in person before applying'],
+    ['t-account', 'Open the baby float savings account', 'Where the R9k a month for Genesis goes'],
+    ['m-apply', 'Apply for the flat you want', 'ID + 3 months of payslips and bank statements'],
+    ['m-movers', 'Book movers', 'Get 2 quotes early, November is busy'],
+    ['t-learners', 'Book your learner\'s licence', 'Unlocks the car'],
+    ['t-booking', 'Genesis booking-in + R2,200', 'By week 32'],
+    ['t-deposit', 'Genesis float fully paid', 'R45,000 by week 36']
+  ];
+  const next = document.getElementById('next');
+  function renderNext() {
+    const open = TODO.filter(t => !NEST.isTicked(t[0])).slice(0, 4);
+    next.innerHTML = open.length ? open.map(t =>
+      `<li data-tick="${t[0]}"><span class="box"></span><span class="txt">${t[1]}<small>${t[2]}</small></span></li>`).join('')
+      : '<li class="alldone">All caught up. Nice.</li>';
+    NEST.wire(next);
+    next.querySelectorAll('[data-tick]').forEach(li => li.addEventListener('click', () => setTimeout(renderNext, 650)));
+  }
+  renderNext();
+
+  // Coming up — the fixed dates, next 4 from today
+  const DATES = [
+    ['2026-10-03', '20-week anomaly scan', 'The big one'],
+    ['2026-10-31', '24-week consult with Sr Lilo', 'R650'],
+    ['2026-11-01', 'Move-in target', 'Ground floor, before it gets heavy'],
+    ['2026-12-01', '28-week gynae visit', 'Tuesday'],
+    ['2026-12-26', 'Genesis booking-in + R2,200', 'Deadline: week 32'],
+    ['2027-01-23', 'Genesis float fully paid', 'R45,000 by week 36'],
+    ['2027-01-26', '36-week gynae visit', 'Tuesday'],
+    ['2027-02-20', 'Due date', 'Baby 🎉']
+  ];
+  const today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  document.getElementById('dates').innerHTML = DATES
+    .map(d => [new Date(d[0] + 'T00:00:00'), d[1], d[2]])
+    .filter(d => d[0] >= today0).slice(0, 4)
+    .map(d => { const soon = (d[0] - today0) / DAY <= 7;
+      return `<li class="${soon ? 'soon' : ''}"><span class="d">${ddmm(d[0])}</span><span class="w">${d[1]}<small>${soon ? 'This week · ' : ''}${d[2]}</small></span></li>`; })
+    .join('') || '<li><span class="d">—</span><span class="w">Nothing left on the calendar</span></li>';
+
+  // Money — what leaves the account this month for the birth (from the Tracker's cadence)
+  const CAD = { '2026-8': [12000, 'Genesis R9k + Lilo deposit R3k'], '2026-9': [11450, 'Genesis R9k + scan + 24-week consult'],
+    '2026-10': [9000, 'Genesis R9k, the birth pot builds'], '2026-11': [20100, 'Genesis R9k + booking + gynae + consults + half of Lilo'],
+    '2027-0': [18700, 'Final Genesis R9k + gynae + consults + rest of Lilo'], '2027-1': [1950, 'Consults only, birth paid from the float'] };
+  const key = d => d.getFullYear() + '-' + d.getMonth();
+  const mName = d => d.toLocaleDateString('en-ZA', { month: 'long' });
+  const nxt = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const c1 = CAD[key(now)], c2 = CAD[key(nxt)];
+  document.getElementById('m1k').textContent = mName(now) + ' · birth costs';
+  document.getElementById('m1v').textContent = c1 ? '~' + fmtR(c1[0]) : 'Nothing due';
+  document.getElementById('m1s').textContent = c1 ? c1[1] : 'No birth costs scheduled this month';
+  document.getElementById('m2').innerHTML = c2 ? 'Next: ' + mName(nxt) + '<b>~' + fmtR(c2[0]) + '</b>' : '';
+
+  // Decided — read the live total straight off the Decided page
+  fetch('decided.html', { cache: 'no-store' }).then(r => r.text()).then(t => {
+    const doc = new DOMParser().parseFromString(t, 'text/html');
+    const tp = doc.querySelector('.totalcard .tp'), ts = doc.querySelector('.totalcard .tsub');
+    if (tp) document.getElementById('decTotal').textContent = tp.textContent.trim() + ' locked in';
+    if (ts) document.getElementById('decSub').textContent = ts.textContent.trim().split('·')[0].trim();
+  }).catch(() => {});
+
+  // Share
+  const btn = document.getElementById('shareBtn'), msg = document.getElementById('shareMsg');
+  const url = 'https://seanmacebo-ux.github.io/nest/';
+  btn.addEventListener('click', async () => {
+    try {
+      if (navigator.share) await navigator.share({ title: 'The Nest', text: 'Our baby, home & car plan', url });
+      else if (navigator.clipboard) { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied'; }
+      else window.prompt('Copy this link for Mishka:', url);
+    } catch (e) {}
   });
 })();
 </script>
