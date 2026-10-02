@@ -20,32 +20,14 @@
 <style>
   .grid.two { grid-template-columns: repeat(2, 1fr); }
   @media (max-width: 780px) { .grid.two { grid-template-columns: 1fr; } }
-  .lt { width: 100%; border-collapse: collapse; margin: 11px 0 0; font-size: 12.5px; }
-  .lt th { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
-  .lt td { padding: 8px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .lt tr:last-child td { border-bottom: none; }
-  .lt .p { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
-  .lt .st { color: var(--ink-soft); font-size: 11px; white-space: nowrap; }
-  .lt .nm { font-weight: 600; }
-  .lt .wy { color: var(--ink-soft); font-size: 11px; display: block; margin-top: 2px; line-height: 1.4; }
-  .lt tr.best td { background: var(--good-soft); }
-  .lt .tag { font-size: 8.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
-  .lane { font-size: 9.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 8px; border-radius: 20px; background: var(--car-soft); color: var(--car-ink); }
-  .lane.a { background: var(--good-soft); color: var(--good); }
   .tt-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .done-card { border-style: dashed; opacity: .82; }
-  .tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-  @media (max-width: 720px) { .tiers { grid-template-columns: 1fr; } }
-  .tier { border: 1px solid var(--line); border-radius: 12px; padding: 14px 15px; background: var(--surface); }
-  .tier.rec { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  .tier .tn { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); font-weight: 600; }
-  .tier .tp { font-family: "Fraunces", serif; font-weight: 600; font-size: 30px; color: var(--accent); letter-spacing: -.02em; margin: 4px 0 0; }
-  .tier .tx { font-size: 12px; color: var(--ink-soft); margin: 7px 0 0; line-height: 1.5; }
-  .notewrap { margin-top: 8px; }
-  .notetoggle { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
-  .notetoggle:hover { border-color: var(--accent); color: var(--car-ink); }
-  .notebox { display: none; width: 100%; margin-top: 8px; min-height: 60px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
-  .notewrap.open .notebox { display: block; }
+  .price-tag { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 15px; color: var(--accent); white-space: nowrap; }
+  .nm { font-weight: 600; font-size: 15px; }
+  .flagline { font-size: 12px; color: var(--red); font-weight: 600; margin: 8px 0 0; line-height: 1.4; }
+  .totalcard { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .totalcard .tn { font-family: "IBM Plex Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); font-weight: 600; }
+  .totalcard .tp { font-family: "Fraunces", serif; font-weight: 600; font-size: 42px; color: var(--accent); letter-spacing: -.02em; line-height: 1; margin-top: 6px; }
+  .totalcard .tsub { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -62,181 +44,49 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow"><span class="dot"></span> Real stock · live SA prices · comfort feel, no luxury price</div>
-    <h1>Filling the <em>Nest</em>.</h1>
-    <p class="sub">The seven things we actually need for move-in: couch, coffee table, TV, main bed (frame + mattress), fridge and washer. Every one shows 3–5 real options with today's prices — tap any row to open the listing. The ★ row is my pick per item: the sweet spot where it feels plush or solid without overpaying. Filter by room, then ♡ Save the ones you and Mishka like.</p>
-    <div class="callout">🛠️ <b>The trick for luxury-on-a-budget:</b> spend on the touch points — a deep couch, a real pocket-spring mattress, solid-wood coffee table — and stay lean on the frame and the box appliances. That's what reads "expensive" without the price tag. Prices shift on weekly specials, so re-check the day you buy.</div>
-    <div class="callout" style="border-left:3px solid var(--red)">🔍 <b>Vetted for real (Aug):</b> I checked each product's reviews AND each company's reputation. The pattern across SA furniture + appliance retailers — products mostly fine, but <b>delivery + after-sales are weak almost everywhere</b> (HelloPeter 1.7–2.7). So on every buy: <b>pay by card</b> (chargeback leverage), <b>inspect before you sign</b>, keep records. The one hard DON'T: the <b>Homzy / Lifestyle Home U-shapes</b> — real scam/fraud flags, see the couch rows.</div>
+    <div class="eyebrow"><span class="dot"></span> Your agreed furniture · just the stuff you've chosen</div>
+    <h1>Your <em>furniture</em>.</h1>
+    <p class="sub">The seven things you've locked in — couch, coffee table, TV, bed, mattress, fridge, washer. Tap any card to open the listing. Total at the bottom. (All the old options and comparisons are gone — this is just your set.)</p>
   </header>
-
-  <div class="sec"><h2>🔁 Your agreed picks vs cheaper swaps</h2>
-    <p>The four pieces you and Mishka agreed on come to <b>R65,247</b> — from boutique stores (Lifeforce, Cielo). Same look and feel from value SA stores drops it to <b>~R22,100</b>. That's <b>~R43,000 saved</b> on four items, before you've bought a single appliance.</p></div>
-  <div class="panel">
-    <table class="lt">
-      <thead><tr><th>Piece</th><th>You agreed</th><th>Cheaper swap (same look/feel)</th><th>Save</th></tr></thead>
-      <tbody>
-        <tr><td class="nm">Modular sofa</td><td class="p">R28,900</td><td>That Couch Place U-Shape + ottoman <span class="wy">R7,490 · full U, grey, cheapest real U found</span></td><td class="p" style="color:var(--good)">~R21k</td></tr>
-        <tr><td class="nm">Bed base</td><td class="p">R15,900</td><td>Decofurn Eden upholstered frame (Queen XL) <span class="wy">R7,699 · tall tufted headboard, hotel look</span></td><td class="p" style="color:var(--good)">~R8k</td></tr>
-        <tr><td class="nm">Coffee table</td><td class="p">R10,499</td><td>Decofurn Goa round solid mango wood <span class="wy">R3,199 · 93% positive, tough enough for delivery</span></td><td class="p" style="color:var(--good)">~R7.3k</td></tr>
-        <tr><td class="nm">TV stand</td><td class="p">R9,948</td><td>Decofurn Mason 160cm 3-door <span class="wy">R3,699 (or Lorna 180cm R1,499)</span></td><td class="p" style="color:var(--good)">~R6.3k</td></tr>
-        <tr class="best"><td class="nm">Total</td><td class="p">R65,247</td><td><b>~R22,100</b> in value equivalents</td><td class="p" style="color:var(--good)"><b>~R43k</b></td></tr>
-      </tbody>
-    </table>
-    <p style="margin:14px 0 0;font-size:12.5px;color:var(--ink-soft)"><b style="color:var(--good)">Where to actually spend:</b> keep a bit of budget on the <b>sofa</b> — that's the daily touch point you'll feel (a R15–19k modular still reads plush). Go cheap on the <b>TV stand + coffee table</b> — nobody feels the difference. That's how you get the "expensive" look for half. Full option lists with reviews are below.</p>
-  </div>
-
-  <div class="filterbar">
-    <div class="fgroup"><span class="lbl">Room</span>
-      <button class="chip" data-f="lane" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="lane" data-v="living" aria-pressed="false">🛋️ Living</button>
-      <button class="chip" data-f="lane" data-v="bedroom" aria-pressed="false">🛏️ Bedroom</button>
-      <button class="chip" data-f="lane" data-v="appliance" aria-pressed="false">🔌 Appliances</button>
-    </div>
-    <span class="count" id="count"></span>
-  </div>
 
   <div class="grid two" id="grid"></div>
 
-  <div class="sec" style="margin-top:34px"><h2>🌙 Mattress — what to look for (Mishka's comfort first)</h2>
-    <p>She'll side-sleep more as the pregnancy goes on, so the bed matters more than anything else in the room. The checklist:</p></div>
-  <div class="panel">
-    <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14px">
-      <li><b>Firmness: medium / medium-plush.</b> Too firm = hip + shoulder pressure (numb arm, tossing). Too soft = the back sinks and lower-back pain gets worse. Medium-plush is the pregnancy sweet spot.</li>
-      <li><b>Type: pocket-spring or hybrid.</b> Avoid Bonnell (connected) springs — movement carries across the bed. Avoid pure memory foam — it sleeps hot (bad in a Joburg summer, and pregnancy runs warm).</li>
-      <li><b>Comfort layer: pillow-top or zoned foam</b> — soft under hips + shoulders, firmer under the lower back. That's the "sink-in without sinking" feel.</li>
-      <li><b>Cooling: gel / coolgel top layer</b> — keeps her from overheating.</li>
-      <li><b>Motion isolation:</b> pocket coils so you don't wake each other (her sleep's already lighter with bathroom trips + later the baby).</li>
-      <li><b>Edge support:</b> reinforced edges make getting in and out easier with a bump.</li>
-      <li><b>Base: match the brand.</b> Most warranties only hold if the mattress sits on the same-brand base — a mismatched or old base can void a sag claim.</li>
-      <li><b>Size: consider a king or queen-XL.</b> More room as the bump grows (pillows between the knees), and space if the baby co-sleeps early on.</li>
-      <li><b>Trial &gt; showroom.</b> Buy where there's a real 100-night in-home trial — her ideal firmness will change by 32 weeks, and 5 minutes in a shop won't show it.</li>
-      <li><b>💡 Cheapest big win:</b> a pregnancy / body pillow (R300–R900) often does more for sleep than the mattress — it supports the bump and keeps the top leg raised.</li>
-    </ul>
-    <p style="margin:14px 0 0;font-size:12.5px;color:var(--ink-soft)">Best all-rounder for her: the <b>Restonic Pocket Cool</b> (pocket springs + zoned foam + gel + 100-night trial). Safer brand/retailer alternative: <b>Sealy Hybrid Sage Plush</b>. Go lie on both together, then lean on the trial.</p>
-  </div>
-
-  <div class="sec" style="margin-top:34px"><h2>✅ Already sorted</h2>
-    <p>Baby gear you've told me is handled — off the shopping list.</p></div>
-  <div class="grid two">
-    <div class="cc done-card"><div class="tt-row"><div class="model">🛁 Baby bath ✅</div></div>
-      <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">Sorted — no spend needed.</p></div>
-    <div class="cc done-card"><div class="tt-row"><div class="model">🧷 Changing station ✅</div></div>
-      <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">Sorted — no spend needed.</p></div>
-  </div>
-
-  <div class="sec" style="margin-top:34px"><h2>💰 What the whole set costs</h2>
-    <p>The honest total for all seven, three ways to play it. This is furniture + appliances only — baby gear (cot, pram) is separate.</p></div>
-  <div class="panel">
-    <div class="tiers">
-      <div class="tier"><div class="tn">Lean start</div><div class="tp">~R37k</div>
-        <div class="tx">Cheapest sensible pick per item (Zola loveseat, value TV), but keeping the two things not worth skipping: a <b>frost-free fridge</b> and a <b>front-loader washer</b>. Fully set up, upgrade pieces later.</div></div>
-      <div class="tier rec"><div class="tn">★ Your actual picks</div><div class="tp">~R45k</div>
-        <div class="tx">The pieces you've chosen — the That Couch Place U-shape couch, solid-wood table, tufted bed, Restonic Pocket Cool mattress, Skyworth QLED TV, the Hisense 347L combi fridge + Defy front-loader. The U-shape is the one spend-up (R7,490 vs a R5,699 loveseat); everything else stays lean. Good reviews, companies that deliver.</div></div>
-      <div class="tier"><div class="tn">Spread it</div><div class="tp">Oct–Nov</div>
-        <div class="tx">Don't buy it all at once. Bed + fridge + washer first (day-one essentials), then couch + TV + coffee table once you're in. Watch Decofurn and Takealot specials — they run often.</div></div>
+  <div class="totalcard">
+    <div>
+      <div class="tn">Your furniture total</div>
+      <div class="tp">≈R42,692*</div>
+      <div class="tsub">7 items · one-off buys (not monthly)</div>
     </div>
-    <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)"><b style="color:var(--good)">✅ Synced with the plan:</b> the home page now carries the real <b>R37k–R52k</b> furniture range (not the old ~R25k), and the month-by-month is re-sequenced — day-one pieces (bed, fridge, washer) at the move, then couch + TV + table on Decofurn/Takealot specials in Dec, so nothing lands on top of the Genesis costs.</p>
+    <div style="text-align:right">
+      <div class="tsub" style="max-width:250px">*Coffee-table price to confirm at Makro (their site blocks the price-checker). Two to double-check before you pay: the <b>Timeless frame is on waitlist</b> (sold out now), and the <b>Sealy is a coil mattress</b> — a pocket-spring is gentler for Mishka if you'd rather swap.</div>
+    </div>
   </div>
 
-  <div class="note">
-    <h4>How to shop this</h4>
-    <p><b>Scan the green rows</b> — that's my best-value pick in each item. From there it's a simple trade: <b>go cheaper</b> on the frame, the coffee table and the TV (nobody feels the difference), and <b>hold the line</b> on the couch, the mattress, the fridge (frost-free) and the washer (front-loader). That's where comfort and daily hassle actually live.</p>
-    <p><b>Save what you both like</b> (tap ♡) and I'll pull it into one shortlist. When you're ready I'll re-check every price live — most of these are on rotating specials, so we time the buy to the discount.</p>
-  </div>
-
-  <div class="foot">FURNITURE · Leroy Merlin · MHC World · Makro · Amazon.co.za · Stax · Decofurn · Superbalist · Hirsch's · reviews read negatives-first · your own finds added as picks 2 Oct 2026 · re-check prices at checkout · The Nest</div>
+  <div class="foot">FURNITURE · your agreed picks · tap a card to open the listing · pay by card + inspect on delivery · re-check prices at checkout · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
 <script>
 const ITEMS=[
- {lane:"living",icon:"🛋️",cat:"Couch",why:"AGREED (★): the @home Hugo grey modular — build-your-own, stain-proof LuxGuard, ~R15k for a corner + single. Decent mid-tier, reconfigurable, grey (Staunch Carbon). The rest stay as options: That Couch Place U (R7,490, cheapest real U), Ottoman Valentina (R8,999, daybed), Decofurn Paris sectional (R17,999). ⛔ Hard NO on the Homzy/Lifestyle U-shapes below.",
-  O:[
-   ["That Couch Place U-Shape + Ottoman","thatcouchplace.co.za","R7,490","The cheapest real U option if you'd rather save ~R7k vs the Hugo: a full 3000×2000mm U with an ottoman, charcoal or light grey, R7,490, 5/5 (4 reviews). <span style='color:var(--red)'>⚠️ Small store, some variants sold-out — confirm the grey's in stock, pay by card.</span>","https://thatcouchplace.co.za/products/u-shape-couch"],
-   ["Decofurn Paris Fabric Sectional (Grey)","Decofurn","R17,999","<span style='color:var(--good)'>✓ The big-store safety net — grey, R17,999 (was R21,999), from a national chain with real recourse.</span> <span style='color:var(--red)'>⚠️ Double the budget U-shapes, and it's a large sectional rather than a deep U; Decofurn delivery is still the weak point — pay by card, inspect.</span> ✓ Buy this if a known retailer matters more than price.","https://decofurnsa.co.za/products/paris-fabric-sectional"],
-   ["Superbalist Zola Loveseat","Superbalist","R5,699","The cheap, zero-risk fallback if the made-to-order wait annoys you. <span style='color:var(--good)'>✓ Best-reviewed here, 40% off (was R9,499).</span> Independent test 4.2/5 (comfort 4.5, durability 4.4), backed by Takealot so there's real recourse. <span style='color:var(--red)'>⚠️ Only a 2-seater (expand via Zorora modules); runs warm on long sits.</span> ✓ Cheapest real couch on the board.","https://superbalist.com/shop/couch"],
-   ["Decofurn Gia Fabric Corner Chaise (Dark Grey)","Decofurn","R12,499","<span style='color:var(--good)'>✓ The in-stock-today option — Dark Grey (chaise-left) is in stock now (was R16,999).</span> Deep 298cm spring+foam, 168 reviews mostly positive. <span style='color:var(--red)'>⚠️ It's an L, not a U; Decofurn the COMPANY is weak (HelloPeter 1.8, delivery/refund gripes) — pay by card, inspect before signing.</span> ✓ Buy this if you want it from a big store, now, and can live with an L-shape.","https://decofurnsa.co.za/products/sofas-gia-fabric-corner-chaise"],
-   ["@home Hugo Modular (grey · corner + single)","@home","R14,998","<span style='color:var(--good)'>✓ AGREED — your couch. Grey (Staunch Carbon), build-your-own modular, stain-proof LuxGuard, currently 25% off (corner R7,874 + single R7,124 = R14,998). Reconfigurable as you grow.</span> <span style='color:var(--red)'>⚠️ @home/TFG after-sales is slow — get the return window in writing, pay by card. Confirm exact config + price at checkout.</span> ✓ Decent mid-tier modular, the hero of the ~R40k set.","https://www.athome.co.za/products/furniture/couches/modular-couches",1],
-   ["Decofurn Mico Modular (per piece)","Decofurn","from R4,399/pc","Cheapest true modular — ~R14–16k for a 3-piece L. <span style='color:var(--red)'>⚠️ Decofurn 1.8 rep — buy in-store + inspect, don't rely on delivery/after-sales; treat as a 3–5yr piece.</span> ✓ Most flexible cheap building blocks.","https://decofurnsa.co.za/products/mico-modular-single-seat-light-grey"],
-   ["Coricraft Granny Goose Modular Corner","Coricraft","R25,499","Most trusted brand name in SA furniture + real warranty (10yr frame / 2yr foam). <span style='color:var(--red)'>⚠️ Priciest by far, above your budget lane; complaint sites look bad (angry-only skew) — go sit on it.</span> ✓ The only real feather 'cloud couch'.","https://coricraft.co.za/products/granny-goose-modular-corner_2635"],
-   ["Ottoman Valentina U-Shape (Grey)","Ottoman","R8,999","The configurable U — a real 3300×2700mm U-shape with daybed, R8,999 (was R10,999), in dark/mid/light grey linen (velvet or boucle +R1,000), rated 5/5. <span style='color:var(--red)'>⚠️ Ottoman's a small online outfit — track record thin, so order early, pay by card, inspect on delivery.</span> ✓ Pick this over the R7,490 one if you want more fabric choice + the daybed.","https://ottomanhd.co.za/product/valentina-3/"],
-   ["Chris U-shape (Homzy/Lifestyle)","⛔ risky","R17,999","<span style='color:var(--red)'>⛔ NOT recommended. You flagged this, but Homzy is scam-flagged (Scam Detector 18/100) and Lifestyle Home is tied to a documented furniture-scam cluster (IOL exposé, a 137-day no-refund case, threats to reviewers). Zero product reviews.</span> Buy the Ottoman Valentina above instead.","https://lifestyle-home.co.za/product/chris-u-shape-sofa-3-free-cushions/"],
-   ["Lewis U-shape (Homzy/Lifestyle)","⛔ risky","R17,600","<span style='color:var(--red)'>⛔ NOT recommended — same as Chris: sold by Homzy/Lifestyle Home, both with scam/fraud flags, cross-listed (a sketchy-reseller pattern), zero product reviews.</span> Get the Ottoman Valentina instead.","https://lifestyle-home.co.za/product/lewis-u-shape-sofa"],
-   ["Extreme U-shape (Homzy)","⛔ risky","R18,800","<span style='color:var(--red)'>⛔ NOT recommended — Homzy scam-flagged (Scam Detector 18/100), no product reviews, online-only. The big look isn't worth the risk.</span> Ottoman Valentina above is the safe U-shape.","https://homzy.co.za/products/extreme-u-shape"]
-  ]},
- {lane:"living",icon:"☕",cat:"Coffee table",why:"You picked the Golden Star Africa engineered-wood rectangle table from Makro (★). Honest note: Makro bot-blocks me so I couldn't read the live price — this brand's engineered-wood tables run ~R800–R1,500 there, so confirm the exact price at checkout. Decofurn Goa (solid mango wood) stays as the sturdier real-wood alternative.",
-  O:[
-   ["Golden Star Africa Engineered-Wood Rectangle","Makro","~R1,299*","<span style='color:var(--good)'>✓ Your pick — engineered-wood rectangle coffee table from Makro, clean modern lines, finishes the set.</span> <span style='color:var(--red)'>⚠️ *Couldn't read the live price (Makro blocks the bot) — this brand's engineered-wood tables run ~R800–R1,500, so confirm the exact price at checkout. Engineered wood (not solid) — use coasters + keep it dry.</span>","https://www.makro.co.za/golden-star-africa-engineered-wood-rectangle-coffee-table/p/itm128b9b7f2776b",1],
-   ["Goa 80cm Round Solid Wood","Decofurn","R2,299–3,199","Solid mango wood — 93% positive reviews ('solid', 'steady', 'as expected') and tough enough to survive Decofurn's delivery. <span style='color:var(--good)'>✓ Dark brown R2,299, light brown R3,199.</span> ✓ The solid-wood alternative if you want real wood.","https://decofurnsa.co.za/products/goa-80cm-round-solid-wood-coffee-table"],
-   ["Belle 80cm Round Stone Top","Decofurn","R2,499","Real sintered stone, 93% 5★ (70+ reviews) — looks the priciest. <span style='color:var(--red)'>⚠️ Stone = highest chip-on-delivery risk with Decofurn; inspect before signing.</span>","https://decofurnsa.co.za/products/belle-80cm-round-stone-top-coffee-table"],
-   ["Kaia 80cm Round","Decofurn","R2,099","Cheapest — travertine-look laminate over MDF. <span style='color:var(--red)'>⚠️ No review data found; scratches easier.</span>","https://decofurnsa.co.za/products/kaia-80cm-round-coffee-table"],
-   ["Veda Solid Wood","Decofurn","R4,399","Bigger surface. <span style='color:var(--red)'>⚠️ Couldn't confirm the coffee-table SKU (a console shares the name) — check you're on the right product before paying the premium.</span>","https://decofurnsa.co.za/collections/coffee-tables"]
-  ]},
- {lane:"living",icon:"📺",cat:"TV (55–60\")",why:"Your live shortlist (Sep 12) — real QLED, 55–60\" only. The value zone under R7k is the Skyworth / TCL / Hisense trio; Samsung/LG QLED start ~R10k and don't even give you 120Hz. Sweet spot = the biggest 120Hz panel you can get. ⚠️ Skip the Hisense VIDAA one unless price drops — weakest OS + 60Hz for the most money.",
-  O:[
-   ["Skyworth 60\" Q6600H QLED 120Hz","HiFiCorp / Kloppers","R6,999","<span style='color:var(--good)'>✓ The pick (re-checked 1 Oct — R6,999 special at HiFiCorp, reg R7,499; same at Kloppers/Metro).</span> Biggest in your range AND 120Hz — 60\" QLED+ with HDMI 2.1, HDR10+, MEMC + Game Mode, Google TV (all apps). Most reviews of the trio (51 · 4.5★). <span style='color:var(--red)'>⚠️ Budget QLED = no local dimming, so blacks lift a touch in a dark room; entry Google-TV processor, not the fastest.</span> ✓ Best size-per-rand with the smooth panel.","https://www.game.co.za/Electronics-&-Entertainment/Television/TVs/SKYWORTH-65%22-QLED-GOOGLE-TV-65Q6600H/p/000000000850035043",1],
-   ["Skyworth 55\" QLED 120Hz Google TV","Amazon.co.za","R6,499","<span style='color:var(--good)'>✓ The one you found on Amazon.co.za.</span> Same 120Hz + Google TV + Dolby Audio combo as the 60\", just 55\". 42 reviews, 4.5★. <span style='color:var(--red)'>⚠️ Same budget-QLED caveats — no local dimming, blacks slightly raised. Confirm the live Amazon price at checkout.</span> ✓ Cheapest 120Hz QLED here — smart-money pick if 55\" fits the wall.","https://www.amazon.co.za/dp/B0H1ML13SH"],
-   ["TCL 55\" C655 QLED (Dolby Vision)","Makro / HiFiCorp","R6,499","The picture-quality pick — QLED Pro + <b>Dolby Vision + Atmos + Onkyo speakers</b> (skip a soundbar), Google TV. <span style='color:var(--red)'>⚠️ 60Hz only (no 120Hz), and TCL's dark-scene handling needs 'dynamic brightness' OFF day one.</span> ✓ Best HDR + sound of the trio; strongest brand.","https://www.firstshop.co.za/products/tcl-c65-65-inch-4k-ultra-hd-qled-smart-tv-65c655-309077"],
-   ["TCL 55\" P8K QLED 144Hz","Takealot","R7,999","The gamer stretch — <b>144Hz + HDMI 2.1 + VRR</b> is unheard of at this price, plus Onkyo 2.1 speakers, Google TV. <span style='color:var(--red)'>⚠️ ~300-nit real brightness (weak in a sunny room), no local dimming so dark scenes grey out, poor off-angle.</span> ✓ Only worth the extra R1.2k if you'll game on it — for soccer + streaming the Skyworth 60\" is better value.","https://www.takealot.com/tcl-55-p8k-144hz-4k-qled-google-smart-tv/PLID97491899"],
-   ["Hisense 58\" Q6Q QLED VIDAA","Game / Makro","R6,995","The one you screenshotted. Real QLED, Dolby Vision, 4K AI upscaler. <span style='color:var(--red)'>⚠️ Runs VIDAA (fewer apps, less slick than Google TV), 60Hz, and it's the priciest of the sub-R7k trio with the thinnest reviews (12). Paying more for less.</span> Only if it goes on special below the Skyworths.","https://www.hificorp.co.za/hisense-65-inch-qled-4k-tv-65q6q"]
-  ]},
- {lane:"bedroom",icon:"🛏️",cat:"Bed frame",why:"You picked the Timeless frame (★) — grey, 2 storage drawers, R3,199. Two honest flags: NO headboard, and currently SOLD OUT (waitlist), so you can't buy it today. Want the hotel-headboard look instead? The Decofurn Eden is the in-stock upgrade. Pay by card + inspect.",
-  O:[
-   ["Timeless Bed Frame (Queen, grey)","MFA Online","R3,199","<span style='color:var(--good)'>✓ Your pick — grey frame with 2 big storage drawers, Queen, R3,199. Clean + practical.</span> <span style='color:var(--red)'>⚠️ No headboard, and currently SOLD OUT — join the waitlist (can't buy today). If you want a headboard now, see the Eden below.</span>","https://mfaonline.co.za/shop/bedroom/bedroom-furniture/bedroom-suites/timeless-bed-frame/",1],
-   ["Eden Textured Fabric (Queen XL)","Decofurn","R7,699","Tall tufted, channel-panel headboard — boutique-hotel look. <span style='color:var(--good)'>✓ In stock, R7,699 (down from R10,499), cream or grey.</span> <span style='color:var(--red)'>⚠️ Decofurn 1.8 company — inspect hard on delivery.</span> ✓ The headboard upgrade if you skip the (sold-out) Timeless.","https://decofurnsa.co.za/products/eden-textured-fabric-bed"],
-   ["Lily Textured Fabric (Queen XL)","Decofurn","R6,999","Padded, soft rounded headboard — modern shape. <span style='color:var(--red)'>⚠️ Only 4 reviews (all positive) — thin data.</span>","https://decofurnsa.co.za/products/lily-textured-fabric-bed"],
-   ["Kim Fabric Bed","Decofurn","R2,499","Cheapest upholstered frame — plain headboard. <span style='color:var(--red)'>⚠️ Fabric-variant reviews thin; the leather sibling reviews well (80% 5★).</span> ✓ Low price = low downside.","https://decofurnsa.co.za/products/beds-bed-frames-kim-fabric"]
-  ]},
- {lane:"bedroom",icon:"🌙",cat:"Mattress",why:"You picked the Sealy Crawford pillow-top set (★). Real talk for Mishka: it's a Bonnell OPEN-COIL spring (connected), not pocket springs — the one thing the pregnancy checklist below says to avoid (movement carries across the bed, less side-sleep pressure relief). Fine budget bed, just not the comfort tier for a side-sleeping pregnant partner. The Restonic Pocket Cool below is the pocket-spring upgrade for ~R3k more — I'd push you there for her. Your call.",
-  O:[
-   ["Sealy Crawford Pillow Top Medium (Queen SET)","Dial-a-Bed","R4,999","<span style='color:var(--good)'>✓ Your pick — medium pillow-top, mattress + base SET, R4,999 (was R7,099), in stock (2–5 days), 100-night exchange.</span> <span style='color:var(--red)'>⚠️ Bonnell OPEN-COIL springs (connected), NOT pocket — the checklist says avoid this for Mishka (motion transfer + less side-sleep pressure relief). Only 1-yr guarantee. It's a SET incl base — if you ALSO buy the Timeless frame you'd pay for a base twice, so get mattress-only or skip the frame.</span>","https://www.dialabed.co.za/sealy-crawford-pillow-top-medium-bed-set+bed_size-Queen~-~Width~152cm+bed_length-Standard~Length~-~Length~188cm",1],
-   ["Restonic iDream Zonal Plush (Q/K)","Mattress Warehouse","R7,999","Cheapest plush pick, 100-night trial, best-rep retailer. <span style='color:var(--red)'>⚠️ All-foam, not pocket spring — less airflow + edge support, can sleep warmer; Restonic brand has sagging complaints.</span> ✓ Zoned gel foam, isolates motion well, 20-yr warranty.","https://www.themattresswarehouse.co.za/product/restonic-idream-zonal-plush-mattress/"],
-   ["Restonic Pocket Cool (Q) — the upgrade for Mishka","Mattress Outlet / Designer Concepts","from R8,199","<span style='color:var(--good)'>✓ The pocket-spring UPGRADE I'd pick for Mishka over the Sealy — hits every pregnancy-comfort box. Cheapest mattress-only R8,199 (Mattress Outlet); Designer Concepts does a base+mattress combo at R7,999.</span> <span style='color:var(--red)'>⚠️ Restonic brand has durability complaints elsewhere — lean on the 100-night trial.</span> ✓ Pocket springs + 7-zone foam (soft hips/shoulders, firm lumbar) + gel cooling + pillow top.","https://mattressoutlet.co.za/product/restonic-orthozone-pocket-cool-mattress/"],
-   ["Decofurn St Regis Pocket","Decofurn","R9,999 Q·R12,999 K","Genuine pocket spring + coolgel + posture zones — cheapest pocket-spring pillow-top. <span style='color:var(--red)'>⚠️ Decofurn service rep is poor — damaged-on-arrival + delivery-delay complaints.</span> ✓ Medium feel, real pocket springs, hotel pillow-top.","https://decofurnsa.co.za/products/st-regis-pocket-mattress"],
-   ["Sealy Hybrid Sage Plush","Mattress Warehouse","R8,399+ ·set R16k","Safer brand + best-rep retailer, proper hybrid. <span style='color:var(--red)'>⚠️ Sealy has sagging-within-2yr complaints; priciest once you add a base.</span> ✓ Pocket springs + latex/memory blend, gel cooling, edge support, 100-night trial. Confirm the queen price.","https://www.themattresswarehouse.co.za/product/sealy-hybrid-sage-plush-mattress/"],
-   ["King Koil Arman Plush (bed set)","Dial-a-Bed","set R12,799","Mattress + matched base together — protects the warranty. <span style='color:var(--red)'>⚠️ Reviews unverified; Dial-a-Bed has delivery-promise complaints.</span> ✓ Pocket springs + plush pillow top, iNERGEX conforming foam.","https://www.dialabed.co.za/king-koil-arman-plush"]
-  ]},
- {lane:"appliance",icon:"❄️",cat:"Fridge",why:"Frost-free only (no hand-defrosting with a newborn). Honest truth: NO fridge brand has a clean after-sales record in SA — so the tiebreaker is reviews + parts network. Your Hisense H450BIT (Sep 12) actually checks out — it's the mid-range combo, not the bottom-shelf models that get the fault reports. Defy stays the alternative for its local repair network.",
-  O:[
-   ["Hisense 347L H450BIT-WD Combi","Stax / Makro","R5,999","<span style='color:var(--good)'>✓ Your fridge — R5,999 at Stax (down from R8,999). Also stocked at Makro (the link you sent) and MHC World R6,599 — check all three the day you buy and take the lowest.</span> Confirmed <b>Total No Frost</b>, 347L (248 fridge / 99 freezer), A+ energy, water dispenser, LED, quiet 41dB. <b>4.3★ from 166 reviews</b> — a real, solid review base (rare at this price). <span style='color:var(--red)'>⚠️ Hisense's repair network is a notch behind Defy — pay by card, inspect on delivery, keep box + receipt for the warranty.</span> ✓ Bigger, cheaper, better-reviewed than the Defy below.","https://www.stax.co.za/product/hisense-h450bitwd-sil-347l-combi-fridge-freezer/",1],
-   ["Defy 302L DAC639","Takealot / Game","R7,999","The safe-brand alternative — frost-free, <b>best parts/repair network in SA</b> (local factory). <span style='color:var(--red)'>⚠️ Smaller (302L) + R1,500 dearer than the Hisense, and no product-specific reviews to lean on.</span> ✓ Buy this only if the repair-network peace-of-mind beats the size + price.","https://www.takealot.com/defy-302l-dac639-bottom-freezer-fridge-water-dispenser-frost-fre/PLID93006116"],
-   ["Defy 327L DAC674 No-Frost","Takealot","R8,399","A bit bigger Defy, same frost-free reliability. <span style='color:var(--red)'>⚠️ Zero reviews on Takealot yet, and the priciest sensible pick here.</span>","https://www.takealot.com/defy-327l-bottom-fridge-freezer-no-frost-dac674-brushed-stainles/PLID99684604"],
-   ["LG No-Frost (inverter)","Hirsch's","confirm price","Owners praise LG inverter fridges for long-term cooling; 10-yr compressor warranty. <span style='color:var(--red)'>⚠️ LG after-sales rated weak (2.6) like everyone; confirm the live ZAR price.</span> ✓ Strong compressor cover if you want a step up.","https://www.hirschs.co.za/brands/lg/refrigeration"]
-  ]},
- {lane:"appliance",icon:"🧺",cat:"Washer",why:"Front-loader — gentler on fabric, far more water/energy efficient once baby laundry jumps. Cut the Defy top-loader (E6/E1 fault pattern + Rochester's refund delays). Buy from Hirsch's — best after-sales of the appliance sellers.",
-  O:[
-   ["Defy 8kg DAW408B Front Loader (Midnight Black)","MHC World","R5,699","<span style='color:var(--good)'>✓ The one you found — R5,699 at MHC World (was R6,999, 19% off). Midnight black, A+++ energy, 1200rpm, 15 programmes, SteamCure + a 14-min quick wash.</span> Defy's <b>local repair network is the best in SA</b> — the real reason to pick it. <span style='color:var(--red)'>⚠️ Pay by card, inspect on delivery, keep the box + receipt for warranty.</span> ✓ Your pick.","https://www.mhcworld.co.za/products/defy-8kg-front-loader-washing-machine-midnight-black-daw408b",1],
-   ["Samsung 8kg WW80T3040 Front Loader","Hirsch's","R5,499","The R200-cheaper alternative, with a <b>10-yr motor warranty</b> (longer cover than the Defy) and a Digital Inverter motor. <span style='color:var(--red)'>⚠️ One report of spin shake — usually a levelling/install issue. Samsung's repair network isn't as wide as Defy's.</span> ✓ Pick this only if the longer motor warranty beats Defy's repair network for you.","https://www.hirschs.co.za/samsung-8kg-front-loader-washing-machine-ww80t3040bs-fa"],
-   ["Bosch Series 4 8kg WAN282X1ZA","Hirsch's / Takealot","R8,999–9,999","Step-up — German build, long service life. <span style='color:var(--red)'>⚠️ +~R3k, and a known quirk: fabric can slip under the door seal + block the filter. Worth it only if longevity beats that hassle.</span>","https://www.hirschs.co.za/bosch-8kg-silver-series-4-frontloader-washing-machine-wan282x1za"]
-  ]}
+ {icon:"🛋️",cat:"Couch",name:"@home Hugo grey modular (corner + single)",price:"R14,998",store:"@home",desc:"Build-your-own modular in grey, stain-proof LuxGuard, reconfigurable as you grow. Confirm the exact config + price at checkout.",url:"https://www.athome.co.za/products/furniture/couches/modular-couches"},
+ {icon:"🛏️",cat:"Bed frame",name:"Timeless Bed Frame (Queen, grey)",price:"R3,199",store:"MFA Online",desc:"Grey frame with 2 big storage drawers, Queen.",flag:"⚠️ Currently SOLD OUT — join the waitlist (can't buy today).",url:"https://mfaonline.co.za/shop/bedroom/bedroom-furniture/bedroom-suites/timeless-bed-frame/"},
+ {icon:"🌙",cat:"Mattress",name:"Sealy Crawford Pillow Top Medium (Queen set)",price:"R4,999",store:"Dial-a-Bed",desc:"Medium pillow-top, mattress + base set, 100-night exchange. In stock.",flag:"⚠️ Coil (not pocket) spring — it's a SET incl base, so don't also buy a base with the frame.",url:"https://www.dialabed.co.za/sealy-crawford-pillow-top-medium-bed-set+bed_size-Queen~-~Width~152cm+bed_length-Standard~Length~-~Length~188cm"},
+ {icon:"☕",cat:"Coffee table",name:"Golden Star Africa Engineered-Wood Rectangle",price:"~R1,299*",store:"Makro",desc:"Engineered-wood rectangle, clean modern lines.",flag:"*Price to confirm at Makro (their site blocks the price-checker).",url:"https://www.makro.co.za/golden-star-africa-engineered-wood-rectangle-coffee-table/p/itm128b9b7f2776b"},
+ {icon:"📺",cat:"TV",name:"Skyworth 55\" QLED 120Hz Google TV",price:"R6,499",store:"Amazon.co.za",desc:"4K QLED, 120Hz, Google TV + Dolby Audio. The one you found.",url:"https://www.amazon.co.za/dp/B0H1ML13SH"},
+ {icon:"❄️",cat:"Fridge",name:"Hisense 347L H450BIT-WD Combi",price:"R5,999",store:"Stax / Makro",desc:"Frost-free combi, 347L, water dispenser, 4.3★. Check Stax / Makro / MHC and take the lowest on the day.",url:"https://www.stax.co.za/product/hisense-h450bitwd-sil-347l-combi-fridge-freezer/"},
+ {icon:"🧺",cat:"Washer",name:"Defy 8kg DAW408B Front Loader (Midnight Black)",price:"R5,699",store:"MHC World",desc:"Front-loader, A+++, SteamCure. Defy = best local repair network in SA.",url:"https://www.mhcworld.co.za/products/defy-8kg-front-loader-washing-machine-midnight-black-daw408b"}
 ];
 const grid=document.getElementById("grid");
-grid.innerHTML=ITEMS.map(it=>{
-  const best=it.O.find(o=>o[5]);
-  const laneName=it.lane==="appliance"?"Appliance":(it.lane==="bedroom"?"Bedroom":"Living");
-  return `
-  <div class="cc" data-lane="${it.lane}">
-    <div class="tt-row">
-      <div class="model">${it.icon} ${it.cat}</div>
-      <span class="lane ${it.lane==="appliance"?"a":""}">${laneName}</span>
-    </div>
-    <div class="bodytag">${it.O.length} real options · tap a row to open the listing</div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">${it.why}</p>
-    <table class="lt"><thead><tr><th>Option</th><th>Price</th><th>Store</th></tr></thead><tbody>
-      ${it.O.map(o=>`<tr class="${o[5]?'best':''}" style="cursor:pointer" title="Open on ${o[1]}" onclick="window.open('${o[4]}','_blank','noopener')"><td><span class="nm">${o[0]}</span>${o[5]?' <span class="tag">my pick</span>':''}<span class="wy">${o[3]}</span></td><td class="p">${o[2]}</td><td class="st">${o[1]} ↗</td></tr>`).join('')}
-    </tbody></table>
-    <button class="savebtn" style="width:100%;margin-top:10px" data-save-kind="furniture" data-save-label="${it.cat}: ${best?best[0]:''}" data-save-url="${best?best[4]:''}">♡ Save my pick</button>
-  </div>`;
-}).join('');
+grid.innerHTML=ITEMS.map(it=>`
+  <div class="cc">
+    <div class="tt-row"><div class="model">${it.icon} ${it.cat}</div><span class="price-tag">${it.price}</span></div>
+    <div class="nm" style="margin-top:8px">${it.name}</div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:7px 0 0;line-height:1.45">${it.desc}</p>
+    ${it.flag?`<p class="flagline">${it.flag}</p>`:''}
+    <div class="cardlinks" style="margin-top:11px"><a class="clink see" style="flex:1" href="${it.url}" target="_blank" rel="noopener noreferrer">View on ${it.store} ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="furniture" data-save-label="${it.cat}: ${it.name}" data-save-url="${it.url}">♡ Save</button>
+  </div>`).join('');
 if (window.NEST) window.NEST.wire();
-(function(){
-  const state={lane:"all"};
-  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc[data-lane]");
-  const countEl=document.getElementById("count");
-  function apply(){let s=0;cards.forEach(c=>{const ok=state.lane==="all"||c.dataset.lane===state.lane;c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+" items";}
-  chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
-  apply();
-})();
 </script>
 </body>
 </html>
