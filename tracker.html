@@ -18,68 +18,70 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
-  .ticker { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px,4vw,30px); box-shadow: var(--shadow); border-top: 4px solid var(--baby); }
-  .ticker.move { border-top-color: var(--home); }
-  .ticker.move .wk { color: var(--home); }
-  .ticker .wk { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(38px,8vw,60px); line-height: 1; letter-spacing: -.02em; color: var(--baby); }
-  .ticker .meta { color: var(--ink-soft); font-size: 15px; margin-top: 8px; }
-  .bar { height: 12px; border-radius: 20px; background: var(--surface-2); margin-top: 18px; overflow: hidden; }
-  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--home), var(--baby)); border-radius: 20px; transition: width .6s cubic-bezier(.2,.7,.3,1); }
-  .barlabels { display: flex; justify-content: space-between; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-soft); margin-top: 7px; letter-spacing: .04em; }
-
-  .mile { list-style: none; margin: 0; padding: 0; }
-  .mile li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dotted var(--line); align-items: baseline; }
-  .mile li:last-child { border-bottom: none; }
-  .mile .when { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; color: var(--home); flex: none; width: 92px; }
-  .mile .what { font-size: 14.5px; }
-  .mile .what small { color: var(--ink-soft); display: block; font-size: 12.5px; }
-  .mile li.past { opacity: .5; } .mile li.past .when { color: var(--ink-soft); }
-  .mile li.now { background: var(--baby-soft); margin: 0 -12px; padding: 12px; border-radius: 10px; border-bottom: none; }
-  .mile li.now .when { color: var(--baby); }
-
-  .todos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-  .todos li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; padding: 9px 8px; border-radius: 9px; }
-  .todos li:hover { background: var(--surface-2); }
-  .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
-  .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
-
-  .saved { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  @media (max-width: 860px) { .saved { grid-template-columns: 1fr; } }
-  .savecol h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
-  .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); } .savecol.mid h4 { color: var(--baby); }
-  .savelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
-  .savelist li a:hover { border-color: var(--accent); }
-  .savelist .go { font-family: "IBM Plex Mono", monospace; color: var(--accent); }
-  .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; }
-
-  .pacer { border-top: 4px solid var(--home); }
   .pacehead { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
   .pacehave { font-size: 14px; color: var(--ink-soft); font-weight: 600; display: flex; align-items: center; gap: 9px; }
   .pacehave input { width: 118px; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 16px; border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; background: var(--surface-2); color: var(--ink); }
-  .paceleft { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(30px,6.5vw,46px); line-height: 1; letter-spacing: -.02em; color: var(--home); }
+  .paceleft { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(30px,6.5vw,44px); line-height: 1; letter-spacing: -.02em; color: var(--home); }
   .paceleft small { font-size: 14px; color: var(--ink-soft); font-family: "IBM Plex Sans", sans-serif; font-weight: 600; }
   .paceleft.warn { color: var(--car-ink); } .paceleft.over { color: var(--red); }
-  .pacelist { list-style: none; margin: 16px 0 0; padding: 0; }
-  .pacerow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dotted var(--line); }
-  .pacerow:last-child { border-bottom: none; }
+  .pbar { height: 10px; border-radius: 20px; background: var(--surface-2); margin-top: 16px; overflow: hidden; }
+  .pbar > span { display: block; height: 100%; border-radius: 20px; transition: width .5s ease; }
+  .pbarlabels { display: flex; justify-content: space-between; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-soft); margin-top: 7px; }
+  .pacelist { list-style: none; margin: 14px 0 0; padding: 0; }
+  .pacegroup { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; padding: 14px 0 4px; }
+  .pacerow { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
   .pacerow.off { opacity: .45; }
-  .pacetoggle { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 16px; text-align: center; user-select: none; }
+  .pacetoggle { flex: none; width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 18px; text-align: center; user-select: none; }
   .pacerow.on .pacetoggle { background: var(--accent); border-color: var(--accent); color: #fff; }
   .paceinfo { flex: 1; min-width: 0; }
   .paceinfo .pl { font-weight: 600; font-size: 14.5px; }
   .paceinfo .ps { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
   .paceamt { flex: none; display: flex; align-items: center; gap: 3px; }
   .paceamt > span { color: var(--ink-soft); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
-  .paceamt input { width: 84px; text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); }
-  .pacesum { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13.5px; }
+  .paceamt input { width: 86px; text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); }
+  .pacesum { display: flex; justify-content: space-between; margin-top: 14px; font-size: 13.5px; }
   .pacesum b { font-family: "IBM Plex Mono", monospace; }
-  .ct { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
-  .ct th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 1px solid var(--line); }
-  .ct td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  .ct td.amt { text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--baby); white-space: nowrap; }
-  .ct tr:last-child td { border-bottom: none; }
-  .ct tr.hl td { background: var(--baby-soft); font-weight: 600; }
+
+  .drip { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .drip td { padding: 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .drip tr:last-child td { border-bottom: none; }
+  .drip td:first-child { width: 52px; font-weight: 600; }
+  .drip td.amt { text-align: right; font-family: "IBM Plex Mono", monospace; font-weight: 600; white-space: nowrap; padding-left: 12px; }
+  .drip td small { display: block; color: var(--ink-soft); font-size: 12px; margin-top: 1px; }
+  .drip tr.past { opacity: .4; }
+  .drip tr.now td { background: var(--baby-soft); }
+  .drip tr.now td:first-child { border-radius: 10px 0 0 10px; padding-left: 10px; }
+  .drip tr.now td:last-child { border-radius: 0 10px 10px 0; padding-right: 10px; }
+  .dripsum { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .dripsum .v { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(28px,6vw,38px); color: var(--baby); line-height: 1; letter-spacing: -.02em; }
+  .dripsum .v small { font-size: 14px; color: var(--ink-soft); font-family: "IBM Plex Sans", sans-serif; font-weight: 600; }
+
+  .tgroup + .tgroup { margin-top: 26px; }
+  .tgroup-h { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 10px; }
+  .tgroup-h h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: 18px; margin: 0; display: flex; align-items: center; gap: 8px; }
+  .tgroup-h h3::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--gc, var(--accent)); }
+  .tgroup-h .cnt { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-soft); }
+  .tgroup.baby { --gc: var(--baby); } .tgroup.home { --gc: var(--home); } .tgroup.car { --gc: var(--car); }
+  .tgroup .ticklist .box { border-color: var(--gc); }
+  .tgroup [data-tick].done .box { background: var(--gc); border-color: var(--gc); }
+  .frontrunner { background: var(--home-soft); color: var(--home-ink); border-radius: 14px; padding: 13px 15px; font-size: 13.5px; margin: 14px 0; }
+  .frontrunner b { font-weight: 600; }
+
+  .timeline li.past { opacity: .4; }
+  .timeline li.next { background: var(--baby-soft); margin: 0 -12px; padding: 12px; border-radius: 12px; border-bottom: none; }
+  .timeline li.next .d { color: var(--baby); }
+  .timeline .tag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: var(--baby); color: #fff; border-radius: 20px; padding: 2px 7px; margin-left: 6px; vertical-align: 2px; }
+  .timeline .rtag { display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; color: var(--car-ink); background: var(--car-soft); border-radius: 20px; padding: 1px 7px; margin-left: 6px; vertical-align: 2px; }
+
+  .saved { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 860px) { .saved { grid-template-columns: 1fr; } }
+  .savecol h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; }
+  .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); } .savecol.furn h4 { color: var(--ink); }
+  .savelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; }
+  .savelist li a:hover { border-color: var(--accent); }
+  .savelist .go { font-family: "IBM Plex Mono", monospace; color: var(--accent); }
+  .emptysave { font-size: 13px; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 12px; padding: 14px; }
 </style>
 </head>
 <body>
@@ -96,245 +98,229 @@
 
 <div class="wrap">
   <nav class="subtabs" aria-label="Section"><a href="index.html">Overview</a><a href="tracker.html" aria-current="page">Money &amp; to-dos</a></nav>
+
   <header>
-    <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · live tracker</div>
-    <h1>Where <em>we're</em> at.</h1>
-    <p class="sub">Your pregnancy week by week, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with Babybean.</p>
+    <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · updated 3 Oct 2026</div>
+    <h1>Money &amp; <em>to-dos</em>.</h1>
+    <p class="sub">What's going out this month, the plan for paying the birth, and everything left to do. Ticks and numbers save on this phone.</p>
   </header>
 
-  <div class="sec"><h2>🍼 Baby, week by week</h2></div>
-  <div class="ticker">
-    <div class="wk" id="wk">Week —</div>
-    <div class="meta" id="meta">calculating…</div>
-    <div class="bar"><span id="barfill" style="width:0%"></span></div>
-    <div class="barlabels"><span>Week 0</span><span>Trimester 2</span><span>Due · 20 Feb 2027</span></div>
-  </div>
-
-  <div class="sec" id="money"><h2>💸 This month's cash pacer</h2>
-    <p>You've got R60k this month. Set each cost — including your rent <b>and Mom's rent</b> — tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the baby float. It all saves on your phone — change the numbers anytime.</p></div>
-  <div class="panel pacer">
+  <div class="sec" id="money"><h2>This month's money</h2>
+    <p>Untick anything you're not paying this month and change any number to the real one. What's left is your buffer.</p></div>
+  <div class="panel">
     <div class="pacehead">
       <label class="pacehave">You have <span style="font-family:'IBM Plex Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
       <div class="paceleft" id="pace-left">R—<small> left</small></div>
     </div>
-    <div class="bar"><span id="pace-bar" style="width:0%"></span></div>
-    <div class="barlabels"><span>Allocated <b id="pace-spent">R0</b></span><span id="pace-msg"></span></div>
+    <div class="pbar"><span id="pace-bar" style="width:0%"></span></div>
+    <div class="pbarlabels"><span>Going out <b id="pace-spent">R0</b></span><span id="pace-msg"></span></div>
     <ul class="pacelist" id="pacelist"></ul>
     <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
-    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'ask Lilo for her deposit amount', 'move R10k to the baby float this week'."></textarea></div>
-    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Now with <b>Lilo's real numbers</b> — the booking deposit is her confirmed R3,000, and "Genesis float" is money you set aside now toward the ~R45k due at week 36. Overwrite any number with your real one.</p>
   </div>
 
-  <div class="sec"><h2>📆 The birth-cost cadence — never a wall</h2>
-    <p>The whole point of starting now: <b>spread it</b> so no single month eats half your salary. Bank the flat number below every month and the birth is fully funded — Genesis takes instalments (confirmed in writing), so you never pay R45k in one hit.</p></div>
-  <div class="panel pacer" style="border-top-color:var(--baby)">
-    <div class="pacehead">
-      <div class="pacehave">The one habit → bank this every month, Sep&nbsp;→&nbsp;Jan</div>
-      <div class="paceleft" style="color:var(--baby)">R14,000<small> / month</small></div>
+  <div class="sec" id="drip"><h2>Paying for the birth, spread out</h2>
+    <p>Genesis takes the R45,000 float in instalments (confirmed in writing), so it never lands as one hit. Full cost breakdown is on the <a href="baby.html" style="color:var(--baby);font-weight:600">Baby page</a>.</p></div>
+  <div class="panel">
+    <div class="dripsum">
+      <div class="stat-k">Set aside every month, Sep to Jan</div>
+      <div class="v">R14,000<small> / month</small></div>
     </div>
-    <p style="margin:6px 0 0;font-size:13px;color:var(--ink-soft)">R9,000 straight to Genesis (× 5 = the R45k float) + R5,000 into a "birth pot" for Lilo, consults, gynae &amp; scans as they land. Do that and the biggest month you ever actually feel is ~R20k — not the R58k wall.</p>
-    <table class="ct" style="margin-top:16px">
-      <thead><tr><th>Month</th><th>What leaves your account</th><th style="text-align:right">Actual</th></tr></thead>
-      <tbody>
-        <tr><td><b>Sep</b></td><td>Genesis R9k + Lilo deposit R3k</td><td class="amt">~R12,000</td></tr>
-        <tr><td><b>Oct</b></td><td>Genesis R9k + sonar + 24w consult</td><td class="amt">~R11,450</td></tr>
-        <tr><td><b>Nov</b></td><td>Genesis R9k (pot builds)</td><td class="amt">~R9,000</td></tr>
-        <tr><td><b>Dec</b></td><td>Genesis R9k + booking + gynae + consults + ½ Lilo balance</td><td class="amt">~R20,100</td></tr>
-        <tr><td><b>Jan</b></td><td>Genesis R9k (final) + gynae + consults + ½ Lilo balance</td><td class="amt">~R18,700</td></tr>
-        <tr><td><b>Feb</b></td><td>3 consults · birth paid from the float</td><td class="amt" style="color:var(--good)">~R1,950</td></tr>
-      </tbody>
+    <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-soft)">R9,000 goes straight to Genesis (5 × R9k = the R45k float by week 36). R5,000 goes into a birth pot for Lilo's consults, her R8,000 balance, the gynae and scans.</p>
+    <table class="drip" id="driptable">
+      <tr data-m="2026-8"><td>Sep</td><td>Genesis R9k + Lilo deposit R3k</td><td class="amt">~R12,000</td></tr>
+      <tr data-m="2026-9"><td>Oct</td><td>Genesis R9k + anomaly scan + 24-week consult</td><td class="amt">~R11,450</td></tr>
+      <tr data-m="2026-10"><td>Nov</td><td>Genesis R9k <small>No appointments, the birth pot builds</small></td><td class="amt">~R9,000</td></tr>
+      <tr data-m="2026-11"><td>Dec</td><td>Genesis R9k + booking-in R2,200 + gynae + 2 consults + half of Lilo's balance</td><td class="amt">~R20,100</td></tr>
+      <tr data-m="2027-0"><td>Jan</td><td>Final Genesis R9k + gynae + bloods + 2 consults + rest of Lilo's balance</td><td class="amt">~R18,700</td></tr>
+      <tr data-m="2027-1"><td>Feb</td><td>3 consults <small>The birth is paid from the float. About R24,800 comes back within a week of a normal birth.</small></td><td class="amt">~R1,950</td></tr>
     </table>
-    <p style="margin:12px 0 0;font-size:13px;color:var(--ink-soft)"><b>Biggest single month ≈ R20k, not R60k.</b> And ~R24,800 of the R45k float refunds within a week of a normal birth — so the true net cost of the birth is ~R46,500. Full breakdown lives on the <a href="baby.html" style="color:var(--baby);font-weight:600">Baby page</a>.</p>
   </div>
 
-  <div class="sec" id="dates"><h2>🗓️ Milestones ahead</h2>
-    <p>The fixed dates that drive everything. Deadlines are Genesis's.</p></div>
-  <div class="panel">
-    <ul class="mile" id="mile"></ul>
-  </div>
+  <div class="sec" id="todo"><h2>To-do</h2>
+    <p>Tap to tick. Done items drop to the bottom.</p></div>
+  <div class="tgroup baby" data-group="baby"><div class="tgroup-h"><h3>Baby</h3><span class="cnt"></span></div><ul class="ticklist"></ul></div>
+  <div class="tgroup car" data-group="car"><div class="tgroup-h"><h3>Car</h3><span class="cnt"></span></div><ul class="ticklist"></ul></div>
 
-  <div class="sec" id="move"><h2>🏡 The move — countdown to November</h2>
-    <p>Ground floor, in and settled before the bump gets heavy. Here's the runway and the steps.</p></div>
-  <div class="ticker move">
-    <div class="wk" id="movewk">— days</div>
-    <div class="meta" id="movemeta">calculating…</div>
-    <div class="bar"><span id="movebar" style="width:0%"></span></div>
-    <div class="barlabels"><span>Now</span><span>Oct · deposit + apply</span><span>Move · November</span></div>
-  </div>
-  <div class="panel" style="margin-top:14px">
-    <ul class="todos">
-      <li data-tick="m-alerts"><span class="box"></span><span class="txt">Set Property24 + Private Property alerts <small>Ground-floor, 2-bed, modern secure estates — East &amp; North</small></span></li>
-      <li data-tick="m-shortlist"><span class="box"></span><span class="txt">Shortlist 4–5 places <small>♡ them on the Apartments board — they land in your saved picks above</small></span></li>
-      <li data-tick="m-viewings"><span class="box"></span><span class="txt">Book viewings <small>See them in person before applying</small></span></li>
-      <li data-tick="m-apply"><span class="box"></span><span class="txt">Apply for the one you want <small>ID, 3 months' payslips/bank statements ready</small></span></li>
-      <li data-tick="m-deposit"><span class="box"></span><span class="txt">Pay deposit + first month (~R22k) <small>The October peak — hold this cash back</small></span></li>
-      <li data-tick="m-movers"><span class="box"></span><span class="txt">Book movers / bakkie <small>Get 2 quotes early — November is busy season</small></span></li>
-      <li data-tick="m-utilities"><span class="box"></span><span class="txt">Sort utilities + address change <small>Prepaid meter, wifi transfer, update your addresses</small></span></li>
-      <li data-tick="m-dayone"><span class="box"></span><span class="txt">Day-one furniture only: bed + fridge + washer (~R16k) <small>Rest follows as specials land — Furniture board</small></span></li>
-      <li data-tick="m-move"><span class="box"></span><span class="txt">MOVE IN <small>Target: November, before week 30</small></span></li>
-    </ul>
-    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Move notes</button><textarea class="notebox" data-note-key="move-notes" placeholder="Jot anything — e.g. 'call agent about the Greenstone place', 'movers quote R3.5k', 'lease starts 1 Nov'."></textarea></div>
-  </div>
+  <div class="sec" id="move"><h2>The move</h2>
+    <p>Ground floor, in and settled before the bump gets heavy.</p></div>
+  <a class="stat home" href="apartments.html" style="margin-bottom:14px">
+    <div class="stat-k">Target · in by 1 November</div>
+    <div class="stat-v" id="mv">—</div>
+    <div class="stat-s" id="mvmeta">&nbsp;</div>
+    <div class="bar"><span id="mvbar"></span></div>
+    <span class="go">Places →</span>
+  </a>
+  <div class="frontrunner"><b>Front-runner (3 Oct):</b> Dowerglen, 62 Elm St · R14,000 · ground floor + garden, 3 beds, available 1 Nov. Dunsevern is the backup but has stairs. Details on <a href="apartments.html" style="color:inherit;font-weight:600">Places</a>.</div>
+  <div class="tgroup home" data-group="move"><div class="tgroup-h"><h3>Move steps</h3><span class="cnt"></span></div><ul class="ticklist"></ul></div>
 
-  <div class="sec" id="todo"><h2>✅ To-do — tap to tick off</h2>
-    <p>Ticks save on this device. Green when done.</p></div>
-  <div class="panel">
-    <ul class="todos">
-      <li data-tick="t-genesis"><span class="box"></span><span class="txt">Email Genesis to book <small>Done — they replied, booking this week</small></span></li>
-      <li data-tick="t-midwife"><span class="box"></span><span class="txt">Choose a midwife <small>✅ Done — going with Lilo (Tèn 'n Tèn), fees confirmed</small></span></li>
-      <li data-tick="t-lilodep"><span class="box"></span><span class="txt">Pay Lilo's R3,000 booking deposit <small>Secures your slot — first come first served. Do this next.</small></span></li>
-      <li data-tick="t-medaid"><span class="box"></span><span class="txt">Put baby on medical aid <small>Mandatory for cash payers before birth (emergency transfers)</small></span></li>
-      <li data-tick="t-doula"><span class="box"></span><span class="txt">Book a doula <small>Mandatory for first-time mums — ask Lilo for recommendations</small></span></li>
-      <li data-tick="t-antenatal"><span class="box"></span><span class="txt">Book Mishka's antenatal check-up</span></li>
-      <li data-tick="t-account"><span class="box"></span><span class="txt">Open the "baby float" savings account <small>For the R45k in January</small></span></li>
-      <li data-tick="t-scan"><span class="box"></span><span class="txt">Book the 20-week scan <small>Maryke · 071 154 0223</small></span></li>
-      <li data-tick="t-booking"><span class="box"></span><span class="txt">Genesis booking-in by week 32 (~Dec) — pay R2,200</span></li>
-      <li data-tick="t-deposit"><span class="box"></span><span class="txt">R45,000 deposit by week 36 (~Jan)</span></li>
-      <li data-tick="t-learners"><span class="box"></span><span class="txt">Book learner's licence <small>Your guy / NaTIS — unlocks the car</small></span></li>
-      <li data-tick="t-alerts"><span class="box"></span><span class="txt">Set Property24 alerts for modern estates</span></li>
-      <li data-tick="t-move"><span class="box"></span><span class="txt">Secure rental + move <small>By November</small></span></li>
-      <li data-tick="t-bank"><span class="box"></span><span class="txt">Bank ~R12k this month <small>The spine — funds everything</small></span></li>
-      <li data-tick="t-babykit"><span class="box"></span><span class="txt">Start the baby-kit shopping list <small>Tick items as you buy — Baby page</small></span></li>
-    </ul>
-  </div>
+  <div class="sec" id="dates"><h2>Every date to the birth</h2>
+    <p>Lilo's consults are Saturdays, the gynae is Tuesdays only. <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--car-ink);background:var(--car-soft);border-radius:20px;padding:1px 7px">R</span> marks a payment deadline.</p></div>
+  <div class="panel"><ul class="timeline" id="dateslist"></ul></div>
 
-  <div class="sec"><h2>❤️ Your saved picks</h2>
-    <p>Cars, flats and midwives you ❤️ across the site land here.</p></div>
+  <div class="sec" id="saved"><h2>Your saved picks</h2>
+    <p>Anything you ♡ on the Cars, Places or Furniture pages lands here (on this phone).</p></div>
   <div class="saved">
-    <div class="savecol car">
-      <h4>🚗 Cars</h4>
-      <ul class="savelist" id="savedcars"></ul>
-    </div>
-    <div class="savecol flat">
-      <h4>🏡 Flats</h4>
-      <ul class="savelist" id="savedflats"></ul>
-    </div>
-    <div class="savecol mid">
-      <h4>👩‍⚕️ Midwives</h4>
-      <ul class="savelist" id="savedmidwives"></ul>
-    </div>
+    <div class="savecol flat"><h4>Places</h4><ul class="savelist" id="savedflats"></ul></div>
+    <div class="savecol furn"><h4>Furniture</h4><ul class="savelist" id="savedfurn"></ul></div>
+    <div class="savecol car"><h4>Cars</h4><ul class="savelist" id="savedcars"></ul></div>
   </div>
 
-  <div class="foot">TRACKER · saves on this device · shared sync arrives with Babybean · The Nest</div>
+  <div class="foot">MONEY &amp; TO-DOS · ticks + numbers save on this phone · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
 <script>
 (function(){
-  // Pregnancy ticker — anchored to the confirmed EDD (20 Feb 2027).
-  // Dating confirmed at first consult: 16w2d on 7 Sep 2026. Self-corrects off the due date.
-  const EDD = new Date('2027-02-20T00:00:00');
-  const DUE = 40;
-  const now = new Date();
-  const daysToDue = Math.max(0, Math.ceil((EDD - now) / 86400000));
-  let week = DUE - Math.ceil(daysToDue / 7);
-  if (week < 0) week = 0; if (week > DUE) week = DUE;
-  const toGo = Math.max(0, DUE - week);
-  const tri = week < 13 ? 1 : week < 28 ? 2 : 3;
-  const triName = ['', 'First trimester', 'Second trimester', 'Third trimester'][tri];
-  document.getElementById('wk').textContent = 'Week ' + week;
-  document.getElementById('meta').textContent = triName + ' · ' + toGo + ' weeks to go · due 20 Feb 2027';
-  document.getElementById('barfill').style.width = Math.round(week / DUE * 100) + '%';
+  const DAY = 86400000, now = new Date();
+  const today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const fmt = n => (n < 0 ? '-R' : 'R') + Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dd = d => DOW[d.getDay()] + ' ' + d.getDate() + ' ' + MON[d.getMonth()];
 
-  // Move countdown — target: move-in by November 2026. Runway opens 1 Sep.
-  const MOVE = new Date('2026-11-01T00:00:00');
-  const MOVE_START = new Date('2026-09-01T00:00:00');
-  const daysToMove = Math.ceil((MOVE - now) / 86400000);
-  const mwk = document.getElementById('movewk');
-  const mmeta = document.getElementById('movemeta');
-  const mbar = document.getElementById('movebar');
-  if (daysToMove > 0) {
-    const weeksToMove = Math.floor(daysToMove / 7);
-    mwk.textContent = daysToMove + (daysToMove === 1 ? ' day' : ' days');
-    mmeta.textContent = weeksToMove + ' weeks to go · target move-in November 2026';
-  } else {
-    mwk.textContent = 'Moved 🎉';
-    mmeta.textContent = 'Ground floor, done — before it got heavy';
+  // ===== Drip table: fade past months, highlight this one
+  const curKey = now.getFullYear() + '-' + now.getMonth();
+  let seenNow = false;
+  document.querySelectorAll('#driptable tr').forEach(tr => {
+    if (tr.dataset.m === curKey) { tr.classList.add('now'); seenNow = true; }
+    else if (!seenNow) tr.classList.add('past');
+  });
+
+  // ===== To-dos (IDs kept from before, so existing ticks carry over)
+  const TODOS = {
+    baby: [
+      ['t-scan', '20/21-week anomaly scan', 'Sat 3 Oct · Maryke Killian 071 154 0223'],
+      ['t-lilodep', 'Pay Lilo\'s R3,000 booking deposit', 'Locks your birth slot. Comes off her R11k fee.'],
+      ['t-gynae', 'Confirm Dr Dlakavu with Lilo, then book both gynae visits', 'Tue 1 Dec (28 wk) and Tue 26 Jan (36 wk) · R3,300 each'],
+      ['t-boxing', 'Move the 32-week consult off Boxing Day', 'Sat 26 Dec. Ask Lilo for the Saturday before or after.'],
+      ['t-medaid', 'Pick the baby\'s medical aid plan', 'Must be in place before the birth (cash payers, for emergency transfers)'],
+      ['t-doula', 'Decide on a doula', 'About R6k. Genesis lists one as required for first-time mums. Ask Lilo who she rates.'],
+      ['t-account', 'Open the birth savings account', 'Where the R14k a month goes'],
+      ['t-booking', 'Genesis booking-in + R2,200', 'By week 32 (26 Dec)'],
+      ['t-lilobal', 'Pay Lilo\'s R8,000 balance', 'By week 36 (23 Jan)'],
+      ['t-deposit', 'Genesis R45,000 float fully paid', 'By week 36 (23 Jan) · paid via the R9k instalments'],
+      ['t-babykit', 'Baby kit shopping', 'Checklist on the Baby page'],
+      ['t-midwife', 'Choose a midwife', 'Sr Lilo Mthembu, fees confirmed'],
+      ['t-genesis', 'Book Genesis', 'Confirmed open, fees + instalments in writing']
+    ],
+    car: [
+      ['t-learners', 'Book your learner\'s licence', 'Unlocks the car. Shortlist + finance maths on the Car page.']
+    ],
+    move: [
+      ['m-shortlist', 'Shortlist the places', 'Done-ish: Dowerglen leads, Dunsevern is backup'],
+      ['m-viewings', 'View the front-runners in person', 'Check the floor, the garden and the walk to the gate'],
+      ['m-apply', 'Apply for the one you want', 'ID + 3 months of payslips and bank statements ready'],
+      ['m-deposit', 'Pay deposit + first month', '~R28,000 for a R14k place (usually 2× rent)'],
+      ['m-movers', 'Book movers or a bakkie', 'Get 2 quotes early, November is busy'],
+      ['m-dayone', 'Buy the day-one furniture', 'Bed, mattress, fridge, washer ≈ R21.5k · see Decided'],
+      ['m-utilities', 'Sort utilities + address change', 'Prepaid meter, wifi transfer, update your addresses'],
+      ['m-move', 'Move in', 'Target 1 November']
+    ]
+  };
+  function renderGroup(g) {
+    const box = document.querySelector(`[data-group="${g}"]`);
+    const list = box.querySelector('.ticklist'), items = TODOS[g];
+    const open = items.filter(t => !NEST.isTicked(t[0])), done = items.filter(t => NEST.isTicked(t[0]));
+    box.querySelector('.cnt').textContent = done.length + ' of ' + items.length + ' done';
+    list.innerHTML = open.concat(done).map(t =>
+      `<li data-tick="${t[0]}"><span class="box"></span><span class="txt">${t[1]}<small>${t[2]}</small></span></li>`).join('');
+    NEST.wire(list);
+    list.querySelectorAll('[data-tick]').forEach(li => li.addEventListener('click', () => setTimeout(() => renderGroup(g), 600)));
   }
-  const moveSpan = MOVE - MOVE_START;
-  const movePct = Math.max(0, Math.min(100, Math.round((now - MOVE_START) / moveSpan * 100)));
-  mbar.style.width = movePct + '%';
+  Object.keys(TODOS).forEach(renderGroup);
 
-  // Milestones
-  const M = [
-    { wk: 16, when: 'Now · wk 16', what: 'Pay Lilo R3,000 to lock your slot', sub: 'Midwife chosen ✅ — deposit is first come first served' },
-    { wk: 20, when: '~3 Oct · wk 20', what: 'The 20/21-week anomaly sonar', sub: 'The big one — book with the sonographer' },
-    { wk: 30, when: 'November', what: 'Move into the new place', sub: 'Ground floor, before it gets heavy' },
-    { wk: 32, when: '~Dec · wk 32', what: 'Genesis booking-in + R2,200', sub: 'Must be done by wk 32' },
-    { wk: 36, when: '~Jan · wk 36', what: '~R45,000 Genesis float due', sub: 'Refundable — for a normal birth ~R24,800 comes back within a week' },
-    { wk: 40, when: '20 Feb', what: 'Baby 🎉', sub: '' }
+  // ===== Move countdown
+  const MOVE = new Date('2026-11-01T00:00:00'), MSTART = new Date('2026-09-01T00:00:00');
+  const dMove = Math.ceil((MOVE - now) / DAY);
+  document.getElementById('mv').innerHTML = dMove > 0 ? dMove + '<small>' + (dMove === 1 ? 'day' : 'days') + ' to go</small>' : 'Moved';
+  document.getElementById('mvmeta').textContent = dMove > 0 ? Math.floor(dMove / 7) + ' weeks to view, sign, pay and move' : 'In before it got heavy';
+  document.getElementById('mvbar').style.width = Math.max(0, Math.min(100, (now - MSTART) / (MOVE - MSTART) * 100)) + '%';
+
+  // ===== Every date (from Lilo's schedule off the 20 Feb due date)
+  const DATES = [
+    ['2026-10-03', '20/21-week anomaly scan', 'Sonographer · book separately'],
+    ['2026-10-31', '24-week consult · Lilo', 'R650'],
+    ['2026-11-01', 'Move-in target', 'Ground floor, before it gets heavy'],
+    ['2026-12-01', '28-week gynae + glucose test', 'Tuesday · R3,300'],
+    ['2026-12-12', '30-week consult · Lilo', 'R650'],
+    ['2026-12-26', '32-week consult · Lilo + Genesis booking-in', 'Boxing Day, shift the consult · R2,200 booking due', 1],
+    ['2027-01-09', '34-week consult · Lilo', 'R650'],
+    ['2027-01-23', 'Week 36 deadline', 'Genesis float done + Lilo\'s R8,000 balance', 1],
+    ['2027-01-26', '36-week gynae + repeat bloods', 'Tuesday · R3,300'],
+    ['2027-01-30', '37-week Strep B test · Lilo', ''],
+    ['2027-02-06', '38-week consult · Lilo', 'R650'],
+    ['2027-02-13', '39-week consult · Lilo', 'R650'],
+    ['2027-02-20', 'Due date 🎉', 'Lilo checks every 2nd day after this']
   ];
-  const ml = document.getElementById('mile');
-  ml.innerHTML = M.map(m => {
-    const cls = week >= m.wk + 1 ? 'past' : (week >= m.wk - 1 && week <= m.wk + 1) ? 'now' : '';
-    return `<li class="${cls}"><span class="when">${m.when}</span><span class="what">${m.what}${m.sub ? `<small>${m.sub}</small>` : ''}</span></li>`;
+  let nextMarked = false;
+  document.getElementById('dateslist').innerHTML = DATES.map(d => {
+    const day = new Date(d[0] + 'T00:00:00');
+    let cls = day < today0 ? 'past' : '';
+    let tag = '';
+    if (!cls && !nextMarked) { cls = 'next'; nextMarked = true; tag = `<span class="tag">${+day === +today0 ? 'Today' : 'Next'}</span>`; }
+    const rtag = d[3] ? '<span class="rtag">R</span>' : '';
+    return `<li class="${cls}"><span class="d">${dd(day)}</span><span class="w">${d[1]}${rtag}${tag}${d[2] ? `<small>${d[2]}</small>` : ''}</span></li>`;
   }).join('');
 
-  // Saved picks
+  // ===== Saved picks
   function render(kind, elId, empty) {
-    const items = window.NEST.saves(kind);
-    const el = document.getElementById(elId);
-    if (!items.length) { el.innerHTML = `<div class="emptysave">${empty}</div>`; return; }
+    const items = NEST.saves(kind), el = document.getElementById(elId);
+    if (!items.length) { el.innerHTML = `<li class="emptysave">${empty}</li>`; return; }
     el.innerHTML = items.map(x => `<li><a href="${x.url || '#'}" target="_blank" rel="noopener noreferrer"><span>${x.label}</span><span class="go">↗</span></a></li>`).join('');
   }
-  render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
-  render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
-  render('midwife', 'savedmidwives', 'No midwives shortlisted yet — tap ♡ on the Baby page.');
-})();
+  render('flat', 'savedflats', 'Nothing saved yet. Tap ♡ Save on Places.');
+  render('furniture', 'savedfurn', 'Nothing saved yet. Tap ♡ Save on Furniture.');
+  render('car', 'savedcars', 'Nothing saved yet. Tap ♡ Save on the Car page.');
 
-// ===== Cash pacer =====
-(function(){
+  // ===== Cash pacer (row keys kept, so saved numbers carry over)
   const KEY = 'nest_pacer';
   const PACE = [
-    { k:'rent',        label:'Our rent',             sub:'This month — your place / the new one (target R13–15k)', amt:14000 },
-    { k:'mom_rent',    label:"Mom's rent",           sub:'You cover this — ~R7–9k for a 1-bed near us',             amt:8000 },
-    { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
-    { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
-    { k:'midwife_dep', label:'Lilo booking deposit', sub:'R3,000 — secures your slot (first come first served). Comes off the birth fee. PAY THIS NEXT.', amt:3000 },
-    { k:'genesis_dep', label:'Genesis instalment', sub:'R9,000/mo × 5 (Sep→Jan) = the R45k float, paid off by wk 36. Genesis confirmed instalments in writing — no lump sum needed.', amt:9000 }
+    { g: 'Every month' },
+    { k: 'rent', label: 'Our rent', sub: 'Dowerglen front-runner is R14,000. Change to your real number.', amt: 14000 },
+    { k: 'mom_rent', label: "Mom's rent", sub: 'You cover this', amt: 8000 },
+    { k: 'groceries', label: 'Groceries', sub: 'The two of you', amt: 4000 },
+    { k: 'electricity', label: 'Electricity + water', sub: 'Prepaid + utilities', amt: 1500 },
+    { k: 'genesis_dep', label: 'Genesis instalment', sub: 'R9,000 × 5 (Sep to Jan) = the R45k float by week 36', amt: 9000 },
+    { k: 'birth_pot', label: 'Birth pot', sub: "Lilo's consults + balance, gynae, scans", amt: 5000 },
+    { g: 'Once-off · tick in the month it happens' },
+    { k: 'flat_once', label: 'Flat deposit + first month', sub: 'Usually 2× rent', amt: 28000, on: false },
+    { k: 'furniture_once', label: 'Day-one furniture', sub: 'Bed, mattress, fridge, washer ≈ R21.5k', amt: 21500, on: false }
   ];
-  const saved = window.NEST._get(KEY, {});
+  const ROWS = PACE.filter(p => p.k);
+  const saved = NEST._get(KEY, {});
   let have = (saved.have != null) ? saved.have : 60000;
   const rs = saved.rows || {};
-  PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = (s.amt != null) ? s.amt : p.amt; });
-  function persist(){ window.NEST._set(KEY, { have: have, rows: Object.fromEntries(PACE.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }])) }); }
-  function fmt(n){ const s = Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); return (n < 0 ? '-R' : 'R') + s; }
+  ROWS.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : (p.on !== false); p.amt = (s.amt != null) ? s.amt : p.amt; });
+  function persist() { NEST._set(KEY, { have, rows: Object.assign({}, rs, Object.fromEntries(ROWS.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }]))) }); }
 
   const list = document.getElementById('pacelist');
-  list.innerHTML = PACE.map((p, i) => `
-    <li class="pacerow ${p.on ? 'on' : 'off'}" data-i="${i}">
-      <span class="pacetoggle" role="button" tabindex="0" aria-label="Toggle ${p.label}">✓</span>
+  list.innerHTML = PACE.map(p => p.g ? `<li class="pacegroup">${p.g}</li>` : `
+    <li class="pacerow ${p.on ? 'on' : 'off'}" data-k="${p.k}">
+      <span class="pacetoggle" role="button" tabindex="0" aria-label="Include ${p.label}">✓</span>
       <span class="paceinfo"><span class="pl">${p.label}</span><span class="ps">${p.sub}</span></span>
-      <span class="paceamt"><span>R</span><input type="number" inputmode="numeric" step="100" min="0" value="${p.amt}"></span>
+      <span class="paceamt"><span>R</span><input type="number" inputmode="numeric" step="100" min="0" value="${p.amt}" aria-label="${p.label} amount"></span>
     </li>`).join('');
-
   const haveInput = document.getElementById('pace-have');
   haveInput.value = have;
   haveInput.addEventListener('input', () => { have = +haveInput.value || 0; recalc(); persist(); });
-
   list.querySelectorAll('.pacerow').forEach(row => {
-    const i = +row.dataset.i;
+    const p = ROWS.find(r => r.k === row.dataset.k);
+    const flip = () => { p.on = !p.on; row.classList.toggle('on', p.on); row.classList.toggle('off', !p.on); recalc(); persist(); };
     const tog = row.querySelector('.pacetoggle');
-    const inp = row.querySelector('.paceamt input');
-    const flip = () => { PACE[i].on = !PACE[i].on; row.classList.toggle('on', PACE[i].on); row.classList.toggle('off', !PACE[i].on); recalc(); persist(); };
     tog.addEventListener('click', flip);
     tog.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
-    inp.addEventListener('input', () => { PACE[i].amt = +inp.value || 0; recalc(); persist(); });
+    row.querySelector('input').addEventListener('input', e => { p.amt = +e.target.value || 0; recalc(); persist(); });
   });
-
-  function recalc(){
-    const alloc = PACE.filter(p => p.on).reduce((s, p) => s + (+p.amt || 0), 0);
-    const left = have - alloc;
+  function recalc() {
+    const alloc = ROWS.filter(p => p.on).reduce((s, p) => s + (+p.amt || 0), 0), left = have - alloc;
     const leftEl = document.getElementById('pace-left');
     leftEl.innerHTML = fmt(left) + '<small> left</small>';
     leftEl.className = 'paceleft ' + (left < 0 ? 'over' : left < 5000 ? 'warn' : '');
     document.getElementById('pace-alloc').textContent = fmt(alloc);
     document.getElementById('pace-spent').textContent = fmt(alloc);
-    const pct = have > 0 ? Math.min(100, Math.round(alloc / have * 100)) : 0;
     const bar = document.getElementById('pace-bar');
-    bar.style.width = pct + '%';
-    bar.style.background = left < 0 ? 'var(--red)' : (left < 5000 ? 'var(--car-ink)' : 'linear-gradient(90deg, var(--home), var(--baby))');
-    document.getElementById('pace-msg').textContent = left < 0 ? ('Over by ' + fmt(-left)) : (left < 5000 ? 'Cutting it fine' : 'On track');
+    bar.style.width = (have > 0 ? Math.min(100, alloc / have * 100) : 0) + '%';
+    bar.style.background = left < 0 ? 'var(--red)' : left < 5000 ? 'var(--car-ink)' : 'var(--home)';
+    document.getElementById('pace-msg').textContent = left < 0 ? 'Over by ' + fmt(-left) : left < 5000 ? 'Cutting it fine' : 'On track';
   }
   recalc();
 })();
