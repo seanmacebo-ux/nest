@@ -49,16 +49,29 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Your agreed furniture · just the stuff you've chosen</div>
     <h1>Your <em>furniture</em>.</h1>
-    <p class="sub">The furniture you've locked in — bed, mattress, coffee table, TV, fridge, washer. Tap any card to open the listing. The couch is off the board for now — send me one you actually like and I'll drop it straight in. Total below.</p>
+    <p class="sub">The furniture you've locked in — bed, mattress, coffee table, TV, fridge, washer. Tap any card to open the listing. For the couch, a live-verified U-shape shortlist is just below. Total below.</p>
   </header>
 
   <div class="grid two" id="grid"></div>
 
+  <div class="note" style="border-left:3px solid var(--car);margin-top:24px" id="couch">
+    <h4>🛋️ Couch — U-shape shortlist (live-verified 3 Oct)</h4>
+    <p style="margin:0 0 8px">You want a U-shape, 4+ seater. I opened each product page to confirm — prices are real, but ⚠️ <b>that board favourite (That Couch Place U-shape, R7,490) is now SOLD OUT.</b> The live options in your R7–10k window are all from <b>Ottoman HD</b> (ottomanhd.co.za), a real SA made-to-order maker:</p>
+    <table class="lt"><thead><tr><th>Couch</th><th>Price</th><th>Note</th></tr></thead><tbody>
+      <tr class="best"><td class="y">Jethro</td><td class="p">R6,999</td><td class="lo">Cheapest. Solid wood frame. ⚠️ Page titles it <b>L-shape</b> — confirm it's a true U first. +R1,000 for velvet.</td></tr>
+      <tr><td class="y">Valentina U-Shape</td><td class="p">R8,999</td><td class="lo">Was R10,999. Proper U, 5/5 rated.</td></tr>
+      <tr><td class="y">Osiris U-Shape</td><td class="p">R8,999</td><td class="lo">Was R10,999. Proper U.</td></tr>
+      <tr><td class="y">The Halo Modular</td><td class="p">R9,499</td><td class="lo">Modular U, rearrangeable.</td></tr>
+      <tr><td class="y">Milano U-Shape</td><td class="p">R9,999</td><td class="lo">Was R13,999. Biggest of the set.</td></tr>
+    </tbody></table>
+    <p style="margin-top:10px;font-size:12px;color:var(--ink-soft)"><b>Honest caveats (all of them):</b> made-to-order, 7–14 day lead time, only a 1-year warranty, and dimensions aren't published online — WhatsApp Ottoman HD (060 568 0352) to confirm it fits the lounge before buying. <b>Out of budget, ruled out:</b> Coricraft U-shapes from ~R25k, Leather Gallery R46k+. <b>Not yet confirmed:</b> I still need to verify the Jethro is a true U + get dimensions on the top 2.</p>
+  </div>
+
   <div class="totalcard">
     <div>
       <div class="tn">Your furniture total</div>
-      <div class="tp">R26,994</div>
-      <div class="tsub">6 items · couch still to choose · one-off buys</div>
+      <div class="tp">~R29,094</div>
+      <div class="tsub">6 items · mattress upgraded to Sealy Turnberry (price pending Dial-a-Bed) · couch still to choose</div>
     </div>
     <div style="text-align:right">
       <div class="tsub" style="max-width:250px">*Coffee-table price to confirm at Makro (their site blocks the price-checker). One to check before you pay: the <b>Timeless frame is on waitlist</b> (sold out right now).</div>
@@ -72,7 +85,7 @@
 <script>
 const ITEMS=[
  {icon:"🛏️",cat:"Bed frame",name:"Timeless Bed Frame (Queen, grey)",price:"R3,199",store:"MFA Online",desc:"Grey frame with 2 big storage drawers, Queen. ✅ In stock (confirmed).",url:"https://mfaonline.co.za/shop/bedroom/bedroom-furniture/bedroom-suites/timeless-bed-frame/"},
- {icon:"🌙",cat:"Mattress",name:"Sealy Posture Premier Wellford Medium (Queen)",price:"R3,999",store:"The Mattress Warehouse",desc:"Sealy mattress-only, MEDIUM feel — made for back + side sleepers (right for Mishka), cooling comfort layer, 9-yr warranty. ✅ In stock, nationwide delivery. 33% off R5,999 — R1,500 cheaper than the firm Victoria it replaces, better brand, better feel.",url:"https://www.themattresswarehouse.co.za/product/sealy-posture-premier-wellford-medium-mattress/"},
+ {icon:"🌙",cat:"Mattress",name:"Sealy Turnberry Posturepedic Medium (Queen)",price:"~R6,099",store:"Dial-a-Bed",desc:"Sealy mattress-only, MEDIUM feel. ⏳ Upgraded 3 Oct from the Wellford — that one was rated only 100kg (no room for Sean at 95kg). Turnberry is rated 125kg per side, built for couples with different comfort needs (fixes the 95/55kg mismatch), gel memory foam + zoned + edge support. Price pending a confirmation call to Dial-a-Bed (listed ~R6,099, down from R8,799 — confirming Queen price + coil type before we lock).",url:"https://www.dialabed.co.za/sealy-turnberry-posturepedic-medium-mattress-only"},
  {icon:"☕",cat:"Coffee table",name:"Golden Star Africa Engineered-Wood Rectangle",price:"R1,299",store:"Makro",desc:"Engineered-wood rectangle, clean modern lines. 120×60×37cm, storage drawers + cabinet. ✅ In stock, price confirmed (56% off R2,999). ⚠️ DIY (self-assembly), online-only.",url:"https://www.makro.co.za/golden-star-africa-engineered-wood-rectangle-coffee-table/p/itm128b9b7f2776b"},
  {icon:"📺",cat:"TV",name:"Skyworth 55\" QLED 120Hz Google TV",price:"R6,299",store:"Amazon.co.za",desc:"4K QLED, 120Hz, Google TV + Dolby Audio. The one you found. ✅ In stock, sold by Amazon — price dropped R6,499 → R6,299.",url:"https://www.amazon.co.za/dp/B0H1ML13SH"},
  {icon:"❄️",cat:"Fridge",name:"Defy 323L DAC627 Combi (Satin Metallic)",price:"R6,499",store:"Takealot",desc:"Bottom-freezer combi, 323L, water dispenser, A+. Same Defy repair-network logic as the washer. ✅ Confirmed in stock — Takealot's Joburg warehouse (I checked the live page). Replaces the Hisense, which went out of stock.",url:"https://www.takealot.com/defy-323l-bottom-mount-freezer-fridge-wd-dac627-satin-metallic/PLID54966398"},
