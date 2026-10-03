@@ -190,6 +190,19 @@ header details.fold .fb .callout { margin: 0; max-width: none; }
 .steps tr:last-child td { border-bottom: none; }
 .steps td:first-child { width: 30%; padding-right: 12px; font-weight: 600; white-space: nowrap; }
 
+/* tappable shortlist cards (e.g. couches) */
+.picklist { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.picklist a { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; transition: border-color .15s ease; }
+.picklist a:hover { border-color: var(--car); }
+.picklist li.top a { border-color: color-mix(in srgb, var(--star) 60%, var(--line)); background: color-mix(in srgb, var(--star) 7%, var(--surface)); }
+.pk-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.pk-n { font-weight: 600; font-size: 14.5px; }
+.pk-p { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14.5px; color: var(--car-ink); white-space: nowrap; }
+.pk-s { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; }
+.pk-t { display: inline-block; margin-top: 7px; font-size: 11px; font-weight: 600; border-radius: 20px; padding: 2px 9px; }
+.pk-t.ok { background: var(--good-soft); color: var(--good); } .pk-t.chk { background: var(--amber-soft); color: var(--amber); } .pk-t.no { background: var(--red-soft); color: var(--red); }
+.pickhead { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); margin: 18px 0 0; }
+
 /* ===== Today dashboard ===== */
 .dash-head h1 { font-size: clamp(30px,6vw,46px); }
 .dash-head .sub { margin-top: 6px; }
