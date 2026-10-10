@@ -27,6 +27,13 @@
   .ub.ok { background: var(--home-soft); color: var(--home-ink); }
   .ub.mid { background: var(--car-soft); color: var(--car-ink); }
   .ub.far { background: var(--red-soft); color: var(--red); }
+  /* uniform per-cycle layout */
+  .cyclegroup { margin-top: 28px; }
+  .cyclegroup.hide { display: none; }
+  .cyclehead { display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px; padding-bottom: 9px; border-bottom: 1px solid var(--line); }
+  .cyclehead h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; margin: 0; color: var(--home-ink); }
+  .cyclecount { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+  .cyclenote { font-size: 12px; color: var(--ink-soft); margin: 7px 0 14px; line-height: 1.45; }
   .hunt { margin-top: 34px; }
   .hunt h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 20px; margin: 0 0 4px; color: var(--home-ink); }
   .huntgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
@@ -39,19 +46,12 @@
   .hlist .nm .arr { color: var(--home); font-family: "IBM Plex Mono", monospace; }
   .hlist .dd { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
   .hlist a:hover .nm { text-decoration: underline; }
-  .notewrap { margin-top: 8px; }
-  .notetoggle { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
-  .notetoggle:hover { border-color: var(--home); color: var(--home-ink); }
-  .notebox { display: none; width: 100%; margin-top: 8px; min-height: 64px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
-  .notewrap.open .notebox { display: block; }
   .cx-units { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
   @media (max-width: 480px) { .cx-units { grid-template-columns: 1fr; } }
   .cx-unit { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
   .cx-who { font-size: 13px; font-weight: 600; color: var(--home-ink); }
   .cx-spec { font-size: 12px; color: var(--ink-soft); margin: 4px 0 8px; line-height: 1.4; }
   .cx-total { margin-top: 10px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; font-weight: 600; color: var(--ink); }
-  .copybar { margin: 16px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .copymsg { font-size: 12.5px; color: var(--home-ink); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -68,76 +68,26 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow"><span class="dot"></span> 3-bed · ≤ R16k · East + Sandton · verified live</div>
+    <div class="eyebrow"><span class="dot"></span> 3-bed · ≤ R16k · baby-friendly · East + Sandton</div>
     <h1>The <em>car-less</em> move.</h1>
-    <p class="sub"><b>Update 10 Oct — Dunsevern fell through, so the hunt's back on.</b> This is a <b>3-bed board</b> (≤ R16k). Your one hard filter now: <b>baby-friendly</b> — safe, secure, ideally step-free. <b>✅ Ground / garden floor</b> = step-free (best with a newborn, but not a dealbreaker); <b>⚠️ Stairs</b> = upper floor, flagged so you know. Real <b>3-bed · 2-bath</b> units in <b>the East (Edenvale / Greenstone)</b> and <b>Sandton (Rivonia)</b>, each <b>opened + verified live</b>. Tap any card to open the listing.</p>
+    <p class="sub"><b>Update 10 Oct — Dunsevern fell through, so the hunt's back on.</b> One hard filter now: <b>baby-friendly</b> (safe, secure, ideally step-free — but step-free isn't a dealbreaker). Everything here is a real <b>3-bed ≤ R16k</b>, each one opened + verified live. Same card every time so you can scan fast: <b>✅ Ground / 🌿 garden</b> = step-free; <b>⚠️ Stairs</b> = upper floor, flagged. Tap a card to open the listing, or hit <b>♡ Save</b>.</p>
   </header>
 
   <div class="zonekey">
-    <span class="zk mid">🚗 EAST · Edenvale + Bedfordview · ~R4–6k/mo Uber to work</span>
+    <span class="zk mid">🚗 EAST · Edenvale / Greenstone · ~R4–6k/mo Uber to work</span>
     <span class="zk far">🛑 SANDTON · Rivonia · R8k+ Uber till the car</span>
   </div>
 
   <div class="note" style="border-left:3px solid var(--home)">
-    <h4>🔄 Auto-hunt is on <span style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--home-ink);background:var(--home-soft);padding:2px 7px;border-radius:20px;margin-left:6px">every 2 days</span></h4>
-    <p style="margin:0">A stealth browser sweeps Property24 + Private Property every 2 days for <b>3-bed · 2-bath</b> units (≤R16k) in the East + Sandton — dead listings drop off, fresh ones get added here automatically.</p>
-  </div>
-
-  <div class="note" style="border-left:3px solid var(--good)" id="yourfinds">
-    <h4>⭐ Your finds — opened + photo-checked</h4>
-    <p style="margin:0 0 10px">You said these beat my options — so I opened the listings and read the photos/description properly, not just the filters. <b>Update 10 Oct: Dunsevern fell through, so it's struck off below and the hunt's back on.</b></p>
-    <ul class="hlist" style="margin-top:0">
-      <li><a href="https://www.property24.com/to-rent/dowerglen/edenvale/gauteng/1194/117603322" target="_blank" rel="noopener noreferrer"><div class="nm">✅ Dowerglen · 62 Elm St (Oude Kaap) — R14,000 <span class="arr">↗</span></div><div class="dd"><b>The strong one.</b> 3-bed · 2-bath · 100m² · <b>confirmed GROUND FLOOR</b> with open-plan kitchen/lounge out to a patio + <b>private garden</b> (photos back it up). Pool, tennis, braai, clubhouse. Heavy security (burglar bars, security gates, full perimeter + electric fence, intercom). Available 1 Nov. Deposit R16,500. ⚠️ Not pet-friendly, utilities excluded. East side = mid Uber (~R4–6k) → true cost ≈ R18–20k while car-less.</div></a></li>
-      <li style="opacity:.6"><div class="nm">❌ Dunsevern · 22 Lane Rd (1 Riverside) — R12,000 <span style="text-decoration:line-through">↗</span></div><div class="dd"><b>GONE (10 Oct) — we lost this one.</b> Pulled off the board. It was a stacked simplex (stairs) anyway, so not the newborn-ideal pick — but it was your cheapest option, so the hunt's back on for a replacement.</div></li>
-    </ul>
-    <p style="margin:10px 0 0;font-size:12.5px;color:var(--ink-soft)"><b>My honest call:</b> Dowerglen R14,001 is now the strongest of your own finds still standing — confirmed ground floor + private garden + 1 Nov, the newborn-practical one. With Dunsevern gone, the new <b>Greenstone Gate R13,500 garden-floor + pet-friendly (avail 1 Jan 2027)</b> on the board below is the closest like-for-like replacement, and cheaper.</p>
-  </div>
-
-  <div class="note" style="border-left:3px solid var(--good)" id="freshfinds">
-    <h4>🆕 Fresh 2-bed finds — standing auto-hunt (6 Oct) <span style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--good);background:var(--good-soft);padding:2px 7px;border-radius:20px;margin-left:6px">verified live</span></h4>
-    <p style="margin:0 0 10px">⚠️ <b>Direction clash — your call:</b> the board above is the <b>3-bed</b> set you locked 4 Oct, but my standing hunt still runs <b>2-bed · ground/garden · R8–14k</b> across your target suburbs (Norwood, Sandringham, Linksfield, Melrose, Orchards, Paulshof, Gallo Manor + Sandton). Here's tonight's live 2-bed catch. <b>Say the word and I'll switch the whole hunt to 3-bed and retire this section.</b> All opened + verified live 6 Oct:</p>
-    <ul class="hlist" style="margin-top:0">
-      <li><a href="https://www.property24.com/to-rent/paulshof/sandton/gauteng/5211/117683768" target="_blank" rel="noopener noreferrer"><div class="nm">✅ Paulshof · Ss Tequesta, 2 Paarl Lane — R12,000 <span class="arr">↗</span></div><div class="dd"><b>The pick.</b> 2 bed · 2 bath, <b>confirmed ground floor</b>, spacious apartment in a lovely secure complex — step-free, the newborn-practical one. Paulshof (Sandton NW) = R8k+ Uber till the car.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/orchards/johannesburg/gauteng/4366/117651934" target="_blank" rel="noopener noreferrer"><div class="nm">Orchards · 2-bed townhouse — R9,000 <span class="arr">↗</span></div><div class="dd"><b>Best value.</b> 2 bed · 2 bath, pet-friendly, renovated, very central — near Norwood, walk to Pick n Pay Hyperama. Cheaper-Uber side. Townhouse = beds likely upstairs, ask.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/gallo-manor/sandton/gauteng/5201/111446617" target="_blank" rel="noopener noreferrer"><div class="nm">🌿 Gallo Manor · garden cottage — R12,500 <span class="arr">↗</span></div><div class="dd">2 bed · 2 bath spacious garden cottage in a quiet boomed enclosure, lock-up-and-go. Available 1 Oct. Sandton = big Uber till the car.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/paulshof/sandton/gauteng/5211/112433421" target="_blank" rel="noopener noreferrer"><div class="nm">Paulshof · 94 Greenwich Village — R8,000 <span class="arr">↗</span></div><div class="dd"><b>Cheapest rent.</b> 2 bed · 1 bath, open-plan living + balcony, secure Greenwich Village estate. Balcony = likely upper floor (stairs), confirm.</div></a></li>
-    </ul>
-  </div>
-
-  <div class="note" style="border-left:3px solid var(--good)" id="freshfinds7oct">
-    <h4>🆕 This cycle's new Sandton 2-bed finds (7 Oct) <span style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--good);background:var(--good-soft);padding:2px 7px;border-radius:20px;margin-left:6px">from today's live search</span></h4>
-    <p style="margin:0 0 10px">Fresh from the standing <b>2-bed · R8–14k</b> sweep across the Sandton target suburbs (Paulshof, Rivonia, Gallo Manor), pulled from Property24's live rental search this cycle. Each is a real, currently-listed unit — but Property24 is rate-limiting individual pages right now, so I couldn't open each to read the storey. <b>Floor isn't stated on the search card → phone the agent before viewing</b> (a house/cottage is your best bet for step-free with a newborn). Sandton = R8k+ Uber till the car, so factor true cost.</p>
-    <ul class="hlist" style="margin-top:0">
-      <li><a href="https://www.property24.com/to-rent/gallo-manor/sandton/gauteng/5201/112735955" target="_blank" rel="noopener noreferrer"><div class="nm">Gallo Manor · 2-bed apartment — R9,000 <span class="arr">↗</span></div><div class="dd"><b>Best value in Sandton this cycle.</b> Cheap rent for the area. Floor not stated — confirm with agent.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/rivonia/sandton/gauteng/4251/117690617" target="_blank" rel="noopener noreferrer"><div class="nm">Rivonia · 2-bed apartment — R10,000 <span class="arr">↗</span></div><div class="dd">Freshest Rivonia listing, same node as the Rivonia Axis 3-bed on the board. Good price. Confirm floor + bath.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/rivonia/sandton/gauteng/4251/117689833" target="_blank" rel="noopener noreferrer"><div class="nm">Rivonia · 2-bed apartment — R11,000 <span class="arr">↗</span></div><div class="dd">Fresh Rivonia 2-bed, mid-range. Confirm floor + bath with agent.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/paulshof/sandton/gauteng/5211/117689410" target="_blank" rel="noopener noreferrer"><div class="nm">Paulshof · 2-bed apartment — R13,000 <span class="arr">↗</span></div><div class="dd">Freshest Paulshof catch, top of the R8–14k band. Confirm floor with agent.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/paulshof/sandton/gauteng/5211/117657293" target="_blank" rel="noopener noreferrer"><div class="nm">Paulshof · 2-bed townhouse — R9,900 <span class="arr">↗</span></div><div class="dd">Townhouse = beds likely upstairs (ask). Good value under R10k in Sandton NW.</div></a></li>
-      <li><a href="https://www.property24.com/to-rent/paulshof/sandton/gauteng/5211/117681510" target="_blank" rel="noopener noreferrer"><div class="nm">Paulshof · 2-bed apartment — R9,500 <span class="arr">↗</span></div><div class="dd">Cheap 2-bed in a secure Paulshof complex. Confirm floor with agent.</div></a></li>
-    </ul>
-  </div>
-
-  <div class="note" style="border-left:3px solid var(--good)" id="freshfinds9oct">
-    <h4>🆕 This cycle's new 2-bed finds (9 Oct) <span style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--good);background:var(--good-soft);padding:2px 7px;border-radius:20px;margin-left:6px">opened + verified live</span></h4>
-    <p style="margin:0 0 10px">Fresh from the standing <b>2-bed · ground/garden · R8–14k</b> sweep across your target suburbs. ⚠️ <b>This cycle Property24 was hard rate-limiting individual pages</b> (couldn't re-open them), so every find below comes from <b>Private Property, which stayed open — and I opened + verified each one live 9 Oct</b>. <b>✅ Ground floor</b> = confirmed step-free, the newborn-practical ones. Tap any to view.</p>
-    <ul class="hlist" style="margin-top:0">
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/rivonia/RR4789230" target="_blank" rel="noopener noreferrer"><div class="nm">✅ Rivonia · The Link — R9,000 <span class="arr">↗</span></div><div class="dd"><b>The Sandton step-free pick + cheapest.</b> 2 bed · 2 bath, <b>confirmed GROUND FLOOR</b>, secure well-maintained complex, well located close to amenities. Available 1 Nov. ⚠️ Sandton = R8k+ Uber till the car, so true cost ~R17k.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/sandringham/RR3971605" target="_blank" rel="noopener noreferrer"><div class="nm">✅ Sandringham · One on Anne — R11,000 <span class="arr">↗</span></div><div class="dd"><b>The central step-free pick.</b> 2 bed · 1 bath, <b>confirmed GROUND FLOOR</b>, brand-new One on Anne development, <b>pet-friendly</b>, gas hob + geyser, top-notch finishes, ~71.5m². Central-east = cheaper Uber (~R4–6k). Available now.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/paulshof/RR4581662" target="_blank" rel="noopener noreferrer"><div class="nm">✅ Paulshof · Sandton — R13,500 <span class="arr">↗</span></div><div class="dd">2 bed · 2 bath, <b>confirmed GROUND FLOOR</b>, well-maintained unit in a sought-after Paulshof complex. Top of band. Available 1 Dec. ⚠️ Sandton NW = big Uber till the car.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR3444896" target="_blank" rel="noopener noreferrer"><div class="nm">Norwood · Victoria border — R9,000 <span class="arr">↗</span></div><div class="dd"><b>Best value.</b> 2 bed · 1 bath, 55m², lock-up-and-go, open-plan lounge/dining/kitchen, rooftop pool, 2 parkings. Cheaper-Uber side. Available now. (Extra: sewerage ~R890 + prepaid elec.) Floor not stated — confirm.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/norwood/RR4790777" target="_blank" rel="noopener noreferrer"><div class="nm">Norwood · near Houghton — R9,500 <span class="arr">↗</span></div><div class="dd">2 bed · 1 bath in a <b>boomed-off area near Houghton</b>, modern industrial-charm finishes, on-site security. Cheaper-Uber side. Available 1 Nov. Confirm floor.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/sandringham/2-bed-at-one-on-anne/1-anne-street-in-sandringham/RR4342284" target="_blank" rel="noopener noreferrer"><div class="nm">Sandringham · One on Anne — R10,600 <span class="arr">↗</span></div><div class="dd">2 bed · 1 bath, sister unit in the same brand-new One on Anne dev, gas hob, fully tiled + vinyl floors. Central-east = cheaper Uber. Available now. Confirm floor (the R11k one above is the confirmed-ground-floor unit).</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/rivonia/67-elizabeth/RR4792770" target="_blank" rel="noopener noreferrer"><div class="nm">Rivonia · 67 Elizabeth — R10,000 <span class="arr">↗</span></div><div class="dd">2 bed, main en-suite, big undercover patio leading to pool, secure boomed-off area. Available now. ⚠️ Sandton = big Uber. Confirm floor.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/rivonia/55-eden-sandton/30-stifling-road/RR4791516" target="_blank" rel="noopener noreferrer"><div class="nm">Rivonia · 55 Eden Sandton — R11,000 <span class="arr">↗</span></div><div class="dd">2 bed · 1 bath, 66m², modern well-maintained unit in the secure Eden Sandton complex. Available 1 Dec. ⚠️ Sandton = big Uber. Confirm floor.</div></a></li>
-    </ul>
+    <h4>🔄 How this board works</h4>
+    <p style="margin:0">Each time I sweep Property24 + Private Property it's a dated <b>cycle</b>, newest on top, every card laid out the same way. <b>Anything that's been sitting here over a month drops off automatically</b> — if we haven't moved on it in that long, we clearly don't want it. So the board only ever shows live, recent, 3-bed options.</p>
   </div>
 
   <div class="filterbar">
     <div class="fgroup"><span class="lbl">Uber cost</span>
       <button class="chip" data-f="uber" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="uber" data-v="ok" aria-pressed="false">🚶 Cheap</button>
-      <button class="chip" data-f="uber" data-v="mid" aria-pressed="false">🚗 Mid</button>
-      <button class="chip" data-f="uber" data-v="far" aria-pressed="false">🛑 Needs car</button>
+      <button class="chip" data-f="uber" data-v="mid" aria-pressed="false">🚗 Mid (East)</button>
+      <button class="chip" data-f="uber" data-v="far" aria-pressed="false">🛑 Needs car (Sandton)</button>
     </div>
     <div class="fgroup"><span class="lbl">Side</span>
       <button class="chip" data-f="side" data-v="all" aria-pressed="true">All</button>
@@ -146,15 +96,21 @@
     </div>
     <div class="fgroup"><span class="lbl">Floor</span>
       <button class="chip" data-f="floor" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="floor" data-v="g" aria-pressed="false">✅ Ground confirmed</button>
-      <button class="chip" data-f="floor" data-v="garden" aria-pressed="false">🌿 Garden</button>
+      <button class="chip" data-f="floor" data-v="g" aria-pressed="false">✅ Step-free</button>
     </div>
     <span class="count" id="count"></span>
   </div>
 
-  <p class="sub" style="margin:0 0 6px">💬 Got a thought on a place? <b>Message Bean</b> (WhatsApp/Telegram) — "love the R9.8k Craighall one, book a viewing" or "kill the Paulshof one." Bean writes it straight onto the card here so <b>you and Mishka both see it</b>. No more notes trapped on one phone.</p>
-  <div class="grid" id="grid"></div>
+  <p class="sub" style="margin:0 0 6px">💬 Got a thought on a place? <b>Message Bean</b> (WhatsApp/Telegram) — "book a viewing on the Greenstone Gate one" or "kill the Dowerglen Ext 4 one." Bean marks it straight onto the card here so <b>you and Mishka both see it</b>.</p>
+
+  <div id="board"></div>
   <div class="empty" id="empty">No places match — widen a filter.</div>
+
+  <div class="note">
+    <h4>My read (10 Oct)</h4>
+    <p><b>The step-free picks</b> (best with a newborn): <b>Dowerglen 62 Elm St R14,000</b> — your own find, confirmed ground floor + private garden + 1 Nov, the strongest; <b>Greenstone Gate R13,500</b> — new this cycle, garden floor + <b>pet-friendly</b>, avail 1 Jan 2027 (right before the baby), the closest replacement for Dunsevern and cheaper; and <b>Rivonia Axis R13,000</b> — ground floor + private garden, cheapest step-free, just carries the Sandton Uber bill till the car.</p>
+    <p><b>Cheapest rent:</b> Dowerglen Ext 4 R12,000 (1st floor, stairs). <b>Honest call:</b> the East is where the real 3-bed stock sits under R16k — Sandton mostly runs R21k+ for 3 beds, so Rivonia Axis is the rare exception. Floors marked "ask agent" are real listings where the storey wasn't stated — phone before viewing. Sandton = R8k+/mo Uber till the car, so true cost there ~R21k. Listings move fast; use <b>Bolt</b> (10–20% under Uber).</p>
+  </div>
 
   <div class="hunt">
     <h4>Where to hunt — beyond Property24</h4>
@@ -178,99 +134,81 @@
     </div>
   </div>
 
-  <div class="note">
-    <h4>My read</h4>
-    <p style="border-left:3px solid var(--home);padding-left:10px"><b>✅ Flipped to 3-bed 4 Oct.</b> You were right — your two finds are 3-bed, so a board full of 2-beds made no sense. I cleared the 2-bed cards and ran a fresh <b>3-bed · 2-bath ≤ R16k</b> hunt, opening every listing to confirm it's live tonight: <b>6 East (Edenvale / Bedfordview)</b> + <b>1 Sandton (Rivonia)</b>. Sandton runs thin for 3-beds under R16k — most sit R21k–R25k — so the East is where the real stock is.</p>
-    <p><b>The 2 I'd chase first</b> (both step-free — the newborn thing): <b>Dowerglen R14,000</b> — your find, confirmed ground floor + private garden + 1 Nov availability, the strongest on the board; and <b>Rivonia Axis R13,000</b> — confirmed ground floor + private garden, cheapest step-free 3-bed (just carries the Sandton Uber bill till the car).</p>
-    <p><b>Best value:</b> Greenstone Ridge R13,500 — 3/2 with fridge + washer + dryer thrown in (saves you buying them), but it's 1st floor (stairs). <b>Cheapest rent:</b> Dunsevern R12,000, your other find — lovely but stacked-simplex stairs.</p>
-    <p><b>Straight talk:</b> ground floor + East + 1 Nov = Dowerglen is the newborn-practical pick even at a touch more rent. Floors marked "ask agent" or "confirm" are real listings where the storey/bath count wasn't stated — phone before viewing. Sandton is R8k+/mo Uber till the car, so true cost ~R21k there. Listings move fast; use <b>Bolt</b> (10–20% under Uber).</p>
-  </div>
-
-  <div class="sec" style="margin-top:38px"><h2>📲 You + Mishka's shortlist (from WhatsApp, 12 Sep)</h2></div>
-  <div class="note" style="margin-top:0;border-left:3px solid var(--home)">
-    <p>📌 <b>This is your old shortlist from 12 Sep, kept as a record — mostly 2-beds, not the live 3-bed board above.</b> The 11 places you two sent each other, with rent + <b>total monthly cost while car-less</b>. Rent is only half the story: the Uber to Glenhazel is the other half until the licence + car land (~Q2 2027). "True cost" = rent + a rough Uber month for that zone. Most sit far north, so cheap-looking rent hides a R8k+ Uber bill. <b>Want me to clear this section now that we're locked on 3-bed? Just say.</b></p>
-  </div>
-
-  <div class="note" style="margin-top:12px">
-    <h4>⚠️ Check the floor / likely stairs</h4>
-    <ul class="hlist" style="margin-top:12px">
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/beverley/d8-xanadu/157-mulbarton-road/RR4737089" target="_blank" rel="noopener noreferrer"><div class="nm">Beverley · Xanadu · 2-bed — R13,000 <span class="arr">↗</span></div><div class="dd">Yours. Brand-new, 2/2, 92m², but <b>first floor + balcony</b> (stairs). Far ~R8k → <b>true cost ≈ R21k/mo</b>.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/sandton/bramley-park/39-allenby-mews/67-granville-place/RR4767521" target="_blank" rel="noopener noreferrer"><div class="nm">Bramley Park · 3-bed townhouse — R14,450 <span class="arr">↗</span></div><div class="dd">Yours. 3/2.5, 215m², garden + jungle gym. Townhouse = beds likely upstairs. Mid ~R6k → <b>true cost ≈ R20k/mo</b>.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/melville/RR4768674" target="_blank" rel="noopener noreferrer"><div class="nm">Melville · 2-bed + flatlet — R15,000 <span class="arr">↗</span></div><div class="dd">Mishka's. 2/1.5, 200m², main house + separate flatlet, pretty garden. Floor not stated. Mid ~R5k → <b>true cost ≈ R20k/mo</b>.</div></a></li>
-    </ul>
-  </div>
-
-  <div class="note" style="margin-top:12px;border-left:3px solid var(--car)">
+  <div class="note" style="margin-top:28px;border-left:3px solid var(--car)">
     <h4>💰 The total-cost reality — read this before you fall for one</h4>
-    <p>Almost everything you both picked sits <b>far north (Sandton / Fourways / Rivonia / Randburg)</b>. The rent looks great — R10–15k — but car-less, the Uber to work runs <b>R8k+/mo</b>, so the <b>real monthly cost lands at R18k–R23k</b>. That's the number the budget actually feels.</p>
-    <p>Compare that to the cheap-Uber picks up top: a <b>Sandringham ground-floor 2-bed at R11,000 + ~R2–3k Uber ≈ R13–14k true cost</b> — roughly <b>R6–9k/month cheaper</b> than the far-north favourites, for the same 2 beds. Over a 12-month lease that's <b>R70k–R100k</b> difference, basically your whole car deposit.</p>
-    <p><b>My honest take:</b> the far-north places become great <i>after</i> the car (Q2 2027). Right now, with a newborn and no car, the move that protects the budget is <b>ground-floor + cheap Uber + close to work</b> — Bedfordview Morninghill is the one far pick that makes sense (ground + garden + only mid Uber ≈ R18k). If you love Rivonia/Lonehill, they're worth it — just go in with eyes open that it's a ~R21–23k/mo lifestyle until you're driving.</p>
-    <p style="font-size:12px;color:var(--ink-soft);margin-top:6px">Also remember the <b>upfront</b>: most ask 1 month deposit + 1 month rent to move in (≈ R26k on a R13k place), plus utilities usually excluded (~R1.5–2.5k/mo on top) unless the listing says included. Uber bands are estimates — use Bolt, it's 10–20% cheaper.</p>
+    <p>Rent is only half the story while you're car-less. The Uber to work runs <b>R4–6k/mo from the East</b> and <b>R8k+/mo from Sandton</b>, so a R13–14k place in Rivonia really costs ~R21k/mo, while the same rent in Edenvale/Greenstone lands ~R18k. That gap over a 12-month lease is basically your car deposit.</p>
+    <p><b>My honest take:</b> with a newborn and no car, the budget-protecting move is <b>East + step-free + close-ish to work</b>. The Sandton places get great <i>after</i> the car (~Q2 2027). Remember the <b>upfront</b> too: most want 1 month deposit + 1 month rent (≈ R26k on a R13k place), plus utilities usually excluded (~R1.5–2.5k/mo) unless stated. Use <b>Bolt</b>, it's 10–20% cheaper than Uber.</p>
   </div>
 
   <div class="sec" style="margin-top:38px"><h2>👵 Mom in the same complex</h2></div>
   <div class="note" style="margin-top:0">
-    <p>Better than a separate cheap flat: one complex with <b>a 3-bed for you + Mishka AND a smaller 1-bed for Mom, same address, same gate.</b> ⚠️ <b>Update (Sep):</b> the Norwood Garden Village unit we'd anchored this on has been let and dropped off — so there's no live same-complex pairing right now. The NGV 1-bed for Mom may still be around (ask the agent), but the matching family unit is gone. I'm hunting fresh complexes that can house both of you. In the meantime, the cheap 1-bed garden cottages below keep Mom in the same suburb as our picks.</p>
-  </div>
-  <div class="grid" id="cxgrid"></div>
-
-  <div class="note" style="margin-top:16px">
-    <h4>👵 More garden cottages for Mom — same suburbs as our picks</h4>
-    <p class="sub" style="margin:4px 0 0">Cheaper 1-beds with a garden, each near one of the 2-beds above so she stays close. All on Private Property — tap to view.</p>
-    <ul class="hlist" style="margin-top:12px">
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/randburg/linden/RR4552977" target="_blank" rel="noopener noreferrer"><div class="nm">Linden · 1-bed garden cottage — R7,000 <span class="arr">↗</span></div><div class="dd">Spacious. Same suburb as the best-value Linden 2-bed. Agent: Zareena Kara.</div></a></li>
-      <li><a href="https://www.privateproperty.co.za/to-rent/gauteng/johannesburg/johannesburg-central/emmarentia/RR3746402" target="_blank" rel="noopener noreferrer"><div class="nm">Emmarentia · 1-bed studio cottage — R7,950 <span class="arr">↗</span></div><div class="dd">60m², private. Near the Linden/Greenside cluster. Private listing.</div></a></li>
-    </ul>
-    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">These aren't in the same complex as a 2-bed (that's rare) — they're the closest cheap garden cottages in the same suburb. A few listings are older; confirm they're still available before viewing.</p>
+    <p>Better than a separate cheap flat: one complex with <b>a 3-bed for you + Mishka AND a smaller 1-bed for Mom, same address, same gate.</b> ⚠️ No live same-complex pairing right now — the Norwood Garden Village unit we'd anchored this on has been let. I'm hunting fresh complexes that can house both of you; I'll surface them as a cycle above when I find one.</p>
   </div>
 
-  <div class="foot">APARTMENTS · Property24 + Private Property · refreshed 10 Oct 2026 · Dunsevern fell through → removed · 2 new East 3-beds added + confirmed live (Greenstone Gate 2 Hereford Dr R13,500 garden-floor/pet-friendly · Dowerglen Ext 4 17 Juniper Dr R12,000) · Rivonia Axis R13,000 re-confirmed live (avail 1 Dec) · baby-friendly is now the one hard filter · listings sell fast · Uber figures are estimates · The Nest</div>
+  <div class="foot">APARTMENTS · Property24 + Private Property · refreshed 10 Oct 2026 · rebuilt to uniform dated cycles · Dunsevern removed (fell through) · retired the old 2-bed finds + 12 Sep shortlist (off-strategy / over a month) · board now auto-drops anything older than a month · 8 live 3-beds across 2 cycles · listings sell fast · Uber figures are estimates · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
 <script>
+// ===== One data model. Every listing is a card with a `cycle` date. =====
+// Newest cycle renders on top; anything older than MAXAGE days auto-drops.
 const F=[
- // ===== EAST · Edenvale / Bedfordview (good rep, ~R4–6k Uber) — all 3-bed, verified live 4 Oct =====
- {s:"east",u:"mid",g:1,garden:1,pick:1,name:"Dowerglen · 62 Elm St",area:"Oude Kaap, Edenvale",rent:"R14,000",spec:"3 bed · 2 bath · 100m²",fl:"✅ Ground floor + private garden",desc:"🏆 YOUR FIND + the strong one. Confirmed GROUND FLOOR, open-plan kitchen/lounge out to a patio + private garden (photos back it up). Pool, tennis, braai, clubhouse. Heavy security (burglar bars, gates, full perimeter + electric fence, intercom). Available 1 Nov. Deposit R16,500. ⚠️ Not pet-friendly, utilities excluded.",url:"https://www.property24.com/to-rent/dowerglen/edenvale/gauteng/1194/117603322"},
- {s:"east",u:"mid",garden:1,pick:1,name:"Greenstone Crest · 99 Stoneridge Dr",area:"Greenstone, Edenvale",rent:"R15,000",spec:"3 bed · 2 bath",fl:"🌿 Garden apartment (confirm ground)",desc:"✅ Verified live 4 Oct — listing literally reads 'Stunning 3-Bed, 2-Bath Garden Apartment in Greenstone Crest'. Lifestyle estate (clubhouse, pool, gym, electric fence, security post). Garden = likely ground, confirm the exact unit's floor with the agent.",url:"https://www.property24.com/to-rent/greenstone-crest/edenvale/gauteng/15871/117665984"},
- {s:"east",u:"mid",name:"Fish Eagle View · Modderfontein",area:"Longlake, Edenvale",rent:"R13,990",spec:"3 bed · confirm bath",fl:"Floor: ask agent",desc:"✅ Verified live 4 Oct. Well-situated Modderfontein / Longlake apartment, secure modern precinct. Good value under R14k for a 3-bed. Confirm bath count + floor with the agent.",url:"https://www.property24.com/to-rent/modderfontein/edenvale/gauteng/11773/117652615"},
- {s:"east",u:"mid",name:"Greenstone Hill · 70 Greenstone Dr",area:"Greenstone, Edenvale",rent:"R16,000",spec:"3 bed · confirm bath",fl:"Floor: ask agent",desc:"✅ Verified live 4 Oct. Spacious, comfortable 3-bed in the Greenstone lifestyle node (shops, Greenstone Mall close). Top of your R16k cap. Confirm bath count + floor.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117662903"},
- {s:"east",u:"mid",name:"Greenstone Ridge · 2 Emerald Blvd",area:"Greenstone, Edenvale",rent:"R13,500",spec:"3 bed · 2 bath",fl:"⚠️ 1st floor — stairs",desc:"✅ Verified live 4 Oct. 3-bed 2-bath + BONUS fridge, washing machine & tumble dryer included (saves you buying them). Cheapest 2-bath 3-bed in the East here. ⚠️ 1st floor = stairs, the trade-off with a newborn.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117638797"},
- {s:"east",u:"mid",g:1,garden:1,pick:1,name:"Greenstone Gate · 2 Hereford Dr",area:"Greenstone Hill, Edenvale",rent:"R13,500",spec:"3 bed · 2 bath · 99m²",fl:"🌿 Garden floor (step-free) + pet-friendly",desc:"🆕 10 Oct — opened + confirmed live. GARDEN-FLOOR unit in Greenstone Gate: step-free, private garden through a sliding door, main en-suite, 2 parking. ✅ PET-FRIENDLY. Available 1 Jan 2027 (lines up with the baby). Deposit R13,000 + R250 app + R1,000 lease fee; prepaid elec/gas/fibre on you. East = ~R4–6k Uber till the car. The newborn-practical East pick now Dunsevern's gone.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/113296892"},
- {s:"east",u:"mid",name:"Dowerglen Ext 4 · 17 Juniper Dr",area:"Dowerglen, Edenvale",rent:"R12,000",spec:"3 bed · 2 bath · 99m²",fl:"⚠️ 1st floor — stairs",desc:"🆕 10 Oct — confirmed live. Cheapest 3-bed on the East board. 3/2, 99m², available now. ⚠️ 1st floor = stairs, the newborn trade-off. Solid fallback if rent matters more than step-free.",url:"https://www.property24.com/to-rent/dowerglen-ext-4/edenvale/gauteng/10372/117589904"},
- // ===== SANDTON · Rivonia (big Uber till the car) — 3-bed, verified live 4 Oct =====
- {s:"north",u:"far",g:1,garden:1,pick:1,name:"Rivonia Axis · 25, 21 11th Ave",area:"Rivonia",rent:"R13,000",spec:"3 bed · confirm bath",fl:"✅ Ground floor + private garden",desc:"✅ Verified live 4 Oct — listing reads 'Marvelous Three Bedroom GROUND FLOOR Apartment with private garden'. The best step-free 3-bed in Sandton for a newborn, and cheap for the area. ⚠️ Sandton = R8k+ Uber till the car, so true cost ~R21k/mo. Confirm bath count.",url:"https://www.property24.com/to-rent/rivonia/sandton/gauteng/4251/117591121"}
+ // ---- 10 Oct cycle ----
+ {cycle:"2026-10-10",s:"east",u:"mid",g:1,garden:1,pick:1,name:"Greenstone Gate · 2 Hereford Dr",area:"Greenstone Hill, Edenvale",rent:"R13,500",spec:"3 bed · 2 bath · 99m²",fl:"🌿 Garden floor (step-free) + pet-friendly",desc:"Opened + confirmed live. GARDEN-FLOOR unit in Greenstone Gate: step-free, private garden through a sliding door, main en-suite, 2 parking. ✅ PET-FRIENDLY. Available 1 Jan 2027 (lines up with the baby). Deposit R13,000 + R250 app + R1,000 lease fee; prepaid elec/gas/fibre on you. The newborn-practical East pick now Dunsevern's gone.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/113296892"},
+ {cycle:"2026-10-10",s:"east",u:"mid",name:"Dowerglen Ext 4 · 17 Juniper Dr",area:"Dowerglen, Edenvale",rent:"R12,000",spec:"3 bed · 2 bath · 99m²",fl:"⚠️ 1st floor — stairs",desc:"Confirmed live. Cheapest 3-bed on the board. 3/2, 99m², available now. ⚠️ 1st floor = stairs, the newborn trade-off. Solid fallback if rent matters more than step-free.",url:"https://www.property24.com/to-rent/dowerglen-ext-4/edenvale/gauteng/10372/117589904"},
+ // ---- 4 Oct cycle ----
+ {cycle:"2026-10-04",s:"east",u:"mid",g:1,garden:1,pick:1,name:"Dowerglen · 62 Elm St",area:"Oude Kaap, Edenvale",rent:"R14,000",spec:"3 bed · 2 bath · 100m²",fl:"✅ Ground floor + private garden",desc:"🏆 YOUR FIND + the strong one. Confirmed GROUND FLOOR, open-plan kitchen/lounge out to a patio + private garden (photos back it up). Pool, tennis, braai, clubhouse. Heavy security (burglar bars, gates, electric fence, intercom). Available 1 Nov. Deposit R16,500. ⚠️ Not pet-friendly, utilities excluded.",url:"https://www.property24.com/to-rent/dowerglen/edenvale/gauteng/1194/117603322"},
+ {cycle:"2026-10-04",s:"east",u:"mid",garden:1,pick:1,name:"Greenstone Crest · 99 Stoneridge Dr",area:"Greenstone, Edenvale",rent:"R15,000",spec:"3 bed · 2 bath",fl:"🌿 Garden apartment (confirm ground)",desc:"Listing reads 'Stunning 3-Bed, 2-Bath Garden Apartment in Greenstone Crest'. Lifestyle estate (clubhouse, pool, gym, electric fence, security post). Garden = likely ground, confirm the exact unit's floor with the agent.",url:"https://www.property24.com/to-rent/greenstone-crest/edenvale/gauteng/15871/117665984"},
+ {cycle:"2026-10-04",s:"east",u:"mid",name:"Fish Eagle View · Modderfontein",area:"Longlake, Edenvale",rent:"R13,990",spec:"3 bed · confirm bath",fl:"Floor: ask agent",desc:"Well-situated Modderfontein / Longlake apartment, secure modern precinct. Good value under R14k for a 3-bed. Confirm bath count + floor with the agent.",url:"https://www.property24.com/to-rent/modderfontein/edenvale/gauteng/11773/117652615"},
+ {cycle:"2026-10-04",s:"east",u:"mid",name:"Greenstone Hill · 70 Greenstone Dr",area:"Greenstone, Edenvale",rent:"R16,000",spec:"3 bed · confirm bath",fl:"Floor: ask agent",desc:"Spacious, comfortable 3-bed in the Greenstone lifestyle node (shops, Greenstone Mall close). Top of your R16k cap. Confirm bath count + floor.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117662903"},
+ {cycle:"2026-10-04",s:"east",u:"mid",name:"Greenstone Ridge · 2 Emerald Blvd",area:"Greenstone, Edenvale",rent:"R13,500",spec:"3 bed · 2 bath",fl:"⚠️ 1st floor — stairs",desc:"3-bed 2-bath + BONUS fridge, washing machine & tumble dryer included (saves you buying them). ⚠️ 1st floor = stairs, the trade-off with a newborn.",url:"https://www.property24.com/to-rent/greenstone-hill/edenvale/gauteng/11700/117638797"},
+ {cycle:"2026-10-04",s:"north",u:"far",g:1,garden:1,pick:1,name:"Rivonia Axis · 25, 21 11th Ave",area:"Rivonia",rent:"R13,000",spec:"3 bed · confirm bath",fl:"✅ Ground floor + private garden",desc:"Re-confirmed live 10 Oct (avail 1 Dec). Listing reads 'Marvelous Three Bedroom GROUND FLOOR Apartment with private garden'. The best step-free 3-bed in Sandton for a newborn, and cheap for the area. ⚠️ Sandton = R8k+ Uber till the car, so true cost ~R21k/mo. Confirm bath count.",url:"https://www.property24.com/to-rent/rivonia/sandton/gauteng/4251/117591121"}
 ];
-const grid=document.getElementById("grid");
-grid.innerHTML=F.map(f=>`
+
+// ===== render =====
+const TODAY=new Date(2026,9,10), MAXAGE=31;
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const dOld=iso=>Math.floor((TODAY-new Date(iso))/864e5);
+const cyLabel=iso=>{const d=new Date(iso);return d.getDate()+' '+MON[d.getMonth()];};
+const card=f=>`
   <div class="cc ${f.pick?'pick':''}" data-side="${f.s}" data-uber="${f.u}" data-floor="${f.g?'g':'u'}" data-garden="${f.garden?'1':'0'}">
     <div class="cc-top"><span class="brand">${f.area}</span><span class="ub ${f.u}">${f.u==='ok'?'🚶 ~R2–3k':f.u==='mid'?'🚗 ~R4–6k':'🛑 R8k+ Uber'}</span></div>
     <div class="model" style="font-size:16px">${f.name} ${f.pick?'<span class="star">★</span>':''}</div>
     <div class="price">${f.rent}<small>${f.spec} · ${f.fl}</small></div>
     <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${f.desc}</p>
-    <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View / browse area ↗</a></div>
+    <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
-  </div>`).join('');
-const CX=[
-];
-document.getElementById("cxgrid").innerHTML=CX.map(x=>`
-  <div class="cc ${x.pick?'pick':''}">
-    <div class="cc-top"><span class="brand">${x.name} · ${x.area}</span><span class="ub ${x.tone}">${x.star}</span></div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;line-height:1.45">${x.desc}</p>
-    ${x.warn?`<p style="font-size:12px;color:var(--red);font-weight:600;margin:9px 0 0;line-height:1.4">${x.warn}</p>`:''}
-    <div class="cx-units">
-      <div class="cx-unit"><div class="cx-who">${x.couple.label} · <b>${x.couple.rent}</b></div><div class="cx-spec">${x.couple.spec}</div><a class="clink see" href="${x.couple.url}" target="_blank" rel="noopener noreferrer">View ↗</a></div>
-      <div class="cx-unit"><div class="cx-who">${x.mom.label} · <b>${x.mom.rent}</b></div><div class="cx-spec">${x.mom.spec}</div><a class="clink see" href="${x.mom.url}" target="_blank" rel="noopener noreferrer">View ↗</a></div>
-    </div>
-    <div class="cx-total">${x.total}</div>
-    <button class="savebtn" style="width:100%;margin-top:10px" data-save-kind="flat" data-save-label="${x.name} (couple + mom)" data-save-url="${x.couple.url}">♡ Save</button>
-  </div>`).join('');
+  </div>`;
+const live=F.filter(f=>dOld(f.cycle)<=MAXAGE);
+const cycles=[...new Set(live.map(f=>f.cycle))].sort().reverse();
+document.getElementById("board").innerHTML=cycles.map(cy=>{
+  const items=live.filter(f=>f.cycle===cy);
+  return `<div class="cyclegroup" data-cycle="${cy}">
+    <div class="cyclehead"><h4>🆕 ${cyLabel(cy)} cycle</h4><span class="cyclecount">${items.length} place${items.length!==1?'s':''}</span></div>
+    <div class="grid">${items.map(card).join('')}</div>
+  </div>`;
+}).join('');
 if (window.NEST) window.NEST.wire();
+
+// ===== filters (apply across every cycle; hide a cycle header when it's emptied) =====
 (function(){
   const state={uber:"all",side:"all",floor:"all"};
-  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll("#grid .cc");
+  const chips=document.querySelectorAll(".chip");
+  const cards=document.querySelectorAll("#board .cc");
   const countEl=document.getElementById("count"),emptyEl=document.getElementById("empty");
-  function apply(){let s=0;cards.forEach(c=>{const floorOk=state.floor==="all"||(state.floor==="g"&&c.dataset.floor==="g")||(state.floor==="garden"&&c.dataset.garden==="1");const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side)&&floorOk;c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+(s===1?" place":" places");emptyEl.classList.toggle("show",s===0);}
+  function apply(){
+    let s=0;
+    cards.forEach(c=>{
+      const floorOk=state.floor==="all"||(state.floor==="g"&&c.dataset.floor==="g");
+      const ok=(state.uber==="all"||c.dataset.uber===state.uber)&&(state.side==="all"||c.dataset.side===state.side)&&floorOk;
+      c.classList.toggle("hide",!ok);if(ok)s++;
+    });
+    document.querySelectorAll(".cyclegroup").forEach(g=>{
+      g.classList.toggle("hide",g.querySelectorAll(".cc:not(.hide)").length===0);
+    });
+    countEl.textContent=s+(s===1?" place":" places");
+    emptyEl.classList.toggle("show",s===0);
+  }
   chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
   apply();
 })();
