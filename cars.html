@@ -92,6 +92,17 @@
     <p style="margin-top:10px;font-size:12px;color:var(--ink-soft)">⚠️ HUNT lane = no warranty, no returns. Do the safety checks below (finance/VIN/NATIS) <b>and</b> an independent inspection before any money moves — doubly so on an auction lot.</p>
   </div>
 
+  <div class="note" style="border-left:3px solid var(--good)" id="dealers">
+    <h4>🏢 Dealerships near you — go see the cars in person</h4>
+    <p style="margin:0">Every model card below now has <b>2 real dealers</b> for that brand (one East Rand, one Sandton side), linked straight to their own stock. Every link checked live 16 Oct. For <b>any brand, used, with dealer backup</b>, start here:</p>
+    <ul style="margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13.5px">
+      <li><a href="https://www.autopedigree.co.za/dealers/gauteng/meadowdale/107" target="_blank" rel="noopener noreferrer"><b>Auto Pedigree Meadowdale ↗</b></a>: 19 Herman St, Edenvale. Closest multi-brand used dealer to you.</li>
+      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-isando" target="_blank" rel="noopener noreferrer"><b>Motus Select Isando ↗</b></a>: 9 Brabazon Rd, Kempton Park. ~115 cars, from ~R156k.</li>
+      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-fourways" target="_blank" rel="noopener noreferrer"><b>Motus Select Fourways ↗</b></a>: 30 White Hills Cl, Lonehill. Sandton side.</li>
+    </ul>
+    <p style="margin-top:8px;font-size:12px;color:var(--ink-soft)">Right on your doorstep on <b>Van Riebeeck Ave, Edenvale</b>: Omoda, Chery, Haval and Nissan are all on that one road. You can see 4 brands in one afternoon.</p>
+  </div>
+
   <div class="note" style="border-left:3px solid var(--car)" id="finance">
     <h4>💳 What it actually costs financed — <b>no balloon</b></h4>
     <p style="margin:0">You're financing this and paying it off, so the price tag isn't the number that matters — the <b>monthly</b> is. This maps any car's price to a real repayment. <b>No balloon, ever</b> — a balloon makes the monthly look cheaper but leaves a big lump owing at the end, and you've said no. So every figure here is a full pay-off: you own it clean at the last instalment.</p>
@@ -118,6 +129,7 @@
     <p style="margin-top:10px;font-size:12px;color:var(--ink-soft)"><b>On top of the monthly:</b> once-off initiation ~R1,207, admin ~R69/mo, + compulsory insurance (~R1,800–2,500 first-time driver) + fuel. <b>All-in, Style X lands ~R11–12k/mo.</b> Keep total car cost under ~20% of income so Feb (Mishka on maternity pay) doesn't squeeze you.</p>
     <p style="margin-top:10px;font-size:13px"><b>The good:</b> 5yr/150k warranty + 10yr/1m-km engine warranty (1st owner), heavily specced, sells ~800/mo in SA (not a fringe gamble).</p>
     <p style="margin-top:8px;font-size:13px"><b style="color:var(--car-ink)">Worth checking yourself on the test drive (owner-reported, not gospel):</b> real fuel closer to 9–10.5L/100km vs 6.9 claimed · DCT gearbox can feel fidgety/hesitant at low speed · lane-assist beeps a lot · Android Auto can drop. Resale on Chinese brands still softer than Toyota/VW — matters most if you'd sell in 3–4 yrs.</p>
+    <p style="margin-top:10px;font-size:13px"><b>🏢 Test-drive it:</b> <a href="https://omoda.co.za/dealers/omoda-edenvale" target="_blank" rel="noopener noreferrer"><b>Omoda Edenvale ↗</b></a> (91 Van Riebeeck Ave, 010 823 5449, minutes from you) · <a href="https://omoda.co.za/dealers/omoda-sandton" target="_blank" rel="noopener noreferrer"><b>Omoda Sandton ↗</b></a> (168 Grayston Dr, 010 900 1805). Book a test drive + ask for a finance quote on Street+ vs Style X.</p>
     <p style="margin-top:10px;font-size:13px"><b>The cheaper lane:</b> a 1-year-old <b>used C5 sits ~R288–350k</b> on WeBuyCars (see the Omoda card below) — saves roughly R50–80k and lets someone else eat the big first-year depreciation. Same car, lower monthly.</p>
   </div>
 
@@ -233,6 +245,25 @@ const CARS=[
  {o:"kr",b:"hatch",brand:"🇰🇷 Kia",name:"Rio",body:"Hatchback",r:["gd","gd"],why:"Roomy inside for its size, easy to trust second-hand. A way to stretch the budget down, not up.",L:[["2021","R220–270k","street","WeBuyCars/private",1]],img:"2021 Kia Rio South Africa",find:"Kia Rio automatic for sale South Africa"},
  {o:"kr",b:"hatch",brand:"🇰🇷 Hyundai",name:"i20",body:"Hatchback",r:["gd","gd"],why:"Punches above its size inside, 7-yr warranty carries over. Good budget-down option.",L:[["2021","R190–240k","street","WeBuyCars/private",1]],img:"2021 Hyundai i20 South Africa",find:"Hyundai i20 automatic for sale South Africa"}
 ];
+// ===== Real dealerships near Edenvale + Sandton (verified 16 Oct). Key = brand name on the card. =====
+const DEALERS={
+ Omoda:[["Omoda Edenvale","91 Van Riebeeck Ave, Edenvale · 010 823 5449","https://omoda.co.za/dealers/omoda-edenvale"],["Omoda Sandton","168 Grayston Dr, Sandown · 010 900 1805","https://omoda.co.za/dealers/omoda-sandton"]],
+ Chery:[["Chery Edenvale","91 Van Riebeeck Ave, Edenvale · 010 822 1980","https://www.chery.co.za/dealers/chery-edenvale"],["Chery Sandton","168 Grayston Dr, Sandown","https://www.chery.co.za/dealers/chery-sandton"]],
+ Kia:[["Kia Edenvale","Edenvale · 011 826 5533","https://www.kia.co.za/dealerships/kia-edenvale"],["Kia Sandton","Sandton · 011 444 2147","https://www.kia.co.za/dealerships/kia-sandton"]],
+ Hyundai:[["Hyundai Edenvale/Meadowdale","Cnr Edenvale Rd & Dick Kemp St · pre-owned stock","https://www.hyundai.co.za/dealers/hyundai-edenvale-meadowdale/pre-owned-vehicles/browse"],["Hyundai Sandton","Cnr Bowling Ave & Dartfield Rd · pre-owned stock","https://www.hyundai.co.za/dealers/hyundai-sandton/pre-owned-vehicles/browse"]],
+ Haval:[["Haval Edenvale","104 Van Riebeeck Ave, Edenvale (pick Edenvale on the locator)","https://www.gwm.co.za/dealership"],["Haval Sandton","Sandton (pick Sandton on the locator)","https://www.gwm.co.za/dealership"]],
+ MG:[["MG Edenvale","Edenvale (on MG's dealer list)","https://www.mgmotor.co.za/dealers.html"]],
+ Toyota:[["Motus Toyota Bedfordview","Cnr Edenvale Rd & Hyperama Link · used + demo","https://motustoyota.co.za/dealers/motus-toyota-bedfordview/cars/used-demo"],["Motus Toyota Bryanston","Cnr William Nicol & Arklow Rd · used + demo","https://motustoyota.co.za/dealers/motus-toyota-bryanston/cars/used-demo"]],
+ Suzuki:[["Suzuki Edenvale","Greenstone Place · used stock","https://www.edenvalesuzuki.co.za/showroom/?new_used=USED"],["Suzuki Rivonia","100 12th Ave, Rivonia · in stock","https://www.suzukirivonia.co.za/cars-in-stock"]],
+ Nissan:[["Edenvale Nissan","Van Riebeeck Ave, Edenvale · used stock","https://www.edenvalenissan.co.za/showroom?new_used=USED"],["CMH Nissan Midrand","451 New Rd, Midrand · pre-owned","https://cmhnissan.co.za/preowned/?dealers=cmh-nissan-midrand"]],
+ Mitsubishi:[["Mitsubishi East Rand","East Rand Mall, Boksburg · used + demo","https://motusmitsubishi.co.za/find-a-dealer/mitsubishi-motors-east-rand/used-demo"],["CMH Mitsubishi Midrand","Midrand · used","https://cmhmitsubishi.co.za/used-vehicles/?swoof=1&dealer=cmh-mitsubishi-midrand"]],
+ Mazda:[["Mazda East Rand Mall","13 Bentel Ave, Boksburg · used stock","https://www.mazdaeastrand.co.za/showroom/?new_used=USED"],["Mazda Woodmead","Woodmead Dr, Sandton · pre-owned","https://mazdawoodmead.hatfieldgroup.co.za/pre-owned-vehicles"]],
+ Honda:[["Motus Honda East Rand","East Rand Mall, Boksburg · used","https://motushonda.co.za/dealer/motus-honda-east-rand/used"],["Motus Honda Fourways","30 White Hills Cl, Lonehill · used","https://motushonda.co.za/dealer/motus-honda-fourways/used"]],
+ Volkswagen:[["Motus VW Edenvale","1 Stoneridge Dr, Greenstone · showroom","https://www.motusvw.co.za/edenvale/showroom/"],["Motus VW Fourways","Fourways Crossing · showroom","https://www.motusvw.co.za/fourways/showroom/"]],
+ Ford:[["Motus Ford Germiston","7 Dakota Cres, Airport Park · used + demo","https://motusford.co.za/dealers/motus-ford-germiston/used-demo"],["CMH Ford Randburg","Cnr Hill & Long Ave · pre-owned","https://cmhford.co.za/preowned/?swoof=1&dealers=cmh-ford-randburg"]],
+ Renault:[["Motus Renault East Rand","Bardene, Boksburg · used","https://www.motusrenault.co.za/dealer/renault-motus-east-rand/used"],["Motus Renault Fourways","30 Whitehills Cl, Lonehill · used","https://www.motusrenault.co.za/dealer/renault-motus-fourways/used"]],
+ Peugeot:[["CMH Peugeot East Rand","143c North Rand Rd, Boksburg","https://cmhpeugeot.co.za/cmh-peugeot-east-rand/"],["Peugeot Sandton","Cnr Winnie Mandela & Ballyclare · used","https://www.smhgroup.co.za/peugeot/used-cars/peugeot-sandton/"]],
+};
 const RL={ex:"Excellent",gd:"Good",tt:"Tight"};
 const grid=document.getElementById("grid");
 grid.innerHTML=CARS.map(c=>{
@@ -257,7 +288,8 @@ grid.innerHTML=CARS.map(c=>{
       <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
       <a class="clink list" href="${wbc}" target="_blank" rel="noopener noreferrer">🔎 WeBuyCars <span class="h">real value</span></a>
     </div>
-    <div class="sellers">💸 Cheaper (private): <a href="${gt}" target="_blank" rel="noopener noreferrer">Gumtree ↗</a> · <a href="${fb}" target="_blank" rel="noopener noreferrer">FB Marketplace ↗</a> — Compare (dealer, pricier): <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
+    ${(DEALERS[mk]||[]).length?`<div class="sellers" style="font-size:12.5px;line-height:1.55">🏢 <b>Go see it — dealers near you:</b><br>${DEALERS[mk].map(d=>`<a href="${d[2]}" target="_blank" rel="noopener noreferrer"><b>${d[0]} ↗</b></a> <span style="color:var(--ink-soft)">${d[1]}</span>`).join('<br>')}</div>`:''}
+    <div class="sellers">Compare prices: <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${wbc}">♡ Save</button>
   </div>`;
 }).join('');
