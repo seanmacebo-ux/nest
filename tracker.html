@@ -112,7 +112,7 @@
   </div>
 
   <div class="sec"><h2>💸 This month's cash pacer</h2>
-    <p>You've got R60k this month. Set each cost — including your rent <b>and Mom's rent</b> — tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the baby float. It all saves on your phone — change the numbers anytime.</p></div>
+    <p>You've got about R52k this month. Set each cost — including your rent <b>and Mom's rent</b> — tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the baby float. It all saves on your phone — change the numbers anytime.</p></div>
   <div class="panel pacer">
     <div class="pacehead">
       <label class="pacehave">You have <span style="font-family:'IBM Plex Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
@@ -145,7 +145,7 @@
         <tr><td><b>Feb</b></td><td>3 consults · birth paid from the float</td><td class="amt" style="color:var(--good)">~R1,950</td></tr>
       </tbody>
     </table>
-    <p style="margin:12px 0 0;font-size:13px;color:var(--ink-soft)"><b>Biggest single month ≈ R20k, not R60k.</b> And ~R24,800 of the R45k float refunds within a week of a normal birth — so the true net cost of the birth is ~R46,500. Full breakdown lives on the <a href="baby.html" style="color:var(--baby);font-weight:600">Baby page</a>.</p>
+    <p style="margin:12px 0 0;font-size:13px;color:var(--ink-soft)"><b>Biggest single month ≈ R20k, not your whole R52k.</b> And ~R24,800 of the R45k float refunds within a week of a normal birth — so the true net cost of the birth is ~R46,500. Full breakdown lives on the <a href="baby.html" style="color:var(--baby);font-weight:600">Baby page</a>.</p>
   </div>
 
   <div class="sec"><h2>🗓️ Milestones ahead</h2>
@@ -299,7 +299,7 @@
     { k:'genesis_dep', label:'Genesis instalment', sub:'R9,000/mo × 5 (Sep→Jan) = the R45k float, paid off by wk 36. Genesis confirmed instalments in writing — no lump sum needed.', amt:9000 }
   ];
   const saved = window.NEST._get(KEY, {});
-  let have = (saved.have != null) ? saved.have : 60000;
+  let have = (saved.have != null) ? saved.have : 52000;
   const rs = saved.rows || {};
   PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = (s.amt != null) ? s.amt : p.amt; });
   function persist(){ window.NEST._set(KEY, { have: have, rows: Object.fromEntries(PACE.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }])) }); }
