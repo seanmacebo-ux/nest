@@ -51,7 +51,7 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Your agreed furniture · just the stuff you've chosen</div>
     <h1>Your <em>furniture</em>.</h1>
-    <p class="sub">The furniture you've chosen: bed, mattress, couch (ordered), TV, TV stand, coffee table, fridge and washer. Tap any card to open the listing. Total below.</p>
+    <p class="sub">The furniture you've chosen: bed, mattress, couch (ordered), TV, TV stand, coffee table, fridge and washer. Plus a shortlist of pillows + blenders further down. Tap any card to open the listing. Total below.</p>
   </header>
 
   <div class="note" style="border-left:3px solid var(--good);margin:0 0 20px">
@@ -62,6 +62,12 @@
   </div>
 
   <div class="grid two" id="grid"></div>
+
+  <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
+    <h4>🛒 Shortlist (23 Oct): pillows + blender, not chosen yet</h4>
+    <p>Not in the total below. All checked live and in stock on 23 Oct. Pillows are from Bed Bath Home (that's where continentallinen.co.za now redirects; it's the Whitehouse + Continental Linen store). Standard size (45 × 70cm) fits your Queen bed.</p>
+  </div>
+  <div class="grid two" id="shortlist" style="margin-top:14px"></div>
 
   <div class="note" style="border-left:3px solid var(--good);margin-top:24px">
     <h4>✅ Couch ORDERED (20 Oct): the Osaka U-shape</h4>
@@ -97,6 +103,23 @@ const ITEMS=[
 ];
 const grid=document.getElementById("grid");
 grid.innerHTML=ITEMS.map(it=>`
+  <div class="cc">
+    <div class="tt-row"><div class="model">${it.icon} ${it.cat}</div><span class="price-tag">${it.price}</span></div>
+    <div class="nm" style="margin-top:8px">${it.name}</div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:7px 0 0;line-height:1.45">${it.desc}</p>
+    ${it.flag?`<p class="flagline">${it.flag}</p>`:''}
+    <div class="cardlinks" style="margin-top:11px"><a class="clink see" style="flex:1" href="${it.url}" target="_blank" rel="noopener noreferrer">View on ${it.store} ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="furniture" data-save-label="${it.cat}: ${it.name}" data-save-url="${it.url}">♡ Save</button>
+  </div>`).join('');
+const SHORT=[
+ {icon:"😴",cat:"Pillows · best value",name:"Whitehouse Deluxe Microfibre Twin Pack (Standard)",price:"R330 for 2",store:"Bed Bath Home",desc:"⭐ Pick. Two pillows for R329.99 (was R399), about R165 each. 100% cotton percale shell, down-proof, so the fill doesn't poke out. Microfibre fill is soft, washable, and fine for allergies.",url:"https://bedbathhome.co.za/products/deluxe-twin-pack-microfibre-pillows"},
+ {icon:"🛏️",cat:"Pillows · side sleeper",name:"Whitehouse Whisper Soft Gusset Pillow (Standard)",price:"R330 each",store:"Bed Bath Home",desc:"Same cotton shell and microfibre fill, but with a boxed edge (the gusset), so it's thicker and holds its shape. Better if you sleep on your side. R329.99 each (was R399).",url:"https://bedbathhome.co.za/products/gusset-pillow-inner-standard-45-x-70cm"},
+ {icon:"🤰",cat:"Pillow · for Mishka",name:"Snugfit Body Comfort Pillow",price:"R430",store:"Bed Bath Home",desc:"Support pillow for between the knees or along the bump. Doctors push side-sleeping from the third trimester, which starts around 1 Dec. R429.99 (was R539).",flag:"Check the size on the page. A full U-shaped pregnancy pillow takes up a lot of a Queen bed.",url:"https://bedbathhome.co.za/products/snugfit-body-comfort-pillow"},
+ {icon:"🥤",cat:"Blender · pick",name:"Milex Nutri 1200 (1200W, cups + blades)",price:"R649",store:"Takealot",desc:"⭐ Pick. 4.7★ from 1,620 reviews. You blend straight in the cup, so it's great for smoothies and shakes, and it can grind and make purée later. R649 (was R999), in stock in JHB.",url:"https://www.takealot.com/milex-nutri-1200-blender-1200w-8-in-1-nutritional-blender-black/PLID49530768"},
+ {icon:"🫙",cat:"Blender · glass jug",name:"Bennett Read 1000W Power Blender, 1.5L glass jug",price:"R829",store:"Takealot",desc:"A big glass jug for soups, family-size smoothies and crushing ice. 4.6★ from 229 reviews, 1000W copper motor, 4 speeds. R829 (was R999), in stock in JHB.",url:"https://www.takealot.com/bennett-read-1000w-power-blender-with-1-5l-glass-jug/PLID72303788"},
+ {icon:"🍼",cat:"Stick blender · baby food",name:"Kenwood HBM01 Hand Blender",price:"R349",store:"Takealot",desc:"The handiest tool for baby purée from ~6 months (around Aug 2027). You blend small amounts right in the pot or bowl, then rinse it. 4.3★ from 245 reviews. R349 (was R599), in stock in JHB.",url:"https://www.takealot.com/kenwood-hand-blender-hbm01-000wh/PLID90037485"}
+];
+document.getElementById("shortlist").innerHTML=SHORT.map(it=>`
   <div class="cc">
     <div class="tt-row"><div class="model">${it.icon} ${it.cat}</div><span class="price-tag">${it.price}</span></div>
     <div class="nm" style="margin-top:8px">${it.name}</div>
