@@ -42,6 +42,8 @@
   <a class="tab" href="cars.html">Cars</a>
   <a class="tab" href="apartments.html">Apartments</a>
   <a class="tab" href="furniture.html" aria-current="page">Furniture</a>
+  <a class="tab" href="bedding.html">Bedding</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
   <a class="tab" href="wifi.html">WiFi</a>
   <a class="tab" href="laptop.html">Laptop</a>
   <a class="tab" href="decided.html">Decided</a>
@@ -51,7 +53,7 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Your agreed furniture · just the stuff you've chosen</div>
     <h1>Your <em>furniture</em>.</h1>
-    <p class="sub">The furniture you've chosen: bed, mattress, couch (ordered), TV, TV stand, coffee table, fridge and washer. Plus shortlists for bedding, blenders and the kitchen further down. Tap any card to open the listing. Total below.</p>
+    <p class="sub">The furniture you've chosen: bed, mattress, couch (ordered), TV, TV stand, coffee table, fridge and washer. Bedding and kitchen stuff now live on their own <a href="bedding.html">Bedding</a> and <a href="kitchen.html">Kitchen</a> tabs. Tap any card to open the listing. Total below.</p>
   </header>
 
   <div class="note" style="border-left:3px solid var(--good);margin:0 0 20px">
@@ -62,26 +64,6 @@
   </div>
 
   <div class="grid two" id="grid"></div>
-
-  <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
-    <h4>🛏️ Bedding shortlist (25 Oct): the Airbnb host's setup</h4>
-    <p>Not in the furniture total. From the host's voice note: <b>light microfibre all-year duvet</b> (no feathers) from Continental Linen/Whitehouse, <b>"Nest" microfibre sheets</b> (that's Bed Bath Home's own brand), and <b>three pillow thicknesses</b>. All Queen, all checked live 25 Oct. Feel the pillows in person at <b>Continental Linen Greenstone</b> (Shop L121, 010 056 8840) or <b>Bedford Square</b>. Free delivery over R1,500.</p>
-    <p><b>Value set: ~R2,153</b> (3 pillows + duvet + sheets + cover + U pillow). <b>Step-up: ~R3,327</b> (the host's Whitehouse Deluxe duvet + Snuggletime pregnancy pillow). <b>Premium:</b> All Finer Things (Adrian's pillows + Divine duvet R2,700).</p>
-  </div>
-  <div class="grid two" id="bedding" style="margin-top:14px"></div>
-
-  <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
-    <h4>🍲 Blender shortlist (25 Oct): picked for reliability, not watts</h4>
-    <p><b>The honest take:</b> for soups, broth soups, sauces and baby purée, a <b>good stick blender is the best tool</b>. You blend right in the pot, so there's no pouring of hot liquid, and baby portions are too small for a 2L jug. Add a jug blender only if smoothies or frozen fruit matter. <b>Dropped:</b> Genesis Nutrimax (Verimark brand, ~1.5★ on Hello Peter, the 2200W can't be verified) and the Russell Hobbs Nexus. <b>Vitamix</b> is the only true buy-it-for-life brand, but it's ~R12.7k in SA, out of stock, and has no local refurb programme.</p>
-  </div>
-  <div class="grid two" id="blend" style="margin-top:14px"></div>
-
-  <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
-    <h4>🍳 Starter kitchen (25 Oct): pots, plates, cutlery, glasses</h4>
-    <p><b>Value kitchen: ~R8,240</b> (everything below). Step-up (Le Creuset, Tramontina, Corelle, 18/10 cutlery): ~R20,700. <b>Spend on:</b> the knife and the pots, because you use them every day. <b>Save on:</b> plates, glasses and cutlery. Corelle can wait until the toddler throws things. <b>Le Creuset (R7,699) mostly buys a lifetime warranty.</b> The Sagenwolf does the same soups at a fifth of the price. <b>Get a stockpot for bone broth:</b> a 5L cast-iron pot full of broth weighs ~9kg and is too small for bones.</p>
-    <p><b>Buy for move day (~R4.9k):</b> pot set, plates, cutlery, glasses, knife, board, spoons, containers. <b>Later:</b> Dutch oven, skillet, stockpot. Several Takealot items say 5–7 work days, so order by ~27 Oct to have them by 1 Nov. Cast iron works on any stove; on glass-ceramic, lift it, don't slide it.</p>
-  </div>
-  <div class="grid two" id="kitchen" style="margin-top:14px"></div>
 
   <div class="note" style="border-left:3px solid var(--good);margin-top:24px">
     <h4>✅ Couch ORDERED (20 Oct): the Osaka U-shape</h4>
@@ -125,46 +107,6 @@ grid.innerHTML=ITEMS.map(it=>`
     <div class="cardlinks" style="margin-top:11px"><a class="clink see" style="flex:1" href="${it.url}" target="_blank" rel="noopener noreferrer">View on ${it.store} ↗</a></div>
     <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="furniture" data-save-label="${it.cat}: ${it.name}" data-save-url="${it.url}">♡ Save</button>
   </div>`).join('');
-const BEDDING=[
- {icon:"😴",cat:"Pillow · firm, flatter",name:"Whitehouse Quilted Hollow Puff (Standard)",price:"R149",store:"Bed Bath Home",desc:"The thinnest of the three thicknesses. Firm density, for back or stomach sleepers. ✅ In stock 25 Oct.",url:"https://bedbathhome.co.za/products/quilted-hollow-puff-pillow-inner"},
- {icon:"😴",cat:"Pillow · medium",name:"Whitehouse Deluxe Microfibre Twin Pack (Standard)",price:"R330 for 2",store:"Bed Bath Home",desc:"⭐ The everyday pick. Two for R329.99 (~R165 each). Cotton percale shell, down-proof, microfibre fill, washable, fine for allergies.",url:"https://bedbathhome.co.za/products/deluxe-twin-pack-microfibre-pillows"},
- {icon:"🛏️",cat:"Pillow · high, side sleeper",name:"Whitehouse Whisper Soft Gusset (45 × 70)",price:"R330",store:"Bed Bath Home",desc:"The thickest. A boxed edge (the gusset) keeps its height, which is good for side sleeping, and Mishka will be side-sleeping from the third trimester. R329.99.",url:"https://bedbathhome.co.za/products/gusset-pillow-inner-standard-45-x-70cm"},
- {icon:"☁️",cat:"Duvet · value",name:"Nest Pure Comfort Duvet Inner (Queen 230×200)",price:"R500",store:"Bed Bath Home",desc:"Sold as all-year-round, microfibre, no feathers. R499.99, ✅ in stock 25 Oct. No tog listed.",url:"https://bedbathhome.co.za/products/nest-pure-comfort-duvet-inner"},
- {icon:"☁️",cat:"Duvet · the host's kind",name:"Whitehouse Microfibre Deluxe Duvet Inner (Queen)",price:"R1,200",store:"Bed Bath Home",desc:"⭐ Closest match to the host's: light, all-year (tog 6–7), cotton down-proof casing, no feathers. R1,199.99 (was R1,379). ✅ In stock.",flag:"The care label says hand wash, so ask in store.",url:"https://bedbathhome.co.za/products/microfibre-deluxe-duvet-inner-downproof"},
- {icon:"🧺",cat:"Sheets · the host's \"Nest\"",name:"Nest Soft Touch Essentials Fitted Sheet (Queen)",price:"R180",store:"Bed Bath Home",desc:"The host's microfibre sheets: they keep their shape better than percale. Queen 152×188×30cm, R179.99. Matching pillowcase pair R78.99 and duvet cover set R359.99. Skip the brushed Nest Cloud range, because pregnancy runs hot.",url:"https://bedbathhome.co.za/products/nest-soft-touch-essentials-fitted-sheet-white"},
- {icon:"🤰",cat:"Pregnancy pillow · value",name:"U-Shaped Full Body Pillow (grey)",price:"R225",store:"Takealot",desc:"Supports the back, bump and knees at once. 140×75cm with a washable cover. 4.1★ from 374 reviews. ✅ In stock.",flag:"A full U takes about half a Queen bed, so Sean gets the other half.",url:"https://www.takealot.com/pregnancy-u-shaped-full-body-pillow-grey/PLID72722966"},
- {icon:"🤰",cat:"Pregnancy pillow · two jobs",name:"Snuggletime Body Comfort Maternity Pillow",price:"R699",store:"Clicks",desc:"⭐ Snake-shaped, so it takes less bed than a U, and it doubles as a feeding pillow after the birth. In stock at Clicks (Dis-Chem R705.99). Replaces the Snugfit, whose label says don't wash it.",url:"https://clicks.co.za/snuggletime_body-comfort-maternity-pillow/p/329295"},
- {icon:"✨",cat:"Premium · the host's favourite",name:"All Finer Things: washable pillows + Divine duvet",price:"R399–R2,820",store:"All Finer Things",desc:"Adrian's family business (since 2007). Pillows R399 medium, R499 firm, R569 Queen 50×80; you can add or remove filling. Divine duvet (Queen) R2,700 summer, R2,820 winter, down-free, in two halves you wash separately. Made to order: ~10 working days, then 2–3 days by courier.",url:"https://www.allfinerthings.com/products/washable-hypoallergenic-pillows"}
-];
-const BLEND=[
- {icon:"🥣",cat:"Stick blender · best value",name:"Philips ProMix HR2535",price:"R924",store:"Takealot",desc:"⭐ Get this first. Blends soup in the pot, and baby purée from ~6 months (Aug 2027). Philips gives a 2-year warranty, the same as the Braun for R475 less. R924 (was R1,399). ✅ In stock 25 Oct.",url:"https://www.takealot.com/philips-promix-daily-collection-hand-blender-hr2535-00/PLID72193268"},
- {icon:"🍲",cat:"Jug blender · only if smoothies",name:"Kenwood Blend n Heat BLM92.920SS",price:"R1,899",store:"Takealot",desc:"Why it's still the jug pick: a big brand with a 2-year warranty, a shatter-proof BPA-free 2L Tritan jug, and soup/sauce/ice programmes. No heating element; blending fast heats soup to 80–85°C in ~7 min. 4.6★ from 63 reviews. ✅ In stock.",url:"https://www.takealot.com/kenwood-blend-n-heat-1500w-high-power-blender-blm92-920ss/PLID72799141"},
- {icon:"🧊",cat:"Jug · ice + frozen fruit",name:"Ninja UltraCrush Professional BP201EU",price:"R2,699",store:"Takealot",desc:"Ninja is now official in SA (2-year warranty, toll-free 0800 014797). Best for ice and frozen smoothies. Owners get about 5–7 years; the drive gears wear. The manual limits hot liquids, so it's not for soup.",url:"https://www.takealot.com/ninja-ultracrush-professional-jug-blender-bp201eu/PLID101546146"},
- {icon:"🏆",cat:"Step-up · Vitamix-style, SA-made",name:"OmniBlend V 2L",price:"R5,259",store:"Omnikitchen",desc:"The realistic buy-it-for-life tier in SA. The maker sells spares and does repairs. Has a tamper, and heats soup by friction. 3-year motor warranty (some retailers say 2). Revisit after the baby, if a jug is getting daily use.",flag:"The jug is polycarbonate, which may contain BPA, so think about that for hot baby food.",url:"https://omnikitchen.co.za/products/omniblend-v"}
-];
-const KITCHEN=[
- {icon:"🍲",cat:"Cast iron Dutch oven · value",name:"Sagenwolf Enamelled Casserole 26cm, 5.1L",price:"R1,499",store:"Yuppiechef",desc:"⭐ The soup, stew and sauce pot. Does what a Le Creuset does at a fifth of the price. 5.3kg with the lid. ✅ In stock 25 Oct. Avoid the LK's 6L: reviews say the enamel flakes and claims get refused.",flag:"Heavy, so Sean lifts it while Mishka's pregnant. No metal spoons, and never put it hot into cold water.",url:"https://www.yuppiechef.com/sagenwolf-cast-iron-series.htm?id=60724&name=Sagenwolf-Enamelled-Cast-Iron-Casserole-Pot-26cm&vid=1731180"},
- {icon:"🍳",cat:"Cast iron skillet",name:"LK's Cast Iron Frying Pan 26cm",price:"R549",store:"Yuppiechef",desc:"Lasts forever if you dry it straight away and wipe it with oil. Never soak it. Step-up: Victoria 26cm with a helper handle, R899 (easier to lift).",url:"https://www.yuppiechef.com/lks-frying-and-jaffle-pans.htm?id=34809&name=LKs-Cast-Iron-Frying-Pan-26cm"},
- {icon:"🦴",cat:"Stockpot · bone broth",name:"Blaumann 24cm Stainless Stock Pot, 7.7L",price:"R520",store:"Takealot",desc:"Big enough for bones plus water. Stainless is light and easy to clean. ✅ In stock. Shortcut idea: the Russell Hobbs 6L pressure cooker (R1,404) makes broth in ~2 hours instead of ~12.",url:"https://www.takealot.com/blaumann-24cm-stainless-steel-stock-pot-with-lid-gourmet-line/PLID102116154"},
- {icon:"🥘",cat:"Everyday pots",name:"Russell Hobbs Stainless 6-piece Set (2.6 / 3.6 / 6.1L)",price:"R1,399",store:"Takealot",desc:"Rice, veg, pasta. Works on induction too. ✅ In stock. Step-up worth it: Tramontina Una 7-piece, R3,109, 15-year warranty.",url:"https://www.takealot.com/russell-hobbs-stainless-steel-6-piece-cookware-set/PLID99466482"},
- {icon:"🍽️",cat:"Plates + bowls",name:"Consol Opal Dinnerware 12-piece",price:"R669",store:"Takealot",desc:"SA brand, opal glass, 4.8★ from 46 reviews. Service for 4. ✅ In stock. Later: Corelle Square 12-piece, R2,365 (light and chip-resistant, good for a toddler).",url:"https://www.takealot.com/consol-opal-dinnerware-12pce-set/PLID52855534"},
- {icon:"🍴",cat:"Cutlery",name:"Eetrite Newport 24-piece",price:"R949",store:"Takealot",desc:"SA brand, 4.9★ from 73 reviews. ✅ In stock.",flag:"It's 18/0 steel, not 18/10, so hand-dry it or it'll water-spot. The 18/10 option is Maxwell & Williams Cosmopolitan 16-piece, R1,679.",url:"https://www.takealot.com/eetrite-newport-cutlery-set-set-of-24/PLID28169913"},
- {icon:"🥛",cat:"Glasses",name:"Consol Willy Tumbler 8-pack (380ml)",price:"R159",store:"Takealot",desc:"Everyday glasses. Add Consol stemless wine glasses, 4 for R169 (4.7★ from 181 reviews). Step-up: Duralex Picardie 6-pack, R499, tempered and very hard to break.",url:"https://www.takealot.com/consol-willy-tumbler-8-pack-380ml/PLID98176749"},
- {icon:"🔪",cat:"Chef's knife",name:"Victorinox 19cm Chef's Knife",price:"R959",store:"Takealot",desc:"The biggest upgrade per rand in the kitchen. Add the Victorinox 8cm paring knife (R129). Also a bamboo board (~R134), wooden spoons (~R139) and a baking tray (~R169).",url:"https://www.takealot.com/victorinox-chefs-knife-19cm-black/PLID28003425"},
- {icon:"🥡",cat:"Meal-prep containers",name:"Consol Madrid Glass Containers 3-piece (×2)",price:"R798",store:"Takealot",desc:"Glass with clip-on vented lids, for batch soups and postpartum meals. R399 a set, get two. ✅ In stock.",url:"https://www.takealot.com/consol-madrid-storage-containers-with-clip-on-vented-lids-3pce-v/PLID91218150"}
-];
-const card=it=>`
-  <div class="cc">
-    <div class="tt-row"><div class="model">${it.icon} ${it.cat}</div><span class="price-tag">${it.price}</span></div>
-    <div class="nm" style="margin-top:8px">${it.name}</div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin:7px 0 0;line-height:1.45">${it.desc}</p>
-    ${it.flag?`<p class="flagline">${it.flag}</p>`:''}
-    <div class="cardlinks" style="margin-top:11px"><a class="clink see" style="flex:1" href="${it.url}" target="_blank" rel="noopener noreferrer">View on ${it.store} ↗</a></div>
-    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="furniture" data-save-label="${it.cat}: ${it.name}" data-save-url="${it.url}">♡ Save</button>
-  </div>`;
-document.getElementById("bedding").innerHTML=BEDDING.map(card).join('');
-document.getElementById("blend").innerHTML=BLEND.map(card).join('');
-document.getElementById("kitchen").innerHTML=KITCHEN.map(card).join('');
 if (window.NEST) window.NEST.wire();
 </script>
 </body>

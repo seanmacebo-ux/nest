@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2F6B4F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Bedding · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛏️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  .grid.two { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 780px) { .grid.two { grid-template-columns: 1fr; } }
+  .tt-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .price-tag { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 15px; color: var(--accent); white-space: nowrap; }
+  .nm { font-weight: 600; font-size: 15px; }
+  .flagline { font-size: 12px; color: var(--red); font-weight: 600; margin: 8px 0 0; line-height: 1.4; }
+  .totalcard { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .totalcard .tn { font-family: "IBM Plex Mono", monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); font-weight: 600; }
+  .totalcard .tp { font-family: "Fraunces", serif; font-weight: 600; font-size: 42px; color: var(--accent); letter-spacing: -.02em; line-height: 1; margin-top: 6px; }
+  .totalcard .tsub { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="baby.html">Baby</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="furniture.html">Furniture</a>
+  <a class="tab" href="bedding.html" aria-current="page">Bedding</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="laptop.html">Laptop</a>
+  <a class="tab" href="decided.html">Decided</a>
+</div></nav>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Bedding · the Airbnb host's setup · checked 25 Oct</div>
+    <h1>Your <em>bedding</em>.</h1>
+    <p class="sub">Pillows, duvet, sheets and Mishka's pregnancy pillow, matched to the Airbnb host's voice note. Queen size. Tap any card to open the listing.</p>
+  </header>
+
+  <div class="note" style="border-left:3px solid var(--accent);margin-top:0">
+    <h4>🛏️ Bedding shortlist (25 Oct): the Airbnb host's setup</h4>
+    <p>Not in the furniture total. From the host's voice note: <b>light microfibre all-year duvet</b> (no feathers) from Continental Linen/Whitehouse, <b>"Nest" microfibre sheets</b> (that's Bed Bath Home's own brand), and <b>three pillow thicknesses</b>. All Queen, all checked live 25 Oct. Feel the pillows in person at <b>Continental Linen Greenstone</b> (Shop L121, 010 056 8840) or <b>Bedford Square</b>. Free delivery over R1,500.</p>
+    <p><b>Value set: ~R2,153</b> (3 pillows + duvet + sheets + cover + U pillow). <b>Step-up: ~R3,327</b> (the host's Whitehouse Deluxe duvet + Snuggletime pregnancy pillow). <b>Premium:</b> All Finer Things (Adrian's pillows + Divine duvet R2,700).</p>
+  </div>
+  <div class="grid two" id="bedding" style="margin-top:14px"></div>
+
+  <div class="foot">BEDDING · prices + stock checked live 25 Oct · re-check at checkout · The Nest</div>
+</div>
+
+<script src="nest.js"></script>
+<script>
+const BEDDING=[
+ {icon:"😴",cat:"Pillow · firm, flatter",name:"Whitehouse Quilted Hollow Puff (Standard)",price:"R149",store:"Bed Bath Home",desc:"The thinnest of the three thicknesses. Firm density, for back or stomach sleepers. ✅ In stock 25 Oct.",url:"https://bedbathhome.co.za/products/quilted-hollow-puff-pillow-inner"},
+ {icon:"😴",cat:"Pillow · medium",name:"Whitehouse Deluxe Microfibre Twin Pack (Standard)",price:"R330 for 2",store:"Bed Bath Home",desc:"⭐ The everyday pick. Two for R329.99 (~R165 each). Cotton percale shell, down-proof, microfibre fill, washable, fine for allergies.",url:"https://bedbathhome.co.za/products/deluxe-twin-pack-microfibre-pillows"},
+ {icon:"🛏️",cat:"Pillow · high, side sleeper",name:"Whitehouse Whisper Soft Gusset (45 × 70)",price:"R330",store:"Bed Bath Home",desc:"The thickest. A boxed edge (the gusset) keeps its height, which is good for side sleeping, and Mishka will be side-sleeping from the third trimester. R329.99.",url:"https://bedbathhome.co.za/products/gusset-pillow-inner-standard-45-x-70cm"},
+ {icon:"☁️",cat:"Duvet · value",name:"Nest Pure Comfort Duvet Inner (Queen 230×200)",price:"R500",store:"Bed Bath Home",desc:"Sold as all-year-round, microfibre, no feathers. R499.99, ✅ in stock 25 Oct. No tog listed.",url:"https://bedbathhome.co.za/products/nest-pure-comfort-duvet-inner"},
+ {icon:"☁️",cat:"Duvet · the host's kind",name:"Whitehouse Microfibre Deluxe Duvet Inner (Queen)",price:"R1,200",store:"Bed Bath Home",desc:"⭐ Closest match to the host's: light, all-year (tog 6–7), cotton down-proof casing, no feathers. R1,199.99 (was R1,379). ✅ In stock.",flag:"The care label says hand wash, so ask in store.",url:"https://bedbathhome.co.za/products/microfibre-deluxe-duvet-inner-downproof"},
+ {icon:"🧺",cat:"Sheets · the host's \"Nest\"",name:"Nest Soft Touch Essentials Fitted Sheet (Queen)",price:"R180",store:"Bed Bath Home",desc:"The host's microfibre sheets: they keep their shape better than percale. Queen 152×188×30cm, R179.99. Matching pillowcase pair R78.99 and duvet cover set R359.99. Skip the brushed Nest Cloud range, because pregnancy runs hot.",url:"https://bedbathhome.co.za/products/nest-soft-touch-essentials-fitted-sheet-white"},
+ {icon:"🤰",cat:"Pregnancy pillow · value",name:"U-Shaped Full Body Pillow (grey)",price:"R225",store:"Takealot",desc:"Supports the back, bump and knees at once. 140×75cm with a washable cover. 4.1★ from 374 reviews. ✅ In stock.",flag:"A full U takes about half a Queen bed, so Sean gets the other half.",url:"https://www.takealot.com/pregnancy-u-shaped-full-body-pillow-grey/PLID72722966"},
+ {icon:"🤰",cat:"Pregnancy pillow · two jobs",name:"Snuggletime Body Comfort Maternity Pillow",price:"R699",store:"Clicks",desc:"⭐ Snake-shaped, so it takes less bed than a U, and it doubles as a feeding pillow after the birth. In stock at Clicks (Dis-Chem R705.99). Replaces the Snugfit, whose label says don't wash it.",url:"https://clicks.co.za/snuggletime_body-comfort-maternity-pillow/p/329295"},
+ {icon:"✨",cat:"Premium · the host's favourite",name:"All Finer Things: washable pillows + Divine duvet",price:"R399–R2,820",store:"All Finer Things",desc:"Adrian's family business (since 2007). Pillows R399 medium, R499 firm, R569 Queen 50×80; you can add or remove filling. Divine duvet (Queen) R2,700 summer, R2,820 winter, down-free, in two halves you wash separately. Made to order: ~10 working days, then 2–3 days by courier.",url:"https://www.allfinerthings.com/products/washable-hypoallergenic-pillows"}
+];
+const card=it=>`
+  <div class="cc">
+    <div class="tt-row"><div class="model">${it.icon} ${it.cat}</div><span class="price-tag">${it.price}</span></div>
+    <div class="nm" style="margin-top:8px">${it.name}</div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:7px 0 0;line-height:1.45">${it.desc}</p>
+    ${it.flag?`<p class="flagline">${it.flag}</p>`:''}
+    <div class="cardlinks" style="margin-top:11px"><a class="clink see" style="flex:1" href="${it.url}" target="_blank" rel="noopener noreferrer">View on ${it.store} ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="furniture" data-save-label="${it.cat}: ${it.name}" data-save-url="${it.url}">♡ Save</button>
+  </div>`;
+document.getElementById("bedding").innerHTML=BEDDING.map(card).join('');
+if (window.NEST) window.NEST.wire();
+</script>
+</body>
+</html>
