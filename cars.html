@@ -18,9 +18,61 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
-  .grid.two { grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 780px) { .grid.two { grid-template-columns: 1fr; } }
-  .lt { width: 100%; border-collapse: collapse; margin: 13px 0 0; font-size: 12.5px; }
+  .filterbar { position: static; }
+  .jump { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 16px; }
+  .jump a { font-size: 12.5px; font-weight: 600; text-decoration: none; color: var(--car-ink); background: var(--car-soft); border-radius: 20px; padding: 6px 12px; }
+  .brief { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .brief span { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--ink); border-radius: 6px; padding: 4px 8px; }
+  .btag { font-size: 9.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
+  .btag.s { background: var(--good-soft); color: var(--good); }
+  .btag.a { background: var(--car-soft); color: var(--car-ink); }
+  .btag.w { background: var(--red-soft); color: var(--red); }
+  .secline { font-size: 13px; color: var(--ink-soft); margin: 6px 0 0; max-width: 66ch; }
+  .changes { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 16px; font-size: 13px; }
+  .changes b.h { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 6px; }
+  .changes ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+  /* live listing cards: one layout for every car */
+  .lgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  @media (max-width: 980px) { .lgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .lgrid { grid-template-columns: 1fr; } }
+  .lc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 15px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .lc.pick { border-color: color-mix(in srgb, var(--star) 60%, var(--line)); }
+  .lc.hide { display: none; }
+  .lc-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .lc-top .star { margin-left: auto; }
+  .st { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; background: var(--surface-2); color: var(--ink-soft); }
+  .st.ok { background: var(--good-soft); color: var(--good); }
+  .st.soon { background: var(--amber-soft); color: var(--amber); }
+  .lc-name { font-weight: 600; font-size: 15px; margin-top: 8px; line-height: 1.3; }
+  .lc-price { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 19px; color: var(--car-ink); margin-top: 4px; }
+  .lc-price small { font-family: "IBM Plex Sans", sans-serif; font-size: 11.5px; font-weight: 500; color: var(--ink-soft); }
+  .lc-facts { font-size: 12.5px; color: var(--ink); margin-top: 3px; }
+  .lc-why { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.45; }
+  .lc-warn { font-size: 12px; color: var(--warn); margin: 6px 0 0; line-height: 1.45; }
+  .lc-act { margin-top: auto; padding-top: 11px; display: flex; gap: 7px; }
+  .lc-act a { flex: 1; text-align: center; text-decoration: none; font-size: 12.5px; font-weight: 600; padding: 8px 10px; border-radius: 9px; background: var(--car); color: #fff; }
+  .lc-act .savebtn { flex: 0 0 auto; }
+  .gone { margin-top: 14px; }
+  .gone > summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 10px 0; list-style: none; }
+  .gone > summary::-webkit-details-marker { display: none; }
+  .gone .lc { opacity: .72; box-shadow: none; }
+  /* model guide: one tappable row per model */
+  .mlist { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
+  @media (max-width: 780px) { .mlist { grid-template-columns: 1fr; } }
+  .mr { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .mr.pick { border-color: color-mix(in srgb, var(--star) 55%, var(--line)); }
+  .mr.hide { display: none; }
+  .mr > summary { list-style: none; cursor: pointer; padding: 11px 13px; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; }
+  .mr > summary::-webkit-details-marker { display: none; }
+  .mr-n { font-weight: 600; font-size: 14.5px; }
+  .mr-b { font-size: 11.5px; color: var(--ink-soft); }
+  .mr-p { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); text-align: right; white-space: nowrap; }
+  .mr-f { font-size: 10.5px; text-align: right; color: var(--ink-soft); white-space: nowrap; }
+  .mr-f.tt { color: var(--warn); font-weight: 600; }
+  .mr-f.ex { color: var(--good); font-weight: 600; }
+  .mr-body { padding: 0 13px 13px; border-top: 1px solid var(--line); }
+  .mr-body p { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
+  .lt { width: 100%; border-collapse: collapse; margin: 10px 0 0; font-size: 12.5px; }
   .lt th { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
   .lt td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
   .lt tr:last-child td { border-bottom: none; }
@@ -30,23 +82,23 @@
   .lt .lo { color: var(--ink-soft); font-size: 11.5px; }
   .lt tr.best td { background: var(--good-soft); }
   .lt .tag { font-size: 8.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
-  .sellers { margin-top: 8px; font-size: 11.5px; color: var(--ink-soft); }
-  .sellers a { color: var(--car-ink); text-decoration: none; font-weight: 600; }
-  .sellers a:hover { text-decoration: underline; }
-  .brandlist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .mlinks { margin-top: 10px; font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+  .mlinks a { color: var(--car-ink); font-weight: 600; text-decoration: none; }
+  /* reference accordions */
+  .acc { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  .acc > summary { cursor: pointer; list-style: none; padding: 14px 16px; font-family: "Fraunces", serif; font-weight: 600; font-size: 16.5px; color: var(--car-ink); display: flex; justify-content: space-between; gap: 10px; }
+  .acc > summary::-webkit-details-marker { display: none; }
+  .acc > summary::after { content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--ink-soft); }
+  .acc[open] > summary::after { content: "−"; }
+  .acc .in { padding: 0 16px 16px; font-size: 13.5px; }
+  .acc .in p { margin: 0 0 10px; }
+  .acc .in ul { margin: 6px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .acc .in a { color: var(--car-ink); font-weight: 600; }
+  .brandlist { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   @media (max-width: 720px) { .brandlist { grid-template-columns: 1fr; } }
-  .br { border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; background: var(--surface); }
-  .brn { font-weight: 600; font-size: 14.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .brd { font-size: 12.5px; color: var(--ink-soft); margin-top: 5px; line-height: 1.45; }
-  .btag { font-size: 9.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
-  .btag.s { background: var(--good-soft); color: var(--good); }
-  .btag.a { background: var(--car-soft); color: var(--car-ink); }
-  .btag.w { background: var(--red-soft); color: var(--red); }
-  .notewrap { margin-top: 8px; }
-  .notetoggle { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: 12px; font-weight: 600; color: var(--ink-soft); cursor: pointer; font-family: inherit; }
-  .notetoggle:hover { border-color: var(--accent); color: var(--car-ink); }
-  .notebox { display: none; width: 100%; margin-top: 8px; min-height: 60px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; font-size: 13px; background: var(--surface-2); color: var(--ink); box-sizing: border-box; }
-  .notewrap.open .notebox { display: block; }
+  .br { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--surface-2); }
+  .brn { font-weight: 600; font-size: 13.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .brd { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; line-height: 1.45; }
 </style>
 </head>
 <body>
@@ -67,146 +119,183 @@
 
 <div class="wrap">
   <header>
-    <div class="eyebrow"><span class="dot"></span> Real options · by brand &amp; model · 2020+ · automatic</div>
+    <div class="eyebrow"><span class="dot"></span> Cars · buying after the licence (~Q2 2027)</div>
     <h1>The <em>Six-Four</em> Shortlist.</h1>
-    <p class="sub">43 models, automatic and 2020+, sized for a 6'4 driver and a baby seat. Prices are real <b>street bands</b> — what they actually sell for on <b>WeBuyCars + private (Gumtree/Facebook)</b>, which runs roughly <b>R20k–R50k under</b> the AutoTrader/Cars.co.za dealer asks. Filter by origin or body, ♡ your picks. Brand-by-brand reliability + resale in <b>The brands</b> at the bottom.</p>
-    <div class="callout car">📷 <b>See it</b> = real photos · 🔎 <b>WeBuyCars</b> (or tap any row) = fixed-price real value, the best public read on street price · 💸 <b>Gumtree + FB Marketplace</b> = the cheapest private deals · <b>AutoTrader/Cars.co.za</b> = dealer asks (pricier), there to compare. The green <b>street</b> row is the real going rate; a second row shows the dealer ask so you see the gap. 🎯 <b>Update (19 Oct):</b> the <b>Omoda C5 is no longer the pick</b>. You're looking at other options, and the live hunt (automatic hatchbacks ≤ R220k) is just below.</div>
+    <div class="brief"><span>Automatic</span><span>Hatchback</span><span>Under R220k</span><span>Gauteng</span><span>Pram fits the boot</span><span>Fits a 6'4 driver</span></div>
+    <p class="sub" style="margin-top:12px">Real cars for sale right now, then a guide to the models worth looking for. You're buying next year, so today's listings will be gone by then. Use them to learn what the money gets you.</p>
+    <div class="jump"><a href="#live">🔄 For sale now</a><a href="#models">🚗 Model guide</a><a href="#money">💳 Monthly cost</a><a href="#safe">🛡️ Buying safely</a><a href="#where">🏢 Where to look</a><a href="#brands">🏷️ Brands</a></div>
   </header>
 
-  <div class="note" style="border-left:3px solid var(--good)" id="livefinds">
-    <h4>🔄 This week's car hunt — two lanes <span style="font-size:9.5px;font-family:'IBM Plex Mono',monospace;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--good);background:var(--good-soft);padding:2px 7px;border-radius:20px;margin-left:6px">auto-refreshed every 2 days</span></h4>
-    <p>New rule (30 Sep): we now <b>skip AutoTrader &amp; Cars.co.za</b> (everyone sees them — no bargains) <b>and skip Facebook Marketplace + Gumtree</b> (saturated + scam-heavy, no real edge). Instead the stealth sweep hunts <b>two lanes</b> for an automatic hatchback under <b>R220k</b>, Gauteng, boot big enough for a pram:</p>
-    <ul style="margin:8px 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:13px">
-      <li><span class="btag s">SAFE</span> &nbsp;<b>Inspect before you pay.</b> Fixed-price, viewable stock with real recourse.</li>
-      <li><span class="btag w">HUNT</span> &nbsp;<b>Cheapest, buy-as-is.</b> Bank repos + auctions — no comeback, so check the <b>viewing/auction date</b> and inspect on-site every time.</li>
-    </ul>
-    <p style="margin-top:10px;font-size:12.5px;color:var(--ink-soft)"><b>This cycle (27 Oct):</b> I re-queried WeBuyCars' stock (240 automatic hatches in Gauteng at ≤ R220k today) and re-opened every car below live. <span class="btag s">SAFE</span> ❌ <b>2 gone</b>: the <b>R207,900 2020 Baleno GLX</b> has sold (its page now bounces to the search), and Burchmore's <b>Kiger</b> lot has expired after Monday's re-run. ⚠️ The <b>25k-km 2023 Baleno</b> and the <b>Mazda3</b> are now "Reserved". ✅ The <b>Polo</b> and the <b>Focus</b> are back "For Sale", the <b>Mazda2</b> came off auction at R186,900, and the <b>A3</b> dropped to R187,900. New: the <b>2021 Peugeot 208 auto (R144,900, 39k km)</b> is back after its sale fell through, and a <b>2020 Hyundai Venue DCT</b> is in Burchmore's Wed 28 Oct Sandton sale. <span class="btag w">HUNT</span> I found the real bank pages this time. <b>MFC (Nedbank)</b> publishes its auction catalogues on its calendar page, and its <b>Gauteng sale on Wed 28 Oct</b> (Esselen Park) has a <b>2024 Baleno auto with 19k km (retail R203,913)</b> ★ and a <b>2024 Kiger AMT</b> (rows below). The next MFC Gauteng sales are 3 Nov and 11 Nov. <b>WesBank</b>'s Midrand repo auction on Thu 29 Oct (146 lots) has no auto hatch under budget, only GTIs, bakkies and SUVs. Park Village's ABSA webcast with the Kia Rio is still on for <b>Wed 28 Oct</b>. Their 3 Nov ABSA sale and 5 Nov national sale have no lots published yet. Aucor is still trucks and plant, and SMD still blocks automated access (HTTP 403).</p>
-    <p style="margin-top:6px;font-size:12px;color:var(--ink-soft)"><b>Previous cycle (25 Oct):</b> I re-queried WeBuyCars' stock (249 automatic hatches in Gauteng at ≤ R220k today) and re-opened every car below live. <span class="btag s">SAFE</span> ❌ <b>2 gone</b>: the <b>R218,900 Starlet</b> has sold (its page now bounces to the search), and Burchmore's <b>Polo Vivo</b> sold at Saturday's auction. ⚠️ The 23 Oct picks are moving fast: the <b>2023 Baleno (R209,900)</b>, the <b>Polo</b> and the <b>Focus</b> are all now "Reserved / Sale in Progress", and the <b>Mazda3</b> has gone onto a WeBuyCars online auction (bid R216,500, closes Mon). ✅ The <b>2019 Jazz is back "For Sale"</b>. The <b>Kiger</b> didn't sell on Saturday and is re-running on <b>Mon 26 Oct</b>. New: a <b>2023 Baleno with only 25k km (R206,900)</b> ★ and a <b>2020 Baleno GLX (R207,900, 355L boot)</b>. I skipped a cheap 2021 Starlet (R160,900) because its WeBuyCars report says the <b>gearbox slips</b>. <span class="btag w">HUNT</span> Park Village has now published the <b>ABSA repo catalogue for Wed 28 Oct</b> (131 lots), and one fits: a <b>2022 Kia Rio auto, 58k km</b> (row below). Their Tue 3 Nov ABSA sale has no lots yet, and the National Vehicle Auction on Thu 5 Nov hasn't published its catalogue. Burchmore's next Johannesburg sales are <b>Wed 28 Oct @ 10:30</b> and <b>Sat 31 Oct @ 11:30</b>, but their stock search only loads in a live browser session, so I couldn't pull the lot lists. Aucor's vehicle sales are trucks and plant only, and SMD still blocks automated access (HTTP 403).</p>
-    <ul style="margin:8px 0 0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px">
-      <li><span class="btag w">HUNT</span> &nbsp;<a href="https://www.mfc.co.za/home/auction-calendar.html" target="_blank" rel="noopener noreferrer"><b>⭐ NEW · MFC (Nedbank) repo · 2024 Suzuki Baleno 1.5 GL Auto ↗</b></a> <b>18,902 km</b> · retail guide R203,913 · 314L boot · <b>MFC Auction House Gauteng, Wed 28 Oct</b>, 5 Lindsay St, Esselen Park, Tembisa (011 879 9321). Bank repo, sold as-is. Repos usually go under retail, which is the point. Phone to confirm the viewing times and lot number before you go, and the catalogue can change on the day. Open the "MFC Auction House Gauteng, 28 Oct" row on the calendar page to see the catalogue.</li>
-      <li><span class="btag w">HUNT</span> &nbsp;<a href="https://www.mfc.co.za/home/auction-calendar.html" target="_blank" rel="noopener noreferrer"><b>NEW · MFC (Nedbank) repo · 2024 Renault Kiger 1.0 Zen AMT ↗</b></a> 35,891 km · retail guide R178,434 · ~405L boot (small crossover) · same <b>MFC Auction House Gauteng sale, Wed 28 Oct</b>, Esselen Park. Same as-is rules as above. The biggest boot for the money, but the AMT gearbox is jerky at low speed. The same catalogue also has a 2024 Starlet auto (70k km, retail R218,869) if the Baleno goes high.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.bidvestburchmores.co.za/stock/hyundai-venue-1.0-tgdi-motion-dct/77823" target="_blank" rel="noopener noreferrer"><b>NEW · Burchmore's Lot 25 · 2020 Hyundai Venue 1.0T Motion DCT ↗</b></a> Estimated trade R193,700 / retail R225,600 · 87,879 km · <b>Burchmore's Sandton live auction, Wed 28 Oct @ 7pm</b> · ~350L boot (small crossover, not a hatch). It's also in a Burchmore's online auction <b>today, Tue 27 Oct, ending 4:30pm</b>, so it may go before Wednesday. ⚠️ The lot sheet lists <b>"Vehicle Damaged" + "Paintwork Done"</b>, so view it on site and ask what was repaired before you bid. The only auto in Wednesday's 24 lots that fits; the other autos are high-km or have small boots.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Peugeot/208/CB2708579" target="_blank" rel="noopener noreferrer"><b>BACK · 2021 Peugeot 208 1.2T GT Line Auto ↗</b></a> <b>R144,900</b> · 38,799 km · Midstream (GP) · 311L boot + Apple CarPlay/Android Auto · complete + up-to-date service history, spare key. Opened live 27 Oct. It went on 23 Oct and is now back "For Sale", so the sale fell through. By far the cheapest low-km auto here. ⚠️ WeBuyCars' condition report flags <b>1 roadworthy-relevant fault</b> that must be fixed, and it's the same 1.2 PureTech engine as the 2008, so ask about the timing belt.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Peugeot/2008/7DD207498" target="_blank" rel="noopener noreferrer"><b>⭐ NEW · 2021 Peugeot 2008 1.2T Active Auto ↗</b></a> R199,900 · 59,929 km · Midstream (GP) · <b>434L boot</b> + ISOFIX · Certified, complete + up-to-date service history, 6-speed auto. Opened live 19 Oct. Biggest boot under budget by a mile. WeBuyCars lists it as a hatch, but it's really a small crossover. ⚠️ The 1.2 PureTech engine has a known timing-belt-in-oil weakness, so ask for proof the belt was checked or replaced.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Suzuki/Baleno/690601811" target="_blank" rel="noopener noreferrer"><b>⭐ NEW · 2023 Suzuki Baleno 1.5 GL Auto ↗</b></a> R206,900 · <b>25,363 km</b> · Midstream (GP) · 314L boot + reverse camera · complete + up-to-date service history, warranty still active, service plan to Jan 2027, no roadworthy faults. Opened live 25 Oct. ⚠️ <b>Now "Reserved" too (27 Oct)</b>, so someone is buying it. Worth a call in case the sale falls through. The lowest-km car under budget. No spare key, so budget ~R2–3k for one.</li>
-      <li><span class="btag w">HUNT</span> &nbsp;<a href="https://www.parkvillageauctions.co.za/catalogue/2407-absa-passenger-and-commercial-vehicle-auction-boksburg" target="_blank" rel="noopener noreferrer"><b>NEW · Park Village ABSA repo · 2022 Kia Rio 1.4 Tec Auto 5-door ↗</b></a> 57,942 km (as displayed) · reg BG51KYZN · ~325L boot · marked "starter" · at ABSA Trade Centre, Top Rd, Boksburg. <b>Webcast Wed 28 Oct @ 10:00</b> (online bidding opens Tue 27 Oct); <b>viewing Tue 27 Oct 9am–3pm + Wed 28 from 8am</b>; R7,000 deposit to register, plus 5% commission + R2,608.70 facilitation fee + VAT on top of the hammer price. Sold subject to a reserve, no warranty. The only auto hatch in the 131-lot catalogue that fits (the 2024 Polo R-Line DSG was withdrawn). Search the catalogue for "KIA RIO" to find its lot.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Honda/FIT/147C01356" target="_blank" rel="noopener noreferrer"><b>⭐ NEW · 2022 Honda Fit 1.5 Elegance CVT ↗</b></a> R209,900 · 52,071 km · Montana (GP) · 309L boot + Honda "magic" fold-flat rear seats · Certified, complete + up-to-date service history, spare key. Opened live 21 Oct. The newer generation of the Jazz, and the youngest Honda in budget.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Suzuki/Baleno/544D09168" target="_blank" rel="noopener noreferrer"><b>⭐ NEW · 2023 Suzuki Baleno 1.5 GL Auto ↗</b></a> R209,900 · 46,386 km · Dome (GP) · 314L boot · Certified, complete + up-to-date service history, <b>service plan to Aug 2027 + warranty to Aug 2028</b>. Opened live 23 Oct. ⚠️ <b>"Reserved / Sale in Progress" as of 25 Oct</b>, so someone is buying it. The newer 2023 Baleno below (R206,900, 25k km) is the one to chase now. The youngest car under budget, and it replaces the reserved Baleno that just sold. No spare key, so budget ~R2–3k for one.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Suzuki/Baleno/83F809804" target="_blank" rel="noopener noreferrer"><b>NEW · 2020 Suzuki Baleno 1.4 GLX Auto ↗</b></a> R203,900 · 44,928 km · Midstream (GP) · 355L boot (the older Baleno shape has the bigger boot) · Certified, service history partial but up to date, spare key. Opened live 23 Oct. Top GLX spec at low km.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Mazda/Mazda%203/BA7408423" target="_blank" rel="noopener noreferrer"><b>NEW · 2020 Mazda3 1.5 Dynamic Auto hatch ↗</b></a> R217,900 · ⚠️ <b>"Reserved" after Monday's auction (27 Oct)</b> · 84,239 km · Silver Lakes (GP) · 308L boot · Certified, complete + up-to-date service history, spare key, 6-speed torque-converter auto (not a CVT). Opened live 23 Oct. The most grown-up car to drive here, but the rear seat and boot are tighter than the Jazz or Baleno, so take the pram to the viewing.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Audi/A3/DBB113510" target="_blank" rel="noopener noreferrer"><b>2018 Audi A3 Sportback 30 TFSI S tronic ↗</b></a> <b>R187,900 (down again, 27 Oct; was R197,900 on 21 Oct)</b> · 124,592 km · Germiston (GP, closest to Edenvale) · 380L boot · "Ready" (no roadworthy faults), service history complete but a service is due. Big boot and premium feel, but it's 2018 and German parts cost more.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Honda/Jazz/BBB103764" target="_blank" rel="noopener noreferrer"><b>⭐ 2020 Honda Jazz 1.5 Sport CVT ↗</b></a> R184,900 · 63,294 km · Silver Lakes (GP) · 359L boot + Honda "magic" fold-flat seats · Certified. The biggest pram boot in this price band, and R22k cheaper than the Baleno.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Honda/Jazz/C48413886" target="_blank" rel="noopener noreferrer"><b>2019 Honda Jazz 1.5 Sport CVT ↗</b></a> R194,900 · 91,665 km · Midstream (GP) · 359L boot · Certified, complete + up-to-date service history. ✅ <b>Back to "For Sale" on 25 Oct</b>: the 23 Oct sale fell through, so it's available again.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Mazda/Mazda%202/BD7009964" target="_blank" rel="noopener noreferrer"><b>2022 Mazda2 1.5 Dynamic Auto ↗</b></a> <b>R186,900, back on fixed-price sale after Monday's auction (27 Oct)</b> · 58,772 km · now at Midstream (GP) · 280L boot (the tightest here). ⚠️ The condition report changed to <b>"Note": roadworthy-relevant faults that must be repaired</b>, so ask what they are before you bid.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Volkswagen/Polo/E4F200522" target="_blank" rel="noopener noreferrer"><b>2020 VW Polo 1.0 TSI Comfortline DSG ↗</b></a> R177,900 · ✅ <b>Back to "For Sale" on 27 Oct</b> (the 25 Oct sale fell through) · 123,057 km · Montana (GP) · 350L boot · partial service history. Big boot, but the DSG gearbox needs a proper check at this mileage.</li>
-      <li><span class="btag s">SAFE</span> &nbsp;<a href="https://www.webuycars.co.za/car-for-sale/Ford/Focus/45B011294" target="_blank" rel="noopener noreferrer"><b>2018 Ford Focus 1.0 EcoBoost Trend Auto ↗</b></a> <b>R153,900</b> · ✅ <b>Back to "For Sale" on 27 Oct</b> · 92,597 km · Germiston (GP, closest to Edenvale) · 316L boot. The budget option, but it's 2018, older than your 2020+ line. ⚠️ WeBuyCars' condition report says it has <b>roadworthy-relevant faults that must be repaired</b> before it's legal to drive, so price that in.</li>
-    </ul>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
-      <div class="br"><div class="brn"><span class="btag s">SAFE</span> Inspect before you pay</div>
-        <div class="brd" style="margin-top:8px">
-          <a href="https://www.webuycars.co.za/cars-for-sale" target="_blank" rel="noopener noreferrer"><b>WeBuyCars ↗</b></a> — fixed-price, viewable, best public read on street value.<br>
-          <a href="https://www.bidvestburchmores.co.za/" target="_blank" rel="noopener noreferrer"><b>Bidvest Burchmore's ↗</b></a> — wholesale-to-public, inspectable stock before sale.
-        </div></div>
-      <div class="br"><div class="brn"><span class="btag w">HUNT</span> Buy-as-is · check the date</div>
-        <div class="brd" style="margin-top:8px">
-          <a href="https://aucor.com/" target="_blank" rel="noopener noreferrer"><b>Aucor ↗</b></a> · <a href="https://www.parkvillageauctions.co.za/" target="_blank" rel="noopener noreferrer"><b>Park Village ↗</b></a> · <a href="https://www.smd.co.za/" target="_blank" rel="noopener noreferrer"><b>SMD Auctions ↗</b></a> — vehicle auctions.<br>
-          <a href="https://www.wesbank.co.za/auctions/catalogues" target="_blank" rel="noopener noreferrer"><b>WesBank Repossessed ↗</b></a> · <a href="https://www.mfc.co.za/home/auction-calendar.html" target="_blank" rel="noopener noreferrer"><b>MFC DealFloor ↗</b></a> — bank repos (ABSA/Nedbank/Standard route through the auction houses on the left).
-        </div></div>
+  <!-- ===== 1. FOR SALE NOW (rendered from the LIVE array below) ===== -->
+  <div class="sec" id="live" style="margin-top:34px"><h2>🔄 For sale now</h2>
+    <p class="secline" id="livemeta"></p></div>
+  <div class="changes"><b class="h">What changed · 27 Oct</b>
+    <ul>
+      <li>❌ 2 gone: the R207,900 2020 Baleno GLX sold, and Burchmore's Kiger lot expired.</li>
+      <li>✅ Back for sale: the Polo, the Focus and the Peugeot 208. The Mazda2 is R186,900 and the A3 dropped to R187,900.</li>
+      <li>🆕 MFC bank-repo auction (28 Oct): a 2024 Baleno with 19k km and a 2024 Kiger. Plus a 2020 Hyundai Venue at Burchmore's.</li>
+      <li>📅 Next auctions: MFC Gauteng 3 Nov + 11 Nov. Park Village ABSA 3 Nov and national 5 Nov (no lots published yet).</li>
+    </ul></div>
+  <div class="filterbar" style="margin-top:14px;padding:4px 0 0;border:0;background:none;backdrop-filter:none">
+    <div class="fgroup">
+      <button class="chip" data-lf="all" aria-pressed="true">All</button>
+      <button class="chip" data-lf="safe" aria-pressed="false"><span class="btag s">SAFE</span> inspect first</button>
+      <button class="chip" data-lf="hunt" aria-pressed="false"><span class="btag w">HUNT</span> auction, as-is</button>
     </div>
-    <p style="margin-top:10px;font-size:12px;color:var(--ink-soft)">⚠️ HUNT lane = no warranty, no returns. Do the safety checks below (finance/VIN/NATIS) <b>and</b> an independent inspection before any money moves — doubly so on an auction lot.</p>
   </div>
+  <div class="lgrid" id="lgrid"></div>
+  <details class="gone" id="gonewrap"><summary id="gonesum"></summary><div class="lgrid" id="ggrid"></div></details>
 
-  <div class="note" style="border-left:3px solid var(--good)" id="dealers">
-    <h4>🏢 Dealerships near you — go see the cars in person</h4>
-    <p style="margin:0">Every model card below now has <b>2 real dealers</b> for that brand (one East Rand, one Sandton side), linked straight to their own stock. Every link checked live 16 Oct. For <b>any brand, used, with dealer backup</b>, start here:</p>
-    <ul style="margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13.5px">
-      <li><a href="https://www.autopedigree.co.za/dealers/gauteng/meadowdale/107" target="_blank" rel="noopener noreferrer"><b>Auto Pedigree Meadowdale ↗</b></a>: 19 Herman St, Edenvale. Closest multi-brand used dealer to you.</li>
-      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-isando" target="_blank" rel="noopener noreferrer"><b>Motus Select Isando ↗</b></a>: 9 Brabazon Rd, Kempton Park. ~115 cars, from ~R156k.</li>
-      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-fourways" target="_blank" rel="noopener noreferrer"><b>Motus Select Fourways ↗</b></a>: 30 White Hills Cl, Lonehill. Sandton side.</li>
-    </ul>
-    <p style="margin-top:8px;font-size:12px;color:var(--ink-soft)">Right on your doorstep on <b>Van Riebeeck Ave, Edenvale</b>: Omoda, Chery, Haval and Nissan are all on that one road. You can see 4 brands in one afternoon.</p>
+  <!-- ===== 2. MODEL GUIDE (rendered from the CARS array below) ===== -->
+  <div class="sec" id="models"><h2>🚗 Model guide</h2>
+    <p class="secline">Which models to look for, with real street prices (what they sell for at WeBuyCars or privately, usually R20k–R50k under dealer asks). Tap a model to see prices, dealers and links. ★ = our picks.</p></div>
+  <div class="filterbar" style="margin-top:6px">
+    <div class="fgroup"><span class="lbl">Budget</span>
+      <button class="chip" data-f="budget" data-v="all" aria-pressed="false">All</button>
+      <button class="chip" data-f="budget" data-v="in" aria-pressed="true">Under R220k</button>
+    </div>
+    <div class="fgroup"><span class="lbl">Body</span>
+      <button class="chip" data-f="body" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="body" data-v="hatch" aria-pressed="false">Hatch</button>
+      <button class="chip" data-f="body" data-v="suv" aria-pressed="false">SUV</button>
+      <button class="chip" data-f="body" data-v="sedan" aria-pressed="false">Sedan</button>
+    </div>
+    <div class="fgroup"><span class="lbl">Origin</span>
+      <button class="chip" data-f="origin" data-v="all" aria-pressed="true">All</button>
+      <button class="chip" data-f="origin" data-v="jp" aria-pressed="false">🇯🇵</button>
+      <button class="chip" data-f="origin" data-v="kr" aria-pressed="false">🇰🇷</button>
+      <button class="chip" data-f="origin" data-v="cn" aria-pressed="false">🇨🇳</button>
+      <button class="chip" data-f="origin" data-v="eu" aria-pressed="false">🇪🇺</button>
+    </div>
+    <span class="count" id="count"></span>
   </div>
+  <div class="mlist" id="grid"></div>
+  <div class="empty" id="empty">No models match. Widen a filter.</div>
+  <p class="secline" style="margin-top:12px"><b>The one test at 6'4:</b> sit in it with the seat all the way back, then fit a rear-facing baby seat behind you. Knees clear and the seat fits = pass. Take the pram to every viewing.</p>
 
-  <div class="note" style="border-left:3px solid var(--car)" id="finance">
-    <h4>💳 What it actually costs financed — <b>no balloon</b></h4>
-    <p style="margin:0">You're financing this and paying it off, so the price tag isn't the number that matters — the <b>monthly</b> is. This maps any car's price to a real repayment. <b>No balloon, ever</b> — a balloon makes the monthly look cheaper but leaves a big lump owing at the end, and you've said no. So every figure here is a full pay-off: you own it clean at the last instalment.</p>
+  <!-- ===== 3. REFERENCE (tap to open) ===== -->
+  <div class="sec"><h2>📚 Before you buy</h2></div>
+
+  <details class="acc" id="money"><summary>💳 What it costs a month (no balloon)</summary><div class="in">
+    <p>You're financing it and paying it off fully, so the monthly is the number that matters. No balloon: you own it clean at the last payment.</p>
     <table class="lt"><thead><tr><th>Car price</th><th>Over 60 months</th><th>Over 72 months</th></tr></thead><tbody>
       <tr><td class="y">R150,000</td><td class="p">≈ R3,340/mo</td><td class="p">≈ R2,930/mo</td></tr>
       <tr><td class="y">R180,000</td><td class="p">≈ R4,010/mo</td><td class="p">≈ R3,520/mo</td></tr>
       <tr class="best"><td class="y">R200,000</td><td class="p">≈ R4,450/mo</td><td class="p">≈ R3,910/mo</td></tr>
-      <tr><td class="y">R230,000</td><td class="p">≈ R5,120/mo</td><td class="p">≈ R4,500/mo</td></tr>
-      <tr class="best"><td class="y">R250,000</td><td class="p">≈ R5,560/mo</td><td class="p">≈ R4,890/mo</td></tr>
+      <tr class="best"><td class="y">R220,000</td><td class="p">≈ R4,890/mo</td><td class="p">≈ R4,300/mo</td></tr>
+      <tr><td class="y">R250,000</td><td class="p">≈ R5,560/mo</td><td class="p">≈ R4,890/mo</td></tr>
       <tr><td class="y">R290,000</td><td class="p">≈ R6,450/mo</td><td class="p">≈ R5,670/mo</td></tr>
     </tbody></table>
-    <p style="margin-top:10px;font-size:12px;color:var(--ink-soft)"><b>Assumes:</b> no deposit, ~12% interest (prime-linked, 2026), no balloon. A deposit drops the monthly. <b>On top of the monthly:</b> once-off bank initiation ~R1,207, admin ~R69/mo, and car insurance (~R800–1,500/mo) — insurance is compulsory on financed cars, so budget it in. Longer term = lower monthly but more interest paid overall; 60 months is the cheaper total.</p>
-  </div>
+    <p style="margin-top:10px;font-size:12px;color:var(--ink-soft)"><b>Assumes</b> no deposit, ~12% interest, no balloon. A deposit lowers the monthly. <b>On top:</b> bank initiation ~R1,207 once-off, admin ~R69/mo, and insurance ~R800–1,500/mo (compulsory on a financed car). 60 months costs less in total than 72.</p>
+  </div></details>
 
-  <div class="filterbar">
-    <div class="fgroup"><span class="lbl">Origin</span>
-      <button class="chip" data-f="origin" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="origin" data-v="jp" aria-pressed="false">🇯🇵 Japanese</button>
-      <button class="chip" data-f="origin" data-v="kr" aria-pressed="false">🇰🇷 Korean</button>
-      <button class="chip" data-f="origin" data-v="cn" aria-pressed="false">🇨🇳 Chinese</button>
-      <button class="chip" data-f="origin" data-v="eu" aria-pressed="false">🇪🇺 European</button>
-    </div>
-    <div class="fgroup"><span class="lbl">Body</span>
-      <button class="chip" data-f="body" data-v="all" aria-pressed="true">All</button>
-      <button class="chip" data-f="body" data-v="suv" aria-pressed="false">SUV</button>
-      <button class="chip" data-f="body" data-v="hatch" aria-pressed="false">Hatch</button>
-      <button class="chip" data-f="body" data-v="sedan" aria-pressed="false">Sedan</button>
-    </div>
-    <span class="count" id="count"></span>
-  </div>
-
-  <div class="grid two" id="grid"></div>
-  <div class="empty" id="empty">No cars match — widen a filter.</div>
-
-  <div class="note">
-    <h4>How to decide from here</h4>
-    <p><b>The green "street" row</b> is the real going rate (WeBuyCars/private). At your budget the sweet spot sits around <b>R200k–R290k</b> for a modern automatic. For a proper private deal, aim for the <b>WeBuyCars price minus ~10–15%</b> on Gumtree/Facebook for the same year + spec.</p>
-    <p><b>Best value plays right now:</b> Ford EcoSport, Renault Duster, Honda BR-V (7-seat) and Suzuki Ertiga (7-seat) — soft resale or MPV space means you pay well under dealer. <b>Skip if budget's tight:</b> Toyota Yaris Cross (least discounted, the "Toyota tax").</p>
-    <p><b>The one test at 6'4:</b> sit in it with the seat all the way back, fit a rear-facing seat behind you. Knees clear + seat fits = pass. Send me the models you like (tap 📷) and I'll narrow to a final 3–4 to go view.</p>
-  </div>
-
-  <div class="note" style="border-left:3px solid var(--red)">
-    <h4>⚠️ Buying private (no dealer warranty) — protect yourself</h4>
-    <p>Private (Gumtree/FB) is cheapest but there's zero comeback if something's wrong. Before any money changes hands:</p>
-    <ul style="margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13.5px">
-      <li><b>Check for outstanding finance</b> (TransUnion/Lightstone history check, a few hundred rand) — a financed car can be repossessed from you even after you've paid.</li>
-      <li><b>Independent inspection</b> — AA or an RMI workshop (~R1,000–R1,500) before you buy.</li>
-      <li><b>VIN on the car matches the papers</b>, and the NATIS reg doc is an <b>original</b>, not a copy.</li>
-      <li><b>Seller's ID matches the registered owner</b> (or a clear paper trail for estate/company sales).</li>
-      <li>Meet in <b>daylight, public place</b>. Never pay a deposit before seeing the car + papers in person. Rushed deal = walk away.</li>
+  <details class="acc" id="safe"><summary>🛡️ Buying safely</summary><div class="in">
+    <p><span class="btag s">SAFE</span> <b>WeBuyCars + Burchmore's:</b> fixed price or inspectable stock, and you can view before you pay. <span class="btag w">HUNT</span> <b>Bank repos + auctions:</b> cheapest, but sold as-is with no warranty and no returns. Check the viewing date and inspect on site every time.</p>
+    <p>Before any money moves, on any car:</p>
+    <ul>
+      <li><b>Check for outstanding finance</b> (TransUnion/Lightstone, a few hundred rand). A financed car can be repossessed from you even after you've paid.</li>
+      <li><b>Independent inspection</b> by the AA or an RMI workshop (~R1,000–R1,500).</li>
+      <li><b>VIN on the car matches the papers</b>, and the NATIS reg doc is the original, not a copy.</li>
+      <li><b>Seller's ID matches the registered owner.</b></li>
+      <li>Never pay a deposit before seeing the car and papers in person. Rushed deal = walk away.</li>
     </ul>
-  </div>
-  <div class="sec" style="margin-top:40px"><h2>🏢 The brands — before you commit</h2>
-    <p>Reliability, warranty, parts and resale in SA. The Chinese brands aren't a blanket risk anymore — it's brand-by-brand now, and Haval is the one with real evidence behind it.</p></div>
-  <div class="panel">
+  </div></details>
+
+  <details class="acc" id="where"><summary>🏢 Where to look + dealers near you</summary><div class="in">
+    <p><b>Fixed price / inspect first:</b> <a href="https://www.webuycars.co.za/cars-for-sale" target="_blank" rel="noopener noreferrer">WeBuyCars ↗</a> · <a href="https://www.bidvestburchmores.co.za/" target="_blank" rel="noopener noreferrer">Bidvest Burchmore's ↗</a></p>
+    <p><b>Auctions + bank repos:</b> <a href="https://www.mfc.co.za/home/auction-calendar.html" target="_blank" rel="noopener noreferrer">MFC (Nedbank) ↗</a> · <a href="https://www.wesbank.co.za/auctions/catalogues" target="_blank" rel="noopener noreferrer">WesBank ↗</a> · <a href="https://www.parkvillageauctions.co.za/" target="_blank" rel="noopener noreferrer">Park Village ↗</a> · <a href="https://aucor.com/" target="_blank" rel="noopener noreferrer">Aucor ↗</a> · <a href="https://www.smd.co.za/" target="_blank" rel="noopener noreferrer">SMD ↗</a></p>
+    <p><b>Used, any brand, with dealer backup:</b></p>
+    <ul>
+      <li><a href="https://www.autopedigree.co.za/dealers/gauteng/meadowdale/107" target="_blank" rel="noopener noreferrer">Auto Pedigree Meadowdale ↗</a> 19 Herman St, Edenvale. The closest.</li>
+      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-isando" target="_blank" rel="noopener noreferrer">Motus Select Isando ↗</a> 9 Brabazon Rd, Kempton Park.</li>
+      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-fourways" target="_blank" rel="noopener noreferrer">Motus Select Fourways ↗</a> 30 White Hills Cl, Lonehill.</li>
+    </ul>
+    <p style="margin-top:10px;font-size:12.5px;color:var(--ink-soft)">Van Riebeeck Ave, Edenvale has Omoda, Chery, Haval and Nissan on one road. Each model in the guide also lists 2 brand dealers.</p>
+  </div></details>
+
+  <details class="acc" id="brands"><summary>🏷️ The brands: reliability + resale</summary><div class="in">
     <div class="brandlist">
-      <div class="br"><div class="brn">🇯🇵 Toyota <span class="btag s">Resale strong</span></div><div class="brd">The benchmark. Parts everywhere and cheap. Pay a premium up front, get it back at resale. The safe default.</div></div>
-      <div class="br"><div class="brn">🇯🇵 Suzuki <span class="btag s">Resale strong</span></div><div class="brd">Simple, cheap to run and fix, few gremlins. Punches way above its price. The budget can't-go-wrong pick.</div></div>
-      <div class="br"><div class="brn">🇯🇵 Mazda <span class="btag s">Resale strong</span></div><div class="brd">A notch more premium for little reliability trade-off. Parts moderate. CX models hold value well.</div></div>
-      <div class="br"><div class="brn">🇯🇵 Honda <span class="btag s">Resale good</span></div><div class="brd">Durable and comfy. Thinner dealer network, so servicing takes a bit more planning.</div></div>
-      <div class="br"><div class="brn">🇯🇵 Nissan <span class="btag a">Resale average</span></div><div class="brd">Solid now, but check the CVT gearbox service history carefully on anything pre-2020.</div></div>
-      <div class="br"><div class="brn">🇯🇵 Mitsubishi <span class="btag a">Resale avg–strong</span></div><div class="brd">Underrated durability (Xpander/Pajero). Smaller network outside the metros.</div></div>
-      <div class="br"><div class="brn">🇰🇷 Kia <span class="btag a">Resale improving</span></div><div class="brd">No longer a budget risk. Long warranty that actually protects you into the used-car years.</div></div>
-      <div class="br"><div class="brn">🇰🇷 Hyundai <span class="btag s">Resale good</span></div><div class="brd">The 7-yr/200,000km warranty is transferable — you inherit real cover, not just a used car. Big win.</div></div>
-      <div class="br"><div class="brn">🇪🇺 Volkswagen <span class="btag s">Resale good</span></div><div class="brd">Great to drive, but budget for DSG gearbox + electrical repairs once the plan runs out. That's the trap.</div></div>
-      <div class="br"><div class="brn">🇪🇺 Ford <span class="btag a">Resale average</span></div><div class="brd">Engines fine, but confirm the gearbox on pre-2018 autos — the PowerShift dual-clutch is a known landmine.</div></div>
-      <div class="br"><div class="brn">🇪🇺 Renault <span class="btag w">Resale weak–avg</span></div><div class="brd">Cheap to buy, but faster depreciation and French electrical risk once out of warranty.</div></div>
-      <div class="br"><div class="brn">🇪🇺 Peugeot <span class="btag w">Resale weak</span></div><div class="brd">Nice cabins, but the smallest network here — resale and confidence reflect that.</div></div>
-      <div class="br"><div class="brn">🇨🇳 Haval / GWM <span class="btag s">Resale strong (for Chinese)</span></div><div class="brd">Safest Chinese bet: 10+ yrs in SA, long warranty, parts 30–40% cheaper than German. Resale now backs it up.</div></div>
-      <div class="br"><div class="brn">🇨🇳 Chery / Omoda <span class="btag a">Resale avg–strong</span></div><div class="brd">Best warranty on paper (up to 10yr/1m km engine). Newer Tiggo Pro range is good; network still maturing.</div></div>
-      <div class="br"><div class="brn">🇨🇳 MG <span class="btag w">Resale weak–avg</span></div><div class="brd">Newest and least proven here. The long warranty is exactly the insurance you want given the short track record.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Toyota <span class="btag s">Resale strong</span></div><div class="brd">The benchmark. Parts everywhere and cheap. Pay a premium up front, get it back at resale.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Suzuki <span class="btag s">Resale strong</span></div><div class="brd">Simple, cheap to run and fix, few gremlins. The budget can't-go-wrong pick.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Mazda <span class="btag s">Resale strong</span></div><div class="brd">A notch more premium for little reliability trade-off. Parts moderate.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Honda <span class="btag s">Resale good</span></div><div class="brd">Durable and comfy. Thinner dealer network, so servicing takes more planning.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Nissan <span class="btag a">Resale average</span></div><div class="brd">Solid now, but check the CVT gearbox service history on anything pre-2020.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Mitsubishi <span class="btag a">Resale avg–strong</span></div><div class="brd">Underrated durability. Smaller network outside the metros.</div></div>
+      <div class="br"><div class="brn">🇰🇷 Kia <span class="btag a">Resale improving</span></div><div class="brd">No longer a budget risk. Long warranty that carries into the used years.</div></div>
+      <div class="br"><div class="brn">🇰🇷 Hyundai <span class="btag s">Resale good</span></div><div class="brd">The 7-yr/200,000km warranty is transferable, so you inherit real cover.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Volkswagen <span class="btag s">Resale good</span></div><div class="brd">Great to drive. Budget for DSG gearbox + electrical repairs once the plan runs out.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Ford <span class="btag a">Resale average</span></div><div class="brd">Engines fine. Avoid the pre-2018 PowerShift dual-clutch auto.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Renault <span class="btag w">Resale weak–avg</span></div><div class="brd">Cheap to buy, but faster depreciation and electrical risk out of warranty.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Peugeot <span class="btag w">Resale weak</span></div><div class="brd">Nice cabins, smallest network here. The 1.2 PureTech has a timing-belt weakness.</div></div>
+      <div class="br"><div class="brn">🇨🇳 Haval / GWM <span class="btag s">Resale strong (for Chinese)</span></div><div class="brd">Safest Chinese bet: 10+ yrs in SA, long warranty, cheaper parts.</div></div>
+      <div class="br"><div class="brn">🇨🇳 Chery / Omoda <span class="btag a">Resale avg–strong</span></div><div class="brd">Best warranty on paper (up to 10yr/1m km engine). Network still maturing.</div></div>
+      <div class="br"><div class="brn">🇨🇳 MG <span class="btag w">Resale weak–avg</span></div><div class="brd">Newest and least proven here. The long warranty is the insurance you want.</div></div>
     </div>
-    <p style="margin:16px 0 0;font-size:12.5px;color:var(--ink-soft)"><b style="color:var(--ink)">Bottom line:</b> none of the Chinese brands carry Toyota-level resale certainty yet, but "risky Chinese car" is outdated — Haval has the most evidence behind it, Chery/Omoda the best warranty, MG the thinnest track record.</p>
-  </div>
-  <div class="foot">CARS · SAFE (WeBuyCars · Burchmore's) + HUNT (auctions · bank repos) · mainstream portals + FB/Gumtree skipped · refreshed 25 Oct 2026 · SAFE: 14 cars re-checked live via stealth browser + WeBuyCars stock API (249 auto hatches ≤R220k in GP) · 2 dead removed (Starlet R218.9k sold, Burchmore's Polo Vivo sold 24 Oct) · new: 2023 Baleno 25k km R206.9k ★, 2020 Baleno GLX R207.9k · 2023 Baleno R209.9k, Polo + Focus now "Reserved"; Mazda3 on WBC auction; Jazz 2019 back For Sale; Kiger re-runs Mon 26 Oct · HUNT: Park Village ABSA repo Wed 28 Oct, 2022 Kia Rio auto (view Tue 27 Oct, Boksburg) · 21 Oct: SAFE: 10 WeBuyCars autos re-checked live via stealth browser + stock API (246 auto hatches ≤R220k in GP) · 1 dead removed (R206.9k Baleno, reserved since 19 Oct) · new: Honda Fit 2022 R209.9k ★, Toyota Starlet 2021 R218.9k, Peugeot 208 2021 R144.9k (roadworthy faults) · R216.9k Baleno + Mazda2 now "Reserved" · A3 down to R192.9k, Focus up to R153.9k · HUNT: Park Village 21 Oct lots MRD021A + MRD045A (ex-MRD110), both "previously repaired"; no new Gauteng repo lots that fit (ABSA 3 Nov = PE/Bloem stock; Aucor Standard Bank JHB 24–26 Oct = no auto hatch ≤R220k; SMD 403) · 19 Oct: SAFE: 9 live WeBuyCars autos (new: Peugeot 2008 R199.9k ★ 434L boot, Audi A3 R197.9k; R206.9k Baleno now "Reserved") · HUNT: Park Village 21 Oct webcast lots MRD021A + MRD110 (2018 Qashqai CVT, JHB yard, view Tue 20 Oct) · 17 Oct: 7 live WeBuyCars auto hatches ≤R220k in Gauteng with pram-size boots (Baleno auto R206.9k ★, Jazz CVT R184.9k ★) · HUNT: no individual lot picked; Burchmore's Mon 19 / Wed 21 / Sat 24 Oct + Park Village bank-instruction webcasts 21 Oct (national) + 3 Nov (Gauteng) · re-check before buying · The Nest</div>
+  </div></details>
+
+  <div class="foot">CARS · listings checked live 27 Oct 2026 (WeBuyCars stock API + stealth browser, MFC, Park Village, Burchmore's) · refreshed monthly on the 1st · AutoTrader, Cars.co.za, Gumtree + FB skipped for the hunt · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
 <script>
+// ===== Cars for sale now. ONE object per car; the page renders every card the same way. =====
+// lane: "safe" | "hunt" · status: "sale" | "reserved" | "auction" (auction needs when:"YYYY-MM-DD")
+// Auctions whose date has passed, and reserved cars, drop into the collapsed "reserved / passed" group on their own.
+const LIVE=[
+ {lane:"safe",pick:1,status:"sale",year:2020,name:"Honda Jazz 1.5 Sport CVT",price:"R184,900",km:"63k km",boot:"359L",where:"Silver Lakes",why:"Biggest pram boot in this price band, with Honda's fold-flat \"magic\" seats. R22k cheaper than the Baleno. Certified.",url:"https://www.webuycars.co.za/car-for-sale/Honda/Jazz/BBB103764",seen:"2026-10-27"},
+ {lane:"safe",pick:1,status:"sale",year:2022,name:"Honda Fit 1.5 Elegance CVT",price:"R209,900",km:"52k km",boot:"309L",where:"Montana",why:"The newer Jazz, and the youngest Honda in budget. Certified, full service history, spare key.",url:"https://www.webuycars.co.za/car-for-sale/Honda/FIT/147C01356",seen:"2026-10-27"},
+ {lane:"safe",pick:1,status:"sale",year:2021,name:"Peugeot 2008 1.2T Active Auto",price:"R199,900",km:"60k km",boot:"434L",where:"Midstream",why:"Biggest boot under budget by a mile, plus ISOFIX. Certified, full service history. Really a small crossover.",warn:"The 1.2 PureTech engine has a timing-belt weakness. Ask for proof the belt was checked or replaced.",url:"https://www.webuycars.co.za/car-for-sale/Peugeot/2008/7DD207498",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2020,name:"Suzuki Baleno 1.4 GLX Auto",price:"R203,900",km:"45k km",boot:"355L",where:"Midstream",why:"Top GLX spec at low km, and the older Baleno shape has the bigger boot. Certified, spare key.",url:"https://www.webuycars.co.za/car-for-sale/Suzuki/Baleno/83F809804",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2019,name:"Honda Jazz 1.5 Sport CVT",price:"R194,900",km:"92k km",boot:"359L",where:"Midstream",why:"Same big Jazz boot, higher km. Certified, full service history. Back for sale after a deal fell through.",url:"https://www.webuycars.co.za/car-for-sale/Honda/Jazz/C48413886",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2021,name:"Peugeot 208 1.2T GT Line Auto",price:"R144,900",km:"39k km",boot:"311L",where:"Midstream",why:"By far the cheapest low-km auto here. Apple CarPlay, full service history, spare key.",warn:"1 roadworthy fault to fix, and the same PureTech timing-belt question as the 2008.",url:"https://www.webuycars.co.za/car-for-sale/Peugeot/208/CB2708579",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2022,name:"Mazda2 1.5 Dynamic Auto",price:"R186,900",km:"59k km",boot:"280L",where:"Midstream",why:"Lovely to drive, but the tightest boot here.",warn:"Roadworthy faults that must be repaired. Ask what they are.",url:"https://www.webuycars.co.za/car-for-sale/Mazda/Mazda%202/BD7009964",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2020,name:"VW Polo 1.0 TSI Comfortline DSG",price:"R177,900",km:"123k km",boot:"350L",where:"Montana",why:"Big boot, best ride for the money. Partial service history.",warn:"High km for a DSG gearbox. Get it checked properly.",url:"https://www.webuycars.co.za/car-for-sale/Volkswagen/Polo/E4F200522",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2018,name:"Audi A3 Sportback 30 TFSI S tronic",price:"R187,900",km:"125k km",boot:"380L",where:"Germiston",why:"Big boot and premium feel, closest to Edenvale. No roadworthy faults. Down R10k since 21 Oct.",warn:"2018 (older than your 2020+ line), service due, German parts cost more.",url:"https://www.webuycars.co.za/car-for-sale/Audi/A3/DBB113510",seen:"2026-10-27"},
+ {lane:"safe",status:"sale",year:2018,name:"Ford Focus 1.0 EcoBoost Trend Auto",price:"R153,900",km:"93k km",boot:"316L",where:"Germiston",why:"The budget option, close to Edenvale.",warn:"2018, and it has roadworthy faults to fix before it's legal to drive.",url:"https://www.webuycars.co.za/car-for-sale/Ford/Focus/45B011294",seen:"2026-10-27"},
+ {lane:"safe",status:"auction",when:"2026-10-28",year:2020,name:"Hyundai Venue 1.0T Motion DCT",price:"R193,700",pnote:"est. trade",km:"88k km",boot:"~350L",where:"Burchmore's Sandton, 7pm",why:"Burchmore's Lot 25. Retail is R225,600. A small crossover, not a hatch.",warn:"Lot sheet says \"Vehicle Damaged\" + \"Paintwork Done\". View it and ask what was repaired.",url:"https://www.bidvestburchmores.co.za/stock/hyundai-venue-1.0-tgdi-motion-dct/77823",seen:"2026-10-27"},
+ {lane:"hunt",pick:1,status:"auction",when:"2026-10-28",year:2024,name:"Suzuki Baleno 1.5 GL Auto",price:"R203,913",pnote:"retail guide",km:"19k km",boot:"314L",where:"MFC Esselen Park, Tembisa",why:"Nedbank repo. Repos usually go under retail. Open the \"MFC Auction House Gauteng, 28 Oct\" row on the calendar. Phone 011 879 9321 for viewing times.",warn:"Sold as-is, no warranty.",url:"https://www.mfc.co.za/home/auction-calendar.html",seen:"2026-10-27"},
+ {lane:"hunt",status:"auction",when:"2026-10-28",year:2024,name:"Renault Kiger 1.0 Zen AMT",price:"R178,434",pnote:"retail guide",km:"36k km",boot:"~405L",where:"MFC Esselen Park, Tembisa",why:"Same MFC sale. Biggest boot for the money. A 2024 Starlet auto is in the same catalogue too.",warn:"Sold as-is. The AMT gearbox is jerky at low speed.",url:"https://www.mfc.co.za/home/auction-calendar.html",seen:"2026-10-27"},
+ {lane:"hunt",status:"auction",when:"2026-10-28",year:2022,name:"Kia Rio 1.4 Tec Auto 5-door",price:"Reserve",pnote:"price not published",km:"58k km",boot:"~325L",where:"Park Village, Boksburg, 10am",why:"ABSA repo, the only auto hatch in the 131-lot catalogue that fits. Search it for \"KIA RIO\".",warn:"R7,000 deposit to register, plus 5% commission + R2,608.70 fee + VAT on top of the hammer price. No warranty.",url:"https://www.parkvillageauctions.co.za/catalogue/2407-absa-passenger-and-commercial-vehicle-auction-boksburg",seen:"2026-10-27"},
+ {lane:"safe",pick:1,status:"reserved",year:2023,name:"Suzuki Baleno 1.5 GL Auto",price:"R206,900",km:"25k km",boot:"314L",where:"Midstream",why:"Lowest km under budget, warranty still active, service plan to Jan 2027. Worth a call in case the sale falls through.",url:"https://www.webuycars.co.za/car-for-sale/Suzuki/Baleno/690601811",seen:"2026-10-27"},
+ {lane:"safe",status:"reserved",year:2023,name:"Suzuki Baleno 1.5 GL Auto",price:"R209,900",km:"46k km",boot:"314L",where:"Dome",why:"Service plan to Aug 2027 + warranty to Aug 2028.",url:"https://www.webuycars.co.za/car-for-sale/Suzuki/Baleno/544D09168",seen:"2026-10-27"},
+ {lane:"safe",status:"reserved",year:2020,name:"Mazda3 1.5 Dynamic Auto hatch",price:"R217,900",km:"84k km",boot:"308L",where:"Silver Lakes",why:"The most grown-up drive here, proper 6-speed auto. Tighter rear seat and boot.",url:"https://www.webuycars.co.za/car-for-sale/Mazda/Mazda%203/BA7408423",seen:"2026-10-27"}
+];
+const TODAY=new Date().toISOString().slice(0,10);
+const fmtDay=d=>new Date(d+"T12:00:00").toLocaleDateString("en-ZA",{weekday:"short",day:"numeric",month:"short"});
+function liveState(c){
+  if(c.status==="reserved") return {open:0,cls:"",txt:"Reserved"};
+  if(c.status==="auction"){
+    if(c.when<TODAY) return {open:0,cls:"",txt:"Auction passed "+fmtDay(c.when)};
+    return {open:1,cls:"soon",txt:(c.when===TODAY?"Auction today":"Auction "+fmtDay(c.when))};
+  }
+  return {open:1,cls:"ok",txt:"For sale"};
+}
+const pnum=s=>{const t=String(s).replace(/,/g,""),m=t.match(/\d+(?:\.\d+)?/);if(!m)return 9e9;let n=+m[0];if(/k/i.test(t)&&n<1000)n*=1000;return n;};
+function liveCard(c){
+  const s=liveState(c);
+  return `<div class="lc ${c.pick?'pick':''}" data-lane="${c.lane}">
+    <div class="lc-top"><span class="btag ${c.lane==='safe'?'s':'w'}">${c.lane==='safe'?'SAFE':'HUNT'}</span><span class="st ${s.cls}">${s.txt}</span>${c.pick?'<span class="star">★ pick</span>':''}</div>
+    <div class="lc-name">${c.year} ${c.name}</div>
+    <div class="lc-price">${c.price}${c.pnote?` <small>${c.pnote}</small>`:''}</div>
+    <div class="lc-facts">${c.km} · ${c.boot} boot · ${c.where}</div>
+    <p class="lc-why">${c.why}</p>
+    ${c.warn?`<p class="lc-warn">⚠️ ${c.warn}</p>`:''}
+    <div class="lc-act"><a href="${c.url}" target="_blank" rel="noopener noreferrer">Open listing ↗</a><button class="savebtn" data-save-kind="car" data-save-label="${c.year} ${c.name} ${c.price}" data-save-url="${c.url}">♡</button></div>
+  </div>`;
+}
+(function(){
+  const open=LIVE.filter(c=>liveState(c).open).sort((a,b)=>(b.pick||0)-(a.pick||0)||pnum(a.price)-pnum(b.price));
+  const shut=LIVE.filter(c=>!liveState(c).open);
+  document.getElementById("lgrid").innerHTML=open.map(liveCard).join("");
+  document.getElementById("ggrid").innerHTML=shut.map(liveCard).join("");
+  document.getElementById("gonesum").textContent=`▸ ${shut.length} reserved or auction passed (tap to see)`;
+  document.getElementById("gonewrap").style.display=shut.length?"":"none";
+  const nSafe=open.filter(c=>c.lane==="safe").length;
+  const seen=LIVE.map(c=>c.seen).sort().pop();
+  document.getElementById("livemeta").textContent=`${open.length} you can still go for (${nSafe} safe, ${open.length-nSafe} hunt). Picks first, then cheapest. Last checked ${fmtDay(seen)}.`;
+  const lchips=document.querySelectorAll(".chip[data-lf]");
+  lchips.forEach(ch=>ch.addEventListener("click",()=>{const v=ch.dataset.lf;lchips.forEach(o=>o.setAttribute("aria-pressed",o===ch?"true":"false"));document.querySelectorAll(".lc").forEach(el=>el.classList.toggle("hide",v!=="all"&&el.dataset.lane!==v));}));
+})();
 const CARS=[
  {o:"cn",b:"suv",pick:1,brand:"🇨🇳 Haval",name:"Jolion",body:"Crossover",r:["gd","ex"],why:"Value benchmark — big screen, 7yr warranty.",L:[[2024,"R289,995","27k","Hatfield, Pta",1],[2024,"R319,900","71k","Randburg"],[2026,"R327,500","3k","Benoni"],[2026,"R339,900","8k","Boksburg"]],img:"2022 Haval Jolion South Africa",find:"Haval Jolion for sale South Africa"},
  {o:"cn",b:"suv",brand:"🇨🇳 Haval",name:"H6",body:"Mid SUV",r:["ex","ex"],why:"Plush, premium-feeling family SUV.",L:[[2022,"R319,880","53k","—",1],[2023,"R329,900","39k","Pretoria"],[2024,"R379,900","33k","—"],[2026,"R433,900","4.5k","Boksburg"]],img:"2022 Haval H6 South Africa",find:"Haval H6 for sale South Africa"},
@@ -275,39 +364,40 @@ const DEALERS={
 };
 const RL={ex:"Excellent",gd:"Good",tt:"Tight"};
 const grid=document.getElementById("grid");
-grid.innerHTML=CARS.map(c=>{
+grid.innerHTML=CARS.slice().sort((a,b)=>(b.pick||0)-(a.pick||0)||pnum(a.L[0][1])-pnum(b.L[0][1])).map(c=>{
   const mk=c.brand.replace(/[^\x00-\x7F]/g,'').trim();
   const q=encodeURIComponent(mk+" "+c.name);
   const at="https://www.autotrader.co.za/cars-for-sale/"+mk.toLowerCase()+"/"+c.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
   const cz="https://www.cars.co.za/usedcars/Gauteng/"+mk+"/"+c.name.replace(/ /g,'-')+"/";
   const wbc="https://www.webuycars.co.za/buy-a-car?search="+q;
-  const gt="https://www.gumtree.co.za/s-cars-bakkies/v1c9077?q="+q;
-  const fb="https://www.facebook.com/marketplace/search/?query="+encodeURIComponent(mk+" "+c.name+" automatic");
+  const street=c.L[0][1], inb=pnum(street)<=220000?"in":"out";
   return `
-  <div class="cc ${c.pick?'pick':''}" data-origin="${c.o}" data-body="${c.b}">
-    <div class="cc-top"><span class="brand">${c.brand}</span>
-      <span style="display:flex;gap:5px"><span class="rt gd"><span class="rk">6'4</span>${RL[c.r[0]]}</span><span class="rt au"><span class="rk">⚙</span>Auto</span></span></div>
-    <div class="model">${c.name} ${c.pick?'<span class="star">★</span>':''}</div>
-    <div class="bodytag">${c.body} · ${c.L.length} price ${c.L.length===1?'read':'reads'} · tap a row for real WeBuyCars stock</div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin:9px 0 0">${c.why}</p>
-    <table class="lt"><thead><tr><th>Year</th><th>Price</th><th>km</th><th>Where</th></tr></thead><tbody>
-      ${c.L.map(l=>`<tr class="${l[4]?'best':''}" style="cursor:pointer" title="Open real ${c.name} stock on WeBuyCars" onclick="window.open('${wbc}','_blank','noopener')"><td class="y">${l[0]}</td><td class="p">${l[1]}</td><td class="km">${l[2]}</td><td class="lo">${l[3]}${l[4]?' <span class="tag">street</span>':''}</td></tr>`).join('')}
-    </tbody></table>
-    <div class="cardlinks">
-      <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
-      <a class="clink list" href="${wbc}" target="_blank" rel="noopener noreferrer">🔎 WeBuyCars <span class="h">real value</span></a>
+  <details class="mr ${c.pick?'pick':''}" data-origin="${c.o}" data-body="${c.b}" data-budget="${inb}">
+    <summary>
+      <span class="mr-n">${c.name} ${c.pick?'<span class="star">★</span>':''}</span><span class="mr-p">${street}</span>
+      <span class="mr-b">${c.brand} · ${c.body}</span><span class="mr-f ${c.r[0]}">6'4 ${RL[c.r[0]]}</span>
+    </summary>
+    <div class="mr-body">
+      <p>${c.why}</p>
+      <table class="lt"><thead><tr><th>Year</th><th>Price</th><th>km</th><th>Where</th></tr></thead><tbody>
+        ${c.L.map(l=>`<tr class="${l[4]?'best':''}"><td class="y">${l[0]}</td><td class="p">${l[1]}</td><td class="km">${l[2]}</td><td class="lo">${l[3]}${l[4]?' <span class="tag">street</span>':''}</td></tr>`).join('')}
+      </tbody></table>
+      <div class="cardlinks">
+        <a class="clink see" href="https://www.google.com/search?q=${encodeURIComponent(c.img)}&tbm=isch" target="_blank" rel="noopener noreferrer">📷 See it</a>
+        <a class="clink list" href="${wbc}" target="_blank" rel="noopener noreferrer">🔎 WeBuyCars stock</a>
+      </div>
+      ${(DEALERS[mk]||[]).length?`<div class="mlinks">🏢 <b>Dealers near you:</b><br>${DEALERS[mk].map(d=>`<a href="${d[2]}" target="_blank" rel="noopener noreferrer">${d[0]} ↗</a> ${d[1]}`).join('<br>')}</div>`:''}
+      <div class="mlinks">Dealer asks: <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
+      <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${wbc}">♡ Save</button>
     </div>
-    ${(DEALERS[mk]||[]).length?`<div class="sellers" style="font-size:12.5px;line-height:1.55">🏢 <b>Go see it — dealers near you:</b><br>${DEALERS[mk].map(d=>`<a href="${d[2]}" target="_blank" rel="noopener noreferrer"><b>${d[0]} ↗</b></a> <span style="color:var(--ink-soft)">${d[1]}</span>`).join('<br>')}</div>`:''}
-    <div class="sellers">Compare prices: <a href="${at}" target="_blank" rel="noopener noreferrer">AutoTrader ↗</a> · <a href="${cz}" target="_blank" rel="noopener noreferrer">Cars.co.za ↗</a></div>
-    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="car" data-save-label="${c.brand.replace(/^[^ ]+ /,'')} ${c.name}" data-save-url="${wbc}">♡ Save</button>
-  </div>`;
+  </details>`;
 }).join('');
 if (window.NEST) window.NEST.wire();
 (function(){
-  const state={origin:"all",body:"all"};
-  const chips=document.querySelectorAll(".chip"),cards=document.querySelectorAll(".cc");
+  const state={origin:"all",body:"all",budget:"in"};
+  const chips=document.querySelectorAll(".chip[data-f]"),cards=document.querySelectorAll(".mr");
   const countEl=document.getElementById("count"),emptyEl=document.getElementById("empty");
-  function apply(){let s=0;cards.forEach(c=>{const ok=(state.origin==="all"||c.dataset.origin===state.origin)&&(state.body==="all"||c.dataset.body===state.body);c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+" models";emptyEl.classList.toggle("show",s===0);}
+  function apply(){let s=0;cards.forEach(c=>{const ok=(state.origin==="all"||c.dataset.origin===state.origin)&&(state.body==="all"||c.dataset.body===state.body)&&(state.budget==="all"||c.dataset.budget===state.budget);c.classList.toggle("hide",!ok);if(ok)s++;});countEl.textContent=s+" of "+cards.length+" models";emptyEl.classList.toggle("show",s===0);}
   chips.forEach(chip=>chip.addEventListener("click",()=>{const f=chip.dataset.f,v=chip.dataset.v;state[f]=v;document.querySelectorAll(`.chip[data-f="${f}"]`).forEach(o=>o.setAttribute("aria-pressed",o===chip?"true":"false"));apply();}));
   apply();
 })();
