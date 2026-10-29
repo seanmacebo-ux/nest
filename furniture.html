@@ -66,6 +66,12 @@
   <div class="grid two" id="grid"></div>
 
   <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
+    <h4>🌀 Bedroom fan (29 Oct): not bought yet, not in the total</h4>
+    <p>Get a <b>tower fan with a remote and a timer</b>: Mishka's going to sleep hot, and nobody gets out of bed at 2am to switch it off. All three ship from Takealot's Joburg warehouse (checked 29 Oct). The Philips 2000 (R1,609) was skipped because it only ships from Cape Town or Durban.</p>
+  </div>
+  <div class="grid two" id="fans" style="margin-top:14px"></div>
+
+  <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
     <h4>🌙 Mattress hunt (28 Oct), now ORDERED: COSOVA 26cm Queen XL, R3,999 (29 Oct)</h4>
     <p><b>Mishka's brief (27 Oct):</b> pocketed coils only, medium (not too soft), avoid cheap poly foam, latex is a plus. <b>Queen 152×188.</b> All prices and stock checked live 28 Oct night.</p>
     <p><b>⭐ In budget (28 Oct late): COSOVA 26cm Cloud 3.0, Double R3,399 / Queen R3,899.</b> Medium, pocket springs, Takealot Joburg warehouse. It's the lead pick card above. The list below is the over-budget options from earlier that night. <a href="https://www.takealot.com/cosova-26cm-mattress-cloud-3-0-hybrid-memory-foam-pocket-spring-/PLID103056341?size=Double" target="_blank" rel="noopener noreferrer">Takealot ↗</a></p>
@@ -110,6 +116,21 @@ const ITEMS=[
  {icon:"❄️",cat:"Fridge",name:"Defy 323L DAC627 Combi (Satin Metallic)",price:"R6,499",store:"Takealot",desc:"Bottom-freezer combi, 323L, water dispenser, A+. Same Defy repair-network logic as the washer. ✅ Confirmed in stock — Takealot's Joburg warehouse (I checked the live page). Replaces the Hisense, which went out of stock.",url:"https://www.takealot.com/defy-323l-bottom-mount-freezer-fridge-wd-dac627-satin-metallic/PLID54966398"},
  {icon:"🧺",cat:"Washer",name:"Defy 8kg DAW408B Front Loader (Midnight Black)",price:"R5,699",store:"MHC World",desc:"Front-loader, A+++, SteamCure. Defy = best local repair network in SA. ✅ In stock (confirmed).",url:"https://www.mhcworld.co.za/products/defy-8kg-front-loader-washing-machine-midnight-black-daw408b"}
 ];
+const FANS=[
+ {icon:"🌀",cat:"Fan · ⭐ pick",name:"Kenwood Slimline Tower Fan with Remote (IFP70.000BK)",price:"R999",store:"Takealot",desc:"⭐ Pick. Remote, 12-hour timer, 180° oscillation, 3 speeds, 102cm tall, 2-year warranty. 4.5★ from 92 reviews. Was R1,149. Takealot Joburg warehouse.",url:"https://www.takealot.com/kenwood-slimline-tower-fan-with-remote-black-ifp70-000bk/PLID96212606"},
+ {icon:"🌀",cat:"Fan · quietest",name:"Xiaomi Smart Tower Fan 2",price:"R1,699",store:"Takealot",desc:"Quiet sleep mode, efficient DC motor, timers from your phone (Xiaomi Home app). Small grille gaps, so it's safe for little fingers later. 4.7★ but only 19 reviews. Takealot Joburg warehouse.",url:"https://www.takealot.com/xiaomi-smart-tower-fan-2/PLID99751141"},
+ {icon:"🌀",cat:"Fan · budget",name:"Kenwood 40cm Pedestal Fan, Matte Black (IFP16.100BK)",price:"R549",store:"Takealot",desc:"Moves the most air, with a 75W copper motor. 4.8★ from 70 reviews. Was R599. Takealot Joburg warehouse.",flag:"No remote confirmed, and it'll be louder than the towers.",url:"https://www.takealot.com/kenwood-pedestal-fan-40cm-matte-black-75w-ifp16-100bk/PLID102739135"}
+];
+const fcard=it=>`
+  <div class="cc">
+    <div class="tt-row"><div class="model">${it.icon} ${it.cat}</div><span class="price-tag">${it.price}</span></div>
+    <div class="nm" style="margin-top:8px">${it.name}</div>
+    <p style="font-size:12.5px;color:var(--ink-soft);margin:7px 0 0;line-height:1.45">${it.desc}</p>
+    ${it.flag?`<p class="flagline">${it.flag}</p>`:''}
+    <div class="cardlinks" style="margin-top:11px"><a class="clink see" style="flex:1" href="${it.url}" target="_blank" rel="noopener noreferrer">View on ${it.store} ↗</a></div>
+    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="furniture" data-save-label="${it.cat}: ${it.name}" data-save-url="${it.url}">♡ Save</button>
+  </div>`;
+document.getElementById("fans").innerHTML=FANS.map(fcard).join('');
 const grid=document.getElementById("grid");
 grid.innerHTML=ITEMS.map(it=>`
   <div class="cc">
