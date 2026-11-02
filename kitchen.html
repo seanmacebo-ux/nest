@@ -94,6 +94,12 @@
   <div class="grid two" id="kitchen" style="margin-top:14px"></div>
 
   <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
+    <h4>☕ Kettle under R400 (1 Nov)</h4>
+    <p>Takealot's top-rated kettles under R400, all 1.7L and in stock on 1 Nov. <b>Pick: the Defy glass at R349.</b> It has the most reviews in budget, and the water never sits against plastic, which helps once you're making baby bottles. Not bought yet.</p>
+  </div>
+  <div class="grid two" id="kettle" style="margin-top:14px"></div>
+
+  <div class="note" style="border-left:3px solid var(--accent);margin-top:24px">
     <h4>🍲 Blender shortlist (25 Oct): picked for reliability, not watts</h4>
     <p><b>The honest take:</b> for soups, broth soups, sauces and baby purée, a <b>good stick blender is the best tool</b>. You blend right in the pot, so there's no pouring of hot liquid, and baby portions are too small for a 2L jug. Add a jug blender only if smoothies or frozen fruit matter. <b>Dropped:</b> Genesis Nutrimax (Verimark brand, ~1.5★ on Hello Peter, the 2200W can't be verified) and the Russell Hobbs Nexus. <b>Vitamix</b> is the only true buy-it-for-life brand, but it's ~R12.7k in SA, out of stock, and has no local refurb programme.</p>
   </div>
@@ -115,6 +121,11 @@ const KITCHEN=[
  {icon:"🔪",cat:"Chef's knife",name:"Victorinox 19cm Chef's Knife",price:"R959",store:"Takealot",desc:"The biggest upgrade per rand in the kitchen. Add the Victorinox 8cm paring knife (R129). Also a bamboo board (~R134), wooden spoons (~R139) and a baking tray (~R169).",url:"https://www.takealot.com/victorinox-chefs-knife-19cm-black/PLID28003425"},
  {icon:"🥡",cat:"Meal-prep containers",name:"Consol Madrid Glass Containers 3-piece (×2)",price:"R798",store:"Takealot",desc:"Glass with clip-on vented lids, for batch soups and postpartum meals. R399 a set, get two. ✅ In stock.",url:"https://www.takealot.com/consol-madrid-storage-containers-with-clip-on-vented-lids-3pce-v/PLID91218150"}
 ];
+const KETTLE=[
+ {icon:"☕",cat:"Kettle · ⭐ pick",name:"Defy WK5300G 1.7L Glass Kettle",price:"R349",store:"Takealot",desc:"4.6★ from 330 reviews, the most in budget. Normally R499. In stock in JHB on 1 Nov. Glass, so the water doesn't sit against plastic.",url:"https://www.takealot.com/defy-wk5300g-tinted-1-7l-glass-kettle/PLID95918801"},
+ {icon:"☕",cat:"Kettle · cheapest good one",name:"Kenwood Cordless Kettle 1.7L (black)",price:"R249",store:"Takealot",desc:"4.6★ from 153 reviews. Normally R359. A brand you know at the lowest price. Ships from Durban.",url:"https://www.takealot.com/all?qsearch=Kenwood%20cordless%20kettle%201.7L"},
+ {icon:"☕",cat:"Kettle · stainless",name:"Mellerware Stainless Steel Kettle 1.7L",price:"R349",store:"Takealot",desc:"4.5★ from 99 reviews. Normally R689. Pick this if you'd rather not have glass.",url:"https://www.takealot.com/mellerware-kettle-stainless-steel-1-7l-2200w-cordless/PLID17259991"}
+];
 const BLEND=[
  {icon:"🥣",cat:"Stick blender · best value",name:"Philips ProMix HR2535",price:"R924",store:"Takealot",desc:"⭐ Get this first. Blends soup in the pot, and baby purée from ~6 months (Aug 2027). Philips gives a 2-year warranty, the same as the Braun for R475 less. R924 (was R1,399). ✅ In stock 25 Oct.",url:"https://www.takealot.com/philips-promix-daily-collection-hand-blender-hr2535-00/PLID72193268"},
  {icon:"🍲",cat:"Jug blender · only if smoothies",name:"Kenwood Blend n Heat BLM92.920SS",price:"R1,899",store:"Takealot",desc:"Why it's still the jug pick: a big brand with a 2-year warranty, a shatter-proof BPA-free 2L Tritan jug, and soup/sauce/ice programmes. No heating element; blending fast heats soup to 80–85°C in ~7 min. 4.6★ from 63 reviews. ✅ In stock.",url:"https://www.takealot.com/kenwood-blend-n-heat-1500w-high-power-blender-blm92-920ss/PLID72799141"},
@@ -132,6 +143,7 @@ const card=it=>`
   </div>`;
 document.getElementById("kitchen").innerHTML=KITCHEN.map(card).join('');
 document.getElementById("blend").innerHTML=BLEND.map(card).join('');
+document.getElementById("kettle").innerHTML=KETTLE.map(card).join('');
 if (window.NEST) window.NEST.wire();
 </script>
 </body>
