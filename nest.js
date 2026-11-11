@@ -3,7 +3,7 @@
 // Storage is two-layer:
 //   1. localStorage  — instant render + full offline use (always written first).
 //   2. Supabase      — the SHARED source of truth, so your notes/saves/ticks
-//                      sync between Sean's phone, Mishka's phone, and Babybean.
+//                      sync between Sean's phone, Mishka's phone, and Bean.
 //
 // If Supabase isn't configured or is unreachable, everything still works exactly
 // like before (local-only). Cloud is additive and never blocks the UI.
