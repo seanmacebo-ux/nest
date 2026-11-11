@@ -101,7 +101,7 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · live tracker</div>
     <h1>Where <em>we're</em> at.</h1>
-    <p class="sub">The money, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with Bean.</p>
+    <p class="sub">The money, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with The Nest.</p>
   </header>
 
   <div class="sec"><h2>💸 This month's cash pacer</h2>
@@ -178,7 +178,7 @@
     </div>
   </div>
 
-  <div class="foot">TRACKER · saves on this device · shared sync arrives with Bean · The Nest</div>
+  <div class="foot">TRACKER · saves on this device · shared sync arrives with The Nest · The Nest</div>
 </div>
 
 <script src="nest.js"></script>
@@ -240,10 +240,10 @@
   const KEY = 'nest_pacer';
   const PACE = [
     { k:'rent',        label:'Our rent',             sub:'This month — your place / the new one (Baker Rd is R11,900 from 1 Nov)', amt:11900 },
-    { k:'mom_stop',    label:"Mom's rent",           sub:'Stopping end of October (20 Oct). Set an amount here if it starts again.', amt:0 },
+    { k:'mom_stop',    label:'Mom',                  sub:'Staying with you at Victoria Square. Put in anything extra you cover for her.', amt:0 },
     { k:'fnb_loan',    label:'FNB personal loan',    sub:"R5,000 a month for 12 months (approved 2 Oct, DebiCheck from Mishka's FNB). Paid off around Oct 2027.", amt:5000 },
     { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
-    { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
+    { k:'electricity', label:'Electricity + water',  sub:'Both prepaid at Victoria Square, and both on you',                                     amt:1500 },
     { k:'car_pot',     label:'Car-deposit pot',      sub:'What you put away toward the car this month', amt:0 }
   ];
   const saved = window.NEST._get(KEY, {});
