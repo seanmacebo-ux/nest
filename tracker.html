@@ -43,7 +43,7 @@
   .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
   .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
 
-  .saved { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .saved { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   @media (max-width: 860px) { .saved { grid-template-columns: 1fr; } }
   .savecol h4 { font-family: "Fraunces", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
   .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); } .savecol.mid h4 { color: var(--baby); }
@@ -87,7 +87,6 @@
   <a class="brandmark" href="index.html">🪺 The Nest</a>
   <a class="tab" href="index.html">Plan</a>
   <a class="tab" href="tracker.html" aria-current="page">Tracker</a>
-  <a class="tab" href="baby.html">Baby</a>
   <a class="tab" href="cars.html">Cars</a>
   <a class="tab" href="apartments.html">Apartments</a>
   <a class="tab" href="furniture.html">Furniture</a>
@@ -102,19 +101,11 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · live tracker</div>
     <h1>Where <em>we're</em> at.</h1>
-    <p class="sub">Your pregnancy week by week, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with Babybean.</p>
+    <p class="sub">The money, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with Babybean.</p>
   </header>
 
-  <div class="sec"><h2>🍼 Baby, week by week</h2></div>
-  <div class="ticker">
-    <div class="wk" id="wk">Week —</div>
-    <div class="meta" id="meta">calculating…</div>
-    <div class="bar"><span id="barfill" style="width:0%"></span></div>
-    <div class="barlabels"><span>Week 0</span><span>Trimester 2</span><span>Due · 20 Feb 2027</span></div>
-  </div>
-
   <div class="sec"><h2>💸 This month's cash pacer</h2>
-    <p>You've got about R52k this month. Set each cost (rent, the FNB loan, the baby) and tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the baby float. It all saves on your phone — change the numbers anytime.</p></div>
+    <p>You've got about R52k this month. Set each cost (rent, the FNB loan, groceries) and tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the car pot. It all saves on your phone — change the numbers anytime.</p></div>
   <div class="panel pacer">
     <div class="pacehead">
       <label class="pacehave">You have <span style="font-family:'IBM Plex Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
@@ -124,40 +115,18 @@
     <div class="barlabels"><span>Allocated <b id="pace-spent">R0</b></span><span id="pace-msg"></span></div>
     <ul class="pacelist" id="pacelist"></ul>
     <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
-    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'ask Lilo for her deposit amount', 'move R10k to the baby float this week'."></textarea></div>
-    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Now with <b>Lilo's real numbers</b> — the booking deposit is her confirmed R3,000, and "Genesis float" is money you set aside now toward the ~R45k due at week 36. Overwrite any number with your real one.</p>
-  </div>
-
-  <div class="sec"><h2>📆 The birth-cost cadence — never a wall</h2>
-    <p>The whole point of starting now: <b>spread it</b> so no single month eats half your salary. Bank the flat number below every month and the birth is fully funded — Genesis takes instalments (confirmed in writing), so you never pay R45k in one hit.</p></div>
-  <div class="panel pacer" style="border-top-color:var(--baby)">
-    <div class="pacehead">
-      <div class="pacehave">The one habit → bank this every month, Sep&nbsp;→&nbsp;Jan</div>
-      <div class="paceleft" style="color:var(--baby)">R14,000<small> / month</small></div>
-    </div>
-    <p style="margin:6px 0 0;font-size:13px;color:var(--ink-soft)">R9,000 straight to Genesis (× 5 = the R45k float) + R5,000 into a "birth pot" for Lilo, consults, gynae &amp; scans as they land. Do that and the biggest month you ever actually feel is ~R20k — not the R58k wall.</p>
-    <table class="ct" style="margin-top:16px">
-      <thead><tr><th>Month</th><th>What leaves your account</th><th style="text-align:right">Actual</th></tr></thead>
-      <tbody>
-        <tr><td><b>Sep</b></td><td>Genesis R9k + Lilo deposit R3k</td><td class="amt">~R12,000</td></tr>
-        <tr><td><b>Oct</b></td><td>Genesis R9k + sonar + 24w consult</td><td class="amt">~R11,450</td></tr>
-        <tr><td><b>Nov</b></td><td>Genesis R9k (pot builds)</td><td class="amt">~R9,000</td></tr>
-        <tr><td><b>Dec</b></td><td>Genesis R9k + booking + gynae + consults + ½ Lilo balance</td><td class="amt">~R20,100</td></tr>
-        <tr><td><b>Jan</b></td><td>Genesis R9k (final) + gynae + consults + ½ Lilo balance</td><td class="amt">~R18,700</td></tr>
-        <tr><td><b>Feb</b></td><td>3 consults · birth paid from the float</td><td class="amt" style="color:var(--good)">~R1,950</td></tr>
-      </tbody>
-    </table>
-    <p style="margin:12px 0 0;font-size:13px;color:var(--ink-soft)"><b>Biggest single month ≈ R20k, not your whole R52k.</b> And ~R24,800 of the R45k float refunds within a week of a normal birth — so the true net cost of the birth is ~R46,500. Full breakdown lives on the <a href="baby.html" style="color:var(--baby);font-weight:600">Baby page</a>.</p>
+    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'couch balance on delivery', 'move R5k to the car pot this week'."></textarea></div>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Overwrite any number with your real one.</p>
   </div>
 
   <div class="sec"><h2>🗓️ Milestones ahead</h2>
-    <p>The fixed dates that drive everything. Deadlines are Genesis's.</p></div>
+    <p>The dates that drive everything.</p></div>
   <div class="panel">
     <ul class="mile" id="mile"></ul>
   </div>
 
   <div class="sec"><h2>🏡 The move — countdown to November</h2>
-    <p>Ground floor, in and settled before the bump gets heavy. Here's the runway and the steps.</p></div>
+    <p>Ground floor, in and settled. Here's how it went.</p></div>
   <div class="ticker move">
     <div class="wk" id="movewk">— days</div>
     <div class="meta" id="movemeta">calculating…</div>
@@ -169,7 +138,7 @@
       <li data-tick="m-alerts"><span class="box"></span><span class="txt">Set Property24 + Private Property alerts <small>Done: found Unit 30, Baker Rd, Eden Glen. Acacia declined 21 Oct. Backups stay on the board until keys</small></span></li>
       <li data-tick="m-shortlist"><span class="box"></span><span class="txt">Shortlist 4–5 places <small>♡ them on the Apartments board — they land in your saved picks above</small></span></li>
       <li data-tick="m-viewings"><span class="box"></span><span class="txt">Book viewings <small>See them in person before applying</small></span></li>
-      <li data-tick="m-apply"><span class="box"></span><span class="txt">Apply for the one you want <small>Acacia declined 21 Oct · ✅ Baker Rd lease in hand 26 Oct, edited (baby, 1 car, anchoring furniture). Initial the 3 changes, Josh's spouse co-signs</small></span></li>
+      <li data-tick="m-apply"><span class="box"></span><span class="txt">Apply for the one you want <small>Acacia declined 21 Oct · ✅ Baker Rd lease in hand 26 Oct, edited (occupants, 1 car, anchoring furniture). Initial the 3 changes, Josh's spouse co-signs</small></span></li>
       <li data-tick="m-deposit"><span class="box"></span><span class="txt">Pay deposit + first month (R23,800) <small>✅ Done. Baker Rd: R11,900 deposit + R11,900 November rent. You're in</small></span></li>
       <li data-tick="m-movers"><span class="box"></span><span class="txt">Book movers / bakkie <small>Get 2 quotes early — November is busy season</small></span></li>
       <li data-tick="m-fibre"><span class="box"></span><span class="txt">Order fibre for Baker Rd (~100Mbps) <small>Ask the landlord which fibre is in the unit. Pick: Cool Ideas 100/50 R989/mo (zero cancellation fee) or Afrihost 100/50 R897/mo (router yours to keep). Keep 50 up, because Mishka's streams need 25+ · full notes + steps on the <a href="wifi.html" style="color:var(--home);font-weight:600">WiFi page</a></small></span></li>
@@ -187,26 +156,17 @@
     <p>Ticks save on this device. Green when done.</p></div>
   <div class="panel">
     <ul class="todos">
-      <li data-tick="t-genesis"><span class="box"></span><span class="txt">Email Genesis to book <small>Done — they replied, booking this week</small></span></li>
-      <li data-tick="t-midwife"><span class="box"></span><span class="txt">Choose a midwife <small>✅ Done — going with Lilo (Tèn 'n Tèn), fees confirmed</small></span></li>
-      <li data-tick="t-lilodep"><span class="box"></span><span class="txt">Pay Lilo's R3,000 booking deposit <small>Still showing as not paid (2 Nov). The ~R8k saved for Lilo covers it. Slots are first come first served, so do this next.</small></span></li>
-      <li data-tick="t-medaid"><span class="box"></span><span class="txt">Put baby on medical aid <small>Mandatory for cash payers before birth (emergency transfers)</small></span></li>
-      <li data-tick="t-doula"><span class="box"></span><span class="txt">Book a doula <small>Mandatory for first-time mums — ask Lilo for recommendations</small></span></li>
-      <li data-tick="t-antenatal"><span class="box"></span><span class="txt">Book Mishka's antenatal check-up</span></li>
-      <li data-tick="t-account"><span class="box"></span><span class="txt">Open the "baby float" savings account <small>For the R45k in January</small></span></li>
-      <li data-tick="t-scan"><span class="box"></span><span class="txt">Book the anomaly scan <small>Planned end Oct (~wk 23–24), don't let it slip to Nov · Maryke · 071 154 0223</small></span></li>
-      <li data-tick="t-booking"><span class="box"></span><span class="txt">Genesis booking-in by week 32 (~Dec) — pay R2,200</span></li>
-      <li data-tick="t-deposit"><span class="box"></span><span class="txt">R45,000 deposit by week 36 (~Jan)</span></li>
       <li data-tick="t-learners"><span class="box"></span><span class="txt">Book learner's licence <small>Your guy / NaTIS — unlocks the car</small></span></li>
       <li data-tick="t-alerts"><span class="box"></span><span class="txt">Set Property24 alerts for modern estates</span></li>
       <li data-tick="t-move"><span class="box"></span><span class="txt">Secure rental + move <small>✅ Moved into Unit 30, 114 Victoria Square, Eden Glen · Greenstone Ridge deposit (R16,905) back once Josh signs the release letter</small></span></li>
-      <li data-tick="t-bank"><span class="box"></span><span class="txt">Bank ~R12k this month <small>The spine — funds everything</small></span></li>
-      <li data-tick="t-babykit"><span class="box"></span><span class="txt">Start the baby-kit shopping list <small>Tick items as you buy — Baby page</small></span></li>
+      <li data-tick="t-bank"><span class="box"></span><span class="txt">Start the car-deposit pot <small>Whatever's left after the flat is finished</small></span></li>
+      <li data-tick="t-greenstone"><span class="box"></span><span class="txt">Greenstone Ridge deposit back (R16,905) <small>Josh signs the release letter</small></span></li>
+      <li data-tick="t-snag"><span class="box"></span><span class="txt">Snag list (Annexure A) to the landlord <small>Dry bathroom tap + rotting bathroom plywood, with photos</small></span></li>
     </ul>
   </div>
 
   <div class="sec"><h2>❤️ Your saved picks</h2>
-    <p>Cars, flats and midwives you ❤️ across the site land here.</p></div>
+    <p>Cars and flats you ❤️ across the site land here.</p></div>
   <div class="saved">
     <div class="savecol car">
       <h4>🚗 Cars</h4>
@@ -216,10 +176,6 @@
       <h4>🏡 Flats</h4>
       <ul class="savelist" id="savedflats"></ul>
     </div>
-    <div class="savecol mid">
-      <h4>👩‍⚕️ Midwives</h4>
-      <ul class="savelist" id="savedmidwives"></ul>
-    </div>
   </div>
 
   <div class="foot">TRACKER · saves on this device · shared sync arrives with Babybean · The Nest</div>
@@ -228,20 +184,7 @@
 <script src="nest.js"></script>
 <script>
 (function(){
-  // Pregnancy ticker — anchored to the confirmed EDD (20 Feb 2027).
-  // Dating confirmed at first consult: 16w2d on 7 Sep 2026. Self-corrects off the due date.
-  const EDD = new Date('2027-02-20T00:00:00');
-  const DUE = 40;
   const now = new Date();
-  const daysToDue = Math.max(0, Math.ceil((EDD - now) / 86400000));
-  let week = DUE - Math.ceil(daysToDue / 7);
-  if (week < 0) week = 0; if (week > DUE) week = DUE;
-  const toGo = Math.max(0, DUE - week);
-  const tri = week < 13 ? 1 : week < 28 ? 2 : 3;
-  const triName = ['', 'First trimester', 'Second trimester', 'Third trimester'][tri];
-  document.getElementById('wk').textContent = 'Week ' + week;
-  document.getElementById('meta').textContent = triName + ' · ' + toGo + ' weeks to go · due 20 Feb 2027';
-  document.getElementById('barfill').style.width = Math.round(week / DUE * 100) + '%';
 
   // Move countdown — target: move-in by November 2026. Runway opens 1 Sep.
   const MOVE = new Date('2026-11-01T00:00:00');
@@ -256,24 +199,28 @@
     mmeta.textContent = weeksToMove + ' weeks to go · target move-in November 2026';
   } else {
     mwk.textContent = 'Moved 🎉';
-    mmeta.textContent = 'Ground floor, done — before it got heavy';
+    mmeta.textContent = 'Unit 30, 114 Victoria Square · in since 1 Nov';
   }
   const moveSpan = MOVE - MOVE_START;
   const movePct = Math.max(0, Math.min(100, Math.round((now - MOVE_START) / moveSpan * 100)));
   mbar.style.width = movePct + '%';
 
-  // Milestones
+  // Milestones — "past" once the date has gone by
   const M = [
-    { wk: 24, when: 'Now · wk 24', what: 'Pay Lilo R3,000 to lock your slot', sub: 'Still showing as not paid (2 Nov) · ~R8k saved for Lilo covers it · first come first served' },
-    { wk: 23, when: 'End Oct · wk 23–24', what: 'The anomaly sonar', sub: 'Planned end of Oct · lock the date, don’t let it slip into Nov' },
-    { wk: 24, when: '1 Nov · wk 24', what: '✅ Moved into the new place', sub: 'Unit 30, 114 Victoria Square, Eden Glen · snag photos by 8 Nov' },
-    { wk: 32, when: '~Dec · wk 32', what: 'Genesis booking-in + R2,200', sub: 'Must be done by wk 32' },
-    { wk: 36, when: '~Jan · wk 36', what: '~R45,000 Genesis float due', sub: 'Refundable — for a normal birth ~R24,800 comes back within a week' },
-    { wk: 40, when: '20 Feb', what: 'Baby 🎉', sub: '' }
-  ];
+    { d: '2026-11-01', when: '1 Nov', what: '✅ Moved into the new place', sub: 'Unit 30, 114 Victoria Square, Eden Glen' },
+    { d: '2026-11-05', when: '5 Nov', what: '✅ Laptop arrived', sub: 'Dell G5 5587 from Device Shop' },
+    { d: '2026-11-30', when: 'Nov', what: 'Fibre live + Greenstone Ridge deposit back', sub: 'Evotel has to release the old tenant\'s line first' },
+    { d: '2026-11-27', when: '27 Nov', what: 'Black Friday', sub: 'Only for things you were buying anyway · check Serval Tracker first' },
+    { d: '2027-03-31', when: 'Early 2027', what: 'Learner\'s licence, then lessons', sub: 'Unlocks the car' },
+    { d: '2027-06-30', when: '~Q2 2027', what: 'Driver\'s licence, then the car 🚗', sub: 'Shortlist on the Cars page' }
+  ].sort((a, b) => a.d < b.d ? -1 : 1);
   const ml = document.getElementById('mile');
+  const today = now.toISOString().slice(0, 10);
+  let nowSet = false;
   ml.innerHTML = M.map(m => {
-    const cls = week >= m.wk + 1 ? 'past' : (week >= m.wk - 1 && week <= m.wk + 1) ? 'now' : '';
+    let cls = '';
+    if (m.d < today) cls = 'past';
+    else if (!nowSet) { cls = 'now'; nowSet = true; }
     return `<li class="${cls}"><span class="when">${m.when}</span><span class="what">${m.what}${m.sub ? `<small>${m.sub}</small>` : ''}</span></li>`;
   }).join('');
 
@@ -286,7 +233,6 @@
   }
   render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
   render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
-  render('midwife', 'savedmidwives', 'No midwives shortlisted yet — tap ♡ on the Baby page.');
 })();
 
 // ===== Cash pacer =====
@@ -298,8 +244,7 @@
     { k:'fnb_loan',    label:'FNB personal loan',    sub:"R5,000 a month for 12 months (approved 2 Oct, DebiCheck from Mishka's FNB). Paid off around Oct 2027.", amt:5000 },
     { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
     { k:'electricity', label:'Electricity + water',  sub:'Prepaid + utilities',                                     amt:1500 },
-    { k:'midwife_dep', label:'Lilo booking deposit', sub:'R3,000 — not paid yet (19 Oct), ~R8k saved for Lilo covers it. Secures your slot (first come first served). Comes off the birth fee. PAY THIS NEXT.', amt:3000 },
-    { k:'genesis_dep', label:'Genesis instalment', sub:'R9,000/mo × 5 (Sep→Jan) = the R45k float, paid off by wk 36. Genesis confirmed instalments in writing — no lump sum needed.', amt:9000 }
+    { k:'car_pot',     label:'Car-deposit pot',      sub:'What you put away toward the car this month', amt:0 }
   ];
   const saved = window.NEST._get(KEY, {});
   let have = (saved.have != null) ? saved.have : 52000;
