@@ -39,6 +39,22 @@
   .ct tr.out td { color: var(--ink-soft); text-decoration: line-through; text-decoration-thickness: 1px; }
   .fine { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
   ul.pl { margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:14.5px; }
+  .layers, .habits { display: flex; flex-direction: column; gap: 10px; }
+  .acc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 16px; -webkit-tap-highlight-color: transparent; }
+  .acc summary::-webkit-details-marker { display: none; }
+  .acc summary::after { content: "+"; margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 600; color: var(--ink-soft); transition: transform .2s ease; }
+  .acc[open] summary::after { transform: rotate(45deg); }
+  .acc .ic { font-size: 22px; line-height: 1; }
+  .acc .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--good-soft); color: var(--good); font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13px; display: grid; place-items: center; }
+  .acc .st { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+  .acc .st small { color: var(--ink-soft); font-size: 12.5px; }
+  .acc .bd { padding: 0 16px 14px; font-size: 14px; border-top: 1px solid var(--line); }
+  .acc .bd p { margin: 10px 0 0; }
+  .acc .bd ul.pl { margin-top: 8px; }
+  .lay-h { border-left: 4px solid var(--good); }
+  .lay-d { border-left: 4px solid var(--accent); }
+  .lay-g { border-left: 4px solid var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -73,6 +89,95 @@
       <li><b>Join on 1 December if you can.</b> December is charged at 2026 rates, and the waiting periods start a month sooner.</li>
       <li><b>The real cost isn't the premium. It's the gynae's rooms.</b> Gynaes charge R1,900–R2,400 a visit and schemes pay about R520. Gap cover doesn't pay rooms visits. Plan for <b>R11–46k out of pocket</b> in a pregnancy year on any plan.</li>
     </ul>
+  </div>
+
+  <div class="sec"><h2>📘 How to use it</h2><p>Tap any card to open it.</p></div>
+
+  <div class="layers">
+    <details class="acc lay-h">
+      <summary><span class="ic">🏥</span><span class="st"><b>Hospital cover</b><small>The big pot · no limit</small></span></summary>
+      <div class="bd">
+        <p>Pays the hospital bill, theatre and NICU (neonatal intensive care) with no annual limit.</p>
+        <p><b>The catch:</b> only at a hospital on the plan's list. On Momentum that's the Associated list (Life Roseacres is on it). Anywhere else, you pay 30% of the bill.</p>
+      </div>
+    </details>
+    <details class="acc lay-d">
+      <summary><span class="ic">👛</span><span class="st"><b>Day-to-day money</b><small>The small pot · ~R4,356 a year</small></span></summary>
+      <div class="bd">
+        <p>Pays GP visits, scans in the doctor's rooms and medicine. On Momentum it's paid in upfront for the whole year, and whatever's left over carries over to next year.</p>
+        <p><b>The catch:</b> when it runs out, everything outside hospital comes from your pocket until the new year.</p>
+      </div>
+    </details>
+    <details class="acc lay-g">
+      <summary><span class="ic">🛡️</span><span class="st"><b>Gap cover</b><small>The top-up · R190–R350 a month</small></span></summary>
+      <div class="bd">
+        <p>Separate insurance. In hospital, it pays what doctors charge above what the medical aid pays (up to 5× the scheme rate on Turnberry), plus some scheme co-payments.</p>
+        <p><b>The catch:</b> it never pays for visits to the doctor's rooms. And it waits 10 months before it pays anything to do with a pregnancy.</p>
+      </div>
+    </details>
+  </div>
+
+  <details class="acc ex" style="margin-top:12px">
+    <summary><span class="ic">🧾</span><span class="st"><b>How a bill actually works</b><small>One example, in rands</small></span></summary>
+    <div class="bd">
+      <p><b>In the gynae's rooms:</b> the visit costs R2,000. The medical aid pays about R520 (from the pregnancy benefit or savings). <b>You pay about R1,480.</b> Gap cover doesn't help here.</p>
+      <p><b>In hospital:</b> the hospital bill is paid in full. The specialist charges R16,000 and the scheme pays R12,000 at double rate. <b>Gap cover pays the R4,000 left over</b>, once you claim it. With a Momentum Associated specialist, there's nothing left over at all.</p>
+    </div>
+  </details>
+
+  <div class="sec"><h2>✅ The habits that save the most</h2><p>Tap each one for the how.</p></div>
+  <div class="habits">
+    <details class="acc">
+      <summary><span class="n">1</span><span class="st"><b>Phone before anything planned</b><small>Get a pre-authorisation number</small></span></summary>
+      <div class="bd">
+        <p>Before any planned hospital stay, procedure or MRI/CT scan, phone the scheme (the number is on the card and in the app) and get an approval number. That approval is called <b>pre-authorisation</b>.</p>
+        <p>Without it, they can pay less or charge a penalty (R500 on KeyHealth, 20% on some schemes).</p>
+        <p><b>Emergency?</b> Go first. Phone within 1–2 working days.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="n">2</span><span class="st"><b>Stay on their lists</b><small>Network hospitals and doctors</small></span></summary>
+      <div class="bd">
+        <p>Use the app to find hospitals, GPs and specialists on the plan's network <b>before</b> you book.</p>
+        <p>Going outside it costs 30% of the hospital bill on Momentum (Associated), or R13,150 upfront on Discovery Smart plans.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="n">3</span><span class="st"><b>Ask every new doctor one question</b><small>It decides most of your costs</small></span></summary>
+      <div class="bd">
+        <p>Say: <i>"Are you on Momentum's Associated list, and what will I pay myself per visit?"</i></p>
+        <p>Some gynaes bill the medical aid and charge only about R450 on top. Others charge R1,900–R2,400 cash. That's the difference between about R11k and R46k a year.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="n">4</span><span class="st"><b>Go easy on the day-to-day money</b><small>It has to last 12 months</small></span></summary>
+      <div class="bd">
+        <p>Don't spend it on pharmacy extras (vitamins, creams, plasters) early in the year. Pay for small things in cash and save it for doctor visits and scans.</p>
+        <p>Use generic medicine when the pharmacist offers it. It's cheaper and does the same job.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="n">5</span><span class="st"><b>Claim from gap cover</b><small>It won't pay unless you ask</small></span></summary>
+      <div class="bd">
+        <p>After any hospital stay, send gap cover:</p>
+        <ul class="pl" style="font-size:14px"><li>each doctor's invoice</li><li>the medical aid's claim statement showing what it paid</li><li>the hospital account</li></ul>
+        <p>Every policy has a deadline for claims. Check the exact one in the policy, and claim as soon as the medical aid's statement arrives.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="n">6</span><span class="st"><b>Check the app every month</b><small>Catch wrong claims early</small></span></summary>
+      <div class="bd">
+        <p>Look at every claim. If a doctor billed for something that didn't happen, or the scheme paid less than it should, phone them.</p>
+        <p>If a doctor sends you a bill directly, submit it to the scheme yourself. Claims have to be in <b>within 4 months</b>, or they won't pay.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="n">7</span><span class="st"><b>Be honest on the form</b><small>Every question, every time</small></span></summary>
+      <div class="bd">
+        <p>If something is left off the application form, the scheme can cancel the cover later, exactly when you need it.</p>
+        <p>Declare everything, and get any waiting periods or exclusions in writing.</p>
+      </div>
+    </details>
   </div>
 
   <div class="sec"><h2>The three picks</h2></div>
