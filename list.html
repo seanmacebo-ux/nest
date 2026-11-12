@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=20261112b">
+<link rel="stylesheet" href="style.css?v=20261112c">
 <style>
   .bl { list-style: none; margin: 0; padding: 0; }
   .bl li { display: flex; gap: 12px; align-items: baseline; padding: 11px 0; border-bottom: 1px dotted var(--line); font-size: 14.5px; }
@@ -28,6 +28,22 @@
   .bl li.unsure .pr { color: var(--ink-soft); }
   .sumrow { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; }
   .sumrow b { font-family: "IBM Plex Mono", monospace; }
+  .bl .tx a { color: var(--accent); font-weight: 600; }
+  .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .acts a, .acts button { font: inherit; font-size: 12.5px; font-weight: 600; text-decoration: none; cursor: pointer; border-radius: 10px; padding: 0 12px; min-height: 36px; display: inline-flex; align-items: center; gap: 6px; }
+  .acts a.op { color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); }
+  .acts button.got { color: var(--surface); background: var(--accent); border: 1px solid var(--accent); }
+  .acts button.got.sent { color: var(--accent); background: var(--good-soft); border-color: var(--good-soft); }
+  li.new .tx b::after { content: "NEW"; margin-left: 6px; font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; padding: 2px 6px; border-radius: 10px; background: var(--amber-soft); color: var(--amber); vertical-align: 2px; }
+  .addbox { background: var(--surface); border: 2px solid var(--accent); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); margin-top: 22px; }
+  .addbox h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: 20px; margin: 0; }
+  .addbox p { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-soft); }
+  .addbox textarea { width: 100%; margin-top: 12px; min-height: 84px; resize: vertical; font: inherit; font-size: 16px; color: var(--ink); background: var(--ground); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .addbox textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .qchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .qchips button { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 20px; padding: 0 12px; min-height: 36px; }
+  .sendbtn { margin-top: 12px; width: 100%; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; color: var(--surface); background: var(--accent); border: 0; border-radius: 12px; min-height: 48px; }
+  .how { font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -39,39 +55,81 @@
   <a class="tab" href="medical.html">Medical aid</a>
   <a class="tab" href="cars.html">Cars</a>
   <a class="tab" href="apartments.html">Apartments</a>
-  <a class="tab" href="furniture.html">Furniture</a>
-  <a class="tab" href="bedding.html">Bedding</a>
-  <a class="tab" href="kitchen.html">Kitchen</a>
   <a class="tab" href="wifi.html">WiFi</a>
-  <a class="tab" href="laptop.html">Laptop</a>
   <a class="tab" href="decided.html">Decided</a>
 </div></nav>
-<script src="nav.js?v=20261112b"></script>
+<script src="nav.js?v=20261112c"></script>
 
 <div class="wrap">
   <header>
     <div class="eyebrow"><span class="dot"></span> For the flat · kept up to date by The Nest</div>
     <h1>Bought &amp; <em>still need</em>.</h1>
-    <p class="sub">Everything for the flat in one place. When you buy, order or receive something, tell The Nest on Telegram and it moves up to Bought. Items marked ❓ are ones I haven't been able to confirm, so tell me where they're at.</p>
+    <p class="sub">One list for everything. Tap <b>✓ Got it</b> when you buy something, or add new things in the box below. Both open Telegram with the message already written, so it lands straight with me and I update the list.</p>
   </header>
 
-  <div class="sec"><h2>💛 For Mishka's recovery · get these now</h2>
+  <div class="addbox">
+    <h3>＋ Add something</h3>
+    <p>Type what you need. Paste a link if you've seen one you like. I'll find options with the browser and put them on this list.</p>
+    <div class="qchips" aria-label="Quick add">
+      <button type="button" data-q="TV: ">📺 TV</button>
+      <button type="button" data-q="Monitor: ">🖥️ Monitor</button>
+      <button type="button" data-q="Dining table: ">🪑 Dining table</button>
+      <button type="button" data-q="Side tables: ">🛋️ Side tables</button>
+      <button type="button" data-q="Mini PC: ">💻 Mini PC</button>
+    </div>
+    <textarea id="addtxt" placeholder="e.g. Monitor, 27 inch, for work, under R3k" aria-label="What do you need?"></textarea>
+    <button type="button" class="sendbtn" id="addsend">Send to The Nest on Telegram →</button>
+    <div class="how">Several things at once is fine: one per line.</div>
+  </div>
+
+  <div class="sec"><h2>💛 For Mishka's recovery</h2>
     <p>Bleeding usually lasts 2 to 6 weeks. Prices checked on Clicks and Dis-Chem, 11 Nov.</p></div>
   <div class="panel">
     <ul class="bl">
       <li><span class="ic">✅</span><span class="tx"><b>Pads: got them (11 Nov)</b> <small>When they run low: Carriwell Premium Organic 10 pack, Clicks R62.99, or Lil-lets Maternity for nights, Clicks R59.99.</small></span><span class="pr">done</span></li>
-      <li><span class="ic">📦</span><span class="tx"><b>Ordered on Takealot today (11 Nov), arriving Thu 12 Nov</b> <small>Tucks Medicated Cooling Pads, 100 (R370) · FertilitySure Perineal Healing Foam with witch hazel, 150ml (R249) · Vitality Aloe Vera Gel, 100ml (R79). Order 230236048, paid. The Tucks pads are cooling witch-hazel pads: lay one or two on top of her maternity pad.</small></span><span class="pr">R698</span></li>
-      <li><span class="ic">🧊</span><span class="tx"><b>Cold pack for down there</b> (only if she's sore or swollen) <small>Easiest is homemade: wet a maternity pad with water, freeze it, and wrap it in a thin cloth. Or ice in a cloth. 10–20 minutes at a time, never ice straight on the skin. Helps most in the first 2–3 days. After that, warm shallow baths feel better.</small></span><span class="pr">R0</span></li>
-      <li><span class="ic">🩲</span><span class="tx"><b>Maternity pants</b> (stretchy, hold pads in place) <small>Carriwell: Dis-Chem R82.99 (S–XL), Clicks R91.20 (XXL). Two packs.</small></span><span class="pr">~R170</span></li>
-      <li><span class="ic">💧</span><span class="tx"><b>Squeeze bottle for rinsing</b> (a "peri bottle") <small>Clicks doesn't stock one. Any clean squeeze bottle or a jug of warm water does the same job.</small></span><span class="pr">—</span></li>
-      <li><span class="ic">👙</span><span class="tx"><b>Soft, firm bra with no underwire + cold packs</b> <small>For if her milk comes in (usually day 2 to 5). Cold packs or chilled cabbage leaves ease it. Don't express, because that makes more milk.</small></span><span class="pr">—</span></li>
-      <li><span class="ic">💊</span><span class="tx"><b>Pain relief + a stool softener</b> <small>Whatever the hospital said is OK. Stool softener: Movicol sachets, Clicks R96.99 for 8, or lactulose syrup from the pharmacy counter. Tell the pharmacist she just gave birth.</small></span><span class="pr">—</span></li>
-      <li><span class="ic">🥤</span><span class="tx"><b>Water, iron-rich food, the cranberry + coconut water she wanted</b> <small>She's lost blood, so red meat, spinach, beans and eggs help.</small></span><span class="pr">—</span></li>
+      <li data-ask="Takealot recovery order (Tucks, healing foam, aloe)" data-done="Arrived"><span class="ic">📦</span><span class="tx"><b>Takealot order, due Thu 12 Nov</b> <small>Tucks Medicated Cooling Pads, 100 (R370) · FertilitySure Perineal Healing Foam, 150ml (R249) · Vitality Aloe Vera Gel, 100ml (R79). Order 230236048, paid. Lay one or two Tucks pads on top of her maternity pad.</small></span><span class="pr">R698</span></li>
+      <li><span class="ic">🧊</span><span class="tx"><b>Cold pack for down there</b> (only if she's sore or swollen) <small>Wet a maternity pad, freeze it, wrap it in a thin cloth. 10–20 minutes at a time, never ice straight on the skin. After the first 2–3 days, warm shallow baths feel better.</small></span><span class="pr">R0</span></li>
+      <li data-ask="Maternity pants"><span class="ic">🩲</span><span class="tx"><b>Maternity pants</b> (hold pads in place) <small>Carriwell: Dis-Chem R82.99 (S–XL), Clicks R91.20 (XXL). Two packs.</small></span><span class="pr">~R170</span></li>
+      <li><span class="ic">💊</span><span class="tx"><b>Pain relief + a stool softener</b> <small>Whatever the hospital said is OK. Movicol sachets, Clicks R96.99 for 8. Tell the pharmacist she just gave birth.</small></span><span class="pr">—</span></li>
+      <li><span class="ic">🥤</span><span class="tx"><b>Water, iron-rich food, cranberry + coconut water</b> <small>She's lost blood, so red meat, spinach, beans and eggs help.</small></span><span class="pr">—</span></li>
     </ul>
-    <div class="sumrow"><span>Still to get, roughly</span><b>~R170</b></div>
-    <p style="margin:12px 0 0;font-size:13px"><b>Ask a doctor today:</b> there's a prescription tablet (cabergoline) that stops the milk coming in. It works best in the first days, so phone the hospital, a GP or a pharmacist.</p>
-    <p style="margin:8px 0 0;font-size:13px"><b>Support for her heart, too:</b> The Compassionate Friends (Highlands North) has free one-on-one support from trained parents who've lost a child, online or in person, plus a group on the second Saturday of every month. 011 440 6322 or 072 667 0273. compassionatefriends.co.za</p>
+    <p style="margin:12px 0 0;font-size:13px"><b>Support for her heart, too:</b> The Compassionate Friends (Highlands North), free one-on-one support from parents who've lost a child, plus a group on the second Saturday of every month. 011 440 6322 or 072 667 0273.</p>
     <p style="margin:8px 0 0;font-size:13px;color:var(--red)"><b>Back to hospital if:</b> she soaks a pad in an hour or less, passes big clots, gets a fever or shivers, has smelly discharge or bad belly pain, a painful swollen leg, chest pain or short breath, or feels very low or unsafe.</p>
+  </div>
+
+  <div class="sec"><h2>🛒 Still need</h2>
+    <p>Most important first. Tap <b>✓ Got it</b> when it's bought.</p></div>
+  <div class="panel">
+    <ul class="bl">
+      <li data-ask="Bed base, Queen XL" data-url="https://mfaonline.co.za/shop/bedroom/bedroom-furniture/bedroom-suites/timeless-bed-frame/"><span class="ic">🛏️</span><span class="tx"><b>Bed base or frame, Queen XL</b> <small>The mattress is Queen XL (12cm longer than a Queen), so the base must be XL too. The Timeless frame you liked only comes in normal Queen.</small></span><span class="pr">~R3,199</span></li>
+      <li class="new" data-ask="Dining table"><span class="ic">🪑</span><span class="tx"><b>Dining table</b> ❓ <small>How many seats, and roughly what budget? Then I'll find options.</small></span><span class="pr">—</span></li>
+      <li class="new" data-ask="Side tables"><span class="ic">🛋️</span><span class="tx"><b>Side tables</b> ❓ <small>Next to the couch, by the bed, or both?</small></span><span class="pr">—</span></li>
+      <li data-ask="Couch balance paid" data-done="Paid"><span class="ic">💸</span><span class="tx"><b>Couch balance</b> <small>Only once it's in and you've checked fabric, seams and legs.</small></span><span class="pr">R5,800</span></li>
+      <li data-ask="Microwave (Defy 30L)" data-url="https://www.takealot.com/all?qsearch=Defy%2030L%20DMO390"><span class="ic">🍲</span><span class="tx"><b>Microwave:</b> Defy 30L Solo DMO390, silver <small>4.7★ from 1,245 reviews on Takealot (checked 11 Nov). Black option: Russell Hobbs 30L Black Mirror, R1,299.</small></span><span class="pr">R1,199</span></li>
+      <li data-ask="Kettle (Defy glass 1.7L)" data-url="https://www.takealot.com/defy-wk5300g-tinted-1-7l-glass-kettle/PLID95918801"><span class="ic">☕</span><span class="tx"><b>Kettle:</b> Defy glass 1.7L</span><span class="pr">R349</span></li>
+      <li data-ask="Coffee table (LAZAVA)" data-url="https://lasa.africa/single-product/lazava-rustic-lift-top-coffee-table-hidden-storage-open"><span class="ic">🪵</span><span class="tx"><b>Coffee table:</b> LAZAVA lift-top <small>On 30 Oct you were waiting for LASA to confirm delivery before ordering.</small></span><span class="pr">R1,609</span></li>
+      <li class="unsure" data-ask="Bedding (pillows, duvet, fitted sheet)"><span class="ic">😴</span><span class="tx"><b>Bedding</b> ❓ <small>Bed Bath Home picks: <a href="https://bedbathhome.co.za/products/deluxe-twin-pack-microfibre-pillows" target="_blank" rel="noopener">Whitehouse pillows, 2 for R330</a> · <a href="https://bedbathhome.co.za/products/microfibre-deluxe-duvet-inner-downproof" target="_blank" rel="noopener">microfibre duvet inner, King, R1,300</a> · <a href="https://bedbathhome.co.za/products/nest-soft-touch-essentials-fitted-sheet-white" target="_blank" rel="noopener">fitted sheet, Queen XLD, R184</a>. Feel them first at Continental Linen, Greenstone.</small></span><span class="pr">~R2,474</span></li>
+      <li class="unsure" data-ask="Kitchen basics"><span class="ic">🍳</span><span class="tx"><b>Kitchen basics</b> ❓ <small>Tell me what you already have. Takealot picks: <a href="https://www.takealot.com/consol-opal-dinnerware-12pce-set/PLID52855534" target="_blank" rel="noopener">Consol plates, 12-piece, R669</a> · <a href="https://www.takealot.com/eetrite-newport-cutlery-set-set-of-24/PLID28169913" target="_blank" rel="noopener">cutlery, 24-piece, R949</a> · <a href="https://www.takealot.com/consol-willy-tumbler-8-pack-380ml/PLID98176749" target="_blank" rel="noopener">8 glasses, R159</a> · <a href="https://www.takealot.com/russell-hobbs-stainless-steel-6-piece-cookware-set/PLID99466482" target="_blank" rel="noopener">Russell Hobbs pots, 6-piece, R1,399</a> · <a href="https://www.takealot.com/victorinox-chefs-knife-19cm-black/PLID28003425" target="_blank" rel="noopener">chef's knife, R959</a> · <a href="https://www.takealot.com/consol-madrid-storage-containers-with-clip-on-vented-lids-3pce-v/" target="_blank" rel="noopener">glass containers, R798</a>.</small></span><span class="pr">~R4,900</span></li>
+      <li data-ask="Cutlery holder"><span class="ic">🍴</span><span class="tx"><b>Cutlery holder</b></span><span class="pr">—</span></li>
+      <li data-ask="Sheer curtain"><span class="ic">🪟</span><span class="tx"><b>Sheer curtain</b></span><span class="pr">—</span></li>
+      <li data-ask="Anti-tip straps"><span class="ic">🔩</span><span class="tx"><b>Anti-tip straps</b> for the TV and the stand</span><span class="pr">~R150</span></li>
+      <li data-ask="Streaming mic (Fifine AM8 NEO)" data-url="https://www.takealot.com/all?qsearch=Fifine%20AM8%20NEO"><span class="ic">🎙️</span><span class="tx"><b>Streaming mic:</b> Fifine AM8 NEO <small>4.9★ from 31 reviews, stand and tap-to-mute included (checked 12 Nov). NearStream AM15X: R1,137, slower delivery, no reviews yet.</small></span><span class="pr">R1,399</span></li>
+      <li class="unsure" data-ask="Webcam"><span class="ic">🎥</span><span class="tx"><b>Webcam</b> ❓ <small>Mishka's people may provide one. If not: Logitech C920, R1,649 on Takealot, 4.6★ from 109 reviews.</small></span><span class="pr">R0–1,649</span></li>
+      <li class="new unsure" data-ask="Monitor"><span class="ic">🖥️</span><span class="tx"><b>Monitor</b> ❓ <small>What's it for (work, Mishka's streaming, gaming) and what size?</small></span><span class="pr">—</span></li>
+      <li class="new unsure" data-ask="Mini PC"><span class="ic">💻</span><span class="tx"><b>Mini PC</b> (maybe) ❓ <small>What would it be for? That decides how much power it needs.</small></span><span class="pr">—</span></li>
+    </ul>
+    <div class="sumrow"><span>Still to spend (rough)</span><b>~R23,700</b></div>
+    <p class="how">Not priced yet: dining table, side tables, monitor, mini PC.</p>
+  </div>
+
+  <div class="sec"><h2>🤔 Only if needed</h2></div>
+  <div class="panel">
+    <ul class="bl">
+      <li class="unsure" data-ask="Fridge" data-url="https://www.takealot.com/defy-323l-bottom-mount-freezer-fridge-wd-dac627-satin-metallic/PLID54966398"><span class="ic">❄️</span><span class="tx"><b>Fridge:</b> Defy 323L combi ❓ <small>Only if the flat has no fridge.</small></span><span class="pr">R6,499</span></li>
+      <li class="unsure" data-ask="Washer" data-url="https://www.mhcworld.co.za/products/defy-8kg-front-loader-washing-machine-midnight-black-daw408b"><span class="ic">🧺</span><span class="tx"><b>Washer:</b> Defy 8kg front loader ❓ <small>Only if Mom's washer doesn't come.</small></span><span class="pr">R5,699</span></li>
+      <li data-ask="Blender" data-url="https://www.takealot.com/philips-promix-daily-collection-hand-blender-hr2535-00/PLID721932"><span class="ic">🥤</span><span class="tx"><b>Blender:</b> Philips ProMix stick blender <small>Step up: Kenwood Blend n Heat jug, R1,899.</small></span><span class="pr">R924</span></li>
+      <li data-ask="Mini UPS for the router"><span class="ic">🔋</span><span class="tx"><b>Mini UPS for the router</b> <small>Only if power cuts bug you.</small></span><span class="pr">R384</span></li>
+    </ul>
   </div>
 
   <div class="sec"><h2>✅ Bought</h2></div>
@@ -79,46 +137,53 @@
     <ul class="bl">
       <li><span class="ic">🌙</span><span class="tx"><b>Mattress:</b> COSOVA 26cm pocket spring, Queen XL <small>Takealot. Delivered Mon 2 Nov.</small></span><span class="pr">R3,999</span></li>
       <li><span class="ic">📺</span><span class="tx"><b>TV:</b> Skyworth 55" QLED Google TV <small>Takealot. Delivered Mon 2 Nov.</small></span><span class="pr">R6,299</span></li>
-      <li><span class="ic">💻</span><span class="tx"><b>Laptop:</b> Dell G5 5587 <small>Device Shop. Paid 2 Nov, arrived 5 Nov, set up.</small></span><span class="pr">R8,913</span></li>
-      <li><span class="ic">💡</span><span class="tx"><b>Ring light + tripod</b> <small>Already have them.</small></span><span class="pr">—</span></li>
-      <li><span class="ic">🌀</span><span class="tx"><b>Bedroom fan:</b> Kenwood 40cm pedestal, matte black <small>Takealot order 228858319, paid 29 Oct, due 30 Oct.</small></span><span class="pr">R549</span></li>
-      <li class="unsure"><span class="ic">🗄️</span><span class="tx"><b>TV stand:</b> Artisan Berlin 160cm rustic ❓ <small>Ordered 29 Oct (#8NV9G8855). Has it been delivered?</small></span><span class="pr">R1,103</span></li>
-      <li class="unsure"><span class="ic">🛋️</span><span class="tx"><b>Couch:</b> Osaka U-shape ❓ <small>Ordered 20 Oct, R5,799.50 deposit paid. Was due 2 Nov. Has it arrived, and is the balance paid?</small></span><span class="pr">R11,599</span></li>
+      <li><span class="ic">💻</span><span class="tx"><b>Laptop:</b> Dell G5 5587 <small>Device Shop. Arrived 5 Nov, set up.</small></span><span class="pr">R8,913</span></li>
+      <li><span class="ic">💡</span><span class="tx"><b>Ring light + tripod</b> <small>Already had them.</small></span><span class="pr">—</span></li>
+      <li><span class="ic">🌀</span><span class="tx"><b>Bedroom fan:</b> Kenwood 40cm pedestal <small>Takealot, paid 29 Oct.</small></span><span class="pr">R549</span></li>
+      <li class="unsure" data-ask="TV stand (Artisan Berlin)" data-done="Arrived"><span class="ic">🗄️</span><span class="tx"><b>TV stand:</b> Artisan Berlin 160cm ❓ <small>Ordered 29 Oct (#8NV9G8855). Has it come?</small></span><span class="pr">R1,103</span></li>
+      <li class="unsure" data-ask="Couch (Osaka U-shape)" data-done="Arrived"><span class="ic">🛋️</span><span class="tx"><b>Couch:</b> Osaka U-shape ❓ <small>Ordered 20 Oct, R5,799.50 deposit paid. Was due 2 Nov. Has it come?</small></span><span class="pr">R11,599</span></li>
     </ul>
     <div class="sumrow"><span>Spent or committed so far</span><b>~R32,462</b></div>
   </div>
 
-  <div class="sec"><h2>🛒 Still need</h2>
-    <p>Most important first.</p></div>
-  <div class="panel">
-    <ul class="bl">
-      <li><span class="ic">🛏️</span><span class="tx"><b>Bed frame, Queen XL</b> <small>The Timeless frame you picked is a normal Queen. The mattress is Queen XL (12cm longer), so get the XL. See <a href="furniture.html">Furniture</a>.</small></span><span class="pr">~R3,199</span></li>
-      <li><span class="ic">💸</span><span class="tx"><b>Couch balance</b> <small>Only once it's in and you've checked fabric, seams and legs. Skip this if it's already paid.</small></span><span class="pr">R5,800</span></li>
-      <li><span class="ic">☕</span><span class="tx"><b>Kettle:</b> Defy glass 1.7L <small>Takealot. See <a href="kitchen.html">Kitchen</a>.</small></span><span class="pr">R349</span></li>
-      <li><span class="ic">🍲</span><span class="tx"><b>Microwave:</b> Defy 30L Solo DMO390, silver <small>Top pick on Takealot: 4.7★ from 1,245 reviews, in the Joburg warehouse, tomorrow with TakealotMORE (checked 11 Nov). Want black? Russell Hobbs 30L Black Mirror, R1,299, 4.7★ from 601.</small></span><span class="pr">R1,199</span></li>
-      <li><span class="ic">🎙️</span><span class="tx"><b>Streaming mic:</b> Fifine AM8 NEO (USB + XLR dynamic) <small>Takealot, in stock, 4.9★ from 31 reviews, comes with a stand and a tap-to-mute button (checked 12 Nov). NearStream option: AM15X, R1,137 (5–7 work days, no reviews yet) or R1,661 for faster delivery.</small></span><span class="pr">R1,399</span></li>
-      <li class="unsure"><span class="ic">🎥</span><span class="tx"><b>Webcam</b> ❓ <small>Mishka's people are checking whether they'll provide one. If not: Logitech C920, R1,649 on Takealot, in stock, 4.6★ from 109 reviews (checked 12 Nov).</small></span><span class="pr">R0–R1,649</span></li>
-      <li><span class="ic">🍴</span><span class="tx"><b>Cutlery holder</b></span><span class="pr">—</span></li>
-      <li><span class="ic">🪟</span><span class="tx"><b>Sheer curtain</b></span><span class="pr">—</span></li>
-      <li><span class="ic">🔩</span><span class="tx"><b>Anti-tip straps</b> for the TV and the stand</span><span class="pr">~R150</span></li>
-      <li><span class="ic">☕</span><span class="tx"><b>Coffee table:</b> LAZAVA lift-top <small>Not ordered yet. On 30 Oct you were waiting for LASA to confirm delivery before ordering.</small></span><span class="pr">R1,609</span></li>
-      <li class="unsure"><span class="ic">😴</span><span class="tx"><b>Bedding:</b> 3 Whitehouse pillows, microfibre duvet, Queen XLD fitted sheet ❓ <small>Not sure if you've bought these yet. See <a href="bedding.html">Bedding</a>.</small></span><span class="pr">~R2,474</span></li>
-      <li class="unsure"><span class="ic">🍳</span><span class="tx"><b>Kitchen basics:</b> plates, cutlery, glasses, pots, knife, board ❓ <small>The China Centre plan comes to about R4–5k. Tell me what you already have. See <a href="kitchen.html">Kitchen</a>.</small></span><span class="pr">~R4,500</span></li>
-    </ul>
-    <div class="sumrow"><span>Still to spend (rough)</span><b>~R20,679</b></div>
-  </div>
-
-  <div class="sec"><h2>🤔 Only if needed</h2></div>
-  <div class="panel">
-    <ul class="bl">
-      <li class="unsure"><span class="ic">❄️</span><span class="tx"><b>Fridge:</b> Defy 323L combi ❓ <small>Only if the flat has no fridge.</small></span><span class="pr">R6,499</span></li>
-      <li class="unsure"><span class="ic">🧺</span><span class="tx"><b>Washer:</b> Defy 8kg front loader ❓ <small>Only if Mom's washer doesn't come.</small></span><span class="pr">R5,699</span></li>
-      <li><span class="ic">🔋</span><span class="tx"><b>Mini UPS for the router</b> <small>Later, only if power cuts bug you.</small></span><span class="pr">R384</span></li>
-    </ul>
-  </div>
-
-  <div class="foot">SHOPPING · bought + still need · updated 12 Nov 2026 · tell The Nest on Telegram when something's bought · The Nest</div>
+  <div class="foot">SHOPPING · one list for the flat · updated 12 Nov 2026 · buttons open Telegram to The Nest · The Nest</div>
 </div>
-<script src="nest.js?v=20261112b"></script>
+<script src="nest.js?v=20261112c"></script>
+<script>
+(() => {
+  const BOT = 'babybeanbot';
+  const tg = text => 'https://t.me/' + BOT + '?text=' + encodeURIComponent(text);
+  const SENT = 'nest_sent';
+  const sent = () => { try { return JSON.parse(localStorage.getItem(SENT)) || {}; } catch (e) { return {}; } };
+  const go = text => {
+    try { navigator.clipboard && navigator.clipboard.writeText(text); } catch (e) {}
+    window.location.href = tg(text);
+  };
+  document.querySelectorAll('li[data-ask]').forEach(li => {
+    const name = li.dataset.ask, verb = li.dataset.done || 'Bought';
+    const acts = document.createElement('span');
+    acts.className = 'acts';
+    if (li.dataset.url) acts.innerHTML = '<a class="op" href="' + li.dataset.url + '" target="_blank" rel="noopener">Open ↗</a>';
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'got';
+    const paint = () => { const on = !!sent()[name]; b.classList.toggle('sent', on); b.textContent = on ? '✓ Sent to The Nest' : '✓ ' + (verb === 'Bought' ? 'Got it' : verb === 'Paid' ? 'Paid' : "It's here"); };
+    paint();
+    b.addEventListener('click', () => {
+      const s = sent(); s[name] = new Date().toISOString(); localStorage.setItem(SENT, JSON.stringify(s)); paint();
+      go('✅ ' + verb + ': ' + name);
+    });
+    acts.appendChild(b);
+    li.querySelector('.tx').appendChild(acts);
+  });
+  const box = document.getElementById('addtxt');
+  document.querySelectorAll('.qchips button').forEach(c => c.addEventListener('click', () => {
+    box.value = (box.value.trim() ? box.value.replace(/\s*$/, '') + '\n' : '') + c.dataset.q; box.focus();
+  }));
+  document.getElementById('addsend').addEventListener('click', () => {
+    const t = box.value.trim(); if (!t) { box.focus(); return; }
+    go('🛒 Add to Shopping:\n' + t);
+  });
+})();
+</script>
 </body>
 </html>
