@@ -18,43 +18,139 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
-  .plan { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); margin-top: 12px; }
-  .plan.best { border-color: var(--good); border-width: 2px; }
-  .plan.avoid { opacity: .85; border-style: dashed; }
-  .plan .tag { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
-  .plan.best .tag { color: var(--good); }
-  .plan .nm { font-family: "Fraunces", serif; font-weight: 600; font-size: 18px; margin-top: 4px; }
-  .plan .pr { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 22px; color: var(--accent); margin-top: 6px; }
-  .plan .pr small { font-family: "IBM Plex Sans", sans-serif; font-size: 12px; color: var(--ink-soft); font-weight: 500; }
-  .plan ul { margin: 10px 0 0; padding-left: 18px; font-size: 13.5px; display: flex; flex-direction: column; gap: 5px; }
-  .steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 9px; font-size: 14.5px; }
-  .steps small { display: block; color: var(--ink-soft); font-size: 12.5px; }
-  .tw { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 4px; }
-  .ct { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-  .ct th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 5px; border-bottom: 1px solid var(--line); }
-  .ct td { padding: 9px 5px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .ct td.amt { font-family: "IBM Plex Mono", monospace; font-weight: 600; white-space: nowrap; }
-  .ct tr:last-child td { border-bottom: none; }
-  .ct tr.hl td { background: var(--good-soft); font-weight: 600; }
-  .ct tr.out td { color: var(--ink-soft); text-decoration: line-through; text-decoration-thickness: 1px; }
-  .fine { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
-  ul.pl { margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px; font-size:14.5px; }
-  .layers, .habits { display: flex; flex-direction: column; gap: 10px; }
+  :root { --navh: 60px; --c-aid: var(--good); --c-gap: var(--star); --c-you: var(--warn); }
+  html { scroll-behavior: smooth; }
+  [id] { scroll-margin-top: calc(var(--navh) + 64px); }
+  .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+  .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+
+  /* jump bar */
+  .jump { position: sticky; top: var(--navh); z-index: 15; margin: 22px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
+    background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .jump::-webkit-scrollbar { display: none; }
+  .jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; min-height: 36px; display: flex; align-items: center; }
+  .jump a.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* hero plan card */
+  .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: 20px; padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
+  .hero .lbl { color: var(--good); }
+  .hero .big { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }
+  .hero .big small { font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
+  .hero .bigsub { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+  .trio { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 16px; }
+  @media (max-width: 640px) { .trio { grid-template-columns: 1fr; } }
+  .trio > div { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; }
+  .trio .ic { font-size: 22px; }
+  .trio b { display: block; font-size: 14.5px; }
+  .trio small { color: var(--ink-soft); font-size: 12.5px; }
+  .trio .v { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .warnbox { margin-top: 12px; background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; display: flex; gap: 10px; }
+  .warnbox b { color: var(--ink); }
+  .herofoot { margin-top: 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; padding: 11px 16px; border-radius: 12px; min-height: 44px; }
+  .prog { flex: 1; min-width: 150px; }
+  .prog .bar { height: 8px; background: var(--surface-2); border-radius: 8px; overflow: hidden; margin-top: 5px; }
+  .prog .bar span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 8px; transition: width .4s ease; }
+
+  /* layers */
+  .layers { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; align-items: start; }
+  @media (max-width: 800px) { .layers { grid-template-columns: 1fr; } }
   .acc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
-  .acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 16px; -webkit-tap-highlight-color: transparent; }
+  .acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 16px; min-height: 56px; -webkit-tap-highlight-color: transparent; }
   .acc summary::-webkit-details-marker { display: none; }
-  .acc summary::after { content: "+"; margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 600; color: var(--ink-soft); transition: transform .2s ease; }
+  .acc summary::after { content: "+"; margin-left: auto; flex: none; font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 600; color: var(--ink-soft); transition: transform .2s ease; }
   .acc[open] summary::after { transform: rotate(45deg); }
-  .acc .ic { font-size: 22px; line-height: 1; }
+  .acc summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 14px; }
+  .acc .ic { font-size: 22px; line-height: 1; flex: none; }
   .acc .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--good-soft); color: var(--good); font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13px; display: grid; place-items: center; }
   .acc .st { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
   .acc .st small { color: var(--ink-soft); font-size: 12.5px; }
   .acc .bd { padding: 0 16px 14px; font-size: 14px; border-top: 1px solid var(--line); }
   .acc .bd p { margin: 10px 0 0; }
-  .acc .bd ul.pl { margin-top: 8px; }
-  .lay-h { border-left: 4px solid var(--good); }
-  .lay-d { border-left: 4px solid var(--accent); }
-  .lay-g { border-left: 4px solid var(--ink-soft); }
+  .lay-h { border-left: 4px solid var(--c-aid); }
+  .lay-d { border-left: 4px solid color-mix(in srgb, var(--c-aid) 50%, var(--surface)); }
+  .lay-g { border-left: 4px solid var(--c-gap); }
+  .stack { display: flex; flex-direction: column; gap: 10px; }
+  ul.pl { margin: 8px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 7px; font-size: 14px; }
+
+  /* bill bars */
+  .bill { margin-top: 12px; }
+  .bill .row { margin-top: 14px; }
+  .bill .row:first-of-type { margin-top: 4px; }
+  .bill .hd { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
+  .bill .hd b { font-weight: 600; }
+  .sbar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin-top: 6px; }
+  .sbar span { display: flex; align-items: center; padding: 0 8px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; }
+  .s-aid { background: var(--c-aid); } .s-gap { background: var(--c-gap); color: #1E2A22 !important; } .s-you { background: var(--c-you); }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+  .bill .cap { font-size: 12.5px; color: var(--ink-soft); margin-top: 5px; }
+
+  /* picks */
+  .picks { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; align-items: start; }
+  @media (max-width: 900px) { .picks { grid-template-columns: 1fr; } }
+  .pick { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 16px 16px 6px; }
+  .pick.best { border: 2px solid var(--good); }
+  .pick .tag { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+  .pick.best .tag { color: var(--good); }
+  .pick .nm { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; line-height: 1.2; margin-top: 4px; }
+  .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 12px; }
+  .stats > div { background: var(--surface-2); border-radius: 10px; padding: 8px 9px; }
+  .stats .lbl { font-size: 9px; letter-spacing: .05em; }
+  .stats .v { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; margin-top: 2px; }
+  .stats .v.sm { font-family: "IBM Plex Sans", sans-serif; font-size: 12.5px; line-height: 1.3; }
+  .pick .why, .pick .trap { font-size: 13.5px; margin-top: 10px; display: flex; gap: 8px; }
+  .pick .trap { color: var(--ink-soft); }
+  .pick details { margin-top: 8px; border-top: 1px solid var(--line); }
+  .pick summary { cursor: pointer; list-style: none; font-size: 13px; font-weight: 600; color: var(--accent); padding: 12px 0; min-height: 44px; display: flex; align-items: center; }
+  .pick summary::-webkit-details-marker { display: none; }
+  .pick summary::after { content: "▾"; margin-left: 6px; transition: transform .2s ease; }
+  .pick details[open] summary::after { transform: rotate(180deg); }
+  .pick details ul { margin: 0 0 12px; padding-left: 18px; font-size: 13.5px; display: flex; flex-direction: column; gap: 5px; }
+
+  /* compare chart */
+  .seg { display: inline-flex; background: var(--surface-2); border-radius: 12px; padding: 4px; gap: 4px; }
+  .seg button { font: inherit; font-size: 13px; font-weight: 600; border: 0; background: transparent; color: var(--ink-soft); padding: 9px 14px; border-radius: 9px; cursor: pointer; min-height: 40px; }
+  .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .chart { margin-top: 14px; }
+  .axis { position: relative; height: 16px; margin-bottom: 4px; }
+  .axis span { position: absolute; transform: translateX(-50%); font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink-soft); }
+  .axis span:first-child { transform: none; } .axis span:last-child { transform: translateX(-100%); }
+  .crow { padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .crow:last-child { border-bottom: 0; }
+  .crow .top { display: flex; align-items: baseline; gap: 8px; font-size: 14px; }
+  .crow .top .mo { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink-soft); }
+  .crow .top .yr { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13.5px; white-space: nowrap; }
+  .track { position: relative; height: 10px; background: var(--surface-2); border-radius: 6px; margin-top: 6px;
+    background-image: linear-gradient(90deg, transparent calc(33.33% - 1px), var(--line) 33.33%, transparent calc(33.33% + 1px), transparent calc(66.67% - 1px), var(--line) 66.67%, transparent calc(66.67% + 1px)); }
+  .track span { position: absolute; top: 0; bottom: 0; border-radius: 6px; background: color-mix(in srgb, var(--ink-soft) 55%, transparent); transition: left .45s cubic-bezier(.2,.7,.3,1), width .45s cubic-bezier(.2,.7,.3,1); }
+  .crow.pk .top b { color: var(--accent); }
+  .crow.pk .track span { background: var(--accent); }
+  .crow.dr { opacity: .55; }
+  .crow.dr .top b { text-decoration: line-through; text-decoration-thickness: 1px; }
+  .badge { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--good-soft); color: var(--good); padding: 2px 7px; border-radius: 20px; }
+  .fine { font-size: 12.5px; color: var(--ink-soft); margin: 12px 0 0; }
+  .moreb { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 12px 0 0; cursor: pointer; min-height: 44px; }
+
+  /* tables in fine print */
+  .tw { overflow-x: auto; margin-top: 10px; }
+  .ct { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .ct th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 5px; border-bottom: 1px solid var(--line); }
+  .ct td { padding: 9px 5px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .ct td.amt { font-family: "IBM Plex Mono", monospace; font-weight: 600; white-space: nowrap; }
+  .ct tr:last-child td { border-bottom: none; }
+
+  /* checklists */
+  .chk { list-style: none; margin: 0; padding: 0; }
+  .chk li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 4px; border-bottom: 1px dotted var(--line); min-height: 44px; }
+  .chk li:last-child { border-bottom: 0; }
+  .chk .box { flex: none; width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--accent); margin-top: 1px; }
+  .chk .txt { font-size: 14.5px; }
+  .chk .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
+  .chk li.done .txt { text-decoration: line-through; text-decoration-color: var(--ink-soft); }
+  .chk .tagq { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -78,21 +174,38 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Medical aid · updated 12 Nov 2026</div>
     <h1>Medical aid: <em>Mishka first</em>.</h1>
-    <p class="sub">Mishka joins now on her own, so her waiting periods start. Sean is added the day his spousal visa comes through. Prices are <b>2027 rates for one adult, per month</b>. They start in January and still need sign-off from the Council for Medical Schemes (the regulator).</p>
+    <p class="sub">Mishka joins now on her own, so her waiting periods start. Sean is added the day his spousal visa comes through. All prices are <b>2027 rates for one adult</b>, still waiting on the regulator's sign-off.</p>
   </header>
 
-  <div class="sec"><h2>The short answer</h2></div>
-  <div class="panel">
-    <ul class="pl">
-      <li><b>Top pick: Momentum Incentive (Associated hospitals), R3,627 a month.</b> Its own specialists are paid in full in hospital, so there's no doctor shortfall even before gap cover kicks in.</li>
-      <li><b>Add gap cover the same day:</b> Turnberry Dynamic, R190 a month if Mishka is under 30, R350 if 30–49. Starting both on the same day skips gap cover's 3-month general wait.</li>
-      <li><b>Join on 1 December if you can.</b> December is charged at 2026 rates, and the waiting periods start a month sooner.</li>
-      <li><b>The real cost isn't the premium. It's the gynae's rooms.</b> Gynaes charge R1,900–R2,400 a visit and schemes pay about R520. Gap cover doesn't pay rooms visits. Plan for <b>R11–46k out of pocket</b> in a pregnancy year on any plan.</li>
-    </ul>
-  </div>
+  <nav class="jump" aria-label="Jump to section">
+    <a href="#plan">Our plan</a>
+    <a href="#how">How it works</a>
+    <a href="#habits">Habits</a>
+    <a href="#picks">Top 3</a>
+    <a href="#compare">Compare</a>
+    <a href="#fine">Fine print</a>
+    <a href="#steps">Steps</a>
+  </nav>
 
-  <div class="sec"><h2>📘 How to use it</h2><p>Tap any card to open it.</p></div>
+  <!-- OUR PLAN -->
+  <section id="plan" class="hero">
+    <div class="lbl">⭐ Our plan · per month</div>
+    <div class="big">R3,817 <small>/ month</small></div>
+    <div class="bigsub">Medical aid R3,627 + gap cover R190. If Mishka is 30 or older, gap cover is R350, so R3,977.</div>
+    <div class="trio">
+      <div><span class="ic">🏥</span><span><b>Momentum Incentive</b><small>Associated hospitals</small></span><span class="v">R3,627</span></div>
+      <div><span class="ic">🛡️</span><span><b>Turnberry gap cover</b><small>Start the same day</small></span><span class="v">R190–350</span></div>
+      <div><span class="ic">📅</span><span><b>Start 1 December</b><small>December is at 2026 rates</small></span><span class="v">1 Dec</span></div>
+    </div>
+    <div class="warnbox"><span>⚠️</span><span><b>Budget R11–46k a year for the gynae's rooms in a pregnancy year.</b> Gynaes charge R1,900–R2,400 a visit and schemes pay about R520. Gap cover doesn't pay rooms visits.</span></div>
+    <div class="herofoot">
+      <a class="btn" href="#steps">Next: talk to a broker →</a>
+      <div class="prog"><div class="lbl" id="progtxt">0 of 6 steps done</div><div class="bar"><span id="progbar"></span></div></div>
+    </div>
+  </section>
 
+  <!-- HOW IT WORKS -->
+  <div class="sec" id="how"><h2>📘 How it works</h2><p>Three layers. Tap one to see what it pays and the catch.</p></div>
   <div class="layers">
     <details class="acc lay-h">
       <summary><span class="ic">🏥</span><span class="st"><b>Hospital cover</b><small>The big pot · no limit</small></span></summary>
@@ -117,16 +230,24 @@
     </details>
   </div>
 
-  <details class="acc ex" style="margin-top:12px">
-    <summary><span class="ic">🧾</span><span class="st"><b>How a bill actually works</b><small>One example, in rands</small></span></summary>
-    <div class="bd">
-      <p><b>In the gynae's rooms:</b> the visit costs R2,000. The medical aid pays about R520 (from the pregnancy benefit or savings). <b>You pay about R1,480.</b> Gap cover doesn't help here.</p>
-      <p><b>In hospital:</b> the hospital bill is paid in full. The specialist charges R16,000 and the scheme pays R12,000 at double rate. <b>Gap cover pays the R4,000 left over</b>, once you claim it. With a Momentum Associated specialist, there's nothing left over at all.</p>
+  <div class="panel bill" style="margin-top:12px">
+    <div class="lbl">🧾 Who pays a bill</div>
+    <div class="legend"><span><i style="background:var(--c-aid)"></i>Medical aid</span><span><i style="background:var(--c-gap)"></i>Gap cover</span><span><i style="background:var(--c-you)"></i>You</span></div>
+    <div class="row">
+      <div class="hd"><b>Gynae visit, in the rooms</b><span class="mono">R2,000</span></div>
+      <div class="sbar"><span class="s-aid" style="width:26%">R520</span><span class="s-you" style="width:74%">You pay R1,480</span></div>
+      <div class="cap">Gap cover doesn't help outside hospital.</div>
     </div>
-  </details>
+    <div class="row">
+      <div class="hd"><b>Specialist, in hospital</b><span class="mono">R16,000</span></div>
+      <div class="sbar"><span class="s-aid" style="width:75%">Scheme R12,000</span><span class="s-gap" style="width:25%">Gap R4,000</span></div>
+      <div class="cap">You pay R0, once you claim from gap cover. With a Momentum Associated specialist, there's no gap at all.</div>
+    </div>
+  </div>
 
-  <div class="sec"><h2>✅ The habits that save the most</h2><p>Tap each one for the how.</p></div>
-  <div class="habits">
+  <!-- HABITS -->
+  <div class="sec" id="habits"><h2>✅ Habits that save the most</h2><p>Tap each one for the how.</p></div>
+  <div class="stack">
     <details class="acc">
       <summary><span class="n">1</span><span class="st"><b>Phone before anything planned</b><small>Get a pre-authorisation number</small></span></summary>
       <div class="bd">
@@ -160,7 +281,7 @@
       <summary><span class="n">5</span><span class="st"><b>Claim from gap cover</b><small>It won't pay unless you ask</small></span></summary>
       <div class="bd">
         <p>After any hospital stay, send gap cover:</p>
-        <ul class="pl" style="font-size:14px"><li>each doctor's invoice</li><li>the medical aid's claim statement showing what it paid</li><li>the hospital account</li></ul>
+        <ul class="pl"><li>each doctor's invoice</li><li>the medical aid's claim statement showing what it paid</li><li>the hospital account</li></ul>
         <p>Every policy has a deadline for claims. Check the exact one in the policy, and claim as soon as the medical aid's statement arrives.</p>
       </div>
     </details>
@@ -180,153 +301,269 @@
     </details>
   </div>
 
-  <div class="sec"><h2>The three picks</h2></div>
+  <!-- PICKS -->
+  <div class="sec" id="picks"><h2>🏆 The top 3</h2><p>"Year" = a high-risk pregnancy year: premiums plus what you'd pay yourself, with gap cover.</p></div>
+  <div class="picks">
+    <article class="pick best">
+      <div class="tag">⭐ Best balance · our pick</div>
+      <div class="nm">Momentum Incentive · Associated</div>
+      <div class="stats">
+        <div><div class="lbl">Month</div><div class="v">R3,627</div></div>
+        <div><div class="lbl">Year</div><div class="v">R69–91k</div></div>
+        <div><div class="lbl">GP visits</div><div class="v sm">From R4,356 savings</div></div>
+      </div>
+      <div class="why">✅ <span>Its own specialists are paid in full in hospital, so no doctor shortfall even before gap cover starts.</span></div>
+      <div class="trap">⚠️ <span>30% of the bill outside the Associated hospitals. R3,650 per MRI.</span></div>
+      <details><summary>Full details</summary>
+        <ul>
+          <li><b>Where the money goes:</b> R3,264 to cover, R363 to savings (R4,356 a year, paid upfront).</li>
+          <li><b>Hospital:</b> no annual limit, no NICU limit, no admission co-pay. Life Roseacres is on the list; Linkwood and Park Lane aren't.</li>
+          <li><b>Doctors:</b> Associated specialists, anaesthetists and paediatricians paid in full. Others up to double the scheme rate.</li>
+          <li><b>Pregnancy:</b> 12 check-ups, 2 scans, urine cultures, blood tests, 3 nurse home visits, a high-risk coach.</li>
+        </ul>
+      </details>
+    </article>
+    <article class="pick">
+      <div class="tag">Best for everyday GP visits</div>
+      <div class="nm">Discovery Classic Smart Saver</div>
+      <div class="stats">
+        <div><div class="lbl">Month</div><div class="v">R3,616</div></div>
+        <div><div class="lbl">Year</div><div class="v">R68–90k</div></div>
+        <div><div class="lbl">GP visits</div><div class="v sm">Unlimited, R80 each</div></div>
+      </div>
+      <div class="why">✅ <span>Unlimited network GP visits at R80. Specialists paid up to double in hospital.</span></div>
+      <div class="trap">⚠️ <span>R13,150 upfront for a planned birth or procedure outside its network. Only 8 check-ups.</span></div>
+      <details><summary>Full details</summary>
+        <ul>
+          <li><b>Where the money goes:</b> R3,363 to cover, R253 to savings (R3,036 a year), plus up to R2,500 for doing health checks.</li>
+          <li><b>Hospital:</b> unlimited in the Smart network (Roseacres, Park Lane, Linkwood for maternity). No NICU limit.</li>
+          <li><b>Doctors:</b> specialists with a payment arrangement are paid in full.</li>
+          <li><b>Pregnancy:</b> 8 check-ups and 2 scans, NIPT if she qualifies, classes. First R4,155 of an MRI is yours.</li>
+        </ul>
+      </details>
+    </article>
+    <article class="pick">
+      <div class="tag">Cheapest</div>
+      <div class="nm">KeyHealth Origin</div>
+      <div class="stats">
+        <div><div class="lbl">Month</div><div class="v">R2,842</div></div>
+        <div><div class="lbl">Year</div><div class="v">R60–82k</div></div>
+        <div><div class="lbl">GP visits</div><div class="v sm">From R3,580 a year</div></div>
+      </div>
+      <div class="why">✅ <span>Lowest premium, and good pregnancy extras (12-week scan, NIPT, vitamins).</span></div>
+      <div class="trap">⚠️ <span>Pays specialists only 100%. Without gap cover the year jumps to R128–150k.</span></div>
+      <details><summary>Full details</summary>
+        <ul>
+          <li><b>Where the money goes:</b> all cover, no savings. R3,580 a year for GP, specialists, medicine and X-rays.</li>
+          <li><b>Hospital:</b> unlimited at Netcare and Life (Roseacres, Linkwood, Park Lane, Genesis Clinic). 30% elsewhere, and Gauteng Mediclinics don't count.</li>
+          <li><b>Pregnancy:</b> 10 check-ups, 2 scans, the 12-week scan and NIPT, R2,770 for vitamins.</li>
+          <li><b>Traps:</b> R1,790 per MRI. R500 if you skip pre-authorisation.</li>
+        </ul>
+      </details>
+    </article>
+  </div>
 
-  <div class="plan best">
-    <div class="tag">⭐ Best balance</div>
-    <div class="nm">Momentum Incentive · Associated hospitals</div>
-    <div class="pr">R3,627 <small>/ month · R43,524 a year</small></div>
-    <ul>
-      <li><b>Where the money goes:</b> R3,264 to cover, R363 to savings (R4,356 a year for GP visits, scans and medicine, paid upfront).</li>
-      <li><b>Hospital:</b> no annual limit, no NICU limit, no admission co-pay. Life Roseacres is on the list.</li>
-      <li><b>Doctors:</b> Associated specialists, anaesthetists and paediatricians paid in full. Others up to double the scheme rate.</li>
-      <li><b>Pregnancy:</b> 12 check-ups, 2 scans, urine cultures, blood tests, 3 nurse home visits, a high-risk coach.</li>
-      <li><b>Traps:</b> 30% of the hospital bill outside the Associated list (Linkwood and Park Lane aren't on it). R3,650 per MRI or CT. GP visits only from the R4,356 savings.</li>
-      <li><b>Pregnancy-year total:</b> R69–91k with gap cover.</li>
+  <!-- COMPARE -->
+  <div class="sec" id="compare"><h2>📊 Compare all 13</h2><p>Cost of a high-risk pregnancy year: premiums plus what you'd pay yourself. The bar runs from a gynae who bills the medical aid (low) to cash-rate doctors (high). Cheapest year at the top. Estimates, not quotes.</p></div>
+  <div class="panel">
+    <div class="seg" role="group" aria-label="Scenario">
+      <button type="button" data-sc="g" aria-pressed="true">With gap cover</button>
+      <button type="button" data-sc="n" aria-pressed="false">Without</button>
+    </div>
+    <div class="chart">
+      <div class="axis"><span style="left:0">R50k</span><span style="left:33.33%">100k</span><span style="left:66.67%">150k</span><span style="left:100%">200k</span></div>
+      <div id="rows"></div>
+    </div>
+    <button type="button" class="moreb" id="showdr">Show the 2 dropped plans</button>
+    <p class="fine" id="scnote"></p>
+  </div>
+
+  <!-- FINE PRINT -->
+  <div class="sec" id="fine"><h2>🔎 The fine print</h2><p>The details behind the numbers. Open what you need.</p></div>
+  <div class="stack">
+    <details class="acc">
+      <summary><span class="ic">🪤</span><span class="st"><b>Co-payments and excesses</b><small>Money you pay even with medical aid</small></span></summary>
+      <div class="bd">
+        <ul class="pl">
+          <li><b>Wrong hospital:</b> 30% of the bill on Momentum (Associated), KeyHealth, Bonitas and Medshield. R13,150 upfront on Discovery Smart plans. None on Momentum (Any), Discovery Classic Saver, Medihelp MedAdd, Bestmed Beat3, Fedhealth flexiFED.</li>
+          <li><b>MRI or CT, per scan:</b> Discovery first R4,155 · Momentum R3,650 · Fedhealth R3,170 · Medihelp R2,200 · Bonitas R1,940 · KeyHealth R1,790 · Bestmed and Medshield none.</li>
+          <li><b>Day procedures in the wrong place:</b> Discovery Classic Saver R7,550 · Bonitas R5,670 · Bestmed R2,987 in a full hospital instead of a day clinic.</li>
+          <li><b>Skipping pre-authorisation:</b> R500 on KeyHealth, 20% on Medihelp and Medshield.</li>
+          <li><b>Avoid nearly all of it:</b> use a network hospital and day clinic, and get pre-authorisation first. Most are waived in a real emergency.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="ic">🩻</span><span class="st"><b>Shortfalls: doctors vs the scheme</b><small>Gynae R1,900–2,400 vs R517 paid</small></span></summary>
+      <div class="bd">
+        <p>Schemes pay a % of their own price list. Most pay 100%, the better plans 200%. Specialists usually charge 300–500%.</p>
+        <div class="tw"><table class="ct">
+          <tr><th>Item</th><th>Scheme 100%</th><th>At 200%</th><th>Doctors charge</th></tr>
+          <tr><td>Gynae visit</td><td class="amt">R517</td><td class="amt">R1,034</td><td class="amt">R1,900–2,400</td></tr>
+          <tr><td>Detailed 20-week scan</td><td class="amt">R879</td><td class="amt">R1,759</td><td class="amt">R2,000–3,700</td></tr>
+          <tr><td>Birth (gynae's fee)</td><td class="amt">R6,057</td><td class="amt">R12,113</td><td class="amt">R15,500–18,000</td></tr>
+          <tr><td>Anaesthetist (C-section)</td><td class="amt">R1,616</td><td class="amt">R3,231</td><td class="amt">~R8,000</td></tr>
+          <tr><td>GP visit</td><td class="amt">R478</td><td class="amt">R955</td><td class="amt">R570–700</td></tr>
+        </table></div>
+        <p class="fine">Fees come from Pretoria/Centurion practices and a Joburg scan centre. No Joburg gynae publishes fees online.</p>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="ic">🛡️</span><span class="st"><b>Gap cover options</b><small>Turnberry Dynamic is the pick</small></span></summary>
+      <div class="bd">
+        <ul class="pl">
+          <li><b>Turnberry Dynamic: R190 a month under 30, R350 for 30–49.</b> Pays up to 5× the scheme rate in hospital, plus scheme co-payments (up to R11,000 for a wrong-hospital penalty). 10-month wait for pregnancy.</li>
+          <li><b>Discovery Gap 500:</b> R295, Discovery members only. Doesn't pay scheme co-payments. 12-month pregnancy wait.</li>
+          <li><b>Stratum Meridian400 / Elite500:</b> R301 / R579. Pays only 20% of pregnancy claims in the first 10 months.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="ic">⏳</span><span class="st"><b>Waiting periods</b><small>Up to 3 months general, 12 for past treatment</small></span></summary>
+      <div class="bd">
+        <ul class="pl">
+          <li><b>3 months:</b> new members with no previous medical aid wait up to 3 months before claims are paid.</li>
+          <li><b>Up to 12 months:</b> the scheme can exclude anything she was treated for in the last 12 months, for up to a year. Expect them to ask about this year's pregnancy.</li>
+          <li><b>A future pregnancy</b> that starts after joining is covered. Get the waiting periods in writing before planning anything.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="ic">👤</span><span class="st"><b>Adding Sean later</b><small>About R2,860 more a month</small></span></summary>
+      <div class="bd">
+        <ul class="pl">
+          <li><b>When his spousal visa comes through,</b> Mishka adds him as her "spouse or partner". He joins on his passport.</li>
+          <li><b>Both of you, per month:</b> Momentum Incentive (Associated) R6,489 · Discovery Classic Smart R5,828 · Momentum Incentive (Any hospital) R8,063.</li>
+          <li><b>A temporary visa probably won't qualify.</b> Schemes generally want a work, spousal or relative's visa, or permanent residence.</li>
+          <li><b>Not married?</b> Schemes usually accept a partner, but may ask for a sworn statement that you live together.</li>
+          <li><b>Avoid for a family later:</b> Discovery Active Smart and Bonitas BonStart. They cap NICU at R60–75k, and NICU costs about R23,000 a day.</li>
+        </ul>
+      </div>
+    </details>
+    <details class="acc">
+      <summary><span class="ic">❌</span><span class="st"><b>Why two plans were dropped</b><small>CompCare and Genesis</small></span></summary>
+      <div class="bd">
+        <p><b>CompCare:</b> cash reserves 23.2% in its own 2025 accounts, below the legal 25%. It also won't pay for an elective C-section.</p>
+        <p><b>Genesis MED-200 Plus:</b> excludes pregnancy if a waiting period applied when joining, which is likely for Mishka.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- STEPS -->
+  <div class="sec" id="steps"><h2>🗺️ Steps</h2><p>Tap to tick. Ticks save for both of you.</p></div>
+  <div class="panel">
+    <ul class="chk" id="steplist">
+      <li data-tick="med-s1"><span class="box"></span><span class="txt">Talk to a broker <small>Costs you nothing (the scheme pays them). Take the questions below.</small></span></li>
+      <li data-tick="med-s2"><span class="box"></span><span class="txt">Choose the hospital and gynae, then the plan <small>Pick the plan whose network includes them. Life Roseacres has a confirmed neonatal ICU.</small></span></li>
+      <li data-tick="med-s3"><span class="box"></span><span class="txt">Mishka applies, ideally to start 1 Dec <small>December is still at 2026 rates.</small></span></li>
+      <li data-tick="med-s4"><span class="box"></span><span class="txt">Add gap cover on the same start date <small>Turnberry Dynamic. Same day = no 3-month general wait.</small></span></li>
+      <li data-tick="med-s5"><span class="box"></span><span class="txt">Get the waiting periods in writing <small>Keep the letter.</small></span></li>
+      <li data-tick="med-s6"><span class="box"></span><span class="txt">Add Sean when his spousal visa is granted</span></li>
     </ul>
   </div>
 
-  <div class="plan">
-    <div class="tag">Best for everyday GP visits</div>
-    <div class="nm">Discovery Classic Smart Saver</div>
-    <div class="pr">R3,616 <small>/ month · R43,392 a year</small></div>
-    <ul>
-      <li><b>Where the money goes:</b> R3,363 to cover, R253 to savings (R3,036 a year), plus up to R2,500 for doing health checks.</li>
-      <li><b>Everyday:</b> unlimited Smart-network GP visits at R80 each.</li>
-      <li><b>Hospital:</b> unlimited in the Smart network (Roseacres, Park Lane, Linkwood for maternity). No NICU limit.</li>
-      <li><b>Doctors:</b> up to double the scheme rate in hospital. Specialists with a payment arrangement are paid in full.</li>
-      <li><b>Pregnancy:</b> 8 check-ups and 2 scans, NIPT if she qualifies, classes.</li>
-      <li><b>Traps:</b> R13,150 upfront for a planned birth or day procedure outside the network. First R4,155 of an MRI. Only 8 check-ups.</li>
-      <li><b>Pregnancy-year total:</b> R68–90k with gap cover.</li>
+  <div class="sec"><h2>📞 Ask the broker</h2><p>Tick them off during the call.</p></div>
+  <div class="panel">
+    <ul class="chk">
+      <li data-tick="med-q1"><span class="box"></span><span class="txt">What waiting periods and exclusions will Mishka get? Can we have it in writing?</span></li>
+      <li data-tick="med-q2"><span class="box"></span><span class="txt">Is the gynae on Momentum's Associated list, or on a Discovery payment arrangement?</span></li>
+      <li data-tick="med-q3"><span class="box"></span><span class="txt">Is the hospital in the plan's network, and does its NICU take very premature babies?</span></li>
+      <li data-tick="med-q4"><span class="box"></span><span class="txt">Which day clinic avoids a co-pay for a day procedure?</span></li>
+      <li data-tick="med-q5"><span class="box"></span><span class="txt">What are Momentum's and Discovery's current cash reserves (solvency)?</span></li>
+      <li data-tick="med-q6"><span class="box"></span><span class="txt">Will any scheme take Sean before his spousal visa?</span></li>
+      <li data-tick="med-q7"><span class="box"></span><span class="txt">Does gap cover pay a newborn's NICU doctors during the pregnancy wait?</span></li>
     </ul>
-  </div>
-
-  <div class="plan">
-    <div class="tag">Cheapest</div>
-    <div class="nm">KeyHealth Origin</div>
-    <div class="pr">R2,842 <small>/ month · R34,104 a year</small></div>
-    <ul>
-      <li><b>Where the money goes:</b> all cover, no savings. R3,580 a year for GP, specialists, medicine and X-rays.</li>
-      <li><b>Hospital:</b> unlimited at Netcare and Life (Roseacres, Linkwood, Park Lane, Genesis Clinic). 30% elsewhere, and Gauteng Mediclinics don't count.</li>
-      <li><b>Doctors:</b> only 100% of the scheme rate, so gap cover is a must.</li>
-      <li><b>Pregnancy:</b> 10 check-ups, 2 scans, the 12-week scan and NIPT, R2,770 for vitamins.</li>
-      <li><b>Traps:</b> R1,790 per MRI. R500 if you skip pre-authorisation. Everyday money runs out fast.</li>
-      <li><b>Pregnancy-year total:</b> R60–82k with gap cover, but <b>R128–150k without it</b>.</li>
-    </ul>
-  </div>
-
-  <div class="sec"><h2>💸 Every plan, full year</h2><p>A high-risk pregnancy year at a network hospital: premiums plus what you pay yourself. Low = a gynae who bills the medical aid plus about R450 a visit. High = cash-rate doctors. Estimates, not quotes.</p></div>
-  <div class="panel">
-    <div class="tw"><table class="ct">
-      <tr><th>Plan</th><th>Per month</th><th>Year + gap cover</th><th>Year, no gap cover</th></tr>
-      <tr><td>KeyHealth Origin</td><td class="amt">R2,842</td><td class="amt">R60–82k</td><td class="amt">R128–150k</td></tr>
-      <tr><td>Discovery Classic Smart</td><td class="amt">R3,257</td><td class="amt">R67–89k</td><td class="amt">R100–122k</td></tr>
-      <tr><td>Discovery Classic Smart Saver</td><td class="amt">R3,616</td><td class="amt">R68–90k</td><td class="amt">R101–123k</td></tr>
-      <tr class="hl"><td>Momentum Incentive (Associated)</td><td class="amt">R3,627</td><td class="amt">R69–91k</td><td class="amt">R102–124k</td></tr>
-      <tr><td>Medihelp MedAdd</td><td class="amt">R4,320</td><td class="amt">R73–95k</td><td class="amt">R141–163k</td></tr>
-      <tr><td>Bonitas BonSave</td><td class="amt">R4,343</td><td class="amt">R72–94k</td><td class="amt">R140–162k</td></tr>
-      <tr><td>Momentum Incentive (Any hospital)</td><td class="amt">R4,510</td><td class="amt">R79–101k</td><td class="amt">R112–134k</td></tr>
-      <tr><td>Bestmed Beat3</td><td class="amt">R4,853</td><td class="amt">R80–102k</td><td class="amt">R148–170k</td></tr>
-      <tr><td>Discovery Classic Saver</td><td class="amt">R5,235</td><td class="amt">R80–102k</td><td class="amt">R113–135k</td></tr>
-      <tr><td>Fedhealth flexiFED 2</td><td class="amt">R5,326</td><td class="amt">R83–105k</td><td class="amt">R151–173k</td></tr>
-      <tr><td>Medshield MediSaver</td><td class="amt">R5,907</td><td class="amt">R90–112k</td><td class="amt">R158–180k</td></tr>
-      <tr><td>Bonitas Standard</td><td class="amt">R6,474</td><td class="amt">R100–122k</td><td class="amt">R168–190k</td></tr>
-      <tr><td>Fedhealth flexiFED 3</td><td class="amt">R6,487</td><td class="amt">R93–115k</td><td class="amt">R161–183k</td></tr>
-      <tr class="out"><td>CompCare SaverCare Plus (dropped)</td><td class="amt">R4,829</td><td class="amt">R79–101k</td><td class="amt">R147–169k</td></tr>
-      <tr class="out"><td>Genesis MED-200 Plus (dropped)</td><td class="amt">R3,550</td><td class="amt">R68–85k</td><td class="amt">R101–119k</td></tr>
-    </table></div>
-    <p class="fine"><b>How to read it:</b> paying more each month mostly buys savings, which is your own money back. It doesn't buy better pregnancy cover. Plans that pay specialists double (Discovery Classic, Momentum) are much safer if gap cover isn't in place yet.</p>
-  </div>
-
-  <div class="sec"><h2>🪤 Co-payments and excesses</h2><p>What Mishka pays herself even with medical aid. Most are waived in a real emergency.</p></div>
-  <div class="panel">
-    <ul class="pl">
-      <li><b>Wrong hospital:</b> 30% of the bill on Momentum (Associated), KeyHealth, Bonitas and Medshield. R13,150 upfront on Discovery Smart plans. None on Momentum (Any), Discovery Classic Saver, Medihelp MedAdd, Bestmed Beat3, Fedhealth flexiFED.</li>
-      <li><b>MRI or CT, per scan:</b> Discovery first R4,155 · Momentum R3,650 · Fedhealth R3,170 · Medihelp R2,200 · Bonitas R1,940 · KeyHealth R1,790 · Bestmed and Medshield none.</li>
-      <li><b>Day procedures in the wrong place:</b> Discovery Classic Saver R7,550 · Bonitas R5,670 · Bestmed R2,987 if done in a full hospital instead of a day clinic.</li>
-      <li><b>Skipping pre-authorisation:</b> R500 on KeyHealth, 20% on Medihelp and Medshield.</li>
-      <li><b>The rule that avoids nearly all of it:</b> use a hospital and day clinic inside the plan's network, and get pre-authorisation first.</li>
-    </ul>
-  </div>
-
-  <div class="sec"><h2>🩻 Shortfalls: doctors vs the scheme</h2><p>Schemes pay a % of their own price list. Most pay 100%, the better plans 200%. Specialists usually charge 300–500%.</p></div>
-  <div class="panel">
-    <div class="tw"><table class="ct">
-      <tr><th>Item</th><th>Scheme 100%</th><th>At 200%</th><th>Doctors charge</th></tr>
-      <tr><td>Gynae visit</td><td class="amt">R517</td><td class="amt">R1,034</td><td class="amt">R1,900–2,400</td></tr>
-      <tr><td>Detailed 20-week scan</td><td class="amt">R879</td><td class="amt">R1,759</td><td class="amt">R2,000–3,700</td></tr>
-      <tr><td>Birth (gynae's fee)</td><td class="amt">R6,057</td><td class="amt">R12,113</td><td class="amt">R15,500–18,000</td></tr>
-      <tr><td>Anaesthetist (C-section)</td><td class="amt">R1,616</td><td class="amt">R3,231</td><td class="amt">~R8,000</td></tr>
-      <tr><td>GP visit</td><td class="amt">R478</td><td class="amt">R955</td><td class="amt">R570–700</td></tr>
-    </table></div>
-    <p class="fine"><b>Ask any new gynae first:</b> "Do you bill the medical aid, and what's my co-pay per visit?" Some charge only about R450 on top. Doctor fees come from Pretoria/Centurion practices and a Joburg scan centre, because no Joburg gynae publishes fees online.</p>
-  </div>
-
-  <div class="sec"><h2>🛡️ Gap cover (just Mishka)</h2></div>
-  <div class="panel">
-    <ul class="pl">
-      <li><b>Turnberry Dynamic (pick): R190 a month under 30, R350 for 30–49.</b> Pays up to 5× the scheme rate in hospital, plus scheme co-payments (up to R11,000 for a wrong-hospital penalty). 10-month wait for pregnancy.</li>
-      <li><b>Discovery Gap 500:</b> R295, Discovery members only. Doesn't pay scheme co-payments. 12-month pregnancy wait.</li>
-      <li><b>Stratum Meridian400 / Elite500:</b> R301 / R579. Pays only 20% of pregnancy claims in the first 10 months.</li>
-      <li><b>Remember:</b> gap cover only pays in hospital. It never pays rooms visits or scans at the gynae.</li>
-    </ul>
-  </div>
-
-  <div class="sec"><h2>👤 Adding Sean later</h2></div>
-  <div class="panel">
-    <ul class="pl">
-      <li><b>When his spousal visa comes through,</b> Mishka adds him as her "spouse or partner". He joins on his passport.</li>
-      <li><b>Cost for both of you, per month:</b> Momentum Incentive (Associated) R6,489 · Discovery Classic Smart R5,828 · Momentum Incentive (Any hospital) R8,063. So about R2,860 more than Mishka alone.</li>
-      <li><b>A temporary visa probably won't qualify.</b> Schemes generally want a work, spousal or relative's visa, or permanent residence. Ask the broker if any scheme takes him sooner.</li>
-      <li><b>Not married?</b> Schemes usually accept a partner, but may ask for a sworn statement that you live together.</li>
-      <li><b>Avoid for a family later:</b> Discovery Active Smart and Bonitas BonStart. They cap NICU at R60–75k, and NICU costs about R23,000 a day.</li>
-    </ul>
-  </div>
-
-  <div class="sec"><h2>⏳ Waiting periods, in plain words</h2></div>
-  <div class="panel">
-    <ul class="pl">
-      <li><b>3 months:</b> new members with no previous medical aid wait up to 3 months before claims are paid.</li>
-      <li><b>Up to 12 months:</b> the scheme can exclude anything she was treated for in the last 12 months, for up to a year. Expect them to ask about this year's pregnancy.</li>
-      <li><b>A future pregnancy</b> that starts after joining is covered. Get the waiting periods in writing before planning anything.</li>
-      <li><b>Answer every question on the form honestly.</b> If something's left out, they can cancel the cover later, exactly when you need it.</li>
-    </ul>
-  </div>
-
-  <div class="sec"><h2>✅ Steps</h2></div>
-  <div class="panel">
-    <ol class="steps">
-      <li>Talk to a broker <small>Costs you nothing (the scheme pays them). Take the questions below.</small></li>
-      <li>Choose the hospital and gynae, then the plan <small>Pick the plan whose network includes them. Life Roseacres has a confirmed neonatal ICU.</small></li>
-      <li>Mishka applies, ideally to start 1 Dec <small>December is still at 2026 rates.</small></li>
-      <li>Add gap cover on the same start date <small>Turnberry Dynamic. Same day = no 3-month general wait.</small></li>
-      <li>Get the waiting periods in writing, and keep the letter</li>
-      <li>Add Sean when his spousal visa is granted</li>
-    </ol>
-  </div>
-
-  <div class="note" style="margin-top:20px">
-    <h4>Questions for the broker</h4>
-    <p>What waiting periods and exclusions will Mishka get, in writing? · Is the gynae on Momentum's Associated list or Discovery's payment arrangement? · Is the hospital in the plan's network, and does its NICU take very premature babies? · Which day clinic avoids a co-pay for a day procedure? · Current solvency (cash reserves) for Momentum and Discovery · Will any scheme take Sean before his spousal visa? · Does gap cover pay a newborn's NICU doctors during the pregnancy wait?</p>
-  </div>
-
-  <div class="note" style="margin-top:12px">
-    <h4>Dropped</h4>
-    <p><b>CompCare:</b> cash reserves 23.2% in its own 2025 accounts, below the legal 25%. It also won't pay for an elective C-section. · <b>Genesis MED-200 Plus:</b> excludes pregnancy if a waiting period applied when joining, which is likely for Mishka.</p>
   </div>
 
   <div class="foot">MEDICAL AID · 2027 rates from each scheme's own documents, opened with browser-kit 11–12 Nov 2026 · doctor fees and year totals are estimates · pending CMS approval · confirm with the scheme or a broker before signing · The Nest</div>
 </div>
 <script src="nest.js"></script>
+<script>
+(() => {
+  // [name, per month, with gap lo, hi, without gap lo, hi, flag]  (k = R1,000)
+  const P = [
+    ['KeyHealth Origin', 2842, 60, 82, 128, 150],
+    ['Discovery Classic Smart', 3257, 67, 89, 100, 122],
+    ['Discovery Classic Smart Saver', 3616, 68, 90, 101, 123],
+    ['Momentum Incentive (Associated)', 3627, 69, 91, 102, 124, 'pk'],
+    ['Medihelp MedAdd', 4320, 73, 95, 141, 163],
+    ['Bonitas BonSave', 4343, 72, 94, 140, 162],
+    ['Momentum Incentive (Any hospital)', 4510, 79, 101, 112, 134],
+    ['Bestmed Beat3', 4853, 80, 102, 148, 170],
+    ['Discovery Classic Saver', 5235, 80, 102, 113, 135],
+    ['Fedhealth flexiFED 2', 5326, 83, 105, 151, 173],
+    ['Medshield MediSaver', 5907, 90, 112, 158, 180],
+    ['Bonitas Standard', 6474, 100, 122, 168, 190],
+    ['Fedhealth flexiFED 3', 6487, 93, 115, 161, 183],
+    ['CompCare SaverCare Plus', 4829, 79, 101, 147, 169, 'dr'],
+    ['Genesis MED-200 Plus', 3550, 68, 85, 101, 119, 'dr'],
+  ];
+  const MIN = 50, MAX = 200, rowsEl = document.getElementById('rows'), note = document.getElementById('scnote');
+  let sc = 'g', showDr = false;
+  const fmt = n => 'R' + n.toLocaleString('en-ZA').replace(/\s/g, ',');
+  const els = new Map();
+  P.forEach(p => {
+    const d = document.createElement('div');
+    d.className = 'crow' + (p[6] ? ' ' + p[6] : '');
+    d.innerHTML = '<div class="top"><b>' + p[0] + '</b>' + (p[6] === 'pk' ? '<span class="badge">Pick</span>' : '') +
+      (p[6] === 'dr' ? '<span class="badge" style="background:var(--warn-soft);color:var(--warn)">Dropped</span>' : '') +
+      '<span class="yr"></span></div><div class="track"><span></span></div><div class="top"><span class="mo">' + fmt(p[1]) + ' a month</span></div>';
+    els.set(p, d);
+  });
+  function render() {
+    const i = sc === 'g' ? 2 : 4;
+    const list = P.filter(p => showDr || p[6] !== 'dr').sort((a, b) => (a[6] === 'dr') - (b[6] === 'dr') || a[i] - b[i] || a[1] - b[1]);
+    list.forEach(p => {
+      const d = els.get(p), lo = p[i], hi = p[i + 1];
+      d.querySelector('.yr').textContent = 'R' + lo + '–' + hi + 'k';
+      const s = d.querySelector('.track span');
+      s.style.left = ((lo - MIN) / (MAX - MIN) * 100) + '%'; s.style.width = ((hi - lo) / (MAX - MIN) * 100) + '%';
+      rowsEl.appendChild(d);
+    });
+    P.forEach(p => { if (!list.includes(p)) els.get(p).remove(); });
+    note.innerHTML = sc === 'g'
+      ? '<b>How to read it:</b> with gap cover, the plans sit close together. Paying more each month mostly buys savings, which is your own money back, not better pregnancy cover.'
+      : '<b>Without gap cover,</b> plans that pay specialists only 100% (KeyHealth, Medihelp, Bestmed, Bonitas) jump by about R70k. Momentum and Discovery Classic pay double, so they hold up better. On Momentum with Associated specialists it\'s about R65–87k.';
+  }
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    sc = b.dataset.sc;
+    document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    render();
+  }));
+  const more = document.getElementById('showdr');
+  more.addEventListener('click', () => { showDr = !showDr; more.textContent = showDr ? 'Hide the dropped plans' : 'Show the 2 dropped plans'; render(); });
+  render();
+
+  // sticky offsets follow the real nav height
+  const nav = document.querySelector('.nav');
+  const setNav = () => document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px');
+  setNav(); window.addEventListener('resize', setNav);
+
+  // jump bar: highlight the section in view
+  const links = [...document.querySelectorAll('.jump a')], jump = document.querySelector('.jump');
+  const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  let cur = null;
+  const mark = () => {
+    const y = nav.offsetHeight + jump.offsetHeight + 20;
+    let k = 0;
+    secs.forEach((s, j) => { if (s.getBoundingClientRect().top <= y) k = j; });
+    if (k === cur) return; cur = k;
+    links.forEach((a, j) => a.classList.toggle('on', j === k));
+    const a = links[k];
+    jump.scrollTo({ left: a.offsetLeft - jump.clientWidth / 2 + a.offsetWidth / 2, behavior: 'smooth' });
+  };
+  window.addEventListener('scroll', mark, { passive: true }); mark();
+
+  // steps progress (ticks are saved + shared by nest.js)
+  const steps = [...document.querySelectorAll('#steplist li')];
+  const prog = () => {
+    const n = steps.filter(li => li.classList.contains('done')).length;
+    document.getElementById('progtxt').textContent = n + ' of ' + steps.length + ' steps done';
+    document.getElementById('progbar').style.width = (n / steps.length * 100) + '%';
+  };
+  new MutationObserver(prog).observe(document.getElementById('steplist'), { subtree: true, attributes: true, attributeFilter: ['class'] });
+  prog();
+})();
+</script>
 </body>
 </html>

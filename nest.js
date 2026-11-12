@@ -197,6 +197,11 @@ window.NEST = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // On phones the menu is one swipeable row: bring the current page's tab into view.
+  const nin = document.querySelector('.nav-in'), cur = nin && nin.querySelector('a.tab[aria-current]');
+  if (cur && nin.scrollWidth > nin.clientWidth) {
+    nin.scrollLeft += cur.getBoundingClientRect().left - nin.getBoundingClientRect().left - (nin.clientWidth - cur.offsetWidth) / 2;
+  }
   window.NEST.wire();
   // First pull seeds the cloud from anything already on this phone, then keeps
   // it in sync. Refresh on tab-focus and every 20s so the other person's edits

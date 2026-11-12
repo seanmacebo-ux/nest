@@ -46,6 +46,14 @@ a { color: inherit; }
 .nav a.tab { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink-soft); padding: 6px 12px; border-radius: 20px; }
 .nav a.tab:hover { color: var(--ink); background: var(--surface-2); }
 .nav a.tab[aria-current="page"] { color: #fff; background: var(--accent); }
+/* phones: one swipeable row instead of three stacked rows */
+@media (max-width: 700px) {
+  .nav-in { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 4px; padding: 9px 16px 9px 0; }
+  .nav-in::-webkit-scrollbar { display: none; }
+  .brandmark { position: sticky; left: 0; z-index: 1; flex: none; margin-right: 4px; padding: 8px 12px 8px 16px; font-size: 17px;
+    background: var(--ground); box-shadow: 10px 0 10px -4px var(--ground); }
+  .nav a.tab { flex: none; padding: 9px 13px; }
+}
 
 /* headings */
 .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
