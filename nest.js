@@ -211,7 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(() => { if (!document.hidden) window.NEST._pull(false); }, 20000);
 });
 
-// Register the service worker so The Nest installs as an app + works offline.
+// No service worker: caching froze phones on old copies (killed 1 Oct). Clear any
+// leftover registration. sw.js stays on the server as the kill switch for phones
+// that still run the old caching worker.
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
 }
