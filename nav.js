@@ -6,6 +6,8 @@
   if (!inner) return;
   const tabs = [...inner.querySelectorAll('a.tab')];
   if (!tabs.length) return;
+  // A phone can hold an old cached style.css: without the menu styling, keep the plain tab bar.
+  if (getComputedStyle(document.documentElement).getPropertyValue('--nav-v').trim() !== '2') return;
   const ICON = { 'Plan': '🗺️', 'Tracker': '📈', 'Shopping': '🛒', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
     'Furniture': '🛋️', 'Bedding': '🛏️', 'Kitchen': '🍳', 'WiFi': '🛜', 'Laptop': '💻', 'Decided': '✅' };
 

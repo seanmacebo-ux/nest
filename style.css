@@ -12,6 +12,7 @@
   --hot: #C0522E; --hot-soft: #F5DFD6;
   --star: #C79A4E;
   --accent: #2F6B4F;
+  --nav-v: 2; /* nav.js only switches to the ☰ menu when this styling is loaded */
   --shadow: 0 1px 2px rgba(30,42,34,.04), 0 6px 16px -8px rgba(30,42,34,.10), 0 14px 34px -18px rgba(30,42,34,.14);
 }
 @media (prefers-color-scheme: dark) {
@@ -45,7 +46,7 @@ a { color: inherit; }
 .brandmark { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 19px; letter-spacing: -.01em; margin-right: auto; display: flex; align-items: center; gap: 8px; text-decoration: none; }
 .nav a.tab { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--ink-soft); padding: 6px 12px; border-radius: 20px; }
 .nav a.tab:hover { color: var(--ink); background: var(--surface-2); }
-.nav a.tab[aria-current="page"] { color: #fff; background: var(--accent); }
+.nav a.tab[aria-current="page"] { color: var(--surface); background: var(--accent); }
 /* phones: one swipeable row instead of three stacked rows */
 @media (max-width: 700px) {
   .nav-in { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 4px; padding: 9px 16px 9px 0; }
@@ -74,7 +75,7 @@ a { color: inherit; }
     text-decoration: none; text-align: center; font-size: 13.5px; font-weight: 600; color: var(--ink); background: var(--surface);
     border: 1px solid var(--line); border-radius: 14px; }
   .navtile .ni { font-size: 22px; line-height: 1; }
-  .navtile[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .navtile[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
   .navtile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 }
 
