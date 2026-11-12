@@ -53,6 +53,29 @@ a { color: inherit; }
   .brandmark { position: sticky; left: 0; z-index: 1; flex: none; margin-right: 4px; padding: 8px 12px 8px 16px; font-size: 17px;
     background: var(--ground); box-shadow: 10px 0 10px -4px var(--ground); }
   .nav a.tab { flex: none; padding: 9px 13px; }
+  /* with nav.js: brand + current page + ☰ Menu; the rest open as a tile grid */
+  .nav.js-menu .nav-in { overflow: visible; padding: 8px 16px; gap: 8px; }
+  .nav.js-menu .brandmark { position: static; padding: 0; margin-right: auto; background: none; box-shadow: none; }
+  .nav.js-menu a.tab { display: none; }
+  .nav.js-menu .menubtn { order: 3; }
+  .nav.js-menu a.tab[aria-current="page"] { display: inline-flex; align-items: center; min-height: 40px; font-size: 13.5px; }
+}
+.menubtn { display: none; }
+@media (max-width: 700px) {
+  .menubtn { display: inline-flex; align-items: center; gap: 7px; flex: none; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+    color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; min-height: 44px; }
+  .menubtn span { font-size: 18px; line-height: 1; }
+  .nav.open .menubtn { background: var(--surface-2); }
+  .menubtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .navpanel { position: absolute; left: 0; right: 0; top: 100%; background: var(--ground); border-bottom: 1px solid var(--line);
+    box-shadow: 0 18px 30px -12px rgba(0,0,0,.25); padding: 12px 16px 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .navpanel[hidden] { display: none; }
+  .navtile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 68px; padding: 8px 4px;
+    text-decoration: none; text-align: center; font-size: 13.5px; font-weight: 600; color: var(--ink); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 14px; }
+  .navtile .ni { font-size: 22px; line-height: 1; }
+  .navtile[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .navtile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 }
 
 /* headings */
