@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#2F6B4F">
+<meta name="theme-color" content="#B8502D">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=20261112c">
+<link rel="stylesheet" href="style.css?v=20261113p">
 <style>
   :root { --navh: 60px; }
   .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
@@ -52,6 +52,7 @@
   .pc2 .pr b { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; display: block; line-height: 1.1; }
   .pc2 .pr small { font-size: 11px; color: var(--ink-soft); }
   .hb { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .03em; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
+  .val .hb, .kv .hb, .st4 .hb { white-space: normal; display: inline-block; font-size: 11px; line-height: 1.35; padding: 3px 8px; border-radius: 8px; }
   .hb.y { background: var(--good-soft); color: var(--good); } .hb.n { background: var(--warn-soft); color: var(--warn); }
   .hb.q { background: var(--surface-2); color: var(--ink-soft); } .hb.b { background: var(--amber-soft); color: var(--amber); }
   .vb { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; padding: 3px 8px; border-radius: 20px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); color: var(--t); }
@@ -120,7 +121,7 @@
   .pickrow button { flex: none; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 0 12px; min-height: 40px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink-soft); }
   .pickrow button[aria-pressed="true"] { background: color-mix(in srgb, var(--t) 18%, var(--surface)); border-color: var(--t); color: var(--ink); }
   .cmp { margin-top: 8px; }
-  .chead { position: sticky; top: calc(var(--navh) + var(--modeh, 62px)); z-index: 11; display: grid; gap: 6px; padding: 8px 0; background: color-mix(in srgb, var(--ground) 94%, transparent); backdrop-filter: blur(8px); }
+  .chead { display: grid; gap: 6px; padding: 8px 0; }
   .chead .h { border-radius: 12px; padding: 8px 9px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); border: 1px solid color-mix(in srgb, var(--t) 35%, var(--line)); text-decoration: none; }
   .chead .h small { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--t); }
   .chead .h b { font-size: 13px; line-height: 1.2; display: block; }
@@ -129,6 +130,10 @@
   .crow2 { padding: 9px 10px 10px; border-top: 1px solid var(--line); }
   .crow2 .rl { font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
   .crow2 .cells { display: grid; gap: 6px; }
+  .cell .who { display: block; font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--t); margin-bottom: 2px; }
+  .cell .val { display: block; font-size: 13.5px; }
+  .cgrp > .gn { padding: 8px 12px 10px; font-size: 12.5px; color: var(--ink-soft); border-top: 1px solid var(--line); }
+  .chead .h .op { display: block; font-size: 11px; font-weight: 600; color: var(--accent); margin-top: 3px; }
   .cell { font-size: 12.5px; line-height: 1.3; padding: 7px 8px; border-radius: 9px; background: var(--surface-2); position: relative; }
   .cell.y { background: var(--good-soft); } .cell.c { background: var(--amber-soft); } .cell.n { background: var(--warn-soft); }
   .cell.best { outline: 2px solid var(--good); outline-offset: -2px; }
@@ -192,7 +197,7 @@
   const tint = o => S[o.s][1];
   const byId = (arr, id) => arr.find(x => x.id === id);
   const HB = { Y: ['y', '✓'], N: ['n', '✗'], '?': ['q', '?'], birth: ['b', 'births'] };
-  const HW = { Y: '✓ Covered', N: '✗ Out of network', '?': '? Unconfirmed', birth: '✓ Births only' };
+  const HW = { Y: '✓ Hospital bill paid in full', N: '✗ Not in network: you pay 30% or a big upfront fee', '?': '? Not confirmed', birth: '✓ Paid in full, but only for the birth' };
   const hosp = (lab, v) => { const h = HB[v] || HB['?']; return '<span class="hb ' + h[0] + '">' + (lab ? lab + ' ' + h[1] : HW[v] || HW['?']) + '</span>'; };
   const XS = { y: ['y', '✅', 'Covered'], c: ['c', '⚠️', 'Covered, with a co-pay or limit'], n: ['n', '❌', 'Not covered'], '?': ['q', '❔', 'Not stated'] };
 
@@ -267,8 +272,8 @@
     const T = [];
     T.push(['ov', 'Overview', () => '<h3>The short version</h3><ul class="ck"><li><i>✅</i><span>' + esc(p.best || '—') + '</span></li><li><i>⚠️</i><span>' + esc(p.catch || '—') + '</span></li>' + (p.traps || []).map(x => '<li><i>💸</i><span>' + esc(x) + '</span></li>').join('') + (p.solv ? '<li><i>🏦</i><span>Cash reserves ' + esc(p.solv) + ' (legal minimum 25%)</span></li>' : '') + '</ul>']);
     if (p.network || p.pl) T.push(['hosp', 'Hospitals', () => '<h3>Hospitals</h3><div class="kv">' +
-      '<div><span class="k">Park Lane</span><span>' + hosp('', p.pl) + ' ' + (p.pl === 'Y' ? 'Covered in full' : p.pl === 'birth' ? 'Covered for the birth' : p.pl === 'N' ? 'Out of network' : 'Not confirmed') + '</span></div>' +
-      '<div><span class="k">Oxford</span><span>' + hosp('', p.ox) + ' ' + (p.ox === 'Y' ? 'Covered in full' : p.ox === 'N' ? 'Out of network' : 'Not confirmed') + '</span></div>' +
+      '<div><span class="k">Park Lane</span><span>' + hosp('', p.pl) + '</span></div>' +
+      '<div><span class="k">Oxford</span><span>' + hosp('', p.ox) + '</span></div>' +
       (p.network ? '<div><span class="k">Network</span><span>' + esc(p.network) + '</span></div>' : '') +
       (p.penalty ? '<div><span class="k">Outside it</span><span>' + esc(p.penalty) + '</span></div>' : '') +
       (p.spec ? '<div><span class="k">Doctors</span><span>' + esc(p.spec) + '</span></div>' : '') +
@@ -323,14 +328,13 @@
   const DEF_P = ['disc-essential-smart', 'disc-classic-smart', 'disc-essential-delta-core'];
   const DEF_G = ['tb-dynamic', 'zl-optimal', 'st-meridian400'];
   function cmpRows(items, rows) {
-    const cols = 'grid-template-columns:repeat(' + items.length + ',1fr)';
     return rows.map(r => {
-      if (r.group) return (r.first ? '' : '</div>') + '<div class="cgrp"><div class="gt">' + r.group + '</div>';
+      if (r.group) return (r.first ? '' : '</div>') + '<div class="cgrp"><div class="gt">' + r.group + '</div>' + (r.note ? '<div class="gn">' + r.note + '</div>' : '');
       const vals = items.map(r.get);
       let best = -1;
       if (r.num) { const nums = vals.map(v => typeof v.n === 'number' ? v.n : null); const ok = nums.filter(n => n != null); if (ok.length > 1 && new Set(ok).size > 1) { const m = r.num === 'min' ? Math.min(...ok) : Math.max(...ok); best = nums.indexOf(m); } }
-      return '<div class="crow2"><div class="rl">' + r.label + '</div><div class="cells" style="' + cols + '">' +
-        vals.map((v, i) => '<div class="cell ' + (v.cls || '') + (i === best ? ' best' : '') + '">' + v.h + '</div>').join('') + '</div></div>';
+      return '<div class="crow2"><div class="rl">' + r.label + '</div><div class="cells">' +
+        vals.map((v, i) => '<div class="cell ' + (v.cls || '') + (i === best ? ' best' : '') + '"><span class="who" style="--t:' + tint(items[i]) + '">' + esc(items[i].name) + '</span><span class="val">' + v.h + '</span></div>').join('') + '</div></div>';
     }).join('') + '</div>';
   }
   function cmpView(ids, kind) {
@@ -338,7 +342,7 @@
     ids = (ids && ids.length ? ids : (isG ? DEF_G : DEF_P)).filter(id => byId(pool, id)).slice(0, 3);
     const items = ids.map(id => byId(pool, id));
     const picker = '<div class="pickrow" role="group" aria-label="Choose up to 3">' + pool.map(o => '<button type="button" data-cmp="' + o.id + '" style="--t:' + tint(o) + '" aria-pressed="' + (ids.includes(o.id) ? 'true' : 'false') + '">' + S[o.s][2] + ' ' + esc((isG ? S[o.s][0] + ' ' : '') + o.name) + '</button>').join('') + '</div>';
-    const head = '<div class="chead" style="grid-template-columns:repeat(' + items.length + ',1fr)">' + items.map(o => '<a class="h" href="#' + kind + '/' + o.id + '" style="--t:' + tint(o) + '"><small>' + esc(S[o.s][0]) + '</small><b>' + esc(o.name) + '</b></a>').join('') + '</div>';
+    const head = '<div class="chead">' + items.map(o => '<a class="h" href="#' + kind + '/' + o.id + '" style="--t:' + tint(o) + '"><small>' + esc(S[o.s][0]) + '</small><b>' + esc(o.name) + '</b><span class="op">Open its own page →</span></a>').join('') + '</div>';
     const txt = (s, cls) => ({ h: esc(s == null || s === '' ? '—' : s), cls });
     const money = n => ({ h: '<span class="mono">' + R(n) + '</span>', n });
     const hv = v => ({ h: hosp('', v), cls: v === 'Y' ? 'y' : v === 'N' ? 'n' : v === 'birth' ? 'c' : '' });
@@ -347,13 +351,13 @@
       rows = [{ group: '💰 Price', first: true },
         { label: 'Mishka alone, a month', num: 'min', get: p => money(p.price) },
         { label: 'Family: ' + esc(famLabel()), num: 'min', get: p => famCost(p) == null ? txt('No family rates') : money(famCost(p)) },
-        { group: '🏥 Hospitals' },
+        { group: '🏥 Hospitals', note: 'Is the hospital on the plan\'s list? If yes, the plan pays the hospital\'s own bill (ward, theatre, nurses). Doctors bill separately, see "Doctors in hospital".' },
         { label: 'Park Lane', get: p => hv(p.pl) }, { label: 'Oxford', get: p => hv(p.ox) },
         { label: 'Cerclage (cervix stitch) at Park Lane', get: p => { const v = p.cerc || ['?', 'Not checked'], x = XS[v[0]]; return { h: x[1] + ' <span style="font-size:11.5px">' + esc(v[1]) + '</span>', cls: x[0] === 'q' ? '' : x[0] }; } },
         { label: 'Outside the network', get: p => txt(p.penalty) }, { label: 'Doctors in hospital', get: p => txt(p.spec) },
         { group: '🤰 Pregnancy' }, { label: 'What\'s included', get: p => txt((p.mat || []).slice(0, 3).join('. ')) },
         { group: '👛 Day-to-day' }, { label: 'GP and extras', get: p => txt((p.d2d || []).slice(0, 2).join('. ')) },
-        { group: '🚫 The Essential Smart "not covered" list' }]
+        { group: '🚫 The Essential Smart "not covered" list', note: '✅ the plan pays · ⚠️ it pays, but you pay a set amount first or it has a limit · ❌ the plan won\'t pay · ❔ the scheme\'s documents don\'t say' }]
         .concat(EX.map(e => ({ label: e[1], get: p => { const v = (p.ex || {})[e[0]] || ['?'], x = XS[v[0]]; return { h: x[1] + (v[1] ? ' <span style="font-size:11.5px">' + esc(v[1]) + '</span>' : ''), cls: x[0] === 'q' ? '' : x[0] }; } })));
     } else {
       rows = [{ group: '💰 Price a month', first: true },
@@ -366,7 +370,7 @@
         { label: 'Sean\'s mom allowed?', get: g => txt(g.parent, /^Yes/.test(g.parent) ? 'y' : /^No/.test(g.parent) ? 'n' : '') }];
     }
     return '<div class="view"><div class="seg2"><a href="#cmp" aria-current="' + (!isG) + '">Medical aids</a><a href="#gcmp" aria-current="' + isG + '">Gap cover</a></div>' +
-      '<p class="fine">Pick up to 3. Tap a name at the top to open it.</p>' + picker + '<div class="cmp">' + head + cmpRows(items, rows) + '</div>' +
+      '<p class="fine">Pick up to 3 plans below. Each answer shows the plan\'s name next to it. Tap a plan card to open its own page.</p>' + picker + '<div class="cmp">' + head + cmpRows(items, rows) + '</div>' +
       (!isG ? '<p class="fine">✅ covered · ⚠️ covered with a co-pay or limit · ❌ not covered · ❔ not stated in the documents. Family cost uses the toggles in any plan\'s Family cost tab.</p>' : '') + '</div>';
   }
 

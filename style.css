@@ -1,33 +1,35 @@
 /* The Nest — shared design system */
 :root {
-  --ground: #F4F3EA; --surface: #FCFBF5; --surface-2: #EAEADE;
-  --ink: #1E2A22; --ink-soft: #5A685E; --line: #E1E3D8;
-  --baby: #B4657A; --baby-soft: #F1E1E5;
-  --home: #2F6B4F; --home-soft: #DAE7DD; --home-ink: #234F3B;
-  --car: #BE6F4C; --car-soft: #F1E2D7; --car-ink: #8A4E33;
-  --good: #2F6B4F; --good-soft: #DAE7DD;
-  --warn: #B4442E; --warn-soft: #F3DED8;
-  --red: #B4442E; --red-soft: #F3DED8;
-  --amber: #B08636; --amber-soft: #EEE4CF;
+  /* palette: Clay & Indigo (13 Nov 2026) */
+  --ground: #F5EDE3; --surface: #FFF8F0; --surface-2: #EEDFCF;
+  --ink: #2B1D17; --ink-soft: #7A6255; --line: #E6D5C3;
+  --baby: #C2557A; --baby-soft: #F6DCE6;
+  --home: #2F7D6B; --home-soft: #D6EBE4; --home-ink: #1F5A4C;
+  --car: #3B4A8C; --car-soft: #DDE1F2; --car-ink: #2C3870;
+  --good: #2F7D6B; --good-soft: #D6EBE4;
+  --warn: #B23A3A; --warn-soft: #F5DADA;
+  --red: #B23A3A; --red-soft: #F5DADA;
+  --amber: #C98A1E; --amber-soft: #F6E6C6;
   --hot: #C0522E; --hot-soft: #F5DFD6;
-  --star: #C79A4E;
-  --accent: #2F6B4F;
+  --star: #D99A2B;
+  --accent: #B8502D;
   --nav-v: 2; /* nav.js only switches to the ☰ menu when this styling is loaded */
-  --shadow: 0 1px 2px rgba(30,42,34,.04), 0 6px 16px -8px rgba(30,42,34,.10), 0 14px 34px -18px rgba(30,42,34,.14);
+  --shadow: 0 1px 2px rgba(43,29,23,.04), 0 6px 16px -8px rgba(43,29,23,.10), 0 14px 34px -18px rgba(43,29,23,.14);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --ground: #12160F; --surface: #1A2016; --surface-2: #232A1F;
-    --ink: #E9EEE2; --ink-soft: #9AA791; --line: #2C3528;
-    --baby: #E091A2; --baby-soft: #37262B;
-    --home: #7FB596; --home-soft: #1E2E24; --home-ink: #A6D3B4;
-    --car: #DA8E6B; --car-soft: #33261C; --car-ink: #E9B792;
-    --good: #7FB596; --good-soft: #1E2E24;
-    --warn: #E8836B; --warn-soft: #37231D;
-    --red: #E8836B; --red-soft: #37231D;
-    --amber: #D3A862; --amber-soft: #302819;
+    --ground: #1A1310; --surface: #241A16; --surface-2: #30231D;
+    --ink: #F3E7DC; --ink-soft: #B59C8C; --line: #3A2C25;
+    --baby: #EC8FB0; --baby-soft: #3A2230;
+    --home: #6CC2A8; --home-soft: #1C2E29; --home-ink: #9BDCC6;
+    --car: #9AA8F0; --car-soft: #222642; --car-ink: #C3CBF7;
+    --good: #6CC2A8; --good-soft: #1C2E29;
+    --warn: #F08A7E; --warn-soft: #3A1F1D;
+    --red: #F08A7E; --red-soft: #3A1F1D;
+    --amber: #E9B45A; --amber-soft: #33281A;
     --hot: #F0836A; --hot-soft: #3A231D;
-    --star: #E9C167; --accent: #7FB596;
+    --star: #F2C063;
+    --accent: #E9825C;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.6);
   }
 }
