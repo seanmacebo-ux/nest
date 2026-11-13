@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#E8474C">
+<meta name="theme-color" content="#6C4CF5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,12 +15,12 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="style.css?v=20261113s">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261113b1">
 <style>
   :root { --navh: 60px; }
-  .mono { font-family: "DM Mono", monospace; font-variant-numeric: tabular-nums; }
-  .lbl { font-family: "DM Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .mono { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
   button { font: inherit; color: inherit; }
 
   /* top switcher */
@@ -37,7 +37,7 @@
 
   /* group headers + plan cards */
   .gh { display: flex; align-items: baseline; gap: 10px; margin: 28px 0 10px; }
-  .gh h2 { font-family: "Fredoka", serif; font-weight: 500; font-size: 21px; margin: 0; }
+  .gh h2 { font-family: "Bricolage Grotesque", serif; font-weight: 500; font-size: 21px; margin: 0; }
   .gh small { color: var(--ink-soft); font-size: 13px; }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
   .pc2 { display: flex; gap: 12px; align-items: center; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; box-shadow: var(--shadow); min-height: 72px; transition: transform .15s ease, border-color .15s ease; }
@@ -45,17 +45,17 @@
   .pc2.pick { border: 2px solid var(--good); }
   .ico { flex: none; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; font-size: 21px; background: color-mix(in srgb, var(--t) 18%, var(--surface)); border: 1px solid color-mix(in srgb, var(--t) 30%, transparent); }
   .pc2 .mid { flex: 1; min-width: 0; }
-  .pc2 .sch { font-family: "DM Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t); }
+  .pc2 .sch { font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t); }
   .pc2 .nm { font-weight: 600; font-size: 15.5px; line-height: 1.2; }
   .pc2 .dots { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
   .pc2 .pr { text-align: right; flex: none; }
-  .pc2 .pr b { font-family: "Fredoka", serif; font-weight: 600; font-size: 19px; display: block; line-height: 1.1; }
+  .pc2 .pr b { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 19px; display: block; line-height: 1.1; }
   .pc2 .pr small { font-size: 11px; color: var(--ink-soft); }
-  .hb { font-family: "DM Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .03em; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
+  .hb { font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .03em; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
   .val .hb, .kv .hb, .st4 .hb { white-space: normal; display: inline-block; font-size: 11px; line-height: 1.35; padding: 3px 8px; border-radius: 8px; }
   .hb.y { background: var(--good-soft); color: var(--good); } .hb.n { background: var(--warn-soft); color: var(--warn); }
   .hb.q { background: var(--surface-2); color: var(--ink-soft); } .hb.b { background: var(--amber-soft); color: var(--amber); }
-  .vb { font-family: "DM Mono", monospace; font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; padding: 3px 8px; border-radius: 20px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); color: var(--t); }
+  .vb { font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; padding: 3px 8px; border-radius: 20px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); color: var(--t); }
 
   /* single plan view */
   .back { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; text-decoration: none; font-size: 14px; font-weight: 600; color: var(--accent); min-height: 44px; }
@@ -63,9 +63,9 @@
   .hero .top { display: flex; align-items: center; gap: 12px; }
   .hero .ico { width: 52px; height: 52px; font-size: 26px; border-radius: 15px; }
   .hero h1 { font-size: clamp(28px,7vw,42px); margin: 0; }
-  .hero .sch { font-family: "DM Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--t); }
-  .hero .big { font-family: "Fredoka", serif; font-weight: 600; font-size: clamp(44px,12vw,64px); line-height: 1; letter-spacing: -.02em; margin-top: 16px; }
-  .hero .big small { font-family: "Nunito", sans-serif; font-size: 14px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
+  .hero .sch { font-family: "JetBrains Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--t); }
+  .hero .big { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(44px,12vw,64px); line-height: 1; letter-spacing: -.02em; margin-top: 16px; }
+  .hero .big small { font-family: "Figtree", sans-serif; font-size: 14px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
   .hero .pn { font-size: 12.5px; color: var(--ink-soft); }
   .hero .bc { display: grid; gap: 8px; margin-top: 14px; font-size: 14px; }
   .hero .bc div { display: flex; gap: 9px; }
@@ -83,11 +83,11 @@
   .tabs button { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 0 14px; min-height: 40px; font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
   .tabs button[aria-selected="true"] { background: var(--t, var(--accent)); border-color: var(--t, var(--accent)); color: #fff; }
   .pane { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; box-shadow: var(--shadow); animation: vin .22s ease; }
-  .pane h3 { font-family: "Fredoka", serif; font-weight: 600; font-size: 19px; margin: 0 0 8px; }
+  .pane h3 { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 19px; margin: 0 0 8px; }
   .kv { display: grid; gap: 0; }
   .kv > div { display: grid; grid-template-columns: 112px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px dotted var(--line); font-size: 14px; }
   .kv > div:last-child { border-bottom: 0; }
-  .kv .k { font-family: "DM Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); padding-top: 2px; }
+  .kv .k { font-family: "JetBrains Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); padding-top: 2px; }
   ul.ck { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14.5px; }
   ul.ck li { display: flex; gap: 10px; align-items: flex-start; }
   ul.ck li i { flex: none; font-style: normal; width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; font-size: 13px; background: color-mix(in srgb, var(--t, var(--accent)) 16%, var(--surface)); }
@@ -106,12 +106,12 @@
   .tg[aria-pressed="true"] .sw::after { transform: translateX(16px); background: #fff; }
   .tg .tx { flex: 1; font-size: 14.5px; font-weight: 600; }
   .tg .tx small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 12.5px; }
-  .tg .am { font-family: "DM Mono", monospace; font-weight: 600; font-size: 14px; }
+  .tg .am { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 14px; }
   .pens { display: flex; gap: 6px; flex-wrap: wrap; padding: 2px 0 4px 4px; }
   .pens button { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 0 11px; min-height: 36px; font-size: 12.5px; font-weight: 600; cursor: pointer; color: var(--ink-soft); }
   .pens button[aria-pressed="true"] { background: var(--amber-soft); border-color: var(--amber); color: var(--ink); }
   .total { margin-top: 6px; border-radius: 16px; padding: 14px 16px; background: color-mix(in srgb, var(--t, var(--accent)) 14%, var(--surface)); display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-  .total b { font-family: "Fredoka", serif; font-size: 34px; font-weight: 600; line-height: 1; }
+  .total b { font-family: "Bricolage Grotesque", serif; font-size: 34px; font-weight: 600; line-height: 1; }
   .fine { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
   .warnb { margin-top: 10px; background: var(--amber-soft); border-radius: 12px; padding: 11px 13px; font-size: 13.5px; }
 
@@ -123,21 +123,21 @@
   .cmp { margin-top: 8px; }
   .chead { display: grid; gap: 6px; padding: 8px 0; }
   .chead .h { border-radius: 12px; padding: 8px 9px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); border: 1px solid color-mix(in srgb, var(--t) 35%, var(--line)); text-decoration: none; }
-  .chead .h small { display: block; font-family: "DM Mono", monospace; font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--t); }
+  .chead .h small { display: block; font-family: "JetBrains Mono", monospace; font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--t); }
   .chead .h b { font-size: 13px; line-height: 1.2; display: block; }
   .cgrp { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
   .cgrp > .gt { padding: 10px 12px; font-weight: 600; font-size: 14px; background: var(--surface-2); display: flex; gap: 8px; align-items: center; }
   .crow2 { padding: 9px 10px 10px; border-top: 1px solid var(--line); }
   .crow2 .rl { font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
   .crow2 .cells { display: grid; gap: 6px; }
-  .cell .who { display: block; font-family: "DM Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--t); margin-bottom: 2px; }
+  .cell .who { display: block; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--t); margin-bottom: 2px; }
   .cell .val { display: block; font-size: 13.5px; }
   .cgrp > .gn { padding: 8px 12px 10px; font-size: 12.5px; color: var(--ink-soft); border-top: 1px solid var(--line); }
   .chead .h .op { display: block; font-size: 11px; font-weight: 600; color: var(--accent); margin-top: 3px; }
   .cell { font-size: 12.5px; line-height: 1.3; padding: 7px 8px; border-radius: 9px; background: var(--surface-2); position: relative; }
   .cell.y { background: var(--good-soft); } .cell.c { background: var(--amber-soft); } .cell.n { background: var(--warn-soft); }
   .cell.best { outline: 2px solid var(--good); outline-offset: -2px; }
-  .cell.best::before { content: "Best"; position: absolute; top: -7px; right: 6px; font-family: "DM Mono", monospace; font-size: 8.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--good); color: #fff; padding: 1px 5px; border-radius: 6px; }
+  .cell.best::before { content: "Best"; position: absolute; top: -7px; right: 6px; font-family: "JetBrains Mono", monospace; font-size: 8.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--good); color: #fff; padding: 1px 5px; border-radius: 6px; }
   .cell .mono { font-weight: 600; font-size: 13.5px; }
   .seg2 { display: inline-flex; background: var(--surface-2); border-radius: 12px; padding: 4px; gap: 4px; margin-top: 16px; }
   .seg2 a { text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 0 14px; min-height: 38px; display: flex; align-items: center; border-radius: 9px; }
@@ -150,7 +150,7 @@
   .intro p { color: var(--ink-soft); font-size: 14.5px; margin: 6px 0 0; }
   .statrow { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; }
   .statrow > div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow); }
-  .statrow b { font-family: "Fredoka", serif; font-size: 24px; font-weight: 600; display: block; line-height: 1.1; }
+  .statrow b { font-family: "Bricolage Grotesque", serif; font-size: 24px; font-weight: 600; display: block; line-height: 1.1; }
   .statrow small { font-size: 11.5px; color: var(--ink-soft); }
 </style>
 </head>
