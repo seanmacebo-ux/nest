@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6C4CF5">
+<meta name="theme-color" content="#E8474C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,21 +15,21 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=20261113e">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css?v=20261113s">
 <style>
   .filterbar { position: static; }
   .jump { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 16px; }
   .jump a { font-size: 12.5px; font-weight: 600; text-decoration: none; color: var(--car-ink); background: var(--car-soft); border-radius: 20px; padding: 6px 12px; }
   .brief { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .brief span { font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--ink); border-radius: 6px; padding: 4px 8px; }
-  .btag { font-size: 9.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
+  .brief span { font-family: "DM Mono", monospace; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--ink); border-radius: 6px; padding: 4px 8px; }
+  .btag { font-size: 9.5px; font-family: "DM Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
   .btag.s { background: var(--good-soft); color: var(--good); }
   .btag.a { background: var(--car-soft); color: var(--car-ink); }
   .btag.w { background: var(--red-soft); color: var(--red); }
   .secline { font-size: 13px; color: var(--ink-soft); margin: 6px 0 0; max-width: 66ch; }
   .changes { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 16px; font-size: 13px; }
-  .changes b.h { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 6px; }
+  .changes b.h { font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 6px; }
   .changes ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
   /* live listing cards: one layout for every car */
   .lgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
@@ -44,8 +44,8 @@
   .st.ok { background: var(--good-soft); color: var(--good); }
   .st.soon { background: var(--amber-soft); color: var(--amber); }
   .lc-name { font-weight: 600; font-size: 15px; margin-top: 8px; line-height: 1.3; }
-  .lc-price { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 19px; color: var(--car-ink); margin-top: 4px; }
-  .lc-price small { font-family: "IBM Plex Sans", sans-serif; font-size: 11.5px; font-weight: 500; color: var(--ink-soft); }
+  .lc-price { font-family: "DM Mono", monospace; font-weight: 600; font-size: 19px; color: var(--car-ink); margin-top: 4px; }
+  .lc-price small { font-family: "Nunito", sans-serif; font-size: 11.5px; font-weight: 500; color: var(--ink-soft); }
   .lc-facts { font-size: 12.5px; color: var(--ink); margin-top: 3px; }
   .lc-why { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.45; }
   .lc-warn { font-size: 12px; color: var(--warn); margin: 6px 0 0; line-height: 1.45; }
@@ -66,29 +66,29 @@
   .mr > summary::-webkit-details-marker { display: none; }
   .mr-n { font-weight: 600; font-size: 14.5px; }
   .mr-b { font-size: 11.5px; color: var(--ink-soft); }
-  .mr-p { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); text-align: right; white-space: nowrap; }
+  .mr-p { font-family: "DM Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); text-align: right; white-space: nowrap; }
   .mr-f { font-size: 10.5px; text-align: right; color: var(--ink-soft); white-space: nowrap; }
   .mr-f.tt { color: var(--warn); font-weight: 600; }
   .mr-f.ex { color: var(--good); font-weight: 600; }
   .mr-body { padding: 0 13px 13px; border-top: 1px solid var(--line); }
   .mr-body p { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
   .lt { width: 100%; border-collapse: collapse; margin: 10px 0 0; font-size: 12.5px; }
-  .lt th { font-family: "IBM Plex Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .lt th { font-family: "DM Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
   .lt td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
   .lt tr:last-child td { border-bottom: none; }
-  .lt .y { font-family: "IBM Plex Mono", monospace; font-weight: 600; }
-  .lt .p { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
-  .lt .km { font-family: "IBM Plex Mono", monospace; color: var(--ink-soft); white-space: nowrap; }
+  .lt .y { font-family: "DM Mono", monospace; font-weight: 600; }
+  .lt .p { font-family: "DM Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
+  .lt .km { font-family: "DM Mono", monospace; color: var(--ink-soft); white-space: nowrap; }
   .lt .lo { color: var(--ink-soft); font-size: 11.5px; }
   .lt tr.best td { background: var(--good-soft); }
-  .lt .tag { font-size: 8.5px; font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
+  .lt .tag { font-size: 8.5px; font-family: "DM Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
   .mlinks { margin-top: 10px; font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
   .mlinks a { color: var(--car-ink); font-weight: 600; text-decoration: none; }
   /* reference accordions */
   .acc { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
-  .acc > summary { cursor: pointer; list-style: none; padding: 14px 16px; font-family: "Fraunces", serif; font-weight: 600; font-size: 16.5px; color: var(--car-ink); display: flex; justify-content: space-between; gap: 10px; }
+  .acc > summary { cursor: pointer; list-style: none; padding: 14px 16px; font-family: "Fredoka", serif; font-weight: 600; font-size: 16.5px; color: var(--car-ink); display: flex; justify-content: space-between; gap: 10px; }
   .acc > summary::-webkit-details-marker { display: none; }
-  .acc > summary::after { content: "+"; font-family: "IBM Plex Mono", monospace; color: var(--ink-soft); }
+  .acc > summary::after { content: "+"; font-family: "DM Mono", monospace; color: var(--ink-soft); }
   .acc[open] > summary::after { content: "−"; }
   .acc .in { padding: 0 16px 16px; font-size: 13.5px; }
   .acc .in p { margin: 0 0 10px; }

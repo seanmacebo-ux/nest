@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6C4CF5">
+<meta name="theme-color" content="#E8474C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,14 +15,14 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=20261113e">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css?v=20261113s">
 <style>
   :root { --navh: 60px; --c-aid: var(--good); --c-gap: var(--star); --c-you: var(--warn); }
   html { scroll-behavior: smooth; }
   [id] { scroll-margin-top: calc(var(--navh) + 64px); }
-  .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
-  .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .mono { font-family: "DM Mono", monospace; font-variant-numeric: tabular-nums; }
+  .lbl { font-family: "DM Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
 
   /* jump bar */
   .jump { position: sticky; top: var(--navh); z-index: 15; margin: 22px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
@@ -35,8 +35,8 @@
   /* hero plan card */
   .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: 20px; padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
   .hero .lbl { color: var(--good); }
-  .hero .big { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }
-  .hero .big small { font-family: "IBM Plex Sans", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
+  .hero .big { font-family: "Fredoka", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }
+  .hero .big small { font-family: "Nunito", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
   .hero .bigsub { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
   .trio { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 16px; }
   @media (max-width: 640px) { .trio { grid-template-columns: 1fr; } }
@@ -44,7 +44,7 @@
   .trio .ic { font-size: 22px; }
   .trio b { display: block; font-size: 14.5px; }
   .trio small { color: var(--ink-soft); font-size: 12.5px; }
-  .trio .v { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .trio .v { margin-left: auto; font-family: "DM Mono", monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
   .warnbox { margin-top: 12px; background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; display: flex; gap: 10px; }
   .warnbox b { color: var(--ink); }
   .herofoot { margin-top: 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -59,11 +59,11 @@
   .acc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
   .acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 16px; min-height: 56px; -webkit-tap-highlight-color: transparent; }
   .acc summary::-webkit-details-marker { display: none; }
-  .acc summary::after { content: "+"; margin-left: auto; flex: none; font-family: "IBM Plex Mono", monospace; font-size: 20px; font-weight: 600; color: var(--ink-soft); transition: transform .2s ease; }
+  .acc summary::after { content: "+"; margin-left: auto; flex: none; font-family: "DM Mono", monospace; font-size: 20px; font-weight: 600; color: var(--ink-soft); transition: transform .2s ease; }
   .acc[open] summary::after { transform: rotate(45deg); }
   .acc summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 14px; }
   .acc .ic { font-size: 22px; line-height: 1; flex: none; }
-  .acc .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--good-soft); color: var(--good); font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13px; display: grid; place-items: center; }
+  .acc .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--good-soft); color: var(--good); font-family: "DM Mono", monospace; font-weight: 600; font-size: 13px; display: grid; place-items: center; }
   .acc .st { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
   .acc .st small { color: var(--ink-soft); font-size: 12.5px; }
   .acc .bd { padding: 0 16px 14px; font-size: 14px; border-top: 1px solid var(--line); }
@@ -81,7 +81,7 @@
   .bill .hd { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
   .bill .hd b { font-weight: 600; }
   .sbar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin-top: 6px; }
-  .sbar span { display: flex; align-items: center; padding: 0 8px; font-family: "IBM Plex Mono", monospace; font-size: 11.5px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; }
+  .sbar span { display: flex; align-items: center; padding: 0 8px; font-family: "DM Mono", monospace; font-size: 11.5px; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; }
   .s-aid { background: var(--c-aid); } .s-gap { background: var(--c-gap); color: #1E2A22 !important; } .s-you { background: var(--c-you); }
   .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; }
   .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
@@ -92,14 +92,14 @@
   @media (max-width: 900px) { .picks { grid-template-columns: 1fr; } }
   .pick { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 16px 16px 6px; }
   .pick.best { border: 2px solid var(--good); }
-  .pick .tag { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+  .pick .tag { font-family: "DM Mono", monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
   .pick.best .tag { color: var(--good); }
-  .pick .nm { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; line-height: 1.2; margin-top: 4px; }
+  .pick .nm { font-family: "Fredoka", serif; font-weight: 600; font-size: 19px; line-height: 1.2; margin-top: 4px; }
   .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 12px; }
   .stats > div { background: var(--surface-2); border-radius: 10px; padding: 8px 9px; }
   .stats .lbl { font-size: 9px; letter-spacing: .05em; }
-  .stats .v { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; margin-top: 2px; }
-  .stats .v.sm { font-family: "IBM Plex Sans", sans-serif; font-size: 12.5px; line-height: 1.3; }
+  .stats .v { font-family: "DM Mono", monospace; font-weight: 600; font-size: 14px; margin-top: 2px; }
+  .stats .v.sm { font-family: "Nunito", sans-serif; font-size: 12.5px; line-height: 1.3; }
   .pick .why, .pick .trap { font-size: 13.5px; margin-top: 10px; display: flex; gap: 8px; }
   .pick .trap { color: var(--ink-soft); }
   .pick details { margin-top: 8px; border-top: 1px solid var(--line); }
@@ -116,13 +116,13 @@
   .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
   .chart { margin-top: 14px; }
   .axis { position: relative; height: 16px; margin-bottom: 4px; }
-  .axis span { position: absolute; transform: translateX(-50%); font-family: "IBM Plex Mono", monospace; font-size: 10px; color: var(--ink-soft); }
+  .axis span { position: absolute; transform: translateX(-50%); font-family: "DM Mono", monospace; font-size: 10px; color: var(--ink-soft); }
   .axis span:first-child { transform: none; } .axis span:last-child { transform: translateX(-100%); }
   .crow { padding: 9px 0; border-bottom: 1px solid var(--line); }
   .crow:last-child { border-bottom: 0; }
   .crow .top { display: flex; align-items: baseline; gap: 8px; font-size: 14px; }
-  .crow .top .mo { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; color: var(--ink-soft); }
-  .crow .top .yr { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13.5px; white-space: nowrap; }
+  .crow .top .mo { font-family: "DM Mono", monospace; font-size: 11.5px; color: var(--ink-soft); }
+  .crow .top .yr { margin-left: auto; font-family: "DM Mono", monospace; font-weight: 600; font-size: 13.5px; white-space: nowrap; }
   .track { position: relative; height: 10px; background: var(--surface-2); border-radius: 6px; margin-top: 6px;
     background-image: linear-gradient(90deg, transparent calc(33.33% - 1px), var(--line) 33.33%, transparent calc(33.33% + 1px), transparent calc(66.67% - 1px), var(--line) 66.67%, transparent calc(66.67% + 1px)); }
   .track span { position: absolute; top: 0; bottom: 0; border-radius: 6px; background: color-mix(in srgb, var(--ink-soft) 55%, transparent); transition: left .45s cubic-bezier(.2,.7,.3,1), width .45s cubic-bezier(.2,.7,.3,1); }
@@ -130,16 +130,16 @@
   .crow.pk .track span { background: var(--accent); }
   .crow.dr { opacity: .55; }
   .crow.dr .top b { text-decoration: line-through; text-decoration-thickness: 1px; }
-  .badge { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--good-soft); color: var(--good); padding: 2px 7px; border-radius: 20px; }
+  .badge { font-family: "DM Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--good-soft); color: var(--good); padding: 2px 7px; border-radius: 20px; }
   .fine { font-size: 12.5px; color: var(--ink-soft); margin: 12px 0 0; }
   .moreb { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 12px 0 0; cursor: pointer; min-height: 44px; }
 
   /* tables in fine print */
   .tw { overflow-x: auto; margin-top: 10px; }
   .ct { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-  .ct th { text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 5px; border-bottom: 1px solid var(--line); }
+  .ct th { text-align: left; font-family: "DM Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 5px; border-bottom: 1px solid var(--line); }
   .ct td { padding: 9px 5px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .ct td.amt { font-family: "IBM Plex Mono", monospace; font-weight: 600; white-space: nowrap; }
+  .ct td.amt { font-family: "DM Mono", monospace; font-weight: 600; white-space: nowrap; }
   .ct tr:last-child td { border-bottom: none; }
 
   /* checklists */
@@ -150,7 +150,7 @@
   .chk .txt { font-size: 14.5px; }
   .chk .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
   .chk li.done .txt { text-decoration: line-through; text-decoration-color: var(--ink-soft); }
-  .chk .tagq { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
+  .chk .tagq { font-family: "DM Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -209,7 +209,8 @@
 
   <!-- NEXT PREGNANCY -->
   <div class="sec" id="next"><h2>🧵 Next pregnancy: check-ups and the cerclage</h2><p>Planning for a closely watched pregnancy: lots of gynae visits and scans, and a cerclage (a stitch in the cervix, usually done early in the pregnancy). Checked in Discovery's and Momentum's 2027 guides and Discovery's day-surgery and waiting-period documents, 13 Nov.</p></div>
-  <div class="warnbox" style="background:var(--warn-soft);margin-top:0"><span>⚠️</span><span><b>The biggest risk is the waiting period, not the plan.</b> Mishka has never been on a medical aid, so any scheme can apply a 3-month general wait <b>and</b> exclude anything she was treated for in the last 12 months, for 12 months. During that time even the legal minimum cover (PMBs) doesn't apply. If they exclude her cervix, a cerclage before about <b>Dec 2027</b> (joining 1 Dec) would be ours. Gap cover usually has the same 12-month rule for pre-existing conditions.</span></div>
+  <div class="warnbox" style="background:var(--good-soft);margin-top:0"><span>✅</span><span><b>Decided 13 Nov: we only try for the next pregnancy once the medical aid can cover it.</b> That means after every waiting period and exclusion has ended, including any on her cervix. The start date comes from the scheme's letter, not a guess.</span></div>
+  <div class="warnbox" style="background:var(--warn-soft)"><span>⚠️</span><span><b>Why the date matters.</b> Mishka has never been on a medical aid, so any scheme can apply a 3-month general wait <b>and</b> exclude anything she was treated for in the last 12 months, for 12 months. During that time even the legal minimum cover (PMBs) doesn't apply. If they exclude her cervix, the earliest "covered" date is about <b>Dec 2027</b> (joining 1 Dec). If they don't, it's about <b>March 2027</b>, after the 3-month wait. Gap cover has its own waits (Turnberry: 10 months on pregnancy), so check that date too.</span></div>
   <div class="stack" style="margin-top:12px">
     <details class="acc lay-h" open>
       <summary><span class="ic">🧵</span><span class="st"><b>The cerclage</b><small>Where it's done decides who pays</small></span></summary>
@@ -219,7 +220,7 @@
           <li><b>Park Lane is not on the Smart day-surgery list</b> (Discovery's 2026 list, the latest public one). On Essential Smart or Classic Smart, a planned cerclage at Park Lane likely means <b>R13,150 upfront</b>.</li>
           <li><b>Fix:</b> ask Dr Moore to do it at a Smart day-surgery facility near Parktown, then it's covered in full. On the list: Mediclinic Morningside, Melrose Surgical Centre, Wits Donald Gordon, Life Fourways, Intercare Sandton Day Clinic.</li>
           <li><b>On Essential Core or Classic Core,</b> Park Lane <i>is</i> on their day-surgery list, so it's covered there.</li>
-          <li><b>Cash price if it's excluded:</b> Mediclinic's fixed hospital fee is R8,015 for a 1-day stay, plus the gynae and anaesthetist. Budget roughly R12–20k (estimate).</li>
+          <li><b>For reference, the cash price:</b> Mediclinic's fixed hospital fee is R8,015 for a 1-day stay, plus the gynae and anaesthetist (roughly R12–20k, estimate). Waiting until it's covered avoids this.</li>
           <li><b>Always</b> get pre-authorisation before the date.</li>
         </ul>
       </div>
@@ -237,12 +238,12 @@
       </div>
     </details>
     <details class="acc lay-g">
-      <summary><span class="ic">💰</span><span class="st"><b>The pregnancy fund</b><small>Roughly R4–6k a month</small></span></summary>
+      <summary><span class="ic">💰</span><span class="st"><b>The pregnancy fund</b><small>Roughly R4–5k a month while we wait</small></span></summary>
       <div class="bd">
         <ul class="pl">
-          <li><b>Target:</b> about R50–80k for a closely watched pregnancy (visits, scans, cerclage if excluded, doctors' gaps). This is an estimate until Dr Moore gives her fees.</li>
-          <li><b>Save it monthly</b> into a separate account from now. R4–6k a month for about a year.</li>
-          <li><b>It shrinks</b> if Dr Moore charges the scheme's rate, or if the cerclage falls after the 12-month exclusion ends.</li>
+          <li><b>Target:</b> about R40–65k for a closely watched pregnancy (extra visits, scans, doctors' gaps). The cerclage and the birth are covered because we wait. This is an estimate until Dr Moore gives her fees.</li>
+          <li><b>Save it monthly</b> into a separate account from now, while we wait for cover. R4–5k a month for about a year.</li>
+          <li><b>It shrinks</b> if Dr Moore charges the scheme's rate.</li>
         </ul>
       </div>
     </details>
@@ -252,8 +253,8 @@
         <ul class="pl">
           <li><b>1. Join on 1 December.</b> Every month earlier is a month off the 12-month clock.</li>
           <li><b>2. Declare everything honestly</b> on the form, including this pregnancy and the cervix. Hiding it lets them cancel cover later.</li>
-          <li><b>3. Get the waiting periods and exclusions in writing</b> before trying again, so you know the exact date the cervix exclusion ends.</li>
-          <li><b>4. Take that date to Dr Moore.</b> When to try again is your and her call; the date just tells you what's covered.</li>
+          <li><b>3. Get the waiting periods and exclusions in writing,</b> for the medical aid and the gap cover. The latest end date is our "covered from" date.</li>
+          <li><b>4. Try only after that date.</b> Take it to Dr Moore so she can plan the check-ups and cerclage around it.</li>
           <li><b>5. Ask Dr Moore</b> her fees, her payment arrangements, and which day clinic she uses for a cerclage.</li>
         </ul>
       </div>
