@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2F6B4F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<title>Plans explorer · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css?v=20261112c">
+<style>
+  :root { --navh: 60px; }
+  .mono { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+  .lbl { font-family: "IBM Plex Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  button { font: inherit; color: inherit; }
+
+  /* top switcher */
+  .modes { position: sticky; top: var(--navh); z-index: 15; margin: 18px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
+    background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .modes .in { display: grid; grid-template-columns: repeat(4,1fr); gap: 4px; background: var(--surface-2); border-radius: 14px; padding: 4px; max-width: 640px; }
+  .modes a { text-decoration: none; text-align: center; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 9px 4px; border-radius: 10px; min-height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.15; }
+  .modes a span { font-size: 16px; }
+  .modes a[aria-current="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+
+  #view { min-height: 60vh; }
+  .view { animation: vin .28s cubic-bezier(.2,.7,.3,1); }
+  @keyframes vin { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* group headers + plan cards */
+  .gh { display: flex; align-items: baseline; gap: 10px; margin: 28px 0 10px; }
+  .gh h2 { font-family: "Fraunces", serif; font-weight: 500; font-size: 21px; margin: 0; }
+  .gh small { color: var(--ink-soft); font-size: 13px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+  .pc2 { display: flex; gap: 12px; align-items: center; text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; box-shadow: var(--shadow); min-height: 72px; transition: transform .15s ease, border-color .15s ease; }
+  .pc2:active { transform: scale(.985); }
+  .pc2.pick { border: 2px solid var(--good); }
+  .ico { flex: none; width: 44px; height: 44px; border-radius: 13px; display: grid; place-items: center; font-size: 21px; background: color-mix(in srgb, var(--t) 18%, var(--surface)); border: 1px solid color-mix(in srgb, var(--t) 30%, transparent); }
+  .pc2 .mid { flex: 1; min-width: 0; }
+  .pc2 .sch { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t); }
+  .pc2 .nm { font-weight: 600; font-size: 15.5px; line-height: 1.2; }
+  .pc2 .dots { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+  .pc2 .pr { text-align: right; flex: none; }
+  .pc2 .pr b { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; display: block; line-height: 1.1; }
+  .pc2 .pr small { font-size: 11px; color: var(--ink-soft); }
+  .hb { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .03em; padding: 2px 7px; border-radius: 20px; white-space: nowrap; }
+  .hb.y { background: var(--good-soft); color: var(--good); } .hb.n { background: var(--warn-soft); color: var(--warn); }
+  .hb.q { background: var(--surface-2); color: var(--ink-soft); } .hb.b { background: var(--amber-soft); color: var(--amber); }
+  .vb { font-family: "IBM Plex Mono", monospace; font-size: 9.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; padding: 3px 8px; border-radius: 20px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); color: var(--t); }
+
+  /* single plan view */
+  .back { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; text-decoration: none; font-size: 14px; font-weight: 600; color: var(--accent); min-height: 44px; }
+  .hero { position: relative; overflow: hidden; margin-top: 6px; border-radius: 22px; padding: 20px; background: linear-gradient(140deg, color-mix(in srgb, var(--t) 22%, var(--surface)), var(--surface) 70%); border: 1px solid color-mix(in srgb, var(--t) 35%, var(--line)); box-shadow: var(--shadow); }
+  .hero .top { display: flex; align-items: center; gap: 12px; }
+  .hero .ico { width: 52px; height: 52px; font-size: 26px; border-radius: 15px; }
+  .hero h1 { font-size: clamp(28px,7vw,42px); margin: 0; }
+  .hero .sch { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--t); }
+  .hero .big { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(44px,12vw,64px); line-height: 1; letter-spacing: -.02em; margin-top: 16px; }
+  .hero .big small { font-family: "IBM Plex Sans", sans-serif; font-size: 14px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
+  .hero .pn { font-size: 12.5px; color: var(--ink-soft); }
+  .hero .bc { display: grid; gap: 8px; margin-top: 14px; font-size: 14px; }
+  .hero .bc div { display: flex; gap: 9px; }
+  .tiles4 { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 14px; }
+  @media (min-width: 700px) { .tiles4 { grid-template-columns: repeat(4,1fr); } }
+  .st4 { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: 10px 12px; }
+  .st4 .v { font-weight: 600; font-size: 15px; margin-top: 3px; line-height: 1.25; }
+  .st4 .v.mono { font-size: 16px; }
+  .hero .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .btn2 { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; font-weight: 600; font-size: 14px; padding: 0 15px; min-height: 44px; border-radius: 12px; background: var(--accent); color: var(--surface); border: 0; cursor: pointer; }
+  .btn2.ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+
+  .tabs { position: sticky; top: calc(var(--navh) + var(--modeh, 62px)); z-index: 12; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 16px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 8px clamp(16px,4vw,40px); background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { flex: none; border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 0 14px; min-height: 40px; font-size: 13px; font-weight: 600; color: var(--ink-soft); cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--t, var(--accent)); border-color: var(--t, var(--accent)); color: #fff; }
+  .pane { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; box-shadow: var(--shadow); animation: vin .22s ease; }
+  .pane h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: 19px; margin: 0 0 8px; }
+  .kv { display: grid; gap: 0; }
+  .kv > div { display: grid; grid-template-columns: 112px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px dotted var(--line); font-size: 14px; }
+  .kv > div:last-child { border-bottom: 0; }
+  .kv .k { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); padding-top: 2px; }
+  ul.ck { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14.5px; }
+  ul.ck li { display: flex; gap: 10px; align-items: flex-start; }
+  ul.ck li i { flex: none; font-style: normal; width: 24px; height: 24px; border-radius: 8px; display: grid; place-items: center; font-size: 13px; background: color-mix(in srgb, var(--t, var(--accent)) 16%, var(--surface)); }
+  .exl { display: grid; gap: 6px; }
+  .exl div { display: flex; gap: 10px; align-items: flex-start; padding: 9px 10px; border-radius: 11px; font-size: 14px; }
+  .exl small { display: block; color: var(--ink-soft); font-size: 12.5px; }
+  .exl .y { background: var(--good-soft); } .exl .c { background: var(--amber-soft); } .exl .n { background: var(--warn-soft); } .exl .q { background: var(--surface-2); }
+  .exl b.s { flex: none; width: 22px; text-align: center; }
+
+  /* family calculator */
+  .fam { display: grid; gap: 8px; }
+  .tg { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 13px; cursor: pointer; min-height: 52px; background: var(--surface); text-align: left; width: 100%; }
+  .tg .sw { flex: none; width: 40px; height: 24px; border-radius: 20px; background: var(--surface-2); border: 1px solid var(--line); position: relative; transition: background .2s; }
+  .tg .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--ink-soft); transition: transform .2s, background .2s; }
+  .tg[aria-pressed="true"] .sw { background: var(--accent); border-color: var(--accent); }
+  .tg[aria-pressed="true"] .sw::after { transform: translateX(16px); background: #fff; }
+  .tg .tx { flex: 1; font-size: 14.5px; font-weight: 600; }
+  .tg .tx small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 12.5px; }
+  .tg .am { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; }
+  .pens { display: flex; gap: 6px; flex-wrap: wrap; padding: 2px 0 4px 4px; }
+  .pens button { border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 0 11px; min-height: 36px; font-size: 12.5px; font-weight: 600; cursor: pointer; color: var(--ink-soft); }
+  .pens button[aria-pressed="true"] { background: var(--amber-soft); border-color: var(--amber); color: var(--ink); }
+  .total { margin-top: 6px; border-radius: 16px; padding: 14px 16px; background: color-mix(in srgb, var(--t, var(--accent)) 14%, var(--surface)); display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .total b { font-family: "Fraunces", serif; font-size: 34px; font-weight: 600; line-height: 1; }
+  .fine { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
+  .warnb { margin-top: 10px; background: var(--amber-soft); border-radius: 12px; padding: 11px 13px; font-size: 13.5px; }
+
+  /* compare */
+  .pickrow { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 4px 0 8px; }
+  .pickrow::-webkit-scrollbar { display: none; }
+  .pickrow button { flex: none; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 20px; padding: 0 12px; min-height: 40px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink-soft); }
+  .pickrow button[aria-pressed="true"] { background: color-mix(in srgb, var(--t) 18%, var(--surface)); border-color: var(--t); color: var(--ink); }
+  .cmp { margin-top: 8px; }
+  .chead { position: sticky; top: calc(var(--navh) + var(--modeh, 62px)); z-index: 11; display: grid; gap: 6px; padding: 8px 0; background: color-mix(in srgb, var(--ground) 94%, transparent); backdrop-filter: blur(8px); }
+  .chead .h { border-radius: 12px; padding: 8px 9px; background: color-mix(in srgb, var(--t) 16%, var(--surface)); border: 1px solid color-mix(in srgb, var(--t) 35%, var(--line)); text-decoration: none; }
+  .chead .h small { display: block; font-family: "IBM Plex Mono", monospace; font-size: 9px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--t); }
+  .chead .h b { font-size: 13px; line-height: 1.2; display: block; }
+  .cgrp { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+  .cgrp > .gt { padding: 10px 12px; font-weight: 600; font-size: 14px; background: var(--surface-2); display: flex; gap: 8px; align-items: center; }
+  .crow2 { padding: 9px 10px 10px; border-top: 1px solid var(--line); }
+  .crow2 .rl { font-size: 12px; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
+  .crow2 .cells { display: grid; gap: 6px; }
+  .cell { font-size: 12.5px; line-height: 1.3; padding: 7px 8px; border-radius: 9px; background: var(--surface-2); position: relative; }
+  .cell.y { background: var(--good-soft); } .cell.c { background: var(--amber-soft); } .cell.n { background: var(--warn-soft); }
+  .cell.best { outline: 2px solid var(--good); outline-offset: -2px; }
+  .cell.best::before { content: "Best"; position: absolute; top: -7px; right: 6px; font-family: "IBM Plex Mono", monospace; font-size: 8.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: var(--good); color: #fff; padding: 1px 5px; border-radius: 6px; }
+  .cell .mono { font-weight: 600; font-size: 13.5px; }
+  .seg2 { display: inline-flex; background: var(--surface-2); border-radius: 12px; padding: 4px; gap: 4px; margin-top: 16px; }
+  .seg2 a { text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 0 14px; min-height: 38px; display: flex; align-items: center; border-radius: 9px; }
+  .seg2 a[aria-current="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+
+  /* birth places */
+  .places { display: grid; gap: 12px; margin-top: 16px; }
+  @media (min-width: 800px) { .places { grid-template-columns: 1fr 1fr; } }
+  .intro { margin-top: 18px; }
+  .intro p { color: var(--ink-soft); font-size: 14.5px; margin: 6px 0 0; }
+  .statrow { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; }
+  .statrow > div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow); }
+  .statrow b { font-family: "Fraunces", serif; font-size: 24px; font-weight: 600; display: block; line-height: 1.1; }
+  .statrow small { font-size: 11.5px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="list.html">Shopping</a>
+  <a class="tab" href="medical.html" aria-current="page">Medical aid</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="decided.html">Decided</a>
+</div></nav>
+<script src="nav.js?v=20261112c"></script>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Plans explorer · 13 Nov 2026</div>
+    <h1>Every plan, <em>its own view</em>.</h1>
+    <p class="sub">Tap a medical aid or gap cover to open it. Compare any three side by side. <a href="medical.html">← Back to our plan</a></p>
+  </header>
+
+  <nav class="modes" aria-label="Explorer"><div class="in">
+    <a href="#aids" data-m="aids"><span>🩺</span>Medical aids</a>
+    <a href="#gap" data-m="gap"><span>🛡️</span>Gap cover</a>
+    <a href="#cmp" data-m="cmp"><span>⚖️</span>Compare</a>
+    <a href="#birth" data-m="birth"><span>🌊</span>Birth places</a>
+  </div></nav>
+
+  <main id="view"></main>
+
+  <div class="foot">PLANS EXPLORER · 2027 rates from each scheme's and insurer's own documents, opened with browser-kit 11–13 Nov 2026 · 2026 prices are marked · pending CMS approval · family totals are estimates · confirm with a broker before signing · The Nest</div>
+</div>
+
+<script src="plans-data.js?v=20261113a"></script>
+<script>
+(() => {
+  const { S, EX, P, G, PLACES, PENALTY } = window.NEST;
+  const $v = document.getElementById('view');
+  const R = n => n == null ? '—' : 'R' + Math.round(n).toLocaleString('en-ZA').replace(/\s/g, ',');
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const tint = o => S[o.s][1];
+  const byId = (arr, id) => arr.find(x => x.id === id);
+  const HB = { Y: ['y', '✓'], N: ['n', '✗'], '?': ['q', '?'], birth: ['b', 'births'] };
+  const HW = { Y: '✓ Covered', N: '✗ Out of network', '?': '? Unconfirmed', birth: '✓ Births only' };
+  const hosp = (lab, v) => { const h = HB[v] || HB['?']; return '<span class="hb ' + h[0] + '">' + (lab ? lab + ' ' + h[1] : HW[v] || HW['?']) + '</span>'; };
+  const XS = { y: ['y', '✅', 'Covered'], c: ['c', '⚠️', 'Covered, with a co-pay or limit'], n: ['n', '❌', 'Not covered'], '?': ['q', '❔', 'Not stated'] };
+
+  // family toggles, shared across views and saved on this phone
+  const FK = 'nest-plans-family';
+  let fam = { sean: true, mom: false, pen: 0, baby: false };
+  try { Object.assign(fam, JSON.parse(localStorage.getItem(FK) || '{}')); } catch (e) {}
+  const saveFam = () => { try { localStorage.setItem(FK, JSON.stringify(fam)); } catch (e) {} };
+  const famCost = p => {
+    if (p.price == null) return null;
+    let t = p.price;
+    if (p.adult == null && (fam.sean || fam.mom || fam.baby)) return null;
+    if (fam.sean) t += p.adult;
+    if (fam.mom) t += p.adult * (1 + fam.pen / 100);
+    if (fam.baby) t += p.child;
+    return t;
+  };
+  const famLabel = () => ['Mishka', fam.sean && 'Sean', fam.mom && 'Sean\'s mom' + (fam.pen ? ' (+' + fam.pen + '%)' : ''), fam.baby && 'baby'].filter(Boolean).join(' + ');
+
+  // ---------- list views ----------
+  const card = (o, kind) => {
+    const href = '#' + kind + '/' + o.id, sch = S[o.s];
+    const right = kind === 'p'
+      ? '<b>' + (o.price ? R(o.price) : '—') + '</b><small>' + (o.priceNote ? esc(o.priceNote) : 'a month') + '</small>'
+      : '<b>' + (o.single29 ? R(o.single29) : '—') + '</b><small>' + (o.single29 ? 'under 30' : 'family priced') + (o.year === 2026 ? ' · 2026' : '') + '</small>';
+    const dots = kind === 'p'
+      ? hosp('Park Lane', o.pl) + hosp('Oxford', o.ox) + (o.verdict ? '<span class="vb">' + esc(o.verdict) + '</span>' : '')
+      : '<span class="hb q">' + o.pct + '%</span><span class="hb ' + (/^None/.test(o.preg) ? 'y' : 'q') + '">🤰 ' + esc(o.preg.split(/[,(]/)[0].trim()) + '</span>' + (/^Yes/.test(o.parent) ? '<span class="hb y">👵 parent ok</span>' : '');
+    return '<a class="pc2' + (o.group === 'pick' ? ' pick' : '') + '" href="' + href + '" style="--t:' + sch[1] + '">' +
+      '<span class="ico">' + sch[2] + '</span><span class="mid"><span class="sch">' + esc(sch[0]) + '</span><span class="nm" style="display:block">' + esc(o.name) + '</span><span class="dots">' + dots + '</span></span>' +
+      '<span class="pr">' + right + '</span></a>';
+  };
+  const group = (title, sub, items, kind) => items.length ? '<div class="gh"><h2>' + title + '</h2><small>' + sub + '</small></div><div class="cards">' + items.map(o => card(o, kind)).join('') + '</div>' : '';
+
+  function aids() {
+    const g = k => P.filter(p => p.group === k).sort((a, b) => (a.price || 9e9) - (b.price || 9e9));
+    return '<div class="view"><div class="statrow"><div><b>45</b><small>plans checked</small></div><div><b>' + G.length + '</b><small>gap covers</small></div><div><b>R2,332</b><small>our pick a month</small></div></div>' +
+      group('⭐ Our pick', 'Hospital plan for Mishka', g('pick'), 'p') +
+      group('✅ Shortlist', 'Covers Park Lane', g('short'), 'p') +
+      group('⚠️ Cheaper, with a catch', 'Read the catch first', g('catch'), 'p') +
+      group('🚫 Park Lane out of network', '30% of the bill or R13k+', g('out'), 'p') +
+      group('❔ Couldn\'t confirm', '', g('unk'), 'p') + '</div>';
+  }
+  function gaps() {
+    const g = k => G.filter(x => x.group === k);
+    return '<div class="view"><div class="intro"><p>Gap cover pays what doctors charge above the medical aid\'s rate in hospital. It never pays rooms visits. Prices are per month.</p></div>' +
+      group('⭐ Our pick', 'Cheapest 500%', g('pick'), 'g') +
+      group('🤰 Best for a pregnancy soon', 'No 10-month wait', g('preg'), 'g') +
+      group('👵 Best when adding a parent', 'Takes Sean\'s mom', g('parent'), 'g') +
+      group('More options', '', g('other'), 'g') +
+      group('🚫 Avoid', '', g('avoid'), 'g') + '</div>';
+  }
+
+  // ---------- single plan view ----------
+  function famPane(p) {
+    if (p.price == null) return '';
+    if (p.adult == null) return '<p class="fine">No adult or child rates found for this plan, so only Mishka\'s price is known: ' + R(p.price) + '.</p>';
+    const row = (k, txt, sub, amt) => '<button type="button" class="tg" data-fam="' + k + '" aria-pressed="' + (fam[k] ? 'true' : 'false') + '"><span class="sw"></span><span class="tx">' + txt + '<small>' + sub + '</small></span><span class="am">' + amt + '</span></button>';
+    return '<div class="fam">' +
+      '<div class="tg" style="cursor:default"><span class="sw" style="background:var(--accent);border-color:var(--accent)"></span><span class="tx">Mishka<small>Main member</small></span><span class="am">' + R(p.price) + '</span></div>' +
+      row('sean', 'Add Sean', 'When his spousal visa comes through', '+' + R(p.adult)) +
+      row('mom', 'Add Sean\'s mom', 'Adult dependant. See the catch below', '+' + R(p.adult * (1 + fam.pen / 100))) +
+      (fam.mom ? '<div class="pens" role="group" aria-label="Late-joiner penalty">' + PENALTY.map(x => '<button type="button" data-pen="' + x[0] + '" aria-pressed="' + (fam.pen === x[0] ? 'true' : 'false') + '">' + (x[0] ? '+' + x[0] + '%' : '0%') + ' · ' + x[1] + '</button>').join('') + '</div>' : '') +
+      row('baby', 'Add the baby', 'Child rate', '+' + R(p.child)) +
+      '</div><div class="total"><span>' + esc(famLabel()) + '</span><b>' + R(famCost(p)) + '</b></div>' +
+      (fam.mom ? '<div class="warnb"><b>Two catches with Sean\'s mom.</b> If she\'s 35+ and has been without medical aid, a late-joiner penalty is added for life (pick the band above; it\'s applied to her whole rate here, so it\'s a rough upper figure). And Discovery only takes the main member\'s own parent, so she may need Sean as main member, or her own policy. Ask the broker.</div>' : '') +
+      '<p class="fine">2027 rates. Gap cover is extra (see Gap cover tab).</p>';
+  }
+  function planView(id, tab) {
+    const p = byId(P, id); if (!p) return aids();
+    const t = tint(p), sch = S[p.s];
+    const T = [];
+    T.push(['ov', 'Overview', () => '<h3>The short version</h3><ul class="ck"><li><i>✅</i><span>' + esc(p.best || '—') + '</span></li><li><i>⚠️</i><span>' + esc(p.catch || '—') + '</span></li>' + (p.traps || []).map(x => '<li><i>💸</i><span>' + esc(x) + '</span></li>').join('') + (p.solv ? '<li><i>🏦</i><span>Cash reserves ' + esc(p.solv) + ' (legal minimum 25%)</span></li>' : '') + '</ul>']);
+    if (p.network || p.pl) T.push(['hosp', 'Hospitals', () => '<h3>Hospitals</h3><div class="kv">' +
+      '<div><span class="k">Park Lane</span><span>' + hosp('', p.pl) + ' ' + (p.pl === 'Y' ? 'Covered in full' : p.pl === 'birth' ? 'Covered for the birth' : p.pl === 'N' ? 'Out of network' : 'Not confirmed') + '</span></div>' +
+      '<div><span class="k">Oxford</span><span>' + hosp('', p.ox) + ' ' + (p.ox === 'Y' ? 'Covered in full' : p.ox === 'N' ? 'Out of network' : 'Not confirmed') + '</span></div>' +
+      (p.network ? '<div><span class="k">Network</span><span>' + esc(p.network) + '</span></div>' : '') +
+      (p.penalty ? '<div><span class="k">Outside it</span><span>' + esc(p.penalty) + '</span></div>' : '') +
+      (p.spec ? '<div><span class="k">Doctors</span><span>' + esc(p.spec) + '</span></div>' : '') + '</div>']);
+    if (p.mat) T.push(['preg', 'Pregnancy', () => '<h3>Pregnancy and baby</h3><ul class="ck">' + p.mat.map(x => '<li><i>🤰</i><span>' + esc(x) + '</span></li>').join('') + '</ul>']);
+    if (p.d2d) T.push(['d2d', 'Day-to-day', () => '<h3>Outside hospital</h3><ul class="ck">' + p.d2d.map(x => '<li><i>👛</i><span>' + esc(x) + '</span></li>').join('') + '</ul>']);
+    if (p.ex) T.push(['ex', 'Exclusions', () => '<h3>The Essential Smart "not covered" list</h3><p class="fine" style="margin:0 0 10px">How this plan handles each one.</p><div class="exl">' +
+      EX.map(e => { const v = p.ex[e[0]] || ['?'], x = XS[v[0]]; return '<div class="' + x[0] + '"><b class="s">' + x[1] + '</b><span>' + esc(e[1]) + '<small>' + esc(v[1] || x[2]) + '</small></span></div>'; }).join('') + '</div>']);
+    if (p.price != null) T.push(['fam', 'Family cost', () => '<h3>Family cost a month</h3>' + famPane(p)]);
+    if (!T.find(x => x[0] === tab)) tab = T[0][0];
+    const cur = T.find(x => x[0] === tab);
+    const showFam = p.adult != null && (fam.sean || fam.mom || fam.baby);
+    return '<div class="view" style="--t:' + t + '"><a class="back" href="#aids">← All medical aids</a>' +
+      '<section class="hero"><div class="top"><span class="ico">' + sch[2] + '</span><div><div class="sch">' + esc(sch[0]) + '</div><h1>' + esc(p.name) + '</h1></div></div>' +
+      '<div class="big">' + (p.price ? R(p.price) : '—') + ' <small>/ month' + (p.priceNote ? ' · ' + esc(p.priceNote) : '') + '</small></div>' +
+      (p.verdict ? '<div style="margin-top:8px"><span class="vb">' + esc(p.verdict) + '</span></div>' : '') +
+      '<div class="tiles4"><div class="st4"><div class="lbl">Park Lane</div><div class="v">' + hosp('', p.pl) + '</div></div><div class="st4"><div class="lbl">Oxford</div><div class="v">' + hosp('', p.ox) + '</div></div>' +
+      '<div class="st4"><div class="lbl">Doctors</div><div class="v" style="font-size:13px">' + esc((p.spec || '—').split(/[,(.]/)[0]) + '</div></div>' +
+      '<div class="st4"><div class="lbl">' + (showFam ? 'Family' : 'Mishka') + '</div><div class="v mono">' + R(showFam ? famCost(p) : p.price) + '</div></div></div>' +
+      '<div class="acts"><a class="btn2" href="#cmp/' + (p.id === 'disc-essential-smart' ? 'disc-essential-smart,disc-classic-smart,disc-essential-delta-core' : 'disc-essential-smart,' + p.id) + '">⚖️ Compare</a><a class="btn2 ghost" href="#gap">🛡️ Gap cover</a></div></section>' +
+      '<div class="tabs" role="tablist">' + T.map(x => '<button type="button" role="tab" data-tab="' + x[0] + '" aria-selected="' + (x[0] === tab ? 'true' : 'false') + '">' + x[1] + '</button>').join('') + '</div>' +
+      '<div class="pane" role="tabpanel">' + cur[2]() + '</div></div>';
+  }
+
+  function gapView(id, tab) {
+    const g = byId(G, id); if (!g) return gaps();
+    const sch = S[g.s];
+    const T = [
+      ['ov', 'Overview', () => '<h3>The short version</h3><ul class="ck"><li><i>✅</i><span>' + esc(g.best) + '</span></li><li><i>⚠️</i><span>' + esc(g.catch) + '</span></li></ul>'],
+      ['price', 'Prices', () => '<h3>Monthly price (' + g.year + ')</h3><div class="kv">' +
+        '<div><span class="k">Single, under 30</span><span class="mono">' + (g.single29 ? R(g.single29) : '—') + '</span></div>' +
+        '<div><span class="k">Single, 30–49</span><span class="mono">' + (g.single49 ? R(g.single49) : '—') + '</span></div>' +
+        (g.couple ? '<div><span class="k">Couple / family</span><span>' + esc(g.couple) + '</span></div>' : '') +
+        (g.older ? '<div><span class="k">Older / parent</span><span>' + esc(g.older) + '</span></div>' : '') + '</div>' + (g.year === 2026 ? '<p class="fine">2026 price. The 2027 price isn\'t published yet.</p>' : '')],
+      ['pays', 'What it pays', () => '<h3>What it pays</h3><ul class="ck"><li><i>🩺</i><span>Doctors in hospital up to ' + g.pct + '% of the scheme rate</span></li><li><i>🧾</i><span>' + esc(g.copay) + '</span></li>' + g.extras.map(x => '<li><i>➕</i><span>' + esc(x) + '</span></li>').join('') + '</ul>'],
+      ['fam', 'Pregnancy & family', () => '<h3>Pregnancy and family</h3><div class="kv"><div><span class="k">Pregnancy wait</span><span>' + esc(g.preg) + '</span></div><div><span class="k">Sean\'s mom</span><span>' + esc(g.parent) + '</span></div></div><p class="fine">Every gap cover needs the person to be on a medical aid too.</p>'],
+    ];
+    if (!T.find(x => x[0] === tab)) tab = 'ov';
+    return '<div class="view" style="--t:' + sch[1] + '"><a class="back" href="#gap">← All gap cover</a>' +
+      '<section class="hero"><div class="top"><span class="ico">' + sch[2] + '</span><div><div class="sch">' + esc(sch[0]) + '</div><h1>' + esc(g.name) + '</h1></div></div>' +
+      '<div class="big">' + (g.single29 ? R(g.single29) : '—') + ' <small>/ month ' + (g.single29 ? 'under 30' : '') + ' · ' + g.year + '</small></div>' +
+      '<div style="margin-top:8px"><span class="vb">' + esc(g.verdict) + '</span></div>' +
+      '<div class="tiles4"><div class="st4"><div class="lbl">Doctors</div><div class="v mono">' + g.pct + '%</div></div><div class="st4"><div class="lbl">30–49</div><div class="v mono">' + (g.single49 ? R(g.single49) : '—') + '</div></div>' +
+      '<div class="st4"><div class="lbl">Pregnancy wait</div><div class="v" style="font-size:13px">' + esc(g.preg.split(/[,(]/)[0]) + '</div></div><div class="st4"><div class="lbl">Parent OK?</div><div class="v" style="font-size:13px">' + esc(g.parent.split(/[,(]/)[0]) + '</div></div></div>' +
+      '<div class="acts"><a class="btn2" href="#gcmp/tb-dynamic,' + (g.id === 'tb-dynamic' ? 'zl-optimal,st-meridian400' : g.id) + '">⚖️ Compare</a></div></section>' +
+      '<div class="tabs" role="tablist">' + T.map(x => '<button type="button" role="tab" data-tab="' + x[0] + '" aria-selected="' + (x[0] === tab ? 'true' : 'false') + '">' + x[1] + '</button>').join('') + '</div>' +
+      '<div class="pane" role="tabpanel">' + T.find(x => x[0] === tab)[2]() + '</div></div>';
+  }
+
+  // ---------- compare ----------
+  const DEF_P = ['disc-essential-smart', 'disc-classic-smart', 'disc-essential-delta-core'];
+  const DEF_G = ['tb-dynamic', 'zl-optimal', 'st-meridian400'];
+  function cmpRows(items, rows) {
+    const cols = 'grid-template-columns:repeat(' + items.length + ',1fr)';
+    return rows.map(r => {
+      if (r.group) return (r.first ? '' : '</div>') + '<div class="cgrp"><div class="gt">' + r.group + '</div>';
+      const vals = items.map(r.get);
+      let best = -1;
+      if (r.num) { const nums = vals.map(v => typeof v.n === 'number' ? v.n : null); const ok = nums.filter(n => n != null); if (ok.length > 1 && new Set(ok).size > 1) { const m = r.num === 'min' ? Math.min(...ok) : Math.max(...ok); best = nums.indexOf(m); } }
+      return '<div class="crow2"><div class="rl">' + r.label + '</div><div class="cells" style="' + cols + '">' +
+        vals.map((v, i) => '<div class="cell ' + (v.cls || '') + (i === best ? ' best' : '') + '">' + v.h + '</div>').join('') + '</div></div>';
+    }).join('') + '</div>';
+  }
+  function cmpView(ids, kind) {
+    const isG = kind === 'g', pool = isG ? G : P.filter(p => ['pick', 'short', 'catch'].includes(p.group));
+    ids = (ids && ids.length ? ids : (isG ? DEF_G : DEF_P)).filter(id => byId(pool, id)).slice(0, 3);
+    const items = ids.map(id => byId(pool, id));
+    const picker = '<div class="pickrow" role="group" aria-label="Choose up to 3">' + pool.map(o => '<button type="button" data-cmp="' + o.id + '" style="--t:' + tint(o) + '" aria-pressed="' + (ids.includes(o.id) ? 'true' : 'false') + '">' + S[o.s][2] + ' ' + esc((isG ? S[o.s][0] + ' ' : '') + o.name) + '</button>').join('') + '</div>';
+    const head = '<div class="chead" style="grid-template-columns:repeat(' + items.length + ',1fr)">' + items.map(o => '<a class="h" href="#' + kind + '/' + o.id + '" style="--t:' + tint(o) + '"><small>' + esc(S[o.s][0]) + '</small><b>' + esc(o.name) + '</b></a>').join('') + '</div>';
+    const txt = (s, cls) => ({ h: esc(s == null || s === '' ? '—' : s), cls });
+    const money = n => ({ h: '<span class="mono">' + R(n) + '</span>', n });
+    const hv = v => ({ h: hosp('', v), cls: v === 'Y' ? 'y' : v === 'N' ? 'n' : v === 'birth' ? 'c' : '' });
+    let rows;
+    if (!isG) {
+      rows = [{ group: '💰 Price', first: true },
+        { label: 'Mishka alone, a month', num: 'min', get: p => money(p.price) },
+        { label: 'Family: ' + esc(famLabel()), num: 'min', get: p => famCost(p) == null ? txt('No family rates') : money(famCost(p)) },
+        { group: '🏥 Hospitals' },
+        { label: 'Park Lane', get: p => hv(p.pl) }, { label: 'Oxford', get: p => hv(p.ox) },
+        { label: 'Outside the network', get: p => txt(p.penalty) }, { label: 'Doctors in hospital', get: p => txt(p.spec) },
+        { group: '🤰 Pregnancy' }, { label: 'What\'s included', get: p => txt((p.mat || []).slice(0, 3).join('. ')) },
+        { group: '👛 Day-to-day' }, { label: 'GP and extras', get: p => txt((p.d2d || []).slice(0, 2).join('. ')) },
+        { group: '🚫 The Essential Smart "not covered" list' }]
+        .concat(EX.map(e => ({ label: e[1], get: p => { const v = (p.ex || {})[e[0]] || ['?'], x = XS[v[0]]; return { h: x[1] + (v[1] ? ' <span style="font-size:11.5px">' + esc(v[1]) + '</span>' : ''), cls: x[0] === 'q' ? '' : x[0] }; } })));
+    } else {
+      rows = [{ group: '💰 Price a month', first: true },
+        { label: 'Single, under 30', num: 'min', get: g => g.single29 ? money(g.single29) : txt('Family price only') },
+        { label: 'Single, 30–49', num: 'min', get: g => g.single49 ? money(g.single49) : txt('—') },
+        { label: 'Couple / family', get: g => txt(g.couple) }, { label: 'Price year', get: g => txt(String(g.year), g.year === 2026 ? 'c' : '') },
+        { group: '🩺 What it pays' }, { label: 'Doctors up to', num: 'max', get: g => ({ h: '<span class="mono">' + g.pct + '%</span>', n: g.pct }) },
+        { label: 'Co-payments / wrong hospital', get: g => txt(g.copay) }, { label: 'Extras', get: g => txt(g.extras.join('. ')) },
+        { group: '🤰 Pregnancy & family' }, { label: 'Pregnancy wait', get: g => txt(g.preg, /^None/.test(g.preg) ? 'y' : /excluded/.test(g.preg) ? 'n' : '') },
+        { label: 'Sean\'s mom allowed?', get: g => txt(g.parent, /^Yes/.test(g.parent) ? 'y' : /^No/.test(g.parent) ? 'n' : '') }];
+    }
+    return '<div class="view"><div class="seg2"><a href="#cmp" aria-current="' + (!isG) + '">Medical aids</a><a href="#gcmp" aria-current="' + isG + '">Gap cover</a></div>' +
+      '<p class="fine">Pick up to 3. Tap a name at the top to open it.</p>' + picker + '<div class="cmp">' + head + cmpRows(items, rows) + '</div>' +
+      (!isG ? '<p class="fine">✅ covered · ⚠️ covered with a co-pay or limit · ❌ not covered · ❔ not stated in the documents. Family cost uses the toggles in any plan\'s Family cost tab.</p>' : '') + '</div>';
+  }
+
+  function birthView() {
+    return '<div class="view"><div class="intro"><p>Where the baby could be born. Both are in Discovery\'s Smart network.</p></div><div class="places">' +
+      PLACES.map(pl => '<section class="pane" style="--t:' + pl.tint + ';margin:0"><div class="top" style="display:flex;gap:12px;align-items:center;margin-bottom:6px"><span class="ico">' + pl.icon + '</span><h3 style="margin:0">' + esc(pl.name) + '</h3></div><div class="kv">' +
+        pl.lines.map(l => '<div><span class="k">' + esc(l[0]) + '</span><span>' + esc(l[1]) + '</span></div>').join('') + '</div></section>').join('') +
+      '</div><p class="fine">Oxford facts from oxfordmidwifery.co.za (FAQ, services, fees pages), read 13 Nov 2026.</p></div>';
+  }
+
+  // ---------- router ----------
+  function route() {
+    const h = decodeURIComponent(location.hash.slice(1)) || 'aids';
+    const [a, b, c] = h.split('/');
+    let mode = 'aids', html;
+    if (a === 'p') { html = planView(b, c); }
+    else if (a === 'g') { mode = 'gap'; html = gapView(b, c); }
+    else if (a === 'gap') { mode = 'gap'; html = gaps(); }
+    else if (a === 'cmp') { mode = 'cmp'; html = cmpView(b ? b.split(',') : null, 'p'); }
+    else if (a === 'gcmp') { mode = 'cmp'; html = cmpView(b ? b.split(',') : null, 'g'); }
+    else if (a === 'birth') { mode = 'birth'; html = birthView(); }
+    else html = aids();
+    $v.innerHTML = html;
+    document.querySelectorAll('.modes a').forEach(x => x.setAttribute('aria-current', x.dataset.m === mode ? 'true' : 'false'));
+    return a;
+  }
+  let lastTop = null;
+  window.addEventListener('hashchange', () => {
+    const a = route();
+    const t = location.hash.split('/')[0];
+    if (t !== lastTop) window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+    lastTop = t;
+  });
+
+  // clicks: tabs, compare picks, family toggles (re-render in place, keep scroll)
+  $v.addEventListener('click', e => {
+    const tb = e.target.closest('[data-tab]');
+    if (tb) { const parts = location.hash.slice(1).split('/'); history.replaceState(null, '', '#' + parts[0] + '/' + parts[1] + '/' + tb.dataset.tab); route(); return; }
+    const cp = e.target.closest('[data-cmp]');
+    if (cp) {
+      const kind = location.hash.startsWith('#gcmp') ? 'gcmp' : 'cmp';
+      const cur = (location.hash.split('/')[1] || (kind === 'gcmp' ? DEF_G : DEF_P).join(',')).split(',').filter(Boolean);
+      const id = cp.dataset.cmp, i = cur.indexOf(id);
+      if (i >= 0) { if (cur.length > 1) cur.splice(i, 1); } else { cur.push(id); if (cur.length > 3) cur.shift(); }
+      const y = scrollY; history.replaceState(null, '', '#' + kind + '/' + cur.join(',')); route(); scrollTo(0, y); return;
+    }
+    const fb = e.target.closest('[data-fam]');
+    if (fb) { const k = fb.dataset.fam; fam[k] = !fam[k]; saveFam(); const y = scrollY; route(); scrollTo(0, y); return; }
+    const pb = e.target.closest('[data-pen]');
+    if (pb) { fam.pen = +pb.dataset.pen; saveFam(); const y = scrollY; route(); scrollTo(0, y); }
+  });
+
+  // sticky offsets follow the real nav + switcher heights
+  const nav = document.querySelector('.nav'), modes = document.querySelector('.modes');
+  const setH = () => { document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px'); document.documentElement.style.setProperty('--modeh', modes.offsetHeight + 'px'); };
+  setH(); window.addEventListener('resize', setH);
+  lastTop = location.hash.split('/')[0];
+  route();
+})();
+</script>
+</body>
+</html>
