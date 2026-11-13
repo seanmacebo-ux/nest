@@ -188,6 +188,19 @@ window.NEST = (() => {
       ['Ask', 'Can Dr Moore deliver there, or only be the backup?'] ] },
   ];
 
+  // Cerclage (cervical stitch) at Park Lane. Discovery lists it as day surgery; Park Lane is on the
+  // day-surgery list for Core/Saver plans ("O") but not Smart or Delta (Discovery 2026 day-surgery list).
+  const SMART_DS = ['c', 'R13,150 upfront at Park Lane. Full cover at a Smart day clinic (e.g. Mediclinic Morningside, Melrose Surgical Centre)'];
+  const CERC = {
+    'disc-essential-smart': SMART_DS, 'disc-classic-smart': SMART_DS, 'disc-classic-smart-saver': SMART_DS,
+    'disc-essential-delta-core': ['c', 'R11,550 upfront at Park Lane. Full cover at a Delta day clinic'],
+    'disc-classic-delta-core': ['c', 'R11,550 upfront at Park Lane. Full cover at a Delta day clinic'],
+    'disc-essential-core': ['y', 'Park Lane is on its day-surgery list'], 'disc-classic-core': ['y', 'Park Lane is on its day-surgery list'],
+    'mom-custom-any': ['c', 'Likely R2,100 authorisation co-pay (not confirmed for cerclage)'],
+    'bm-beat1': ['?', 'On Bestmed\'s day-procedure list; facility rules not checked'],
+  };
+  P.forEach(p => { if (p.ex) p.cerc = CERC[p.id] || ['?', 'Not checked']; });
+
   const PENALTY = [[0, 'No penalty'], [5, '1–4 yrs uncovered'], [25, '5–14 yrs'], [50, '15–24 yrs'], [75, '25+ yrs']];
 
   return { S, EX, P, G, PLACES, PENALTY };

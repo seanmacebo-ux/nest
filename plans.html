@@ -182,7 +182,7 @@
   <div class="foot">PLANS EXPLORER · 2027 rates from each scheme's and insurer's own documents, opened with browser-kit 11–13 Nov 2026 · 2026 prices are marked · pending CMS approval · family totals are estimates · confirm with a broker before signing · The Nest</div>
 </div>
 
-<script src="plans-data.js?v=20261113a"></script>
+<script src="plans-data.js?v=20261113b"></script>
 <script>
 (() => {
   const { S, EX, P, G, PLACES, PENALTY } = window.NEST;
@@ -271,7 +271,9 @@
       '<div><span class="k">Oxford</span><span>' + hosp('', p.ox) + ' ' + (p.ox === 'Y' ? 'Covered in full' : p.ox === 'N' ? 'Out of network' : 'Not confirmed') + '</span></div>' +
       (p.network ? '<div><span class="k">Network</span><span>' + esc(p.network) + '</span></div>' : '') +
       (p.penalty ? '<div><span class="k">Outside it</span><span>' + esc(p.penalty) + '</span></div>' : '') +
-      (p.spec ? '<div><span class="k">Doctors</span><span>' + esc(p.spec) + '</span></div>' : '') + '</div>']);
+      (p.spec ? '<div><span class="k">Doctors</span><span>' + esc(p.spec) + '</span></div>' : '') +
+      (p.cerc ? '<div><span class="k">Cerclage</span><span>' + XS[p.cerc[0]][1] + ' ' + esc(p.cerc[1]) + '</span></div>' : '') + '</div>' +
+      (p.cerc ? '<p class="fine">Cerclage = a stitch in the cervix. If she\'s never had medical aid, it can be excluded for the first 12 months. See the Medical aid page.</p>' : '')]);
     if (p.mat) T.push(['preg', 'Pregnancy', () => '<h3>Pregnancy and baby</h3><ul class="ck">' + p.mat.map(x => '<li><i>🤰</i><span>' + esc(x) + '</span></li>').join('') + '</ul>']);
     if (p.d2d) T.push(['d2d', 'Day-to-day', () => '<h3>Outside hospital</h3><ul class="ck">' + p.d2d.map(x => '<li><i>👛</i><span>' + esc(x) + '</span></li>').join('') + '</ul>']);
     if (p.ex) T.push(['ex', 'Exclusions', () => '<h3>The Essential Smart "not covered" list</h3><p class="fine" style="margin:0 0 10px">How this plan handles each one.</p><div class="exl">' +
@@ -347,6 +349,7 @@
         { label: 'Family: ' + esc(famLabel()), num: 'min', get: p => famCost(p) == null ? txt('No family rates') : money(famCost(p)) },
         { group: '🏥 Hospitals' },
         { label: 'Park Lane', get: p => hv(p.pl) }, { label: 'Oxford', get: p => hv(p.ox) },
+        { label: 'Cerclage (cervix stitch) at Park Lane', get: p => { const v = p.cerc || ['?', 'Not checked'], x = XS[v[0]]; return { h: x[1] + ' <span style="font-size:11.5px">' + esc(v[1]) + '</span>', cls: x[0] === 'q' ? '' : x[0] }; } },
         { label: 'Outside the network', get: p => txt(p.penalty) }, { label: 'Doctors in hospital', get: p => txt(p.spec) },
         { group: '🤰 Pregnancy' }, { label: 'What\'s included', get: p => txt((p.mat || []).slice(0, 3).join('. ')) },
         { group: '👛 Day-to-day' }, { label: 'GP and extras', get: p => txt((p.d2d || []).slice(0, 2).join('. ')) },
