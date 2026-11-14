@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C4CF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<title>Bedroom · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛏️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261113b1">
+<link rel="stylesheet" href="rooms.css?v=20261114a">
+</head>
+<body data-room="Bedroom">
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="lounge.html">Lounge</a>
+  <a class="tab" href="bedroom.html" aria-current="page">Bedroom</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
+  <a class="tab" href="office.html">Office</a>
+  <a class="tab" href="medical.html">Medical aid</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="recovery.html">Post-pregnancy</a>
+  <a class="tab" href="decided.html">Decided</a>
+</div></nav>
+<script src="nav.js?v=20261114q"></script>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> The flat · room by room</div>
+    <h1>🛏️ Bedroom.</h1>
+    <p class="sub">The bed, bedding, side tables and fans. Tap a thing to see the options. The buttons message me on Telegram.</p>
+    <nav class="rooms" id="rooms" aria-label="Rooms"></nav>
+    <div class="stats">
+      <div class="stat go"><div class="sl">Still to spend</div><div class="sv" id="st-need">—</div><div class="ss" id="st-needn">—</div></div>
+      <div class="stat"><div class="sl">Bought</div><div class="sv" id="st-spent">—</div><div class="ss" id="st-spentn">—</div></div>
+    </div>
+    <nav class="jump" aria-label="Jump to">
+      <a href="#need-sec">🛒 Still need <span class="n" id="j-need"></span></a>
+      <a href="#bought-sec">✅ Bought <span class="n" id="j-bought"></span></a>
+    </nav>
+  </header>
+
+  <details class="addbox">
+    <summary><span class="pl">＋</span><span><b>Add something</b><small>TVs, monitors, anything. Paste a link if you've seen one.</small></span></summary>
+    <div class="abd">
+    <div class="qchips" aria-label="Quick add">
+      <button type="button" data-q="TV: ">📺 TV</button>
+      <button type="button" data-q="Monitor: ">🖥️ Monitor</button>
+      <button type="button" data-q="Microwave: ">🍲 Microwave</button>
+      <button type="button" data-q="Mini PC: ">💻 Mini PC</button>
+    </div>
+    <textarea id="addtxt" placeholder="e.g. Monitor, 27 inch, for work, under R3k" aria-label="What do you need?"></textarea>
+    <button type="button" class="sendbtn" id="addsend">Send to The Nest on Telegram →</button>
+    <div class="how">Several things at once is fine: one per line. I'll find options with the browser and put them on this list.</div>
+    </div>
+  </details>
+
+  <div class="sec" id="need-sec"><h2>🛒 Still need</h2>
+    <p>Tap a thing to see the options. <b>✓ Bought this</b> tells me which one you got. <b>🔎 More options</b> asks me to find more.</p></div>
+  <div id="need"></div>
+  <div class="need-total"><span>Still to spend<br><small style="font-weight:500" id="needsub">rough, using the ⭐ picks</small></span><b id="needsum">—</b></div>
+
+  <div id="maybe-wrap"><div class="sec" id="maybe-sec"><h2>🤔 Only if needed</h2></div>
+  <div id="maybe"></div></div>
+
+  <div class="sec" id="bought-sec"><h2>✅ Bought</h2></div>
+  <div class="panel won">
+    <ul class="bl" id="boughtlist"></ul>
+    <div class="sumrow"><span>Spent in this room</span><b id="spentsum">—</b></div>
+  </div>
+
+  <div class="foot">BEDROOM · part of the flat, room by room · updated 14 Nov 2026 · The Nest</div>
+</div>
+<script src="nest.js?v=20261112c"></script>
+<script src="rooms.js?v=20261114a"></script>
+</body>
+</html>
