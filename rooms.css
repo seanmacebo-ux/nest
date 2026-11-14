@@ -124,3 +124,31 @@
   .rooms { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
   .rooms a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; border-radius: 22px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; }
   .rooms a[aria-current] { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* --- 14 Nov: same layout as the Medical aid page (sticky pill bar + hero card) --- */
+  :root { --navh: 60px; }
+  [id] { scroll-margin-top: calc(var(--navh) + 64px); }
+  .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .jump { position: sticky; top: var(--navh); z-index: 15; margin: 22px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
+    background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+    display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .jump::-webkit-scrollbar { display: none; }
+  .jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; min-height: 36px; display: flex; align-items: center; gap: 0; }
+  .jump a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+  .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: 20px; padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
+  .hero .lbl { color: var(--good); }
+  .hero .big { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }
+  .hero .big small { font-family: "Figtree", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
+  .hero .bigsub { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+  .trio { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 16px; }
+  @media (max-width: 640px) { .trio { grid-template-columns: 1fr; } }
+  .trio > a { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--ink); }
+  .trio .ic { font-size: 22px; flex: none; }
+  .trio b { display: block; font-size: 14.5px; }
+  .trio small { color: var(--ink-soft); font-size: 12.5px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .trio > a > span:nth-child(2) { min-width: 0; }
+  .trio .v { margin-left: auto; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .sec .isub { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--accent); font-weight: 600; }
+  #need .opts, #maybe .opts { margin-top: 12px; }
+  .opt { background: var(--surface); box-shadow: var(--shadow); }
+  .iacts { margin-top: 10px; }

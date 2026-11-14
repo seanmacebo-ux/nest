@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261113b1">
+<link rel="stylesheet" href="style.css?v=20261114c">
 <style>
   .filterbar { position: static; }
   .jump { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 16px; }
@@ -242,14 +242,15 @@ function liveState(c){
 const pnum=s=>{const t=String(s).replace(/,/g,""),m=t.match(/\d+(?:\.\d+)?/);if(!m)return 9e9;let n=+m[0];if(/k/i.test(t)&&n<1000)n*=1000;return n;};
 function liveCard(c){
   const s=liveState(c);
-  return `<div class="lc ${c.pick?'pick':''}" data-lane="${c.lane}">
+  return `<div class="lc ${c.pick?'pick':''}" data-lane="${c.lane}" data-dk="car|${c.url}" data-dl="${c.year} ${c.name}, ${c.price}" data-st="${c.st||''}">
     <div class="lc-top"><span class="btag ${c.lane==='safe'?'s':'w'}">${c.lane==='safe'?'SAFE':'HUNT'}</span><span class="st ${s.cls}">${s.txt}</span>${c.pick?'<span class="star">★ pick</span>':''}</div>
     <div class="lc-name">${c.year} ${c.name}</div>
     <div class="lc-price">${c.price}${c.pnote?` <small>${c.pnote}</small>`:''}</div>
     <div class="lc-facts">${c.km}${c.boot?` · ${c.boot} boot`:''} · ${c.where}</div>
     <p class="lc-why">${c.why}</p>
     ${c.warn?`<p class="lc-warn">⚠️ ${c.warn}</p>`:''}
-    <div class="lc-act"><a href="${c.url}" target="_blank" rel="noopener noreferrer">Open listing ↗</a><button class="savebtn" data-save-kind="car" data-save-label="${c.year} ${c.name} ${c.price}" data-save-url="${c.url}">♡</button></div>
+    <div class="lc-act"><a href="${c.url}" target="_blank" rel="noopener noreferrer">Open listing ↗</a></div>
+    <div class="dec"></div>
   </div>`;
 }
 (function(){
@@ -267,5 +268,6 @@ function liveCard(c){
 })();
 if (window.NEST) window.NEST.wire();
 </script>
+<script src="decide.js?v=20261114c"></script>
 </body>
 </html>

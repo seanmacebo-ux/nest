@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261113b1">
+<link rel="stylesheet" href="style.css?v=20261114c">
 <style>
   .zonekey { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
   .zk { font-size: 12.5px; font-weight: 600; padding: 8px 13px; border-radius: 20px; display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); }
@@ -262,13 +262,13 @@ const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De
 const dOld=iso=>Math.floor((TODAY-new Date(iso))/864e5);
 const cyLabel=iso=>{const d=new Date(iso);return d.getDate()+' '+MON[d.getMonth()];};
 const card=f=>`
-  <div class="cc ${f.pick?'pick':''}" data-side="${f.s}" data-uber="${f.u}" data-floor="${f.g?'g':'u'}" data-garden="${f.garden?'1':'0'}">
+  <div class="cc ${f.pick?'pick':''}" data-dk="flat|${f.url}" data-dl="${f.name} (${f.area}), ${f.rent}" data-st="${f.st||''}" data-side="${f.s}" data-uber="${f.u}" data-floor="${f.g?'g':'u'}" data-garden="${f.garden?'1':'0'}">
     <div class="cc-top"><span class="brand">${f.area}</span><span class="ub ${f.u}">${f.u==='ok'?'🚶 ~R2–3k':f.u==='mid'?'🚗 ~R4–6k':'🛑 R8k+ Uber'}</span></div>
     <div class="model" style="font-size:16px">${f.name} ${f.pick?'<span class="star">★</span>':''}</div>
     <div class="price">${f.rent}<small>${f.spec} · ${f.fl}</small></div>
     <p style="font-size:12.5px;color:var(--ink-soft);margin:11px 0 0;line-height:1.45">${f.desc}</p>
     <div class="cardlinks"><a class="clink see" style="flex:1" href="${f.url}" target="_blank" rel="noopener noreferrer">View listing ↗</a></div>
-    <button class="savebtn" style="width:100%;margin-top:8px" data-save-kind="flat" data-save-label="${f.name} (${f.area})" data-save-url="${f.url}">♡ Save</button>
+    <div class="dec"></div>
   </div>`;
 const live=F.filter(f=>dOld(f.cycle)<=MAXAGE);
 const cycles=[...new Set(live.map(f=>f.cycle))].sort().reverse();
@@ -304,5 +304,6 @@ if (window.NEST) window.NEST.wire();
   apply();
 })();
 </script>
+<script src="decide.js?v=20261114c"></script>
 </body>
 </html>

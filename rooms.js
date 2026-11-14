@@ -18,9 +18,10 @@ const BOUGHT={
 ]
 };
 (() => {
-  const BOT = 'babybeanbot', SENT = 'nest_sent';
-  // tg:// opens the Telegram app straight away with the text typed in. The
-  // https://t.me/ version lands on a web page first and drops the text.
+  // Rendered like the Medical aid page: header, a sticky pill bar with one pill per
+  // thing (each has its own #anchor), a hero card with the total, then every
+  // thing as its own section with its options showing. 🤔/✕ come from decide.js.
+  const BOT = 'babybeanbot', SENT = 'nest_sent', ROOM = document.body.dataset.room;
   const tg = t => 'tg://resolve?domain=' + BOT + '&text=' + encodeURIComponent(t);
   const web = 'https://t.me/' + BOT;
   const copy = t => {
@@ -41,78 +42,80 @@ const BOUGHT={
   const go = (key, text) => { const s = sent(); s[key] = 1; localStorage.setItem(SENT, JSON.stringify(s)); copy(text); showToast(text); window.location.href = tg(text); };
   const esc = x => String(x == null ? '' : x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
   const num = p => { const m = String(p).replace(/,/g,'').match(/\d+/); return m ? +m[0] : 0; };
-  function optHTML(it, o) {
+  const fmt = n => 'R' + n.toLocaleString('en-ZA').replace(/\s/g, ',');
+  const slug = t => t.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const short = t => t.split(/[,(]/)[0].trim();
+  const pickOf = it => { const o = it.o || []; return o.find(x => x.pick) || (o.length === 1 ? o[0] : null); };
+  const pickPrice = it => { if (it.price) return num(it.price); const pk = pickOf(it); return pk ? num(pk.p) : 0; };
+  const mine = list => list.filter(g => g.g === ROOM).flatMap(g => g.items);
+  const need = mine(NEED), maybe = mine(MAYBE), bought = BOUGHT[ROOM] || [];
+  const room = ROOMS.find(r => r.g === ROOM) || { ic: '' };
+
+  const optHTML = (it, o) => {
     const key = it.name + ' — ' + o.n, on = sent()[key];
-    return `<div class="opt ${o.pick ? 'pick' : ''}">
+    return `<div class="opt ${o.pick ? 'pick' : ''}" data-dk="${esc(ROOM + '|' + it.name + '|' + o.n)}" data-dl="${esc(short(it.name) + ': ' + o.n + ' (' + o.p + ', ' + o.s + ')')}" data-st="${esc(o.st || '')}">
       <div class="ot">${esc(o.t || (o.pick ? '⭐ Pick' : ''))}</div>
       <div class="on">${esc(o.n)}</div>
       <div class="opr">${esc(o.p)} <small>· ${esc(o.s)}${o.c ? ' · checked ' + esc(o.c) : ''}</small></div>
       ${o.w ? `<p class="ow">${o.w}</p>` : ''}${o.f ? `<p class="of">⚠️ ${o.f}</p>` : ''}
       <div class="acts">${o.u ? `<a class="op" href="${esc(o.u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}<button type="button" class="got ${on ? 'sent' : ''}" data-k="${esc(key)}">${on ? '✓ Sent' : '✓ Bought this'}</button></div>
+      <div class="dec"></div>
     </div>`;
-  }
-  const fmt = n => 'R' + n.toLocaleString('en-ZA').replace(/\s/g, ',');
-  function itemHTML(it) {
-    const ps = (it.o || []).map(o => num(o.p)).filter(Boolean);
-    const pr = it.price || (ps.length ? (Math.min(...ps) === Math.max(...ps) ? fmt(Math.min(...ps)) : 'from ' + fmt(Math.min(...ps))) : '');
-    const n = (it.o || []).length, pk = (it.o || []).find(o => o.pick);
-    const meta = [pr ? `<span class="ipr">${esc(pr)}</span>` : '', n ? n + ' option' + (n > 1 ? 's' : '') : '', it.sub ? esc(it.sub) : (n ? '' : 'Tell me more')].filter(Boolean).join(' · ');
-    return `<details class="item ${it.cls || ''}">
-      <summary><span class="iic">${it.ic}</span><span class="ist"><b>${esc(it.name)}</b><span class="imeta">${meta}</span>${pk && n > 1 ? `<span class="ipick">${esc(pk.n)}</span>` : ''}</span></summary>
-      <div class="ibd">
-        ${it.note ? `<p class="inote">${it.note}</p>` : ''}
-        ${n ? `<div class="opts">${it.o.map(o => optHTML(it, o)).join('')}</div>` : ''}
-        <div class="iacts">${n ? '' : `<button type="button" data-done="${esc(it.name)}">✓ Got it</button>`}<button type="button" data-more="${esc(it.name)}">🔎 More options</button><button type="button" data-skip="${esc(it.name)}">✕ Don't need it</button></div>
-      </div>
-    </details>`;
-  }
-  const TINT = { 'Lounge': ['🛋️', '--home-soft'], 'Bedroom': ['🛏️', '--car-soft'], 'Kitchen + dining': ['🍳', '--amber-soft'], 'Office + streaming': ['💻', '--baby-soft'], 'Laundry': ['🧺', '--surface-2'] };
-  const slug = g => 'room-' + g.toLowerCase().replace(/[^a-z]+/g, '-').replace(/-$/, '');
-  const pickPrice = it => { if (it.price) return num(it.price); const o = it.o || [], pk = o.find(x => x.pick) || (o.length === 1 ? o[0] : null); return pk ? num(pk.p) : 0; };
-  const paint = (el, list, ids) => { el.innerHTML = list.map(g => {
-    const t = TINT[g.g] || ['', '--surface-2'], tot = g.items.reduce((a, it) => a + pickPrice(it), 0);
-    const head = g.g ? `<div class="chap-h"><span class="ct">${t[0]}</span><h3>${esc(g.g)}</h3><span class="cs">${g.items.length} thing${g.items.length > 1 ? 's' : ''}${tot ? '<br>~' + fmt(tot) : ''}</span></div>` : '';
-    return `<section class="chap"${ids && g.g ? ` id="${slug(g.g)}"` : ''} style="--t: var(${t[1]})">${head}<div class="items">${g.items.map(itemHTML).join('')}</div></section>`;
-  }).join(''); };
-  document.querySelectorAll('li[data-ask]').forEach(li => {
-    const name = li.dataset.ask, verb = li.dataset.done || 'Bought';
-    const acts = document.createElement('span'); acts.className = 'acts';
-    if (li.dataset.url) acts.innerHTML = '<a class="op" href="' + esc(li.dataset.url) + '" target="_blank" rel="noopener">Open ↗</a>';
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'got' + (sent()[name] ? ' sent' : '');
-    b.textContent = sent()[name] ? '✓ Sent' : (verb === 'Bought' ? '✓ Got it' : verb === 'Paid' ? '✓ Paid' : "✓ It's here");
-    b.addEventListener('click', () => { b.classList.add('sent'); b.textContent = '✓ Sent'; go(name, '✅ ' + verb + ': ' + name); });
-    acts.appendChild(b); li.querySelector('.tx').appendChild(acts);
-  });
-  const box = document.getElementById('addtxt');
-  document.querySelectorAll('.qchips button').forEach(c => c.addEventListener('click', () => { box.value = (box.value.trim() ? box.value.replace(/\s*$/, '') + '\n' : '') + c.dataset.q; box.focus(); }));
-  document.getElementById('addsend').addEventListener('click', () => { const t = box.value.trim(); if (!t) { box.focus(); return; } go('add:' + t, '🛒 Add to ' + document.body.dataset.room + ':\n' + t); });
-  const ROOM = document.body.dataset.room;
-  const mine = list => list.filter(g => g.g === ROOM).map(g => Object.assign({}, g, { g: '' }));
-  const need = mine(NEED), maybe = mine(MAYBE);
-  document.getElementById('rooms').innerHTML = ROOMS.map(r => `<a href="${r.href}"${r.g === ROOM ? ' aria-current="page"' : ''}>${r.ic} ${esc(r.g)} <span class="n">${(NEED.find(g => g.g === r.g) || { items: [] }).items.length}</span></a>`).join('') + '<a href="recovery.html">💛 Post-pregnancy</a>';
-  paint(document.getElementById('need'), need);
-  if (maybe.length) paint(document.getElementById('maybe'), maybe); else document.getElementById('maybe-wrap').remove();
-  const bl = BOUGHT[ROOM] || [];
-  document.getElementById('boughtlist').innerHTML = bl.length ? bl.join('') : '<li><span class="ic">·</span><span class="tx">Nothing bought for this room yet.</span></li>';
-  const spent = bl.reduce((a, l) => a + num((l.match(/class="pr">([^<]*)/) || [, ''])[1]), 0);
+  };
+  const itemHTML = it => {
+    const n = (it.o || []).length, pr = pickPrice(it);
+    const sub = [n ? n + ' option' + (n > 1 ? 's' : '') : '', it.price ? esc(it.price) : '', it.sub ? esc(it.sub) : ''].filter(Boolean).join(' · ');
+    return `<div class="sec" id="${slug(short(it.name))}"><h2>${it.ic} ${esc(it.name)}</h2>
+      <p>${sub ? `<span class="isub">${sub}</span>` : ''}${it.note ? ' ' + it.note : ''}${!n && !it.note ? ' No options yet. Tap 🔎 and I\'ll find some.' : ''}</p></div>
+      ${n ? `<div class="opts">${it.o.map(o => optHTML(it, o)).join('')}</div>` : ''}
+      <div class="iacts">${n ? '' : `<button type="button" data-done="${esc(it.name)}">✓ Got it</button>`}<button type="button" data-more="${esc(it.name)}">🔎 More options</button><button type="button" data-skip="${esc(it.name)}">✕ Don't need it</button></div>`;
+  };
+
+  // sticky pill bar
+  const pills = need.map(it => `<a href="#${slug(short(it.name))}">${it.ic} ${esc(short(it.name))}</a>`)
+    .concat(maybe.length ? ['<a href="#maybe-sec">🤔 Only if needed</a>'] : [], ['<a href="#bought-sec">✅ Bought</a>'],
+      ROOMS.filter(r => r.g !== ROOM).map(r => `<a href="${r.href}">${r.ic} ${esc(r.g.split(' ')[0])} →</a>`), ['<a href="recovery.html">💛 Post-pregnancy →</a>']);
+  document.getElementById('jump').innerHTML = pills.join('');
+
+  // hero
+  const tot = need.reduce((a, it) => a + pickPrice(it), 0), unpriced = need.filter(it => !pickPrice(it)).length;
+  const spent = bought.reduce((a, l) => a + num((l.match(/class="pr">([^<]*)/) || [, ''])[1]), 0);
+  document.getElementById('hero').innerHTML = `
+    <div class="lbl">${room.ic} ${esc(ROOM)} · still to spend</div>
+    <div class="big">~${fmt(tot)} <small>to go</small></div>
+    <div class="bigsub">${need.length} thing${need.length === 1 ? '' : 's'} left${unpriced ? ' (' + unpriced + ' not priced yet)' : ''}. ${spent ? fmt(spent) + ' already bought for this room. ' : ''}Rough, using the ⭐ picks.</div>
+    <div class="trio">${need.map(it => { const pk = pickOf(it), p = pickPrice(it);
+      return `<a href="#${slug(short(it.name))}"><span class="ic">${it.ic}</span><span><b>${esc(short(it.name))}</b><small>${pk ? '⭐ ' + esc(pk.n) : (it.sub ? esc(it.sub) : 'No pick yet')}</small></span><span class="v">${p ? fmt(p) : '—'}</span></a>`; }).join('')}</div>`;
+
+  document.getElementById('need').innerHTML = need.map(itemHTML).join('');
+  if (maybe.length) document.getElementById('maybe').innerHTML = maybe.map(itemHTML).join(''); else document.getElementById('maybe-wrap').remove();
+  document.getElementById('boughtlist').innerHTML = bought.length ? bought.join('') : '<li><span class="ic">·</span><span class="tx">Nothing bought for this room yet.</span></li>';
   document.getElementById('spentsum').textContent = spent ? fmt(spent) : '—';
 
-  const NEEDTOT = '~' + fmt(need.reduce((a, g) => a + g.items.reduce((b, it) => b + pickPrice(it), 0), 0));
-  document.getElementById('needsum').textContent = NEEDTOT;
-  const needN = need.reduce((a, g) => a + g.items.length, 0), boughtN = bl.length;
-  document.getElementById('st-need').textContent = NEEDTOT;
-  const unpriced = need.reduce((a, g) => a + g.items.filter(it => !pickPrice(it)).length, 0);
-  document.getElementById('st-needn').textContent = needN + ' things left' + (unpriced ? ' · ' + unpriced + ' not priced yet' : '');
-  document.getElementById('needsub').textContent = 'rough, using the ⭐ picks' + (unpriced ? '. ' + unpriced + ' things have no price yet' : '');
-  document.getElementById('st-spent').textContent = document.getElementById('spentsum').textContent;
-  document.getElementById('st-spentn').textContent = boughtN + ' things bought';
-  document.getElementById('j-need').textContent = needN;
-  document.getElementById('j-bought').textContent = boughtN;
+  const box = document.getElementById('addtxt');
+  document.querySelectorAll('.qchips button').forEach(c => c.addEventListener('click', () => { box.value = (box.value.trim() ? box.value.replace(/\s*$/, '') + '\n' : '') + c.dataset.q; box.focus(); }));
+  document.getElementById('addsend').addEventListener('click', () => { const t = box.value.trim(); if (!t) { box.focus(); return; } go('add:' + t, '🛒 Add to ' + ROOM + ':\n' + t); });
   document.addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b) return;
+    const b = e.target.closest('button'); if (!b || b.closest('.dec')) return;
     if (b.dataset.k) { b.classList.add('sent'); b.textContent = '✓ Sent'; go(b.dataset.k, '✅ Bought: ' + b.dataset.k); }
     else if (b.dataset.done) go(b.dataset.done, '✅ Bought: ' + b.dataset.done);
     else if (b.dataset.more) go('more:' + b.dataset.more, '🔎 More options please: ' + b.dataset.more);
     else if (b.dataset.skip) go('skip:' + b.dataset.skip, "✕ Don't need: " + b.dataset.skip);
   });
+
+  // same as Medical aid: sticky offsets follow the nav, the pill in view lights up
+  const nav = document.querySelector('.nav'), jump = document.getElementById('jump');
+  const setNav = () => document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px');
+  setNav(); window.addEventListener('resize', setNav);
+  const links = [...jump.querySelectorAll('a[href^="#"]')], secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  let cur = null;
+  const mark = () => {
+    const y = nav.offsetHeight + jump.offsetHeight + 20; let k = 0;
+    secs.forEach((s, j) => { if (s && s.getBoundingClientRect().top <= y) k = j; });
+    if (k === cur) return; cur = k;
+    links.forEach((a, j) => a.classList.toggle('on', j === k));
+    const a = links[k]; if (a) jump.scrollTo({ left: a.offsetLeft - jump.clientWidth / 2 + a.offsetWidth / 2, behavior: 'smooth' });
+  };
+  window.addEventListener('scroll', mark, { passive: true }); mark();
+  if (location.hash) { const t = document.querySelector(location.hash); if (t) setTimeout(() => t.scrollIntoView(), 50); }
 })();

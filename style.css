@@ -191,3 +191,18 @@ h1 em { font-style: normal !important; color: var(--ink) !important; background:
 .hb,.vb,.badge,.tier { border-radius: 999px !important; border: 1.5px solid currentColor; }
 .modes .in a { border: 0 !important; box-shadow: none !important; }
 .modes .in a[aria-current="true"] { background: var(--accent) !important; color: var(--surface) !important; }
+
+/* --- 14 Nov: 🤔 Consider / ✕ Reject (decide.js), replaces ♡ Save --- */
+.dec { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.dec button { font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface-2); color: var(--ink); }
+.dec button[data-dv="consider"].on { background: var(--amber-soft); border-color: var(--amber); color: var(--ink); }
+.dec button[data-dv="reject"].on { background: var(--surface-2); border-color: var(--ink-soft); color: var(--ink-soft); }
+.is-consider { box-shadow: inset 0 0 0 2px var(--amber) !important; }
+.is-consider::before { content: "🤔 CONSIDERING"; display: block; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--amber); margin-bottom: 6px; }
+.is-reject { order: 99; opacity: .45; }
+.is-reject::before { content: "✕ REJECTED"; display: block; font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 700; letter-spacing: .06em; color: var(--ink-soft); margin-bottom: 6px; }
+.is-reject .ow, .is-reject .of, .is-reject .lc-why, .is-reject .lc-warn, .is-reject p { display: none; }
+.dectray { position: fixed; left: 12px; right: 12px; bottom: 14px; z-index: 40; max-width: 560px; margin: 0 auto; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 16px; border-radius: 18px; background: var(--ink); color: var(--surface); box-shadow: var(--shadow); font-weight: 700; font-size: 14px; }
+.dectray.on { display: flex; }
+.dectray small { display: block; font-weight: 500; font-size: 11.5px; opacity: .75; }
+.dectray .send { font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; border: 0; border-radius: 999px; min-height: 44px; padding: 0 16px; background: var(--accent); color: #fff; white-space: nowrap; }
