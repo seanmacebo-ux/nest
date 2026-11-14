@@ -32,6 +32,13 @@
     panel.appendChild(a);
   });
 
+  // Mishka's recovery lives inside Shopping; give it its own tile so it's one tap away.
+  const rec = document.createElement('a');
+  rec.href = 'list.html#recovery-sec';
+  rec.className = 'navtile';
+  rec.innerHTML = '<span class="ni" aria-hidden="true">💛</span><span>Mishka\'s recovery</span>';
+  panel.prepend(rec);
+
   inner.querySelector('.brandmark').after(btn);
   nav.appendChild(panel);
   nav.classList.add('js-menu');
