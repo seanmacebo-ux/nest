@@ -1,0 +1,232 @@
+{
+ "slug": "money",
+ "title": "Money",
+ "emoji": "💸",
+ "intro": "Money follows a few simple rules: interest, inflation and fees. Learn those, and banks, car dealers and influencers lose their edge over you. Everything here uses South African figures checked in November 2026.",
+ "sections": [
+  {
+   "title": "How money moves",
+   "points": [
+    "Interest is the price of borrowing money. When you borrow, you pay it. When you save, you earn it.",
+    "Compound interest means you earn interest on your interest. R1,000 a month at 10% a year grows to about R759,000 after 20 years. You only put in R240,000.",
+    "Inflation (prices rising over time) quietly eats cash. Money sitting in a 0% account loses buying power every year.",
+    "Banks make money on the spread (the gap between what they pay savers and what they charge borrowers), plus fees.",
+    "The repo rate is the rate the Reserve Bank (SARB) charges banks. Prime is the base rate banks lend at, normally repo plus 3.5 points.",
+    "In September 2026 the SARB raised repo to 7.25%, so prime went to 10.75%. Most home and car loans are priced as prime plus or minus something, so your instalment moves when the SARB moves."
+   ]
+  },
+  {
+   "title": "Debt: friend or trap",
+   "points": [
+    "Good debt buys something that grows or earns, like a home or a skill. Bad debt buys things that lose value fast, like clothes on store credit.",
+    "Your credit score is a number bureaus (companies that keep your borrowing history) give you. It drives the interest rate a bank offers you.",
+    "By law you get a free credit report from each credit bureau every year. TransUnion and Experian both offer this online.",
+    "If your report has a mistake, you can dispute it with the bureau that issued it, for free.",
+    "Paying on time every month matters most. Keep credit card and store card balances low compared to their limits.",
+    "The National Credit Act (NCA) is the law that governs lending. Only borrow from lenders registered with the National Credit Regulator (NCR)."
+   ]
+  },
+  {
+   "title": "Growing money",
+   "points": [
+    "Step one is an emergency fund (cash for surprises, like a job loss or a car repair). Aim for 3 to 6 months of expenses in a separate savings account.",
+    "A Tax-Free Savings Account (TFSA) lets your money grow with no tax on interest, dividends or growth. From 1 March 2026 the limit is R46,000 a year and R500,000 in your lifetime, per person.",
+    "Go over the TFSA limit and SARS charges 40% tax on the excess. Unused yearly space is lost, it does not carry over.",
+    "A retirement annuity (RA, a personal retirement fund) is tax-deductible. You can deduct up to 27.5% of your income, capped at R430,000 a year from March 2026.",
+    "Under the two-pot system (since September 2024), one-third of new retirement contributions goes to a savings pot. You can withdraw from it once per tax year, minimum R2,000, taxed at your marginal rate (the tax rate on your top slice of income).",
+    "Low-cost index funds and ETFs (exchange-traded funds, which buy a whole market in one go) beat most expensive funds over time. Fees matter: R1,000 a month for 30 years grows to about R1.83m at 9% a year, but only R1.35m at 7.5%."
+   ]
+  },
+  {
+   "title": "Housing: rent vs buy",
+   "points": [
+    "Renting is not 'dead money'. A bond also has dead money: interest, rates, levies, insurance and repairs.",
+    "A R1.2m bond over 20 years at prime (10.75%) costs about R12,180 a month. Compare that full cost to your rent, not just the price tag.",
+    "Transfer duty (a tax on buying property) is 0% on homes up to R1,210,000 for 2026/27. You still pay bond registration and conveyancing (legal transfer) fees.",
+    "A deposit lowers your loan and often gets you a better rate. Banks check your income, expenses, credit record and existing debts.",
+    "Bond originators like ooba and BetterBond send one application to several banks so they compete for you. ooba's service is free to you.",
+    "First Home Finance (formerly FLISP) is a once-off government subsidy for first-time buyers with household income of R3,501 to R22,000 a month. If you earn above that together, you will not qualify."
+   ]
+  },
+  {
+   "title": "Cars and car loans",
+   "points": [
+    "A car loses value from day one. Treat it as a cost, not an investment.",
+    "Vehicle finance uses the car as security, so it is usually cheaper than an unsecured personal loan.",
+    "Small rate gaps add up. A R250,000 car over 72 months costs about R4,730 a month at 10.75%, and about R4,990 at 12.75%. That gap is roughly R19,000 over the loan.",
+    "A balloon payment (a big lump sum you owe at the end) lowers the monthly instalment but costs more. With a 30% balloon at 12.75%, the instalment drops to about R4,290, but the total rises to about R384,000.",
+    "Total cost of ownership is instalment plus insurance, fuel, services, tyres and tolls. Budget for all of it before you choose a car.",
+    "A bigger deposit, a shorter term, no balloon and a clean credit report are what get you a better deal by Q2 2027."
+   ]
+  },
+  {
+   "title": "Building your own thing",
+   "points": [
+    "Side income is taxable. SARS counts it together with your salary.",
+    "For 2026/27, you pay no income tax under 65 if your total taxable income is below R99,000.",
+    "If you earn income that is not salary, SARS treats you as a provisional taxpayer. That means you pay tax in advance, by the end of August and the end of February.",
+    "Keep records of what you earn and spend on the side hustle. Legitimate business costs can reduce the tax you owe.",
+    "You can register a company online with CIPC (the Companies and Intellectual Property Commission). Start as a sole trader first if it is small, and register a company once it grows.",
+    "Grow skills and income first. A raise or a client is worth far more than chasing a few extra percent on savings."
+   ]
+  }
+ ],
+ "do": [
+  "Pull your free TransUnion and Experian credit reports this month. Dispute any errors.",
+  "Open a separate emergency fund account. Automate a debit order on payday.",
+  "Write down your full monthly spending for 3 months before the car decision.",
+  "Save a car deposit now. Aim to finance with no balloon and a 60-month term or shorter.",
+  "Each of you open a TFSA with a low-cost index ETF once the emergency fund is in place.",
+  "Check what your employer's retirement fund charges in fees. Avoid two-pot withdrawals unless it is a real emergency.",
+  "Run the ooba bond and transfer cost calculator for a home you like, and compare it with your current rent."
+ ],
+ "ask": [
+  "What is the interest rate as prime plus or minus, and is it fixed or linked to prime?",
+  "What is the total amount I will repay over the full term, including all fees?",
+  "Is there a balloon or residual payment in this deal? Show me the quote without one.",
+  "What is the monthly service fee and initiation fee, and are they included in the instalment?",
+  "What credit life or insurance are you adding, and can I use my own cover instead?",
+  "What are the total annual fees on this fund (TER plus platform plus advice fees)?",
+  "Are you registered with the FSCA, and what is your FSP number?"
+ ],
+ "watch_out": [
+  "Forex and crypto 'mentors' selling courses or signals. Most earn from your fees and sign-ups, not from trading.",
+  "Guaranteed high returns are a lie. Real investments go up and down.",
+  "MLMs (multi-level marketing) where you profit by recruiting people, not by selling to real customers.",
+  "Deepfake videos of Ramaphosa, Motsepe or TV presenters promoting investments. The FSCA has warned about these.",
+  "Loan sharks (mashonisas) who want to keep your bank card or ID as security. Walk away.",
+  "High balloon payments that make a car look affordable. The lump sum does not go away.",
+  "Two-pot withdrawals for non-emergencies. You pay tax now and lose years of compound growth.",
+  "Paying a website for your credit report. You get one free from each bureau every year."
+ ],
+ "resources": [
+  {
+   "type": "article",
+   "title": "Tax-Free Investments",
+   "source": "SARS",
+   "url": "https://www.sars.gov.za/types-of-tax/personal-income-tax/tax-free-investments/",
+   "why": "Official TFSA limits (R46,000 a year, R500,000 lifetime) and the 40% penalty.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Rates of Tax for Individuals",
+   "source": "SARS",
+   "url": "https://www.sars.gov.za/tax-rates/income-tax/rates-of-tax-for-individuals/",
+   "why": "Current tax tables and the R99,000 tax-free threshold for side-income planning.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Free Credit Report",
+   "source": "TransUnion",
+   "url": "https://www.transunion.co.za/assistance/free-credit-report",
+   "why": "Get your free yearly report and dispute errors.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "FSP Search",
+   "source": "FSCA",
+   "url": "https://www.fsca.co.za/",
+   "why": "Check whether an adviser or investment firm is actually licensed before you pay anything.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "FSCA warning: These well-known people cannot help you to invest",
+   "source": "The Citizen",
+   "url": "https://www.citizen.co.za/business/personal-finance/fsca-warning-these-well-known-people-cannot-help-you-to-invest",
+   "why": "How deepfake investment scams work in SA.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Two-pot withdrawals: What you need to know",
+   "source": "Capitec",
+   "url": "https://www.capitecbank.co.za/personal/credit-hub/articles/planning-and-goals/two-pot-withdrawals-what-you-need-to-know/",
+   "why": "Plain explainer of the savings pot, the R2,000 minimum and the tax hit.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Just One Lap",
+   "source": "Simon Brown",
+   "url": "https://www.justonelap.com/",
+   "why": "Independent SA site on ETFs and tax-free investing, with a JSE ETF database.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "10X Investments",
+   "source": "10X",
+   "url": "https://www.10x.co.za/",
+   "why": "Low-fee index retirement annuities and TFSAs. Shows why fees matter.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "EasyEquities",
+   "source": "EasyEquities",
+   "url": "https://www.easyequities.co.za/",
+   "why": "Low-cost platform to buy ETFs in a TFSA with no minimums.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Bond and Transfer Costs Calculator",
+   "source": "ooba",
+   "url": "https://www.ooba.co.za/home-loan-calculators/bond-and-transfer-costs-calculator/",
+   "why": "See the real upfront cost of buying, beyond the deposit.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "First Home Finance",
+   "source": "NHFC",
+   "url": "https://www.nhfc.co.za/first-home-finance/",
+   "why": "Official criteria for the first-time buyer subsidy (formerly FLISP).",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Balloon payment warning for car buyers in South Africa",
+   "source": "BusinessTech",
+   "url": "https://businesstech.co.za/news/banking/777994/balloon-payment-warning-for-car-buyers-in-south-africa/",
+   "why": "Why balloon deals keep people paying for cars longer.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "CIPC",
+   "source": "Companies and Intellectual Property Commission",
+   "url": "https://www.cipc.co.za/",
+   "why": "Where you register a company when the side hustle grows.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "The Psychology of Money",
+   "source": "Morgan Housel",
+   "url": "https://www.harriman-house.com/psychologyofmoney",
+   "why": "Best book on money behaviour. Short chapters, no jargon.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "How to Make Your First Million",
+   "source": "Warren Ingram",
+   "url": "https://www.penguinrandomhouse.co.za/book/how-make-your-first-million/9781770227613",
+   "why": "SA financial planner on how ordinary South Africans built wealth.",
+   "verified": true
+  },
+  {
+   "type": "podcast",
+   "title": "Honest Money (podcast)",
+   "source": "Warren Ingram",
+   "url": "https://honestmoney.buzzsprout.com/807923",
+   "why": "350+ SA episodes on investing, retirement and money habits. No hype.",
+   "verified": true
+  }
+ ]
+}

@@ -1,0 +1,263 @@
+{
+ "slug": "body",
+ "title": "Body",
+ "emoji": "🫀",
+ "intro": "Four real things in our circle: Sean's eczema, his mom's blood pressure, his sister-in-law's acne, and what a blood test actually takes from you. Each one has treatments with solid evidence and a lot of noise around them. The goal is to know enough to ask sharp questions and spot hype.",
+ "sections": [
+  {
+   "title": "Eczema (Sean): what it is and the daily routine",
+   "points": [
+    "Eczema (atopic dermatitis) is two problems at once: a leaky skin barrier and an immune system that overreacts.",
+    "A weak barrier lets water out and irritants in. Many people carry gene changes (like filaggrin, a skin-building protein) that make the barrier thinner.",
+    "Itch leads to scratching, which damages skin more, which itches more. Breaking that loop is the whole game.",
+    "Moisturisers (emollients) are the base treatment, not an extra. The NHS says use them at least twice a day, generously, even when skin looks clear.",
+    "Soak and seal: short lukewarm bath or shower, pat dry, then put moisturiser on within about 3 minutes so it locks the water in.",
+    "Common triggers: soap and bubble bath, sweat, heat, wool, stress, dust mites, and fragranced products. Swap soap for an emollient wash."
+   ]
+  },
+  {
+   "title": "Eczema (Sean): medicines that work, and diet myths",
+   "points": [
+    "Steroid creams (topical corticosteroids) calm flares fast. Used in the right strength, for short bursts, they are safe. Fear of them often causes under-treatment.",
+    "Dose by fingertip unit (a line of cream from fingertip to first crease). One unit covers about two adult palms of skin.",
+    "Calcineurin inhibitors (tacrolimus, pimecrolimus) are steroid-free creams. They are good for the face, eyelids and folds where steroids thin the skin.",
+    "For severe eczema, a dermatologist can offer injections (biologics like dupilumab) or tablets (JAK inhibitors). These work well but are costly in SA, so check your medical aid.",
+    "Diet: the NHS says do not cut out foods unless a doctor tells you to. Food allergy matters more in babies; in adults, elimination diets rarely help and can backfire.",
+    "Real evidence: a Cochrane review found moisturisers mean fewer flares and less steroid needed. Most 'miracle' creams were no better than a plain one."
+   ]
+  },
+  {
+   "title": "High blood pressure (Sean's mom): the numbers and why it's silent",
+   "points": [
+    "Blood pressure has two numbers. The top (systolic) is pressure when the heart squeezes. The bottom (diastolic) is pressure when it rests.",
+    "Healthy is roughly 90/60 to 120/80. High is 140/90 or more at a clinic, or 135/85 or more at home (NHS).",
+    "It is called silent because most people feel nothing. WHO says about 44% of adults with high blood pressure do not know they have it.",
+    "Over years, high pressure damages arteries, which leads to stroke, heart attack, kidney failure and dementia. Treatment cuts those risks.",
+    "South Africans eat about 6 to 11 g of salt a day. WHO's limit is under 5 g, about one teaspoon. Much of it hides in bread, stock cubes, processed meat and takeaways.",
+    "SA law has capped salt in processed foods since 2016, which helped, but home cooking and stock cubes still add a lot."
+   ]
+  },
+  {
+   "title": "High blood pressure: what actually lowers it",
+   "points": [
+    "DASH (Dietary Approaches to Stop Hypertension) is an eating plan with lots of vegetables, fruit, beans, whole grains and low-fat dairy, and less salt and fatty meat. Trials show it lowers pressure.",
+    "Exercise helps: aim for about 150 minutes a week of brisk walking or similar.",
+    "Alcohol raises blood pressure. Cutting down helps; heavy drinking is a big driver.",
+    "Home checks need a validated upper-arm machine (one tested for accuracy; check the STRIDE BP list). Sit 5 minutes, arm at heart level, take 2 readings morning and evening for a week.",
+    "Pills matter. Most people need them for life. Stopping because you feel fine can make pressure bounce back up, because feeling fine was never the sign.",
+    "Emergency signs: very high readings (around 180/120) with chest pain, severe headache, confusion, vision loss or weakness. Face drooping or slurred speech means stroke. Call 112 from a mobile or 10177."
+   ]
+  },
+  {
+   "title": "Acne (sister-in-law): causes, what works, myths and scars",
+   "points": [
+    "Acne starts when oil (sebum) and dead skin clog a pore, bacteria (C. acnes) grow, and the spot gets inflamed. Hormones drive the oil. It is not caused by dirty skin.",
+    "First line: benzoyl peroxide (kills bacteria, no resistance) and retinoids like adapalene (unclog pores). Start thin, every other night, and give it 8 to 12 weeks. Azelaic acid is gentler and fades dark marks.",
+    "Antibiotics should never be used alone or long-term. NICE says pair them with benzoyl peroxide or a retinoid and review by about 3 months to limit resistance.",
+    "For women, the combined pill or spironolactone can help. Severe or scarring acne needs a dermatologist for isotretinoin, which works very well but needs strict pregnancy prevention and monitoring.",
+    "Diet: modest evidence that high-GI foods (sugary, white-flour foods that spike blood sugar) and milk, especially skim, worsen acne in some people. Chocolate alone has weak evidence. It's a nudge, not a cure.",
+    "Picking causes scars; early treatment prevents them. Dark marks (post-inflammatory hyperpigmentation) fade over months with sunscreen. Pitted scars need dermatologist procedures."
+   ]
+  },
+  {
+   "title": "Drawing blood: how much, how fast it comes back, how to read it",
+   "points": [
+    "An adult has about 5 litres of blood (about 8% of body weight). A test tube holds about 2 to 10 ml, so a normal panel of a few tubes is well under 1% of your blood.",
+    "A full donation is much bigger: SANBS takes 480 ml, about 10%. Even that is safe for healthy adults.",
+    "Plasma (the watery part of blood) comes back within a day or two if you drink fluids. Red cells take weeks; haemoglobin is usually back to normal in 6 to 12 weeks.",
+    "Draws matter when blood is already low: anaemia (too few red cells or low haemoglobin), babies, and long hospital stays where daily tests can add up.",
+    "FBC (full blood count) basics: haemoglobin (oxygen carrier), MCV (red cell size: small often means low iron, big can mean low B12 or folate), white cells (infection and immunity), platelets (clotting).",
+    "Reference ranges cover about 95% of healthy people, so a slightly flagged result is not automatically a problem. Trends over time and how you feel matter more."
+   ]
+  }
+ ],
+ "do": [
+  "Sean: keep a big tub of plain emollient (about R130 for 400 g at Dis-Chem) by the shower and moisturise straight after every wash.",
+  "Sean: at the first sign of a flare, use the prescribed steroid cream for a short burst, then step down. Don't wait it out.",
+  "Buy Sean's mom a validated upper-arm BP monitor (check the model on STRIDE BP) and log a week of morning and evening readings for her doctor.",
+  "Cut salt at home: taste before salting, use fewer stock cubes, and read bread and processed-meat labels.",
+  "For acne: start benzoyl peroxide or adapalene thin, every other night, and stick with it for 12 weeks before switching.",
+  "Ask for a copy of every blood test result and keep them in one folder so you can see trends."
+ ],
+ "ask": [
+  "Which strength of steroid cream should I use, on which body parts, and for how many days?",
+  "Is my eczema bad enough for a dermatologist, or for biologic or JAK treatment, and does my medical aid cover it?",
+  "What is my mom's target blood pressure, and how should she time her pills?",
+  "Could any of her other medicines (like anti-inflammatory painkillers) be pushing her blood pressure up?",
+  "Is this acne bad enough for isotretinoin, and what monitoring would that need?",
+  "Which of my blood results are out of range, by how much, and do they need retesting?"
+ ],
+ "watch_out": [
+  "Myth: steroid creams always thin your skin. Short courses at the right strength are safe; under-treating eczema causes more harm.",
+  "Red flag: eczema that suddenly weeps, crusts or forms painful clustered blisters, with fever. That can be infection or eczema herpeticum and needs a doctor the same day.",
+  "Myth: 'I feel fine, so I can stop my blood pressure pills.' High pressure has no feeling. Never stop without the doctor.",
+  "Red flag: severe headache, chest pain, sudden vision change, face drooping or slurred speech. Call 112 or 10177 now.",
+  "Myth: acne comes from dirty skin, and toothpaste or lemon juice fixes spots. Both irritate and can darken marks.",
+  "Hype: 'detox' teas, eczema 'cures' and supplements sold online. If it promises to cure eczema or blood pressure, be sceptical.",
+  "Wrist and finger BP gadgets and smartwatches are often inaccurate. Use a validated upper-arm cuff."
+ ],
+ "resources": [
+  {
+   "type": "article",
+   "title": "Atopic eczema",
+   "source": "NHS",
+   "url": "https://www.nhs.uk/conditions/atopic-eczema/",
+   "why": "Clear basics, triggers, treatments and when to see a doctor.",
+   "topic": "eczema",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Emollients",
+   "source": "Eczema.org (UK national eczema charity)",
+   "url": "https://eczema.org/information-and-advice/treatments-for-eczema/emollients/",
+   "why": "Deep, practical guide to choosing and using moisturisers.",
+   "topic": "eczema",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Emollients and moisturisers for eczema",
+   "source": "Cochrane",
+   "url": "https://www.cochrane.org/CD012119",
+   "why": "The evidence summary: moisturisers mean fewer flares; fancy ones aren't clearly better.",
+   "topic": "eczema",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "What is Eczema? Atopic Dermatitis Explained by a Dermatologist",
+   "source": "Allergy & Asthma Network (YouTube)",
+   "url": "https://www.youtube.com/watch?v=mQ73EpeenGk",
+   "why": "Short explainer on the barrier and immune sides of eczema.",
+   "topic": "eczema",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Epi-max Cream 400g",
+   "source": "Dis-Chem",
+   "url": "https://www.dischem.co.za/epi-max-cream-400g",
+   "why": "Cheap, plain SA emollient; about R130 (R117 on special) in Nov 2026.",
+   "topic": "eczema",
+   "verified": true
+  },
+  {
+   "type": "place",
+   "title": "Heart and Stroke Foundation South Africa",
+   "source": "HSFSA",
+   "url": "https://www.heartfoundation.co.za/",
+   "why": "SA-specific heart health, salt advice and the Heart Mark food logo.",
+   "topic": "bp",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "High blood pressure",
+   "source": "NHS",
+   "url": "https://www.nhs.uk/conditions/high-blood-pressure/",
+   "why": "What the numbers mean, clinic vs home thresholds, and lifestyle steps.",
+   "topic": "bp",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Blood pressure chart: What your reading means",
+   "source": "Mayo Clinic",
+   "url": "https://www.mayoclinic.org/diseases-conditions/high-blood-pressure/in-depth/blood-pressure/art-20050982",
+   "why": "Simple chart to place any reading in a category.",
+   "topic": "bp",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "DASH Eating Plan",
+   "source": "NHLBI (US National Heart, Lung, and Blood Institute)",
+   "url": "https://www.nhlbi.nih.gov/education/dash-eating-plan",
+   "why": "The original DASH plan from the people who ran the trials.",
+   "topic": "bp",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "STRIDE BP validated monitor lists",
+   "source": "STRIDE BP",
+   "url": "https://www.stridebp.org/",
+   "why": "Check a BP machine is accuracy-tested before buying.",
+   "topic": "bp",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "How to measure your blood pressure at home",
+   "source": "British Heart Foundation (YouTube)",
+   "url": "https://www.youtube.com/watch?v=wKCa9g0ob7k",
+   "why": "Two-minute walkthrough of getting an accurate home reading.",
+   "topic": "bp",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Acne",
+   "source": "NHS",
+   "url": "https://www.nhs.uk/conditions/acne/",
+   "why": "Plain overview of causes, pharmacy options and prescription treatments.",
+   "topic": "acne",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Acne",
+   "source": "DermNet (dermatologist-written, NZ)",
+   "url": "https://dermnetnz.org/topics/acne",
+   "why": "Deeper detail on hormones, diet evidence, isotretinoin and scars.",
+   "topic": "acne",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "How to apply topical acne medication",
+   "source": "American Academy of Dermatology (YouTube)",
+   "url": "https://www.youtube.com/watch?v=Kh6I5eXtgSc",
+   "why": "One-minute guide to using creams right so they work and irritate less.",
+   "topic": "acne",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "The Skincare Bible",
+   "source": "Dr Anjali Mahto, consultant dermatologist (Penguin)",
+   "url": "https://www.penguin.co.uk/books/308182/the-skincare-bible-by-mahto-anjali/9780241309100",
+   "why": "No-nonsense skin book with a strong acne section and myth-busting.",
+   "topic": "acne",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "How your body replaces blood",
+   "source": "NHS Blood and Transplant",
+   "url": "https://www.blood.co.uk/the-donation-process/after-your-donation/how-your-body-replaces-blood/",
+   "why": "How plasma, red cells and iron recover after blood is taken.",
+   "topic": "blood",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Blood tests",
+   "source": "NHS",
+   "url": "https://www.nhs.uk/tests-and-treatments/blood-tests/",
+   "why": "What happens during a blood test and the common types.",
+   "topic": "blood",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Full blood count: what it tells your doctor about your health",
+   "source": "Pathology Tests Explained (YouTube)",
+   "url": "https://www.youtube.com/watch?v=HJO2ZmGtYHc",
+   "why": "Short, plain explainer of the most common blood test.",
+   "topic": "blood",
+   "verified": true
+  }
+ ]
+}

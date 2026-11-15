@@ -1,0 +1,109 @@
+/* Nest Learn: track pages + home. Built on The Nest's style.css so both apps look the same. */
+:root { --navh: 60px; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: calc(var(--navh) + 64px); }
+.lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* jump bar (same as Medical aid) */
+.jump { position: sticky; top: var(--navh); z-index: 15; margin: 22px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
+  background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+.jump::-webkit-scrollbar { display: none; }
+.jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; min-height: 36px; display: flex; align-items: center; }
+.jump a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+/* progress */
+.tprog { margin-top: 18px; max-width: 420px; }
+.tprog .bar { height: 8px; background: var(--surface-2); border-radius: 8px; overflow: hidden; margin-top: 5px; }
+.tprog .bar span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 8px; transition: width .4s ease; }
+.tprog .pc { display: block; color: var(--ink-soft); font-size: 12.5px; margin-top: 4px; }
+.tprog.mini { margin-top: 12px; max-width: none; }
+
+/* accordions (same as Medical aid) */
+.accs { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.acc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+.acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 14px 16px; min-height: 56px; -webkit-tap-highlight-color: transparent; }
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary::after { content: "+"; margin-left: auto; flex: none; font-family: "JetBrains Mono", monospace; font-size: 20px; font-weight: 600; color: var(--ink-soft); transition: transform .2s ease; }
+.acc[open] summary::after { transform: rotate(45deg); }
+.acc summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 14px; }
+.acc .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--good-soft); color: var(--good); font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 13px; display: grid; place-items: center; }
+.acc .st { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+.acc .st small { color: var(--ink-soft); font-size: 12.5px; }
+.acc .bd { padding: 0 16px 14px; font-size: 14.5px; border-top: 1px solid var(--line); }
+.pts { margin: 10px 0 0; padding-left: 18px; }
+.pts li { margin: 8px 0; }
+
+/* do / ask / watch */
+.checks { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.checks label { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; font-size: 14.5px; cursor: pointer; box-shadow: var(--shadow); }
+.checks input { flex: none; width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--good); }
+.checks input:checked + span { color: var(--ink-soft); text-decoration: line-through; }
+.asks { margin: 14px 0 0; padding: 14px 16px 14px 36px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); font-size: 14.5px; }
+.asks li { margin: 8px 0; }
+.warns { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.warns li { background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+.warns li::before { content: "⚠️ "; }
+
+/* resources */
+.filt { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.rlist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+@media (max-width: 700px) { .rlist { grid-template-columns: 1fr; } }
+.rc { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 14px 16px; display: flex; flex-direction: column; }
+.rc[hidden] { display: none; }
+.rtop { display: flex; gap: 12px; align-items: flex-start; }
+.ric { font-size: 22px; flex: none; }
+.rtx b { display: block; font-size: 15px; line-height: 1.35; }
+.rtx small { color: var(--ink-soft); font-size: 12.5px; }
+.rwhy { font-size: 13.5px; margin: 8px 0 0; color: var(--ink); }
+.racts { display: flex; gap: 8px; margin-top: auto; padding-top: 12px; }
+.racts a, .racts button { font: inherit; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; border-radius: 10px; padding: 0 14px; min-height: 40px; display: inline-flex; align-items: center; }
+.racts .op { color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); }
+.racts .done { color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); }
+.rc.is-done { border-color: var(--good); }
+.rc.is-done .done { color: var(--surface); background: var(--good); border-color: var(--good); }
+
+/* home */
+.tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
+@media (max-width: 900px) { .tgrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .tgrid { grid-template-columns: 1fr; } }
+.tcard { text-decoration: none; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.tcard .tic { font-size: 30px; line-height: 1; }
+.tcard b { font-family: "Bricolage Grotesque", serif; font-size: 22px; margin-top: 6px; }
+.tcard small { color: var(--ink-soft); font-size: 13.5px; }
+.tcard .tmeta { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--ink-soft); margin-top: 8px; }
+
+.lfoot { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px,4vw,40px) 40px; color: var(--ink-soft); font-size: 12.5px; }
+.lfoot a { color: var(--accent); font-weight: 600; }
+
+/* match The Nest's Playful Bold cards */
+.tcard,.rc,.asks,.checks label { border-radius: 22px !important; border: 2px solid var(--ink) !important; box-shadow: 4px 4px 0 var(--accent) !important; }
+.rc.is-done { box-shadow: 4px 4px 0 var(--good) !important; }
+  .addbox { background: var(--surface); border: 2px solid var(--accent); border-radius: 18px; padding: 18px; box-shadow: var(--shadow); margin-top: 22px; }
+  .addbox h3 { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 20px; margin: 0; }
+  .addbox p { margin: 6px 0 0; font-size: 13.5px; color: var(--ink-soft); }
+  .addbox textarea { width: 100%; margin-top: 12px; min-height: 84px; resize: vertical; font: inherit; font-size: 16px; color: var(--ink); background: var(--ground); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .addbox textarea:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .qchips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .qchips button { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 20px; padding: 0 12px; min-height: 36px; }
+  .sendbtn { margin-top: 12px; width: 100%; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; color: var(--surface); background: var(--accent); border: 0; border-radius: 12px; min-height: 48px; }
+  .how { font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; }
+  details.addbox { padding: 0; border-width: 1.5px; box-shadow: none; margin-top: 14px; }
+  details.addbox > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; padding: 12px 16px; min-height: 56px; }
+  details.addbox > summary::-webkit-details-marker { display: none; }
+  details.addbox > summary .pl { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: var(--surface); display: grid; place-items: center; font-size: 20px; font-weight: 600; transition: transform .2s ease; }
+  details.addbox[open] > summary .pl { transform: rotate(45deg); }
+  details.addbox > summary b { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 18px; display: block; }
+  details.addbox > summary small { color: var(--ink-soft); font-size: 12.5px; }
+  details.addbox .abd { padding: 0 16px 16px; }
+  .qchips button, .acts a, .acts button, .iacts button { min-height: 44px; }
+.qchips button[aria-pressed="true"] { color: var(--surface); background: var(--accent); border-color: var(--accent); }
+.qchips + .qchips { margin-top: 8px; }
+/* breakdown under a resource */
+.brk { margin-top: 10px; background: var(--surface-2); border-radius: 12px; }
+.brk summary { cursor: pointer; padding: 10px 12px; font-size: 13.5px; font-weight: 700; list-style: none; }
+.brk summary::-webkit-details-marker { display: none; }
+.brk ul { margin: 0; padding: 0 14px 12px 30px; font-size: 13.5px; }
+.brk li { margin: 6px 0; }
+.rc.mine { box-shadow: 4px 4px 0 var(--star) !important; }
+.rc.mine .rtx small { color: var(--amber); font-weight: 600; }

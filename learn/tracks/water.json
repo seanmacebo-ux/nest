@@ -1,0 +1,282 @@
+{
+ "slug": "water",
+ "title": "Water",
+ "emoji": "💧",
+ "intro": "Your tap water in Edenvale travels from dams in Lesotho, through the Vaal system, to Rand Water's treatment plants, then through Ekurhuleni's pipes to your flat. It is tested against a national standard and Ekurhuleni scores well. The weak spot is supply, not quality, so the smart moves are a small water store and, if you want better taste, a simple filter.",
+ "sections": [
+  {
+   "title": "Where your tap water comes from",
+   "points": [
+    "Edenvale falls under the City of Ekurhuleni. City outage notices list Edenvale among the areas it supplies.",
+    "The journey starts in Lesotho. The Lesotho Highlands Water Project (a joint Lesotho and South Africa scheme) stores water in the Katse and Mohale dams and sends it through tunnels into the Vaal River system.",
+    "The Vaal system is a network of 14 linked dams. Rand Water takes its raw water from the Vaal Dam. Sterkfontein Dam is the backup and only tops up the Vaal Dam if it drops below 18%.",
+    "Rand Water is the bulk supplier. It cleans the water at big plants like Zuikerbosch in Vereeniging: it adds lime so dirt clumps and sinks, filters it through sand, adjusts the pH, then adds chlorine to kill germs.",
+    "Rand Water makes about 5,000 million litres a day. About 77% goes to Joburg, Tshwane and Ekurhuleni. It pumps into municipal reservoirs, not into homes.",
+    "Ekurhuleni buys that water and runs the reservoirs, street pipes, meters and billing. Pipes and geysers inside your property are usually the landlord's or body corporate's job."
+   ]
+  },
+  {
+   "title": "Why the taps run dry",
+   "points": [
+    "Most Gauteng outages are not about empty dams. Experts call it an 'institutional drought': the water exists, but pumps, pipes and power fail.",
+    "Power cuts stop the pumps. On 2 November 2026 an Ekurhuleni power failure stopped Rand Water's Mapleton pump station, and Rand Water warned of shortages in Ekurhuleni.",
+    "Planned maintenance causes big cuts. Rand Water's December 2025 maintenance hit Edenvale, and the city warned that pressure can take up to two weeks to recover, especially in high-lying areas.",
+    "Demand is too high. Rand Water is licensed to take 1,600 million cubic metres a year but took 193 million more than that in 2023/24.",
+    "Leaks waste a lot. Gauteng loses about 431 billion litres a year. Ekurhuleni does better than most metros here: its losses are within international averages.",
+    "Help is coming slowly. Phase II of the Lesotho project (Polihali Dam) will raise transfers from 780 million to about 1.27 billion cubic metres a year. Water is expected around 2028 to 2030, and the date has slipped before."
+   ]
+  },
+  {
+   "title": "Is it safe to drink?",
+   "points": [
+    "SANS 241 is South Africa's drinking water standard. It sets limits for germs, chemicals and things like cloudiness. Germs such as E. coli must be at zero.",
+    "Blue Drop is the government's audit of drinking water systems. A score above 95% earns a certificate. In the 2023 full audit, Ekurhuleni scored 97% and Joburg 98%. Only 26 systems in the whole country were certified.",
+    "The 2025 Blue Drop progress check (released March 2026) found big metros 'generally performing well', with Gauteng and the Western Cape strongest. It was a progress check, not a full audit.",
+    "Ekurhuleni's own 2024/25 report shows 98% to 100% compliance with SANS 241 across all measures.",
+    "Green Drop audits sewage treatment. In 2026 Ekurhuleni won six Green Drop certificates and took the top three wastewater spots in the country. That matters because treated sewage flows back into rivers.",
+    "You can check results yourself on the government's IRIS 'My Water' map. By law, a city must warn residents if its water is a health risk. Boil only if a notice tells you to, or if you're using stored or untreated water."
+   ]
+  },
+  {
+   "title": "Filtering it yourself",
+   "points": [
+    "Start with the goal. Your tap water already meets the standard, so a filter here mostly fixes taste and chlorine smell. The US CDC (its national public health agency) says you may not need one at all if your water is clean.",
+    "Carbon jug filters (activated carbon traps chemicals on its surface) improve taste and chlorine and can cut some lead. They are not built to remove germs. A Brita Aluna 2.4 L jug is R699 at Yuppiechef, and a 2-pack of Maxtra Pro cartridges is R699, so about R350 per cartridge. Check the box for how often to swap it.",
+    "Tap-mounted filters screw onto the kitchen tap with no plumbing, which suits a rental. The Brita On Tap system is R1,999 at Yuppiechef.",
+    "Reverse osmosis (RO) pushes water through a very fine membrane. It removes lead, copper and salt and can cut fluoride and nitrate. It also strips minerals, sends some water down the drain and needs under-sink plumbing. Local 5-stage units start around R1,700.",
+    "UV filters use light to kill germs but don't remove chemicals. They need power and a pre-filter. They're useful for rainwater, but overkill for treated city water. Ceramic gravity filters trap dirt and many bacteria. They don't stop viruses or dissolved chemicals unless they also have a carbon core.",
+    "Check certification. NSF/ANSI (a US standards body) labels: 42 means taste and chlorine, 53 means health contaminants like lead, 58 means RO systems, 55 means UV, and 401 means newer contaminants. The numbers are not a ranking. Look up the exact model in NSF's database."
+   ]
+  },
+  {
+   "title": "Backup water and independence",
+   "points": [
+    "Store at least 4 litres per person per day, for at least 3 days. For the two of you, that's about 24 litres minimum. Aim for about 110 litres, which covers two weeks.",
+    "Use clean, food-grade containers with tight lids. Never reuse bleach or chemical bottles. Wash them with soap and a weak bleach rinse, label them with the date, keep them cool and dark, and refill every 6 months.",
+    "A 1,000 L JoJo vertical tank costs about R1,935 at Hinterland. It needs a level, solid base. When full it weighs about a tonne, so don't put it on a balcony without checking.",
+    "In a rental, the landlord doesn't have to supply a tank, so you'd usually pay. Once installed, a tank counts as a fixture and becomes the landlord's property unless you both sign an agreement that you can take it with you.",
+    "Under the National Water Act, you can collect and use rainwater off a roof without a licence. In a flat you probably don't control the roof or gutters, so ask the body corporate. Boil or treat rainwater before drinking it.",
+    "To make water safe, bring it to a rolling boil for 1 minute. The CDC says to boil for 3 minutes only above about 2,000 m, and Edenvale sits around 1,600 m. Unscented bleach works too, but wait 30 minutes and check the strength on the label, because CDC drop counts assume 5 to 9% bleach. Neither method removes chemicals."
+   ]
+  }
+ ],
+ "do": [
+  "Bookmark Ekurhuleni's Outages Alert page and save the city call centre number: 0860 543 000.",
+  "Look up your area on the DWS IRIS 'My Water' map once, so you know what normal looks like.",
+  "Buy six 5 L food-grade bottles (about 30 L), fill them, write the date on them, and set a 6-month reminder to refill.",
+  "When a Rand Water maintenance notice drops for Edenvale, fill extra bottles and a bucket for flushing the day before.",
+  "Keep a way to boil water without electricity, such as a gas camping stove, because water and power cuts often come together.",
+  "Before buying a filter, decide if you want better taste (jug or tap filter) or contaminant removal (certified RO). Then check the model in NSF's database."
+ ],
+ "ask": [
+  "Landlord: Can we fit a tap-mounted or under-sink filter? Can we have that in writing, including who removes it and who fixes any damage when we leave?",
+  "Landlord or body corporate: Does the building have its own storage tank or booster pump for outages? Who owns the pipes between the meter and our flat?",
+  "Body corporate: What are the rules on placing a water tank, and what weight can a balcony or yard take?",
+  "Ekurhuleni (0860 543 000): Which reservoir supplies our street? Is our area high-lying, which means slower recovery after outages?",
+  "Filter seller: Which NSF/ANSI standard is this model certified to, for which contaminants? Can I see the listing?",
+  "Filter seller: How long does a cartridge last in litres or months, what does a replacement cost, and how much water does the RO unit send down the drain?"
+ ],
+ "watch_out": [
+  "TDS meter and 'electrolysis' demos where tap water turns brown are sales tricks. TDS (total dissolved solids) measures minerals, not safety.",
+  "'Tested to NSF standards' is not the same as 'NSF certified'. Ask for the listing.",
+  "Alkaline and 'structured' water health claims aren't backed by solid evidence. Don't pay extra for them.",
+  "An old cartridge is worse than none. It stops working and can grow bacteria, so change it on schedule.",
+  "A full Vaal Dam doesn't mean your taps will run. Most Gauteng outages are about pumps, power and pipes.",
+  "Boiling kills germs but does nothing for fuel or chemical contamination.",
+  "Don't store drinking water in old bleach, pesticide or chemical containers, or in glass that can break."
+ ],
+ "resources": [
+  {
+   "type": "place",
+   "title": "Outages Alert (City of Ekurhuleni press releases)",
+   "source": "City of Ekurhuleni",
+   "url": "https://www.ekurhuleni.gov.za/category/press-releases/outages-alert/",
+   "why": "Where planned and unplanned water cuts for Edenvale are posted.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "IRIS My Water: South Africa's Tap Water Map",
+   "source": "Department of Water and Sanitation",
+   "url": "https://ws.dws.gov.za/iris/mywater.aspx",
+   "why": "Live SANS 241 compliance map. Check your area's water quality.",
+   "verified": true
+  },
+  {
+   "type": "place",
+   "title": "Rand Water",
+   "source": "Rand Water",
+   "url": "https://www.randwater.co.za/",
+   "why": "Bulk supplier. Shows weekly water use for each metro, including Ekurhuleni.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Rand Water planned maintenance for December 2025",
+   "source": "City of Ekurhuleni",
+   "url": "https://www.ekurhuleni.gov.za/press-releases/outages-alert/rand-water-planned-maintenance-for-december-2025/",
+   "why": "A real example of a maintenance cut that hit Edenvale, and the two-week recovery warning.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Official reports reveal massive scale of the waste, pollution and poorly treated water crisis",
+   "source": "Daily Maverick (Dec 2023)",
+   "url": "https://www.dailymaverick.co.za/article/2023-12-05-official-reports-reveal-massive-scale-of-the-waste-pollution-and-poorly-treated-water-crisis/",
+   "why": "2023 Blue Drop results: Ekurhuleni 97%, Joburg 98%.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "SA's water crisis deepens: nearly half of wastewater systems critical",
+   "source": "Mail & Guardian (Mar 2026)",
+   "url": "https://mg.co.za/the-green-guardian/2026-03-31-sa-s-water-crisis-deepens-nearly-half-of-wastewater-systems-critical/",
+   "why": "Latest Blue, Green and No Drop findings, including Gauteng's 431 billion litres of losses.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Water woes: what the temporary shutdown of the supply from Lesotho means for Johannesburg",
+   "source": "Daily Maverick (Oct 2024)",
+   "url": "https://www.dailymaverick.co.za/article/2024-10-08-water-woes-what-the-temporary-shutdown-of-the-supply-from-lesotho-means-for-johannesburg",
+   "why": "The clearest walk-through of Lesotho to Vaal to Rand Water.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Ekurhuleni water outages as power failure leaves Rand Water unable to pump",
+   "source": "Engineering News (Nov 2026)",
+   "url": "https://www.engineeringnews.co.za/article/ekurhuleni-water-outages-as-power-failure-leaves-rand-water-unable-to-pump-2026-11-03",
+   "why": "A recent local case of a power cut causing a water cut.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "About Choosing Home Water Filters",
+   "source": "US CDC",
+   "url": "https://www.cdc.gov/drinking-water/prevention/about-choosing-home-water-filters.html",
+   "why": "Plain guide to what jug, under-sink and RO filters actually remove.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "NSF Standards for Water Treatment Systems",
+   "source": "NSF",
+   "url": "https://www.nsf.org/consumer-resources/articles/standards-water-treatment-systems",
+   "why": "What 42, 53, 55, 58 and 401 mean. Use it with NSF's certified product search.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "How to Make Water Safe in an Emergency",
+   "source": "US CDC",
+   "url": "https://www.cdc.gov/water-emergency/about/index.html",
+   "why": "Boiling and bleach steps, with amounts.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "How to Create an Emergency Water Supply",
+   "source": "US CDC",
+   "url": "https://www.cdc.gov/healthywater/emergency/creating-storing-emergency-water-supply.html",
+   "why": "How much to store, which containers to use and how often to refresh them.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "The quest for generators, inverters and water tanks",
+   "source": "Private Property",
+   "url": "https://www.privateproperty.co.za/advice/property/articles/the-quest-for-generators-inverters-and-water-tanks/8848",
+   "why": "Who pays for a tank in a rental, and who owns it afterwards.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "National Water Act, Schedule 1: Permissible use of water",
+   "source": "Acts Online",
+   "url": "https://www.acts.co.za/national-water/schedule_1__permissible_use_of.php",
+   "why": "The law that lets you store and use roof rainwater without a licence.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Brita range (jugs, cartridges, On Tap)",
+   "source": "Yuppiechef",
+   "url": "https://www.yuppiechef.com/brita.htm",
+   "why": "Local prices: Aluna jug R699, 2-pack of cartridges R699, On Tap R1,999.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Vertical Water Tank 1000L JoJo",
+   "source": "Hinterland",
+   "url": "https://www.hinterland.co.za/products/jojo-tank-water-vertical-1000l",
+   "why": "About R1,935 for a 1,000 L tank, plus base requirements.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "The Big Thirst: The Secret Life and Turbulent Future of Water",
+   "source": "Charles Fishman (Simon & Schuster)",
+   "url": "https://www.simonandschuster.com/books/The-Big-Thirst/Charles-Fishman/9781439102084",
+   "why": "A readable, fun look at how water really works and why it's getting scarce.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "Water: A Biography",
+   "source": "Giulio Boccaletti (Penguin Random House)",
+   "url": "https://www.penguinrandomhouse.com/books/602733/water-by-giulio-boccaletti/",
+   "why": "How control of water shaped societies, from ancient irrigation to modern dams.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "South Africa's Water Predicament: Freshwater's Unceasing Decline",
+   "source": "Anja du Plessis (Springer, 2023)",
+   "url": "https://link.springer.com/book/10.1007/978-3-031-24019-5",
+   "why": "The SA-specific deep dive on why water services keep declining. Academic, but direct.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "Day Zero: One City's Response to a Record-Breaking Drought",
+   "source": "Leonie Joubert & Gina Ziervogel (UCT ACDI)",
+   "url": "https://dayzero.org.za/",
+   "why": "How Cape Town avoided running dry, and lessons for Gauteng households.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Lesotho Highlands Water Project Turns 40: Beyond Dams, Water and Infrastructure",
+   "source": "YouTube",
+   "url": "https://www.youtube.com/watch?v=A4-oM6-rRMY",
+   "why": "7-minute look at the scheme your tap water starts in.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Zuikerbosch Water Purification Plant to boost water supply: Majodina",
+   "source": "SABC News (YouTube)",
+   "url": "https://www.youtube.com/watch?v=413_29OS6n4",
+   "why": "2-minute news clip on the Rand Water plant that treats Gauteng's water.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "How Water Towers Work",
+   "source": "Practical Engineering (YouTube)",
+   "url": "https://www.youtube.com/watch?v=yZwfcMSDBHs",
+   "why": "Clear explainer on storage and pressure, and why high-lying areas dry up first. The whole channel is worth following.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Reverse Osmosis vs Carbon Filters: Which One Do You Actually Need?",
+   "source": "Multipure (YouTube)",
+   "url": "https://www.youtube.com/watch?v=9DAwXEEaJJ0",
+   "why": "Short comparison of RO and carbon. Made by a filter brand, so watch for the sales angle.",
+   "verified": true
+  }
+ ]
+}
