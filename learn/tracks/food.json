@@ -1,0 +1,295 @@
+{
+ "slug": "food",
+ "title": "Food",
+ "emoji": "🥕",
+ "intro": "You can buy most of your fresh food without a supermarket. Edenvale has its own farmers market, and two big wholesale markets (City Deep and Springs) are open to the public. A few pots on a ground-floor patio can cover your herbs and greens most of the year.",
+ "sections": [
+  {
+   "title": "How food reaches Joburg",
+   "points": [
+    "Most fresh fruit and veg goes through council-run wholesale markets. Farmers send produce there, agents sell it for them, and buyers pay the day's price.",
+    "Joburg Market in City Deep is the biggest of these. It calls itself the leading fresh produce market in Africa.",
+    "Prices change every day with supply. Good rains in 2026 brought more produce into the Springs market and pushed some prices down.",
+    "Quick context on supermarkets: four chains run formal grocery retail. In 2019 the Competition Commission found that their exclusive leases in malls kept smaller shops out. That's why buying around them takes a bit of effort.",
+    "Food is expensive right now. PMBEJD (a Pietermaritzburg research group) says its Joburg household food basket cost R5,766.71 in October 2026.",
+    "No VAT is charged on 21 basic foods, including brown bread, maize meal, eggs, dried beans, and fresh fruit and veg. Buying these loose and direct gets you the most value."
+   ]
+  },
+  {
+   "title": "Buying direct near Edenvale",
+   "points": [
+    "Edenvale Farmers Market runs outside De Backery in the Edenvale CBD. It's on the first and last Saturday of each month, 07:00 to 12:00. Stalls sell veg, fruit, eggs and meat.",
+    "Anyone can buy at Joburg Market. Bring your ID and register at a customer service kiosk for a free buyer card. Load money onto it at the cashier, then buy from the agents in the halls.",
+    "For smaller amounts at Joburg Market, use the People's Market (the old Mandela Market). Traders there split bulk stock into smaller lots, and it's cash only.",
+    "The Ekurhuleni Fresh Produce Market in Springs is closer to home and open to everyone. You don't need to be a business. A market agent says prices are often better than in shops.",
+    "Bryanston Organic & Natural Market (40 Culross Road) has been running for about 40 years. Go there for certified-organic and specialty produce. It runs on Thursdays and Saturdays.",
+    "For meat, buy a whole lamb or a quarter beef from a farm or a butcher who buys direct, and have it cut and packed for the freezer. Ask where the animal came from and how it was raised."
+   ]
+  },
+  {
+   "title": "Veg boxes, co-ops and bulk buying",
+   "points": [
+    "Delivery services cut out the supermarket too. Munching Mongoose delivers organic produce, grass-fed meat and dairy across greater Joburg, with no maximum order size.",
+    "Split a market haul with one or two other households. A pocket of onions or a box of tomatoes is cheap per kg but too much for two people.",
+    "Buy dry staples like rice, maize meal, lentils, oil and flour in bulk from a cash-and-carry. Always compare the price per kg, not the pack price.",
+    "Buy what's in season and cheap, then freeze it, sauce it or pickle it. A small chest freezer pays for itself if you buy meat in bulk.",
+    "Go early. Wholesale markets close by 10:00 or 11:00, and the best stock goes first."
+   ]
+  },
+  {
+   "title": "Growing your own in a rental",
+   "points": [
+    "Grow in things you can move: grow bags, big pots, or a raised bed on legs. You keep the garden when you move, and the landlord's lawn stays untouched.",
+    "Johannesburg's last frost is usually mid-August and the first frost around mid-June. Plant tomatoes outside in October or November.",
+    "Start with easy, high-yield crops: Swiss chard (local 'spinach'), lettuce, radish, cherry tomatoes, bush beans, spring onions, basil and parsley. Give mint its own pot.",
+    "Give pots at least 6 hours of direct sun. Use bagged potting mix, not garden soil, and make sure water drains out the bottom.",
+    "Save water: mulch the soil, water early in the morning, and catch rain in a bucket during summer storms. Highveld winters are dry, so pots dry out fast.",
+    "A worm farm on the patio turns kitchen scraps into free fertiliser. A ready-made one with 500 worms costs about R2,700, or you can build one from stacked crates."
+   ]
+  },
+  {
+   "title": "Labels and ultra-processed food",
+   "points": [
+    "Ingredients are listed from most to least by weight, so the first three tell you what you're really eating.",
+    "Ultra-processed food (UPF) is made with industrial ingredients you wouldn't cook with at home, like emulsifiers, flavourings, colourants and sweeteners. Fizzy drinks, packaged snacks and sugary cereals are typical examples.",
+    "A 2024 BMJ review covered almost 10 million people. It linked eating more UPF with 32 health harms, including heart disease deaths and type 2 diabetes. These studies show links, not proof of cause, but the pattern is consistent.",
+    "SA's planned front-of-pack warning labels (draft regulation R3337) were still not law in mid-2026. So turn the pack over and read the back.",
+    "Use the 'per 100g' column to compare products. Check sugar and sodium first."
+   ]
+  }
+ ],
+ "do": [
+  "Put the next first or last Saturday in the calendar for Edenvale Farmers Market (07:00 to 12:00, outside De Backery).",
+  "Go to Joburg Market once on a weekday before 09:00 with your ID. Register for the free buyer card and walk the People's Market.",
+  "Try the Springs market on a Saturday morning and compare prices with your last grocery slip.",
+  "Buy 3 large pots, potting mix and seedlings (Swiss chard, lettuce, basil, cherry tomato) this month. It's still summer planting season.",
+  "Start a worm farm, bought or DIY, and stop throwing veg scraps in the bin.",
+  "Set a monthly food budget and see how close you get to PMBEJD's R5,766 Joburg basket."
+ ],
+ "ask": [
+  "What's in season and cheapest this week?",
+  "Where is your farm, and did you grow this or buy it in?",
+  "Do you spray? If so, with what?",
+  "Can I get a better price for a full box, pocket or crate?",
+  "For meat: how was the animal raised (grass-fed or feedlot), and can you cut and pack a quarter or half for the freezer?",
+  "Do you deliver to Edenvale, or is there a pickup point nearby?"
+ ],
+ "watch_out": [
+  "'Farm fresh' on a market stall doesn't always mean the seller grew it. Some resell wholesale stock, so ask.",
+  "'Natural' and 'organic-style' are marketing words. Only certified organic has a standard behind it.",
+  "Bulk only saves money if you use it. A 10 kg box of tomatoes that rots costs more than 1 kg from a stall.",
+  "Market hours are early, and wholesale halls close by 10:00 or 11:00. Don't arrive at noon.",
+  "Don't fill pots with garden soil. It compacts and drowns roots, so use potting mix.",
+  "UPF research shows strong links but rarely proves cause. Eat more whole food without getting scared of every packet."
+ ],
+ "resources": [
+  {
+   "type": "place",
+   "title": "Edenvale Farmers Market",
+   "source": "Bedfordview Edenvale News (Caxton)",
+   "url": "https://www.citizen.co.za/bedfordview-edenvale-news/news-headlines/local-news/2026/04/02/fresh-produce-found-in-edenvale-cbd/",
+   "why": "First and last Saturday of the month, 07:00 to 12:00, outside De Backery, Edenvale CBD. Farm veg, eggs and meat, no entry fee.",
+   "verified": true
+  },
+  {
+   "type": "place",
+   "title": "How to buy at Joburg Market",
+   "source": "Joburg Market",
+   "url": "https://joburgmarket.co.za/?p=5978",
+   "why": "City Deep. Mon 05:00 to 10:00, Tue to Fri 05:00 to 11:00, Sat 05:00 to 10:00. Bring your ID for a free buyer card.",
+   "verified": true
+  },
+  {
+   "type": "place",
+   "title": "People's Market and Unity Market at Joburg Market",
+   "source": "Joburg Market",
+   "url": "https://joburgmarket.co.za/mandela-peoples-market/",
+   "why": "City Deep, same hours as the main market. Smaller quantities, cash only.",
+   "verified": true
+  },
+  {
+   "type": "place",
+   "title": "Ekurhuleni Fresh Produce Market, Springs",
+   "source": "City of Ekurhuleni",
+   "url": "https://www.ekurhuleni.gov.za/press-releases/economic-development/mmc-for-economic-infrastructure-development-agency-mlambo-visits-ekurhuleni-fresh-produce-market/",
+   "why": "Springs, East Rand. Open to the public and running in 2026. Early mornings; Saturday is busy, so phone for exact hours.",
+   "verified": true
+  },
+  {
+   "type": "place",
+   "title": "Bryanston Organic & Natural Market",
+   "source": "Sandton Tourism",
+   "url": "https://www.sandtontourism.com/members/members-listing/bryanston-organic-natural-market/",
+   "why": "40 Culross Rd, Bryanston. Thursdays and Saturdays, mornings to mid-afternoon. Organic food; call 011 706 3671 to confirm hours.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Munching Mongoose",
+   "source": "munchingmongoose.co.za",
+   "url": "https://munchingmongoose.co.za/",
+   "why": "Delivery across greater Joburg: organic produce, grass-fed meat, dairy and eggs.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Johannesburg planting calendar (Zone 9b)",
+   "source": "Fryd",
+   "url": "https://fryd.app/en/garden-guide/johannesburg",
+   "why": "Month-by-month sowing and harvest chart. Frost from mid-June to mid-August.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Jane's Delicious Garden Planner",
+   "source": "Jane's Delicious Garden",
+   "url": "https://jane-s-delicious-garden.shopstar.co.za",
+   "why": "Lay out containers or beds and get a planting calendar for your location. Jane is Joburg-based.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "Livingseeds",
+   "source": "livingseeds.co.za",
+   "url": "https://livingseeds.co.za/",
+   "why": "SA heirloom seed shop with seedlings (herbs from about R15) and garden supplies.",
+   "verified": true
+  },
+  {
+   "type": "tool",
+   "title": "The Worm Oasis worm farm",
+   "source": "Sustainable.co.za",
+   "url": "https://sustainable.co.za/products/the-worm-oasis-worm-farm",
+   "why": "SA-made, about R2,717 with 500 worms. Fits on a patio.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Household Affordability Index (October 2026)",
+   "source": "PMBEJD",
+   "url": "https://pmbejd.org.za/",
+   "why": "Monthly cost of a household food basket. Joburg was R5,766.71 in October 2026.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Grocery Retail Market Inquiry report (2019)",
+   "source": "UCT Libraries / Competition Commission",
+   "url": "https://lib.uct.ac.za/government-publications/articles/2019-11-29-grocery-retail-market-inquiry-report-competition-commissioner-inquiry-panel",
+   "why": "The official look at how the big chains limit smaller competitors.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "The big question around SA's VAT-free food",
+   "source": "BusinessTech",
+   "url": "https://businesstech.co.za/news/government/802097/the-big-question-around-south-africas-vat-free-food-basket/",
+   "why": "How the 21 zero-rated foods work and who benefits most.",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "Ultra-processed food linked to 32 health harms",
+   "source": "BMJ Group",
+   "url": "https://bmjgroup.com/consistent-evidence-links-ultra-processed-food-to-over-30-damaging-health-outcomes/",
+   "why": "Plain summary of the biggest UPF evidence review (2024).",
+   "verified": true
+  },
+  {
+   "type": "article",
+   "title": "SA's draft food labelling regulations (R3337): current status",
+   "source": "GoLegal (KISCH IP)",
+   "url": "https://www.golegal.co.za/food-labelling-regulations/",
+   "why": "Why warning labels still aren't on SA packs (July 2026).",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "Jane's Delicious Garden",
+   "source": "Jane Griffiths (Sunbird), Exclusive Books",
+   "url": "https://exclusivebooks.co.za/products/9781920289935",
+   "why": "The SA organic veg bible, covering nearly 100 veg and herbs. R370.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "Jane's Delicious Urban Gardening",
+   "source": "Jane Griffiths, Exclusive Books",
+   "url": "https://exclusivebooks.co.za/products/9781920289874",
+   "why": "Small-space growing: containers, edible walls, rainwater and grey water. R370.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "Ultra-Processed People",
+   "source": "Chris van Tulleken, Exclusive Books",
+   "url": "https://exclusivebooks.co.za/products/9781529160222",
+   "why": "Readable, evidence-based guide to what UPF is and why it matters. R305.",
+   "verified": true
+  },
+  {
+   "type": "book",
+   "title": "Food Rules: An Eater's Manual",
+   "source": "Michael Pollan",
+   "url": "https://michaelpollan.com/books/food-rules/",
+   "why": "Short rules for eating simply, one per page. A quick read.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "How one woman sparked a suburban organic renaissance (TEDxJohannesburg)",
+   "source": "Jane Griffiths, TEDx Talks",
+   "url": "https://www.youtube.com/watch?v=myMjGTVRupw",
+   "why": "16 minutes on why growing your own food in Joburg works.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "10 Veggies to start in November in South Africa",
+   "source": "Gardening With Karabo",
+   "url": "https://www.youtube.com/watch?v=ybbzoyuYOVI",
+   "why": "What to plant right now, from a current SA channel (Oct 2026).",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "How to start a vegetable garden in pots",
+   "source": "Millennial Homesteader",
+   "url": "https://www.youtube.com/watch?v=hz5TTRxDjUQ",
+   "why": "SA container growing for renters (2026).",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Worm Farms: How to really get them working",
+   "source": "Livingseeds Farm",
+   "url": "https://www.youtube.com/watch?v=J36npR7DFL0",
+   "why": "Practical SA worm farm setup and troubleshooting.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Joburg Market: small-scale buyers making a living with fresh produce",
+   "source": "SABC News",
+   "url": "https://www.youtube.com/watch?v=6NJd0rNtVjw",
+   "why": "See how the market floor works before you go (2025).",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "The harsh reality of ultra-processed food",
+   "source": "The Royal Institution (Chris van Tulleken)",
+   "url": "https://www.youtube.com/watch?v=5QOTBreQaIk",
+   "why": "Lecture version of the UPF evidence.",
+   "verified": true
+  },
+  {
+   "type": "video",
+   "title": "Evidence-based natural pest control for SA gardens",
+   "source": "City Press (Jane Griffiths)",
+   "url": "https://www.youtube.com/watch?v=dbhNblUjSoA",
+   "why": "4 minutes on dealing with pests without poisons.",
+   "verified": true
+  }
+ ]
+}
