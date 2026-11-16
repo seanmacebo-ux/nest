@@ -150,6 +150,24 @@
   .chk .txt { font-size: 14.5px; }
   .chk .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
   .chk li.done .txt { text-decoration: line-through; text-decoration-color: var(--ink-soft); }
+  /* side-by-side compare: one card per question, three answers */
+  .vs-head { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; position: sticky; top: calc(var(--navh) + 57px); z-index: 5; background: var(--ground); padding: 8px 0; }
+  .vs-head div { border-radius: 10px; padding: 8px 8px; background: var(--surface); border: 1px solid var(--line); font-size: 12.5px; line-height: 1.25; }
+  .vs-head div b { display: block; font-size: 13px; }
+  .vs-head div small { font-family: "JetBrains Mono", monospace; font-size: 11.5px; font-weight: 600; color: var(--accent); }
+  .vs-head .ours { border: 2px solid var(--good); }
+  .vs-row { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 10px 10px; margin-top: 8px; box-shadow: var(--shadow); }
+  .vs-row .q { font-size: 13.5px; font-weight: 700; margin: 0 2px 7px; }
+  .vs-row .a { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+  .vs-row .a span { background: var(--surface-2); border-radius: 9px; padding: 7px 8px; font-size: 12.5px; line-height: 1.35; }
+  .vs-row .a span:first-child { background: var(--good-soft); }
+  .vs-row .a .bad { background: var(--warn-soft) !important; }
+  .vs-row .a .ok { font-weight: 600; }
+  .vs-take { margin-top: 10px; }
+  .tl { list-style: none; margin: 8px 0 0; padding: 0; }
+  .tl li { display: grid; grid-template-columns: 78px 1fr; gap: 10px; padding: 9px 0; border-bottom: 1px dotted var(--line); font-size: 14px; }
+  .tl li:last-child { border-bottom: 0; }
+  .tl .d { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; color: var(--accent); padding-top: 2px; }
   .chk .tagq { font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
 </style>
 </head>
@@ -180,6 +198,9 @@
 
   <nav class="jump" aria-label="Jump to section">
     <a href="#plan">Our plan</a>
+    <a href="#into">What we're getting into</a>
+    <a href="#vs-aid">Aid side by side</a>
+    <a href="#vs-gap">Gap side by side</a>
     <a href="#next">Next pregnancy</a>
     <a href="#inc">What's included</a>
     <a href="plans.html">🧭 All plans</a>
@@ -210,6 +231,65 @@
       <div class="prog"><div class="lbl" id="progtxt">0 of 6 steps done</div><div class="bar"><span id="progbar"></span></div></div>
     </div>
   </section>
+
+  <!-- WHAT WE'RE GETTING INTO -->
+  <div class="sec" id="into"><h2>🔍 What we're getting into</h2><p>In one place: what we pay every month, what we still pay ourselves, and when the cover actually starts. All from Discovery's and Turnberry's 2027 documents, checked 13 Nov. Out-of-pocket amounts are estimates.</p></div>
+  <div class="panel">
+    <div class="lbl">💳 Every month, by debit order</div>
+    <ul class="pl">
+      <li><b>R2,522</b> = Discovery Essential Smart R2,332 + Turnberry gap cover R190. If Mishka is 30 or older, gap cover is R350, so <b>R2,682</b>.</li>
+      <li><b>When Sean joins</b> (after his spousal visa): another R2,332, so about <b>R4,850–5,200</b> for both, depending on gap cover.</li>
+      <li><b>Plus the birth fund</b> we save ourselves: R2,500 a month (more on that below).</li>
+    </ul>
+    <div class="lbl" style="margin-top:16px">🧾 What we still pay ourselves</div>
+    <ul class="pl">
+      <li><b>Specialist visits in the rooms</b> (the gynae's office). Discovery pays about R520 of 8 pregnancy check-ups. Gynaes charge R1,900–3,300, and every visit after the 8th is all ours. Gap cover never pays rooms visits.</li>
+      <li><b>Medicine for short illnesses</b> (antibiotics and so on), physio, and MRI/CT scans outside a hospital stay.</li>
+      <li><b>R135 per GP visit</b> at a network GP.</li>
+      <li><b>Anything on the "not covered" list:</b> a caesar by choice, joint, back, knee and shoulder surgery, and a few others.</li>
+    </ul>
+    <div class="lbl" style="margin-top:16px">⏳ When the cover actually starts (joining 1 Dec)</div>
+    <ul class="tl">
+      <li><span class="d">1 Dec 2026</span><span><b>Medical aid and gap cover start.</b> Emergencies and accidents are covered from day one.</span></li>
+      <li><span class="d">~Mar 2027</span><span><b>The 3-month general wait ends.</b> Normal hospital cover kicks in, if the scheme doesn't exclude her cervix.</span></li>
+      <li><span class="d">~Oct 2027</span><span><b>Gap cover's 10-month pregnancy wait ends.</b> From here, the doctors' extra fees for a birth are covered up to 500%.</span></li>
+      <li><span class="d">~Dec 2027</span><span><b>Latest "covered" date</b> if the scheme excludes her cervix for 12 months. The scheme's letter tells us which date is real.</span></li>
+    </ul>
+  </div>
+
+  <div class="sec" id="vs-aid"><h2>🏥 Medical aid, side by side</h2><p>Our plan against the two closest alternatives. Prices are for Mishka alone, per month, in 2027. Every other plan is on the <a href="plans.html">🧭 All plans</a> page.</p></div>
+  <div class="vs-head" aria-hidden="true">
+    <div class="ours"><b>Essential Smart</b><small>R2,332 ⭐ ours</small></div>
+    <div><b>Essential Delta Core</b><small>R2,894</small></div>
+    <div><b>Classic Smart</b><small>R3,257</small></div>
+  </div>
+  <div class="vs-row"><div class="q">Park Lane and Oxford?</div><div class="a"><span class="ok">✅ Both in network</span><span>Park Lane for births only. ✅ Oxford</span><span class="ok">✅ Both in network</span></div></div>
+  <div class="vs-row"><div class="q">The hospital bill for a birth</div><div class="a"><span>Paid in full</span><span>Paid in full</span><span>Paid in full</span></div></div>
+  <div class="vs-row"><div class="q">Doctors in hospital (gynae, anaesthetist)</div><div class="a"><span>100% of Discovery's rate. Gap cover pays the rest</span><span>100% of Discovery's rate. Gap cover pays the rest</span><span class="ok">Up to 200%, so a smaller gap</span></div></div>
+  <div class="vs-row"><div class="q">Caesar by choice</div><div class="a"><span class="bad">❌ Not covered (medically needed is)</span><span>No rule against it in the guide</span><span class="ok">✅ Covered</span></div></div>
+  <div class="vs-row"><div class="q">Pregnancy check-ups and scans</div><div class="a"><span>8 check-ups, 2 scans, NIPT if she qualifies</span><span>Same</span><span>Same</span></div></div>
+  <div class="vs-row"><div class="q">GP visits</div><div class="a"><span class="ok">Unlimited at network GPs, R135 each</span><span class="bad">❌ None. Every GP visit is ours</span><span class="ok">Unlimited, R80 each</span></div></div>
+  <div class="vs-row"><div class="q">Back, knee, joint surgery</div><div class="a"><span class="bad">❌ Not covered</span><span>✅ Covered</span><span>✅ Covered</span></div></div>
+  <div class="vs-row"><div class="q">Planned stay at a hospital not on the list</div><div class="a"><span>R13,150 upfront</span><span>R11,550 upfront</span><span>R13,150 upfront</span></div></div>
+  <div class="vs-row"><div class="q">Extra per year vs ours</div><div class="a"><span>—</span><span>+R6,744</span><span>+R11,100</span></div></div>
+  <div class="panel vs-take">
+    <p style="margin:0"><b>The trade-off:</b> Essential Smart is the cheapest way to get Park Lane and Oxford with the whole hospital bill paid. The catch is it pays doctors less and skips some surgeries, which is why gap cover isn't optional. Classic Smart is the one to move up to if Sean's mom joins or a caesar by choice matters.</p>
+  </div>
+
+  <div class="sec" id="vs-gap"><h2>🛡️ Gap cover, side by side</h2><p>Gap cover pays what doctors charge in hospital above what the medical aid pays. It never pays rooms visits. Prices per month for one person.</p></div>
+  <div class="vs-head" aria-hidden="true">
+    <div class="ours"><b>Turnberry Dynamic</b><small>R190–350 ⭐ ours</small></div>
+    <div><b>Zestlife Optimal</b><small>R276 (2026)</small></div>
+    <div><b>Discovery Gap 500</b><small>R506</small></div>
+  </div>
+  <div class="vs-row"><div class="q">Pays doctors up to</div><div class="a"><span class="ok">500%</span><span>400%</span><span class="ok">500%</span></div></div>
+  <div class="vs-row"><div class="q">Wait before it pays for a pregnancy</div><div class="a"><span class="bad">10 months (ends ~Oct 2027)</span><span class="ok">None, if she isn't pregnant when it starts</span><span class="bad">12 months</span></div></div>
+  <div class="vs-row"><div class="q">Medical aid co-payments (like the wrong-hospital penalty)</div><div class="a"><span class="ok">Yes, up to R11,000 once a year</span><span class="ok">Yes, up to R16,800, twice a year</span><span class="bad">Only MRI/CT and scope co-pays</span></div></div>
+  <div class="vs-row"><div class="q">MRI/CT the scheme won't pay</div><div class="a"><span>R5,500 once a year</span><span>Up to R16,000</span><span>Co-pay only</span></div></div>
+  <div class="vs-row"><div class="q">Who can join</div><div class="a"><span>Under 30 R190, 30–49 R350. No parents</span><span>Under 42s only. No parents</span><span>Discovery members only; everyone on the scheme must join</span></div></div>
+  <div class="panel vs-take">
+    <p style="margin:0"><b>One thing to decide with the broker:</b> if the scheme <i>doesn't</i> exclude her cervix, medical aid cover starts about March 2027, but Turnberry still waits on a pregnancy until about October. Zestlife Optimal has no pregnancy wait as long as she isn't pregnant when it starts, for R86 a month more if she's under 30, and R74 less if she's 30 or older (2026 price, 2027 not out yet). If the cervix <i>is</i> excluded until December 2027, Turnberry's wait is over by then and it's the better buy.</p>
+  </div>
 
   <!-- NEXT PREGNANCY -->
   <div class="sec" id="next"><h2>🧵 Next pregnancy: check-ups and the cerclage</h2><p>Planning for a closely watched pregnancy: lots of gynae visits and scans, and a cerclage (a stitch in the cervix, usually done early in the pregnancy). Checked in Discovery's and Momentum's 2027 guides and Discovery's day-surgery and waiting-period documents, 13 Nov.</p></div>
@@ -411,7 +491,7 @@
       <summary><span class="ic">🏥</span><span class="st"><b>Hospital cover</b><small>The big pot · no limit</small></span></summary>
       <div class="bd">
         <p>Pays the hospital bill, theatre and NICU (neonatal intensive care) with no annual limit.</p>
-        <p><b>The catch:</b> only at a hospital on the plan's list. On Momentum that's the Associated list (Life Roseacres is on it). Anywhere else, you pay 30% of the bill.</p>
+        <p><b>The catch:</b> only at a hospital on the plan's list. On our plan that's the Smart network (Park Lane and Oxford are in it). For a planned stay anywhere else, it's R13,150 upfront.</p>
       </div>
     </details>
     <details class="acc lay-d">
@@ -466,7 +546,7 @@
     <details class="acc">
       <summary><span class="n">3</span><span class="st"><b>Ask every new doctor one question</b><small>It decides most of your costs</small></span></summary>
       <div class="bd">
-        <p>Say: <i>"Are you on Momentum's Associated list, and what will I pay myself per visit?"</i></p>
+        <p>Say: <i>"Do you have a payment arrangement with Discovery, and what will I pay myself per visit?"</i></p>
         <p>Some gynaes bill the medical aid and charge only about R450 on top. Others charge R1,900–R2,400 cash. That's the difference between about R11k and R46k a year.</p>
       </div>
     </details>
@@ -502,10 +582,10 @@
   </div>
 
   <!-- PICKS -->
-  <div class="sec" id="picks"><h2>🏆 The top 3</h2><p>"Year" = a high-risk pregnancy year: premiums plus what you'd pay yourself, with gap cover.</p></div>
+  <div class="sec" id="picks"><h2>🏆 The first top 3 (11 Nov)</h2><p>Our shortlist before we chose Essential Smart on 13 Nov. "Year" = a high-risk pregnancy year: premiums plus what you'd pay yourself, with gap cover.</p></div>
   <div class="picks">
-    <article class="pick best">
-      <div class="tag">⭐ Best balance · our pick</div>
+    <article class="pick">
+      <div class="tag">Old pick (11 Nov), before we chose Essential Smart</div>
       <div class="nm">Momentum Incentive · Associated</div>
       <div class="stats">
         <div><div class="lbl">Month</div><div class="v">R3,627</div></div>
@@ -613,7 +693,7 @@
       <div class="bd">
         <ul class="pl">
           <li><b>Turnberry Dynamic: R190 a month under 30, R350 for 30–49.</b> Pays up to 5× the scheme rate in hospital, plus scheme co-payments (up to R11,000 for a wrong-hospital penalty). 10-month wait for pregnancy.</li>
-          <li><b>Discovery Gap 500:</b> R295, Discovery members only. Doesn't pay scheme co-payments. 12-month pregnancy wait.</li>
+          <li><b>Discovery Gap 500:</b> R506 on Essential plans, Discovery members only. Doesn't pay scheme co-payments. 12-month pregnancy wait.</li>
           <li><b>Stratum Meridian400 / Elite500:</b> R301 / R579. Pays only 20% of pregnancy claims in the first 10 months.</li>
         </ul>
       </div>
@@ -688,7 +768,7 @@
     ['KeyHealth Origin', 2842, 60, 82, 128, 150],
     ['Discovery Classic Smart', 3257, 67, 89, 100, 122],
     ['Discovery Classic Smart Saver', 3616, 68, 90, 101, 123],
-    ['Momentum Incentive (Associated)', 3627, 69, 91, 102, 124, 'pk'],
+    ['Momentum Incentive (Associated)', 3627, 69, 91, 102, 124],
     ['Medihelp MedAdd', 4320, 73, 95, 141, 163],
     ['Bonitas BonSave', 4343, 72, 94, 140, 162],
     ['Momentum Incentive (Any hospital)', 4510, 79, 101, 112, 134],
