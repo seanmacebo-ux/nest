@@ -169,6 +169,12 @@
   .tl li:last-child { border-bottom: 0; }
   .tl .d { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; color: var(--accent); padding-top: 2px; }
   .chk .tagq { font-family: "JetBrains Mono", monospace; font-size: 9.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft); }
+  /* hospital list */
+  .hl { list-style: none; margin: 6px 0 0; padding: 0; }
+  .hl li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; padding: 10px 2px; border-bottom: 1px dotted var(--line); font-size: 14.5px; min-height: 44px; }
+  .hl li:last-child { border-bottom: 0; }
+  .hl a { font-weight: 600; color: var(--ink); text-decoration-color: var(--accent); }
+  .hl small { color: var(--ink-soft); font-size: 12.5px; }
   /* who to call */
   .ccs { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
   @media (max-width: 760px) { .ccs { grid-template-columns: 1fr; } }
@@ -212,6 +218,7 @@
   <nav class="jump" aria-label="Jump to section">
     <a href="#plan">Our plan</a>
     <a href="#contacts">📞 Who to call</a>
+    <a href="#lists">🏥 Hospital list</a>
     <a href="#into">What we're getting into</a>
     <a href="#vs-aid">Aid side by side</a>
     <a href="#vs-gap">Gap side by side</a>
@@ -288,6 +295,56 @@
     </article>
   </div>
   <p class="fine">Before signing with any broker, check their FSP number on the FSCA's website (fsca.co.za). The email buttons open a short draft in your mail app; read it and change anything before you send.</p>
+
+  <!-- HOSPITAL + DOCTOR LISTS -->
+  <div class="sec" id="lists"><h2>🏥 Discovery's lists</h2><p>Where our plan pays in full. The hospitals are from Discovery's own <b>2027</b> Smart network list. Tap a name to open it in Maps.</p></div>
+  <div class="panel">
+    <div class="lbl">🏥 Smart network hospitals in Gauteng</div>
+    <p class="fine" style="margin-top:6px">Planned stays here: hospital bill paid in full. Anywhere else: R13,150 upfront. Emergencies: any hospital, no upfront payment.</p>
+    <div class="lbl" style="margin-top:14px">Closest to the flat (East Rand)</div>
+    <ul class="hl">
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Life%20Roseacres%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Life Roseacres Hospital</a><small>Germiston</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Netcare%20Linkwood%20Clinic%2C%20Gauteng" target="_blank" rel="noopener">Netcare Linkwood Clinic</a><small>Linksfield</small> <span class="badge">Births only (an "exception" hospital)</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Life%20The%20Glynnwood%2C%20Gauteng" target="_blank" rel="noopener">Life The Glynnwood</a><small>Benoni</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Netcare%20Alberton%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Netcare Alberton Hospital</a><small>Alberton</small></li>
+    </ul>
+    <div class="lbl" style="margin-top:14px">Johannesburg</div>
+    <ul class="hl">
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Park%20Lane%20Clinic%2C%20Gauteng" target="_blank" rel="noopener">Park Lane Clinic</a><small>Parktown</small> <span class="badge">Dr Moore's hospital</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Oxford%20Maternity%20Unit%2C%20Gauteng" target="_blank" rel="noopener">Oxford Maternity Unit</a><small>Saxonwold</small> <span class="badge">Midwife-led births</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Wits%20Donald%20Gordon%20Medical%20Centre%2C%20Gauteng" target="_blank" rel="noopener">Wits Donald Gordon Medical Centre</a><small>Parktown</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Nelson%20Mandela%20Childrens%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Nelson Mandela Childrens Hospital</a><small>Parktown</small> <span class="badge">Children</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mediclinic%20Morningside%2C%20Gauteng" target="_blank" rel="noopener">Mediclinic Morningside</a><small>Sandton</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Life%20Fourways%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Life Fourways Hospital</a><small>Fourways</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Olivedale%20Clinic%2C%20Gauteng" target="_blank" rel="noopener">Olivedale Clinic</a><small>Randburg</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Life%20Wilgeheuwel%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Life Wilgeheuwel Hospital</a><small>Roodepoort</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Netcare%20Pinehaven%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Netcare Pinehaven Hospital</a><small>Krugersdorp</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Dr%20S%20K%20Matseke%20Memorial%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Dr S K Matseke Memorial Hospital</a><small>Soweto</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Botshelong%20Empilweni%20Clinic%2C%20Gauteng" target="_blank" rel="noopener">Botshelong Empilweni Clinic</a><small>Vosloorus</small></li>
+    </ul>
+    <div class="lbl" style="margin-top:14px">Midrand and Pretoria</div>
+    <ul class="hl">
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Netcare%20Waterfall%20City%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Netcare Waterfall City Hospital</a><small>Midrand</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mediclinic%20Midstream%2C%20Gauteng" target="_blank" rel="noopener">Mediclinic Midstream</a><small>Olifantsfontein</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Life%20Groenkloof%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Life Groenkloof Hospital</a><small>Pretoria</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Life%20Wilgers%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Life Wilgers Hospital</a><small>Pretoria</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mediclinic%20Medforum%2C%20Gauteng" target="_blank" rel="noopener">Mediclinic Medforum</a><small>Pretoria</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mediclinic%20Muelmed%2C%20Gauteng" target="_blank" rel="noopener">Mediclinic Muelmed</a><small>Pretoria</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mediclinic%20Legae%2C%20Gauteng" target="_blank" rel="noopener">Mediclinic Legae</a><small>Mabopane</small></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Optimed%20Eye%20And%20Laser%20Clinic%2C%20Gauteng" target="_blank" rel="noopener">Optimed Eye And Laser Clinic</a><small>Pretoria</small> <span class="badge">Eyes</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Netcare%20Femina%20Clinic%2C%20Gauteng" target="_blank" rel="noopener">Netcare Femina Clinic</a><small>Pretoria</small> <span class="badge">Births only</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Netcare%20Pretoria%20East%20Private%20Hospital%2C%20Gauteng" target="_blank" rel="noopener">Netcare Pretoria East Private Hospital</a><small>Pretoria</small> <span class="badge">Births only</span></li>
+      <li><a href="https://www.google.com/maps/search/?api=1&amp;query=Mediclinic%20Vereeniging%2C%20Gauteng" target="_blank" rel="noopener">Mediclinic Vereeniging</a><small>Vereeniging</small></li>
+    </ul>
+    <div class="warnbox" style="background:var(--warn-soft)"><span>⚠️</span><span><b>Not on the list:</b> Linksfield, Bedford Gardens, Sunninghill and Netcare Milpark (except for a few heart procedures). A planned stay there costs R13,150 upfront. Discovery says the list can change at any time, so check the app before anything planned.</span></div>
+    <div class="lbl" style="margin-top:16px">🩺 Doctors who charge Discovery's rate</div>
+    <ul class="pl">
+      <li><b>Discovery doesn't publish this list.</b> It's only in the Discovery app, under "Find a provider", once Mishka is a member. A broker can look doctors up before then.</li>
+      <li><b>Network GPs</b> (R135 a visit on our plan) are in the same search. Pick one near the flat and save it.</li>
+      <li><b>Specialists:</b> ask each one, <i>"Do you have a payment arrangement with Discovery?"</i> If yes, Discovery pays them in full and there's no gap.</li>
+    </ul>
+    <p class="fine">Source: Discovery Health Medical Scheme, "Quality care in our hospital network 2027" (Smart Hospital Network and Smart Exception Hospitals pages). Downloaded 13 Nov 2026, checked 16 Nov.</p>
+  </div>
 
   <!-- WHAT WE'RE GETTING INTO -->
   <div class="sec" id="into"><h2>🔍 What we're getting into</h2><p>In one place: what we pay every month, what we still pay ourselves, and when the cover actually starts. All from Discovery's and Turnberry's 2027 documents, checked 13 Nov. Out-of-pocket amounts are estimates.</p></div>
@@ -562,7 +619,7 @@
       <li><b>If a birth falls before about Oct 2027</b> (gap cover's 10-month wait), add R10–19k for Dr Moore's and the anaesthetist's fees above the plan's rate. Make it R3,500 a month then.</li>
       <li><b>Doula:</b> Dilfeeza's fee goes on top. Ask her what it is.</li>
     </ul>
-    <p class="fine">Prices are Discovery's and Turnberry's 2027 documents, checked 13 Nov. Hospital lists are 2026; confirm Park Lane and Oxford stay in the Smart network for 2027. Out-of-pocket amounts are estimates, not quotes.</p>
+    <p class="fine">Prices are Discovery's and Turnberry's 2027 documents, checked 13 Nov. Park Lane and Oxford are both on Discovery's 2027 Smart network list. Out-of-pocket amounts are estimates, not quotes.</p>
   </div>
 
   <!-- HOW IT WORKS -->
@@ -849,7 +906,7 @@
   <div class="panel" style="margin-top:12px">
     <div class="lbl">🏥 The birth and the hospital</div>
     <ul class="chk">
-      <li data-tick="med-q9"><span class="box"></span><span class="txt">Are Netcare Park Lane and the Oxford Maternity Unit still in the Smart network for 2027? <small>Ask: Discovery · The hospital lists we have are 2026.</small></span></li>
+      <li data-tick="med-q9"><span class="box"></span><span class="txt">Are Netcare Park Lane and the Oxford Maternity Unit still in the Smart network for 2027? <small>Ask: Discovery · Both are on the 2027 list; confirm nothing changes before the birth.</small></span></li>
       <li data-tick="med-q3"><span class="box"></span><span class="txt">How premature a baby can Park Lane's NICU take? If baby has to be moved to another hospital, is that covered? <small>Ask: Park Lane + Discovery</small></span></li>
       <li data-tick="med-q21"><span class="box"></span><span class="txt">What counts as a "medically needed" caesar on Essential Smart, and who approves it? <small>Ask: Discovery · A caesar by choice isn't covered.</small></span></li>
       <li data-tick="med-q22"><span class="box"></span><span class="txt">How many days in hospital do they pay after a normal birth and a caesar? What if she needs longer? <small>Ask: Discovery · Guide says 3 and 4 days.</small></span></li>
