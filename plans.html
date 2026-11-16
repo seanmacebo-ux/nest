@@ -267,7 +267,7 @@
       (fam.mom ? '<div class="pens" role="group" aria-label="Late-joiner penalty">' + PENALTY.map(x => '<button type="button" data-pen="' + x[0] + '" aria-pressed="' + (fam.pen === x[0] ? 'true' : 'false') + '">' + (x[0] ? '+' + x[0] + '%' : '0%') + ' · ' + x[1] + '</button>').join('') + '</div>' : '') +
       row('baby', 'Add the baby', 'Child rate', '+' + R(p.child)) +
       '</div><div class="total"><span>' + esc(famLabel()) + '</span><b>' + R(famCost(p)) + '</b></div>' +
-      (fam.mom ? '<div class="warnb"><b>Two catches with Sean\'s mom.</b> If she\'s 35+ and has been without medical aid, a late-joiner penalty is added for life (pick the band above; it\'s applied to her whole rate here, so it\'s a rough upper figure). And Discovery only takes the main member\'s own parent, so she may need Sean as main member, or her own policy. Ask the broker.</div>' : '') +
+      (fam.mom ? '<div class="warnb"><b>Two catches with Sean\'s mom.</b> If she\'s 35+ and has been without medical aid, a late-joiner penalty is added for life (pick the band above; it\'s applied to her whole rate here, so it\'s a rough upper figure). She turns 50 next year: with no SA medical aid since 35, joining at 49 is the +25% band and joining at 50 is +50%. And Discovery only takes the main member\'s own parent, so she may need Sean as main member, or her own policy. Ask the broker.</div>' : '') +
       '<p class="fine">2027 rates. Gap cover is extra (see Gap cover tab).</p>';
   }
   function planView(id, tab) {
