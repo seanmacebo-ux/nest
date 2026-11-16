@@ -82,7 +82,7 @@ const BOUGHT={
     return `<div class="sec" id="${slug(short(it.name))}"><h2>${iconOf(it)} ${esc(it.name)}</h2>
       <p>${sub ? `<span class="isub">${sub}</span>` : ''}${it.note ? ' ' + it.note : ''}${!n && !it.note ? ' No options yet. Tap 🔎 and I\'ll find some.' : ''}</p></div>
       ${n ? `<div class="opts">${it.o.map(o => optHTML(it, o)).join('')}</div>` : ''}
-      <div class="iacts">${n ? '' : `<button type="button" data-done="${esc(it.name)}">✓ Got it</button>`}<button type="button" data-more="${esc(it.name)}">🔎 More options</button><button type="button" data-skip="${esc(it.name)}">✕ Don't need it</button></div>`;
+      <div class="iacts">${n > 1 ? `<button type="button" class="cmpb" data-cmp="${esc(it.name)}">⚖️ Compare side by side</button>` : ''}${n ? '' : `<button type="button" data-done="${esc(it.name)}">✓ Got it</button>`}<button type="button" data-more="${esc(it.name)}">🔎 More options</button><button type="button" data-skip="${esc(it.name)}">✕ Don't need it</button></div>`;
   };
 
   // sticky pill bar
@@ -109,8 +109,51 @@ const BOUGHT={
   const box = document.getElementById('addtxt');
   document.querySelectorAll('.qchips button').forEach(c => c.addEventListener('click', () => { box.value = (box.value.trim() ? box.value.replace(/\s*$/, '') + '\n' : '') + c.dataset.q; box.focus(); }));
   document.getElementById('addsend').addEventListener('click', () => { const t = box.value.trim(); if (!t) { box.focus(); return; } go('add:' + t, '🛒 Add to ' + ROOM + ':\n' + t); });
+  // ⚖️ compare: any item with 2+ options opens a side-by-side sheet (Sean, 16 Nov)
+  const all = need.concat(maybe);
+  const ov = document.createElement('div'); ov.className = 'cmp-ov'; ov.hidden = true;
+  ov.innerHTML = '<div class="cmp-sheet" role="dialog" aria-modal="true" aria-labelledby="cmp-t"><div class="cmp-top"><b id="cmp-t"></b><button type="button" class="cmp-x" data-cmpclose aria-label="Close">✕</button></div><p class="cmp-hint">Tap to choose up to 3.</p><div class="cmp-chips"></div><div class="cmp-body"></div></div>';
+  document.body.appendChild(ov);
+  let cIt = null, cSel = [];
+  const cRow = (label, cells) => `<div class="cmp-row"><div class="cmp-q">${label}</div><div class="cmp-a" style="--n:${cSel.length}">${cells.join('')}</div></div>`;
+  const cRender = () => {
+    const opts = cIt.o, pk = pickOf(cIt), sel = cSel.map(i => opts[i]);
+    ov.querySelector('.cmp-chips').innerHTML = opts.map((o, i) => `<button type="button" data-ci="${i}" aria-pressed="${cSel.includes(i)}">${o.pick ? '⭐ ' : ''}${esc(short(o.n).slice(0, 34))}<small>${esc(o.p)}</small></button>`).join('');
+    const prices = sel.map(o => num(o.p)), low = Math.min(...prices.filter(Boolean));
+    const vs = o => { if (o === pk) return '⭐ The pick'; if (!pk || !num(o.p)) return ''; const d = num(o.p) - num(pk.p); return d === 0 ? 'Same as the pick' : (d > 0 ? '+' : '−') + fmt(Math.abs(d)) + ' vs the pick'; };
+    ov.querySelector('.cmp-body').innerHTML =
+      `<div class="cmp-a cmp-mini" style="--n:${sel.length}">${sel.map(o => `<b class="${o.pick ? 'pk' : ''}">${o.pick ? '⭐ ' : ''}${esc(short(o.n))}</b>`).join('')}</div>` +
+      `<div class="cmp-a cmp-heads" style="--n:${sel.length}">${sel.map(o => `<div class="cmp-h${o.pick ? ' pk' : ''}">${photoHTML(cIt, o)}<b>${esc(o.n)}</b></div>`).join('')}</div>` +
+      cRow('Price', sel.map(o => `<span class="${num(o.p) === low && sel.length > 1 ? 'best' : ''}"><b class="cmp-p">${esc(o.p)}</b>${vs(o) ? '<br>' + vs(o) : ''}</span>`)) +
+      cRow('Shop', sel.map(o => `<span>${esc(o.s)}${o.c ? '<br><small>checked ' + esc(o.c) + '</small>' : ''}</span>`)) +
+      (sel.some(o => /\(/.test(o.n)) ? cRow('Details', sel.map(o => `<span>${esc((o.n.match(/\(([^)]*)\)/) || [, '—'])[1])}</span>`)) : '') +
+      (sel.some(o => o.t) ? cRow('In short', sel.map(o => `<span>${o.t ? esc(o.t) : (o.pick ? '⭐ Pick' : '—')}</span>`)) : '') +
+      cRow('Why it\'s good', sel.map(o => `<span>${o.w || '—'}</span>`)) +
+      cRow('The catch', sel.map(o => `<span class="${o.f ? 'bad' : ''}">${o.f ? '⚠️ ' + o.f : 'None noted'}</span>`)) +
+      cRow('', sel.map(o => `<span class="cmp-go">${o.u ? `<a href="${esc(o.u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</span>`));
+  };
+  const cOpen = name => {
+    cIt = all.find(it => it.name === name); if (!cIt) return;
+    const pi = cIt.o.findIndex(o => o.pick);
+    cSel = (pi >= 0 ? [pi] : []).concat(cIt.o.map((o, i) => i).filter(i => i !== pi)).slice(0, Math.min(3, cIt.o.length));
+    ov.querySelector('#cmp-t').textContent = '⚖️ ' + short(cIt.name);
+    cRender(); ov.hidden = false; document.documentElement.classList.add('cmp-lock');
+    ov.querySelector('.cmp-sheet').scrollTop = 0; ov.querySelector('.cmp-x').focus();
+  };
+  const cClose = () => { ov.hidden = true; document.documentElement.classList.remove('cmp-lock'); };
+  ov.addEventListener('click', e => {
+    if (e.target === ov || e.target.closest('[data-cmpclose]')) { cClose(); return; }
+    const c = e.target.closest('[data-ci]'); if (!c) return;
+    const i = +c.dataset.ci;
+    if (cSel.includes(i)) { if (cSel.length > 1) cSel = cSel.filter(x => x !== i); }
+    else { cSel = cSel.concat(i); if (cSel.length > 3) cSel.shift(); }
+    cSel.sort((a, b) => a - b); cRender();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !ov.hidden) cClose(); });
+
   document.addEventListener('click', e => {
-    const b = e.target.closest('button'); if (!b || b.closest('.dec')) return;
+    const b = e.target.closest('button'); if (!b || b.closest('.dec') || b.closest('.cmp-ov')) return;
+    if (b.dataset.cmp) { cOpen(b.dataset.cmp); return; }
     if (b.dataset.k) { b.classList.add('sent'); b.textContent = '✓ Sent'; go(b.dataset.k, '✅ Bought: ' + b.dataset.k); }
     else if (b.dataset.done) go(b.dataset.done, '✅ Bought: ' + b.dataset.done);
     else if (b.dataset.more) go('more:' + b.dataset.more, '🔎 More options please: ' + b.dataset.more);
