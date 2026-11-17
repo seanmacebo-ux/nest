@@ -72,7 +72,7 @@
     <p class="sub">Every check and calculation behind the picks, with the maths shown and links to the sources. Each room's options link back here. Prices change, so each section says when it was checked.</p>
   </header>
   <nav class="jump" style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0">
-    <a class="tab" href="#prices">🔁 Price re-check</a><a class="tab" href="#minipc">💻 Mini PC import</a><a class="tab" href="#weddell">💧 Weddell / Desertcart</a><a class="tab" href="#projector">📽️ Projector</a><a class="tab" href="#blinds">🪟 Blinds</a><a class="tab" href="#shower">🚿 Shower head</a><a class="tab" href="#fibre">🛜 Fibre</a><a class="tab" href="#books">📚 Books + papers</a>
+    <a class="tab" href="#prices">🔁 Price re-check</a><a class="tab" href="#minipc">💻 Mini PC import</a><a class="tab" href="#weddell">💧 Weddell / Desertcart</a><a class="tab" href="#projector">📽️ Projector</a><a class="tab" href="#blinds">🪟 Blinds</a><a class="tab" href="#shower">🚿 Shower head</a><a class="tab" href="#fibre">🛜 Fibre</a><a class="tab" href="#books">📚 Books + papers</a><a class="tab" href="#water">💧 Mineral water</a>
   </nav>
 
   <div class="panel" id="prices" style="margin-top:14px">
@@ -153,6 +153,19 @@
     <h2 style="margin:0">📚 Books and papers (Nest Learn)</h2>
     <p><b>49 books and papers from 2023 or later</b> were added across the 5 tracks. All 50 links were then opened in browser-kit. That found and fixed 4 dead or wrong links, and swapped in the newest BFAP food-price brief (Sep 2026: a healthy basket costs <b>R3,905 a month</b>). 8 books got Takealot prices. 5 journal sites block bots, so those cards link to the journal's own page.</p>
     <p><a href="https://seanmacebo-ux.github.io/nest-learn/" target="_blank" rel="noopener">Open Nest Learn →</a></p>
+  </div>
+
+  <div class="panel" id="water" style="margin-top:14px">
+    <h2 style="margin:0">💧 Mineral water report: fact-check (17 Nov)</h2>
+    <p>Sean shared a report on SA mineral waters. Each brand's numbers were checked against its own website with browser-kit.</p>
+    <table class="lt"><thead><tr><th>Brand · what checks out</th><th>Verdict</th></tr></thead><tbody>
+      <tr class="best"><td><span class="nm">Aquamine (Cradle of Humankind, Gauteng)</span><span class="wy">Ca 58, Mg 40, HCO₃ 240 match its site exactly. Also Na 5, K 4, Cl 8, SO₄ 12, silica 11. ⚠️ That analysis is from the CSIR, dated <b>10 Jan 2010</b>. Glass bottles carry a deposit. Maths: the ions add up to 378 mg/L. Bicarbonate loses about half its weight when dried, so TDS ≈ 378 − 122 ≈ <b>256</b>, which matches its "well above 250".</span></td><td class="p">✅ real, but old lab</td></tr>
+      <tr class="best"><td><span class="nm">Africqua Mount Aqua</span><span class="wy">Ca 13.3, Mg 16.4, TDS 144 match its site. ⚠️ "97" is alkalinity <b>as CaCO₃</b>, not bicarbonate. As bicarbonate, it's about 97 × 1.22 ≈ <b>118 mg/L</b>.</span></td><td class="p">✅ mostly right</td></tr>
+      <tr class="no"><td><span class="nm">Mountain Falls (Overberg)</span><span class="wy">The <b>TDS 345 and pH 7</b> are on its homepage. But its site doesn't publish the Ca 14, Mg 11 or HCO₃ 110 the report gives. If those were true, they'd only explain about a third of 345, so the rest would be other salts, like sodium and chloride. It's not a calcium/magnesium water. Glass: 12 × 750ml for R485.</span></td><td class="p">❓ ask for the lab sheet</td></tr>
+      <tr class="no"><td><span class="nm">Ah Che Bello (Paarl / Karkloof)</span><span class="wy">Glass only (750ml and 440ml), still and sparkling, natural mineral water. Its website shows <b>no mineral analysis at all</b>. The report doesn't give one either, it only says it's "on the label". Not verified.</span></td><td class="p">❓ no numbers</td></tr>
+      <tr><td><span class="nm">S.Pellegrino · Gerolsteiner</span><span class="wy">Both brands' sites were down or wouldn't load for browser-kit, so not verified today. Read the analysis off the bottle.</span></td><td class="p">❔ not checked</td></tr>
+    </tbody></table>
+    <p style="font-size:12.5px;color:var(--ink-soft)"><b>Other problems with the report:</b> its checklist says "four markers" but only lists three. pH and TDS aren't proportional, so "TDS vs pH ratio" isn't a real test. "Verified typical lab analyses" overstates it: two brands have no published numbers. <b>Best local pick for calcium + magnesium: Aquamine</b>, from a spring at Muldersdrift, Gauteng. Ask them for a current analysis.<br><b>Sources:</b> <a href="https://aquamine.co.za/products.html" target="_blank" rel="noopener">Aquamine analysis</a> · <a href="https://africqua.co.za/whats-in-the-water/" target="_blank" rel="noopener">Africqua analysis</a> · <a href="https://mountainfalls.co.za/" target="_blank" rel="noopener">Mountain Falls</a> · <a href="https://chebello.co.za" target="_blank" rel="noopener">Che Bello</a>.</p>
   </div>
 
   <div class="foot">FINDINGS · every number here was checked on 17 Nov 2026 with browser-kit unless it says otherwise · The Nest</div>
