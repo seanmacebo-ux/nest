@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C4CF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Findings · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261114c">
+<style>
+  .lt { width: 100%; border-collapse: collapse; margin: 11px 0 0; font-size: 13px; }
+  .lt th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .lt td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .lt tr:last-child td { border-bottom: none; }
+  .lt .p { font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
+  .lt .nm { font-weight: 600; }
+  .lt .wy { color: var(--ink-soft); font-size: 12px; display: block; margin-top: 3px; line-height: 1.45; }
+  .lt tr.best td { background: var(--good-soft); }
+  .lt tr.no td { opacity: .7; }
+  .todos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .todos li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; padding: 9px 8px; border-radius: 9px; }
+  .todos li:hover { background: var(--surface-2); }
+  .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
+  .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
+  .speed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  @media (max-width: 600px) { .speed { grid-template-columns: 1fr; } }
+  .sp { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .sp .k { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .sp .v { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 26px; margin-top: 4px; color: var(--home); }
+  .sp .v.bad { color: var(--red); }
+  .sp .s { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="lounge.html">Lounge</a>
+  <a class="tab" href="bedroom.html">Bedroom</a>
+  <a class="tab" href="bathroom.html">Bathroom</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
+  <a class="tab" href="office.html">Office</a>
+  <a class="tab" href="medical.html">Medical aid</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="recovery.html">Post-pregnancy</a>
+  <a class="tab" href="decided.html">Decided</a>
+  <a class="tab" href="findings.html" aria-current="page">Findings</a>
+</div></nav>
+<script src="nav.js?v=20261117b"></script>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> How we worked it out · updated 17 Nov 2026</div>
+    <h1>The <em>Findings</em>.</h1>
+    <p class="sub">Every check and calculation behind the picks, with the maths shown and links to the sources. Each room's options link back here. Prices change, so each section says when it was checked.</p>
+  </header>
+  <nav class="jump" style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0">
+    <a class="tab" href="#prices">🔁 Price re-check</a><a class="tab" href="#minipc">💻 Mini PC import</a><a class="tab" href="#weddell">💧 Weddell / Desertcart</a><a class="tab" href="#projector">📽️ Projector</a><a class="tab" href="#blinds">🪟 Blinds</a><a class="tab" href="#shower">🚿 Shower head</a><a class="tab" href="#fibre">🛜 Fibre</a><a class="tab" href="#books">📚 Books + papers</a>
+  </nav>
+
+  <div class="panel" id="prices" style="margin-top:14px">
+    <h2 style="margin:0">🔁 Price re-check, every Takealot option (17 Nov)</h2>
+    <p><b>Finding:</b> all <b>77</b> Takealot options in the room pages were re-opened with browser-kit. <b>16 prices changed</b> and <b>1 item went out of stock</b>. The room pages are updated.</p>
+    <table class="lt"><thead><tr><th>Item</th><th>Was</th><th>Now</th></tr></thead><tbody>
+      <tr class="no"><td><span class="nm">Defy 323L fridge</span></td><td class="p">R5,999</td><td class="p">R7,299</td></tr>
+      <tr class="no"><td><span class="nm">Magnetic blackout blind</span></td><td class="p">R952</td><td class="p">R1,378</td></tr>
+      <tr class="no"><td><span class="nm">Elektra 36cm floor fan</span></td><td class="p">R710</td><td class="p">R999</td></tr>
+      <tr class="no"><td><span class="nm">Blaumann 7.7L stock pot</span></td><td class="p">R487</td><td class="p">R649</td></tr>
+      <tr class="no"><td><span class="nm">Cast iron Dutch oven 24.5cm</span></td><td class="p">R399</td><td class="p">R535</td></tr>
+      <tr class="no"><td><span class="nm">Fir wood bed frame</span></td><td class="p">R2,689</td><td class="p">R2,889</td></tr>
+      <tr class="no"><td><span class="nm">Stainless mixing bowls</span></td><td class="p">R199</td><td class="p">R259</td></tr>
+      <tr class="best"><td><span class="nm">Consol Willy tumblers, 8</span></td><td class="p">R159</td><td class="p">R100</td></tr>
+      <tr class="best"><td><span class="nm">Cast iron set, turquoise</span></td><td class="p">R898</td><td class="p">R799</td></tr>
+      <tr class="best"><td><span class="nm">Porcelain ramekins, 6</span></td><td class="p">R219</td><td class="p">R188</td></tr>
+      <tr class="best"><td><span class="nm">Blackwell cast iron pans</span></td><td class="p">R367</td><td class="p">R335</td></tr>
+      <tr><td><span class="nm">5 more moved by R1–R10</span><span class="wy">Rustic bedside table, 2 cast iron sets, suction blind, seat cushion, pleated blind.</span></td><td class="p">—</td><td class="p">—</td></tr>
+      <tr class="no"><td><span class="nm">Mellerware Breeze pedestal fan</span></td><td class="p">R599</td><td class="p">❌ out of stock</td></tr>
+    </tbody></table>
+    <p class="fine" style="font-size:12.5px;color:var(--ink-soft)">Method: Takealot's own product data for each item, using the price of the offer Takealot shows by default. Other shops (Decofurn, Wootware, Evetech and so on) weren't re-checked in this pass.</p>
+  </div>
+
+  <div class="panel" id="minipc" style="margin-top:14px">
+    <h2 style="margin:0">💻 Mini PC: import from GMKtec vs buy in SA</h2>
+    <p><b>Finding:</b> only the <b>M6 Ultra</b> comes out cheaper to import. The bigger ones cost the same or more once VAT is added.</p>
+    <p><b>The maths:</b> landed price = (US$ price × R16.94) + import VAT + about R300 courier fee. SARS charges VAT on the <b>customs value plus 10%</b>, at 15%, so the VAT is <b>16.5% of the price</b> (15% × 1.10). Computers are normally duty-free, so no duty is added.</p>
+    <table class="lt"><thead><tr><th>Model · working</th><th>Landed</th><th>In SA</th><th>Import</th></tr></thead><tbody><tr class="best"><td><span class="nm">M6 Ultra 32GB/1TB</span><span class="wy">$679.99 × R16.94 = R11,519 · + VAT R1,901 · + R300 courier</span></td><td class="p">R13,700</td><td class="p">R15,499</td><td class="p">saves R1,800</td></tr><tr class="best"><td><span class="nm">M6 Ultra 16GB/512GB</span><span class="wy">$499.99 × R16.94 = R8,470 · + VAT R1,398 · + R300 courier</span></td><td class="p">R10,150</td><td class="p">R11,999</td><td class="p">saves R1,850</td></tr><tr class="no"><td><span class="nm">K8 Plus 32GB/1TB</span><span class="wy">$919.99 × R16.94 = R15,585 · + VAT R2,571 · + R300 courier</span></td><td class="p">R18,450</td><td class="p">R17,999</td><td class="p">+R450</td></tr><tr class="no"><td><span class="nm">K12 32GB/1TB</span><span class="wy">$919.99 × R16.94 = R15,585 · + VAT R2,571 · + R300 courier</span></td><td class="p">R18,450</td><td class="p">R16,999</td><td class="p">+R1,450</td></tr><tr class="no"><td><span class="nm">K11 32GB/1TB</span><span class="wy">$999.99 × R16.94 = R16,940 · + VAT R2,795 · + R300 courier</span></td><td class="p">R20,050</td><td class="p">R17,999</td><td class="p">+R2,050</td></tr></tbody></table>
+    <p style="font-size:12.5px;color:var(--ink-soft)"><b>Not included:</b> GMKtec's shipping cost (only shown at checkout). The R300 courier fee is an estimate. The 0% duty on computers is the usual rate, but I didn't check it on SARS's tariff book. A warranty claim means sending it back overseas.<br>
+    <b>Sources:</b> <a href="https://www.gmktec.com/products/amd-ryzen-5-7640hs-mini-pc-nucbox-m6-ultra" target="_blank" rel="noopener">GMKtec store prices</a> (read 17 Nov, store ships to South Africa) · <a href="https://www.x-rates.com/calculator/?from=USD&to=ZAR&amount=1" target="_blank" rel="noopener">US$1 = R16.94 (x-rates, 17 Nov)</a> · <a href="https://www.sars.gov.za/faq/faq-how-is-vat-calculated-on-imported-goods/" target="_blank" rel="noopener">SARS: how import VAT is calculated</a> · SA prices from the <a href="office.html#mini-pc">Office page</a> (Wootware).</p>
+  </div>
+
+  <div class="panel" id="weddell" style="margin-top:14px">
+    <h2 style="margin:0">💧 Weddell refills: Desertcart direct vs Amazon.co.za</h2>
+    <p><b>Finding:</b> Desertcart's own prices look cheaper (3+1 pack <b>R2,543</b> vs <b>R2,641</b> on Amazon), but that's probably not the full price. <b>Amazon's R2,641 is all-in.</b></p>
+    <ul>
+      <li><b>Desertcart's shipping policy</b> adds shipping at checkout. It lists the countries where Desertcart pays customs, and <b>South Africa isn't one of them</b>, even though the site banner says "customs included".</li>
+      <li><b>If SARS VAT applies:</b> R2,543 × 16.5% ≈ <b>R420</b> VAT at the door. That makes it ≈ <b>R2,963 + shipping</b>, which is more than Amazon.</li>
+      <li><b>Amazon.co.za:</b> VAT and delivery are included, and Amazon's A-to-z Guarantee covers it. It's sold by DesertcartZA, arriving 1–4 Dec.</li>
+      <li><b>Price per filter:</b> genuine 3+1 = R2,641 ÷ 4 = <b>R660</b> · genuine 2+2 = R2,346 ÷ 4 = <b>R587</b> · compatible BFLEPATI 2+2 = R1,378 ÷ 4 = <b>R345</b>, plus shipping and possibly VAT. Compatible filters aren't NSF-certified.</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--ink-soft)"><b>Couldn't check:</b> Desertcart's product pages block bots, even in real Chrome, so the actual checkout total is unknown. Test it on your phone, with the Edenvale address.<br><b>Sources:</b> <a href="https://www.desertcart.co.za/support/shipping" target="_blank" rel="noopener">Desertcart shipping policy</a> · <a href="https://www.desertcart.co.za/support/return" target="_blank" rel="noopener">Desertcart returns (store credit only)</a> · <a href="https://www.amazon.co.za/dp/B0DK127QW1" target="_blank" rel="noopener">Amazon 3+1 listing</a> · <a href="https://www.sars.gov.za/faq/faq-how-is-vat-calculated-on-imported-goods/" target="_blank" rel="noopener">SARS import VAT</a> · options on the <a href="bathroom.html">Bathroom page</a>.</p>
+  </div>
+
+  <div class="panel" id="projector" style="margin-top:14px">
+    <h2 style="margin:0">📽️ Projector that sits at the wall and copes with light</h2>
+    <p><b>Finding:</b> that's an <b>ultra-short throw (UST) laser</b> projector. The cheapest on Takealot is the <b>Hisense PL2 at R27,498</b> (2,700 ANSI lumens). The brightest is the <b>Epson LS650 at R40,729</b> (3,600 lumens).</p>
+    <ul>
+      <li><b>Light:</b> even 3,600 lumens washes out on a plain painted wall in daylight. A grey light-rejecting (ALR) screen is what makes UST work with light in the room. Takealot doesn't sell one.</li>
+      <li><b>Honest comparison:</b> a <b>Hisense 85" E7Q TV is R14,999</b> (4.7★, 23 reviews). That's about half the PL2, and better in a bright room.</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--ink-soft)"><b>Sources:</b> brightness and prices from each Takealot listing (17 Nov). Options are on the <a href="bedroom.html#projector">Bedroom page</a>.</p>
+  </div>
+
+  <div class="panel" id="blinds" style="margin-top:14px">
+    <h2 style="margin:0">🪟 Blinds for the bedroom window (no drilling)</h2>
+    <p><b>Window:</b> <b>145cm wide × 88cm tall</b> inside the recess, from Sean's measuring photo (17 Nov).</p>
+    <ul>
+      <li><b>Pleated paper blind</b> (90 wide × 150 long): 145 ÷ 90 = 1.6, so you need <b>2</b>. Trim each to about 72.5cm wide and 90cm long. 2 × R359 = <b>R718</b>.</li>
+      <li><b>Magnetic blackout</b> (300 × 148): one 145 × 88 piece fits, with lots spare. <b>R1,378</b> (was R952 this morning).</li>
+      <li><b>Stick-on blackout, size M</b> (1.45m × 2m): the width matches exactly. Trim the length to about 90cm. <b>R679</b>.</li>
+      <li><b>Spring rod</b> (110–200cm) fits 145. But the café curtains are 123cm long, which is 123 − 88 = <b>35cm too long</b>.</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--ink-soft)">Options are on the <a href="bedroom.html#blinds">Bedroom page</a>.</p>
+  </div>
+
+  <div class="panel" id="shower" style="margin-top:14px">
+    <h2 style="margin:0">🚿 Shower head: why 15cm</h2>
+    <p>A wider head spreads the same water over a bigger area, so each jet is softer. The Weddell already lowers pressure a little, and Amazon's review summary mentions reduced pressure. So <b>15cm is the safe step up</b>, and 20cm is the most to go for. All the options fit a standard ½-inch arm. Importing one isn't worth it: on a R100–R300 item, the shipping costs more than the head. Options are on the <a href="bathroom.html#shower-head">Bathroom page</a>.</p>
+  </div>
+
+  <div class="panel" id="fibre" style="margin-top:14px">
+    <h2 style="margin:0">🛜 Fibre: is it delivering?</h2>
+    <p>Plan: Evotel 120/120 (billed through Afrihost). Sean's test on 17 Nov, over WiFi: <b>129 down / 134 up</b>. That's <b>108% / 112%</b> of the plan (129 ÷ 120, 134 ÷ 120). A 1080p stream needs about 6–10 up, so even three at once fit easily. Ping wasn't captured. See the <a href="wifi.html">WiFi page</a>.</p>
+  </div>
+
+  <div class="panel" id="books" style="margin-top:14px">
+    <h2 style="margin:0">📚 Books and papers (Nest Learn)</h2>
+    <p><b>49 books and papers from 2023 or later</b> were added across the 5 tracks. All 50 links were then opened in browser-kit. That found and fixed 4 dead or wrong links, and swapped in the newest BFAP food-price brief (Sep 2026: a healthy basket costs <b>R3,905 a month</b>). 8 books got Takealot prices. 5 journal sites block bots, so those cards link to the journal's own page.</p>
+    <p><a href="https://seanmacebo-ux.github.io/nest-learn/" target="_blank" rel="noopener">Open Nest Learn →</a></p>
+  </div>
+
+  <div class="foot">FINDINGS · every number here was checked on 17 Nov 2026 with browser-kit unless it says otherwise · The Nest</div>
+</div>
+<script src="nest.js?v=20261112c"></script>
+</body>
+</html>
