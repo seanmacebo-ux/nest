@@ -166,6 +166,11 @@
   .opt .on { font-size: 14px; line-height: 1.35; margin: 0; overflow-wrap: anywhere; }
   .opt .opr { font-size: 21px; line-height: 1.25; letter-spacing: -.04em; margin-top: 7px; }
   .opt .ometa { font-size: 11px; line-height: 1.4; color: var(--ink-soft); margin-top: 3px; }
+  .opt .oimp, .opt .oimp-note { font-size: 12px; line-height: 1.5; color: var(--ink-soft); overflow-wrap: anywhere; }
+  .opt .oimp { margin-top: 8px; }
+  .opt .oimp .good { color: var(--good); }
+  .opt .oimp-note { margin-top: 3px; }
+  .opt .oimp-note > summary { cursor: pointer; }
   .opt .ow { margin-top: 12px; line-height: 1.55; }
   .opt .of { line-height: 1.5; margin-top: 6px; }
   .opt.pick .product-photo { width: 96px; height: 96px; }
