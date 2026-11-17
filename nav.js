@@ -8,7 +8,7 @@
   if (!tabs.length) return;
   // A phone can hold an old cached style.css: without the menu styling, keep the plain tab bar.
   if (getComputedStyle(document.documentElement).getPropertyValue('--nav-v').trim() !== '2') return;
-  const ICON = { 'Plan': '🗺️', 'Tracker': '📈', 'Lounge': '🛋️', 'Bedroom': '🛏️', 'Kitchen': '🍳', 'Office': '💻', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
+  const ICON = { 'Plan': '🗺️', 'Tracker': '📈', 'Lounge': '🛋️', 'Bedroom': '🛏️', 'Bathroom': '🛁', 'Kitchen': '🍳', 'Office': '💻', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
     'Furniture': '🛋️', 'Bedding': '🛏️', 'Kitchen': '🍳', 'WiFi': '🛜', 'Post-pregnancy': '💛', 'Laptop': '💻', 'Decided': '✅' };
 
   const btn = document.createElement('button');
