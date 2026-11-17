@@ -115,45 +115,68 @@ const BOUGHT={
   // ⚖️ compare: any item with 2+ options opens a side-by-side sheet (Sean, 16 Nov)
   const all = need.concat(maybe);
   const ov = document.createElement('div'); ov.className = 'cmp-ov'; ov.hidden = true;
-  ov.innerHTML = '<div class="cmp-sheet" role="dialog" aria-modal="true" aria-labelledby="cmp-t"><div class="cmp-top"><b id="cmp-t"></b><button type="button" class="cmp-x" data-cmpclose aria-label="Close">✕</button></div><p class="cmp-hint">Tap to choose up to 3.</p><div class="cmp-chips"></div><div class="cmp-body"></div></div>';
+  ov.innerHTML = '<div class="cmp-sheet" role="dialog" aria-modal="true" aria-labelledby="cmp-t"><div class="cmp-top"><b id="cmp-t"></b><button type="button" class="cmp-x" data-cmpclose aria-label="Close">✕</button></div><p class="cmp-hint">Tap to choose up to 3.</p><div class="pickrow" role="group" aria-label="Choose up to 3 products"></div><div class="cmp-body"></div></div>';
   document.body.appendChild(ov);
-  let cIt = null, cSel = [];
-  const cRow = (label, cells) => `<div class="cmp-row"><div class="cmp-q">${label}</div><div class="cmp-a" style="--n:${cSel.length}">${cells.join('')}</div></div>`;
+  let cIt = null, cSel = [], cFocus = null;
+  const cTints = ['var(--accent)', 'var(--amber)', 'var(--good)'];
+  const cSaved = () => { try { const s = JSON.parse(localStorage.getItem('nest_cmp_sel')); return s && typeof s === 'object' && !Array.isArray(s) ? s : {}; } catch (e) { return {}; } };
+  const cSave = () => { try { localStorage.setItem('nest_cmp_sel', JSON.stringify({ ...cSaved(), [cIt.name]: cSel })); } catch (e) {} };
+  const cRow = (label, sel, get) => {
+    const cells = sel.map(get); if (!cells.some(v => v.h)) return '';
+    return `<div class="crow2"><div class="rl">${esc(label)}</div><div class="cells">${cells.map((v, i) => `<div class="cell ${v.cls || ''}"><span class="who" style="--t:${cTints[i]}">${esc(short(sel[i].n))}</span><span class="val">${v.h || '—'}</span></div>`).join('')}</div></div>`;
+  };
   const cRender = () => {
     const opts = cIt.o, pk = pickOf(cIt), sel = cSel.map(i => opts[i]);
-    ov.querySelector('.cmp-chips').innerHTML = opts.map((o, i) => `<button type="button" data-ci="${i}" aria-pressed="${cSel.includes(i)}">${o.pick ? '⭐ ' : ''}${esc(short(o.n).slice(0, 34))}<small>${esc(o.p)}</small></button>`).join('');
+    const picker = ov.querySelector('.pickrow'), left = picker.scrollLeft;
+    picker.innerHTML = opts.map((o, i) => `<button type="button" data-ci="${i}" style="--t:${cTints[cSel.indexOf(i)] || cTints[0]}" aria-pressed="${cSel.includes(i)}">${o.pick ? '⭐ ' : ''}${esc(short(o.n))} · ${esc(o.p)}</button>`).join('');
+    picker.scrollLeft = left;
     const prices = sel.map(o => num(o.p)), low = Math.min(...prices.filter(Boolean));
     const vs = o => { if (o === pk) return '⭐ The pick'; if (!pk || !num(o.p)) return ''; const d = num(o.p) - num(pk.p); return d === 0 ? 'Same as the pick' : (d > 0 ? '+' : '−') + fmt(Math.abs(d)) + ' vs the pick'; };
+    const txt = (s, cls) => ({ h: esc(s), cls });
+    const row = (label, get) => cRow(label, sel, get);
+    const group = (title, rows) => rows ? `<div class="cgrp"><div class="gt">${esc(title)}</div>${rows}</div>` : '';
+    const status = { consider: '🤔 Considering', reject: '✕ Rejected', bought: '✓ Bought' };
+    ov.querySelector('.cmp-body').style.setProperty('--n', sel.length);
     ov.querySelector('.cmp-body').innerHTML =
-      `<div class="cmp-a cmp-mini" style="--n:${sel.length}">${sel.map(o => `<b class="${o.pick ? 'pk' : ''}">${o.pick ? '⭐ ' : ''}${esc(short(o.n))}</b>`).join('')}</div>` +
-      `<div class="cmp-a cmp-heads" style="--n:${sel.length}">${sel.map(o => `<div class="cmp-h${o.pick ? ' pk' : ''}">${photoHTML(cIt, o)}<b>${esc(o.n)}</b></div>`).join('')}</div>` +
-      cRow('Price', sel.map(o => `<span class="${num(o.p) === low && sel.length > 1 ? 'best' : ''}"><b class="cmp-p">${esc(o.p)}</b>${vs(o) ? '<br>' + vs(o) : ''}</span>`)) +
-      cRow('Import (landed)', sel.map(o => `<span class="${o.imp && num(o.imp.p) < num(o.p) ? 'best' : ''}">${o.imp ? esc(o.imp.p) + '<br><small>' + esc(o.imp.d) + '</small>' : '—'}</span>`)) +
-      cRow('Shop', sel.map(o => `<span>${esc(o.s)}${o.c ? '<br><small>checked ' + esc(o.c) + '</small>' : ''}</span>`)) +
-      (sel.some(o => /\(/.test(o.n)) ? cRow('Details', sel.map(o => `<span>${esc((o.n.match(/\(([^)]*)\)/) || [, '—'])[1])}</span>`)) : '') +
-      (sel.some(o => o.t) ? cRow('In short', sel.map(o => `<span>${o.t ? esc(o.t) : (o.pick ? '⭐ Pick' : '—')}</span>`)) : '') +
-      cRow('Why it\'s good', sel.map(o => `<span>${o.w || '—'}</span>`)) +
-      cRow('The catch', sel.map(o => `<span class="${o.f ? 'bad' : ''}">${o.f ? '⚠️ ' + o.f : 'None noted'}</span>`)) +
-      cRow('', sel.map(o => `<span class="cmp-go">${o.u ? `<a href="${esc(o.u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</span>`));
+      `<div class="cmp-mini" style="--n:${sel.length}">${sel.map((o, i) => `<b style="--t:${cTints[i]}">${o.pick ? '⭐ ' : ''}${esc(short(o.n))}</b>`).join('')}</div>` +
+      `<div class="chead" style="--n:${sel.length}">${sel.map((o, i) => `<div class="h" style="--t:${cTints[i]}">${photoHTML(cIt, o)}<div><small>${esc(o.s)}</small><b>${esc(o.n)}</b>${o.u ? `<a class="op" href="${esc(o.u)}" target="_blank" rel="noopener">Open ↗</a>` : ''}</div></div>`).join('')}</div>` +
+      group('💰 Price', row('Price', o => txt(o.p, num(o.p) && num(o.p) === low ? 'best' : '')) +
+        row('vs the ⭐ pick', o => txt(vs(o))) +
+        (sel.some(o => o.imp) ? row('Import (landed)', o => ({ h: o.imp ? esc(o.imp.p) + (o.imp.d ? '<br><small>' + esc(o.imp.d) + '</small>' : '') : '', cls: o.imp && num(o.imp.p) && num(o.imp.p) < num(o.p) ? 'best' : '' })) : '')) +
+      group('🛒 Where to buy', row('Shop', o => txt((o.s || '') + (o.c ? ' · checked ' + o.c : ''))) +
+        (sel.some(o => o.st) ? row('Status', o => txt(status[o.st] || '—')) : '')) +
+      group('📋 What it is', row('Details', o => txt((o.n.match(/\(([^)]*)\)/) || [, ''])[1])) + row('In short', o => txt(o.t))) +
+      group('👍 Why', row('Why', o => ({ h: o.w || '', cls: 'y' }))) +
+      group('⚠️ Catch', sel.some(o => o.f) ? row('Catch', o => txt(o.f || 'None noted', o.f ? 'n' : '')) : '');
   };
   const cOpen = name => {
     cIt = all.find(it => it.name === name); if (!cIt) return;
-    const pi = cIt.o.findIndex(o => o.pick);
-    cSel = (pi >= 0 ? [pi] : []).concat(cIt.o.map((o, i) => i).filter(i => i !== pi)).slice(0, Math.min(3, cIt.o.length));
+    const pi = cIt.o.findIndex(o => o.pick), saved = cSaved()[cIt.name];
+    cSel = Array.isArray(saved) && saved.length > 0 && saved.length <= 3 && new Set(saved).size === saved.length && saved.every(i => Number.isInteger(i) && i >= 0 && i < cIt.o.length) ? saved :
+      (pi >= 0 ? [pi] : []).concat(cIt.o.map((o, i) => i).filter(i => i !== pi)).slice(0, 3);
+    cFocus = document.activeElement;
     ov.querySelector('#cmp-t').textContent = '⚖️ ' + short(cIt.name);
-    cRender(); ov.hidden = false; document.documentElement.classList.add('cmp-lock');
+    cRender(); cSave(); ov.hidden = false; document.documentElement.classList.add('cmp-lock');
     ov.querySelector('.cmp-sheet').scrollTop = 0; ov.querySelector('.cmp-x').focus();
   };
-  const cClose = () => { ov.hidden = true; document.documentElement.classList.remove('cmp-lock'); };
+  const cClose = () => { ov.hidden = true; document.documentElement.classList.remove('cmp-lock'); if (cFocus) cFocus.focus(); };
   ov.addEventListener('click', e => {
     if (e.target === ov || e.target.closest('[data-cmpclose]')) { cClose(); return; }
     const c = e.target.closest('[data-ci]'); if (!c) return;
     const i = +c.dataset.ci;
     if (cSel.includes(i)) { if (cSel.length > 1) cSel = cSel.filter(x => x !== i); }
     else { cSel = cSel.concat(i); if (cSel.length > 3) cSel.shift(); }
-    cSel.sort((a, b) => a - b); cRender();
+    cSave(); cRender(); ov.querySelector(`[data-ci="${i}"]`).focus({ preventScroll: true });
   });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !ov.hidden) cClose(); });
+  document.addEventListener('keydown', e => {
+    if (ov.hidden) return;
+    if (e.key === 'Escape') cClose();
+    if (e.key === 'Tab') {
+      const tabs = [...ov.querySelectorAll('button, a[href]')], first = tabs[0], last = tabs[tabs.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
 
   document.addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b || b.closest('.dec') || b.closest('.cmp-ov')) return;
