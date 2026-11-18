@@ -194,7 +194,7 @@
   <div class="foot">PLANS EXPLORER · 2027 rates from each scheme's and insurer's own documents, opened with browser-kit 11–13 Nov 2026 · 2026 prices are marked · pending CMS approval · family totals are estimates · confirm with a broker before signing · The Nest</div>
 </div>
 
-<script src="plans-data.js?v=20261118b"></script>
+<script src="plans-data.js?v=20261118c"></script>
 <script>
 (() => {
   const { S, EX, P, G, PLACES, PENALTY } = window.NEST;
@@ -251,7 +251,7 @@
   function gaps() {
     const g = k => G.filter(x => x.group === k);
     return '<div class="view"><div class="intro"><p>Gap cover pays what doctors charge above the medical aid\'s rate in hospital. It never pays rooms visits. Prices are per month.</p></div>' +
-      group('🆕 From the broker · 18 Nov', 'Front-runner, not picked yet', g('new'), 'g') +
+      group('🆕 From the broker · 18 Nov', 'Runner-up to Turnberry for now', g('new'), 'g') +
       group('⭐ Our pick', 'Cheapest 500%', g('pick'), 'g') +
       group('🤰 Best for a pregnancy soon', 'No 10-month wait', g('preg'), 'g') +
       group('👵 Best when adding a parent', 'Takes Sean\'s mom', g('parent'), 'g') +
