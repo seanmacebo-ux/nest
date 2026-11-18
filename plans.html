@@ -194,7 +194,7 @@
   <div class="foot">PLANS EXPLORER · 2027 rates from each scheme's and insurer's own documents, opened with browser-kit 11–13 Nov 2026 · 2026 prices are marked · pending CMS approval · family totals are estimates · confirm with a broker before signing · The Nest</div>
 </div>
 
-<script src="plans-data.js?v=20261116a"></script>
+<script src="plans-data.js?v=20261118a"></script>
 <script>
 (() => {
   const { S, EX, P, G, PLACES, PENALTY } = window.NEST;
@@ -229,7 +229,7 @@
     const href = '#' + kind + '/' + o.id, sch = S[o.s];
     const right = kind === 'p'
       ? '<b>' + (o.price ? R(o.price) : '—') + '</b><small>' + (o.priceNote ? esc(o.priceNote) : 'a month') + '</small>'
-      : '<b>' + (o.single29 ? R(o.single29) : '—') + '</b><small>' + (o.single29 ? 'under 30' : 'family priced') + (o.year === 2026 ? ' · 2026' : '') + '</small>';
+      : '<b>' + (o.single29 ? R(o.single29) : '—') + '</b><small>' + (o.flat ? 'whole family' : o.single29 ? 'under 30' : 'family priced') + (o.year === 2026 ? ' · 2026' : '') + '</small>';
     const dots = kind === 'p'
       ? hosp('Park Lane', o.pl) + hosp('Oxford', o.ox) + (o.verdict ? '<span class="vb">' + esc(o.verdict) + '</span>' : '')
       : '<span class="hb q">' + o.pct + '%</span><span class="hb ' + (/^None/.test(o.preg) ? 'y' : 'q') + '">🤰 ' + esc(o.preg.split(/[,(]/)[0].trim()) + '</span>' + (/^Yes/.test(o.parent) ? '<span class="hb y">👵 parent ok</span>' : '');
@@ -251,6 +251,7 @@
   function gaps() {
     const g = k => G.filter(x => x.group === k);
     return '<div class="view"><div class="intro"><p>Gap cover pays what doctors charge above the medical aid\'s rate in hospital. It never pays rooms visits. Prices are per month.</p></div>' +
+      group('🆕 From the broker · 18 Nov', 'Front-runner, not picked yet', g('new'), 'g') +
       group('⭐ Our pick', 'Cheapest 500%', g('pick'), 'g') +
       group('🤰 Best for a pregnancy soon', 'No 10-month wait', g('preg'), 'g') +
       group('👵 Best when adding a parent', 'Takes Sean\'s mom', g('parent'), 'g') +
@@ -317,12 +318,16 @@
         (g.couple ? '<div><span class="k">Couple / family</span><span>' + esc(g.couple) + '</span></div>' : '') +
         (g.older ? '<div><span class="k">Older / parent</span><span>' + esc(g.older) + '</span></div>' : '') + '</div>' + (g.year === 2026 ? '<p class="fine">2026 price. The 2027 price isn\'t published yet.</p>' : '')],
       ['pays', 'What it pays', () => '<h3>What it pays</h3><ul class="ck"><li><i>🩺</i><span>Doctors in hospital up to ' + g.pct + '% of the scheme rate</span></li><li><i>🧾</i><span>' + esc(g.copay) + '</span></li>' + g.extras.map(x => '<li><i>➕</i><span>' + esc(x) + '</span></li>').join('') + '</ul>'],
+      ...(g.who ? [['who', 'Who can join', () => '<h3>Who can be on it</h3><div class="kv">' + g.who.map(l => '<div><span class="k">' + esc(l[0]) + '</span><span>' + esc(l[1]) + '</span></div>').join('') + '</div>' +
+        '<h3 style="margin-top:18px">Shared vs each person</h3><div class="kv">' + g.shared.map(l => '<div><span class="k">' + esc(l[0]) + '</span><span>' + esc(l[1]) + '</span></div>').join('') + '</div>' +
+        '<h3 style="margin-top:18px">👵 Two routes for Sean\'s mom</h3><div class="kv">' + g.mom.map(l => '<div><span class="k">' + esc(l[0]) + '</span><span>' + esc(l[1]) + '</span></div>').join('') + '</div>' +
+        '<p class="fine">From TRA\'s 2027 Premiums and Benefits document and the broker\'s comparison, read 18 Nov 2026.</p>']] : []),
       ['fam', 'Pregnancy & family', () => '<h3>Pregnancy and family</h3><div class="kv"><div><span class="k">Pregnancy wait</span><span>' + esc(g.preg) + '</span></div><div><span class="k">Sean\'s mom</span><span>' + esc(g.parent) + '</span></div></div><p class="fine">Every gap cover needs the person to be on a medical aid too.</p>'],
     ];
     if (!T.find(x => x[0] === tab)) tab = 'ov';
     return '<div class="view" style="--t:' + sch[1] + '"><a class="back" href="#gap">← All gap cover</a>' +
       '<section class="hero"><div class="top"><span class="ico">' + sch[2] + '</span><div><div class="sch">' + esc(sch[0]) + '</div><h1>' + esc(g.name) + '</h1></div></div>' +
-      '<div class="big">' + (g.single29 ? R(g.single29) : '—') + ' <small>/ month ' + (g.single29 ? 'under 30' : '') + ' · ' + g.year + '</small></div>' +
+      '<div class="big">' + (g.single29 ? R(g.single29) : '—') + ' <small>/ month ' + (g.flat ? 'whole family' : g.single29 ? 'under 30' : '') + ' · ' + g.year + '</small></div>' +
       '<div style="margin-top:8px"><span class="vb">' + esc(g.verdict) + '</span></div>' +
       '<div class="tiles4"><div class="st4"><div class="lbl">Doctors</div><div class="v mono">' + g.pct + '%</div></div><div class="st4"><div class="lbl">30–49</div><div class="v mono">' + (g.single49 ? R(g.single49) : '—') + '</div></div>' +
       '<div class="st4"><div class="lbl">Pregnancy wait</div><div class="v" style="font-size:13px">' + esc(g.preg.split(/[,(]/)[0]) + '</div></div><div class="st4"><div class="lbl">Parent OK?</div><div class="v" style="font-size:13px">' + esc(g.parent.split(/[,(]/)[0]) + '</div></div></div>' +
@@ -333,7 +338,7 @@
 
   // ---------- compare ----------
   const DEF_P = ['disc-essential-smart', 'disc-classic-smart', 'disc-essential-delta-core'];
-  const DEF_G = ['tb-dynamic', 'zl-optimal', 'st-meridian400'];
+  const DEF_G = ['tra-super', 'tb-dynamic', 'st-meridian400'];
   function cmpRows(items, rows) {
     return rows.map(r => {
       if (r.group) return (r.first ? '' : '</div>') + '<div class="cgrp"><div class="gt">' + r.group + '</div>' + (r.note ? '<div class="gn">' + r.note + '</div>' : '');
