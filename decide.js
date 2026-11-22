@@ -52,12 +52,19 @@
 
   const send = () => {
     const p = get(PEND), ks = Object.keys(p); if (!ks.length) return;
-    const by = v => ks.filter(k => p[k].v === v).map(k => '• ' + p[k].l);
-    const lines = ['🗳 Our picks (' + document.title.replace(' · The Nest', '') + ')'];
-    const c = by('consider'), r = by('reject'), u = by('');
-    if (c.length) lines.push('🤔 Consider:', ...c);
-    if (r.length) lines.push('✕ Reject:', ...r);
-    if (u.length) lines.push('↩︎ Undo:', ...u);
+    // The tray collects taps from every page, so label each line by the room
+    // in its key ("Room|thing|option"), not by whichever page Send was tapped on.
+    const page = document.title.replace(' · The Nest', '');
+    const tag = { flat: 'Apartments', car: 'Cars', newcar: 'Cars' };
+    const where = k => { const r = k.includes('|') ? k.split('|')[0] : ''; return r ? (tag[r] || r.replace(' + ', ' & ')) : page; };
+    const lines = ['🗳 Our picks'];
+    [['consider', '🤔 Consider:'], ['reject', '✕ Reject:'], ['', '↩︎ Undo:']].forEach(([v, head]) => {
+      const mine = ks.filter(k => p[k].v === v); if (!mine.length) return;
+      lines.push(head);
+      [...new Set(mine.map(where))].forEach(w => {
+        lines.push('  ' + w + ':', ...mine.filter(k => where(k) === w).map(k => '• ' + p[k].l));
+      });
+    });
     const text = lines.join('\n');
     try { navigator.clipboard && navigator.clipboard.writeText(text).catch(() => {}); } catch (e) {}
     put(PEND, {}); tray();
