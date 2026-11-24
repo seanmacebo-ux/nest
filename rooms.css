@@ -173,6 +173,8 @@
   .opt .oimp-note > summary { cursor: pointer; }
   .opt .ow { margin-top: 12px; line-height: 1.55; }
   .opt .of { line-height: 1.5; margin-top: 6px; }
+  .opt .oyt { line-height: 1.5; margin-top: 6px; font-size: 13px; }
+  .opt .oyt a { color: var(--accent); font-weight: 600; }
   .opt.pick .product-photo { width: 96px; height: 96px; }
   .opt.pick .ot { display: inline-block; color: var(--accent); background: var(--surface-2); padding: 3px 7px; border-radius: 6px; }
   .opt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: auto; padding-top: 12px; }
