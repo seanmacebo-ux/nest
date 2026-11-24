@@ -159,16 +159,16 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Cars · brand new · listings 17 Nov 2026</div>
     <h1>A brand-new car, <em>paid off with a loan</em>.</h1>
-    <p class="sub">New only, up to R200k, R300k at the most. Prices are from each maker's own SA price page, opened 14 Nov. Mark cars 🤔 Consider or ✕ Reject, then tap Send.</p>
+    <p class="sub">New only, up to <b>R400k</b> (raised 24 Nov, since nothing under R300k was good enough). Prices are from each maker's own SA price page, opened 14 Nov. Mark cars 🤔 Consider or ✕ Reject, then tap Send.</p>
   </header>
 
   <nav class="jump" id="jump" aria-label="Jump to">
-    <a href="#u200">💚 Under R200k</a><a href="#to300">🚗 R200k–R300k</a><a href="#pay">💳 Paying for it</a><a href="#also">➕ Also in budget</a><a href="#live">🔄 Used</a><a href="#safe">🛡️ Buying safely</a><a href="#brands">🏷️ Brands</a>
+    <a href="#u200">💚 Under R200k</a><a href="#to300">🚗 R200k–R300k</a><a href="#to400">🚙 R300k–R400k</a><a href="#pay">💳 Paying for it</a><a href="#also">➕ Also in budget</a><a href="#live">🔄 Used</a><a href="#safe">🛡️ Buying safely</a><a href="#brands">🏷️ Brands</a>
   </nav>
 
   <section class="hero" id="top">
     <div class="lbl">🚗 Budget · brand new</div>
-    <div class="big">R200k <small>up to R300k max</small></div>
+    <div class="big">R400k <small>max, raised 24 Nov</small></div>
     <div class="bigsub">The big catch: <b>there's no new automatic under R200k.</b> Under R200k is manual only. The cheapest real automatic in budget is the Kia Picanto at R249,995.</div>
     <div class="trio">
       <a href="#u200"><span class="ic">💚</span><span><b>Toyota Vitz 1.0 manual</b><small>Under R200k · 6 airbags + stability control</small></span><span class="v">R182,400</span></a>
@@ -184,6 +184,9 @@
   <div class="sec" id="to300"><h2>🚗 R200k–R300k</h2><p class="secline">Where the automatics are. "AMT" is a manual that changes gear by itself: cheap and simple, but jerky. "CVT" is smooth but less loved for long life. A normal "auto" is the toughest kind.</p></div>
   <div class="lgrid" id="ngrid2"></div>
 
+  <div class="sec" id="to400"><h2>🚙 R300k–R400k (new max)</h2><p class="secline" id="to400line">Added 24 Nov when the budget went up to R400k. Prices from each maker's SA price page; listings opened on cars.co.za.</p></div>
+  <div class="lgrid" id="ngrid4"></div>
+
   <div class="sec" id="also"><h2>➕ Also in budget</h2><p class="secline">From the makers' price pages, 14 Nov. Not ranked as closely as the cards above, but each has real stock linked.</p></div>
   <div class="lgrid" id="ngrid3"></div>
 
@@ -198,6 +201,14 @@
       <tr class="best"><td class="y">R54k (20%)</td><td class="p">R5,208/mo<br><span class="lo">+R96k extra</span></td><td class="p">R6,318/mo<br><span class="lo">+R163k extra</span></td></tr>
     </tbody></table>
     <p style="margin-top:8px;font-size:12.5px">Each R27k of <b>cash</b> deposit cuts about R640 a month and saves about R11k. Never borrow the deposit: that's 24% money to save 14.75% money. On a <b>R200k</b> car with no deposit: car finance R4,829/mo (+R90k) vs personal loan R5,857/mo (+R151k).</p>
+
+    <p style="margin-top:12px;font-size:12.5px"><b>R400k, the new max (24 Nov), 5 years.</b> Same likely rates.</p>
+    <table class="lt"><thead><tr><th>Deposit</th><th>Car finance 14.75%</th><th>Personal loan 24%</th></tr></thead><tbody>
+      <tr><td class="y">R0</td><td class="p">R9,561/mo<br><span class="lo">+R174k extra</span></td><td class="p">R11,611/mo<br><span class="lo">+R297k extra</span></td></tr>
+      <tr><td class="y">R40k (10%)</td><td class="p">R8,615/mo<br><span class="lo">+R157k extra</span></td><td class="p">R10,460/mo<br><span class="lo">+R268k extra</span></td></tr>
+      <tr class="best"><td class="y">R80k (20%)</td><td class="p">R7,668/mo<br><span class="lo">+R140k extra</span></td><td class="p">R9,309/mo<br><span class="lo">+R239k extra</span></td></tr>
+    </tbody></table>
+    <p style="margin-top:8px;font-size:12.5px">At R400k the gap is about <b>R123k</b>. Paying R12,000 a month clears car finance in 3.7 years (+R124k) and the personal loan in 4.8 years (+R277k). Only some banks lend R400k unsecured: Capitec and African Bank (R500k), FNB (R450k), Nedbank (R400k). Add insurance (~R2–2.5k) and fuel on top of the monthly.</p>
 
     <p style="margin-top:12px;font-size:12.5px"><b>Balloon (ruled out 30 Sep, shown so you can see why).</b> R270k, car finance 14.75%, no deposit:</p>
     <table class="lt"><thead><tr><th>Setup</th><th>Monthly</th><th>Extra</th></tr></thead><tbody>
@@ -357,7 +368,7 @@ const NEW=[{"band": "u200", "name": "Toyota Vitz 1.0 MT", "price": "R182,400", "
     <div class="lc-name">${c.name}</div>
     <div class="lc-price">${c.price} <small>list price</small></div>
     <p class="lc-why">${c.why}</p>
-    ${c.fuel?`<p class="lc-spec"><b>Gearbox:</b> ${c.box}<br><b>Fuel:</b> ${c.fuel}<br><b>Warranty:</b> ${c.warranty} · <b>Plan:</b> ${c.plan}<br><b>Safety:</b> ${c.safety}</p>`:''}
+    ${c.fuel?`<p class="lc-spec"><b>Gearbox:</b> ${c.box}<br><b>Fuel:</b> ${c.fuel}<br><b>Warranty:</b> ${c.warranty} · <b>Plan:</b> ${c.plan}<br><b>Safety:</b> ${c.safety}${c.boot?`<br><b>Boot:</b> ${c.boot}`:''}</p>`:''}
     <p class="lc-warn">⚠️ ${c.warn?c.warn+' ':''}At 6'4, sit in it before buying.</p>
     ${buy(c)}
     <div class="lc-act"><a href="${c.url}" target="_blank" rel="noopener noreferrer">Maker's page ↗</a></div>
@@ -366,6 +377,7 @@ const NEW=[{"band": "u200", "name": "Toyota Vitz 1.0 MT", "price": "R182,400", "
   document.getElementById("ngrid1").innerHTML=NEW.filter(c=>c.band==="u200").map(card).join("");
   document.getElementById("ngrid2").innerHTML=NEW.filter(c=>c.band==="200to300").map(card).join("");
   document.getElementById("ngrid3").innerHTML=NEW.filter(c=>c.band==="also").map(card).join("");
+  document.getElementById("ngrid4").innerHTML=NEW.filter(c=>c.band==="300to400").map(card).join("");
   const nav=document.querySelector(".nav"),jump=document.getElementById("jump");
   const setNav=()=>document.documentElement.style.setProperty("--navh",nav.offsetHeight+"px");setNav();window.addEventListener("resize",setNav);
   const links=[...jump.querySelectorAll('a[href^="#"]')],secs=links.map(a=>document.querySelector(a.getAttribute("href")));let cur=null;
