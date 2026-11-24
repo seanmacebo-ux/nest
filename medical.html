@@ -164,6 +164,7 @@
   .vs-row .a .bad { background: var(--warn-soft) !important; }
   .vs-row .a .ok { font-weight: 600; }
   .vs-take { margin-top: 10px; }
+  .vs2 .vs-head, .vs2 .vs-row .a { grid-template-columns: repeat(2,1fr); }
   .tl { list-style: none; margin: 8px 0 0; padding: 0; }
   .tl li { display: grid; grid-template-columns: 78px 1fr; gap: 10px; padding: 9px 0; border-bottom: 1px dotted var(--line); font-size: 14px; }
   .tl li:last-child { border-bottom: 0; }
@@ -220,6 +221,8 @@
 
   <nav class="jump" aria-label="Jump to section">
     <a href="#plan">Our plan</a>
+    <a href="#quotes24">🧾 24 Nov quotes</a>
+    <a href="#gap24">🛡️ Gap for 3</a>
     <a href="#contacts">📞 Who to call</a>
     <a href="#lists">🏥 Hospital list</a>
     <a href="#into">What we're getting into</a>
@@ -241,6 +244,7 @@
 
   <!-- OUR PLAN -->
   <section id="plan" class="hero">
+    <div class="warnbox" style="margin:0 0 12px;background:var(--warn-soft)"><span>🔄</span><span><b>Being re-decided (24 Nov).</b> The broker quotes changed the picture. See <a href="#quotes24">the two quotes side by side</a> and <a href="#gap24">gap cover for all three of us</a>. The plan below is the 13 Nov one.</span></div>
     <div class="lbl">⭐ Our plan · per month</div>
     <div class="big">R2,522 <small>/ month</small></div>
     <div class="bigsub">Hospital plan R2,332 + gap cover R190. Mishka (25 next year) and Sean (27) both stay on the under-30 gap cover rate until 2030. Chosen 13 Nov: a hospital plan plus gap cover, pay the rooms visits ourselves.</div>
@@ -258,6 +262,58 @@
       <div class="prog"><div class="lbl" id="progtxt">0 of 6 steps done</div><div class="bar"><span id="progbar"></span></div></div>
     </div>
   </section>
+
+  <!-- 24 NOV: BROKER QUOTES, CLEAR VERSION -->
+  <div class="sec" id="quotes24"><h2>🧾 The two broker quotes (24 Nov), side by side</h2><p>Brenda (Shomang Brokers) quoted 4 medical aids for Mishka alone, 2027 prices, starting 1 Dec. Dylan (Garone) sent Turnberry's 2027 gap cover documents. Everything below is read straight from those PDFs.</p></div>
+  <div class="panel">
+    <p style="margin:0"><b>Where everyone stands:</b></p>
+    <ul class="pl">
+      <li><b>Brenda (broker) recommends Bestmed Beat 2</b>, R3,315 a month: "the best balance between affordability and benefits". Her cheapest is Fedhealth myFED at R2,649.</li>
+      <li><b>Our 13 Nov pick (Discovery Essential Smart, R2,332)</b> wasn't in Brenda's quote. It's still the cheapest that has Park Lane, but it pays doctors less and skips some surgeries.</li>
+      <li><b>My read:</b> of Brenda's four, only <b>Bestmed Beat 2</b> and <b>Discovery Classic Smart Saver</b> are worth it. The other two are explained at the bottom.</li>
+      <li><b>Not decided yet.</b> The deciding question is in the gap cover part: which medical aid lets Sean's mom be a dependant.</li>
+    </ul>
+  </div>
+  <div class="vs-wrap vs2">
+  <div class="vs-head" aria-hidden="true">
+    <div class="ours"><b>Bestmed Beat 2</b><small>R3,315 · broker's pick</small></div>
+    <div><b>Discovery Classic Smart Saver</b><small>R3,616</small></div>
+  </div>
+  <div class="vs-row"><div class="q">What you pay a month (Mishka, 2027)</div><div class="a"><span class="ok">R3,315, of which R530 goes into her own savings</span><span>R3,616, of which R253 goes into savings</span></div></div>
+  <div class="vs-row"><div class="q">Which hospitals</div><div class="a"><span class="ok">Any private hospital, so Park Lane is never a question</span><span>Its Smart network. Outside it: R13,150 upfront. The cerclage at Park Lane falls in that rule</span></div></div>
+  <div class="vs-row"><div class="q">Gynae and anaesthetist in hospital</div><div class="a"><span>Paid at 100% of Bestmed's rate. Gap cover pays the rest</span><span class="ok">Paid up to 200%, so a smaller gap</span></div></div>
+  <div class="vs-row"><div class="q">Pregnancy check-ups</div><div class="a"><span>6 check-ups, 2 after the birth, 2 scans, 1 breastfeeding consult</span><span class="ok">8 check-ups, 2 scans, 1 genetic blood test (NIPT), blood tests, 5 classes</span></div></div>
+  <div class="vs-row"><div class="q">GP visits when you're sick</div><div class="a"><span>Paid from her savings (R6,360 a year). When it runs out, we pay</span><span class="ok">Unlimited at network GPs, R80 each</span></div></div>
+  <div class="vs-row"><div class="q">Savings for day-to-day (GP, meds, specialists' rooms)</div><div class="a"><span class="ok">R6,360 a year</span><span>R3,036 a year</span></div></div>
+  <div class="vs-row"><div class="q">MRI and CT scans</div><div class="a"><span>Up to R23,932 a year for the family</span><span>In hospital: paid. Outside: first R4,155 from savings</span></div></div>
+  <div class="vs-row"><div class="q">Sean's mom as Mishka's dependant</div><div class="a"><span class="bad">Not in the quote. Ask Brenda</span><span class="bad">❌ No. Discovery only takes the main member's own parent</span></div></div>
+  <div class="vs-row"><div class="q">Waiting periods (she's never had medical aid)</div><div class="a"><span>Same for both: 3 months for everything, 12 months for anything she's seen a doctor for in the last year (her cervix). Applies even to emergencies-by-law (PMBs). The letter after she applies gives the real dates</span><span>Same for both</span></div></div>
+  </div>
+  <div class="panel vs-take">
+    <p style="margin:0"><b>In one line:</b> Bestmed is cheaper, takes any hospital and gives double the savings. Discovery pays doctors more, has cheap unlimited GP visits and more pregnancy extras. If gap cover is in place before the next pregnancy (the plan), Bestmed's lower doctor rate matters less, because gap cover tops it up.</p>
+    <p style="margin:10px 0 0"><b>Why not the other two:</b> <b>Fedhealth myFED (R2,649)</b> only uses network hospitals, pays 2 specialist visits a year (R2,220 total) and charges R16,750 for a planned C-section. <b>Bonitas BonCap (R3,795)</b> costs more than both, only uses network specialists and caps newborn hospital care at R60,260 a year, which is risky if a baby comes early. Both are priced on your income.</p>
+  </div>
+
+  <div class="sec" id="gap24"><h2>🛡️ Gap cover for Mishka, Sean and mom</h2><p>Dynamic is out: it can't take Sean's mom. These are the options that take all three. Prices are per month for the whole family, 2027, under 65. From Turnberry's 2027 brochure and TRA's documents (18 Nov).</p></div>
+  <div class="vs-wrap">
+  <div class="vs-head" aria-hidden="true">
+    <div class="ours"><b>Turnberry Synergy</b><small>R738</small></div>
+    <div><b>TRA Super Cover Plus</b><small>R455</small></div>
+    <div><b>Turnberry Optimal</b><small>R795</small></div>
+  </div>
+  <div class="vs-row"><div class="q">Price for all three</div><div class="a"><span>R545 family + R193 for mom</span><span class="ok">R455 flat for everyone (R682 if anyone is 65+)</span><span>R600 family + R195 for mom</span></div></div>
+  <div class="vs-row"><div class="q">Pays doctors up to</div><div class="a"><span>5× the medical aid rate</span><span class="ok">7× the medical aid rate</span><span>5× the medical aid rate</span></div></div>
+  <div class="vs-row"><div class="q">Wrong-hospital penalty (matters on Discovery, not Bestmed)</div><div class="a"><span class="ok">Up to R12,500, once a year</span><span class="bad">Up to R5,790, once a year</span><span class="ok">Up to R16,000, twice a year</span></div></div>
+  <div class="vs-row"><div class="q">Other co-payments</div><div class="a"><span>Covered, up to the yearly limit</span><span>Up to R69,460 a year, shared by the family</span><span>Covered, up to the yearly limit</span></div></div>
+  <div class="vs-row"><div class="q">Cancer cover</div><div class="a"><span class="bad">❌ None</span><span>Not in TRA's summary</span><span class="ok">✅ Yes (you pay 20% of the extra), incl. biological drugs</span></div></div>
+  <div class="vs-row"><div class="q">Baby extras</div><div class="a"><span>Kids' dental up to R3,600 a year</span><span class="ok">R15,750 if a baby is born before 34 weeks, private ward after the birth, 6 weeks of gynae/paed visits</span><span>—</span></div></div>
+  <div class="vs-row"><div class="q">Wait before a pregnancy is covered</div><div class="a"><span>10 months</span><span>10 months</span><span>10 months</span></div></div>
+  </div>
+  <div class="panel vs-take">
+    <p style="margin:0"><b>The catch for all three:</b> mom can only be added if she's a <b>dependant on the same medical aid</b> as Mishka or Sean, and Sean can only be added once he's on a medical aid himself. Until then, any of these covers Mishka alone, at the full family price.</p>
+    <p style="margin:10px 0 0"><b>So it comes down to:</b> Bestmed + TRA (R455) if Bestmed accepts mom as Mishka's dependant, since Bestmed has no wrong-hospital penalty for TRA's small R5,790 limit to matter. If you go Discovery, Optimal (R795) is worth the extra R57 over Synergy: it pays up to R16,000 of Discovery's R13,150 penalty (Synergy R12,500) and it has cancer cover.</p>
+    <p style="margin:10px 0 0"><b>Ask Brenda:</b> 1) Can Sean's mom be Mishka's dependant on Bestmed Beat 2, and what does it cost? 2) Can Sean be added as soon as his visa comes through? 3) The waiting periods and exclusions in writing for Mishka.</p>
+  </div>
 
   <!-- WHO TO CALL -->
   <div class="sec" id="contacts"><h2>📞 Who to call</h2><p>Tap to call or email. A broker costs us nothing (the scheme pays them) and can also deal with Discovery and Turnberry for us. All three brokers are a few minutes from the flat. Numbers and emails are from each company's own website, checked 16 Nov. Google ratings as shown on Google that day.</p></div>
