@@ -1,135 +1,172 @@
-// The Nest — client-side interactivity (notes + saves + ticks).
-//
-// Storage is two-layer:
-//   1. localStorage  — instant render + full offline use (always written first).
-//   2. Supabase      — the SHARED source of truth, so your notes/saves/ticks
-//                      sync between Sean's phone, Mishka's phone, and The Nest.
-//
-// If Supabase isn't configured or is unreachable, everything still works exactly
-// like before (local-only). Cloud is additive and never blocks the UI.
-
-// --- cloud config -----------------------------------------------------------
-// Publishable (anon) key: safe to ship in a public site by design — Row Level
-// Security decides what it can touch. Fill these two in and sync goes live.
-const NEST_SB = {
-  url: '',   // e.g. https://xxxx.supabase.co
-  key: '',   // e.g. sb_publishable_....
-  table: 'nest_kv',
-};
-const NEST_SB_ON = () => !!(NEST_SB.url && NEST_SB.key);
-
+// The Nest — instant local saves, shared same-origin state and a durable outbox.
+// A static GitHub Pages copy keeps working when /api/kv is unavailable.
 window.NEST = {
-  _get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } },
-  _set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
-
-  // --- Supabase REST helpers (plain fetch, no SDK) --------------------------
-  _sbHeaders(extra) {
-    return Object.assign({
-      'apikey': NEST_SB.key,
-      'Authorization': 'Bearer ' + NEST_SB.key,
-      'Content-Type': 'application/json',
-    }, extra || {});
+  _rows: {}, _ready: false, _busy: false, _pulling: false, _reachable: false,
+  _get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch { return d; } },
+  _raw(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  _out() { return this._get('nest_sync_outbox', {}); },
+  _snapshot() {
+    const result = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k.startsWith('nest_') || k.startsWith('nest_sync_')) continue;
+      if (k === 'nest_notes') Object.entries(this.notes()).forEach(([n,v]) => result['note:' + n] = v);
+      else if (k === 'nest_ticks') result.ticks = JSON.stringify(this.ticks());
+      else if (k.startsWith('nest_save_')) result['save:' + k.slice(10)] = JSON.stringify(this._get(k, []));
+      else result['local:' + k] = JSON.stringify(this._get(k, null));
+    }
+    return result;
   },
-  _sbUpsert(k, v) {
-    if (!NEST_SB_ON()) return;
+  _set(k, v) {
+    const before = this._snapshot();
+    this._raw(k, v);
+    const after = this._snapshot();
+    for (const key of new Set([...Object.keys(before), ...Object.keys(after)])) {
+      const value = after[key] ?? '';
+      if (value !== before[key]) this._queue(key, value, before[key]);
+    }
+  },
+  _queue(k, v, fallback) {
+    const out = this._out(), previous = out[k];
+    out[k] = { v, base: previous ? previous.base : (this._rows[k]?.v ?? fallback ?? null), rev: previous ? previous.rev : (this._rows[k]?.rev ?? 0), id: crypto.randomUUID() };
+    this._raw('nest_sync_outbox', out);
+    this._chip();
+    clearTimeout(this._timer);
+    this._timer = setTimeout(() => this._flush(), 450);
+  },
+  _apply(k, v) {
+    if (k.startsWith('note:')) { const notes = this.notes(); if (v) notes[k.slice(5)] = v; else delete notes[k.slice(5)]; this._raw('nest_notes', notes); }
+    else {
+      try {
+        const value = JSON.parse(v);
+        if (k === 'ticks') this._raw('nest_ticks', value);
+        else if (k.startsWith('save:')) this._raw('nest_save_' + k.slice(5), value);
+        else if (k.startsWith('local:nest_') && !k.startsWith('local:nest_sync_')) this._raw(k.slice(6), value);
+      } catch {}
+    }
+  },
+  async _fetch(path, options) {
+    const response = await fetch(path, { cache: 'no-store', ...options });
+    if (response.status === 401) { location.assign('/login?next=' + encodeURIComponent(location.pathname + location.search)); throw new Error('Login required'); }
+    return response;
+  },
+  _chip() {
+    const el = document.getElementById('nest-sync-status');
+    if (el) el.textContent = Object.keys(this._out()).length ? 'Not synced yet' : this._reachable ? 'Synced' : 'Saved on this phone';
+  },
+  // Apply only this phone's changes to the current server value after a conflict.
+  // Missing object properties represent removals, including unticked tasks.
+  _merge(k, base, mine, theirs) {
+    if (mine === base) return theirs;
+    if (k.startsWith('note:')) return mine;
     try {
-      fetch(`${NEST_SB.url}/rest/v1/${NEST_SB.table}?on_conflict=k`, {
-        method: 'POST',
-        headers: this._sbHeaders({ 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
-        body: JSON.stringify({ k: k, v: v, updated_at: new Date().toISOString() }),
-      }).catch(() => {});
-    } catch (e) {}
+      const b = base == null ? null : JSON.parse(base), m = JSON.parse(mine), t = JSON.parse(theirs);
+      const object = x => x && typeof x === 'object' && !Array.isArray(x);
+      const patch = (before, local, remote) => {
+        if (JSON.stringify(before) === JSON.stringify(local)) return remote;
+        if (!object(local)) return local;
+        const result = object(remote) ? {...remote} : {};
+        for (const key of new Set([...Object.keys(before || {}), ...Object.keys(local)])) {
+          if (!Object.hasOwn(local, key)) delete result[key];
+          else result[key] = patch(before?.[key], local[key], remote?.[key]);
+        }
+        return result;
+      };
+      if (Array.isArray(m) && Array.isArray(t) && (k.startsWith('save:') || k.startsWith('local:nest_todos_') || k === 'local:nest_milestones')) {
+        const identity = x => k.startsWith('save:') ? x.label : x.id;
+        const before = new Map((b || []).map(x => [identity(x), x]));
+        const local = new Map(m.map(x => [identity(x), x]));
+        const result = new Map(t.map(x => [identity(x), x]));
+        for (const label of before.keys()) if (!local.has(label)) result.delete(label);
+        for (const [label, value] of local) if (JSON.stringify(before.get(label)) !== JSON.stringify(value)) result.set(label, value);
+        return JSON.stringify([...result.values()]);
+      }
+      return JSON.stringify(patch(b, m, t));
+    } catch { return mine; }
   },
-  _sbDelete(k) {
-    if (!NEST_SB_ON()) return;
+  async _flush() {
+    if (!this._ready || this._busy || this._pulling) return;
+    this._busy = true;
     try {
-      fetch(`${NEST_SB.url}/rest/v1/${NEST_SB.table}?k=eq.${encodeURIComponent(k)}`, {
-        method: 'DELETE', headers: this._sbHeaders(),
-      }).catch(() => {});
-    } catch (e) {}
+      for (const [k, entry] of Object.entries(this._out())) {
+        const response = await this._fetch('/api/kv/' + encodeURIComponent(k), { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify({v: entry.v, rev: entry.rev}) });
+        const data = await response.json();
+        const out = this._out();
+        if (response.status === 409) {
+          this._rows[k] = data.current;
+          // A keystroke may have updated the outbox while the request was in flight.
+          const pending = out[k];
+          if (pending) {
+            pending.v = this._merge(k, pending.base, pending.v, data.current?.v ?? 'null');
+            pending.base = data.current?.v ?? null; pending.rev = data.current?.rev ?? 0;
+            this._apply(k, pending.v);
+          }
+        } else {
+          if (!response.ok) throw new Error('Save failed');
+          this._rows[k] = data;
+          if (out[k]?.id === entry.id) delete out[k];
+          else if (out[k]) { out[k].base = entry.v; out[k].rev = data.rev; }
+        }
+        this._raw('nest_sync_outbox', out);
+      }
+      this._reachable = true;
+      this._repaint();
+      window.dispatchEvent(new Event('nest:sync'));
+    } catch { this._reachable = false; }
+    finally {
+      this._busy = false; this._chip();
+      if (Object.keys(this._out()).length) { clearTimeout(this._timer); this._timer = setTimeout(() => this._flush(), 5000); }
+    }
   },
-  async _sbFetchAll() {
-    const r = await fetch(`${NEST_SB.url}/rest/v1/${NEST_SB.table}?select=k,v`, { headers: this._sbHeaders() });
-    if (!r.ok) throw new Error('sb ' + r.status);
-    return await r.json();
+  async _pull() {
+    if (this._pulling || this._busy) return;
+    this._pulling = true;
+    try {
+      const response = await this._fetch('/api/kv');
+      if (!response.ok) throw new Error('Offline');
+      const {rows} = await response.json();
+      if (!Array.isArray(rows)) throw new Error('Not the Nest API');
+      this._rows = Object.fromEntries(rows.map(r => [r.k, r]));
+      const local = this._snapshot(), out = this._out();
+      const migration = !this._get('nest_sync_migrated', false);
+      if (migration && !this._get('nest_sync_migration_backup', null)) this._raw('nest_sync_migration_backup', local);
+      for (const [k, v] of Object.entries(local)) {
+        if (out[k]) continue;
+        if (!this._rows[k]) this._queue(k, v, null);
+        else if (migration && (k === 'ticks' || k.startsWith('save:'))) {
+          // Only the first migration unions old phone picks. Later pulls must
+          // respect removals rather than resurrecting another phone's unticks.
+          const cloud = this._rows[k].v;
+          const merged = k === 'ticks' ? JSON.stringify({...JSON.parse(v), ...JSON.parse(cloud)}) : JSON.stringify([...new Map([...JSON.parse(v), ...JSON.parse(cloud)].map(x => [x.label,x])).values()]);
+          if (merged !== cloud) this._queue(k, merged, cloud);
+        }
+      }
+      const pending = this._out();
+      rows.forEach(r => { if (!pending[r.k]) this._apply(r.k, r.v); });
+      Object.entries(pending).forEach(([k, e]) => this._apply(k, e.v));
+      this._raw('nest_sync_migrated', true);
+      this._ready = true; this._reachable = true;
+      this._repaint(); window.dispatchEvent(new Event('nest:sync'));
+    } catch { this._reachable = false; }
+    finally { this._pulling = false; this._chip(); }
+    this._flush();
   },
-
-  // --- saves ----------------------------------------------------------------
   saves(kind) { return this._get('nest_save_' + kind, []); },
   isSaved(kind, label) { return this.saves(kind).some(x => x.label === label); },
   toggleSave(kind, label, url) {
-    const s = this.saves(kind);
-    const i = s.findIndex(x => x.label === label);
-    if (i >= 0) s.splice(i, 1); else s.push({ label: label, url: url || '' });
-    this._set('nest_save_' + kind, s);
-    this._sbUpsert('save:' + kind, JSON.stringify(s));
-    return i < 0;
+    const saves = this.saves(kind), i = saves.findIndex(x => x.label === label);
+    if (i >= 0) saves.splice(i, 1); else saves.push({label, url: url || ''});
+    this._set('nest_save_' + kind, saves); return i < 0;
   },
-
-  // --- ticks ----------------------------------------------------------------
   ticks() { return this._get('nest_ticks', {}); },
   isTicked(id) { return !!this.ticks()[id]; },
   toggleTick(id) {
-    const t = this.ticks();
-    if (t[id]) delete t[id]; else t[id] = 1;
-    this._set('nest_ticks', t);
-    this._sbUpsert('ticks', JSON.stringify(t));
-    return !!t[id];
+    const ticks = this.ticks(); if (ticks[id]) delete ticks[id]; else ticks[id] = 1;
+    this._set('nest_ticks', ticks); return !!ticks[id];
   },
-
-  // --- notes ----------------------------------------------------------------
   notes() { return this._get('nest_notes', {}); },
   getNote(k) { return this.notes()[k] || ''; },
-  setNote(k, v) {
-    const n = this.notes();
-    if (v && v.trim()) { n[k] = v; this._sbUpsert('note:' + k, v); }
-    else { delete n[k]; this._sbDelete('note:' + k); }
-    this._set('nest_notes', n);
-  },
-
-  // --- cloud sync: pull shared state down, repaint the page -----------------
-  async _pull(seed) {
-    if (!NEST_SB_ON()) return;
-    let rows;
-    try { rows = await this._sbFetchAll(); } catch (e) { return; } // offline: keep local
-
-    const cloudNotes = {}, cloudTicks = {}, cloudSaves = {};
-    let haveTicks = false;
-    rows.forEach(row => {
-      if (row.k.indexOf('note:') === 0) { if (row.v) cloudNotes[row.k.slice(5)] = row.v; }
-      else if (row.k.indexOf('save:') === 0) { try { cloudSaves[row.k.slice(5)] = JSON.parse(row.v) || []; } catch (e) {} }
-      else if (row.k === 'ticks') { try { Object.assign(cloudTicks, JSON.parse(row.v) || {}); haveTicks = true; } catch (e) {} }
-    });
-
-    // Notes: cloud wins per-key. On first run (seed), push any local-only notes
-    // up so nothing already typed on this phone gets lost.
-    const localNotes = this.notes();
-    const mergedNotes = Object.assign({}, cloudNotes);
-    if (seed) {
-      Object.keys(localNotes).forEach(k => {
-        if (!(k in cloudNotes) && localNotes[k] && localNotes[k].trim()) {
-          mergedNotes[k] = localNotes[k];
-          this._sbUpsert('note:' + k, localNotes[k]);
-        }
-      });
-    }
-    this._set('nest_notes', mergedNotes);
-
-    // Ticks: cloud wins if present; else seed from local.
-    if (haveTicks) this._set('nest_ticks', cloudTicks);
-    else if (seed && Object.keys(this.ticks()).length) this._sbUpsert('ticks', JSON.stringify(this.ticks()));
-
-    // Saves: cloud wins per-kind if present; else seed from local.
-    Object.keys(cloudSaves).forEach(kind => this._set('nest_save_' + kind, cloudSaves[kind]));
-    if (seed) {
-      document.querySelectorAll('[data-save-kind]').forEach(btn => {
-        const kind = btn.dataset.saveKind;
-        if (!(kind in cloudSaves) && this.saves(kind).length) this._sbUpsert('save:' + kind, JSON.stringify(this.saves(kind)));
-      });
-    }
-
-    this._repaint();
-  },
+  setNote(k, v) { const notes = this.notes(); if (v.trim()) notes[k] = v; else delete notes[k]; this._set('nest_notes', notes); },
 
   // Re-sync the on-screen widgets from storage without clobbering a field the
   // user is actively typing in.
@@ -190,25 +227,24 @@ window.NEST = {
       paint();
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
-      el.addEventListener('click', () => { NEST.toggleTick(id); paint(); });
-      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); NEST.toggleTick(id); paint(); } });
+      el.addEventListener('click', e => { if (e.target.closest('button,a,input,textarea,select')) return; NEST.toggleTick(id); paint(); });
+      el.addEventListener('keydown', e => { if (e.target !== el) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); NEST.toggleTick(id); paint(); } });
     });
   },
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  // On phones the menu is one swipeable row: bring the current page's tab into view.
   const nin = document.querySelector('.nav-in'), cur = nin && nin.querySelector('a.tab[aria-current]');
-  if (cur && nin.scrollWidth > nin.clientWidth) {
-    nin.scrollLeft += cur.getBoundingClientRect().left - nin.getBoundingClientRect().left - (nin.clientWidth - cur.offsetWidth) / 2;
-  }
-  window.NEST.wire();
-  // First pull seeds the cloud from anything already on this phone, then keeps
-  // it in sync. Refresh on tab-focus and every 20s so the other person's edits
-  // show up without a manual reload.
-  window.NEST._pull(true);
-  document.addEventListener('visibilitychange', () => { if (!document.hidden) window.NEST._pull(false); });
-  setInterval(() => { if (!document.hidden) window.NEST._pull(false); }, 20000);
+  if (cur && nin.scrollWidth > nin.clientWidth) nin.scrollLeft += cur.getBoundingClientRect().left - nin.getBoundingClientRect().left - (nin.clientWidth - cur.offsetWidth) / 2;
+  const chip = document.createElement('small');
+  chip.id = 'nest-sync-status'; chip.setAttribute('role', 'status');
+  chip.style.cssText = 'display:block;text-align:right;color:var(--ink-soft);font-size:11px;margin:8px 18px';
+  document.querySelector('.nav')?.after(chip);
+  NEST.wire(); NEST._chip(); NEST._pull();
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) NEST._pull(); });
+  window.addEventListener('focus', () => NEST._pull());
+  window.addEventListener('online', () => NEST._pull());
+  setInterval(() => { if (!document.hidden) NEST._pull(); }, 30000);
 });
 
 // No service worker: caching froze phones on old copies (killed 1 Oct). Clear any
