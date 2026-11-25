@@ -34,6 +34,7 @@
   });
   const states = () => document.querySelectorAll('.skin-tick[data-tick]').forEach(el => {
     el.setAttribute('role', 'checkbox');
+    el.setAttribute('aria-label', 'Bought: ' + el.closest('.skin-product').querySelector('h3').textContent);
     el.setAttribute('aria-checked', String(NEST.isTicked(el.dataset.tick)));
   });
   document.addEventListener('DOMContentLoaded', () => {

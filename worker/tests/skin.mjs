@@ -67,15 +67,38 @@ try {
     assert.doesNotMatch(await page.content(), /photo/i);
   }
   for (const file of ['skin.html', 'skin.js']) assert.doesNotMatch(readFileSync(new URL(file, root), 'utf8'), /photo/i);
-  assert.equal(await first.locator('#skin-shopping [data-tick]').count(), 7);
+  assert.equal(await first.locator('#skin-shopping [data-tick]').count(), 14);
+  assert.equal(await first.locator('main > details.skin-card').count(), 6);
+  for (const page of [first, second]) await page.locator('#shopping > summary').click();
+  assert.equal(await first.locator('.skin-retailer').count(), 71);
+  assert.equal(await first.locator('.skin-retailer[target="_blank"][rel="noopener noreferrer"]').count(), 71);
+  assert.ok(await first.locator('a[href="tel:0114520851"]').count() > 0);
+  assert.ok(await first.locator('a[href="tel:0116639900"]').count() > 0);
+  const options = await first.locator('.skin-options li').allTextContents();
+  for (const option of options) {
+    assert.match(option, /Checked 25 Nov 2026/);
+    assert.match(option, /R[\d,]+\.\d{2}|Price unverified/);
+    assert.match(option, /In stock online|Out of stock online|Stock unverified/);
+  }
+  assert.match(await first.locator('#buy-retinoid').innerText(), /Schedule 3/);
+  assert.match(await first.locator('#buy-skinoren').innerText(), /Schedule 1/);
+  assert.match(await first.locator('#shopping').innerText(), /grey-market \/ counterfeit risk/);
+  assert.match(await first.locator('#research').textContent(), /6–14 months/);
+  assert.match(await first.locator('#later').textContent(), /6–8 weeks irritation-free/);
+  assert.doesNotMatch(await first.locator('main').textContent(), /Mishka/i);
+  assert.equal(await first.locator('#research').getAttribute('open'), null);
+  await first.locator('#research > summary').press('Enter');
+  assert.notEqual(await first.locator('#research').getAttribute('open'), null);
+  await first.locator('#research > summary').click();
   assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
   await first.locator('.menubtn').click();
   assert.equal(await first.locator('.navtile[aria-current=page]').innerText(),'🧴\nSkin');
   await first.locator('.menubtn').click();
   const tick='[data-tick="skin-bought-anua"]';
-  await first.locator(tick).click();
+  await first.locator(tick).press('Space');
   await eventually(()=>JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get('ticks')?.v || '{}')['skin-bought-anua']);
   await first.reload();await first.waitForFunction(()=>NEST._ready);
+  await first.locator('#shopping > summary').click();
   assert.equal(await first.locator(tick).getAttribute('aria-checked'),'true');
   await second.evaluate(()=>NEST._pull());
   assert.equal(await second.locator(tick).getAttribute('aria-checked'),'true');
@@ -90,6 +113,7 @@ try {
   assert.equal(await first.locator('#skin-log-note').inputValue(),'');
   assert.match(await first.locator('#skin-log-status').innerText(),/Entry saved/);
   await first.reload();await first.waitForFunction(()=>NEST._ready);
+  await first.locator('#shopping > summary').click();
   assert.equal(await first.locator('#skin-log > li').count(),1);
   assert.equal(await first.locator('#skin-log > li b').innerText(),'Better');
   assert.equal(await first.locator('.skin-entry-note').innerText(),'Less irritation today. <b>Plain text</b>');
@@ -116,12 +140,17 @@ try {
   await second.locator(tick).click();
   await eventually(()=>!JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get('ticks').v)['skin-bought-anua']);
   await first.reload();await first.waitForFunction(()=>NEST._ready);
+  await first.locator('#shopping > summary').click();
   assert.equal(await first.locator(tick).getAttribute('aria-checked'),'false');
   assert.deepEqual(await first.locator('#skin-log > li > b').allTextContents(),['Worse','Same','Better']);
-  await first.screenshot({path:'/tmp/nest-skin-mobile.png',fullPage:true});
+  for (const width of [320, 390]) {
+    await first.setViewportSize({width,height:844});
+    assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
+  }
+  await first.screenshot({path:'/tmp/nest-skin-mobile.png',fullPage:false});
   await first.emulateMedia({colorScheme:'dark'});
   assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
-  await first.screenshot({path:'/tmp/nest-skin-dark.png',fullPage:true});
+  await first.screenshot({path:'/tmp/nest-skin-dark.png',fullPage:false});
   assert.deepEqual(errors,[]);
-  console.log('Skin browser checks passed: private auth, 390px light/dark layout, active mobile nav, no image reminders, shopping ticks, keyboard access, dated log entries, plain-text notes, newest-first order, cross-device conflict merge, reload persistence and untick propagation.');
+  console.log('Skin browser checks passed: private auth, 14 products / 71 retailer options, dated stock/price notes, tel links, collapsible research and staged plan, 390px light/dark layout, active mobile nav, no image reminders, shopping ticks, keyboard access, dated log entries, plain-text notes, newest-first order, cross-device conflict merge, reload persistence and untick propagation.');
 } finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); db.close(); }

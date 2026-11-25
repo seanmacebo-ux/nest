@@ -29,15 +29,34 @@
   .skin-tick small, .skin-muted { display: block; color: var(--ink-soft); font-size: 13px; }
   .skin-date, .skin-note { display: block; width: 100%; max-width: 100%; min-width: 0; padding: 12px; margin: 8px 0; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); color: var(--ink); font: inherit; font-size: 16px; }
   .skin-note { min-height: 88px; resize: vertical; }
-  .skin-schedule { display: grid; gap: 12px; }
-  .skin-schedule p { margin: 0; padding-bottom: 12px; border-bottom: 1px dotted var(--line); }
-  .skin-schedule p:last-child { border: 0; padding: 0; }
   .skin-label { display: block; font-size: 13px; font-weight: 600; margin-top: 12px; }
   .skin-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
   .skin-actions button { min-height: 44px; padding: 10px 18px; background: var(--surface-2); color: var(--ink); font: inherit; cursor: pointer; }
   .skin-entry-note { white-space: pre-wrap; overflow-wrap: anywhere; }
-  .skin-panel p:first-child { margin-top: 0; }
-  .skin-panel p:last-child { margin-bottom: 0; }
+
+  .skin-card { margin: 18px 0; padding: 0; overflow: hidden; }
+  .skin-card > summary { padding: 20px; cursor: pointer; min-height: 64px; }
+  .skin-card summary h2 { display: inline; font-size: clamp(19px, 4.8vw, 25px); line-height: 1.25; }
+  .skin-card summary .skin-muted { margin: 8px 0 0 18px; }
+  .skin-body { padding: 0 20px 20px; overflow-wrap: anywhere; }
+  .skin-body h3 { margin: 24px 0 8px; font-size: 18px; line-height: 1.4; }
+  .skin-evidence,.skin-phase { display: inline-block; border: 1px solid var(--line); border-radius: 10px; padding: 4px 8px; font-size: 12px; font-weight: 700; background: var(--surface-2); }
+  .skin-body blockquote { margin: 18px 0; padding: 12px 14px; border-left: 4px solid var(--accent); background: var(--surface-2); }
+  .skin-body cite { display: block; margin-top: 8px; font-size: 13px; font-style: normal; }
+  .skin-product { border-top: 2px solid var(--line); margin-top: 24px; padding-top: 22px; }
+  .skin-product h3 { margin-top: 10px; }
+  .skin-options { list-style: none; margin: 0; padding: 0; }
+  .skin-options li { padding: 12px; margin: 10px 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
+  .skin-options a { display: flex; align-items: center; min-height: 44px; line-height: 1.4; font-weight: 700; }
+  .skin-options b,.skin-options small { display: block; margin-top: 6px; }
+  .skin-options small,.skin-store small { color: var(--ink-soft); font-size: 13px; }
+  .skin-store { display: grid; gap: 8px; margin: 18px 0; }
+  .skin-store a { min-height: 44px; display: flex; align-items: center; }
+  .skin-store-note { font-size: 14px; }
+  .skin-store-note a { display: inline-block; padding: 10px 2px; }
+  .skin-sources { text-align: left; overflow-wrap: anywhere; }
+  .skin-sources summary { padding: 12px 0; cursor: pointer; }
+  .skin-sources li { margin: 12px 0; }
 </style>
 </head>
 <body>
@@ -65,66 +84,359 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> For Sean · private</div>
     <h1>Skin <em>reset</em>.</h1>
-    <p class="sub">Keep it gentle now. Build slowly after the course, and track what actually changes.</p>
+    <p class="sub">Roaccutane 20 mg · darker skin · Greenstone, Johannesburg. What is worth doing, what can wait, and where to buy it.</p>
   </header>
 
-  <section aria-labelledby="now-title">
-    <div class="sec"><h2 id="now-title">🧴 Now: on Roaccutane, keep it simple</h2><p>Current course: 20 mg. The active-product plan below is on hold.</p></div>
-    <div class="panel skin-panel">
-      <ul class="skin-list">
-        <li>Gentle cleanser.</li>
-        <li>Fragrance-free moisturiser, several times a day.</li>
-        <li>SPF 50+ every morning, with lip balm throughout the day.</li>
-      </ul>
-      <p><b>Stop:</b> COSRX BHA, PFB Vanish, benzoyl peroxide, glycolic/AHA, Skinoren, retinal/adapalene, Medicube pads and minoxidil.</p>
-      <p><b>Hold Anua + azelaic acid</b> until the rash has fully settled. Check reintroduction with the prescriber and stop if they sting.</p>
-      <div class="callout car"><b>Tell the prescriber about the rash. Only change the dose with them.</b></div>
-    </div>
-  </section>
+<details class="panel skin-card" id="research"><summary><h2>What the research actually says</h2><span class="skin-muted">Beard mechanics, slow fading, and the evidence limits.</span></summary><div class="skin-body">
+<p><span class="skin-evidence">Guidance + repeated user reports</span></p>
+<h3>Beard bumps: change the cut first</h3>
+<p>Pseudofolliculitis barbae (PFB) is usually a hair-direction problem: a close-cut, curly hair grows back into the skin. Roaccutane treats acne, so it may not fix ingrowns. Infection and eczema can coexist; the beard line and rash need a prescriber's assessment.</p>
+<p><b>Clippers with a guard, leaving about 1–3 mm. No razor, foil shaver, plucking or waxing.</b> Do not pick or dig out hairs; try a warm compress. Bumps may calm in 4–8 weeks if the close shaving stops.</p>
+<blockquote>“Ditched the foil shaver completely... the single biggest change”<cite><a class="" href="https://reddit.com/r/Blackskincare/comments/1wvc5kd/6_months_skin_update/" target="_blank" rel="noopener noreferrer">r/Blackskincare · 1 Oct 2026 · anecdote</a></cite></blockquote>
+<p>For persistent PFB, ask a dermatologist experienced with dark skin about Nd:YAG hair removal or electrolysis. Defer procedures until about 6 months after the course and get the prescriber's clearance; this is not an automatic start date.</p>
+<h3>Dark marks: think 6–14 months</h3>
+<p><span class="skin-evidence">Community timelines, not a guarantee</span> PIH means the dark marks left by inflammation. Some change may show at 3–6 months; substantial fading often takes 6–14 months, with stubborn ingrown marks lasting longer. Preventing fresh inflammation matters as much as fading old marks.</p>
+<blockquote>“It took me a full year of consistent tret use before years of hyperpigmentation finally faded”<cite><a class="" href="https://reddit.com/r/Blackskincare/comments/1reytec/acne_problems_needs_a_solution_please/o7gb42l/" target="_blank" rel="noopener noreferrer">r/Blackskincare · 26 Feb 2026 · anecdote</a></cite></blockquote>
+<h3>The after-course core</h3>
+<p><span class="skin-evidence">Clinical support + community convergence</span> Adapalene <b>or</b> tretinoin at night, azelaic acid in the day, and daily SPF recur most consistently. This is a discussion with the prescriber after the course, not an instruction to start now. OTC retinal has less outcome evidence in dark skin.</p>
+<blockquote>“After 6 months, no active acne (except for one during my period), no texture and very little hyperpigmentation.”<cite><a class="" href="https://reddit.com/r/Blackskincare/comments/1lrkzwv/losing_hope/n1bmtwv/" target="_blank" rel="noopener noreferrer">r/Blackskincare · 4 Jul 2025 · prescribed adapalene + azelaic, anecdote</a></cite></blockquote>
+<h3>Counter-evidence: more products can still fail</h3>
+<p><span class="skin-evidence">Anecdote / limited trials</span> A Fitzpatrick V user after Accutane tried azelaic, retinol, glycolic, Anua TXA, sunscreen and clinic treatments: “the dark patches just won't budge”. <a class="" href="https://reddit.com/r/SkincareAddiction/comments/1nheh4k/stubborn_hyperpigmentation_after_accutane/" target="_blank" rel="noopener noreferrer">Read the stubborn-PIH account</a>. Others report barrier damage from tretinoin plus azelaic or intolerance to niacinamide. Some users report fewer ingrowns on Accutane; others report more. None proves what will happen for you.</p>
+<p>The small 12-week TXA trial tested <b>5% TXA solution versus 20% azelaic cream</b>, not Anua's 4% mixed serum. Glycolic evidence for PFB is old and small; product anecdotes are not proof that acids straighten beard hair.</p>
+<h3>Where the earlier PDF went wrong</h3>
+<ul class="skin-list">
+<li>It said to pause actives, then pushed seven products and stronger concentrations. Strength is not the goal on irritated skin.</li>
 
-  <section aria-labelledby="later-title">
-    <div class="sec"><h2 id="later-title">🌱 After the course: restart at week 0</h2><p>Confirm with your prescriber when your skin is ready. One new product every 2 weeks, only if the previous one is comfortable.</p></div>
-    <div class="panel skin-panel">
-      <ol class="skin-list">
-        <li><b>Week 0:</b> SPF every morning + The Ordinary Azelaic Acid 10% in the morning. Keep cleanser and moisturiser.</li>
-        <li><b>Week 2:</b> Anua Niacinamide + TXA serum in the morning; PFB Vanish on the beard line after trims.</li>
-        <li><b>Week 4:</b> add COSRX BHA, Monday and Thursday nights.</li>
-        <li><b>Week 6:</b> add one retinoid, Tuesday and Saturday nights. A pea-sized amount, sandwiched between moisturiser layers.</li>
-      </ol>
-      <p class="skin-muted">These are earliest checkpoints, not deadlines. If SPF or both week-2 products are new, introduce them separately, 2 weeks apart, and move later additions back. Never rush to catch up.</p>
-      <p><b>Azelaic step-up:</b> only consider Skinoren 15% after 6 weeks on 10% with no stinging. Make it a separate change.</p>
-      <p><b>Morning, once introduced:</b> cleanser → Anua → azelaic → SPF last.</p>
-    </div>
-    <div class="sec"><h2>🌙 One night schedule</h2><p>Only after each product has been introduced and tolerated.</p></div>
-    <div class="panel skin-panel">
-      <div class="skin-schedule">
-        <p><b>Mon + Thu:</b> cleanser → COSRX BHA → moisturiser.</p>
-        <p><b>Tue + Sat:</b> cleanser → moisturiser → retinoid → moisturiser.</p>
-        <p><b>Wed / Fri / Sun:</b> cleanser → moisturiser only.</p>
-      </div>
-      <p><b>After trims:</b> use PFB only on a separate night, replacing a moisturiser-only night. Never use it on a BHA or retinoid night. Otherwise skip it.</p>
-      <p><b>Never stack acids or combine them with the retinoid.</b> Do not add the PDF's extra acid nights.</p>
-      <p class="skin-muted">PDF had two versions of the nights; I used the one that never stacks acids.</p>
-    </div>
-  </section>
+<li>Its roadmap said BHA Mon/Wed/Fri and retinoid Tue/Thu/Sat; its daily table said BHA Mon/Thu and retinoid Tue/Sat. It also added two products at once despite its two-week rule.</li>
 
-  <section aria-labelledby="shopping-title">
-    <div class="sec"><h2 id="shopping-title">🛍️ Shopping list</h2><p>Tap when bought. Buying it does not mean starting it now. Prices and shops from the PDF, November 2026; confirm before ordering.</p></div>
-    <div class="panel"><ul class="skin-rows" id="skin-shopping">
-      <li><div class="skin-tick" data-tick="skin-bought-azelaic"><span class="box" aria-hidden="true"></span><span class="txt"><b>The Ordinary Azelaic Acid 10%</b><small>Clicks Greenstone · price not given in PDF</small><small>Bought</small></span></div></li>
-      <li><div class="skin-tick" data-tick="skin-bought-anua"><span class="box" aria-hidden="true"></span><span class="txt"><b>Anua Niacinamide 10% + TXA 4% Serum</b><small>R495 · Glow Theory</small><small>Bought</small></span></div></li>
-      <li><div class="skin-tick" data-tick="skin-bought-bha"><span class="box" aria-hidden="true"></span><span class="txt"><b>COSRX BHA Blackhead Power Liquid</b><small>R370 · Skinbeat / Arc</small><small>Bought</small></span></div></li>
-      <li><div class="skin-tick" data-tick="skin-bought-retinoid"><span class="box" aria-hidden="true"></span><span class="txt"><b>Skin Functional 0.2% Retinal OR adapalene 0.1%</b><small>Retinal ~R385 · Arc / Dis-Chem. Adapalene via GP prescription; price not given. Choose one.</small><small>Bought</small></span></div></li>
-      <li><div class="skin-tick" data-tick="skin-bought-spf"><span class="box" aria-hidden="true"></span><span class="txt"><b>Beauty of Joseon Relief Sun SPF 50+</b><small>R329 · Secret Skin, or R469 · Woolworths</small><small>Bought</small></span></div></li>
-      <li><div class="skin-tick" data-tick="skin-bought-skinoren"><span class="box" aria-hidden="true"></span><span class="txt"><b>Skinoren 15%</b><small>Clicks pharmacy counter · ask price. Later step-up only.</small><small>Bought</small></span></div></li>
-      <li><div class="skin-tick" data-tick="skin-bought-pfb"><span class="box" aria-hidden="true"></span><span class="txt"><b>PFB Vanish + Chromabright</b><small>Desertcart · check current price</small><small>Bought</small></span></div></li>
-    </ul></div>
-  </section>
+<li>Marks in 8–12 weeks and a full result at month 6 were optimistic. Bumps improving in weeks depends on grooming changes, not just products.</li>
 
-  <section aria-labelledby="tracker-title">
-    <div class="sec"><h2 id="tracker-title">📝 Sean's log</h2><p>Track changes in your own words. Tap Better, Same or Worse to save a dated entry.</p></div>
-    <div class="panel skin-panel">
-      <label class="skin-label" for="skin-start">After-course restart date (week 0)</label>
+<li>Holding azelaic during Roaccutane is cautious, not a blanket proven incompatibility. Some users had it prescribed during the course. Skinoren stays on hold unless your prescriber agrees.</li>
+</ul>
+<p class="skin-muted">Evidence reviewed 25 Nov 2026: archived Reddit, YouTube transcripts/comments, guidance and selected papers. Not a systematic review. No usable South African community evidence; mostly US/UK diaspora. Several papers/leaflets were search summaries or abstracts only. Progress posts have survivor bias, and some creators sell products or use affiliate links.</p></div></details>
+<details class="panel skin-card" id="now" open><summary><h2>Now, on Roaccutane</h2><span class="skin-muted">Safe basics, buy links, and questions for the prescriber.</span></summary><div class="skin-body">
+<p><b>Keep the routine small while on Roaccutane.</b> Choose one of each; there is no need to buy every alternative below. Prices are the 25 Nov 2026 research snapshot.</p>
+<ul class="skin-list">
+<li><b>Gentle cleanser:</b> Cleanse gently; avoid scrubs. <a class="" href="https://www.dischem.co.za/cerave-hydrating-cleanser-236ml-355" target="_blank" rel="noopener noreferrer">Dis-Chem - CeraVe Hydrating Cleanser 236ml · R255.00</a>.</li>
+
+<li><b>Fragrance-free moisturiser:</b> Apply as often as needed; check fragrance on the box. <a class="" href="https://clicks.co.za/la-roche-posay_cicaplast-baume-b5-40ml/p/320768" target="_blank" rel="noopener noreferrer">Clicks - La Roche-Posay Cicaplast Baume B5 40ml · R213.50</a>.</li>
+
+<li><b>Daily SPF50+:</b> Every morning; reapply outdoors. No-white-cast claims are unverified on your skin. <a class="" href="https://www.dischem.co.za/la-roche-posay-anthelios-uvmune-400-fluide-invisible-spf50-50ml-394" target="_blank" rel="noopener noreferrer">Dis-Chem - LRP Anthelios UVMune 400 Invisible Fluid SPF50+ 50ml · R264.59</a>.</li>
+
+<li><b>Lip balm:</b> Use through the day for dry, cracked lips. <a class="" href="https://www.dischem.co.za/eau-thermale-avene-cicalfate-lips-repair-balm-10ml-033" target="_blank" rel="noopener noreferrer">Dis-Chem - Avene Cicalfate Lips Repair Balm 10ml · R123.44</a>.</li>
+</ul>
+<p>For pigment, ask about tinted sunscreen with iron oxides if you can find a shade that works on darker skin. Tinted/mineral products can look ashy; chemical sunscreens may sting. Test tolerance rather than relying on “invisible” marketing.</p>
+<h3>Ask your prescriber</h3>
+<ul class="skin-list">
+<li>Is azelaic acid acceptable during my 20 mg course, with this rash? Which strength and frequency?</li>
+
+<li>Would a short hydrocortisone course help, and exactly where and for how long?</li>
+
+<li>Do the beard bumps need a topical antibiotic? Is this PFB, bacterial folliculitis, a fungal infection or eczema? Antibiotic choice and resistance prevention need a clinician.</li>
+
+<li>Please assess the rash now. Is it dermatitis from the course or something else? Only change the dose with the prescriber.</li>
+</ul>
+<h3>Not compatible with the current routine</h3>
+<p><b>Hold adapalene/tretinoin/retinal, benzoyl peroxide (BPO), salicylic/BHA, glycolic/AHA, PFB Vanish and exfoliating pads.</b> Keep Skinoren and other azelaic products on hold pending the answer above. Hold Anua/TXA and minoxidil while skin is irritated.</p>
+<p><b>Do not combine oral doxycycline, minocycline or other tetracycline pills with isotretinoin.</b> This is a contraindicated drug combination, not just an irritation risk. Do not repeat old tablets without checking.</p>
+<p>No waxing, peels or laser treatments during the course; discuss the roughly 6-month waiting period afterwards.</p>
+<p><b>Stop a new topical and ask for advice</b> if burning persists, skin cracks or peeling patches develop. Spreading pus-filled bumps need medical assessment. A blistering/peeling rash, mouth sores, facial swelling or breathing difficulty needs urgent medical help; stop Roaccutane for a serious rash and contact a doctor immediately.</p></div></details>
+<details class="panel skin-card" id="shopping"><summary><h2>Where to buy</h2><span class="skin-muted">14 products · 71 retailer options · checked 25 Nov 2026.</span></summary><div class="skin-body">
+<p>14 products · 71 retailer options. Buying does not mean starting. “In stock” means online at the research check, <b>not Greenstone shelf stock</b>. Prices and promotions change; call before travelling. Search links are leads, not confirmed product listings.</p>
+<div class="callout"><b>Takealot K-beauty: grey-market / counterfeit risk.</b> Seller authenticity was not verified. COSRX “Parallel Import” is explicitly grey market; unusually cheap Anua is a warning sign. Prefer established SA retailers or specialists (Glow Theory, Skinbeat, Secret Skin); their authenticity was not independently verified either. Desertcart is also third-party stock with unverified authenticity.</div>
+<div class="skin-store"><b>Call Greenstone</b><a href="tel:0114520851">Clicks pharmacy · 011 452 0851</a><a href="tel:0116639900">Dis-Chem · 011 663 9900</a><small>Clicks: Greenstone Shopping Centre, Modderfontein Rd. Dis-Chem: Cnr Modderfontein Rd &amp; Van Riebeek Ave.</small></div><div id="skin-shopping">
+<article class="skin-product" id="buy-cleanser">
+<span class="skin-phase">Now</span>
+<h3>Gentle cleanser (CeraVe Hydrating / Cetaphil Gentle Skin / La Roche-Posay Toleriane Dermo-Cleanser)</h3>
+<p>Non-foaming cleanser to use twice a day</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/cerave_hydrating-cleanser-473ml/p/366458" target="_blank" rel="noopener noreferrer">Clicks - CeraVe Hydrating Cleanser 473ml</a><b>R369.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:31 SAST</small><small>Shown &#x27;On promo&#x27;; schema InStock.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/cerave-hydrating-cleanser-236ml-355" target="_blank" rel="noopener noreferrer">Dis-Chem - CeraVe Hydrating Cleanser 236ml</a><b>R255.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:31 SAST</small><small>Member price R160.65 (30% off).</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/cerave-hydrating-cleanser-for-normal-to-dry-skin-daily-face-wash-236-ml/PLID95491542" target="_blank" rel="noopener noreferrer">Takealot - CeraVe Hydrating Cleanser 236ml</a><b>R179.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:31 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://clicks.co.za/cetaphil_gentle-cleanser-236ml/p/9260" target="_blank" rel="noopener noreferrer">Clicks - Cetaphil Gentle Cleanser 236ml</a><b>R270.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:31 SAST</small><small>Schema InStock.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/cetaphil-gentle-skin-cleanser-236ml-927" target="_blank" rel="noopener noreferrer">Dis-Chem - Cetaphil Gentle Skin Cleanser 236ml</a><b>R269.99 · In stock online</b><small>Checked 25 Nov 2026 · 20:31 SAST</small><small>Member price R170.09.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/cetaphil-gentle-skin-cleanser-236ml/PLID70922063" target="_blank" rel="noopener noreferrer">Takealot - Cetaphil Gentle Skin Cleanser 236ml</a><b>R215.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:31 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/la-roche-posay-toleriane-dermo-nettoyant-cleanser-200ml-893" target="_blank" rel="noopener noreferrer">Dis-Chem - La Roche-Posay Toleriane Dermo-Cleanser 200ml</a><b>R333.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Page price (discount basis unclear).</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/la-roche-posay-toleriane-dermo-cleanser-for-sensitive-skin-200-ml/PLID97987073" target="_blank" rel="noopener noreferrer">Takealot - La Roche-Posay Toleriane Dermo-Cleanser 200ml</a><b>R370.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Seller not verified.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Clicks Greenstone (Greenstone Shopping Centre, Modderfontein Rd): shop <a href="tel:0114520816">011 452 0816</a>, pharmacy <a href="tel:0114520851">011 452 0851</a>. Call ahead for stock. or Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead. Woolworths did not list these brands.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. Buy today.</p>
+<div class="skin-tick" data-tick="skin-bought-cleanser"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Gentle cleanser (CeraVe Hydrating / Cetaphil Gentle Skin / La Roche-Posay Toleriane Dermo-Cleanser)</span></span></div></article>
+
+<article class="skin-product" id="buy-moisturiser">
+<span class="skin-phase">Now</span>
+<h3>Fragrance-free moisturiser/emollient (CeraVe Moisturising Cream / La Roche-Posay Cicaplast Baume B5+)</h3>
+<p>Barrier repair; apply more than once a day</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/cerave_moisturising-cream-454g/p/360501" target="_blank" rel="noopener noreferrer">Clicks - CeraVe Moisturising Cream 454g</a><b>R400.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Schema InStock.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/cerave-moisturising-cream-454g-365" target="_blank" rel="noopener noreferrer">Dis-Chem - CeraVe Moisturising Cream 454g</a><b>R399.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Special R359.10.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/cerave-moisturising-cream-daily-hydration-body-and-face-moisturizer-340-g/PLID95491543" target="_blank" rel="noopener noreferrer">Takealot - CeraVe Moisturising Cream 340g</a><b>R299.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://clicks.co.za/la-roche-posay_cicaplast-baume-b5-40ml/p/320768" target="_blank" rel="noopener noreferrer">Clicks - La Roche-Posay Cicaplast Baume B5 40ml</a><b>R213.50 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Promo price (schema list R305). Also Cicaplast B5 SPF50+ 40ml R199.50.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/la-roche-posay-cicaplast-balm-b5-40ml-866" target="_blank" rel="noopener noreferrer">Dis-Chem - La Roche-Posay Cicaplast Balm B5 40ml</a><b>R299.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Special R269.10.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/la-roche-posay-cicaplast-ultra-repairing-soothing-balm-barrier-cream-40-ml/PLID97987064" target="_blank" rel="noopener noreferrer">Takealot - Cicaplast Baume B5+ 40ml</a><b>R299.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Seller not verified.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Clicks Greenstone (Greenstone Shopping Centre, Modderfontein Rd): shop <a href="tel:0114520816">011 452 0816</a>, pharmacy <a href="tel:0114520851">011 452 0851</a>. Call ahead for stock. or Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. Fragrance-free per brand marketing - confirm on the box. Eucerin UreaRepair and Bioderma Atoderm (Clicks R480/200ml) are other options.</p>
+<div class="skin-tick" data-tick="skin-bought-moisturiser"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Fragrance-free moisturiser/emollient (CeraVe Moisturising Cream / La Roche-Posay Cicaplast Baume B5+)</span></span></div></article>
+
+<article class="skin-product" id="buy-sunscreen">
+<span class="skin-phase">Now</span>
+<h3>Sunscreen SPF50 for daily use (white-cast claims unverified) (La Roche-Posay Anthelios UVMune 400 Invisible Fluid / Bioderma XDefense / Skin Functional Chemical &amp; Mineral)</h3>
+<p>Every morning during the course</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://www.dischem.co.za/la-roche-posay-anthelios-uvmune-400-fluide-invisible-spf50-50ml-394" target="_blank" rel="noopener noreferrer">Dis-Chem - LRP Anthelios UVMune 400 Invisible Fluid SPF50+ 50ml</a><b>R264.59 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Page price.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/la-roche-posay-anthelios-uvmune-400-invisible-fluid-sunscreen-spf-50-50-ml/PLID97987033" target="_blank" rel="noopener noreferrer">Takealot - LRP Anthelios UVMune 400 Invisible Fluid 50ml</a><b>R279.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://clicks.co.za/bioderma_%70hotoderm-xdefense-ultra-fluid-spf50+-invisible-40ml/p/399159" target="_blank" rel="noopener noreferrer">Clicks - Bioderma XDefense Ultra-Fluid Invisible 40ml</a><b>R415.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Schema InStock. Tinted shades 02/03 on Takealot at R249.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/bioderma-%70hotoderm-xdefense-ultra-fluid-spf50-invisible-40ml/PLID99420957" target="_blank" rel="noopener noreferrer">Takealot - Bioderma XDefense Ultra-Fluid Invisible 40ml</a><b>R249.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:32 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/skin-functional-chemical-mineral-sunscreen-spf50-50ml-813" target="_blank" rel="noopener noreferrer">Dis-Chem - Skin Functional Chemical &amp; Mineral SPF50 50ml</a><b>R245.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Member price R171.50.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/prod/_/A-511493204" target="_blank" rel="noopener noreferrer">Woolworths - Skin Functional Chemical &amp; Mineral SPF50</a><b>R260.00 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Listed R260; stock not confirmed.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/prod/_/A-506796324" target="_blank" rel="noopener noreferrer">Woolworths - Skin Functional Mineral SPF50</a><b>R299.00 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Listed R299; white cast on dark skin UNVERIFIED.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/skin-functional-chemical-and-mineral-sunscreen-spf50-liquid-lotion/PLID100477249" target="_blank" rel="noopener noreferrer">Takealot - Skin Functional Chemical &amp; Mineral SPF50</a><b>R179.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Seller not verified.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead. / Woolworths Greenstone (existence/phone UNVERIFIED; use the &#x27;Check in-store availability&#x27; button on the product page or the centre line <a href="tel:0115240445">011 524 0445</a>, unverified). Clicks Greenstone carries Bioderma.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. &#x27;No white cast&#x27; is brand positioning, not verified by me; try a small patch first.</p>
+<div class="skin-tick" data-tick="skin-bought-sunscreen"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Sunscreen SPF50 for daily use (white-cast claims unverified) (La Roche-Posay Anthelios UVMune 400 Invisible Fluid / Bioderma XDefense / Skin Functional Chemical &amp; Mineral)</span></span></div></article>
+
+<article class="skin-product" id="buy-lips">
+<span class="skin-phase">Now</span>
+<h3>Lip balm (La Roche-Posay Cicaplast Lips B5 / Avene Cicalfate Lips / Eucerin Intensive Lip Balm)</h3>
+<p>Roaccutane cheilitis</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://www.dischem.co.za/la-roche-posay-cicaplast-lips-7-5ml-868" target="_blank" rel="noopener noreferrer">Dis-Chem - LRP Cicaplast Lips 7.5ml</a><b>R166.50 · In stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Page price.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/la-roche-posay-cicaplast-lips-for-dry-and-damaged-skin-barrier-balm-7-5-ml/PLID97987067" target="_blank" rel="noopener noreferrer">Takealot - LRP Cicaplast Lips 7.5ml</a><b>R185.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/eau-thermale-avene-cicalfate-lips-repair-balm-10ml-033" target="_blank" rel="noopener noreferrer">Dis-Chem - Avene Cicalfate Lips Repair Balm 10ml</a><b>R123.44 · In stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Page price.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/eucerin-intensive-lip-balm-for-dry-and-extremely-dry-lips-10ml/PLID91396313" target="_blank" rel="noopener noreferrer">Takealot - Eucerin Intensive Lip Balm 10ml</a><b>R90.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/cat?Ntt=lip+balm+skin+functional" target="_blank" rel="noopener noreferrer">Woolworths - Skin Functional Palmitoyl Tri-Peptide Lip Protector SPF30</a><b>R180.00 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:22 SAST</small><small>Seen on search card; stock/URL not verified.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead. / Woolworths Greenstone (existence/phone UNVERIFIED; use the &#x27;Check in-store availability&#x27; button on the product page or the centre line <a href="tel:0115240445">011 524 0445</a>, unverified).</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. Bio-Oil not wanted (excluded).</p>
+<div class="skin-tick" data-tick="skin-bought-lips"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Lip balm (La Roche-Posay Cicaplast Lips B5 / Avene Cicalfate Lips / Eucerin Intensive Lip Balm)</span></span></div></article>
+
+<article class="skin-product" id="buy-spf">
+<span class="skin-phase">Now</span>
+<h3>Beauty of Joseon Relief Sun SPF50+ (Rice + Niacinamide, 50ml)</h3>
+<p>Daily SPF; Roaccutane-compatible but chemical filters - patch test as skin is irritated</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://skinbeat.co.za/products/beauty-of-joseon-relief-sun-rice-niacinamide-spf50-pa" target="_blank" rel="noopener noreferrer">Skinbeat</a><b>R350.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:34 SAST</small><small>50ml R350 (10ml R90). Add to cart.</small></li>
+
+<li><a class="skin-retailer" href="https://glowtheory.com/products/beauty-of-joseon-relief-sun-spf-50-rice-niacinamide" target="_blank" rel="noopener noreferrer">Glow Theory</a><b>R365.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:28 SAST</small><small>Add to cart.</small></li>
+
+<li><a class="skin-retailer" href="https://secretskin.co.za/products/beauty-of-joseon-relief-sun-aqua-fresh-b5-spf50-pa" target="_blank" rel="noopener noreferrer">Secret Skin (Aqua-Fresh + B5 version, not Rice+Niacinamide)</a><b>R399.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:29 SAST</small><small>Different version. PDF&#x27;s R329 not seen; Rice + Niacinamide not found there.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/prod/_/A-510882392" target="_blank" rel="noopener noreferrer">Woolworths</a><b>R469.00 · Out of stock online</b><small>Checked 25 Nov 2026 · 20:26 SAST</small><small>Page says out of stock online (&#x27;Sorry, we&#x27;re out of this product&#x27;).</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/beauty-of-joseon-relief-sun-rice-niacinamide-spf50-pa-50ml-450" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>R450.00 · Out of stock online</b><small>Checked 25 Nov 2026 · 20:26 SAST</small><small>Out of stock online (Aqua-fresh version also OOS, R450).</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Woolworths Greenstone (existence/phone UNVERIFIED; use the &#x27;Check in-store availability&#x27; button on the product page or the centre line <a href="tel:0115240445">011 524 0445</a>, unverified). Online-out-of-stock does not mean the shelf is empty: call.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. Sunscreen claim SPF50+ PA++++; K-beauty fake risk: buy from specialist SA retailers or Woolworths/Dis-Chem, not marketplace listings.</p>
+<div class="skin-tick" data-tick="skin-bought-spf"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Beauty of Joseon Relief Sun SPF50+ (Rice + Niacinamide, 50ml)</span></span></div></article>
+
+<article class="skin-product" id="buy-retinoid">
+<span class="skin-phase">After course</span>
+<h3>Adapalene 0.1% (Differin gel)</h3>
+<p>Prescription-strength retinoid for acne/texture</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/search?q=differin" target="_blank" rel="noopener noreferrer">Clicks</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:57 SAST</small><small>Site search: &#x27;no results&#x27; for differin and adapalene. Not sold online.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/catalogsearch/result/?q=adapalene" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:55 SAST</small><small>No Differin/adapalene product found online.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/all?qsearch=differin+adapalene" target="_blank" rel="noopener noreferrer">Woolworths / Takealot</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:56 SAST</small><small>Nothing relevant found.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Needs a GP script first, then fill at Clicks Greenstone pharmacy (<a href="tel:0114520851">011 452 0851</a>) or Dis-Chem Greenstone dispensary (<a href="tel:0116639900">011 663 9900</a>). Price UNVERIFIED. Tell the Roaccutane prescriber before ever restarting retinoids.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Schedule 3 (SAHPRA Differin leaflet, 2026 version via search): prescription needed.</p>
+<div class="skin-tick" data-tick="skin-bought-retinoid"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Adapalene 0.1% (Differin gel)</span></span></div></article>
+
+<article class="skin-product" id="buy-skinoren">
+<span class="skin-phase">After course</span>
+<h3>Skinoren Acne Gel 15% azelaic acid (30g)</h3>
+<p>Acne + post-inflammatory marks (azelaic acid 15%)</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/skinoren_acne-gel-30g/p/937445" target="_blank" rel="noopener noreferrer">Clicks</a><b>R359.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:29 SAST</small><small>Page schema says InStock but text says &#x27;Scheduled medicine. Sign in to order&#x27; - online ordering needs a Clicks account; easiest is asking at the pharmacy counter. Page states Schedule 1.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/catalogsearch/result/?q=skinoren" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:39 SAST</small><small>Search for &#x27;skinoren&#x27; returned no Skinoren product (only unrelated items). Not listed online.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/cat?Ntt=skinoren" target="_blank" rel="noopener noreferrer">Woolworths</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:39 SAST</small><small>Not listed (search &#x27;skinoren&#x27; returned unrelated items). Not a pharmacy range.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/all?qsearch=skinoren" target="_blank" rel="noopener noreferrer">Takealot</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 20:50 SAST</small><small>No Skinoren listing found (only a Skin Functional azelaic serum came up).</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Clicks Greenstone (Greenstone Shopping Centre, Modderfontein Rd): shop <a href="tel:0114520816">011 452 0816</a>, pharmacy <a href="tel:0114520851">011 452 0851</a>. Call ahead for stock. Ask the pharmacist at the counter.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Schedule 1 per Clicks product page (pharmacist-sold, no script). SA package insert for Skinoren cream is S1 (SAHPRA doc via search); gel not read from the insert. A PharmaCompass entry shows 10mg/g - conflicts with Clicks 15%, unresolved.</p>
+<div class="skin-tick" data-tick="skin-bought-skinoren"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Skinoren Acne Gel 15% azelaic acid (30g)</span></span></div></article>
+
+<article class="skin-product" id="buy-azelaic">
+<span class="skin-phase">After course</span>
+<h3>The Ordinary Azelaic Acid Suspension 10% (30ml)</h3>
+<p>Milder azelaic acid for acne marks/redness</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/the-ordinary_azelaic-acid-10-suspension-30ml/p/401063" target="_blank" rel="noopener noreferrer">Clicks</a><b>R260.00 · Out of stock online</b><small>Checked 25 Nov 2026 · 20:33 SAST</small><small>Sold out online (&#x27;Notify me when in stock&#x27;); &#x27;Find in-store&#x27; button may show Greenstone stock.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/the-ordinary-azelaic-acid-suspension-10-30ml-771" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>R251.99 · Out of stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>Out of stock online.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/prod/_/A-506019322" target="_blank" rel="noopener noreferrer">Closest local equivalent: Skin Functional 10% Azelaic Acid Serum (Woolworths)</a><b>R270.00 · Stock unverified</b><small>Checked 25 Nov 2026 · 19:50 SAST</small><small>Listed at R270 (25% off 2 promo); stock not confirmed on the page.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/skin-functional-10-azelaic-acid-multi-tasking-fixer-30ml-241" target="_blank" rel="noopener noreferrer">Closest local equivalent: Skin Functional 10% Azelaic Acid Serum (Dis-Chem)</a><b>R270.00 · Out of stock online</b><small>Checked 25 Nov 2026 · 19:50 SAST</small><small>Out of stock online; member price R189.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/skin-functional-10-azelaic-acid-serum-acne-rosacea-pigmentation/PLID66382220" target="_blank" rel="noopener noreferrer">Closest local equivalent: Skin Functional 10% Azelaic Acid Serum (Takealot)</a><b>R199.00 · In stock online</b><small>Checked 25 Nov 2026 · 19:50 SAST</small><small>Listed in stock; seller not verified (open marketplace).</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Call Clicks Greenstone (<a href="tel:0114520816">011 452 0816</a>) to ask for stock or a store transfer; Dis-Chem Greenstone <a href="tel:0116639900">011 663 9900</a>. Woolworths Greenstone for the Skin Functional equivalent.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled (cosmetic). Import: not needed, equivalents sold locally; The Ordinary direct/import not checked (unverified).</p>
+<div class="skin-tick" data-tick="skin-bought-azelaic"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">The Ordinary Azelaic Acid Suspension 10% (30ml)</span></span></div></article>
+
+<article class="skin-product" id="buy-anua">
+<span class="skin-phase">After course</span>
+<h3>Anua Niacinamide 10% + TXA 4% Serum (30ml)</h3>
+<p>Fade dark marks (niacinamide, tranexamic acid, arbutin)</p>
+<p><b>Optional later only: no TXA, niacinamide, BHA or glycolic until 6–8 weeks irritation-free on the core routine.</b></p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://glowtheory.com/products/anua-niacinamide-10-txa-4-serum" target="_blank" rel="noopener noreferrer">Glow Theory</a><b>R495.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:27 SAST</small><small>Add to cart available. Specialist K-beauty retailer; authenticity not independently verified.</small></li>
+
+<li><a class="skin-retailer" href="https://secretskin.co.za/products/anua-niacinamide-10-and-txa-4-serum" target="_blank" rel="noopener noreferrer">Secret Skin</a><b>R495.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:29 SAST</small><small>&#x27;Available in stock&#x27;; branch stock list shown (Klerksdorp, Centurion...). Gauteng branches listed on page.</small></li>
+
+<li><a class="skin-retailer" href="https://skinbeat.co.za/products/niacinamide-10-txa-4-dark-spot-correcting-serum" target="_blank" rel="noopener noreferrer">Skinbeat</a><b>R485.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:28 SAST</small><small>30ml R485 in stock; 10ml (R210) sold out.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/prod/_/A-512261918" target="_blank" rel="noopener noreferrer">Woolworths</a><b>R699.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>&#x27;Add to cart&#x27; present; dearest option. In-store availability check button on page.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/anua-niacinamide-10-txa-4-serum-30ml-362" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>R675.00 · Out of stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>Out of stock online.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/anua-niacinamide-10-txa-4-dark-spot-brightening-glow-serum-for-glassskin/PLID95774015" target="_blank" rel="noopener noreferrer">Takealot (GREY-MARKET RISK)</a><b>R359.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>Marketplace price 40% below RRP; a second Takealot listing for the same serum is R839 (PLID104065572). Seller not verified. Avoid for skincare.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> No Anua stockist at Greenstone Mall confirmed. Woolworths lists it (R699; call Greenstone store). PDF says Beauty on TApp, Sandton City - NOT verified. Cheapest verified: Skinbeat/Glow Theory/Secret Skin online.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled (cosmetic). PDF says hold until the rash settles.</p>
+<div class="skin-tick" data-tick="skin-bought-anua"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Anua Niacinamide 10% + TXA 4% Serum (30ml)</span></span></div></article>
+
+<article class="skin-product" id="buy-bha">
+<span class="skin-phase">After course</span>
+<h3>COSRX BHA Blackhead Power Liquid (100ml; 4% betaine salicylate)</h3>
+<p>Unclog pores/small bumps (BHA)</p>
+<p><b>Optional later only: no TXA, niacinamide, BHA or glycolic until 6–8 weeks irritation-free on the core routine.</b></p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://glowtheory.com/products/bha-blackhead-power-liquid" target="_blank" rel="noopener noreferrer">Glow Theory</a><b>R395.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:27 SAST</small><small>Add to cart available. Mini 50ml R195.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/cosrx-bha-blackhead-power-liquid/PLID70338182" target="_blank" rel="noopener noreferrer">Takealot (grey-market risk)</a><b>R305.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>In stock, R509 list. Seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/cosrx-bha-blackhead-power-liquid-50-ml-parallel-import/PLID96303115" target="_blank" rel="noopener noreferrer">Takealot (labelled Parallel Import, 50ml)</a><b>R209.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>Explicitly parallel import = grey market.</small></li>
+
+<li><a class="skin-retailer" href="https://skinbeat.co.za/search?q=cosrx" target="_blank" rel="noopener noreferrer">Skinbeat</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 20:34 SAST</small><small>PDF says R370 here but the BHA Blackhead Power Liquid did not appear in a COSRX search. UNVERIFIED.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/catalogsearch/result/?q=cosrx" target="_blank" rel="noopener noreferrer">Dis-Chem / Woolworths / Clicks</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:55 SAST</small><small>Not stocked (searched; only COSRX AHA/BHA Refresh toner at Woolworths R429, a different product).</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> None at Greenstone Mall. PDF says Beauty on TApp Sandton City - NOT verified.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. Stop now (acid exfoliant).</p>
+<div class="skin-tick" data-tick="skin-bought-bha"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">COSRX BHA Blackhead Power Liquid (100ml; 4% betaine salicylate)</span></span></div></article>
+
+<article class="skin-product" id="buy-retinal">
+<span class="skin-phase">After course</span>
+<h3>Skin Functional 0.2% Retinaldehyde (retinal) Serum 30ml</h3>
+<p>Retinoid for texture/marks (OTC retinal; less outcome evidence than adapalene/tretinoin)</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://www.takealot.com/skin-functional-0-2-retinaldehyde-serum-ageing-acne-texture/PLID95935510" target="_blank" rel="noopener noreferrer">Takealot</a><b>R269.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>In stock (ships DBN/JHB); R385 list; seller not verified.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/skin-functional-0-2-retinaldehyde-retinal-serum-30ml-562" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>R370.00 · Out of stock online</b><small>Checked 25 Nov 2026 · 20:25 SAST</small><small>Out of stock online; member price R259.</small></li>
+
+<li><a class="skin-retailer" href="https://www.woolworths.co.za/prod/_/A-506019242" target="_blank" rel="noopener noreferrer">Woolworths (0.1% only)</a><b>R320.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:26 SAST</small><small>Woolworths stocks 0.1% not 0.2%. &#x27;Add to cart&#x27; present.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/skin-functional-0-1-retinaldehyde-the-powerful-vitamin-a-30-381" target="_blank" rel="noopener noreferrer">Dis-Chem (0.1% alternative)</a><b>R315.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:26 SAST</small><small>List R315; member price R220.50. Add to cart and click-and-collect available.</small></li>
+
+<li><a class="skin-retailer" href="https://www.arcstore.co.za/" target="_blank" rel="noopener noreferrer">Arc</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:54 SAST</small><small>Arc site search returned nothing; stock UNVERIFIED.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead. / Woolworths Greenstone (existence/phone UNVERIFIED; use the &#x27;Check in-store availability&#x27; button on the product page or the centre line <a href="tel:0115240445">011 524 0445</a>, unverified).</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled (cosmetic). Retinoid: stop on Roaccutane.</p>
+<div class="skin-tick" data-tick="skin-bought-retinal"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Skin Functional 0.2% Retinaldehyde (retinal) Serum 30ml</span></span></div></article>
+
+<article class="skin-product" id="buy-pfb">
+<span class="skin-phase">After course</span>
+<h3>PFB Vanish + Chromabright (ingrown hair / razor bump treatment)</h3>
+<p>Beard-line ingrowns and marks (glycolic/lactic/salicylic)</p>
+<p><b>Optional later only: no TXA, niacinamide, BHA or glycolic until 6–8 weeks irritation-free on the core routine.</b></p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://www.desertcart.co.za/products/863700950-chromabright-ingrown-hair-treatment-2-oz-after-shave-soothing-solution" target="_blank" rel="noopener noreferrer">Desertcart SA (Chromabright 2oz, ships from USA)</a><b>R1,121.40 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:30 SAST</small><small>Search-card price; site says customs and duties are included in landed price; delivery claim &#x27;most orders 3-7 days&#x27; (site claim, unverified). Product page hit a Cloudflare check so stock/seller UNVERIFIED.</small></li>
+
+<li><a class="skin-retailer" href="https://www.desertcart.co.za/products/1754668-razor-bump-treatment-3-28-oz-after-shave-serum-smoothing" target="_blank" rel="noopener noreferrer">Desertcart SA (PFB Razor Bump Treatment 3.28oz, USA)</a><b>R1,172.90 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:30 SAST</small><small>Search-card price, landed per site claim.</small></li>
+
+<li><a class="skin-retailer" href="https://www.desertcart.co.za/products/102057025-ultra-chromabright-ingrown-hair-treatment-3-28-oz-triple-action" target="_blank" rel="noopener noreferrer">Desertcart SA (Ultra Chromabright 3.28oz)</a><b>R1,850.90 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:30 SAST</small><small>Search-card price.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/the-legendary-barber-razor-bump-solution-731" target="_blank" rel="noopener noreferrer">Closest local: The Legendary Barber Razor Bump Solution (Dis-Chem)</a><b>R108.99 · In stock online</b><small>Checked 25 Nov 2026 · 20:30 SAST</small><small>Add to cart. Actives not checked - UNVERIFIED equivalence.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/folisan-intimate-15ml-salicylic-acid-perfect-for-pimples-ingrown-hair/PLID90906873" target="_blank" rel="noopener noreferrer">Closest local: Folisan Intimate 15ml salicylic acid (Takealot)</a><b>R224.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:30 SAST</small><small>Salicylic acid only (no glycolic). Seller not verified.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Not sold at Clicks, Dis-Chem, Woolworths or Takealot (searched). No physical option.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> Not scheduled. Stop now. Fakes: Desertcart resells Amazon-type third-party sellers (UAE/UK/US) with large price spread; prefer the US-shipped listing; risk moderate, authenticity not verifiable by me.</p>
+<div class="skin-tick" data-tick="skin-bought-pfb"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">PFB Vanish + Chromabright (ingrown hair / razor bump treatment)</span></span></div></article>
+
+<article class="skin-product" id="buy-bpo">
+<span class="skin-phase">After course</span>
+<h3>Benzoyl peroxide 5% wash (Benzac AC 5 Wash 100g)</h3>
+<p>Spot treatment for active pimples</p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/benzac_ac-5-wash-100g/p/4337" target="_blank" rel="noopener noreferrer">Clicks</a><b>R201.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:29 SAST</small><small>R201 on promo (40% off to 7 Dec 2026); list R335. In stock.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/benzac-ac-5-wash-tube-100g-134" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>R319.99 · In stock online</b><small>Checked 25 Nov 2026 · 20:28 SAST</small><small>Member price R230.39. Add to cart + click and collect.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/benzac-ac-5-wash-100g/PLID94905963" target="_blank" rel="noopener noreferrer">Takealot</a><b>R379.00 · In stock online</b><small>Checked 25 Nov 2026 · 20:28 SAST</small><small>Third-party seller: Hello Wellness.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Clicks Greenstone (Greenstone Shopping Centre, Modderfontein Rd): shop <a href="tel:0114520816">011 452 0816</a>, pharmacy <a href="tel:0114520851">011 452 0851</a>. Call ahead for stock. / Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> No schedule shown on the Clicks page, UNVERIFIED (pharmacist can confirm). Stop now.</p>
+<div class="skin-tick" data-tick="skin-bought-bpo"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Benzoyl peroxide 5% wash (Benzac AC 5 Wash 100g)</span></span></div></article>
+
+<article class="skin-product" id="buy-minoxidil">
+<span class="skin-phase">After course</span>
+<h3>Minoxidil (beard, e.g. Regaine)</h3>
+<p>Patchy beard growth</p>
+<p><b>Not a treatment for bumps or dark marks; beard use is off-label. Discuss the need and irritation risk first.</b></p>
+<ul class="skin-options">
+<li><a class="skin-retailer" href="https://clicks.co.za/search?q=minoxidil" target="_blank" rel="noopener noreferrer">Clicks</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:57 SAST</small><small>No search results for minoxidil/regaine online. Ask in store.</small></li>
+
+<li><a class="skin-retailer" href="https://www.dischem.co.za/catalogsearch/result/?q=regaine" target="_blank" rel="noopener noreferrer">Dis-Chem</a><b>Price unverified · Stock unverified</b><small>Checked 25 Nov 2026 · 19:59 SAST</small><small>No Regaine/minoxidil product in results.</small></li>
+
+<li><a class="skin-retailer" href="https://www.takealot.com/regaine-for-men-hair-loss-3-month-supply-73-ml-pack-of-3/PLID91438532" target="_blank" rel="noopener noreferrer">Takealot - Regaine for Men 3x73ml</a><b>R1,344.00 · Stock unverified</b><small>Checked 25 Nov 2026 · 20:27 SAST</small><small>Ships 14-16 work days from a global seller; poor value/authenticity unknown. Avoid.</small></li>
+</ul>
+<p class="skin-store-note"><b>Nearest store:</b> Clicks Greenstone (Greenstone Shopping Centre, Modderfontein Rd): shop <a href="tel:0114520816">011 452 0816</a>, pharmacy <a href="tel:0114520851">011 452 0851</a>. Call ahead for stock. or Dis-Chem Greenstone Centre (Cnr Modderfontein Rd &amp; Van Riebeek Ave): <a href="tel:0116639900">011 663 9900</a> / <a href="tel:0114520717">011 452 0717</a>, WhatsApp / phone <a href="tel:+27791086615">+27 79 108 6615</a> (listing says open until 19:00). Call ahead. Ask the pharmacist; strength/schedule to confirm there.</p>
+<p class="skin-store-note"><b>Schedule / script:</b> UNVERIFIED (I believe topical minoxidil is pharmacist-sold in SA; confirm). Stop now.</p>
+<div class="skin-tick" data-tick="skin-bought-minoxidil"><span class="box" aria-hidden="true"></span><span class="txt">Bought<span class="skin-muted">Minoxidil (beard, e.g. Regaine)</span></span></div></article>
+</div></div></details>
+<details class="panel skin-card" id="ointment"><summary><h2>The old ointment</h2><span class="skin-muted">Not identified. The old prescription is the best lead.</span></summary><div class="skin-body">
+<p><b>Still unidentified.</b> You remembered a discontinued “nice ointment” that helped within a week or two. The records do not name it, and no South African discontinuation was confirmed.</p>
+<p>The 2022 Linksfield dermatologist prescription covered acne and eczema. A fast response might fit an eczema/inflammation treatment better than a typical acne retinoid, but that is an inference, not an identification. Recorded emollient orders do not establish which treatment you meant.</p>
+<p><b>Do you remember the tube colour or brand, and was it prescribed by the Linksfield dermatologist or a GP?</b></p>
+<p>Ask the Linksfield dermatologist rooms for the 2022 prescription, or check medical-aid claims for the dispensed drug name. Then a pharmacist can verify the brand or same-active alternative, and the Roaccutane prescriber can check compatibility. Do not buy a guessed substitute.</p></div></details>
+<details class="panel skin-card" id="later"><summary><h2>After the course</h2><span class="skin-muted">A slow core routine, with no acid-heavy weekly schedule.</span></summary><div class="skin-body">
+<p><span class="skin-evidence">Evidence-informed synthesis · prescriber-led</span></p><ol class="skin-list">
+<li><b>Start only when the prescriber says skin is ready.</b> Keep cleanser, moisturiser and daily SPF.</li>
+
+<li><b>Choose adapalene or tretinoin, not both.</b> Build slowly towards 2–3 nights a week, or less if needed. Use a pea-sized amount with moisturiser. Introduce azelaic acid 15–20% in the day as a separate change, not on the same starting day.</li>
+
+<li><b>No TXA/niacinamide/BHA/glycolic until 6–8 weeks irritation-free</b> on the core routine. Those are optional extras, not milestones to catch up on. PFB Vanish contains acids too.</li>
+
+<li><b>Keep the guard and avoid close shaving permanently.</b> If bumps persist at 3 months, ask the GP/derm about diagnosis and whether BPO with or without clindamycin, or a short anti-inflammatory treatment, fits.</li>
+
+<li>Discuss Nd:YAG/electrolysis for persistent ingrowns after about 6 months off isotretinoin and clinical clearance. Procedures are not a shortcut for an active rash.</li>
+</ol>
+<p>Look for calmer bumps at 4–8 weeks with grooming changes, some mark fading at 3–6 months, and a longer 6–14 month horizon for substantial fading. Stop irritating additions and seek advice rather than increasing strength.</p></div></details>
+<details class="panel skin-card" id="tracker" open><summary><h2>Sean’s Better / Same / Worse log</h2><span class="skin-muted">Your dated notes, synced through The Nest.</span></summary><div class="skin-body">
+<p>Track changes in your own words. Better, Same or Worse saves a dated entry.</p>      <label class="skin-label" for="skin-start">After-course restart date (week 0)</label>
       <input class="notebox skin-date" data-note-key="skin-start" id="skin-start" type="date">
       <label class="skin-label" for="skin-log-note">Note</label>
       <textarea class="skin-note" id="skin-log-note" placeholder="How is your skin feeling?"></textarea>
@@ -136,27 +448,35 @@
       <p class="skin-muted" id="skin-log-status" role="status"></p>
       <ul class="skin-rows" id="skin-log" aria-label="Sean's entries, newest first"></ul>
       <noscript>Enable JavaScript to use the synced log.</noscript>
-    </div>
-  </section>
+</div></details>
+<footer class="foot"><details class="skin-sources"><summary>Sources + research limits</summary>
+<p>Community quotations and counter-evidence link to their threads above. Shopping links are the retailer sources checked on 25 Nov 2026. Prices, shelf stock, schedules marked unverified and the old ointment remain subject to confirmation.</p>
+<ul>
+<li><a class="" href="https://dermnetnz.org/topics/pseudofolliculitis-barbae" target="_blank" rel="noopener noreferrer">DermNet: beard bumps and shaving</a></li>
 
-  <section aria-labelledby="rules-title">
-    <div class="sec"><h2 id="rules-title">🛡️ Rules + stop signals</h2></div>
-    <div class="panel skin-panel">
-      <ul class="skin-list">
-        <li><b>No picking or squeezing.</b> It can leave new dark marks.</li>
-        <li><b>Trim, don't shave close.</b> Use a short guard.</li>
-        <li><b>SPF always.</b> Every morning, including near windows; reapply when outdoors.</li>
-        <li><b>Patch test for 3 days</b> on a small area under the jaw before each new product.</li>
-        <li><b>Stop signals:</b> burning, peeling patches, stinging that lasts more than a few minutes, or redness into the next morning. Stop that product for a week. Once settled, discuss restarting at half the frequency; persistent irritation needs your prescriber.</li>
-        <li>Avoid unregulated lightening creams. Ask the prescriber how long to wait before laser or clinic procedures after Roaccutane.</li>
-      </ul>
-      <p><b>See a GP:</b> bumps become hard and raised, pus-filled bumps spread, or nothing changes by week 12. Tell your Roaccutane prescriber about the current rash now.</p>
-      <p><b>Urgent help:</b> a blistering or peeling rash, mouth sores, or facial swelling / trouble breathing needs immediate medical help. For a serious rash, stop Roaccutane and contact a doctor immediately. <a href="https://www.medicines.org.uk/emc/product/10556/pil" rel="noreferrer">Isotretinoin patient leaflet</a>.</p>
-    </div>
-  </section>
-  <footer class="foot">Not medical advice. Check with your prescriber.</footer>
+<li><a class="" href="https://www.nhs.uk/medicines/isotretinoin-capsules/" target="_blank" rel="noopener noreferrer">NHS: isotretinoin</a></li>
+
+<li><a class="" href="https://royalberkshire.nhs.uk/media/mqlnuujf/skincare-routine-while-on-isotretinoin_may24.pdf" target="_blank" rel="noopener noreferrer">Royal Berkshire: skincare during isotretinoin (research used search summary)</a></li>
+
+<li><a class="" href="https://www.medicines.org.uk/emc/product/10556/pil" target="_blank" rel="noopener noreferrer">Isotretinoin patient leaflet: interactions and serious rash</a></li>
+
+<li><a class="" href="https://pi-pil-repository.sahpra.org.za/wp-content/uploads/2026/02/pil-differin-gel-approved.pdf" target="_blank" rel="noopener noreferrer">SAHPRA: Differin S3 leaflet (research used search summary)</a></li>
+
+<li><a class="" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10199364/" target="_blank" rel="noopener noreferrer">TXA 5% versus azelaic 20%: small 12-week trial</a></li>
+
+<li><a class="" href="https://pubmed.ncbi.nlm.nih.gov/8261811/" target="_blank" rel="noopener noreferrer">Glycolic for PFB, 1993: abstract only</a></li>
+
+<li><a class="" href="https://jddonline.com/articles/dermatology/S1545961619P0246X" target="_blank" rel="noopener noreferrer">JDD PFB review: abstract only</a></li>
+
+<li><a class="" href="https://www.youtube.com/watch?v=fjIGAFmBgRE" target="_blank" rel="noopener noreferrer">Doctorly: azelaic acid, expert discussion and user comments</a></li>
+
+<li><a class="" href="https://www.youtube.com/watch?v=HltWYB69ZqM" target="_blank" rel="noopener noreferrer">Dr Alexis Stephens: azelaic timelines (transcript)</a></li>
+
+<li><a class="" href="https://health.uct.ac.za/hair-skin-research-lab/articles/2025-03-06-dangerous-skin-lightening-products-sale-our-streets" target="_blank" rel="noopener noreferrer">UCT: dangerous skin-lightening products</a></li>
+</ul></details>
+<p>Not medical advice; check with your prescriber.</p></footer>
 </main>
 <script src="nest.js?v=20261112c"></script>
-<script src="skin.js?v=20261125b"></script>
+<script src="skin.js?v=20261125c"></script>
 </body>
 </html>
