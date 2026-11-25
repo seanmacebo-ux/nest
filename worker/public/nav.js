@@ -1,5 +1,5 @@
-// The Nest — phone menu. On small screens the 12 tabs collapse behind a
-// "☰ Menu" button that opens a grid of big tiles. Without JS (or on wide
+// The Nest — phone menu. On small screens the tabs collapse behind a
+// "☰ Menu" button that opens grouped links. Without JS (or on wide
 // screens) the normal tab row is used, so nothing breaks if this fails.
 (() => {
   const nav = document.querySelector('.nav'), inner = nav && nav.querySelector('.nav-in');
@@ -13,7 +13,7 @@
   const tabs = [...inner.querySelectorAll('a.tab')];
   if (!tabs.length) return;
   // A phone can hold an old cached style.css: without the menu styling, keep the plain tab bar.
-  if (getComputedStyle(document.documentElement).getPropertyValue('--nav-v').trim() !== '2') return;
+  if (getComputedStyle(document.documentElement).getPropertyValue('--nav-v').trim() !== '3') return;
   const ICON = { 'Skin': '🧴', 'Ask Claude': '💬', 'Log out': '↗', 'Plan': '🗺️', 'Tracker': '📈', 'Lounge': '🛋️', 'Bedroom': '🛏️', 'Bathroom': '🛁', 'Water': '💧', 'Kitchen': '🍳', 'Office': '💻', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
     'Furniture': '🛋️', 'Bedding': '🛏️', 'Kitchen': '🍳', 'WiFi': '🛜', 'Post-pregnancy': '💛', 'Laptop': '💻', 'Decided': '✅', 'Findings': '🧾' };
 
@@ -28,15 +28,51 @@
   panel.className = 'navpanel';
   panel.id = 'navpanel';
   panel.hidden = true;
-  tabs.forEach(t => {
+  const tile = t => {
     const a = document.createElement('a');
     a.href = t.getAttribute('href');
     a.className = 'navtile';
     const name = t.textContent.trim();
     a.innerHTML = '<span class="ni" aria-hidden="true">' + (ICON[name] || '•') + '</span><span>' + name + '</span>';
     if (t.hasAttribute('aria-current')) a.setAttribute('aria-current', 'page');
-    panel.appendChild(a);
+    return a;
+  };
+  const groups = [
+    ['Us', ['Plan', 'Tracker', 'Decided', 'Findings']],
+    ['The flat', ['Lounge', 'Bedroom', 'Kitchen', 'Bathroom', 'Office', 'Water', 'WiFi']],
+    ['Life', ['Medical aid', 'Skin', 'Cars', 'Apartments', 'Post-pregnancy']]
+  ];
+  const remaining = new Map(tabs.map(t => [t.textContent.trim(), t]));
+  groups.forEach(([label, names], i) => {
+    const section = document.createElement('section');
+    const heading = document.createElement('h2');
+    heading.id = 'navgroup-' + i;
+    heading.textContent = label;
+    section.className = 'navgroup';
+    section.setAttribute('aria-labelledby', heading.id);
+    section.appendChild(heading);
+    const links = document.createElement('div');
+    links.className = 'navlinks';
+    names.forEach(name => {
+      if (!remaining.has(name)) return;
+      links.appendChild(tile(remaining.get(name)));
+      remaining.delete(name);
+    });
+    section.appendChild(links);
+    panel.appendChild(section);
   });
+  const actions = document.createElement('div');
+  actions.className = 'navactions';
+  ['Ask Claude', 'Log out'].forEach(name => {
+    if (!remaining.has(name)) return;
+    const a = tile(remaining.get(name));
+    a.classList.add(name === 'Ask Claude' ? 'navask' : 'navlogout');
+    actions.appendChild(a);
+    remaining.delete(name);
+  });
+  // Keep any page-specific tabs available too.
+  remaining.forEach(t => panel.appendChild(tile(t)));
+  panel.appendChild(actions);
 
   inner.querySelector('.brandmark').after(btn);
   nav.appendChild(panel);
