@@ -85,14 +85,14 @@ try {
   assert.equal(auth.status(),303,'Sean login');
   await page.emulateMedia({colorScheme:'dark'});
   await page.goto(base+'/index.html',{waitUntil:'networkidle'});
-  assert.deepEqual(await page.locator('.bottom-tab > span:last-child').allTextContents(),['Home','Rooms','Decided','Ask','More']);
+  assert.deepEqual(await page.locator('.bottom-tab > span:last-child').allTextContents(),['Home','Rooms','Overview','Ask','More']);
   await openMore();
   assert.deepEqual(await page.locator('.navgroup h3').allTextContents(),['Us','Life']);
   assert.deepEqual(await page.locator('.navgroup').nth(0).locator('a').allTextContents(),['Plan','Tracker','Findings','Shopping']);
   assert.deepEqual(await page.locator('.navgroup').nth(1).locator('a').allTextContents(),['Medical aid','Skin','Cars','Apartments','Post-pregnancy']);
   assert.equal(await page.locator('.navlogout').getAttribute('href'),'/logout');
   await closeMore();
-  const destinations=[['index','Home'],['rooms','Rooms'],['decided','Decided'],['ask','Ask'],
+  const destinations=[['index','Home'],['rooms','Rooms'],['decided','Overview'],['ask','Ask'],
     ...['lounge','bedroom','kitchen','bathroom','office','water','wifi'].map(p=>[p,'Rooms']),
     ...['list','tracker','findings','medical','skin','cars','apartments','recovery','plans'].map(p=>[p,'More'])];
   const visited=new Set();

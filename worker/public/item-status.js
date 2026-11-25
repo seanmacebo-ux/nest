@@ -19,12 +19,25 @@
   // Historical notes are kept on their current item, not duplicated as extra purchases.
   const noteNames=['Bed base or frame, Queen XL','Mattress','TV','Fridge','Washer','Coffee table','TV stand','Couch','Laptop'];
   DECISION_NOTES.forEach((note,i)=>{const it=items.find(x=>x.name===noteNames[i]);if(it)it.history=note;});
+  // WiFi has a service and checklist rather than product alternatives. Historical
+  // ISP comparisons stay on its page; they are not additional purchases.
+  const wifi=[
+    {name:'Evotel fibre 120/120',ic:'🛜',fixedStatus:'bought',monthly:897,note:'Live since mid-November. Afrihost billing in Mishka’s name. Router included.',recommended:'Afrihost · Evotel 120/120'},
+    {name:'Confirm fibre network',ic:'🛜',fixedStatus:'decided',note:'Evotel confirmed at Unit 30 on 30 October.'},
+    {name:'Cancel MWeb',ic:'📋',tick:'w-cancel',note:'One full calendar month’s notice. Keep the cancellation screenshot.'},
+    {name:'Return MWeb router',ic:'📦',tick:'w-router-return',note:'Within 20 days of the old line going off.'},
+    {name:'Run bufferbloat test',ic:'💻',tick:'w-bufferbloat',note:'Send The Nest the grade from waveform.com/tools/bufferbloat; then price two SQM routers.'},
+    {name:'Mini UPS for router',ic:'🔋',fixedStatus:'decided',note:'Not getting it: Sean’s decision, 17 November. No purchase planned.'}
+  ];
+  items.push(...wifi.map(it=>({...it,room:'WiFi',href:'wifi.html',id:id('WiFi',it.name)})));
   const choices=()=>window.NEST?NEST._get('nest_decide',{}):JSON.parse(localStorage.getItem('nest_decide')||'{}');
   const optionKey=(it,o)=>{const source=it.source||it;return source.room+'|'+source.name+'|'+o.n;};
   const optionState=(key,fallback)=>choices()[key]??fallback??'';
   function status(it) {
     if(it.source)return status(it.source);
     if(it.boughtHTML)return 'bought';
+    if(it.fixedStatus)return it.fixedStatus;
+    if(it.tick)return window.NEST?.isTicked(it.tick)?'decided':'need';
     // Explicitly chosen 20 Oct; recommendation stars alone never mean Decided.
     if(it.name==='Coffee table') {
       const chosen=(it.o||[]).find(o=>o.pick), key=chosen&&optionKey(it,chosen);

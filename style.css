@@ -254,3 +254,23 @@ h1 { font-family: "Bricolage Grotesque", Georgia, serif; }
 #jump { gap:4px; }
 #jump button { font-size:12px; padding:8px; }
 .status-hub .room-counts span { white-space:nowrap; }
+/* Cross-room views stay reachable beneath the app header on a phone. */
+#views-switcher { position:sticky; top:calc(var(--topbar-h) + env(safe-area-inset-top) + 1px); z-index:15; background:var(--ground); padding:8px 0; }
+.view-segments { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:5px; }
+.view-segments button { grid-column:span 2; min-width:0; min-height:48px; padding:8px 4px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink); font:600 12px/1.4 Figtree,system-ui,sans-serif; cursor:pointer; }
+.view-segments button:nth-child(-n+2) { grid-column:span 3; }
+.view-segments button[aria-pressed=true] { background:var(--accent); color:var(--ground); border-color:var(--accent); }
+.view-segments button span { display:inline-block; margin-left:3px; }
+.view-segments button:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+.view-total { margin:20px 0; }
+.view-total > strong { font-size:28px; }
+.view-total p { color:var(--ink-soft); font-size:13px; }
+.view-options { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; margin-top:12px; }
+.view-options.comparing { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.view-option { min-width:0; display:flex; flex-direction:column; gap:7px; padding:10px; border:1px solid var(--line); border-radius:12px; background:var(--ground); font-size:13px; }
+.view-option small { color:var(--ink-soft); }
+.view-option .dec { margin-top:auto; padding-top:8px; gap:6px; }
+.view-option .dec button { width:100%; min-height:48px; padding:6px; font-size:12px; }
+.view-photo { display:flex; align-items:center; justify-content:center; width:96px; max-width:100%; height:96px; border-radius:10px; background:var(--surface-2); font-size:32px; margin:8px 0; }
+.view-photo img { width:100%; height:100%; object-fit:contain; border-radius:10px; }
+.view-room { scroll-margin-top:180px; }

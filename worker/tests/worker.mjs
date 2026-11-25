@@ -36,6 +36,7 @@ const machine = (body = {}) => ({method:'POST', headers:{Authorization:'Bearer '
 for (const path of ['/', '/tracker.html', '/img/p/test.webp', '/nest.js']) assert.equal((await call(path)).status, 302);
 for (const path of ['/manifest.webmanifest', '/icon-192.png', '/apple-touch-icon.png', '/login']) assert.equal((await call(path)).status, 200);
 assert.equal((await call('/api/kv')).status, 401);
+assert.equal((await call('/api/me')).status, 401);
 assert.equal((await call('/api/worker/claim', {method:'POST'})).status, 401);
 async function login(username, password = 'test-password', ip='test-ip', next='/tracker.html') {
   return call('/login', {method:'POST', headers:{'CF-Connecting-IP':ip}, body:new URLSearchParams({username,password,next})}, false);
@@ -46,6 +47,7 @@ const auth = await login('sean'); assert.equal(auth.status,303);
 assert.match(auth.headers.get('Set-Cookie'), /HttpOnly; Secure; SameSite=Lax; Path=\//);
 cookie = auth.headers.get('Set-Cookie').split(';')[0];
 assert.equal((await call('/tracker.html')).status,200);
+assert.deepEqual(await (await call('/api/me')).json(),{username:'sean'});
 assert.equal((await call('/api/kv', {headers:{Cookie:cookie + 'tampered'}}, false)).status,401);
 assert.equal((await call('/api/kv/test', {...put('x',0), headers:{Origin:'https://evil.test'}})).status,403);
 assert.equal((await login('sean','test-password','redirect-ip','//evil.test')).headers.get('Location'),'/');

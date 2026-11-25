@@ -124,8 +124,13 @@ try {
         assert.match(await sean.locator('[data-room-summary="'+room+'"] [data-count='+status+']').textContent(),new RegExp('^'+n+' '));
       }
     } else {
+      if(view==='decided') {
+        await sean.waitForFunction(()=>document.querySelector('#overview').dataset.viewsReady==='true');
+        await sean.locator('[data-view=all]').click();
+      }
+      const wifi=await sean.evaluate(()=>NEST_ITEMS.items.filter(x=>x.room==='WiFi').map(x=>x.id));
       const ids=await sean.locator('[data-item]').evaluateAll(els=>els.map(x=>x.dataset.item));
-      assert.deepEqual(ids.sort(),inventory.sort(),'Every canonical item appears exactly once');
+      assert.deepEqual(ids.sort(),[...inventory,...wifi].sort(),'Every canonical item appears exactly once');
       for(const a of await sean.locator('.item-link').all()) {
         const target=await a.getAttribute('href');
         const response=await sean.request.get(base+'/'+target); assert.equal(response.status(),200);

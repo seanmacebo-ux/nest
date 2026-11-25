@@ -121,6 +121,7 @@ async function enqueue(req, env, user) {
 }
 async function api(req, env, user, path) {
   const method = req.method;
+  if (path === '/api/me' && method === 'GET') return json({username:user.u});
   if (path === '/api/kv' && method === 'GET') return json({ rows: (await env.DB.prepare('SELECT * FROM kv ORDER BY k').all()).results });
   if (path.startsWith('/api/kv/')) {
     const k = text(decodeURIComponent(path.slice(8)), 200, 'key');
