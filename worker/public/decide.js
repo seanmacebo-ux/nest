@@ -62,7 +62,7 @@
     const page = document.title.replace(' · The Nest', '');
     const tag = { flat: 'Apartments', car: 'Cars', newcar: 'Cars' };
     const where = k => { const r = k.includes('|') ? k.split('|')[0] : ''; return r ? (tag[r] || r.replace(' + ', ' & ')) : page; };
-    const lines = ['🗳 Our picks'];
+    const lines = ['🗳 Our choices'];
     [['consider', '🤔 Consider:'], ['reject', '✕ Reject:'], ['', '↩︎ Undo:']].forEach(([v, head]) => {
       const mine = ks.filter(k => p[k].v === v); if (!mine.length) return;
       lines.push(head);
@@ -88,7 +88,7 @@
       if (v === (el.dataset.st || '')) delete p[k]; else p[k] = { v, l: el.dataset.dl || k };
       put(PEND, p);
     }
-    paint(el); tray();
+    paint(el); tray(); window.dispatchEvent(new Event('nest:choices'));
   });
 
   document.addEventListener('DOMContentLoaded', () => { if (!APP) document.body.appendChild(bar); wire(); });

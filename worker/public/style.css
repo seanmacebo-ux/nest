@@ -215,3 +215,42 @@ html.sheet-lock { overflow: hidden; }
 h1 { font-family: "Bricolage Grotesque", Georgia, serif; }
 .price { font-size: var(--t-price); line-height: 20px; font-weight: 700; }
 .skin-actions button, .dectray .send, .btn, .btn2 { min-height: var(--tap); }
+
+/* One status vocabulary across rooms, Shopping and Decided. */
+.status-label { font-size:14px; font-weight:700; }
+.status-need { color:var(--car-ink); }
+.status-considering { color:var(--amber); }
+.status-decided { color:var(--accent); }
+.status-bought { color:var(--good); }
+.status-reject { color:var(--ink-soft); }
+.status-legend { font-size:11px; white-space:nowrap; margin:16px 0 24px; }
+.status-group { margin:24px 0; min-width:0; }
+.status-group > h2 { font-size:18px; margin-bottom:12px; }
+.status-empty { color:var(--ink-soft); font-size:13px; }
+.room-item { min-width:0; margin-bottom:24px; }
+.item-status { margin-top:20px; }
+.option-status { font-size:12px; margin-bottom:10px; }
+.rejected { margin-top:12px; padding:12px; background:var(--surface-2); border-radius:var(--r-md); }
+.rejected > summary { min-height:44px; cursor:pointer; color:var(--ink-soft); }
+.rejected .opts { margin-top:12px; }
+#jump button { flex-shrink:0; min-height:44px; border:0; border-radius:var(--r-pill); padding:8px 12px; background:var(--surface-2); color:var(--ink); font:inherit; font-size:13px; }
+#jump button[aria-pressed=true] { background:var(--accent); color:var(--ground); }
+#jump { display:flex; gap:8px; overflow-x:auto; }
+.summary-item { background:var(--surface); border:1px solid var(--line); border-radius:var(--r-md); padding:16px; margin:12px 0; overflow-wrap:anywhere; }
+.summary-item p { font-size:14px; color:var(--ink-soft); margin:8px 0; }
+.item-link { display:flex; flex-direction:column; gap:4px; padding:10px 0; color:var(--ink); text-decoration:none; }
+.item-link small, .history { color:var(--ink-soft); font-size:12px; }
+.history summary { min-height:44px; display:flex; align-items:center; cursor:pointer; }
+.status-hub { grid-template-columns:1fr; }
+.status-hub .room-link { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+.room-counts { font-size:12px; line-height:1.8; }
+.status-hub small { font-size:12px; color:var(--ink-soft); }
+.service-link { margin-top:12px; }
+.group-total { color:var(--ink-soft); font-size:16px; }
+[hidden] { display:none !important; }
+#jump { flex-wrap:nowrap; }
+.status-decided { color:var(--primary, #6C4CF5); }
+.status-hub .room-counts span { display:inline; font:inherit; width:auto; height:auto; padding:0; border-radius:0; background:none; }
+#jump { gap:4px; }
+#jump button { font-size:12px; padding:8px; }
+.status-hub .room-counts span { white-space:nowrap; }

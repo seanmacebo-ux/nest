@@ -3,7 +3,8 @@
 // CHROMIUM_PATH optionally selects an already installed browser.
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
-import {readFileSync} from 'node:fs';
+import {readFileSync, mkdirSync} from 'node:fs';
+mkdirSync('/tmp/layout',{recursive:true});
 import {DatabaseSync} from 'node:sqlite';
 import {pbkdf2Sync} from 'node:crypto';
 import worker from '../src/index.js';
@@ -42,7 +43,7 @@ const base='http://127.0.0.1:' + server.address().port;
 const browser=await chromium.launch(process.env.CHROMIUM_PATH ? {executablePath:process.env.CHROMIUM_PATH} : {});
 const errors=[];
 async function phone(name) {
-  const context=await browser.newContext({viewport:{width:390,height:844}});
+  const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:'dark'});
   await context.route('https://fonts.googleapis.com/**',r=>r.abort());
   const auth=await context.request.post(base+'/login',{form:{username:name,password:'test-password',next:'/office.html'},maxRedirects:0});
   assert.equal(auth.status(),303);
@@ -76,6 +77,64 @@ try {
     assert.equal(await sean.locator('.dectray').count(),0);
     assert.equal(await sean.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
   }
+  for(const name of ['rooms','office','lounge','decided']) {
+    await sean.goto(base+'/'+name+'.html',{waitUntil:'domcontentloaded'});
+    await sean.waitForFunction(()=>NEST._ready);
+    await sean.screenshot({path:'/tmp/layout/local-'+name+'.png'});
+  }
+  // Inventory and grouping: compare the rendered DOM to the original static arrays.
+  const inventory=[], counts={};
+  for (const room of ['office','lounge','bedroom','kitchen','bathroom','water']) {
+    await sean.goto(base+'/'+room+'.html',{waitUntil:'domcontentloaded'});
+    await sean.waitForFunction(()=>NEST._ready);
+    const expected=await sean.evaluate(()=>{
+      const room=document.body.dataset.room;
+      const raw=[...NEED,...MAYBE].filter(g=>g.g===room).flatMap(g=>g.items);
+      const options=raw.reduce((n,it)=>n+(it.ref?[...NEED,...MAYBE].flatMap(g=>g.items).find(x=>x.name===it.ref).o.length:(it.o||[]).length),0);
+      return {room,n:raw.length+(BOUGHT[room]||[]).length,options,ids:NEST_ITEMS.forRoom(room).filter(x=>!x.ref).map(x=>x.id)};
+    });
+    inventory.push(...expected.ids);
+    assert.equal(await sean.locator('.room-item').count(),expected.n);
+    assert.equal(await sean.locator('[data-dk]').count(),expected.options,'No product options lost or duplicated');
+    assert.equal(await sean.locator('.status-group').count(),4);
+    assert.equal(await sean.locator('.status-group .room-item').count(),expected.n);
+    assert.equal(await sean.evaluate(()=>new Set([...document.querySelectorAll('[data-item]')].map(x=>x.dataset.item)).size),expected.n);
+    counts[expected.room]={};
+    for(const status of ['need','considering','decided','bought']) {
+      const group=sean.locator('.status-group[data-status='+status+']');
+      counts[expected.room][status]=await group.locator('.room-item').count();
+      await sean.locator('[data-filter='+status+']').click();
+      assert.equal(await sean.locator('.status-group:visible').count(),1);
+      assert.equal(await group.isVisible(),true);
+    }
+    await sean.locator('[data-filter=all]').click();
+    assert.equal(await sean.locator('.rejected[open]').count(),0);
+    if(await sean.locator('[data-cmp]').count()) {
+      await sean.locator('[data-cmp]').first().click();
+      assert.equal(await sean.locator('.cmp-ov').isVisible(),true);
+      await sean.locator('[data-cmpclose]').click();
+    }
+  }
+  for(const view of ['rooms','decided','list']) {
+    await sean.goto(base+'/'+view+'.html',{waitUntil:'domcontentloaded'});
+    await sean.waitForFunction(()=>NEST._ready);
+    assert.equal(await sean.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+    if(view==='rooms') {
+      for(const [room,statuses] of Object.entries(counts)) for(const [status,n] of Object.entries(statuses)) {
+        assert.match(await sean.locator('[data-room-summary="'+room+'"] [data-count='+status+']').textContent(),new RegExp('^'+n+' '));
+      }
+    } else {
+      const ids=await sean.locator('[data-item]').evaluateAll(els=>els.map(x=>x.dataset.item));
+      assert.deepEqual(ids.sort(),inventory.sort(),'Every canonical item appears exactly once');
+      for(const a of await sean.locator('.item-link').all()) {
+        const target=await a.getAttribute('href');
+        const response=await sean.request.get(base+'/'+target); assert.equal(response.status(),200);
+      }
+    }
+    const links=await sean.locator('.bottom-bar a,.navtile,.room-link').evaluateAll(els=>els.map(x=>x.getAttribute('href')));
+    for(const href of new Set(links)) assert.equal((await sean.request.get(base+'/'+href)).status(),200,'Logged-in destination '+href);
+    assert.equal(await sean.locator('.bottom-bar').innerText().then(t=>t.includes('Picks')),false);
+  }
   await sean.goto(base+'/office.html',{waitUntil:'domcontentloaded'});
   await sean.locator('.addbox summary').click();
   await sean.locator('#addtxt').fill('Monitor under R3000\nhttps://example.com/monitor');
@@ -93,19 +152,21 @@ try {
   assert.equal(await sean.locator('#addtxt').inputValue(),'Keep this draft');
   assert.match(await sean.locator('.toast').innerText(),/Could not send/);
   await sean.unroute('**/api/requests');
-  const card=sean.locator('[data-dk]').first(), key=await card.getAttribute('data-dk');
+  const key=await sean.locator('[data-dk]').first().getAttribute('data-dk'), card=sean.locator('[data-dk="'+key+'"]');
   await card.locator('[data-dv=consider]').click();
+  assert.equal(await card.locator('xpath=ancestor::section[contains(@class,"status-group")]').getAttribute('data-status'),'considering');
   await eventually(()=>db.prepare('SELECT v FROM kv WHERE k=?').get('local:nest_decide')?.v.includes('consider'));
   await mishka.evaluate(()=>NEST._pull());
-  assert.equal(await mishka.locator('[data-dk]').first().locator('[data-dv=consider]').getAttribute('aria-pressed'),'true');
-  await mishka.locator('[data-dk]').first().locator('[data-dv=reject]').click();
+  assert.equal(await mishka.locator('[data-dk="'+key+'"]').locator('[data-dv=consider]').getAttribute('aria-pressed'),'true');
+  await mishka.locator('[data-dk="'+key+'"]').locator('[data-dv=reject]').click();
   await eventually(()=>JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get('local:nest_decide').v)[key]==='reject');
   await sean.evaluate(()=>NEST._pull());
   assert.equal(await card.locator('[data-dv=reject]').getAttribute('aria-pressed'),'true');
+  await card.locator('xpath=ancestor::details').evaluate(el=>el.open=true);
   await card.locator('[data-dv=reject]').click();
   await eventually(()=>JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get('local:nest_decide').v)[key]==='');
   await mishka.evaluate(()=>NEST._pull());
-  assert.equal(await mishka.locator('[data-dk]').first().locator('[data-dv=reject]').getAttribute('aria-pressed'),'false');
+  assert.equal(await mishka.locator('[data-dk="'+key+'"]').locator('[data-dv=reject]').getAttribute('aria-pressed'),'false');
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM requests').get().n,1);
   assert.equal(await sean.locator('.dectray').count(),0);
   // The public origin must retain Telegram, even with NEST loaded.
@@ -126,5 +187,5 @@ try {
   assert.match(await publicPage.locator('.toast').innerText(),/Opening Telegram/);
   assert.ok(await publicPage.evaluate(()=>JSON.parse(localStorage.getItem('nest_sent'))['add:Public test']));
   assert.deepEqual(errors,[]);
-  console.log('Room browser checks passed: 390px six-room layout, request enqueue/confirmation, failed-send draft, Sean/Mishka consider/reject/undo via Worker KV, no app send tray, public Telegram flow.');
+  console.log('Room browser checks passed: 390x844 inventory conservation, four groups/filters, hub counts, aggregate uniqueness, compare, logged-in navigation, six-room layout, request enqueue/confirmation, failed-send draft, Sean/Mishka consider/reject/undo via Worker KV, no app send tray, public Telegram flow.');
 } finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); db.close(); }

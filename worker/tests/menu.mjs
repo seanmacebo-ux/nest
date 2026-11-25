@@ -85,16 +85,16 @@ try {
   assert.equal(auth.status(),303,'Sean login');
   await page.emulateMedia({colorScheme:'dark'});
   await page.goto(base+'/index.html',{waitUntil:'networkidle'});
-  assert.deepEqual(await page.locator('.bottom-tab > span:last-child').allTextContents(),['Home','Rooms','Picks','Ask','More']);
+  assert.deepEqual(await page.locator('.bottom-tab > span:last-child').allTextContents(),['Home','Rooms','Decided','Ask','More']);
   await openMore();
   assert.deepEqual(await page.locator('.navgroup h3').allTextContents(),['Us','Life']);
-  assert.deepEqual(await page.locator('.navgroup').nth(0).locator('a').allTextContents(),['Plan','Tracker','Findings']);
+  assert.deepEqual(await page.locator('.navgroup').nth(0).locator('a').allTextContents(),['Plan','Tracker','Findings','Shopping']);
   assert.deepEqual(await page.locator('.navgroup').nth(1).locator('a').allTextContents(),['Medical aid','Skin','Cars','Apartments','Post-pregnancy']);
   assert.equal(await page.locator('.navlogout').getAttribute('href'),'/logout');
   await closeMore();
-  const destinations=[['index','Home'],['rooms','Rooms'],['decided','Picks'],['ask','Ask'],
+  const destinations=[['index','Home'],['rooms','Rooms'],['decided','Decided'],['ask','Ask'],
     ...['lounge','bedroom','kitchen','bathroom','office','water','wifi'].map(p=>[p,'Rooms']),
-    ...['tracker','findings','medical','skin','cars','apartments','recovery','plans'].map(p=>[p,'More'])];
+    ...['list','tracker','findings','medical','skin','cars','apartments','recovery','plans'].map(p=>[p,'More'])];
   const visited=new Set();
   for(const [path,active] of destinations) {
     const response=await page.goto(base+'/'+path+'.html',{waitUntil:'networkidle'});
@@ -106,7 +106,7 @@ try {
     await layout();
     const controls=await page.locator('.acts button, .acts a, .iacts button, .dec button, .clink, .sendbtn, #ask-form button, .skin-actions button, #shareBtn').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({label:e.textContent.trim(),height:e.getBoundingClientRect().height})));
     for(const control of controls) assert.ok(control.height>=48,JSON.stringify(control));
-    if(path==='rooms') assert.deepEqual(await page.locator('.room-link').evaluateAll(as=>as.map(a=>a.getAttribute('href'))),['lounge.html','bedroom.html','kitchen.html','bathroom.html','office.html','water.html','wifi.html']);
+    if(path==='rooms') assert.deepEqual(await page.locator('.room-link').evaluateAll(as=>as.map(a=>a.getAttribute('href'))),['lounge.html','bedroom.html','bathroom.html','water.html','kitchen.html','office.html','wifi.html']);
     if(['index','office','skin','lounge'].includes(path)) await page.screenshot({path:(process.env.NEST_SCREENSHOT_DIR || '/tmp/design1')+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+(path==='index'?'home':path)+'.png'});
     await openMore();
     if(['tracker','findings','medical','skin','cars','apartments','recovery'].includes(path)) assert.equal(await page.locator('.navtile[aria-current]').getAttribute('href'),path+'.html');
