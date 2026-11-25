@@ -33,6 +33,9 @@
   .skin-schedule p { margin: 0; padding-bottom: 12px; border-bottom: 1px dotted var(--line); }
   .skin-schedule p:last-child { border: 0; padding: 0; }
   .skin-label { display: block; font-size: 13px; font-weight: 600; margin-top: 12px; }
+  .skin-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+  .skin-actions button { min-height: 44px; padding: 10px 18px; background: var(--surface-2); color: var(--ink); font: inherit; cursor: pointer; }
+  .skin-entry-note { white-space: pre-wrap; overflow-wrap: anywhere; }
   .skin-panel p:first-child { margin-top: 0; }
   .skin-panel p:last-child { margin-bottom: 0; }
 </style>
@@ -83,7 +86,7 @@
     <div class="sec"><h2 id="later-title">🌱 After the course: restart at week 0</h2><p>Confirm with your prescriber when your skin is ready. One new product every 2 weeks, only if the previous one is comfortable.</p></div>
     <div class="panel skin-panel">
       <ol class="skin-list">
-        <li><b>Week 0:</b> SPF every morning + The Ordinary Azelaic Acid 10% in the morning. Keep cleanser and moisturiser. Take baseline photos.</li>
+        <li><b>Week 0:</b> SPF every morning + The Ordinary Azelaic Acid 10% in the morning. Keep cleanser and moisturiser.</li>
         <li><b>Week 2:</b> Anua Niacinamide + TXA serum in the morning; PFB Vanish on the beard line after trims.</li>
         <li><b>Week 4:</b> add COSRX BHA, Monday and Thursday nights.</li>
         <li><b>Week 6:</b> add one retinoid, Tuesday and Saturday nights. A pea-sized amount, sandwiched between moisturiser layers.</li>
@@ -119,13 +122,20 @@
   </section>
 
   <section aria-labelledby="tracker-title">
-    <div class="sec"><h2 id="tracker-title">📸 Does it help?</h2><p>Take baseline photos of both cheeks, then every 4 weeks. Same light, angle and distance, no filter. Keep the photos privately on your phone; this page stores checks and notes only.</p></div>
+    <div class="sec"><h2 id="tracker-title">📝 Sean's log</h2><p>Track changes in your own words. Tap Better, Same or Worse to save a dated entry.</p></div>
     <div class="panel skin-panel">
       <label class="skin-label" for="skin-start">After-course restart date (week 0)</label>
       <input class="notebox skin-date" data-note-key="skin-start" id="skin-start" type="date">
-      <p class="skin-muted">Choose the date when you actually restart. Check dates follow it; changing the date keeps your existing checks and notes.</p>
-      <ul class="skin-rows" id="skin-checks"></ul>
-      <noscript>Enable JavaScript to use the synced photo checks and notes.</noscript>
+      <label class="skin-label" for="skin-log-note">Note</label>
+      <textarea class="skin-note" id="skin-log-note" placeholder="How is your skin feeling?"></textarea>
+      <div class="skin-actions" aria-label="Save a log entry">
+        <button class="btn2" type="button" data-skin-result="Better">Better</button>
+        <button class="btn2" type="button" data-skin-result="Same">Same</button>
+        <button class="btn2" type="button" data-skin-result="Worse">Worse</button>
+      </div>
+      <p class="skin-muted" id="skin-log-status" role="status"></p>
+      <ul class="skin-rows" id="skin-log" aria-label="Sean's entries, newest first"></ul>
+      <noscript>Enable JavaScript to use the synced log.</noscript>
     </div>
   </section>
 
@@ -144,9 +154,9 @@
       <p><b>Urgent help:</b> a blistering or peeling rash, mouth sores, or facial swelling / trouble breathing needs immediate medical help. For a serious rash, stop Roaccutane and contact a doctor immediately. <a href="https://www.medicines.org.uk/emc/product/10556/pil" rel="noreferrer">Isotretinoin patient leaflet</a>.</p>
     </div>
   </section>
-  <footer class="foot">Plan from Sean's PDF, 25 Nov 2026. Not medical advice; check with your prescriber.</footer>
+  <footer class="foot">Not medical advice. Check with your prescriber.</footer>
 </main>
 <script src="nest.js?v=20261112c"></script>
-<script src="skin.js?v=20261125a"></script>
+<script src="skin.js?v=20261125b"></script>
 </body>
 </html>

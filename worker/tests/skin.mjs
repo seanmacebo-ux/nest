@@ -1,4 +1,4 @@
-// Real room pages at phone width, backed by the Worker and disposable SQLite.
+// Private Skin page at phone width, backed by the Worker and disposable SQLite.
 // Requires Playwright (PLAYWRIGHT_MODULE may point to its index.mjs).
 // CHROMIUM_PATH optionally selects an already installed browser.
 import assert from 'node:assert/strict';
@@ -60,8 +60,14 @@ try {
   const anonymous=await fetch(base+'/skin',{redirect:'manual'});
   assert.equal(anonymous.status,302);
   assert.match(anonymous.headers.get('location'),/^\/login/);
-  const first=await phone('sean'), second=await phone('mishka');
+  const first=await phone('sean'), second=await phone('sean');
   assert.equal(await first.title(),'Skin · The Nest');
+  for (const page of [first, second]) {
+    assert.doesNotMatch(await page.locator('body').innerText(), /photo/i);
+    assert.doesNotMatch(await page.content(), /photo/i);
+  }
+  for (const file of ['skin.html', 'skin.js']) assert.doesNotMatch(readFileSync(new URL(file, root), 'utf8'), /photo/i);
+  assert.equal(await first.locator('#skin-shopping [data-tick]').count(), 7);
   assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
   await first.locator('.menubtn').click();
   assert.equal(await first.locator('.navtile[aria-current=page]').innerText(),'🧴\nSkin');
@@ -73,25 +79,49 @@ try {
   assert.equal(await first.locator(tick).getAttribute('aria-checked'),'true');
   await second.evaluate(()=>NEST._pull());
   assert.equal(await second.locator(tick).getAttribute('aria-checked'),'true');
+  const logKey='local:nest_skin_log_sean';
+  const storedEntries=()=>Object.values(JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get(logKey)?.v || '{}'));
+  const settled=page=>page.waitForFunction(()=>NEST._ready&&!NEST._busy&&Object.keys(NEST._out()).length===0);
   await first.locator('#skin-start').fill('2027-01-04');
-  await first.locator('#skin-note-4').fill('Bumps 2 / marks 3 / texture 2');
-  await first.locator('[data-tick="skin-photo-4"]').press('Space');
-  await eventually(()=>db.prepare('SELECT v FROM kv WHERE k=?').get('note:skin-check-4')?.v==='Bumps 2 / marks 3 / texture 2');
-  await eventually(()=>db.prepare('SELECT v FROM kv WHERE k=?').get('note:skin-start')?.v==='2027-01-04');
+  await first.locator('#skin-log-note').fill('Less irritation today. <b>Plain text</b>');
+  await first.getByRole('button',{name:'Better',exact:true}).press('Space');
+  await eventually(()=>storedEntries().length===1);
+  await settled(first);
+  assert.equal(await first.locator('#skin-log-note').inputValue(),'');
+  assert.match(await first.locator('#skin-log-status').innerText(),/Entry saved/);
+  await first.reload();await first.waitForFunction(()=>NEST._ready);
+  assert.equal(await first.locator('#skin-log > li').count(),1);
+  assert.equal(await first.locator('#skin-log > li b').innerText(),'Better');
+  assert.equal(await first.locator('.skin-entry-note').innerText(),'Less irritation today. <b>Plain text</b>');
+  assert.equal(await first.locator('.skin-entry-note b').count(),0);
+  assert.ok(Number.isFinite(Date.parse(await first.locator('#skin-log time').getAttribute('datetime'))));
   await second.evaluate(()=>NEST._pull());
-  assert.equal(await second.locator('#skin-note-4').inputValue(),'Bumps 2 / marks 3 / texture 2');
   assert.equal(await second.locator('#skin-start').inputValue(),'2027-01-04');
-  assert.match(await second.locator('[data-skin-week="4"]').textContent(),/1 Feb 2027/);
-  assert.equal(await second.locator('[data-tick="skin-photo-4"]').getAttribute('aria-checked'),'true');
+  assert.equal(await second.locator('#skin-log > li').count(),1);
+  // A draft survives background sync; it becomes an entry only on a button tap.
+  await second.locator('#skin-log-note').fill('No change today.');
+  await second.evaluate(()=>NEST._pull());
+  assert.equal(await second.locator('#skin-log-note').inputValue(),'No change today.');
+  await second.getByRole('button',{name:'Same',exact:true}).click();
+  await eventually(()=>storedEntries().length===2);
+  await settled(second);
+  // First has an older revision. Saving here must preserve the other device's entry.
+  await first.locator('#skin-log-note').fill('Feels dry this evening.');
+  await first.getByRole('button',{name:'Worse',exact:true}).click();
+  await settled(first);
+  assert.equal(storedEntries().length,3);
+  await second.evaluate(()=>NEST._pull());
+  assert.deepEqual(await second.locator('#skin-log > li > b').allTextContents(),['Worse','Same','Better']);
+  assert.deepEqual(await second.locator('.skin-entry-note').allTextContents(),['Feels dry this evening.','No change today.','Less irritation today. <b>Plain text</b>']);
   await second.locator(tick).click();
   await eventually(()=>!JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get('ticks').v)['skin-bought-anua']);
   await first.reload();await first.waitForFunction(()=>NEST._ready);
   assert.equal(await first.locator(tick).getAttribute('aria-checked'),'false');
-  assert.equal(await first.locator('#skin-note-4').inputValue(),'Bumps 2 / marks 3 / texture 2');
+  assert.deepEqual(await first.locator('#skin-log > li > b').allTextContents(),['Worse','Same','Better']);
   await first.screenshot({path:'/tmp/nest-skin-mobile.png',fullPage:true});
   await first.emulateMedia({colorScheme:'dark'});
   assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
   await first.screenshot({path:'/tmp/nest-skin-dark.png',fullPage:true});
   assert.deepEqual(errors,[]);
-  console.log('Skin browser checks passed: private auth, 390px light/dark layout, active mobile nav, bought/photo checks, keyboard access, shared dates/notes, reload persistence and untick propagation.');
+  console.log('Skin browser checks passed: private auth, 390px light/dark layout, active mobile nav, no image reminders, shopping ticks, keyboard access, dated log entries, plain-text notes, newest-first order, cross-device conflict merge, reload persistence and untick propagation.');
 } finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); db.close(); }
