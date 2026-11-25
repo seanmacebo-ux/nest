@@ -4,17 +4,17 @@
 (() => {
   const nav = document.querySelector('.nav'), inner = nav && nav.querySelector('.nav-in');
   if (!inner) return;
-  for (const [href, label] of [['ask.html', 'Ask Claude'], ['/logout', 'Log out']]) {
+  for (const [href, label] of [['skin.html', 'Skin'], ['ask.html', 'Ask Claude'], ['/logout', 'Log out']]) {
     if (inner.querySelector(`a[href="${href}"]`)) continue;
     const a = document.createElement('a'); a.href = href; a.className = 'tab'; a.textContent = label;
-    if (href === location.pathname.split('/').pop()) a.setAttribute('aria-current', 'page');
+    if (href.replace(/\.html$/, '') === location.pathname.split('/').pop().replace(/\.html$/, '')) a.setAttribute('aria-current', 'page');
     inner.appendChild(a);
   }
   const tabs = [...inner.querySelectorAll('a.tab')];
   if (!tabs.length) return;
   // A phone can hold an old cached style.css: without the menu styling, keep the plain tab bar.
   if (getComputedStyle(document.documentElement).getPropertyValue('--nav-v').trim() !== '2') return;
-  const ICON = { 'Ask Claude': '💬', 'Log out': '↗', 'Plan': '🗺️', 'Tracker': '📈', 'Lounge': '🛋️', 'Bedroom': '🛏️', 'Bathroom': '🛁', 'Water': '💧', 'Kitchen': '🍳', 'Office': '💻', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
+  const ICON = { 'Skin': '🧴', 'Ask Claude': '💬', 'Log out': '↗', 'Plan': '🗺️', 'Tracker': '📈', 'Lounge': '🛋️', 'Bedroom': '🛏️', 'Bathroom': '🛁', 'Water': '💧', 'Kitchen': '🍳', 'Office': '💻', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
     'Furniture': '🛋️', 'Bedding': '🛏️', 'Kitchen': '🍳', 'WiFi': '🛜', 'Post-pregnancy': '💛', 'Laptop': '💻', 'Decided': '✅', 'Findings': '🧾' };
 
   const btn = document.createElement('button');
