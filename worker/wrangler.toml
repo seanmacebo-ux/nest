@@ -3,13 +3,14 @@ main = "src/index.js"
 compatibility_date = "2026-11-01"
 account_id = "0a4adfcf8b6965b12475030abfce60dc"
 workers_dev = true
+preview_urls = false
 assets = { directory = "./public", binding = "ASSETS", run_worker_first = true }
 
 [[d1_databases]]
 binding = "DB"
 database_name = "nest"
-database_id = "REPLACE_D1_ID"
+database_id = "76589c75-f313-46d7-83d2-d8feaa2c078e"
 
 [[kv_namespaces]]
 binding = "FILES"
-id = "REPLACE_KV_ID"
+id = "0361d2075cc54f8eb939a5da54d9a1db"
