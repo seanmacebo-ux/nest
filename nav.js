@@ -20,6 +20,7 @@
     const el = document.createElement(href ? 'a' : 'button');
     if (href) el.href = href; else {el.type='button'; el.setAttribute('aria-haspopup','dialog'); el.setAttribute('aria-controls','more-sheet'); el.setAttribute('aria-expanded','false');}
     el.className='bottom-tab';
+    el.dataset.tone = {Home:'primary',Rooms:'shopping',Picks:'picks',Ask:'primary',More:'primary'}[label];
     el.innerHTML='<span class="tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true">'+icons[label]+'</svg></span><span>'+label+'</span>';
     if (active===label) { el.classList.add('active'); if(href) el.setAttribute('aria-current','page'); }
     bar.append(el);

@@ -18,10 +18,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css?v=20261125-design1">
+<link rel="stylesheet" href="vibrancy.css?v=20261125-design2">
 </head>
-<body>
+<body data-tone="primary">
 <header class="nav"></header>
-<script src="nav.js?v=20261125-design1"></script>
+<script src="nav.js?v=20261125-design2"></script>
 
 <div class="wrap">
   <header>
@@ -29,8 +30,8 @@
     <h1>Building a life,<br><em>together</em>.</h1>
     <p class="sub">Everything that keeps us together, in one place: the home, the money, Mishka's recovery, medical aid, the car, and whatever comes next.</p>
     <div style="margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <button id="shareBtn" type="button" style="font:inherit;font-weight:600;font-size:14px;cursor:pointer;border:none;border-radius: var(--r-sm);padding:11px 18px;background:var(--accent);color:#fff">📤 Share with Mishka</button>
-      <a href="recovery.html" style="font-weight:600;font-size:14px;text-decoration:none;border-radius: var(--r-sm);padding:11px 18px;background:#ffe3ea;color:#8a2343">💛 Mishka's recovery</a>
+      <button id="shareBtn" type="button" style="font:inherit;font-weight:600;font-size:14px;cursor:pointer;border:none;border-radius: var(--r-sm);padding:11px 18px">📤 Share with Mishka</button>
+      <a href="recovery.html" style="font-weight:600;font-size:14px;text-decoration:none;border-radius: var(--r-sm);padding:11px 18px;background:var(--baby-soft);color:var(--baby)">💛 Mishka's recovery</a>
       <span id="shareMsg" style="font-size:13px;color:var(--ink-soft)"></span>
     </div>
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft);max-width:64ch"><b>📲 Put it on your home screen:</b> on <b>iPhone</b>, open it in Safari, tap Share, then <b>Add to Home Screen</b>. On <b>Android</b>, open it in Chrome, tap ⋮, then <b>Install app</b>.</p>
@@ -70,7 +71,7 @@
   </div>
 
   <div class="sec"><h2>The money</h2></div>
-  <div class="panel">
+  <div class="panel money-card" data-tone="money">
     <div class="num" style="font-family:'Bricolage Grotesque',serif;font-weight:600;font-size:clamp(34px,6vw,48px);color:var(--accent);letter-spacing:-.02em;line-height:1">~R24k <span style="font-size:.5em;color:var(--ink-soft)">left over / month</span></div>
     <p style="margin:12px 0 0;max-width:64ch">Your 7 Oct budget spent about R40k of your R52k. Without the R12k a month that was set aside there, you spend about R28k, which leaves roughly R24k a month. It's a rough number until you redo the budget. First it finishes the flat, then it builds the car deposit.</p>
   </div>

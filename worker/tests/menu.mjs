@@ -107,7 +107,7 @@ try {
     const controls=await page.locator('.acts button, .acts a, .iacts button, .dec button, .clink, .sendbtn, #ask-form button, .skin-actions button, #shareBtn').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({label:e.textContent.trim(),height:e.getBoundingClientRect().height})));
     for(const control of controls) assert.ok(control.height>=48,JSON.stringify(control));
     if(path==='rooms') assert.deepEqual(await page.locator('.room-link').evaluateAll(as=>as.map(a=>a.getAttribute('href'))),['lounge.html','bedroom.html','kitchen.html','bathroom.html','office.html','water.html','wifi.html']);
-    if(path==='index'||path==='office') await page.screenshot({path:'/tmp/design1/'+(process.env.NEST_BASE_URL?'after-':'local-')+(path==='index'?'home':'office')+'.png'});
+    if(['index','office','skin','lounge'].includes(path)) await page.screenshot({path:(process.env.NEST_SCREENSHOT_DIR || '/tmp/design1')+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+(path==='index'?'home':path)+'.png'});
     await openMore();
     if(['tracker','findings','medical','skin','cars','apartments','recovery'].includes(path)) assert.equal(await page.locator('.navtile[aria-current]').getAttribute('href'),path+'.html');
     for(const href of await page.locator('.navtile, .bottom-bar a').evaluateAll(as=>as.map(a=>a.getAttribute('href')))) visited.add(href);
@@ -133,7 +133,7 @@ try {
   }
   await page.goto(base+'/office.html',{waitUntil:'networkidle'});
   await openMore();
-  await page.screenshot({path:'/tmp/design1/'+(process.env.NEST_BASE_URL?'after-':'local-')+'more-sheet.png'});
+  await page.screenshot({path:(process.env.NEST_SCREENSHOT_DIR || '/tmp/design1')+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+'more-sheet.png'});
   // Modal focus remains in the sheet, and background scrolling is locked.
   for(let i=0;i<15;i++){await page.keyboard.press('Tab');assert.ok(await page.evaluate(()=>document.querySelector('#more-sheet').contains(document.activeElement)));}
   assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).overflow),'hidden');

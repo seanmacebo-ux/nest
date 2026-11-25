@@ -1,0 +1,128 @@
+/* Colour layer: semantic hues stay consistent across pages, cards and navigation.
+   Light values retain the shell's system-theme support; dark is the main design. */
+:root {
+  --primary: #6940DA; --primary-start: #7139DF; --primary-end: #4840C4;
+  --shopping: #AE4326; --money: #08745D; --health: #AA286E;
+  --travel: #116BA8; --picks: #8A5900;
+  --reject: #B04450; --consider: var(--picks); --bought: var(--money);
+  --tone: var(--primary); --accent: var(--tone);
+  --accent-soft: color-mix(in srgb, var(--tone) 14%, var(--surface));
+  --hero-start: color-mix(in srgb, var(--tone) 14%, var(--surface));
+  --hero-end: var(--surface);
+  --primary-glow: #7139DF30;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #211D38; --surface-2: #2B2546; --surface-3: #342C50;
+    --ink: #F4F0FF; --ink-soft: #C5BEDD;
+    --primary: #BC9CFF; --primary-start: #8344E8; --primary-end: #4D46C8;
+    --shopping: #FFA17D; --money: #58E2BA; --health: #FF91CE;
+    --travel: #78D4FF; --picks: #FFCF70; --reject: #E9A0AC;
+    --good: var(--money); --good-soft: #153C35;
+    --home: var(--money); --home-soft: #153C35; --home-ink: #A4F4D7;
+    --baby: var(--health); --baby-soft: #48233F;
+    --car: var(--travel); --car-soft: #16354B; --car-ink: #AFE6FF;
+    --amber: var(--picks); --amber-soft: #43341F;
+    --red: var(--reject); --red-soft: #402831;
+    --hero-start: color-mix(in srgb, var(--tone) 19%, var(--surface));
+    --hero-end: color-mix(in srgb, var(--primary-end) 12%, var(--surface));
+    --primary-glow: #8654FF40;
+  }
+}
+[data-tone="primary"] { --tone: var(--primary); }
+[data-tone="shopping"] { --tone: var(--shopping); }
+[data-tone="money"] { --tone: var(--money); }
+[data-tone="health"] { --tone: var(--health); }
+[data-tone="travel"] { --tone: var(--travel); }
+[data-tone="picks"] { --tone: var(--picks); }
+body {
+  background-image: radial-gradient(ellipse 95% 510px at 80% 0%, color-mix(in srgb, var(--tone) 14%, transparent), transparent 100%);
+  background-repeat: no-repeat;
+}
+body .app-topbar { background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(16px); }
+body .eyebrow, body .lbl, body .sec .isub, .navgroup h3 { color: var(--tone); }
+.eyebrow .dot { box-shadow: 0 0 12px color-mix(in srgb, var(--tone) 60%, transparent); }
+body .hero, body .money-card, body .skin-card[open], body .pacer {
+  background: linear-gradient(125deg, var(--hero-start), var(--hero-end));
+  border: 1px solid var(--line);
+}
+.money-card { --accent: var(--money); }
+body .hero .lbl, body .hero .big { color: var(--tone); }
+body .skin-card > summary { background: linear-gradient(125deg, var(--hero-start), var(--hero-end)); }
+body .skin-evidence, body .skin-phase { color: var(--health); background: color-mix(in srgb, var(--health) 12%, var(--surface)); }
+/* Primary fills use white on the darker end stops, not the pale text accent. */
+body #shareBtn, body #ask-form button, body .sendbtn, body .btn, body .dectray .send {
+  background: linear-gradient(115deg, var(--primary-start), var(--primary-end));
+  color: #fff !important;
+  border: 0;
+  box-shadow: 0 4px 22px -6px var(--primary-glow);
+}
+body .chip[aria-pressed="true"], body .jump a.on, body .rooms a[aria-current], body .iacts .cmpb, body .clink.see {
+  background: var(--accent-soft); color: var(--tone); border-color: transparent;
+}
+body .bottom-bar { background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(16px); }
+body .bottom-tab .tab-icon { color: var(--tone); }
+body .bottom-tab.active, body .bottom-tab[aria-expanded="true"] { color: var(--tone); }
+body .bottom-tab.active .tab-icon, body .bottom-tab[aria-expanded="true"] .tab-icon {
+  background: color-mix(in srgb, var(--tone) 23%, var(--surface));
+  box-shadow: 0 0 18px -6px color-mix(in srgb, var(--tone) 40%, transparent);
+}
+.navtile[href="tracker.html"] { --tone: var(--money); }
+.navtile[href="medical.html"], .navtile[href="skin.html"], .navtile[href="recovery.html"] { --tone: var(--health); }
+.navtile[href="cars.html"], .navtile[href="apartments.html"] { --tone: var(--travel); }
+.navtile[href="findings.html"] { --tone: var(--shopping); }
+body .navtile { color: var(--tone); background: color-mix(in srgb, var(--tone) 12%, var(--surface-2)); }
+body .navtile[aria-current] { background: color-mix(in srgb, var(--tone) 23%, var(--surface-2)); }
+body .more-sheet { background: var(--surface-2); }
+body .sheet-head { background: linear-gradient(110deg, color-mix(in srgb, var(--primary) 14%, var(--surface-2)), var(--surface-2)); }
+body .room-link, body .tile { background: linear-gradient(125deg, color-mix(in srgb, var(--tone) 10%, var(--surface)), var(--surface)); }
+.tile { --tone: var(--shopping); }
+.tile[href="ask.html"] { --tone: var(--primary); }
+.tile[href="medical.html"], .tile[href="recovery.html"] { --tone: var(--health); }
+.tile[href="apartments.html"], .tile[href="cars.html"] { --tone: var(--travel); }
+body .tile .tt, body .tile .go { color: var(--tone); }
+body .room-link > span { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; background: var(--accent-soft); }
+body .item .iic, body .chap-h .ct, body .bl .ic { background: color-mix(in srgb, var(--shopping) 18%, var(--surface-2)); }
+body .trio .ic { border-radius: var(--r-sm); background: var(--accent-soft); }
+body .opt.pick .ot { color: var(--picks); background: var(--amber-soft); }
+body .opt.pick { box-shadow: none; border-color: color-mix(in srgb, var(--picks) 25%, var(--line)); }
+body .dec button[data-dv="consider"] { color: var(--consider); background: color-mix(in srgb, var(--consider) 9%, var(--surface)); }
+body .dec button[data-dv="consider"].on { color: var(--consider); background: var(--amber-soft); border-color: transparent; box-shadow: 0 0 18px -7px var(--consider); }
+body .is-consider { box-shadow: 0 0 22px -12px var(--consider) !important; border-color: color-mix(in srgb, var(--consider) 30%, var(--line)); }
+body .is-reject { opacity: 1; }
+body .dec button[data-dv="reject"], body .is-reject::before { color: var(--reject); }
+body .dec button[data-dv="reject"].on { color: var(--reject); background: var(--red-soft); border-color: transparent; }
+body .is-consider::before, body .is-reject::before { width: fit-content; padding: 4px 8px; border-radius: var(--r-pill); background: var(--amber-soft); }
+body .is-reject::before { background: var(--red-soft); }
+body .won { background: color-mix(in srgb, var(--bought) 10%, var(--surface)); }
+body #bought-sec h2, body .won .sumrow b { color: var(--bought); }
+body .won .bl .ic { background: var(--good-soft); }
+/* Recompute dependent tokens at each semantic scope (custom properties inherit
+   computed values, so changing only --tone would retain the parent's accent). */
+[data-tone], .tile, .navtile {
+  --accent: var(--tone);
+  --accent-soft: color-mix(in srgb, var(--tone) 14%, var(--surface));
+  --hero-start: color-mix(in srgb, var(--tone) 14%, var(--surface));
+  --hero-end: var(--surface);
+}
+@media (prefers-color-scheme: dark) {
+  [data-tone], .tile, .navtile {
+    --hero-start: color-mix(in srgb, var(--tone) 19%, var(--surface));
+    --hero-end: color-mix(in srgb, var(--primary-end) 12%, var(--surface));
+  }
+}
+/* Match the fallback fill to the gradient for forced-image modes and contrast
+   tools; Home's legacy inline background otherwise leaves a pale fallback. */
+body #shareBtn, body #ask-form button, body .sendbtn, body .btn, body .dectray .send {
+  background-color: var(--primary-start) !important;
+}
+/* Keep existing data visualisations and completed rows readable on richer
+   surfaces. Quiet states use colour rather than reducing the whole row opacity. */
+body .mile li.past { opacity: 1; }
+body .lc-act a { background: var(--car-soft); color: var(--car-ink); min-height: var(--tap); display: grid; place-items: center; }
+@media (prefers-color-scheme: dark) {
+  body .s-aid, body .s-you { color: #211D38; }
+  body .pc2 .sch, body .hero .sch { color: var(--health); }
+  body .vb { color: var(--health); background: var(--baby-soft); }
+}
+body .acts button.got, body .acts button.got.sent { color: var(--bought); background: var(--good-soft); border-color: transparent; }
