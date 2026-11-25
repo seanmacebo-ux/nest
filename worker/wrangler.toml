@@ -1,0 +1,15 @@
+name = "nest"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+account_id = "0a4adfcf8b6965b12475030abfce60dc"
+workers_dev = true
+assets = { directory = "./public", binding = "ASSETS", run_worker_first = true }
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nest"
+database_id = "REPLACE_D1_ID"
+
+[[kv_namespaces]]
+binding = "FILES"
+id = "REPLACE_KV_ID"

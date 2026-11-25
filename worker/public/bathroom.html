@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C4CF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<title>Bathroom · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261114c">
+<link rel="stylesheet" href="rooms.css?v=20261117b">
+</head>
+<body data-room="Bathroom">
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="lounge.html">Lounge</a>
+  <a class="tab" href="bedroom.html">Bedroom</a>
+  <a class="tab" href="bathroom.html" aria-current="page">Bathroom</a>
+  <a class="tab" href="water.html">Water</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
+  <a class="tab" href="office.html">Office</a>
+  <a class="tab" href="medical.html">Medical aid</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="recovery.html">Post-pregnancy</a>
+  <a class="tab" href="decided.html">Decided</a>
+  <a class="tab" href="findings.html">Findings</a>
+</div></nav>
+<script src="nav.js?v=20261117c"></script>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> The flat · room by room</div>
+    <h1>🛁 Bathroom.</h1>
+    <p class="sub">Shower filter refills and a new shower head. Every thing has its own button in the bar below. Mark options 🤔 Consider or ✕ Reject, then tap Send so I save it for both of you.</p>
+  </header>
+
+  <nav class="jump" id="jump" aria-label="Jump to"></nav>
+
+  <section class="hero" id="hero"></section>
+
+  <details class="addbox">
+    <summary><span class="pl">＋</span><span><b>Add something</b><small>Towels, mats, anything. Paste a link if you've seen one.</small></span></summary>
+    <div class="abd">
+    <div class="qchips" aria-label="Quick add">
+      <button type="button" data-q="Towels: ">🧺 Towels</button>
+      <button type="button" data-q="Bath mat: ">🟫 Bath mat</button>
+      <button type="button" data-q="Shower caddy: ">🧴 Shower caddy</button>
+      <button type="button" data-q="Toilet: ">🚽 Toilet</button>
+    </div>
+    <textarea id="addtxt" placeholder="e.g. Towels, 4 bath towels, grey, under R800" aria-label="What do you need?"></textarea>
+    <button type="button" class="sendbtn" id="addsend">Send to The Nest on Telegram →</button>
+    <div class="how">Several things at once is fine: one per line. I'll find options with the browser and put them on this list.</div>
+    </div>
+  </details>
+
+  <div id="need"></div>
+
+  <div id="maybe-wrap"><div class="sec" id="maybe-sec"><h2>🤔 Only if needed</h2><p>Only buy these if it turns out you need them.</p></div>
+  <div id="maybe"></div></div>
+
+  <div class="sec" id="bought-sec"><h2>✅ Bought</h2></div>
+  <div class="panel won">
+    <ul class="bl" id="boughtlist"></ul>
+    <div class="sumrow"><span>Spent in this room</span><b id="spentsum">—</b></div>
+  </div>
+
+  <div class="foot">BATHROOM · part of the flat, room by room · updated 17 Nov 2026 · The Nest</div>
+</div>
+<script src="nest.js?v=20261112c"></script>
+<script src="decide.js?v=20261114c"></script>
+<script src="rooms.js?v=20261118m"></script>
+</body>
+</html>

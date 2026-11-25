@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C4CF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Ask Claude · The Nest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261124">
+<style>
+.ask-wrap{max-width:780px}#ask-form label{display:block;font-weight:600;margin:14px 0 6px}#ask-text{width:100%;resize:vertical;min-height:140px;box-sizing:border-box;background:var(--ground);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px;font:inherit;font-size:16px}#ask-files{max-width:100%;font:inherit;font-size:14px}#ask-form button{display:block;min-height:46px;border:0;border-radius:12px;background:var(--accent);color:var(--surface);font:inherit;font-weight:600;padding:10px 24px;margin-top:18px;cursor:pointer}#ask-form button:disabled{opacity:.6}.ask-meta{font-size:12px;color:var(--ink-soft)}.ask-status{display:inline-block;padding:3px 9px;border-radius:20px;background:var(--surface-2);font-size:12px;font-weight:600}.ask-status.done{background:var(--good-soft);color:var(--good)}.ask-status.failed{background:var(--red-soft);color:var(--red)}.ask-status.working{color:var(--accent)}.ask-question{white-space:pre-wrap;overflow-wrap:anywhere}.ask-reply{border-top:1px solid var(--line);margin-top:18px;padding-top:14px;overflow-wrap:anywhere}.ask-reply p{margin:6px 0}.ask-reply ul{padding-left:22px}.ask-card{margin-top:16px}.ask-attachments{padding-left:20px;font-size:14px}#ask-message{font-size:14px}#ask-message.error{color:var(--red)}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+<a class="brandmark" href="index.html">🪺 The Nest</a>
+<a class="tab" href="index.html">Plan</a><a class="tab" href="tracker.html">Tracker</a>
+<a class="tab" href="ask.html" aria-current="page">Ask Claude</a>
+<a class="tab" href="lounge.html">Lounge</a><a class="tab" href="bedroom.html">Bedroom</a><a class="tab" href="bathroom.html">Bathroom</a><a class="tab" href="water.html">Water</a><a class="tab" href="kitchen.html">Kitchen</a><a class="tab" href="office.html">Office</a><a class="tab" href="medical.html">Medical aid</a><a class="tab" href="cars.html">Cars</a><a class="tab" href="apartments.html">Apartments</a><a class="tab" href="wifi.html">WiFi</a><a class="tab" href="recovery.html">Post-pregnancy</a><a class="tab" href="decided.html">Decided</a><a class="tab" href="findings.html">Findings</a>
+</div></nav>
+<script src="nav.js?v=20261124"></script>
+<div class="wrap ask-wrap">
+<header><div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · our inbox</div><h1>💬 Ask <em>Claude.</em></h1><p class="sub">A question, a photo, a document. Ask here and both of you can see the answer.</p><p id="ask-heartbeat" class="ask-meta">Claude last checked in: checking…</p></header>
+<form id="ask-form" class="panel">
+<label for="ask-text">What can I help with?</label><textarea id="ask-text" name="text" maxlength="20000" required placeholder="Ask anything about our plans…"></textarea>
+<label for="ask-files">Add photos or documents</label><input id="ask-files" name="files[]" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.webp,.doc,.docx,.xls,.xlsx,image/jpeg,image/png,image/heic,image/webp">
+<p class="ask-meta">Up to 5 files, 20 MB each. Your phone's picker also lets you take a photo.</p><button type="submit">Send →</button><p id="ask-message" role="status" aria-live="polite"></p>
+</form>
+<div class="sec"><h2>Our conversations</h2></div><div id="ask-requests"><p class="ask-meta">Loading…</p></div>
+<div class="foot">JUST US · The Nest</div>
+</div>
+<script src="nest.js?v=20261124"></script><script src="ask.js?v=20261124"></script>
+</body></html>

@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C4CF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<title>Tracker · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261114c">
+<style>
+  .ticker { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px,4vw,30px); box-shadow: var(--shadow); border-top: 4px solid var(--baby); }
+  .ticker.move { border-top-color: var(--home); }
+  .ticker.move .wk { color: var(--home); }
+  .ticker .wk { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(38px,8vw,60px); line-height: 1; letter-spacing: -.02em; color: var(--baby); }
+  .ticker .meta { color: var(--ink-soft); font-size: 15px; margin-top: 8px; }
+  .bar { height: 12px; border-radius: 20px; background: var(--surface-2); margin-top: 18px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--home), var(--baby)); border-radius: 20px; transition: width .6s cubic-bezier(.2,.7,.3,1); }
+  .barlabels { display: flex; justify-content: space-between; font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--ink-soft); margin-top: 7px; letter-spacing: .04em; }
+
+  .mile { list-style: none; margin: 0; padding: 0; }
+  .mile li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dotted var(--line); align-items: baseline; }
+  .mile li:last-child { border-bottom: none; }
+  .mile .when { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; color: var(--home); flex: none; width: 92px; }
+  .mile .what { font-size: 14.5px; }
+  .mile .what small { color: var(--ink-soft); display: block; font-size: 12.5px; }
+  .mile li.past { opacity: .5; } .mile li.past .when { color: var(--ink-soft); }
+  .mile li.now { background: var(--baby-soft); margin: 0 -12px; padding: 12px; border-radius: 10px; border-bottom: none; }
+  .mile li.now .when { color: var(--baby); }
+
+  .todos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .todos li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; padding: 9px 8px; border-radius: 9px; }
+  .todos li:hover { background: var(--surface-2); }
+  .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
+  .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
+
+  .saved { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 860px) { .saved { grid-template-columns: 1fr; } }
+  .savecol h4 { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); } .savecol.mid h4 { color: var(--baby); }
+  .savelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+  .savelist li a:hover { border-color: var(--accent); }
+  .savelist .go { font-family: "JetBrains Mono", monospace; color: var(--accent); }
+  .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; }
+
+  .pacer { border-top: 4px solid var(--home); }
+  .pacehead { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .pacehave { font-size: 14px; color: var(--ink-soft); font-weight: 600; display: flex; align-items: center; gap: 9px; }
+  .pacehave input { width: 118px; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 16px; border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; background: var(--surface-2); color: var(--ink); }
+  .paceleft { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(30px,6.5vw,46px); line-height: 1; letter-spacing: -.02em; color: var(--home); }
+  .paceleft small { font-size: 14px; color: var(--ink-soft); font-family: "Figtree", sans-serif; font-weight: 600; }
+  .paceleft.warn { color: var(--car-ink); } .paceleft.over { color: var(--red); }
+  .pacelist { list-style: none; margin: 16px 0 0; padding: 0; }
+  .pacerow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dotted var(--line); }
+  .pacerow:last-child { border-bottom: none; }
+  .pacerow.off { opacity: .45; }
+  .pacetoggle { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 16px; text-align: center; user-select: none; }
+  .pacerow.on .pacetoggle { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .paceinfo { flex: 1; min-width: 0; }
+  .paceinfo .pl { font-weight: 600; font-size: 14.5px; }
+  .paceinfo .ps { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
+  .paceamt { flex: none; display: flex; align-items: center; gap: 3px; }
+  .paceamt > span { color: var(--ink-soft); font-family: "JetBrains Mono", monospace; font-size: 13px; }
+  .paceamt input { width: 84px; text-align: right; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); }
+  .pacesum { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13.5px; }
+  .pacesum b { font-family: "JetBrains Mono", monospace; }
+  .ct { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
+  .ct th { text-align: left; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  .ct td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  .ct td.amt { text-align: right; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--baby); white-space: nowrap; }
+  .ct tr:last-child td { border-bottom: none; }
+  .ct tr.hl td { background: var(--baby-soft); font-weight: 600; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html" aria-current="page">Tracker</a>
+  <a class="tab" href="lounge.html">Lounge</a>
+  <a class="tab" href="bedroom.html">Bedroom</a>
+  <a class="tab" href="bathroom.html">Bathroom</a>
+  <a class="tab" href="water.html">Water</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
+  <a class="tab" href="office.html">Office</a>
+  <a class="tab" href="medical.html">Medical aid</a>
+  <a class="tab" href="cars.html">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="recovery.html">Post-pregnancy</a>
+  <a class="tab" href="decided.html">Decided</a>
+  <a class="tab" href="findings.html">Findings</a>
+</div></nav>
+<script src="nav.js?v=20261117c"></script>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · live tracker</div>
+    <h1>Where <em>we're</em> at.</h1>
+    <p class="sub">The money, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with The Nest.</p>
+  </header>
+
+  <div class="sec"><h2>💸 This month's cash pacer</h2>
+    <p>You've got about R52k this month. Set each cost (rent, the FNB loan, groceries) and tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the car pot. It all saves on your phone — change the numbers anytime.</p></div>
+  <div class="panel pacer">
+    <div class="pacehead">
+      <label class="pacehave">You have <span style="font-family:'JetBrains Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
+      <div class="paceleft" id="pace-left">R—<small> left</small></div>
+    </div>
+    <div class="bar"><span id="pace-bar" style="width:0%"></span></div>
+    <div class="barlabels"><span>Allocated <b id="pace-spent">R0</b></span><span id="pace-msg"></span></div>
+    <ul class="pacelist" id="pacelist"></ul>
+    <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
+    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'couch balance on delivery', 'move R5k to the car pot this week'."></textarea></div>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Overwrite any number with your real one.</p>
+  </div>
+
+  <div class="sec"><h2>🗓️ Milestones ahead</h2>
+    <p>The dates that drive everything.</p></div>
+  <div class="panel">
+    <ul class="mile" id="mile"></ul>
+  </div>
+
+  <div class="sec"><h2>🏡 The move — countdown to November</h2>
+    <p>Ground floor, in and settled. Here's how it went.</p></div>
+  <div class="ticker move">
+    <div class="wk" id="movewk">— days</div>
+    <div class="meta" id="movemeta">calculating…</div>
+    <div class="bar"><span id="movebar" style="width:0%"></span></div>
+    <div class="barlabels"><span>Now</span><span>Oct · deposit + apply</span><span>Move · November</span></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <ul class="todos">
+      <li data-tick="m-alerts"><span class="box"></span><span class="txt">Set Property24 + Private Property alerts <small>Done: found Unit 30, Baker Rd, Eden Glen. Acacia declined 21 Oct. Backups stay on the board until keys</small></span></li>
+      <li data-tick="m-shortlist"><span class="box"></span><span class="txt">Shortlist 4–5 places <small>♡ them on the Apartments board — they land in your saved picks above</small></span></li>
+      <li data-tick="m-viewings"><span class="box"></span><span class="txt">Book viewings <small>See them in person before applying</small></span></li>
+      <li data-tick="m-apply"><span class="box"></span><span class="txt">Apply for the one you want <small>Acacia declined 21 Oct · ✅ Baker Rd lease in hand 26 Oct, edited (occupants, 1 car, anchoring furniture). Initial the 3 changes, Josh's spouse co-signs</small></span></li>
+      <li data-tick="m-deposit"><span class="box"></span><span class="txt">Pay deposit + first month (R23,800) <small>✅ Done. Baker Rd: R11,900 deposit + R11,900 November rent. You're in</small></span></li>
+      <li data-tick="m-movers"><span class="box"></span><span class="txt">Book movers / bakkie <small>Get 2 quotes early — November is busy season</small></span></li>
+      <li data-tick="m-fibre"><span class="box"></span><span class="txt">Order fibre for Baker Rd (~100Mbps) <small>Ask the landlord which fibre is in the unit. Pick: Cool Ideas 100/50 R989/mo (zero cancellation fee) or Afrihost 100/50 R897/mo (router yours to keep). Keep 50 up, because Mishka's streams need 25+ · full notes + steps on the <a href="wifi.html" style="color:var(--home);font-weight:600">WiFi page</a></small></span></li>
+      <li data-tick="m-utilities"><span class="box"></span><span class="txt">Sort utilities + address change <small>Prepaid meter · cancel MWeb now (1 calendar month notice) + order new fibre once the Baker Rd lease is signed · electricity AND water are prepaid there · update your addresses</small></span></li>
+      <li data-tick="m-dayone"><span class="box"></span><span class="txt">Day-one furniture from the ~R27k budget <small>✅ Couch delivered · ✅ both mattresses delivered 2 Nov · ✅ TV delivered 2 Nov · ✅ TV stand arrived. Still to buy: bed frame (Queen XL), washer if Mom's doesn't come. Furniture board</small></span></li>
+      <li data-tick="m-move"><span class="box"></span><span class="txt">MOVE IN <small>✅ In at Unit 30, 114 Victoria Square. Snag photos (Annexure A) by Sun 8 Nov: add the dry bathroom tap + the rotting bathroom plywood</small></span></li>
+    </ul>
+    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Move notes</button><textarea class="notebox" data-note-key="move-notes" placeholder="Jot anything — e.g. 'call agent about the Greenstone place', 'movers quote R3.5k', 'lease starts 1 Nov'."></textarea></div>
+  </div>
+
+  <div class="sec"><h2>✅ To-do — tap to tick off</h2>
+    <p>Ticks save on this device. Green when done.</p></div>
+  <div class="panel">
+    <ul class="todos">
+      <li data-tick="t-learners"><span class="box"></span><span class="txt">Book learner's licence <small>Your guy / NaTIS — unlocks the car</small></span></li>
+      <li data-tick="t-alerts"><span class="box"></span><span class="txt">Set Property24 alerts for modern estates</span></li>
+      <li data-tick="t-move"><span class="box"></span><span class="txt">Secure rental + move <small>✅ Moved into Unit 30, 114 Victoria Square, Eden Glen · Greenstone Ridge deposit (R16,905) back once Josh signs the release letter</small></span></li>
+      <li data-tick="t-bank"><span class="box"></span><span class="txt">Start the car-deposit pot <small>Whatever's left after the flat is finished</small></span></li>
+      <li data-tick="t-greenstone"><span class="box"></span><span class="txt">Greenstone Ridge deposit back (R16,905) <small>Josh signs the release letter</small></span></li>
+      <li data-tick="t-snag"><span class="box"></span><span class="txt">Snag list (Annexure A) to the landlord <small>Dry bathroom tap + rotting bathroom plywood, with photos</small></span></li>
+    </ul>
+  </div>
+
+  <div class="sec"><h2>❤️ Your saved picks</h2>
+    <p>Cars and flats you ❤️ across the site land here.</p></div>
+  <div class="saved">
+    <div class="savecol car">
+      <h4>🚗 Cars</h4>
+      <ul class="savelist" id="savedcars"></ul>
+    </div>
+    <div class="savecol flat">
+      <h4>🏡 Flats</h4>
+      <ul class="savelist" id="savedflats"></ul>
+    </div>
+  </div>
+
+  <div class="foot">TRACKER · saves on this device · shared sync arrives with The Nest · The Nest</div>
+</div>
+
+<script src="nest.js?v=20261112c"></script>
+<script>
+(function(){
+  const now = new Date();
+
+  // Move countdown — target: move-in by November 2026. Runway opens 1 Sep.
+  const MOVE = new Date('2026-11-01T00:00:00');
+  const MOVE_START = new Date('2026-09-01T00:00:00');
+  const daysToMove = Math.ceil((MOVE - now) / 86400000);
+  const mwk = document.getElementById('movewk');
+  const mmeta = document.getElementById('movemeta');
+  const mbar = document.getElementById('movebar');
+  if (daysToMove > 0) {
+    const weeksToMove = Math.floor(daysToMove / 7);
+    mwk.textContent = daysToMove + (daysToMove === 1 ? ' day' : ' days');
+    mmeta.textContent = weeksToMove + ' weeks to go · target move-in November 2026';
+  } else {
+    mwk.textContent = 'Moved 🎉';
+    mmeta.textContent = 'Unit 30, 114 Victoria Square · in since 1 Nov';
+  }
+  const moveSpan = MOVE - MOVE_START;
+  const movePct = Math.max(0, Math.min(100, Math.round((now - MOVE_START) / moveSpan * 100)));
+  mbar.style.width = movePct + '%';
+
+  // Milestones — "past" once the date has gone by
+  const M = [
+    { d: '2026-11-01', when: '1 Nov', what: '✅ Moved into the new place', sub: 'Unit 30, 114 Victoria Square, Eden Glen' },
+    { d: '2026-11-05', when: '5 Nov', what: '✅ Laptop arrived', sub: 'Dell G5 5587 from Device Shop' },
+    { d: '2026-11-30', when: 'Nov', what: 'Fibre live + Greenstone Ridge deposit back', sub: 'Evotel has to release the old tenant\'s line first' },
+    { d: '2026-11-27', when: '27 Nov', what: 'Black Friday', sub: 'Only for things you were buying anyway · check Serval Tracker first' },
+    { d: '2027-03-31', when: 'Early 2027', what: 'Learner\'s licence, then lessons', sub: 'Unlocks the car' },
+    { d: '2027-06-30', when: '~Q2 2027', what: 'Driver\'s licence, then the car 🚗', sub: 'Shortlist on the Cars page' }
+  ].sort((a, b) => a.d < b.d ? -1 : 1);
+  window.NEST_MILESTONES = M;
+
+  // Saved picks
+  function render(kind, elId, empty) {
+    const items = window.NEST.saves(kind);
+    const el = document.getElementById(elId);
+    if (!items.length) { el.innerHTML = `<div class="emptysave">${empty}</div>`; return; }
+    el.replaceChildren(...items.map(x => {
+      const li = document.createElement('li'), a = document.createElement('a');
+      try { const url = new URL(x.url, location.href); a.href = ['https:', 'http:'].includes(url.protocol) ? url.href : '#'; } catch { a.href = '#'; }
+      a.target = '_blank'; a.rel = 'noopener noreferrer';
+      const label = document.createElement('span'); label.textContent = x.label;
+      const go = document.createElement('span'); go.className = 'go'; go.textContent = '↗';
+      a.append(label, go); li.append(a); return li;
+    }));
+  }
+  function renderSaved() {
+  render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
+  render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
+  }
+  renderSaved(); window.addEventListener('nest:sync', renderSaved);
+})();
+
+// ===== Cash pacer =====
+(function(){
+  const KEY = 'nest_pacer';
+  const PACE = [
+    { k:'rent',        label:'Our rent',             sub:'This month — your place / the new one (Baker Rd is R11,900 from 1 Nov)', amt:11900 },
+    { k:'mom_stop',    label:'Mom',                  sub:'Staying with you at Victoria Square. Put in anything extra you cover for her.', amt:0 },
+    { k:'fnb_loan',    label:'FNB personal loan',    sub:"R5,000 a month for 12 months (approved 2 Oct, DebiCheck from Mishka's FNB). Paid off around Oct 2027.", amt:5000 },
+    { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
+    { k:'electricity', label:'Electricity + water',  sub:'Both prepaid at Victoria Square, and both on you',                                     amt:1500 },
+    { k:'car_pot',     label:'Car-deposit pot',      sub:'What you put away toward the car this month', amt:0 }
+  ];
+  const saved = window.NEST._get(KEY, {});
+  let have = Number.isFinite(+saved.have) && saved.have != null ? Math.max(0, +saved.have) : 52000;
+  const rs = saved.rows || {};
+  PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = Number.isFinite(+s.amt) && s.amt != null ? Math.max(0, +s.amt) : p.amt; });
+  function persist(){ window.NEST._set(KEY, { have: have, rows: Object.fromEntries(PACE.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }])) }); }
+  function fmt(n){ const s = Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); return (n < 0 ? '-R' : 'R') + s; }
+
+  const list = document.getElementById('pacelist');
+  list.innerHTML = PACE.map((p, i) => `
+    <li class="pacerow ${p.on ? 'on' : 'off'}" data-i="${i}">
+      <span class="pacetoggle" role="button" tabindex="0" aria-label="Toggle ${p.label}">✓</span>
+      <span class="paceinfo"><span class="pl">${p.label}</span><span class="ps">${p.sub}</span></span>
+      <span class="paceamt"><span>R</span><input type="number" inputmode="numeric" step="100" min="0" value="${p.amt}"></span>
+    </li>`).join('');
+
+  const haveInput = document.getElementById('pace-have');
+  haveInput.value = have;
+  haveInput.addEventListener('input', () => { have = +haveInput.value || 0; recalc(); persist(); });
+
+  list.querySelectorAll('.pacerow').forEach(row => {
+    const i = +row.dataset.i;
+    const tog = row.querySelector('.pacetoggle');
+    const inp = row.querySelector('.paceamt input');
+    const flip = () => { PACE[i].on = !PACE[i].on; row.classList.toggle('on', PACE[i].on); row.classList.toggle('off', !PACE[i].on); recalc(); persist(); };
+    tog.addEventListener('click', flip);
+    tog.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+    inp.addEventListener('input', () => { PACE[i].amt = +inp.value || 0; recalc(); persist(); });
+  });
+
+  function recalc(){
+    const alloc = PACE.filter(p => p.on).reduce((s, p) => s + (+p.amt || 0), 0);
+    const left = have - alloc;
+    const leftEl = document.getElementById('pace-left');
+    leftEl.innerHTML = fmt(left) + '<small> left</small>';
+    leftEl.className = 'paceleft ' + (left < 0 ? 'over' : left < 5000 ? 'warn' : '');
+    document.getElementById('pace-alloc').textContent = fmt(alloc);
+    document.getElementById('pace-spent').textContent = fmt(alloc);
+    const pct = have > 0 ? Math.min(100, Math.round(alloc / have * 100)) : 0;
+    const bar = document.getElementById('pace-bar');
+    bar.style.width = pct + '%';
+    bar.style.background = left < 0 ? 'var(--red)' : (left < 5000 ? 'var(--car-ink)' : 'linear-gradient(90deg, var(--home), var(--baby))');
+    document.getElementById('pace-msg').textContent = left < 0 ? ('Over by ' + fmt(-left)) : (left < 5000 ? 'Cutting it fine' : 'On track');
+  }
+  recalc();
+  window.addEventListener('nest:sync', () => {
+    const current = NEST._get(KEY, null); if (!current) return;
+    if (document.activeElement === haveInput || list.contains(document.activeElement)) return;
+    have = Number.isFinite(+current.have) ? Math.max(0, +current.have) : have;
+    haveInput.value = have;
+    PACE.forEach((p, i) => {
+      const row = current.rows?.[p.k]; if (!row) return;
+      p.on = !!row.on; p.amt = Number.isFinite(+row.amt) ? Math.max(0, +row.amt) : p.amt;
+      const el = list.children[i]; el.classList.toggle('on', p.on); el.classList.toggle('off', !p.on);
+      el.querySelector('input').value = p.amt;
+    });
+    recalc();
+  });
+})();
+</script>
+<script src="tracker-edit.js"></script>
+</body>
+</html>

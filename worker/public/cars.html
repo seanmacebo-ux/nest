@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C4CF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="The Nest">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="robots" content="noindex, nofollow">
+<title>Cars · The Nest</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261114c">
+<style>
+  .filterbar { position: static; }
+  .brief { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .brief span { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--ink); border-radius: 6px; padding: 4px 8px; }
+  .btag { font-size: 9.5px; font-family: "JetBrains Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
+  .btag.s { background: var(--good-soft); color: var(--good); }
+  .btag.a { background: var(--car-soft); color: var(--car-ink); }
+  .btag.w { background: var(--red-soft); color: var(--red); }
+  .secline { font-size: 13px; color: var(--ink-soft); margin: 6px 0 0; max-width: 66ch; }
+  .changes { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 16px; font-size: 13px; }
+  .changes b.h { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 6px; }
+  .changes ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+  /* --- 14 Nov: same layout as Medical aid (sticky pill bar + hero) --- */
+  :root { --navh: 60px; }
+  [id] { scroll-margin-top: calc(var(--navh) + 64px); }
+  .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .jump { position: sticky; top: var(--navh); z-index: 15; margin: 22px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
+    background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+    display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .jump::-webkit-scrollbar { display: none; }
+  .jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; min-height: 36px; display: flex; align-items: center; }
+  .jump a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+  .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: 20px; padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
+  .hero .lbl { color: var(--good); }
+  .hero .big { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }
+  .hero .big small { font-family: "Figtree", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
+  .hero .bigsub { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
+  .trio { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 16px; }
+  @media (max-width: 640px) { .trio { grid-template-columns: 1fr; } }
+  .trio > a, .trio > div { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--ink); }
+  .trio .ic { font-size: 22px; flex: none; }
+  .trio b { display: block; font-size: 14.5px; }
+  .trio small { color: var(--ink-soft); font-size: 12.5px; }
+  .trio .v { margin-left: auto; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .warnbox { margin-top: 12px; background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; display: flex; gap: 10px; }
+ 
+ /* 17 Nov: real for-sale listings on every new-car card */
+ .buy { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+ .buy .lbl { display: block; margin-bottom: 2px; }
+ .buy a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); background: var(--surface-2); border-radius: 10px; padding: 8px 10px; min-height: 44px; }
+ .buy .bp { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); white-space: nowrap; }
+ .buy .bd { font-size: 12.5px; font-weight: 600; line-height: 1.3; min-width: 0; }
+ .buy .bd small { display: block; font-weight: 500; color: var(--ink-soft); font-size: 11px; }
+ .buy .bg { margin-left: auto; color: var(--car-ink); font-weight: 700; }
+ .lc-spec { font-size: 12px; color: var(--ink); margin: 8px 0 0; line-height: 1.5; }
+  .lc-spec b { font-weight: 600; color: var(--ink-soft); }
+  .also { margin-top: 12px; }
+  /* live listing cards: one layout for every car */
+  .lgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+  @media (max-width: 980px) { .lgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .lgrid { grid-template-columns: 1fr; } }
+  .lc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 15px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .lc.pick { border-color: color-mix(in srgb, var(--star) 60%, var(--line)); }
+  .lc.hide { display: none; }
+  .lc-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .lc-top .star { margin-left: auto; }
+  .st { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; background: var(--surface-2); color: var(--ink-soft); }
+  .st.ok { background: var(--good-soft); color: var(--good); }
+  .st.soon { background: var(--amber-soft); color: var(--amber); }
+  .lc-name { font-weight: 600; font-size: 15px; margin-top: 8px; line-height: 1.3; }
+  .lc-price { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 19px; color: var(--car-ink); margin-top: 4px; }
+  .lc-price small { font-family: "Figtree", sans-serif; font-size: 11.5px; font-weight: 500; color: var(--ink-soft); }
+  .lc-facts { font-size: 12.5px; color: var(--ink); margin-top: 3px; }
+  .lc-why { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.45; }
+  .lc-warn { font-size: 12px; color: var(--warn); margin: 6px 0 0; line-height: 1.45; }
+  .lc-act { margin-top: auto; padding-top: 11px; display: flex; gap: 7px; }
+  .lc-act a { flex: 1; text-align: center; text-decoration: none; font-size: 12.5px; font-weight: 600; padding: 8px 10px; border-radius: 9px; background: var(--car); color: #fff; }
+  .lc-act .savebtn { flex: 0 0 auto; }
+  .gone { margin-top: 14px; }
+  .gone > summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 10px 0; list-style: none; }
+  .gone > summary::-webkit-details-marker { display: none; }
+  .gone .lc { opacity: .72; box-shadow: none; }
+  /* model guide: one tappable row per model */
+  .mlist { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
+  @media (max-width: 780px) { .mlist { grid-template-columns: 1fr; } }
+  .mr { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .mr.pick { border-color: color-mix(in srgb, var(--star) 55%, var(--line)); }
+  .mr.hide { display: none; }
+  .mr > summary { list-style: none; cursor: pointer; padding: 11px 13px; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; }
+  .mr > summary::-webkit-details-marker { display: none; }
+  .mr-n { font-weight: 600; font-size: 14.5px; }
+  .mr-b { font-size: 11.5px; color: var(--ink-soft); }
+  .mr-p { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); text-align: right; white-space: nowrap; }
+  .mr-f { font-size: 10.5px; text-align: right; color: var(--ink-soft); white-space: nowrap; }
+  .mr-f.tt { color: var(--warn); font-weight: 600; }
+  .mr-f.ex { color: var(--good); font-weight: 600; }
+  .mr-body { padding: 0 13px 13px; border-top: 1px solid var(--line); }
+  .mr-body p { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
+  .lt { width: 100%; border-collapse: collapse; margin: 10px 0 0; font-size: 12.5px; }
+  .lt th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .lt td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
+  .lt tr:last-child td { border-bottom: none; }
+  .lt .y { font-family: "JetBrains Mono", monospace; font-weight: 600; }
+  .lt .p { font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
+  .lt .km { font-family: "JetBrains Mono", monospace; color: var(--ink-soft); white-space: nowrap; }
+  .lt .lo { color: var(--ink-soft); font-size: 11.5px; }
+  .lt tr.best td { background: var(--good-soft); }
+  .lt .tag { font-size: 8.5px; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
+  .mlinks { margin-top: 10px; font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
+  .mlinks a { color: var(--car-ink); font-weight: 600; text-decoration: none; }
+  /* reference accordions */
+  .acc { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  .acc > summary { cursor: pointer; list-style: none; padding: 14px 16px; font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 16.5px; color: var(--car-ink); display: flex; justify-content: space-between; gap: 10px; }
+  .acc > summary::-webkit-details-marker { display: none; }
+  .acc > summary::after { content: "+"; font-family: "JetBrains Mono", monospace; color: var(--ink-soft); }
+  .acc[open] > summary::after { content: "−"; }
+  .acc .in { padding: 0 16px 16px; font-size: 13.5px; }
+  .acc .in p { margin: 0 0 10px; }
+  .acc .in ul { margin: 6px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .acc .in a { color: var(--car-ink); font-weight: 600; }
+  .brandlist { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 720px) { .brandlist { grid-template-columns: 1fr; } }
+  .br { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--surface-2); }
+  .brn { font-weight: 600; font-size: 13.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .brd { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; line-height: 1.45; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brandmark" href="index.html">🪺 The Nest</a>
+  <a class="tab" href="index.html">Plan</a>
+  <a class="tab" href="tracker.html">Tracker</a>
+  <a class="tab" href="lounge.html">Lounge</a>
+  <a class="tab" href="bedroom.html">Bedroom</a>
+  <a class="tab" href="bathroom.html">Bathroom</a>
+  <a class="tab" href="water.html">Water</a>
+  <a class="tab" href="kitchen.html">Kitchen</a>
+  <a class="tab" href="office.html">Office</a>
+  <a class="tab" href="medical.html">Medical aid</a>
+  <a class="tab" href="cars.html" aria-current="page">Cars</a>
+  <a class="tab" href="apartments.html">Apartments</a>
+  <a class="tab" href="wifi.html">WiFi</a>
+  <a class="tab" href="recovery.html">Post-pregnancy</a>
+  <a class="tab" href="decided.html">Decided</a>
+  <a class="tab" href="findings.html">Findings</a>
+</div></nav>
+<script src="nav.js?v=20261117c"></script>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Cars · brand new · listings 17 Nov 2026</div>
+    <h1>A brand-new car, <em>paid off with a loan</em>.</h1>
+    <p class="sub">New only, up to <b>R400k</b> (raised 24 Nov, since nothing under R300k was good enough). Prices are from each maker's own SA price page, opened 14 Nov. Mark cars 🤔 Consider or ✕ Reject, then tap Send.</p>
+  </header>
+
+  <nav class="jump" id="jump" aria-label="Jump to">
+    <a href="#u200">💚 Under R200k</a><a href="#to300">🚗 R200k–R300k</a><a href="#to400">🚙 R300k–R400k</a><a href="#pay">💳 Paying for it</a><a href="#also">➕ Also in budget</a><a href="#live">🔄 Used</a><a href="#safe">🛡️ Buying safely</a><a href="#brands">🏷️ Brands</a>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="lbl">🚗 Budget · brand new</div>
+    <div class="big">R400k <small>max, raised 24 Nov</small></div>
+    <div class="bigsub">The big catch: <b>there's no new automatic under R200k.</b> Under R200k is manual only. The cheapest real automatic in budget is the Kia Picanto at R249,995.</div>
+    <div class="trio">
+      <a href="#u200"><span class="ic">💚</span><span><b>Toyota Vitz 1.0 manual</b><small>Under R200k · 6 airbags + stability control</small></span><span class="v">R182,400</span></a>
+      <a href="#to400"><span class="ic">⭐</span><span><b>Toyota Urban Cruiser 1.5 XR auto</b><small>List R373,800 · Toyota Edenvale has one at R345,995</small></span><span class="v">R345,995</span></a>
+      <a href="#pay"><span class="ic">💳</span><span><b>R346k car, 5 yrs, no deposit</b><small>Car finance ~R8,100 · personal loan R10,200–12,500</small></span><span class="v">a month</span></a>
+    </div>
+    <div class="warnbox"><span>⚠️</span><span><b>On the R346k Urban Cruiser, a personal loan costs R100k to R230k more than car finance over 5 years</b>, using the banks' own published rates (car finance 13–14.25%; personal loans 20–28.25% on average, per Nedbank). Clear the FNB loan first and put down a cash deposit. Details in <a href="#pay">Paying for it</a>.</span></div>
+  </section>
+
+  <div class="sec" id="u200"><h2>💚 Under R200k (manual only)</h2><p class="secline">Every new car under R200k has a manual gearbox. Prices are list prices; ask for the on-the-road price.</p></div>
+  <div class="lgrid" id="ngrid1"></div>
+
+  <div class="sec" id="to300"><h2>🚗 R200k–R300k</h2><p class="secline">Where the automatics are. "AMT" is a manual that changes gear by itself: cheap and simple, but jerky. "CVT" is smooth but less loved for long life. A normal "auto" is the toughest kind.</p></div>
+  <div class="lgrid" id="ngrid2"></div>
+
+  <div class="sec" id="to400"><h2>🚙 R300k–R400k (new max)</h2><p class="secline" id="to400line">Added 24 Nov when the budget went up to R400k. Prices from each maker's SA price page; listings opened on cars.co.za.</p></div>
+  <div class="lgrid" id="ngrid4"></div>
+
+  <div class="sec" id="also"><h2>➕ Also in budget</h2><p class="secline">From the makers' price pages, 14 Nov. Not ranked as closely as the cards above, but each has real stock linked.</p></div>
+  <div class="lgrid" id="ngrid3"></div>
+
+  <div class="sec" id="pay"><h2>💳 Paying for it: loan vs car finance</h2><p class="secline">Rebuilt 24 Nov from the banks' own pages, the SARB and the NCR (sources at the bottom). Prime is <b>10.75%</b>, repo 7.25% (SARB, unchanged on 19 Nov; next decision 28 Jan 2027). Every number includes the R1,207.50 start fee and R69 a month that every lender charges.</p></div>
+  <div class="note" style="margin-top:0">
+    <p style="font-size:12.5px"><b>The real rates.</b> <b>Car finance:</b> the banks' own calculators start at <b>13.00%</b> (WesBank), <b>13.75%</b> (Nedbank MFC, "prime + 3%") and <b>14.25%</b> (Standard Bank). Dealer deals go lower but come with strings: Toyota 12.25% (10% deposit, 48 months, big final payment) and Suzuki 11.18% (40% balloon, "may increase depending on risk profile"). Legal maximum 24.25%. <b>Personal loan:</b> banks advertise "from" 12.50% (Capitec), 13.75% (Absa) and 15.15% (FNB), but those are for the best records. Nedbank's own page says South Africans pay <b>20% to 28.25%</b> on average, and 28.25% is the legal maximum. Personal loans also force <b>credit life cover</b>: R2.58 to R4.50 per R1,000 owed, every month (Capitec, NCR cap). No bank publishes what a first-time borrower gets, so below we show both ends.</p>
+
+    <p style="margin-top:10px;font-size:12.5px"><b>🆕 The in-between option: Capitec Vehicle Loan.</b> A loan made for buying a car, but <b>unsecured</b>, so you own the car from day one with no bank on the papers (what you wanted on 14 Nov). Up to R500k over up to 84 months, interest "from prime" (10.75%) "based on your credit profile". Capitec doesn't publish the top of its range; because it's unsecured, the legal maximum is 28.25%. Worth getting a real quote next to a car-finance quote. <a href="https://www.capitecbank.co.za/personal/credit/vehicle-loan/" target="_blank" rel="noopener">Capitec's page ↗</a></p>
+
+    <p style="margin-top:14px;font-size:12.5px"><b>🧾 Second opinion (Codex, 24 Nov): every way to pay, all-in.</b> R346k, no deposit, no balloon, 5 years. Includes the R1,207.50 + R69 fees and an example R1,500 a month for comprehensive insurance on every option. Personal loans also include credit life (R2.58–R4.50 per R1,000 owed). Totals leave out dealer extras, fuel and services.</p>
+    <table class="lt"><thead><tr><th>Route</th><th>First month</th><th>Total, 5 yrs</th></tr></thead><tbody>
+      <tr class="best"><td class="y">Car finance (dealer or your own bank), 13–14.25%</td><td class="p">R9,469–R9,693</td><td class="p">R568k–R582k</td></tr>
+      <tr><td class="y">Capitec Vehicle Loan, from 10.75%</td><td class="p">R9,971–R13,994</td><td class="p">R574k–R804k</td></tr>
+      <tr><td class="y">Capitec personal loan, 12.75–28.25%</td><td class="p">R10,320–R13,994</td><td class="p">R596k–R804k</td></tr>
+      <tr><td class="y">FNB personal loan, 15.15–28.25%</td><td class="p">R10,752–R13,994</td><td class="p">R622k–R804k</td></tr>
+      <tr><td class="y">Personal loan, what most people get (20–28.25%)</td><td class="p">R11,664–R13,994</td><td class="p">R678k–R804k</td></tr>
+    </tbody></table>
+    <p style="margin-top:8px;font-size:12.5px"><b>Why people say a bank loan is easier, and they're right about this part:</b> approval can be paid out in minutes (FNB), you own the car from day one, you can buy privately, and the lender doesn't dictate your insurance. It's the better deal only if the real quote comes in close to car finance. Being a "cash buyer" doesn't guarantee a discount: dealers earn commission on finance.</p>
+    <p style="margin-top:8px;font-size:12.5px"><b>Costs that hide in a car deal:</b> dealer extras (extended warranty, tyre and rim, scratch and dent, service-plan top-ups). Every R10,000 of extras financed adds about R228 a month. Ask for a written price breakdown and say no to extras you don't want. A 1% rise in the rate adds about R179 a month.</p>
+    <p style="margin-top:8px;font-size:12.5px"><b>The real blocker is whose income counts.</b> The R52k is Sean's salary. A bank won't automatically let Mishka borrow against it, and Sean's visa is pending. Car costs plus the FNB loan come to about R14,500 a month before fuel. Waiting until FNB is paid off frees R5,000 a month.</p>
+    <p style="margin-top:8px;font-size:12.5px"><b>Ask every lender:</b> 1) Whose income qualifies, and what's the total I'll repay in writing, with every fee, insurance and extra? 2) Is the rate fixed or does it move with prime, and can we use our own insurance? 3) How are extra payments applied, and what does settling early cost?</p>
+
+    <p style="margin-top:12px;font-size:12.5px"><b>Toyota Urban Cruiser at the Edenvale dealer, R346k, 5 years.</b> "Extra" is everything paid on top of the car price.</p>
+    <table class="lt"><thead><tr><th>Deposit</th><th>Car finance 13.75%</th><th>Personal loan 20–28.25%</th></tr></thead><tbody>
+      <tr><td class="y">R0</td><td class="p">R8,103/mo<br><span class="lo">+R140k extra</span></td><td class="p">R10,164–R12,494/mo<br><span class="lo">+R242k–R368k extra</span></td></tr>
+      <tr><td class="y">R35k (10%)</td><td class="p">R7,302/mo<br><span class="lo">+R127k extra</span></td><td class="p">R9,158–R11,256/mo<br><span class="lo">+R218k–R332k extra</span></td></tr>
+      <tr class="best"><td class="y">R69k (20%)</td><td class="p">R6,502/mo<br><span class="lo">+R113k extra</span></td><td class="p">R8,152–R10,018/mo<br><span class="lo">+R195k–R296k extra</span></td></tr>
+    </tbody></table>
+    <p style="margin-top:8px;font-size:12.5px">Car finance across the banks' range (13.00–14.25%), no deposit: R7,969–R8,193 a month. The personal loan figures include credit life, which is highest in the first month and drops as you pay. Each R35k of <b>cash</b> deposit cuts about R800 a month on car finance and saves about R13k. Never borrow the deposit.</p>
+
+    <p style="margin-top:12px;font-size:12.5px"><b>At the R400k max, 5 years.</b></p>
+    <table class="lt"><thead><tr><th>Deposit</th><th>Car finance 13.75%</th><th>Personal loan 20–28.25%</th></tr></thead><tbody>
+      <tr><td class="y">R0</td><td class="p">R9,352/mo<br><span class="lo">+R161k extra</span></td><td class="p">R11,734–R14,427/mo<br><span class="lo">+R279k–R425k extra</span></td></tr>
+      <tr class="best"><td class="y">R80k (20%)</td><td class="p">R7,501/mo<br><span class="lo">+R130k extra</span></td><td class="p">R9,408–R11,564/mo<br><span class="lo">+R224k–R341k extra</span></td></tr>
+    </tbody></table>
+
+    <p style="margin-top:12px;font-size:12.5px"><b>Balloon (ruled out 30 Sep, shown so you can see why).</b> R346k, car finance 13.75%, no deposit. Nedbank MFC allows up to 35% on a new car over 72 months.</p>
+    <table class="lt"><thead><tr><th>Setup</th><th>Monthly</th><th>Extra</th></tr></thead><tbody>
+      <tr class="best"><td class="y">5 yrs, no balloon</td><td class="p">R8,103</td><td class="p">+R140k</td></tr>
+      <tr><td class="y">6 yrs, no balloon</td><td class="p">R7,177</td><td class="p">+R171k</td></tr>
+      <tr><td class="y">6 yrs, 35% balloon</td><td class="p">R6,086<br><span class="lo">+ R121,100 lump at the end</span></td><td class="p">+R213k</td></tr>
+    </tbody></table>
+    <p style="margin-top:8px;font-size:12.5px">The cheap-looking dealer deals (Suzuki's 40% balloon, Toyota's "guaranteed future value") work the same way: lower monthly, a big payment at the end.</p>
+
+    <p style="margin-top:12px;font-size:12.5px"><b>Paying it off fast (how you're doing the FNB loan).</b> R346k, no deposit, paying R12,000 every month:</p>
+    <table class="lt"><thead><tr><th>Option</th><th>Paid off in</th><th>Extra</th></tr></thead><tbody>
+      <tr class="best"><td class="y">Car finance 13.75%</td><td class="p">3.0 yrs</td><td class="p">+R81k</td></tr>
+      <tr><td class="y">Personal loan 20%</td><td class="p">3.7 yrs</td><td class="p">+R171k</td></tr>
+      <tr><td class="y">Personal loan 28.25%</td><td class="p">5.2 yrs</td><td class="p">+R389k</td></tr>
+    </tbody></table>
+    <p style="margin-top:8px;font-size:12.5px">Paying early is free on loans up to R250k. Above R250k (both of these), the law lets the lender charge up to <b>3 months' interest</b> as an early-settlement fee. FNB and Nedbank say they don't charge it on personal loans; ask for it in writing on any quote.</p>
+
+    <p style="margin-top:12px;font-size:12.5px"><b>The FNB loan you're already paying.</b> Mishka's FNB loan is R5,000 a month for 12 months from Oct 2026, so it ends around Oct 2027. The car is about Q2 2027. Banks count it when they decide how much to lend and at what rate. <b>Clearing it first</b> frees the R5k and leaves a fully paid loan on her record. That's the only thing we found that moves a first-time borrower towards the low end of these ranges: TransUnion and AutoTrader both say the rate is set by your credit score and history.</p>
+    <p style="margin-top:10px;font-size:12.5px"><b>Who can apply.</b> FNB personal loans: permanent SA residents only, employed or self-employed. Absa personal loans accept self-employed (tax assessment, 6 months of statements, accountant's letter). Standard Bank car finance needs an SA ID. Absa car finance accepts a work permit and passport. WesBank Graduate Finance needs no credit history if you're under 31 with a degree from the last 3 years. Car finance always requires comprehensive insurance (your own insurer is fine).</p>
+    <p style="margin-top:10px;font-size:12.5px"><b>Our lean:</b> clear FNB, save a cash deposit, then car finance with <b>no balloon</b>, 5 years or less, and pay extra every month. On the Urban Cruiser that's roughly <b>R100k to R230k less</b> than a personal loan over 5 years, and you still own it outright at the end.</p>
+    <p style="margin-top:10px;font-size:11.5px;color:var(--ink-soft)"><b>Sources, opened 24 Nov 2026:</b> <a href="https://www.resbank.co.za/en/home/what-we-do/statistics/key-statistics/current-market-rates" target="_blank" rel="noopener">SARB rates</a> · <a href="https://www.ncr.org.za/documents/pages/Acts/SKM_C284e15110908440.compressed.pdf" target="_blank" rel="noopener">NCR rate caps</a> · <a href="https://www.wesbank.co.za/home/calculate" target="_blank" rel="noopener">WesBank</a> · <a href="https://personal.nedbank.co.za/borrow/vehicle-finance.html" target="_blank" rel="noopener">Nedbank MFC</a> · <a href="https://www.standardbank.co.za/southafrica/personal/products-and-services/borrow-for-your-needs/vehicle-financing/calculators" target="_blank" rel="noopener">Standard Bank VAF</a> · <a href="https://www.absa.co.za/personal/loans/for-a-car/explore-solutions/" target="_blank" rel="noopener">Absa VAF</a> · <a href="https://www.toyota.co.za/offers/starlet" target="_blank" rel="noopener">Toyota offer</a> · <a href="https://content.suzukiauto.co.za/deals/black-november/swift" target="_blank" rel="noopener">Suzuki offer</a> · <a href="https://www.fnb.co.za/loans/personal-loan.html" target="_blank" rel="noopener">FNB loan</a> · <a href="https://www.capitecbank.co.za/personal/credit/personal-loan/" target="_blank" rel="noopener">Capitec loan</a> · <a href="https://www.absa.co.za/personal/loans/for-myself/personal-loan/" target="_blank" rel="noopener">Absa loan</a> · <a href="https://personal.nedbank.co.za/borrow/personal-loans.html" target="_blank" rel="noopener">Nedbank loan</a> · <a href="https://www.transunion.co.za/education/credit-score" target="_blank" rel="noopener">TransUnion</a></p>
+  </div>
+
+  <!-- ===== 1. FOR SALE NOW (rendered from the LIVE array below) ===== -->
+  <div class="sec" id="live" style="margin-top:34px"><h2>🔄 Used, for comparison</h2>
+    <p class="secline" id="livemeta"></p></div>
+  <div class="changes"><b class="h">What changed · 12 Nov</b>
+    <ul>
+      <li>🧹 Dropped the Uber-type cars (Amaze, Baleno, Starlet, Ballade) and the weaker picks (Renault, Chery, Ford EcoSport, Venue, Mazda2).</li>
+      <li>🆕 New finds straight from dealer-group sites (Motus Select, CMH), each opened today. Two from 11 Nov kept: the Honda Fit and the 2021 Kia Rio.</li>
+      <li>⚖️ Every model checked for gearbox type, parts, real fuel use and known problems. See How models rank.</li>
+    </ul></div>
+  <div class="lgrid" id="lgrid"></div>
+  <details class="gone" id="gonewrap"><summary id="gonesum"></summary><div class="lgrid" id="ggrid"></div></details>
+
+  <!-- ===== 2. HOW THE MODELS RANK (12 Nov research, cars.co.za buyer's guides, CAR, The Citizen) ===== -->
+  <div class="sec" id="models"><h2>🏆 How the models rank</h2>
+    <p class="secline">Scored on gearbox, parts, real fuel use and known problems, for automatics under R220k. Sources: Cars.co.za buyer's guides, CAR magazine and The Citizen, read 12 Nov.</p></div>
+  <div class="note" style="margin-top:0">
+    <p><b>1. Suzuki Vitara Brezza 1.5 auto (2021–22).</b> Normal automatic, cheap shared Suzuki parts (123 dealers), 6.8 L/100km measured, not an Uber car. Catch: 2 airbags, no stability control.</p>
+    <p><b>2. Suzuki Vitara 1.6 auto (2016–19), GL+ only.</b> The best engine and gearbox on the list, 6-speed normal auto. Hard to find in Gauteng right now. Skip the GLX: its glass roof eats headroom.</p>
+    <p><b>3. Toyota Corolla 1.8 CVT (2015–18).</b> Cheapest to keep running, most space, parts at 220 Toyota dealers, R135–220k. Test-drive for CVT judder. None at the big dealer groups under R220k today, so this one means looking at smaller dealers.</p>
+    <p><b>4. Kia Rio 1.4, 6-speed auto (2019+).</b> Simple and reliable. Avoid the older 4-speed.</p>
+    <p><b>5. Honda Jazz 1.5 CVT (2016–21).</b> Best for your height (steering adjusts for reach), 5.8 L/100km claimed. Check the CVT's history.</p>
+    <p style="margin-top:12px"><b>Skip:</b> Ford Fiesta auto (left SA in 2022, used 9.2 L/100km in a test, engine belt issue) · VW Polo DSG at this budget (high km on a fragile gearbox) · Hyundai Creta and Venue (steering doesn't adjust for reach, hard at 6'4) · Toyota Urban Cruiser (same car as the Brezza for ~R20k more) · Kia Rio and Hyundai i20 4-speed autos.</p>
+    <p class="secline" style="margin-top:12px"><b>The one test at 6'4:</b> no review tested a driver your height. Sit in it with the seat all the way back, then sit behind yourself. Knees clear front and back = pass.</p>
+  </div>
+
+  <!-- ===== 3. REFERENCE (tap to open) ===== -->
+  <div class="sec"><h2>📚 Before you buy</h2></div>
+
+
+  <details class="acc" id="safe"><summary>🛡️ Buying safely</summary><div class="in">
+    <p><span class="btag s">SAFE</span> <b>Franchise + dealer-group used stock:</b> fixed price, a dealer you can go back to, usually a service history, and sometimes leftover factory warranty. Test drive before you sign. <span class="btag w">HUNT</span> <b>Burchmore's, bank repos + auctions:</b> cheapest, but sold as-is with no warranty and no returns. Check the viewing date and inspect on site every time.</p>
+    <p>Before any money moves, on any car:</p>
+    <ul>
+      <li><b>Check for outstanding finance</b> (TransUnion/Lightstone, a few hundred rand). A financed car can be repossessed from you even after you've paid.</li>
+      <li><b>Independent inspection</b> by the AA or an RMI workshop (~R1,000–R1,500).</li>
+      <li><b>VIN on the car matches the papers</b>, and the NATIS reg doc is the original, not a copy.</li>
+      <li><b>Seller's ID matches the registered owner.</b></li>
+      <li><b>Ask for the on-the-road price.</b> Some dealers add licensing, admin and delivery fees on top of the advertised price.</li>
+      <li>Never pay a deposit before seeing the car and papers in person. Rushed deal = walk away.</li>
+    </ul>
+  </div></details>
+
+  <details class="acc" id="where"><summary>🏢 Where to look + dealers near you</summary><div class="in">
+    <p><b>Search dealer stock:</b> <a href="https://www.cars.co.za/usedcars/Gauteng/Automatic-cars/" target="_blank" rel="noopener noreferrer">Cars.co.za, Gauteng automatics ↗</a> · <a href="https://www.autotrader.co.za/cars-for-sale/gauteng/p-1?transmission=2" target="_blank" rel="noopener noreferrer">AutoTrader, Gauteng automatics ↗</a></p>
+    <p><b>Auctions + bank repos:</b> <a href="https://www.bidvestburchmores.co.za/" target="_blank" rel="noopener noreferrer">Bidvest Burchmore's ↗</a> · <a href="https://www.mfc.co.za/home/auction-calendar.html" target="_blank" rel="noopener noreferrer">MFC (Nedbank) ↗</a> · <a href="https://www.wesbank.co.za/auctions/catalogues" target="_blank" rel="noopener noreferrer">WesBank ↗</a> · <a href="https://www.parkvillageauctions.co.za/" target="_blank" rel="noopener noreferrer">Park Village ↗</a> · <a href="https://aucor.com/" target="_blank" rel="noopener noreferrer">Aucor ↗</a> · <a href="https://www.smd.co.za/" target="_blank" rel="noopener noreferrer">SMD ↗</a></p>
+    <p><b>Used, any brand, with dealer backup:</b></p>
+    <ul>
+      <li><a href="https://www.autopedigree.co.za/dealers/gauteng/meadowdale/107" target="_blank" rel="noopener noreferrer">Auto Pedigree Meadowdale ↗</a> 19 Herman St, Edenvale. The closest, but almost all its Gauteng automatics are over R220k right now.</li>
+      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-isando" target="_blank" rel="noopener noreferrer">Motus Select Isando ↗</a> 9 Brabazon Rd, Kempton Park.</li>
+      <li><a href="https://www.motusselect.co.za/buy-cars?dealership=motus-select-fourways" target="_blank" rel="noopener noreferrer">Motus Select Fourways ↗</a> 30 White Hills Cl, Lonehill.</li>
+    </ul>
+    <p style="margin-top:10px;font-size:12.5px;color:var(--ink-soft)">Van Riebeeck Ave, Edenvale has Omoda, Chery, Haval and Nissan on one road. Each model in the guide also lists 2 brand dealers.</p>
+  </div></details>
+
+  <details class="acc" id="brands"><summary>🏷️ The brands: reliability + resale</summary><div class="in">
+    <div class="brandlist">
+      <div class="br"><div class="brn">🇯🇵 Toyota <span class="btag s">Resale strong</span></div><div class="brd">The benchmark. Parts everywhere and cheap. Pay a premium up front, get it back at resale.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Suzuki <span class="btag s">Resale strong</span></div><div class="brd">Simple, cheap to run and fix, few gremlins. The budget can't-go-wrong pick.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Mazda <span class="btag s">Resale strong</span></div><div class="brd">A notch more premium for little reliability trade-off. Parts moderate.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Honda <span class="btag s">Resale good</span></div><div class="brd">Durable and comfy. Thinner dealer network, so servicing takes more planning.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Nissan <span class="btag a">Resale average</span></div><div class="brd">Solid now, but check the CVT gearbox service history on anything pre-2020.</div></div>
+      <div class="br"><div class="brn">🇯🇵 Mitsubishi <span class="btag a">Resale avg–strong</span></div><div class="brd">Underrated durability. Smaller network outside the metros.</div></div>
+      <div class="br"><div class="brn">🇰🇷 Kia <span class="btag a">Resale improving</span></div><div class="brd">No longer a budget risk. Long warranty that carries into the used years.</div></div>
+      <div class="br"><div class="brn">🇰🇷 Hyundai <span class="btag s">Resale good</span></div><div class="brd">The 7-yr/200,000km warranty is transferable, so you inherit real cover.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Volkswagen <span class="btag s">Resale good</span></div><div class="brd">Great to drive. Budget for DSG gearbox + electrical repairs once the plan runs out.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Ford <span class="btag a">Resale average</span></div><div class="brd">Engines fine. Avoid the pre-2018 PowerShift dual-clutch auto.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Renault <span class="btag w">Resale weak–avg</span></div><div class="brd">Cheap to buy, but faster depreciation and electrical risk out of warranty.</div></div>
+      <div class="br"><div class="brn">🇪🇺 Peugeot <span class="btag w">Resale weak</span></div><div class="brd">Nice cabins, smallest network here. The 1.2 PureTech has a timing-belt weakness.</div></div>
+      <div class="br"><div class="brn">🇨🇳 Haval / GWM <span class="btag s">Resale strong (for Chinese)</span></div><div class="brd">Safest Chinese bet: 10+ yrs in SA, long warranty, cheaper parts.</div></div>
+      <div class="br"><div class="brn">🇨🇳 Chery / Omoda <span class="btag a">Resale avg–strong</span></div><div class="brd">Best warranty on paper (up to 10yr/1m km engine). Network still maturing.</div></div>
+      <div class="br"><div class="brn">🇨🇳 MG <span class="btag w">Resale weak–avg</span></div><div class="brd">Newest and least proven here. The long warranty is the insurance you want.</div></div>
+    </div>
+  </div></details>
+
+  <div class="foot">CARS · brand-new prices from each maker's SA price page and loan research by Codex, 14 Nov 2026 · used listings 12 Nov 2026 · listings from Motus Select + CMH dealer-group sites, each opened in the stealth browser (two from 11 Nov via Cars.co.za dealer stock) · model ranking from Cars.co.za buyer's guides, CAR magazine and The Citizen · fit at 6'4 not tested by any review · The Nest</div>
+</div>
+
+<script src="nest.js?v=20261112c"></script>
+<script>
+// ===== Cars for sale now. ONE object per car; the page renders every card the same way. =====
+// lane: "safe" | "hunt" · status: "sale" | "reserved" | "auction" (auction needs when:"YYYY-MM-DD")
+// Auctions whose date has passed, and reserved cars, drop into the collapsed "reserved / passed" group on their own.
+const LIVE=[
+ {lane:"safe",pick:1,status:"sale",year:2022,name:"Suzuki Vitara Brezza 1.5 GL Auto",price:"R182,900",pnote:"was R224,900",km:"90k km",boot:"328L",where:"Motus Ford Germiston, Airport Park",why:"Our #1 model. A normal automatic gearbox (the toughest kind), Suzuki's most common engine so parts are cheap, and 6.8 L/100km in a 6,000km test. R42k off, and about 15 minutes from home.",warn:"Only 2 airbags and no stability control. 90k km, so ask for the service book. The back seat is tight.",url:"https://www.motusselect.co.za/specials-cars/suzuki/vitara-brezza/2022-suzuki-vitara-brezza-15-gl-at-ma3nyfj1s00984090",seen:"2026-11-12"},
+ {lane:"safe",pick:1,status:"sale",year:2021,name:"Honda Jazz 1.5 Elegance CVT",price:"R219,900",km:"56k km",boot:"359L",where:"CMH Honda The Glen, Glenvista",why:"Lowest km of the lot, from a Honda dealer. The steering adjusts for height and reach, the best sign for a 6'4 driver. 5.8 L/100km claimed and the biggest boot here.",warn:"CVT gearbox with a few reported problems: test-drive for jerks or whining and ask for the service history. Right at the budget limit.",url:"https://cmh.co.za/preowned/2021-honda-jazz-1-5-elegance-cvt-86whusdr000580/",seen:"2026-11-12"},
+ {lane:"safe",pick:1,status:"sale",year:2019,name:"Kia Rio 1.4 LX Auto",price:"R209,900",pnote:"was R261,995",km:"118k km",boot:"325L",where:"Hyundai Strijdom Park, Randburg",why:"Simple, reliable chain-driven engine and easy Kia parts. R52k off.",warn:"Ask whether it's the 6-speed automatic (Kias built from Dec 2018). The older 4-speed is the one to avoid. 118k km, and Randburg is about 30 minutes away. Fit at 6'4 isn't known: sit in it.",url:"https://www.motusselect.co.za/specials-cars/kia/rio/2019-kia-rio-14-lx-at-5dr-knadc514mk6240795",seen:"2026-11-12"},
+ {lane:"safe",status:"sale",year:2021,name:"Kia Rio 1.4 EX Auto",price:"R199,900",km:"50k km",boot:"325L",where:"Chery Lenasia",why:"Same reliable Rio, newer and with far fewer km, under R200k. A 2021 has the 6-speed automatic.",warn:"Checked 11 Nov, not today. Lenasia is about 40 minutes away, and the ad doesn't mention service history.",url:"https://www.cars.co.za/for-sale/used/2021-Kia-Rio-1.4-EX-5-dr-Auto-Gauteng-Lenasia/11334815/",seen:"2026-11-11"},
+ {lane:"safe",status:"sale",year:2022,name:"Honda Fit 1.5 Elegance CVT",price:"R219,900",km:"79k km",boot:"309L",where:"Cubbi Germiston, Gosforth Park",why:"The newer Jazz in top spec, close to home.",warn:"Checked 11 Nov, not today. Same CVT advice as the Jazz. Cubbi is a used-car dealer, not Honda.",url:"https://www.cars.co.za/for-sale/used/2022-Honda-Fit-1.5-Elegance-CVT-Gauteng-Germiston/11202630/",seen:"2026-11-11"},
+];
+const TODAY=new Date().toISOString().slice(0,10);
+const fmtDay=d=>new Date(d+"T12:00:00").toLocaleDateString("en-ZA",{weekday:"short",day:"numeric",month:"short"});
+function liveState(c){
+  if(c.status==="reserved") return {open:0,cls:"",txt:"Reserved"};
+  if(c.status==="auction"){
+    if(c.when<TODAY) return {open:0,cls:"",txt:"Auction passed "+fmtDay(c.when)};
+    return {open:1,cls:"soon",txt:(c.when===TODAY?"Auction today":"Auction "+fmtDay(c.when))};
+  }
+  return {open:1,cls:"ok",txt:"For sale"};
+}
+const pnum=s=>{const t=String(s).replace(/,/g,""),m=t.match(/\d+(?:\.\d+)?/);if(!m)return 9e9;let n=+m[0];if(/k/i.test(t)&&n<1000)n*=1000;return n;};
+function liveCard(c){
+  const s=liveState(c);
+  return `<div class="lc ${c.pick?'pick':''}" data-lane="${c.lane}" data-dk="car|${c.url}" data-dl="${c.year} ${c.name}, ${c.price}" data-st="${c.st||''}">
+    <div class="lc-top"><span class="btag ${c.lane==='safe'?'s':'w'}">${c.lane==='safe'?'SAFE':'HUNT'}</span><span class="st ${s.cls}">${s.txt}</span>${c.pick?'<span class="star">★ pick</span>':''}</div>
+    <div class="lc-name">${c.year} ${c.name}</div>
+    <div class="lc-price">${c.price}${c.pnote?` <small>${c.pnote}</small>`:''}</div>
+    <div class="lc-facts">${c.km}${c.boot?` · ${c.boot} boot`:''} · ${c.where}</div>
+    <p class="lc-why">${c.why}</p>
+    ${c.warn?`<p class="lc-warn">⚠️ ${c.warn}</p>`:''}
+    <div class="lc-act"><a href="${c.url}" target="_blank" rel="noopener noreferrer">Open listing ↗</a></div>
+    <div class="dec"></div>
+  </div>`;
+}
+(function(){
+  const open=LIVE.filter(c=>liveState(c).open).sort((a,b)=>(b.pick||0)-(a.pick||0)||pnum(a.price)-pnum(b.price));
+  const shut=LIVE.filter(c=>!liveState(c).open);
+  document.getElementById("lgrid").innerHTML=open.map(liveCard).join("");
+  document.getElementById("ggrid").innerHTML=shut.map(liveCard).join("");
+  document.getElementById("gonesum").textContent=`▸ ${shut.length} reserved or auction passed (tap to see)`;
+  document.getElementById("gonewrap").style.display=shut.length?"":"none";
+  const nSafe=open.filter(c=>c.lane==="safe").length;
+  const seen=LIVE.map(c=>c.seen).sort().pop();
+  document.getElementById("livemeta").textContent=`${open.length} you can still go for (${nSafe} safe, ${open.length-nSafe} hunt). Picks first, then cheapest. Last checked ${fmtDay(seen)}.`;
+  const lchips=[];
+  lchips.forEach(ch=>ch.addEventListener("click",()=>{const v=ch.dataset.lf;lchips.forEach(o=>o.setAttribute("aria-pressed",o===ch?"true":"false"));document.querySelectorAll(".lc").forEach(el=>el.classList.toggle("hide",v!=="all"&&el.dataset.lane!==v));}));
+})();
+
+// ===== Brand-new cars, 14 Nov 2026 (maker price pages via browser-kit). band: u200 | 200to300 =====
+const NEW=[{"band": "u200", "name": "Toyota Vitz 1.0 MT", "price": "R182,400", "box": "5-speed manual", "fuel": "4.4 l/100km (claim)", "warranty": "3yr/100,000km", "plan": "4 services/60,000km", "safety": "6 airbags (front, side, curtain) + ABS, EBD, BA, VSC stability control standard across the range", "why": "Celerio mechanicals with a Toyota badge, Toyota dealers, and full safety kit even on the base car.", "warn": "Shorter warranty than the Suzuki twin (3yr vs 5yr). Manual only under R200k (the XR AMT is R229,400).", "url": "https://www.toyota.co.za/vehicles/toyota-vitz", "pick": 1, "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Vitz-1.0-Gauteng/11109225/", "p": "R179,995", "d": "Fosters Toyota", "a": "Robertville, Roodepoort (West Rand)", "k": "0 Km", "c": "new", "t": "Toyota Vitz 1.0"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Vitz-1.0-Gauteng/11311864/", "p": "R177,900", "d": "Nic Bottari", "a": "Nigel (East Rand)", "k": "15 Km", "c": "new", "t": "Toyota Vitz 1.0"}]}, {"band": "u200", "name": "Renault Kwid 1.0 Evolution 5-Dr", "price": "R178,799", "box": "5-speed manual", "fuel": "from 4.4 l/100km (claim)", "warranty": "5yr/150,000km (Renault SA terms quoted in the Kiger release; Kwid page did not state them)", "plan": "2yr/30,000km (same caveat)", "safety": "Dual front airbags + ABS/EBD per page. ESC not listed", "why": "Cheapest new car on the list.", "warn": "Weakest safety here: only 2 airbags and no ESC listed. Smaller dealer network than Suzuki or Toyota. The AMT is R209,999.", "url": "https://www.renault.co.za/vehicle/kwid", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Renault-Kwid-1.0-Evolution-Gauteng-Kempton-Park/11254907/", "p": "R159,999", "d": "Renault Kempton Park", "a": "Rhodesfield, Kempton Park (East Rand)", "k": "0 Km", "c": "new", "t": "Renault Kwid 1.0 Evolution"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Renault-Kwid-1.0-Evolution-Gauteng-Roodepoort/11342168/", "p": "R164,999", "d": "Renault Clearwater", "a": "Little Falls, Roodepoort", "k": "0 Km", "c": "new", "t": "Renault Kwid 1.0 Evolution"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Renault-Kwid-1.0-Evolution-Gauteng-Sandton/11308518/", "p": "R178,799", "d": "Bidvest McCarthy Renault Woodmead", "a": "Woodmead, Sandton", "k": "1 Km", "c": "new", "t": "Renault Kwid 1.0 Evolution"}]}, {"band": "u200", "name": "Suzuki Celerio 1.0 GA MT", "price": "R188,900", "box": "5-speed manual", "fuel": "4.2 l/100km (claim)", "warranty": "5yr/200,000km", "plan": "4yr/60,000km service plan", "safety": "ABS+EBD listed. Airbag count and ESC not shown on page. No NCAP rating checked today", "why": "Cheapest Suzuki. Huge dealer network, cheap parts, very low fuel use.", "warn": "Manual only at this price. The GA is basic (no steering controls), and it's small for a 6'4\" driver.", "url": "https://www.suzukiauto.co.za/cars/celerio", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Celerio-1.0-GA-Gauteng-Rivonia/11294225/", "p": "R181,900", "d": "Suzuki Rivonia", "a": "Rivonia, Sandton", "k": "0 Km", "c": "new", "t": "Suzuki Celerio 1.0 GA"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Celerio-1.0-GA-Gauteng/10437351/", "p": "R181,900", "d": "Suzuki Kyalami", "a": "Kyalami, Midrand", "k": "0 Km", "c": "new", "t": "Suzuki Celerio 1.0 GA"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Celerio-1.0-GA-Gauteng-Springs/11331431/", "p": "R189,700", "d": "Muji Suzuki Springs", "a": "Springs (East Rand)", "k": "32 Km", "c": "new", "t": "Suzuki Celerio 1.0 GA"}]}, {"band": "200to300", "name": "Suzuki Baleno 1.5 GL AT", "price": "R294,900", "box": "4-speed torque-converter automatic (conventional auto, not CVT/DSG)", "fuel": "5.7 l/100km (claim)", "warranty": "5yr/200,000km", "plan": "4yr/60,000km service plan", "safety": "ABS+EBD, cruise, reverse camera listed. Airbag count and NCAP not shown on page", "why": "Best all-round fit for a new driver: a proven old-school auto, a 1.5 engine, Suzuki warranty, and the R303,900 Starlet Xs AT twin for less money.", "warn": "The 4-speed auto is dated and drinks a little more. The GL trim is basic (steel wheels).", "url": "https://www.suzukiauto.co.za/cars/baleno", "pick": 1, "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Baleno-1.5-GL-Auto-Gauteng-Johannesburg/11346572/", "p": "R269,900", "d": "Suzuki Bedfordview", "a": "Kensington / Bedfordview, Joburg East", "k": "10 Km", "c": "new", "t": "Suzuki Baleno 1.5 GL Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Baleno-1.5-GL-Auto-Gauteng-Alberton/11304311/", "p": "R263,700", "d": "Suzuki Alberton", "a": "Alberton (East Rand)", "k": "15 Km", "c": "new", "t": "Suzuki Baleno 1.5 GL Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Baleno-1.5-GL-Auto-Gauteng-Rivonia/11221164/", "p": "R267,900", "d": "Suzuki Rivonia", "a": "Rivonia, Sandton", "k": "0 Km", "c": "new", "t": "Suzuki Baleno 1.5 GL Auto"}]}, {"band": "200to300", "name": "Suzuki Celerio 1.0 GL AMT", "price": "R225,900", "box": "5-speed AMT (automated manual; jerky shifts, but simple and cheap)", "fuel": "4.2 l/100km (claim)", "warranty": "5yr/200,000km", "plan": "4yr/60,000km service plan", "safety": "ABS+EBD listed. Airbags/ESC not shown on page", "why": "The cheapest two-pedal car from a big-network brand.", "warn": "An AMT is not a true auto: it hesitates and rolls on hills. Also small for 196cm. Vitz XR AMT twin is R229,400 with 6 airbags + VSC.", "url": "https://www.suzukiauto.co.za/cars/celerio", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Celerio-1.0-GL-AMT-Gauteng-Johannesburg/11346571/", "p": "R219,900", "d": "Suzuki Bedfordview", "a": "Kensington / Bedfordview, Joburg East", "k": "10 Km", "c": "new", "t": "Suzuki Celerio 1.0 GL AMT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Celerio-1.0-GL-AMT-Gauteng-Alberton/10930557/", "p": "R214,900", "d": "Suzuki Alberton", "a": "Alberton (East Rand)", "k": "15 Km", "c": "new", "t": "Suzuki Celerio 1.0 GL AMT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Celerio-1.0-GL-AMT-Gauteng/10437352/", "p": "R217,900", "d": "Suzuki Kyalami", "a": "Kyalami, Midrand", "k": "0 Km", "c": "new", "t": "Suzuki Celerio 1.0 GL AMT"}]}, {"band": "200to300", "name": "Nissan Magnite 1.0 Visia EZ-Shift", "price": "R269,200", "box": "5-speed AMT", "fuel": "Not shown on page", "warranty": "Page says 'extended warranty' with no terms shown", "plan": "Not shown on page", "safety": "6 airbags, VDC stability control, hill start assist", "why": "A compact-SUV body with 6 airbags and stability control for well under R300k.", "warn": "It's an AMT, and the 1.0 non-turbo is weak. Nissan SA's future is uncertain. Warranty terms not confirmed.", "url": "https://www.nissan.co.za/vehicles/new/magnite.html", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Nissan-Magnite-1.0-Visia-AMT-Gauteng-Germiston/11038857/", "p": "R239,900", "d": "McCarthy Nissan Renault Germiston", "a": "Germiston (East Rand)", "k": "0 Km", "c": "new", "t": "Nissan Magnite 1.0 Visia AMT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Nissan-Magnite-1.0-Visia-AMT-Gauteng-Kempton-Park/11320447/", "p": "R239,999", "d": "Nissan Kempton Park", "a": "Rhodesfield, Kempton Park (East Rand)", "k": "0 Km", "c": "new", "t": "Nissan Magnite 1.0 Visia AMT"}]}, {"band": "200to300", "name": "Toyota Starlet 1.5 Xi 5MT", "price": "R273,700", "box": "5-speed manual (Xs 4AT auto is R303,900, just over max)", "fuel": "5.4 l/100km manual (claim)", "warranty": "Starlet page said 'currently unavailable'. Toyota std seen on Vitz/Urban Cruiser: 3yr/100,000km", "plan": "Same caveat: 4 services/60,000km on sibling pages", "safety": "Six airbags (curtain on selected models), ABS, VSC stability, hill assist", "why": "Toyota badge, dealers and resale on the Baleno body.", "warn": "Costs more than the identical Suzuki. The auto breaks the R300k cap.", "url": "https://www.toyota.co.za/vehicles/toyota-starlet", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Starlet-1.5-XI-Gauteng-Randburg/11041010/", "p": "R262,900", "d": "Motus Toyota Strijdom Park", "a": "Strijdom Park, Randburg", "k": "1 Km", "c": "new", "t": "Toyota Starlet 1.5 XI"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Starlet-1.5-XI-Gauteng-Randburg/10261993/", "p": "R273,700", "d": "Motus Toyota Strijdom Park", "a": "Strijdom Park, Randburg", "k": "1 Km", "c": "new", "t": "Toyota Starlet 1.5 XI"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Starlet-1.5-XI-Gauteng-Alberton/10963799/", "p": "R259,999", "d": "CMH Toyota Alberton", "a": "Newmarket Park, Alberton (East Rand)", "k": "150 Km", "c": "new", "t": "Toyota Starlet 1.5 XI"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Starlet-1.5-XS-Auto-Gauteng-Alberton/10963794/", "p": "R276,500", "d": "CMH Toyota Alberton", "a": "Newmarket Park, Alberton (East Rand)", "k": "150 Km", "c": "new", "t": "Toyota Starlet 1.5 XS Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Starlet-1.5-XS-Auto-Gauteng/11109219/", "p": "R284,995", "d": "Fosters Toyota", "a": "Robertville, Roodepoort (West Rand)", "k": "0 Km", "c": "new", "t": "Toyota Starlet 1.5 XS Auto"}]}, {"band": "200to300", "name": "Suzuki Dzire 1.2 GL+ CVT", "price": "R275,900", "box": "CVT (flag: CVT, though no known bad SA reputation for Suzuki's)", "fuel": "4.5 l/100km (claim)", "warranty": "5yr/200,000km", "plan": "4yr/60,000km service plan", "safety": "Six airbags, ABS+EBD, HEARTECT body (page). NCAP not checked today", "why": "A small sedan with a big boot (the closest thing to a Corolla in budget). Very frugal, with cruise and a camera.", "warn": "CVT plus a 1.2 engine feels slow on the highway. Sedan rear headroom is lower.", "url": "https://www.suzukiauto.co.za/cars/dzire", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Dzire-1.2-GL-Auto-Gauteng-Rivonia/10446552/", "p": "R249,900", "d": "Suzuki Rivonia", "a": "Rivonia, Sandton", "k": "0 Km", "c": "new", "t": "Suzuki Dzire 1.2 GL+ Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Dzire-1.2-GL-Auto-Gauteng/11109686/", "p": "R249,900", "d": "Suzuki Kyalami", "a": "Kyalami, Midrand", "k": "0 Km", "c": "new", "t": "Suzuki Dzire 1.2 GL+ Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Dzire-1.2-GL-Auto-Gauteng-Alberton/11035903/", "p": "R257,700", "d": "Suzuki Alberton", "a": "Alberton (East Rand)", "k": "15 Km", "c": "new", "t": "Suzuki Dzire 1.2 GL+ Auto"}]}, {"band": "200to300", "name": "Mahindra XUV 3XO MX2 AT", "price": "R279,999", "box": "6-speed automatic (torque converter)", "fuel": "Not shown on page", "warranty": "5yr/150,000km + roadside for warranty term", "plan": "3yr/55,000km service plan (MX models)", "safety": "6 airbags, ABS, EBD and ESC across the range", "why": "The only real compact SUV (Brezza-type) with a proper 6-speed auto and 6 airbags under R300k.", "warn": "Mahindra has a smaller dealer network and less proven parts pricing than Suzuki/Toyota. The base MX2 is sparse, and the fuel figure was not shown.", "url": "https://www.mahindra.co.za/models/xuv-3xo", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Mahindra-XUV-3XO-1.2T-MX2-Auto-Gauteng-Johannesburg/11309788/", "p": "R255,000", "d": "McCarthy Mahindra The Glen", "a": "The Glen, Joburg South", "k": "5 Km", "c": "new", "t": "Mahindra XUV 3XO 1.2T MX2 Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Mahindra-XUV-3XO-1.2T-MX2-Auto-Gauteng-Roodepoort/11253175/", "p": "R259,999", "d": "CMH Haval Little Falls", "a": "Little Falls, Roodepoort", "k": "0 Km", "c": "new", "t": "Mahindra XUV 3XO 1.2T MX2 Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Mahindra-XUV-3XO-1.2T-MX2-Auto-Gauteng-Pretoria/11281223/", "p": "R249,000", "d": "Mahindra Pretoria North", "a": "Pretoria North", "k": "10 Km", "c": "new", "t": "Mahindra XUV 3XO 1.2T MX2 Auto"}]}, {"band": "200to300", "name": "Honda Amaze 1.2 Comfort CVT", "price": "R297,100", "box": "CVT", "fuel": "Not shown on page", "warranty": "Not shown on page", "plan": "Not shown on page", "safety": "Comfort trim: 6 airbags, VSC stability, hill start, rear camera + sensors (Trend has only 2 airbags)", "why": "The closest to the Honda/Jazz feel they liked, with full safety on the Comfort trim, and it's a sedan.", "warn": "Right at the R300k max. CVT. Honda's SA dealer network is much thinner than Suzuki/Toyota. Warranty not confirmed.", "url": "https://www.honda.co.za/cars/amaze", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Honda-Amaze-1.2-Comfort-Auto-Gauteng/11322077/", "p": "R259,000", "d": "CMH Honda The Glen", "a": "Bassonia / The Glen, Joburg South", "k": "150 Km", "c": "demo", "t": "Honda Amaze 1.2 Comfort Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Honda-Amaze-1.2-Comfort-Auto-Gauteng-Crown-Mines/10932080/", "p": "R273,900", "d": "Chery Johannesburg", "a": "Amalgam / Crown Mines, Joburg", "k": "20 Km", "c": "new", "t": "Honda Amaze 1.2 Comfort Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Honda-Amaze-1.2-Comfort-Auto-Gauteng-Sandton/10767885/", "p": "R274,900", "d": "MG Sandton", "a": "Sandton", "k": "150 Km", "c": "new", "t": "Honda Amaze 1.2 Comfort Auto"}]}, {"band": "also", "name": "Toyota Vitz 1.0 XR AMT", "price": "R229,400", "box": "AMT", "why": "The Vitz with a two-pedal (AMT) gearbox, 6 airbags + stability control.", "url": "https://www.toyota.co.za/vehicles/toyota-vitz", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Vitz-1.0-XR-AMT-Gauteng/11311866/", "p": "R222,900", "d": "Nic Bottari", "a": "Nigel (East Rand)", "k": "15 Km", "c": "new", "t": "Toyota Vitz 1.0 XR AMT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Vitz-1.0-XR-AT-Gauteng-Sandton/11282006/", "p": "R224,990", "d": "Motus Toyota Bryanston", "a": "Bryanston, Sandton", "k": "10 Km", "c": "new", "t": "Toyota Vitz 1.0 XR AT"}]}, {"band": "also", "name": "Kia Picanto 1.0 LS auto", "price": "R249,995", "box": "Automatic", "why": "Real automatic. Small. Dealers are asking R7k over Kia's own price: ask for R249,995.", "url": "https://www.kia.co.za/new-cars/picanto", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Kia-Picanto-1.0-LS-Auto-Gauteng-Johannesburg/11308146/", "p": "R256,995", "d": "Motus Bedfordview", "a": "Bedfordview (East Rand)", "k": "0 Km", "c": "new", "t": "Kia Picanto 1.0 LS Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Kia-Picanto-1.0-LS-Auto-Gauteng-Johannesburg/11321123/", "p": "R254,995", "d": "Motus Kia Germiston –", "a": "Airport Park, Germiston (East Rand)", "k": "37 Km", "c": "new", "t": "Kia Picanto 1.0 LS Auto"}]}, {"band": "also", "name": "Renault Kiger 1.0 Techno AMT", "price": "R254,999", "box": "AMT", "why": "Global NCAP 4 stars for adults (13 Nov). No East Rand stock.", "url": "https://www.renault.co.za/vehicle/kiger", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Renault-Kiger-1.0-Techno-AMT-Gauteng-Sandton/11221509/", "p": "R249,999", "d": "Bidvest McCarthy Renault Woodmead", "a": "Woodmead, Sandton", "k": "1 Km", "c": "new", "t": "Renault Kiger 1.0 Techno AMT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Renault-Kiger-1.0-Techno-AMT-Gauteng-Sandton/10883258/", "p": "R254,999", "d": "Bidvest McCarthy Renault Woodmead", "a": "Woodmead, Sandton", "k": "35 Km", "c": "new", "t": "Renault Kiger 1.0 Techno AMT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Renault-Kiger-1.0-Techno-AMT-Gauteng-Midrand/11294377/", "p": "R249,999", "d": "CMH Nissan Midrand", "a": "Midrand", "k": "150 Km", "c": "new", "t": "Renault Kiger 1.0 Techno AMT"}]}, {"band": "also", "name": "Suzuki Swift 1.2 GL+ CVT", "price": "R270,900", "box": "CVT", "why": "CVT. Lots of stock, Alberton is R22k under list.", "url": "https://www.suzukiauto.co.za/cars/swift", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Swift-1.2-GL-Auto-Gauteng-Johannesburg/11345707/", "p": "R259,900", "d": "Suzuki Bedfordview", "a": "Kensington / Bedfordview, Joburg East", "k": "10 Km", "c": "new", "t": "Suzuki Swift 1.2 GL+ Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Swift-1.2-GL-Auto-Gauteng-Boksburg/11343777/", "p": "R270,900", "d": "Suzuki Boksburg", "a": "Boksburg (East Rand)", "k": "0 Km", "c": "new", "t": "Suzuki Swift 1.2 GL+ Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Swift-1.2-GL-Auto-Gauteng-Alberton/11304312/", "p": "R248,700", "d": "Suzuki Alberton", "a": "Alberton (East Rand)", "k": "15 Km", "c": "new", "t": "Suzuki Swift 1.2 GL+ Auto"}]}, {"band": "also", "name": "Hyundai Grand i10 1.2 Premium auto", "price": "R272,400", "box": "Automatic", "why": "Real automatic, 7yr/200,000km warranty. Listed as \"Motion Auto\" (old trim name), so confirm the trim. Hyundai shows R15k cashback: ask.", "url": "https://www.hyundai.co.za/new-vehicles/showroom/grand-i10", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Hyundai-Grand-i10-1.2-Motion-Auto-Gauteng-Springs/11331181/", "p": "R272,400", "d": "Springs Hyundai", "a": "Springs (East Rand)", "k": "40 Km", "c": "new", "t": "Hyundai Grand i10 1.2 Motion Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Hyundai-Grand-i10-1.2-Motion-Auto-Gauteng-Springs/11331189/", "p": "R272,400", "d": "Springs Hyundai", "a": "Springs (East Rand)", "k": "44 Km", "c": "new", "t": "Hyundai Grand i10 1.2 Motion Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Hyundai-Grand-i10-1.2-Motion-Auto-Gauteng-Heidelberg/11183300/", "p": "R269,900", "d": "AutoCity Multi Franchise", "a": "Heidelberg (Gauteng, ~45 km south-east)", "k": "50 Km", "c": "new", "t": "Hyundai Grand i10 1.2 Motion Auto"}]}, {"band": "also", "name": "VW Polo Vivo Life", "price": "R294,500", "box": "Manual", "why": "Global NCAP 4 stars. The 1.6 Life auto lists at R326,800 but one is R299,000 in Braamfontein. The R259,900 Northcliff ad could be bait: get a written quote.", "url": "https://www.vw.co.za/en/models/polo-vivo.html", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Volkswagen-Polo-Vivo-1.4-Life-Gauteng-Randburg/11335931/", "p": "R259,900", "d": "VW Northcliff", "a": "Cresta / Northcliff, Randburg", "k": "5 Km", "c": "new", "t": "Volkswagen Polo Vivo 1.4 Life"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Volkswagen-Polo-Vivo-1.4-Life-Gauteng-Four-Ways/11330471/", "p": "R289,900", "d": "Motus VW Fourways", "a": "Fourways", "k": "15 Km", "c": "new", "t": "Volkswagen Polo Vivo 1.4 Life"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Volkswagen-Polo-Vivo-1.6-Life-Gauteng-Johannesburg/11326372/", "p": "R299,000", "d": "VW Braamfontein", "a": "Braamfontein, Joburg CBD", "k": "14 Km", "c": "new", "t": "Volkswagen Polo Vivo 1.6 Life"}]}, {"band": "also", "name": "Hyundai Exter 1.2 Premium AMT", "price": "R294,900", "box": "AMT", "why": "Small SUV, AMT. The R259,400 price is just Hyundai's cashback, and excludes admin, delivery and licensing.", "url": "https://www.hyundai.co.za/new-vehicles/showroom/exter", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Hyundai-Exter-1.2-Premium-Auto-Gauteng-Heidelberg/11183956/", "p": "R259,400", "d": "AutoCity Multi Franchise", "a": "Heidelberg (Gauteng, ~45 km south-east)", "k": "50 Km", "c": "new", "t": "Hyundai Exter 1.2 Premium Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Hyundai-Exter-1.2-Premium-Auto-Gauteng-Heidelberg/11183294/", "p": "R259,400", "d": "AutoCity Multi Franchise", "a": "Heidelberg (Gauteng, ~45 km south-east)", "k": "50 Km", "c": "new", "t": "Hyundai Exter 1.2 Premium Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Hyundai-Exter-1.2-Executive-Gauteng-Lenasia/11066682/", "p": "R269,900", "d": "Hyundai Lenasia", "a": "Lenasia, Joburg South", "k": "42 Km", "c": "new", "t": "Hyundai Exter 1.2 Executive"}]}, {"band": "300to400", "name": "Omoda C5 1.5T Street+ CVT", "price": "R339,900", "box": "CVT", "fuel": "6.9 l/100km", "warranty": "5 yr / 150,000 km (plus 10 yr / 1,000,000 km engine for first owner)", "plan": "2 yr / 25,000 km service plan (per cars.co.za spec, not on maker page)", "safety": "4 airbags, stability control, ISOFIX outer rear. NCAP not verified", "boot": "442 l", "why": "Most car for the money here: turbo engine, big screens and a properly grown-up look for under R340k. Roomier than the Suzuki and Toyota small SUVs.", "warn": "Omoda's own site is running a rear axle inspection campaign on 2022 to 2023 C5s, and early cars had CVT and software gripes. Resale on new Chinese brands is still soft, and only 4 airbags.", "url": "https://www.omoda.co.za/models/omoda-c5", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Omoda-C5-1.5T-Street-Plus-Gauteng-Bedfordview/11113488/", "p": "R339,900", "d": "Omoda Bedfordview", "a": "Bedfordview", "k": "0 Km", "c": "new", "t": "2026 Omoda C5 1.5T Street Plus"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Omoda-C5-1.5T-Street-Plus-Gauteng-Sandton/11356512/", "p": "R339,900", "d": "DigiCars Group", "a": "Sandton", "k": "10 Km", "c": "new", "t": "2026 Omoda C5 1.5T Street Plus"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Mahindra XUV 3XO 1.2T AX5 AT", "price": "R349,099", "box": "6-speed automatic (torque converter)", "fuel": "5.6 l/100km", "warranty": "5 yr / 150,000 km", "plan": "5 yr / 100,000 km service plan", "safety": "6 airbags, stability control, ISOFIX outer rear. NCAP not verified", "boot": "364 l", "why": "A proper torque-converter auto with a punchy turbo, 6 airbags and the longest service plan in this list. Dealers are discounting hard, so real prices sit near R310k.", "warn": "Mahindra's dealer network and resale are weaker than Toyota or Suzuki. It is a short car (under 4 m), so check rear legroom behind a 6'4\" driver with a rear-facing baby seat.", "url": "https://www.mahindra.co.za/models/xuv-3xo", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Mahindra-XUV-3XO-1.2T-AX5-Auto-Gauteng-Johannesburg/11336971/", "p": "R305,100", "d": "McCarthy Mahindra The Glen", "a": "Johannesburg", "k": "5 Km", "c": "new", "t": "2026 Mahindra XUV 3XO 1.2T AX5 Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Mahindra-XUV-3XO-1.2T-AX5-Auto-Gauteng-Kempton-Park/11315898/", "p": "R309,900", "d": "Mahindra Kempton Park New Cars", "a": "Kempton Park", "k": "0 Km", "c": "new", "t": "2026 Mahindra XUV 3XO 1.2T AX5 Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Mahindra-XUV-3XO-1.2T-AX5-Auto-Gauteng-Pretoria/11295942/", "p": "R315,000", "d": "Bidvest McCarthy Mahindra Silverlakes New", "a": "Pretoria", "k": "0 Km", "c": "new", "t": "2026 Mahindra XUV 3XO 1.2T AX5 Auto"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Kia Sonet 1.5 LX CVT", "price": "R349,995", "box": "CVT", "fuel": "6.2 l/100km", "warranty": "5 yr / unlimited km", "plan": "3 yr / 45,000 km service plan", "safety": "6 airbags, stability control, hill assist, ISOFIX outer rear. NCAP not verified", "boot": "385 l", "why": "Tidy, well-built small SUV with an unlimited-km warranty and a decent boot for its size. Kia's CVT is one of the better-regarded ones.", "warn": "That price is Kia's current promo (R25,000 off the R374,995 list price), so it may change by mid 2027. It is a small car, so a pram plus shopping will be tight.", "url": "https://www.kia.co.za/vehicles/sonet", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Kia-Sonet-1.5-LX-CVT-Auto-Gauteng-Johannesburg/11321122/", "p": "R355,995", "d": "Motus Kia Germiston – New", "a": "Johannesburg", "k": "41 Km", "c": "new", "t": "2026 Kia Sonet 1.5 LX CVT Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Kia-Sonet-1.5-LX-Gauteng-Springs/10775066/", "p": "R321,995", "d": "Springs Hyundai", "a": "Springs", "k": "30 Km", "c": "new", "t": "2026 Kia Sonet 1.5 LX"}], "seen": "24 Nov"}, {"band": "300to400", "name": "GWM Ora 5 1.5T Super Luxury DCT", "price": "R364,900", "box": "7-speed dual-clutch (DCT)", "fuel": "6.9 l/100km", "warranty": "7 yr / 200,000 km", "plan": "7 yr / 75,000 km service plan", "safety": "6 airbags, stability control, ISOFIX outer rear. NCAP not verified", "boot": "not verified", "why": "A full-size compact SUV (about 4.47 m long, 2.72 m wheelbase) with 6 airbags and a 7-year warranty for the price of a small Suzuki. Lots of cabin for a tall driver.", "warn": "Brand-new model in SA with no track record yet, and GWM resale drops faster than Toyota. Dual-clutch boxes can be jerky in stop-start traffic, so test it in traffic.", "url": "https://www.gwm.co.za/models/ora-5", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-GWM-Ora-5-1.5T-Super-Luxury-DCT-Auto-Gauteng-Boksburg/11347694/", "p": "R364,900", "d": "GWM Eastrand", "a": "Boksburg", "k": "15 Km", "c": "new", "t": "2026 GWM Ora 5 1.5T Super Luxury DCT Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-GWM-Ora-5-1.5T-Super-Luxury-DCT-Auto-Gauteng-Benoni/11185763/", "p": "R364,896", "d": "GWM Benoni", "a": "Benoni", "k": "15 Km", "c": "new", "t": "2026 GWM Ora 5 1.5T Super Luxury DCT Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-GWM-Ora-5-1.5T-Super-Luxury-DCT-Auto-Gauteng-Randburg/11350039/", "p": "R364,900", "d": "GWM Northcliff", "a": "Randburg", "k": "22 Km", "c": "new", "t": "2026 GWM Ora 5 1.5T Super Luxury DCT Auto"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Suzuki Fronx 1.5 GLX AT", "price": "R372,900", "box": "4-speed automatic (torque converter)", "fuel": "5.7 l/100km", "warranty": "5 yr / 200,000 km", "plan": "4 yr / 60,000 km service plan", "safety": "6 airbags, ESP, hill hold, ISOFIX outer rear. NCAP not verified", "boot": "304 l", "why": "Cheap to run, simple proven gearbox, long warranty, and the GLX has a 9-inch screen and 360 camera.", "warn": "It is basically a raised Baleno (same as the Toyota Starlet Cross), so it may feel too Uber-ish. The sloping roof and 304 l boot are the worst here for a 6'4\" driver and a pram.", "url": "https://www.suzukiauto.co.za/cars/fronx", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Fronx-1.5-GLX-Auto-Gauteng-Boksburg/11343772/", "p": "R372,900", "d": "Suzuki Boksburg", "a": "Boksburg", "k": "0 Km", "c": "new", "t": "2026 Suzuki Fronx 1.5 GLX Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Fronx-1.5-GLX-Auto-Gauteng-Roodepoort/11353569/", "p": "R355,700", "d": "Suzuki West Rand", "a": "Roodepoort", "k": "50 Km", "c": "new", "t": "2026 Suzuki Fronx 1.5 GLX Auto"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Toyota Urban Cruiser 1.5 XR AT", "price": "R373,800", "box": "4-speed automatic (torque converter)", "fuel": "6.1 l/100km", "warranty": "3 yr / 100,000 km", "plan": "4 services / 60,000 km service plan", "safety": "6 airbags, stability control, ISOFIX outer rear. NCAP not verified", "boot": "353 l", "why": "A real compact SUV (4.37 m) with a simple, proven automatic, top-spec XR kit and Toyota's dealer network and resale. Dealers are already selling it around R346k, including one in Edenvale.", "warn": "Only 77 kW with a 4-speed auto, so it is slow on the highway when loaded. Warranty is just 3 years (the Suzuki Grand Vitara twin gets 5 years), and it is a Suzuki under the skin.", "url": "https://www.toyota.co.za/toyota-price-list", "pick": 1, "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Urban-Cruiser-1.5-XR-Auto-Gauteng-Edenvale/11290989/", "p": "R345,995", "d": "Bidvest McCarthy Toyota Edenvale New", "a": "Edenvale", "k": "1 Km", "c": "new", "t": "2026 Toyota Urban Cruiser 1.5 XR Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Urban-Cruiser-1.5-XR-Auto-Gauteng-Centurion/11348908/", "p": "R346,900", "d": "Bidvest McCarthy Toyota Centurion", "a": "Centurion", "k": "0 Km", "c": "new", "t": "2026 Toyota Urban Cruiser 1.5 XR Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Toyota-Urban-Cruiser-1.5-XR-Auto-Gauteng-Pretoria/11338075/", "p": "R349,000", "d": "Bidvest McCarthy Toyota Lynnwood New", "a": "Pretoria", "k": "0 Km", "c": "new", "t": "2026 Toyota Urban Cruiser 1.5 XR Auto"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Haval Jolion 1.5T City Plus DCT", "price": "R373,950", "box": "7-speed dual-clutch (DCT)", "fuel": "8.1 l/100km", "warranty": "7 yr / 200,000 km", "plan": "7 yr / 75,000 km service plan", "safety": "4 airbags, stability control, ISOFIX outer rear. NCAP not verified", "boot": "337 l", "why": "Big cabin with a famously roomy back seat and a flat floor, plus the longest warranty and service plan in this list. Good for a tall dad sitting behind a baby seat.", "warn": "Thirstiest car here, and only 4 airbags on this trim. Older Jolions drew complaints about jerky low-speed DCT behaviour and resale is well below Toyota.", "url": "https://www.gwm.co.za/models/jolion", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Haval-Jolion-1.5T-City-Plus-DCT-Gauteng-Benoni/11343793/", "p": "R375,950", "d": "GWM Benoni", "a": "Benoni", "k": "15 Km", "c": "new", "t": "2026 Haval Jolion 1.5T City Plus DCT"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Haval-Jolion-1.5T-City-Plus-DCT-Gauteng-Lenasia/11354816/", "p": "R373,950", "d": "GWM Lenasia", "a": "Lenasia", "k": "0 Km", "c": "new", "t": "2026 Haval Jolion 1.5T City Plus DCT"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Jaecoo J5 1.5T Vortex CVT", "price": "R379,900", "box": "CVT", "fuel": "7.5 l/100km", "warranty": "5 yr / 150,000 km (plus 10 yr / 1,000,000 km engine for first owner)", "plan": "5 yr / 75,000 km service plan", "safety": "4 airbags, stability control, ISOFIX outer rear. NCAP not verified", "boot": "480 l", "why": "Biggest boot in this list (480 l) and a tall, boxy body, so the pram and a 6'4\" driver both fit easily. Strong kit with a 13.2-inch screen and a 5-year service plan.", "warn": "Very new brand (Chery group) with thin history and uncertain resale, and only 4 airbags. CVT plus turbo is less proven than a normal auto.", "url": "https://www.jaecoo.co.za/models/jaecoo-j5", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Jaecoo-J5-1.5T-Vortex-Gauteng-Bedfordview/11113483/", "p": "R379,900", "d": "Omoda Bedfordview", "a": "Bedfordview", "k": "0 Km", "c": "new", "t": "2026 Jaecoo J5 1.5T Vortex"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Jaecoo-J5-1.5T-Vortex-Gauteng-Sandton/11314184/", "p": "R349,900", "d": "DigiCars Group", "a": "Sandton", "k": "16 Km", "c": "new", "t": "2026 Jaecoo J5 1.5T Vortex"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Jaecoo-J5-1.5T-Vortex-Gauteng-Sandton/11314179/", "p": "R379,900", "d": "DigiCars Group", "a": "Sandton", "k": "10 Km", "c": "new", "t": "2026 Jaecoo J5 1.5T Vortex"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Suzuki Grand Vitara 1.5 GL AT", "price": "R381,900", "box": "4-speed automatic (torque converter)", "fuel": "5.6 l/100km", "warranty": "5 yr / 200,000 km", "plan": "4 yr / 60,000 km service plan", "safety": "6 airbags, ESP, ISOFIX outer rear. NCAP not verified", "boot": "310 l", "why": "Same car as the Toyota Urban Cruiser but with a 5-year, 200,000 km warranty. Dealers are already selling it from about R357k.", "warn": "Lower-spec GL trim than the Toyota XR, and Suzuki resale is a notch under Toyota. Same slow 4-speed auto as the Toyota.", "url": "https://www.suzukiauto.co.za/cars/grand-vitara", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Grand-Vitara-1.5-GL-Auto-Gauteng-Sandton/10912847/", "p": "R356,900", "d": "Suzuki Fourways New Cars", "a": "Sandton", "k": "10 Km", "c": "new", "t": "2026 Suzuki Grand Vitara 1.5 GL Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-Grand-Vitara-1.5-GL-Auto-Gauteng-Rivonia/11294227/", "p": "R364,900", "d": "Suzuki Rivonia", "a": "Rivonia", "k": "0 Km", "c": "new", "t": "2026 Suzuki Grand Vitara 1.5 GL Auto"}], "seen": "24 Nov"}, {"band": "300to400", "name": "Suzuki XL6 1.5 GL AT", "price": "R381,900", "box": "4-speed automatic (torque converter)", "fuel": "6.1 l/100km", "warranty": "5 yr / 200,000 km", "plan": "4 yr / 60,000 km service plan", "safety": "6 airbags, ESP, ISOFIX, reverse camera. NCAP not verified", "boot": "209 l (550 l with 3rd row folded)", "why": "Tallest cabin here (1.72 m roof) with six seats in three rows, so headroom and space for a pram plus grandparents is easy. Proven Suzuki engine and gearbox.", "warn": "It is an MPV and close cousin of the Ertiga, which is a very common Uber and Bolt car. Slow when full.", "url": "https://www.suzukiauto.co.za/cars/xl6", "buy": [{"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-XL6-1.5-GL-Auto-Gauteng-Centurion/10177010/", "p": "R344,900", "d": "Suzuki Centurion", "a": "Centurion", "k": "0 Km", "c": "new", "t": "2026 Suzuki XL6 1.5 GL Auto"}, {"u": "https://www.cars.co.za/for-sale/new/2026-Suzuki-XL6-1.5-GL-Auto-Gauteng-Springs/11331425/", "p": "R348,500", "d": "Muji Suzuki Springs New", "a": "Springs", "k": "32 Km", "c": "new", "t": "2026 Suzuki XL6 1.5 GL Auto"}], "seen": "24 Nov"}];
+(function(){
+  const gb=b=>/AMT/i.test(b)?'AMT':/torque|^automatic/i.test(b)?'Automatic':/CVT/i.test(b)?'CVT':/manual/i.test(b)?'Manual':'Automatic';
+  const buy=c=>c.buy&&c.buy.length?`<div class="buy"><b class="lbl">🛒 For sale now · cars.co.za, opened ${c.seen||'17 Nov'}</b>${c.buy.map(l=>`<a href="${l.u}" target="_blank" rel="noopener noreferrer"><span class="bp">${l.p}</span><span class="bd">${l.d}<small>${l.a} · ${l.k.replace(/ ?Km$/i,' km on the clock')}${l.c==='demo'?' · demo':''}${l.t&&!l.t.startsWith(c.name.split(' ').slice(0,2).join(' '))?'':''}</small><small class="bt">${l.t}</small></span><span class="bg">↗</span></a>`).join('')}</div>`:'';
+  const card=c=>`<div class="lc ${c.pick?'pick':''}" data-dk="newcar|${c.name}" data-dl="${c.name}, ${c.price} (new)" data-st="${c.st||''}">
+    <div class="lc-top"><span class="btag s">NEW</span><span class="st ok">${gb(c.box)}</span>${c.pick?'<span class="star">★ pick</span>':''}</div>
+    <div class="lc-name">${c.name}</div>
+    <div class="lc-price">${c.price} <small>list price</small></div>
+    <p class="lc-why">${c.why}</p>
+    ${c.fuel?`<p class="lc-spec"><b>Gearbox:</b> ${c.box}<br><b>Fuel:</b> ${c.fuel}<br><b>Warranty:</b> ${c.warranty} · <b>Plan:</b> ${c.plan}<br><b>Safety:</b> ${c.safety}${c.boot?`<br><b>Boot:</b> ${c.boot}`:''}</p>`:''}
+    <p class="lc-warn">⚠️ ${c.warn?c.warn+' ':''}At 6'4, sit in it before buying.</p>
+    ${buy(c)}
+    <div class="lc-act"><a href="${c.url}" target="_blank" rel="noopener noreferrer">Maker's page ↗</a></div>
+    <div class="dec"></div>
+  </div>`;
+  document.getElementById("ngrid1").innerHTML=NEW.filter(c=>c.band==="u200").map(card).join("");
+  document.getElementById("ngrid2").innerHTML=NEW.filter(c=>c.band==="200to300").map(card).join("");
+  document.getElementById("ngrid3").innerHTML=NEW.filter(c=>c.band==="also").map(card).join("");
+  document.getElementById("ngrid4").innerHTML=NEW.filter(c=>c.band==="300to400").map(card).join("");
+  const nav=document.querySelector(".nav"),jump=document.getElementById("jump");
+  const setNav=()=>document.documentElement.style.setProperty("--navh",nav.offsetHeight+"px");setNav();window.addEventListener("resize",setNav);
+  const links=[...jump.querySelectorAll('a[href^="#"]')],secs=links.map(a=>document.querySelector(a.getAttribute("href")));let cur=null;
+  const mark=()=>{const y=nav.offsetHeight+jump.offsetHeight+20;let k=0;secs.forEach((s,j)=>{if(s&&s.getBoundingClientRect().top<=y)k=j;});if(k===cur)return;cur=k;links.forEach((a,j)=>a.classList.toggle("on",j===k));const a=links[k];if(a)jump.scrollTo({left:a.offsetLeft-jump.clientWidth/2+a.offsetWidth/2,behavior:"smooth"});};
+  window.addEventListener("scroll",mark,{passive:true});mark();
+})();
+if (window.NEST) window.NEST.wire();
+</script>
+<script src="decide.js?v=20261114c"></script>
+</body>
+</html>
