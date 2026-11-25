@@ -1,90 +1,59 @@
-// The Nest — phone menu. On small screens the tabs collapse behind a
-// "☰ Menu" button that opens grouped links. Without JS (or on wide
-// screens) the normal tab row is used, so nothing breaks if this fails.
+// Shared app shell. Only this branch is deployed to the private Worker.
 (() => {
-  const nav = document.querySelector('.nav'), inner = nav && nav.querySelector('.nav-in');
-  if (!inner) return;
-  for (const [href, label] of [['skin.html', 'Skin'], ['ask.html', 'Ask Claude'], ['/logout', 'Log out']]) {
-    if (inner.querySelector(`a[href="${href}"]`)) continue;
-    const a = document.createElement('a'); a.href = href; a.className = 'tab'; a.textContent = label;
-    if (href.replace(/\.html$/, '') === location.pathname.split('/').pop().replace(/\.html$/, '')) a.setAttribute('aria-current', 'page');
-    inner.appendChild(a);
+  const top = document.querySelector('.nav');
+  if (!top) return;
+  const app = !/github\.io$/.test(location.hostname);
+  const current = location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+  const rooms = ['lounge', 'bedroom', 'kitchen', 'bathroom', 'office', 'water', 'wifi'];
+  const titles = {index:'Home', rooms:'Rooms', decided:'Picks', ask:'Ask Claude', tracker:'Tracker', findings:'Findings', medical:'Medical aid', skin:'Skin', cars:'Cars', apartments:'Apartments', recovery:'Post-pregnancy', plans:'Medical plans', ...Object.fromEntries(rooms.map(x=>[x,x==='wifi'?'WiFi':x[0].toUpperCase()+x.slice(1)]))};
+  top.className = 'nav app-topbar';
+  top.innerHTML = '<div class="nav-in">' + (titles[current] || 'The Nest') + '</div>';
+  const active = current === 'index' ? 'Home' : rooms.includes(current) || current === 'rooms' ? 'Rooms' : current === 'decided' ? 'Picks' : current === 'ask' ? 'Ask' : 'More';
+  const icons = {
+    Home:'<path d="m3 10 9-7 9 7v11h-6v-7H9v7H3z"/>',
+    Rooms:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+    Picks:'<path d="m5 12 4 4L19 6"/>', Ask:'<path d="M21 11a8 8 0 0 1-8 8H7l-4 3V11a9 9 0 0 1 18 0Z"/>',
+    More:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>'
+  };
+  const bar = document.createElement('nav'); bar.className = 'bottom-bar'; bar.setAttribute('aria-label','Primary');
+  for (const [label,href] of [['Home','index.html'],['Rooms','rooms.html'],['Picks','decided.html'],...(app ? [['Ask','ask.html']] : []),['More',null]]) {
+    const el = document.createElement(href ? 'a' : 'button');
+    if (href) el.href = href; else {el.type='button'; el.setAttribute('aria-haspopup','dialog'); el.setAttribute('aria-controls','more-sheet'); el.setAttribute('aria-expanded','false');}
+    el.className='bottom-tab';
+    el.innerHTML='<span class="tab-icon"><svg viewBox="0 0 24 24" aria-hidden="true">'+icons[label]+'</svg></span><span>'+label+'</span>';
+    if (active===label) { el.classList.add('active'); if(href) el.setAttribute('aria-current','page'); }
+    bar.append(el);
   }
-  const tabs = [...inner.querySelectorAll('a.tab')];
-  if (!tabs.length) return;
-  // A phone can hold an old cached style.css: without the menu styling, keep the plain tab bar.
-  if (getComputedStyle(document.documentElement).getPropertyValue('--nav-v').trim() !== '3') return;
-  const ICON = { 'Skin': '🧴', 'Ask Claude': '💬', 'Log out': '↗', 'Plan': '🗺️', 'Tracker': '📈', 'Lounge': '🛋️', 'Bedroom': '🛏️', 'Bathroom': '🛁', 'Water': '💧', 'Kitchen': '🍳', 'Office': '💻', 'Medical aid': '🩺', 'Cars': '🚗', 'Apartments': '🏡',
-    'Furniture': '🛋️', 'Bedding': '🛏️', 'Kitchen': '🍳', 'WiFi': '🛜', 'Post-pregnancy': '💛', 'Laptop': '💻', 'Decided': '✅', 'Findings': '🧾' };
-
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.className = 'menubtn';
-  btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('aria-controls', 'navpanel');
-  btn.innerHTML = '<span aria-hidden="true">☰</span> Menu';
-
-  const panel = document.createElement('div');
-  panel.className = 'navpanel';
-  panel.id = 'navpanel';
-  panel.hidden = true;
-  const tile = t => {
-    const a = document.createElement('a');
-    a.href = t.getAttribute('href');
-    a.className = 'navtile';
-    const name = t.textContent.trim();
-    a.innerHTML = '<span class="ni" aria-hidden="true">' + (ICON[name] || '•') + '</span><span>' + name + '</span>';
-    if (t.hasAttribute('aria-current')) a.setAttribute('aria-current', 'page');
-    return a;
-  };
-  const groups = [
-    ['Us', ['Plan', 'Tracker', 'Decided', 'Findings']],
-    ['The flat', ['Lounge', 'Bedroom', 'Kitchen', 'Bathroom', 'Office', 'Water', 'WiFi']],
-    ['Life', ['Medical aid', 'Skin', 'Cars', 'Apartments', 'Post-pregnancy']]
-  ];
-  const remaining = new Map(tabs.map(t => [t.textContent.trim(), t]));
-  groups.forEach(([label, names], i) => {
-    const section = document.createElement('section');
-    const heading = document.createElement('h2');
-    heading.id = 'navgroup-' + i;
-    heading.textContent = label;
-    section.className = 'navgroup';
-    section.setAttribute('aria-labelledby', heading.id);
-    section.appendChild(heading);
-    const links = document.createElement('div');
-    links.className = 'navlinks';
-    names.forEach(name => {
-      if (!remaining.has(name)) return;
-      links.appendChild(tile(remaining.get(name)));
-      remaining.delete(name);
-    });
-    section.appendChild(links);
-    panel.appendChild(section);
+  document.body.append(bar);
+  const more = bar.querySelector('button');
+  const sheet = document.createElement('dialog'); sheet.id='more-sheet'; sheet.className='more-sheet'; sheet.setAttribute('aria-labelledby','more-title');
+  sheet.innerHTML='<div class="sheet-head"><button class="sheet-handle" type="button" aria-label="Close More"><span></span></button><div class="sheet-title"><h2 id="more-title">More</h2><button class="sheet-close" type="button" aria-label="Close More">✕</button></div></div><div class="sheet-scroll"></div>';
+  const scroll = sheet.querySelector('.sheet-scroll');
+  for(const [group,links] of [['Us',[['index','Plan'],['tracker','Tracker'],['findings','Findings']]],['Life',[['medical','Medical aid'],...(app ? [['skin','Skin']] : []),['cars','Cars'],['apartments','Apartments'],['recovery','Post-pregnancy']]]]) {
+    const section=document.createElement('section'); section.className='navgroup';
+    section.innerHTML='<h3>'+group+'</h3><div class="navlinks">'+links.map(([path,label])=>'<a class="navtile" href="'+path+'.html"'+(path===current?' aria-current="page"':'')+'>'+label+'</a>').join('')+'</div>';
+    scroll.append(section);
+  }
+  if(app) scroll.insertAdjacentHTML('beforeend','<a class="navlogout" href="/logout">Log out</a>');
+  document.body.append(sheet);
+  let pushed=false, startY=null;
+  const finish=()=>{sheet.close();document.documentElement.classList.remove('sheet-lock');more.setAttribute('aria-expanded','false');more.focus();};
+  const close=()=>{if(!sheet.open)return;const back=pushed;pushed=false;finish();if(back)history.back();};
+  more.onclick=()=>{history.pushState({...history.state,nestMore:true},'');pushed=true;scroll.scrollTop=0;sheet.showModal();document.documentElement.classList.add('sheet-lock');more.setAttribute('aria-expanded','true');};
+  window.addEventListener('popstate',()=>{pushed=false;if(sheet.open)finish();});
+  sheet.addEventListener('cancel',e=>{e.preventDefault();close();});
+  sheet.addEventListener('keydown',e=>{
+    if(e.key!=='Tab')return;
+    const targets=[...sheet.querySelectorAll('button, a[href]')];
+    const first=targets[0], last=targets[targets.length-1];
+    if(e.shiftKey && document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
   });
-  const actions = document.createElement('div');
-  actions.className = 'navactions';
-  ['Ask Claude', 'Log out'].forEach(name => {
-    if (!remaining.has(name)) return;
-    const a = tile(remaining.get(name));
-    a.classList.add(name === 'Ask Claude' ? 'navask' : 'navlogout');
-    actions.appendChild(a);
-    remaining.delete(name);
-  });
-  // Keep any page-specific tabs available too.
-  remaining.forEach(t => panel.appendChild(tile(t)));
-  panel.appendChild(actions);
-
-  inner.querySelector('.brandmark').after(btn);
-  nav.appendChild(panel);
-  nav.classList.add('js-menu');
-
-  const set = open => {
-    panel.hidden = !open;
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    nav.classList.toggle('open', open);
-  };
-  btn.addEventListener('click', e => { e.stopPropagation(); set(panel.hidden); });
-  document.addEventListener('click', e => { if (!panel.hidden && !nav.contains(e.target)) set(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
-  window.addEventListener('resize', () => { if (window.innerWidth > 700) set(false); });
+  sheet.querySelectorAll('button').forEach(b=>b.onclick=close);
+  sheet.addEventListener('click',e=>{if(e.target!==sheet)return;const r=sheet.getBoundingClientRect();if(e.clientY<r.top||e.clientX<r.left||e.clientX>r.right)close();});
+  // Swipe the handle; scrolling the menu never starts a dismiss gesture.
+  const handle=sheet.querySelector('.sheet-handle');
+  handle.addEventListener('pointerdown',e=>{startY=e.clientY;handle.setPointerCapture(e.pointerId);});
+  handle.addEventListener('pointerup',e=>{if(startY!==null && e.clientY-startY>60)close();startY=null;});
+  handle.addEventListener('pointercancel',()=>{startY=null;});
 })();

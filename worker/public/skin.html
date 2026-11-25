@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6C4CF5">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100E22" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F4FF" media="(prefers-color-scheme: light)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,23 +16,23 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧴</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261114c">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261125-design1">
 <style>
   .skin-list { margin: 0; padding-left: 20px; }
   .skin-list li { margin: 10px 0; }
   .skin-rows { list-style: none; margin: 0; padding: 0; }
   .skin-rows > li { padding: 15px 0; border-bottom: 1px dotted var(--line); }
   .skin-rows > li:last-child { border-bottom: 0; }
-  .skin-tick { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 8px 0; }
-  .skin-tick .box { flex: 0 0 22px; height: 22px; border: 2px solid var(--line); border-radius: 6px; margin-top: 2px; }
+  .skin-tick { display: flex; align-items: flex-start; gap: 12px; min-height: 48px; padding: 8px 0; }
+  .skin-tick .box { flex: 0 0 22px; height: 22px; border: 2px solid var(--line); border-radius: var(--r-sm); margin-top: 2px; }
   .skin-tick .txt { flex: 1; min-width: 0; }
   .skin-tick small, .skin-muted { display: block; color: var(--ink-soft); font-size: 13px; }
-  .skin-date, .skin-note { display: block; width: 100%; max-width: 100%; min-width: 0; padding: 12px; margin: 8px 0; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); color: var(--ink); font: inherit; font-size: 16px; }
+  .skin-date, .skin-note { display: block; width: 100%; max-width: 100%; min-width: 0; padding: 12px; margin: 8px 0; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 16px; }
   .skin-note { min-height: 88px; resize: vertical; }
   .skin-label { display: block; font-size: 13px; font-weight: 600; margin-top: 12px; }
   .skin-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
-  .skin-actions button { min-height: 44px; padding: 10px 18px; background: var(--surface-2); color: var(--ink); font: inherit; cursor: pointer; }
+  .skin-actions button { min-height: 48px; padding: 10px 18px; background: var(--surface-2); color: var(--ink); font: inherit; cursor: pointer; }
   .skin-entry-note { white-space: pre-wrap; overflow-wrap: anywhere; }
 
   .skin-card { margin: 18px 0; padding: 0; overflow: hidden; }
@@ -40,18 +41,18 @@
   .skin-card summary .skin-muted { margin: 8px 0 0 18px; }
   .skin-body { padding: 0 20px 20px; overflow-wrap: anywhere; }
   .skin-body h3 { margin: 24px 0 8px; font-size: 18px; line-height: 1.4; }
-  .skin-evidence,.skin-phase { display: inline-block; border: 1px solid var(--line); border-radius: 10px; padding: 4px 8px; font-size: 12px; font-weight: 700; background: var(--surface-2); }
+  .skin-evidence,.skin-phase { display: inline-block; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 4px 8px; font-size: 12px; font-weight: 700; background: var(--surface-2); }
   .skin-body blockquote { margin: 18px 0; padding: 12px 14px; border-left: 4px solid var(--accent); background: var(--surface-2); }
   .skin-body cite { display: block; margin-top: 8px; font-size: 13px; font-style: normal; }
   .skin-product { border-top: 2px solid var(--line); margin-top: 24px; padding-top: 22px; }
   .skin-product h3 { margin-top: 10px; }
   .skin-options { list-style: none; margin: 0; padding: 0; }
-  .skin-options li { padding: 12px; margin: 10px 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); }
-  .skin-options a { display: flex; align-items: center; min-height: 44px; line-height: 1.4; font-weight: 700; }
+  .skin-options li { padding: 12px; margin: 10px 0; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface-2); }
+  .skin-options a { display: flex; align-items: center; min-height: 48px; line-height: 1.4; font-weight: 700; }
   .skin-options b,.skin-options small { display: block; margin-top: 6px; }
   .skin-options small,.skin-store small { color: var(--ink-soft); font-size: 13px; }
   .skin-store { display: grid; gap: 8px; margin: 18px 0; }
-  .skin-store a { min-height: 44px; display: flex; align-items: center; }
+  .skin-store a { min-height: 48px; display: flex; align-items: center; }
   .skin-store-note { font-size: 14px; }
   .skin-store-note a { display: inline-block; padding: 10px 2px; }
   .skin-sources { text-align: left; overflow-wrap: anywhere; }
@@ -60,25 +61,8 @@
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
-  <a class="brandmark" href="index.html">🪺 The Nest</a>
-  <a class="tab" href="index.html">Plan</a>
-  <a class="tab" href="tracker.html">Tracker</a>
-  <a class="tab" href="lounge.html">Lounge</a>
-  <a class="tab" href="bedroom.html">Bedroom</a>
-  <a class="tab" href="bathroom.html">Bathroom</a>
-  <a class="tab" href="water.html">Water</a>
-  <a class="tab" href="kitchen.html">Kitchen</a>
-  <a class="tab" href="office.html">Office</a>
-  <a class="tab" href="medical.html">Medical aid</a>
-  <a class="tab" href="cars.html">Cars</a>
-  <a class="tab" href="apartments.html">Apartments</a>
-  <a class="tab" href="wifi.html">WiFi</a>
-  <a class="tab" href="recovery.html">Post-pregnancy</a>
-  <a class="tab" href="decided.html">Decided</a>
-  <a class="tab" href="findings.html">Findings</a>
-</div></nav>
-<script src="nav.js?v=20261125skin"></script>
+<header class="nav"></header>
+<script src="nav.js?v=20261125-design1"></script>
 
 <main class="wrap">
   <header>

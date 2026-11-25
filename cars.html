@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6C4CF5">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100E22" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F4FF" media="(prefers-color-scheme: light)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,49 +16,49 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261114c">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261125-design1">
 <style>
   .filterbar { position: static; }
   .brief { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .brief span { font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--ink); border-radius: 6px; padding: 4px 8px; }
-  .btag { font-size: 9.5px; font-family: "JetBrains Mono", monospace; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 20px; }
+  .brief span { font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 600; background: var(--surface-2); color: var(--ink); border-radius: var(--r-sm); padding: 4px 8px; }
+  .btag { font-size: 11px; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: var(--r-md); }
   .btag.s { background: var(--good-soft); color: var(--good); }
   .btag.a { background: var(--car-soft); color: var(--car-ink); }
   .btag.w { background: var(--red-soft); color: var(--red); }
   .secline { font-size: 13px; color: var(--ink-soft); margin: 6px 0 0; max-width: 66ch; }
-  .changes { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 13px 16px; font-size: 13px; }
-  .changes b.h { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 6px; }
+  .changes { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 13px 16px; font-size: 13px; }
+  .changes b.h { font-family: "Figtree", system-ui, sans-serif; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: 6px; }
   .changes ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
   /* --- 14 Nov: same layout as Medical aid (sticky pill bar + hero) --- */
   :root { --navh: 60px; }
   [id] { scroll-margin-top: calc(var(--navh) + 64px); }
-  .lbl { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+  .lbl { font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
   .jump { position: sticky; top: var(--navh); z-index: 15; margin: 22px calc(-1 * clamp(16px,4vw,40px)) 0; padding: 10px clamp(16px,4vw,40px);
     background: color-mix(in srgb, var(--ground) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
     display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; }
   .jump::-webkit-scrollbar { display: none; }
-  .jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; min-height: 36px; display: flex; align-items: center; }
+  .jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 8px 14px; min-height: 48px; display: flex; align-items: center; }
   .jump a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
-  .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: 20px; padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
+  .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: var(--r-md); padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
   .hero .lbl { color: var(--good); }
   .hero .big { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }
   .hero .big small { font-family: "Figtree", sans-serif; font-size: 15px; font-weight: 500; color: var(--ink-soft); letter-spacing: 0; }
   .hero .bigsub { font-size: 13.5px; color: var(--ink-soft); margin-top: 6px; }
   .trio { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 16px; }
   @media (max-width: 640px) { .trio { grid-template-columns: 1fr; } }
-  .trio > a, .trio > div { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--ink); }
+  .trio > a, .trio > div { background: var(--surface-2); border-radius: var(--r-sm); padding: 12px 14px; display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--ink); }
   .trio .ic { font-size: 22px; flex: none; }
   .trio b { display: block; font-size: 14.5px; }
   .trio small { color: var(--ink-soft); font-size: 12.5px; }
-  .trio .v { margin-left: auto; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 14px; white-space: nowrap; }
-  .warnbox { margin-top: 12px; background: var(--amber-soft); border-radius: 12px; padding: 12px 14px; font-size: 13.5px; display: flex; gap: 10px; }
+  .trio .v { margin-left: auto; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 14px; white-space: nowrap; }
+  .warnbox { margin-top: 12px; background: var(--amber-soft); border-radius: var(--r-sm); padding: 12px 14px; font-size: 13.5px; display: flex; gap: 10px; }
  
  /* 17 Nov: real for-sale listings on every new-car card */
  .buy { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
  .buy .lbl { display: block; margin-bottom: 2px; }
- .buy a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); background: var(--surface-2); border-radius: 10px; padding: 8px 10px; min-height: 44px; }
- .buy .bp { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); white-space: nowrap; }
+ .buy a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); background: var(--surface-2); border-radius: var(--r-sm); padding: 8px 10px; min-height: 48px; }
+ .buy .bp { font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 13px; color: var(--car-ink); white-space: nowrap; }
  .buy .bd { font-size: 12.5px; font-weight: 600; line-height: 1.3; min-width: 0; }
  .buy .bd small { display: block; font-weight: 500; color: var(--ink-soft); font-size: 11px; }
  .buy .bg { margin-left: auto; color: var(--car-ink); font-weight: 700; }
@@ -68,22 +69,22 @@
   .lgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
   @media (max-width: 980px) { .lgrid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .lgrid { grid-template-columns: 1fr; } }
-  .lc { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 15px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .lc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 15px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
   .lc.pick { border-color: color-mix(in srgb, var(--star) 60%, var(--line)); }
   .lc.hide { display: none; }
   .lc-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .lc-top .star { margin-left: auto; }
-  .st { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; background: var(--surface-2); color: var(--ink-soft); }
+  .st { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: var(--r-md); background: var(--surface-2); color: var(--ink-soft); }
   .st.ok { background: var(--good-soft); color: var(--good); }
   .st.soon { background: var(--amber-soft); color: var(--amber); }
   .lc-name { font-weight: 600; font-size: 15px; margin-top: 8px; line-height: 1.3; }
-  .lc-price { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 19px; color: var(--car-ink); margin-top: 4px; }
+  .lc-price { font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 19px; color: var(--car-ink); margin-top: 4px; }
   .lc-price small { font-family: "Figtree", sans-serif; font-size: 11.5px; font-weight: 500; color: var(--ink-soft); }
   .lc-facts { font-size: 12.5px; color: var(--ink); margin-top: 3px; }
   .lc-why { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; line-height: 1.45; }
   .lc-warn { font-size: 12px; color: var(--warn); margin: 6px 0 0; line-height: 1.45; }
   .lc-act { margin-top: auto; padding-top: 11px; display: flex; gap: 7px; }
-  .lc-act a { flex: 1; text-align: center; text-decoration: none; font-size: 12.5px; font-weight: 600; padding: 8px 10px; border-radius: 9px; background: var(--car); color: #fff; }
+  .lc-act a { flex: 1; text-align: center; text-decoration: none; font-size: 12.5px; font-weight: 600; padding: 8px 10px; border-radius: var(--r-sm); background: var(--car); color: #fff; }
   .lc-act .savebtn { flex: 0 0 auto; }
   .gone { margin-top: 14px; }
   .gone > summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-soft); padding: 10px 0; list-style: none; }
@@ -92,36 +93,36 @@
   /* model guide: one tappable row per model */
   .mlist { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
   @media (max-width: 780px) { .mlist { grid-template-columns: 1fr; } }
-  .mr { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+  .mr { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); }
   .mr.pick { border-color: color-mix(in srgb, var(--star) 55%, var(--line)); }
   .mr.hide { display: none; }
   .mr > summary { list-style: none; cursor: pointer; padding: 11px 13px; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; align-items: center; }
   .mr > summary::-webkit-details-marker { display: none; }
   .mr-n { font-weight: 600; font-size: 14.5px; }
   .mr-b { font-size: 11.5px; color: var(--ink-soft); }
-  .mr-p { font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 13px; color: var(--car-ink); text-align: right; white-space: nowrap; }
-  .mr-f { font-size: 10.5px; text-align: right; color: var(--ink-soft); white-space: nowrap; }
+  .mr-p { font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 13px; color: var(--car-ink); text-align: right; white-space: nowrap; }
+  .mr-f { font-size: 11px; text-align: right; color: var(--ink-soft); white-space: nowrap; }
   .mr-f.tt { color: var(--warn); font-weight: 600; }
   .mr-f.ex { color: var(--good); font-weight: 600; }
   .mr-body { padding: 0 13px 13px; border-top: 1px solid var(--line); }
   .mr-body p { font-size: 12.5px; color: var(--ink-soft); margin: 10px 0 0; }
   .lt { width: 100%; border-collapse: collapse; margin: 10px 0 0; font-size: 12.5px; }
-  .lt th { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
+  .lt th { font-family: "Figtree", system-ui, sans-serif; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-weight: 600; }
   .lt td { padding: 7px 8px; border-bottom: 1px solid var(--line); }
   .lt tr:last-child td { border-bottom: none; }
-  .lt .y { font-family: "JetBrains Mono", monospace; font-weight: 600; }
-  .lt .p { font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
-  .lt .km { font-family: "JetBrains Mono", monospace; color: var(--ink-soft); white-space: nowrap; }
+  .lt .y { font-family: "Figtree", system-ui, sans-serif; font-weight: 600; }
+  .lt .p { font-family: "Figtree", system-ui, sans-serif; font-weight: 600; color: var(--car-ink); white-space: nowrap; }
+  .lt .km { font-family: "Figtree", system-ui, sans-serif; color: var(--ink-soft); white-space: nowrap; }
   .lt .lo { color: var(--ink-soft); font-size: 11.5px; }
   .lt tr.best td { background: var(--good-soft); }
-  .lt .tag { font-size: 8.5px; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
+  .lt .tag { font-size: 11px; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; color: var(--good); text-transform: uppercase; letter-spacing: .04em; }
   .mlinks { margin-top: 10px; font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
   .mlinks a { color: var(--car-ink); font-weight: 600; text-decoration: none; }
   /* reference accordions */
-  .acc { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+  .acc { margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); }
   .acc > summary { cursor: pointer; list-style: none; padding: 14px 16px; font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 16.5px; color: var(--car-ink); display: flex; justify-content: space-between; gap: 10px; }
   .acc > summary::-webkit-details-marker { display: none; }
-  .acc > summary::after { content: "+"; font-family: "JetBrains Mono", monospace; color: var(--ink-soft); }
+  .acc > summary::after { content: "+"; font-family: "Figtree", system-ui, sans-serif; color: var(--ink-soft); }
   .acc[open] > summary::after { content: "−"; }
   .acc .in { padding: 0 16px 16px; font-size: 13.5px; }
   .acc .in p { margin: 0 0 10px; }
@@ -129,31 +130,14 @@
   .acc .in a { color: var(--car-ink); font-weight: 600; }
   .brandlist { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   @media (max-width: 720px) { .brandlist { grid-template-columns: 1fr; } }
-  .br { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--surface-2); }
+  .br { border: 1px solid var(--line); border-radius: var(--r-sm); padding: 10px 12px; background: var(--surface-2); }
   .brn { font-weight: 600; font-size: 13.5px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .brd { font-size: 12.5px; color: var(--ink-soft); margin-top: 4px; line-height: 1.45; }
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
-  <a class="brandmark" href="index.html">🪺 The Nest</a>
-  <a class="tab" href="index.html">Plan</a>
-  <a class="tab" href="tracker.html">Tracker</a>
-  <a class="tab" href="lounge.html">Lounge</a>
-  <a class="tab" href="bedroom.html">Bedroom</a>
-  <a class="tab" href="bathroom.html">Bathroom</a>
-  <a class="tab" href="water.html">Water</a>
-  <a class="tab" href="kitchen.html">Kitchen</a>
-  <a class="tab" href="office.html">Office</a>
-  <a class="tab" href="medical.html">Medical aid</a>
-  <a class="tab" href="cars.html" aria-current="page">Cars</a>
-  <a class="tab" href="apartments.html">Apartments</a>
-  <a class="tab" href="wifi.html">WiFi</a>
-  <a class="tab" href="recovery.html">Post-pregnancy</a>
-  <a class="tab" href="decided.html">Decided</a>
-  <a class="tab" href="findings.html">Findings</a>
-</div></nav>
-<script src="nav.js?v=20261117c"></script>
+<header class="nav"></header>
+<script src="nav.js?v=20261125-design1"></script>
 
 <div class="wrap">
   <header>

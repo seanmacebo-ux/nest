@@ -63,7 +63,7 @@ try {
   assert.equal(await sean.locator('#hero').textContent(),'');
   await sean.evaluate(()=>document.documentElement.classList.remove('nest-app'));
   assert.ok(await sean.locator('#hero').isVisible());
-  assert.equal(await sean.locator('#hero').evaluate(e=>e.offsetHeight),40);
+  assert.equal(await sean.locator('#hero').evaluate(e=>e.offsetHeight),38);
   await sean.screenshot({path:'/tmp/nest-office-empty-before.png'});
   await sean.evaluate(()=>document.documentElement.classList.add('nest-app'));
   assert.equal(await sean.locator('#hero').isVisible(),false);
@@ -82,6 +82,7 @@ try {
   await sean.locator('#addsend').click();
   await eventually(async()=>await sean.locator('#addtxt').inputValue()==='');
   assert.match(await sean.locator('.toast').innerText(),/^Sent to The Nest/);
+  assert.ok(await sean.locator('.toast').evaluate(e=>e.getBoundingClientRect().bottom<=document.querySelector('.bottom-bar').getBoundingClientRect().top),'Toast clears bottom bar');
   const queued=db.prepare('SELECT * FROM requests').all();
   assert.equal(queued.length,1);assert.equal(queued[0].created_by,'sean');
   assert.equal(queued[0].text.replace(/\r\n/g,'\n'),'🛒 Add to Office + streaming:\nMonitor under R3000\nhttps://example.com/monitor');
@@ -120,6 +121,7 @@ try {
   assert.match(await publicPage.locator('#addsend').textContent(),/Telegram/);
   await publicPage.locator('[data-dk]').first().locator('[data-dv=consider]').click();
   assert.equal(await publicPage.locator('.dectray.on .send').textContent(),'Send to The Nest →');
+  assert.ok(await publicPage.locator('.dectray').evaluate(e=>e.getBoundingClientRect().bottom<=document.querySelector('.bottom-bar').getBoundingClientRect().top),'Decision tray clears bottom bar');
   await publicPage.locator('.addbox summary').click();await publicPage.locator('#addtxt').fill('Public test');await publicPage.locator('#addsend').click();
   assert.match(await publicPage.locator('.toast').innerText(),/Opening Telegram/);
   assert.ok(await publicPage.evaluate(()=>JSON.parse(localStorage.getItem('nest_sent'))['add:Public test']));

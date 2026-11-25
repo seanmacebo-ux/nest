@@ -45,92 +45,139 @@ const errors=[];
 const context = await browser.newContext({viewport:{width:390,height:844}});
 const page = await context.newPage();
 page.on('pageerror', e => errors.push(e.message));
-const expected = [
-  ['Us', ['Plan', 'Tracker', 'Decided', 'Findings']],
-  ['The flat', ['Lounge', 'Bedroom', 'Kitchen', 'Bathroom', 'Office', 'Water', 'WiFi']],
-  ['Life', ['Medical aid', 'Skin', 'Cars', 'Apartments', 'Post-pregnancy']]
-];
-async function openMenu() {
-  await page.locator('.menubtn').click();
-  assert.equal(await page.locator('.menubtn').getAttribute('aria-expanded'), 'true');
+
+const more = () => page.locator('.bottom-bar button');
+const sheet = () => page.locator('#more-sheet');
+const canonical = path => path.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+async function openMore() {
+  await more().click();
+  assert.equal(await more().getAttribute('aria-expanded'), 'true');
+  assert.ok(await sheet().isVisible());
+}
+async function closeMore() {
+  await page.keyboard.press('Escape');
+  await page.waitForFunction(()=>!document.querySelector('#more-sheet').open);
+  assert.equal(await more().getAttribute('aria-expanded'), 'false');
+  assert.ok(await more().evaluate(e=>e===document.activeElement));
 }
 async function layout() {
   const metrics = await page.evaluate(() => {
-    const panel = document.querySelector('.navpanel'), rect = panel.getBoundingClientRect();
-    return {bottom:rect.bottom, height:rect.height, scroll:panel.scrollHeight, client:panel.clientHeight,
-      overflow:document.documentElement.scrollWidth > innerWidth,
-      targets:[...panel.querySelectorAll('a'), document.querySelector('.menubtn'), document.querySelector('.nav-in [aria-current]')].map(a => {
-        const r=a.getBoundingClientRect(); return {name:a.textContent.trim(), width:r.width, height:r.height};
-      })};
+    const bar=document.querySelector('.bottom-bar'), wrap=document.querySelector('.wrap');
+    return {overflow:document.documentElement.scrollWidth>innerWidth,
+      padding:parseFloat(getComputedStyle(wrap).paddingBottom),barHeight:bar.offsetHeight,
+      tabs:[...bar.children].map(a=>({height:a.offsetHeight,width:a.offsetWidth}))};
   });
-  assert.equal(metrics.overflow, false);
-  assert.ok(metrics.bottom <= page.viewportSize().height, JSON.stringify(metrics));
-  for (const target of metrics.targets) assert.ok(target.height >= 44 && target.width >= 44, JSON.stringify(target));
-  return metrics;
+  assert.equal(metrics.overflow,false, 'No horizontal overflow: '+page.url());
+  assert.ok(metrics.padding>=metrics.barHeight+24, 'Content has bottom clearance');
+  for(const t of metrics.tabs) assert.ok(t.height>=48 && t.width>=48);
+  await page.evaluate(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'instant'}));
+  assert.ok(await page.evaluate(()=>{
+    const w=document.querySelector('.wrap'), b=document.querySelector('.bottom-bar');
+    return w.lastElementChild.getBoundingClientRect().bottom<=b.getBoundingClientRect().top;
+  }), 'Final content is reachable above bar: '+page.url());
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
 }
 try {
   const password = process.env.NEST_BASE_URL
     ? JSON.parse(readFileSync(process.env.NEST_LOGIN_FILE, 'utf8')).passwords.sean
     : 'test-password';
-  const auth = await context.request.post(base+'/login', {form:{username:'sean',password,next:'/skin'},maxRedirects:0});
-  assert.equal(auth.status(), 303, 'Sean login');
-  await page.goto(base+'/skin', {waitUntil:'networkidle'});
-  await openMenu();
-  for (const [i, [label, names]] of expected.entries()) {
-    const group = page.locator('.navgroup').nth(i);
-    assert.equal(await group.locator('h2').textContent(), label);
-    assert.deepEqual(await group.locator('.navtile > span:last-child').allTextContents(), names);
-  }
-  assert.equal(await page.locator('.navtile').count(), 18);
-  const original = await page.locator('.nav-in a.tab').evaluateAll(as => as.map(a=>a.getAttribute('href')).sort());
-  const links = await page.locator('.navtile').evaluateAll(as => as.map(a=>({href:a.getAttribute('href'),name:a.lastElementChild.textContent})));
-  assert.deepEqual(links.map(a=>a.href).sort(), original);
-  for (const colorScheme of ['light','dark']) {
-    await page.emulateMedia({colorScheme});
-    const metrics = await layout();
-    assert.ok(metrics.scroll <= metrics.client, 'Menu fits fully at 390x844');
-    await page.screenshot({path:'/tmp/nest-menu-'+(process.env.NEST_BASE_URL ? 'live-' : '')+colorScheme+'.png'});
-    console.log(colorScheme+' 390x844 panel: '+Math.round(metrics.height)+'px; all 18 links fit');
-  }
-  await page.setViewportSize({width:390,height:500});
-  const short = await layout();
-  assert.ok(short.scroll > short.client, 'Short viewport uses internal scroll');
-  await page.locator('.navlogout').scrollIntoViewIfNeeded();
-  assert.ok(await page.locator('.navlogout').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0 && r.bottom<=innerHeight;}));
-  assert.ok(await page.locator('.navpanel').evaluate(e=>e.scrollTop > 0));
-  await page.setViewportSize({width:390,height:844});
-  await page.keyboard.press('Escape');
-  assert.equal(await page.locator('.menubtn').getAttribute('aria-expanded'), 'false');
-  assert.ok(await page.locator('.menubtn').evaluate(e=>e===document.activeElement));
-  for (const link of links.filter(a=>a.href!=='/logout')) {
-    await openMenu();
-    const responsePromise = page.waitForNavigation({waitUntil:'networkidle'});
-    await page.locator('.navtile').filter({has:page.locator('span:last-child', {hasText:new RegExp('^'+link.name+'$')})}).click();
-    const response = await responsePromise;
-    assert.equal(response.status(), 200, link.name);
-    // Cloudflare Assets redirects .html URLs to their extensionless form.
-    const canonical = path => path.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
-    assert.equal(canonical(new URL(page.url()).pathname), canonical('/'+link.href), link.name+' destination');
-    assert.equal(await page.locator('.nav-in a.tab[aria-current]').textContent(), link.name);
-    await openMenu();
-    assert.equal(await page.locator('.navtile[aria-current] > span:last-child').textContent(), link.name);
+  const auth = await context.request.post(base+'/login', {form:{username:'sean',password,next:'/'},maxRedirects:0});
+  assert.equal(auth.status(),303,'Sean login');
+  await page.emulateMedia({colorScheme:'dark'});
+  await page.goto(base+'/index.html',{waitUntil:'networkidle'});
+  assert.deepEqual(await page.locator('.bottom-tab > span:last-child').allTextContents(),['Home','Rooms','Picks','Ask','More']);
+  await openMore();
+  assert.deepEqual(await page.locator('.navgroup h3').allTextContents(),['Us','Life']);
+  assert.deepEqual(await page.locator('.navgroup').nth(0).locator('a').allTextContents(),['Plan','Tracker','Findings']);
+  assert.deepEqual(await page.locator('.navgroup').nth(1).locator('a').allTextContents(),['Medical aid','Skin','Cars','Apartments','Post-pregnancy']);
+  assert.equal(await page.locator('.navlogout').getAttribute('href'),'/logout');
+  await closeMore();
+  const destinations=[['index','Home'],['rooms','Rooms'],['decided','Picks'],['ask','Ask'],
+    ...['lounge','bedroom','kitchen','bathroom','office','water','wifi'].map(p=>[p,'Rooms']),
+    ...['tracker','findings','medical','skin','cars','apartments','recovery','plans'].map(p=>[p,'More'])];
+  const visited=new Set();
+  for(const [path,active] of destinations) {
+    const response=await page.goto(base+'/'+path+'.html',{waitUntil:'networkidle'});
+    assert.equal(response.status(),200,path);
+    assert.equal(canonical(new URL(page.url()).pathname),canonical('/'+path+'.html'));
+    assert.equal(await page.locator('.bottom-tab.active > span:last-child').textContent(),active,path);
+    assert.equal(await page.locator('.nav-in a').count(),0,'Title-only top bar');
+    assert.match(await page.locator('meta[name=viewport]').getAttribute('content'),/viewport-fit=cover/);
     await layout();
-    await page.locator('.menubtn').click();
-    console.log(link.name+': 200, active page highlighted');
+    const controls=await page.locator('.acts button, .acts a, .iacts button, .dec button, .clink, .sendbtn, #ask-form button, .skin-actions button, #shareBtn').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({label:e.textContent.trim(),height:e.getBoundingClientRect().height})));
+    for(const control of controls) assert.ok(control.height>=48,JSON.stringify(control));
+    if(path==='rooms') assert.deepEqual(await page.locator('.room-link').evaluateAll(as=>as.map(a=>a.getAttribute('href'))),['lounge.html','bedroom.html','kitchen.html','bathroom.html','office.html','water.html','wifi.html']);
+    if(path==='index'||path==='office') await page.screenshot({path:'/tmp/design1/'+(process.env.NEST_BASE_URL?'after-':'local-')+(path==='index'?'home':'office')+'.png'});
+    await openMore();
+    if(['tracker','findings','medical','skin','cars','apartments','recovery'].includes(path)) assert.equal(await page.locator('.navtile[aria-current]').getAttribute('href'),path+'.html');
+    for(const href of await page.locator('.navtile, .bottom-bar a').evaluateAll(as=>as.map(a=>a.getAttribute('href')))) visited.add(href);
+    await closeMore();
+    console.log(path+': 200; '+active+' highlighted; no overflow; content clears bar');
   }
-  await openMenu();
-  await page.locator('.wrap').click({position:{x:10,y:700}});
-  assert.equal(await page.locator('.menubtn').getAttribute('aria-expanded'), 'false');
-  await openMenu();
-  await page.setViewportSize({width:1000,height:844});
-  assert.equal(await page.locator('.navpanel').isVisible(), false);
-  assert.equal(await page.locator('.nav-in a.tab').count(), 18);
+  // Exercise actual primary, room-hub and More links, including Cloudflare's clean URLs.
+  for(const href of visited) {
+    if(href==='rooms.html') {
+      await page.locator('.bottom-bar a[href="rooms.html"]').click();await page.waitForLoadState('networkidle');
+      for(const room of ['lounge','bedroom','kitchen','bathroom','office','water','wifi']) {
+        await page.locator('.room-link[href="'+room+'.html"]').click();await page.waitForLoadState('networkidle');
+        assert.equal(canonical(new URL(page.url()).pathname),'/'+room);
+        await page.locator('.bottom-bar a[href="rooms.html"]').click();await page.waitForLoadState('networkidle');
+      }
+    } else {
+      const primary=page.locator('.bottom-bar a[href="'+href+'"]');
+      if(await primary.count()) await primary.click();
+      else {await openMore();await page.locator('.navtile[href="'+href+'"]').click();}
+      await page.waitForLoadState('networkidle');
+      assert.equal(canonical(new URL(page.url()).pathname),canonical('/'+href));
+    }
+  }
+  await page.goto(base+'/office.html',{waitUntil:'networkidle'});
+  await openMore();
+  await page.screenshot({path:'/tmp/design1/'+(process.env.NEST_BASE_URL?'after-':'local-')+'more-sheet.png'});
+  // Modal focus remains in the sheet, and background scrolling is locked.
+  for(let i=0;i<15;i++){await page.keyboard.press('Tab');assert.ok(await page.evaluate(()=>document.querySelector('#more-sheet').contains(document.activeElement)));}
+  assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).overflow),'hidden');
+  await page.setViewportSize({width:390,height:360});
+  const scroll=page.locator('.sheet-scroll');
+  assert.ok(await scroll.evaluate(e=>e.scrollHeight>e.clientHeight),'Short viewport scrolls internally');
+  await scroll.hover();await page.mouse.wheel(0,600);
+  await page.waitForFunction(()=>document.querySelector('.sheet-scroll').scrollTop>0);
+  await page.locator('.navlogout').scrollIntoViewIfNeeded();
+  assert.ok(await page.locator('.navlogout').evaluate(e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}));
+  await closeMore();
   await page.setViewportSize({width:390,height:844});
-  await openMenu();
-  await page.locator('.navlogout').click();
-  await page.waitForURL('**/login');
-  const denied = await context.request.get(base+'/skin', {maxRedirects:0});
-  assert.equal(denied.status(), 302, 'Logout clears session');
-  assert.deepEqual(errors, []);
-  console.log('Menu checks passed: groups, unchanged hrefs, phone light/dark, short-screen scroll, 17 destinations, active pages, dismissal, desktop, logout.');
-} finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); db.close(); }
+  await openMore();
+  await page.mouse.click(10,10);
+  await page.waitForFunction(()=>!document.querySelector('#more-sheet').open);
+  await openMore();
+  await page.goBack();
+  await page.waitForFunction(()=>!document.querySelector('#more-sheet').open);
+  await openMore();
+  const handle=await page.locator('.sheet-handle').boundingBox();
+  await page.mouse.move(handle.x+handle.width/2,handle.y+20);await page.mouse.down();await page.mouse.move(handle.x+handle.width/2,handle.y+100,{steps:10});await page.mouse.up();
+  await page.waitForFunction(()=>!document.querySelector('#more-sheet').open);
+  for(const colorScheme of ['light','dark']) {
+    await page.emulateMedia({colorScheme});await layout();
+    const theme=await page.evaluate(()=>{const m=[...document.querySelectorAll('meta[name="theme-color"]')].find(m=>matchMedia(m.media).matches);return {meta:m.content,bg:getComputedStyle(document.body).backgroundColor};});
+    assert.equal(theme.meta,colorScheme==='dark'?'#100E22':'#F6F4FF');
+    assert.equal(theme.bg,colorScheme==='dark'?'rgb(16, 14, 34)':'rgb(246, 244, 255)');
+  }
+  await page.setViewportSize({width:1000,height:844});await layout();
+  await page.setViewportSize({width:390,height:844});
+  if(!process.env.NEST_BASE_URL) {
+    const publicPage=await browser.newPage({viewport:{width:390,height:844}});
+    await publicPage.route('https://nest-test.github.io/**',async r=>{
+      const response=await asset(new Request(r.request().url()));
+      await r.fulfill({status:response.status,headers:Object.fromEntries(response.headers),body:Buffer.from(await response.arrayBuffer())});
+    });
+    await publicPage.goto('https://nest-test.github.io/index.html',{waitUntil:'networkidle'});
+    assert.equal(await publicPage.locator('.bottom-tab').count(),4,'Public origin omits Ask');
+    await publicPage.locator('.bottom-bar button').click();
+    assert.equal(await publicPage.locator('.bottom-bar, #more-sheet').locator('a[href="skin.html"],a[href="ask.html"],a[href="/logout"]').count(),0,'App-only navigation stays private');
+    await publicPage.close();
+  }
+  await openMore();await page.locator('.navlogout').click();await page.waitForURL('**/login');
+  assert.equal((await context.request.get(base+'/skin',{maxRedirects:0})).status(),302,'Logout clears session');
+  assert.deepEqual(errors,[]);
+  console.log('App shell passed: all destinations, clicks, 390x844 dark/light, desktop, content clearance, short-sheet scroll, focus trap, Escape, outside tap, Back, swipe, logout.');
+} finally {await browser.close();await new Promise(resolve=>server.close(resolve));db.close();}

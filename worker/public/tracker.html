@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6C4CF5">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100E22" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F4FF" media="(prefers-color-scheme: light)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,32 +16,32 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪺</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261114c">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261125-design1">
 <style>
-  .ticker { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px,4vw,30px); box-shadow: var(--shadow); border-top: 4px solid var(--baby); }
+  .ticker { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: clamp(22px,4vw,30px); box-shadow: var(--shadow); border-top: 4px solid var(--baby); }
   .ticker.move { border-top-color: var(--home); }
   .ticker.move .wk { color: var(--home); }
   .ticker .wk { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(38px,8vw,60px); line-height: 1; letter-spacing: -.02em; color: var(--baby); }
   .ticker .meta { color: var(--ink-soft); font-size: 15px; margin-top: 8px; }
-  .bar { height: 12px; border-radius: 20px; background: var(--surface-2); margin-top: 18px; overflow: hidden; }
-  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--home), var(--baby)); border-radius: 20px; transition: width .6s cubic-bezier(.2,.7,.3,1); }
-  .barlabels { display: flex; justify-content: space-between; font-family: "JetBrains Mono", monospace; font-size: 10.5px; color: var(--ink-soft); margin-top: 7px; letter-spacing: .04em; }
+  .bar { height: 12px; border-radius: var(--r-md); background: var(--surface-2); margin-top: 18px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--home), var(--baby)); border-radius: var(--r-md); transition: width .6s cubic-bezier(.2,.7,.3,1); }
+  .barlabels { display: flex; justify-content: space-between; font-family: "Figtree", system-ui, sans-serif; font-size: 11px; color: var(--ink-soft); margin-top: 7px; letter-spacing: .04em; }
 
   .mile { list-style: none; margin: 0; padding: 0; }
   .mile li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dotted var(--line); align-items: baseline; }
   .mile li:last-child { border-bottom: none; }
-  .mile .when { font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 600; color: var(--home); flex: none; width: 92px; }
+  .mile .when { font-family: "Figtree", system-ui, sans-serif; font-size: 12px; font-weight: 600; color: var(--home); flex: none; width: 92px; }
   .mile .what { font-size: 14.5px; }
   .mile .what small { color: var(--ink-soft); display: block; font-size: 12.5px; }
   .mile li.past { opacity: .5; } .mile li.past .when { color: var(--ink-soft); }
-  .mile li.now { background: var(--baby-soft); margin: 0 -12px; padding: 12px; border-radius: 10px; border-bottom: none; }
+  .mile li.now { background: var(--baby-soft); margin: 0 -12px; padding: 12px; border-radius: var(--r-sm); border-bottom: none; }
   .mile li.now .when { color: var(--baby); }
 
   .todos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-  .todos li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; padding: 9px 8px; border-radius: 9px; }
+  .todos li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; padding: 9px 8px; border-radius: var(--r-sm); }
   .todos li:hover { background: var(--surface-2); }
-  .todos .box { flex: none; width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--accent); margin-top: 1px; }
+  .todos .box { flex: none; width: 18px; height: 18px; border-radius: var(--r-sm); border: 2px solid var(--accent); margin-top: 1px; }
   .todos .txt small { display: block; color: var(--ink-soft); font-size: 12.5px; }
 
   .saved { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -48,15 +49,15 @@
   .savecol h4 { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 17px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
   .savecol.car h4 { color: var(--car-ink); } .savecol.flat h4 { color: var(--home-ink); } .savecol.mid h4 { color: var(--baby); }
   .savelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+  .savelist li a { display: flex; justify-content: space-between; gap: 8px; text-decoration: none; font-size: 13.5px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 11px 13px; }
   .savelist li a:hover { border-color: var(--accent); }
-  .savelist .go { font-family: "JetBrains Mono", monospace; color: var(--accent); }
-  .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 18px; }
+  .savelist .go { font-family: "Figtree", system-ui, sans-serif; color: var(--accent); }
+  .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: var(--r-sm); padding: 18px; }
 
   .pacer { border-top: 4px solid var(--home); }
   .pacehead { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
   .pacehave { font-size: 14px; color: var(--ink-soft); font-weight: 600; display: flex; align-items: center; gap: 9px; }
-  .pacehave input { width: 118px; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 16px; border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px; background: var(--surface-2); color: var(--ink); }
+  .pacehave input { width: 118px; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 16px; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 7px 10px; background: var(--surface-2); color: var(--ink); }
   .paceleft { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(30px,6.5vw,46px); line-height: 1; letter-spacing: -.02em; color: var(--home); }
   .paceleft small { font-size: 14px; color: var(--ink-soft); font-family: "Figtree", sans-serif; font-weight: 600; }
   .paceleft.warn { color: var(--car-ink); } .paceleft.over { color: var(--red); }
@@ -64,44 +65,27 @@
   .pacerow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dotted var(--line); }
   .pacerow:last-child { border-bottom: none; }
   .pacerow.off { opacity: .45; }
-  .pacetoggle { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 16px; text-align: center; user-select: none; }
+  .pacetoggle { flex: none; width: 20px; height: 20px; border-radius: var(--r-sm); border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 16px; text-align: center; user-select: none; }
   .pacerow.on .pacetoggle { background: var(--accent); border-color: var(--accent); color: #fff; }
   .paceinfo { flex: 1; min-width: 0; }
   .paceinfo .pl { font-weight: 600; font-size: 14.5px; }
   .paceinfo .ps { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
   .paceamt { flex: none; display: flex; align-items: center; gap: 3px; }
-  .paceamt > span { color: var(--ink-soft); font-family: "JetBrains Mono", monospace; font-size: 13px; }
-  .paceamt input { width: 84px; text-align: right; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; background: var(--surface); color: var(--ink); }
+  .paceamt > span { color: var(--ink-soft); font-family: "Figtree", system-ui, sans-serif; font-size: 13px; }
+  .paceamt input { width: 84px; text-align: right; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 6px 8px; background: var(--surface); color: var(--ink); }
   .pacesum { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13.5px; }
-  .pacesum b { font-family: "JetBrains Mono", monospace; }
+  .pacesum b { font-family: "Figtree", system-ui, sans-serif; }
   .ct { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
-  .ct th { text-align: left; font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  .ct th { text-align: left; font-family: "Figtree", system-ui, sans-serif; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 1px solid var(--line); }
   .ct td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  .ct td.amt { text-align: right; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--baby); white-space: nowrap; }
+  .ct td.amt { text-align: right; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; color: var(--baby); white-space: nowrap; }
   .ct tr:last-child td { border-bottom: none; }
   .ct tr.hl td { background: var(--baby-soft); font-weight: 600; }
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
-  <a class="brandmark" href="index.html">🪺 The Nest</a>
-  <a class="tab" href="index.html">Plan</a>
-  <a class="tab" href="tracker.html" aria-current="page">Tracker</a>
-  <a class="tab" href="lounge.html">Lounge</a>
-  <a class="tab" href="bedroom.html">Bedroom</a>
-  <a class="tab" href="bathroom.html">Bathroom</a>
-  <a class="tab" href="water.html">Water</a>
-  <a class="tab" href="kitchen.html">Kitchen</a>
-  <a class="tab" href="office.html">Office</a>
-  <a class="tab" href="medical.html">Medical aid</a>
-  <a class="tab" href="cars.html">Cars</a>
-  <a class="tab" href="apartments.html">Apartments</a>
-  <a class="tab" href="wifi.html">WiFi</a>
-  <a class="tab" href="recovery.html">Post-pregnancy</a>
-  <a class="tab" href="decided.html">Decided</a>
-  <a class="tab" href="findings.html">Findings</a>
-</div></nav>
-<script src="nav.js?v=20261117c"></script>
+<header class="nav"></header>
+<script src="nav.js?v=20261125-design1"></script>
 
 <div class="wrap">
   <header>
@@ -114,7 +98,7 @@
     <p>You've got about R52k this month. Set each cost (rent, the FNB loan, groceries) and tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the car pot. It all saves on your phone — change the numbers anytime.</p></div>
   <div class="panel pacer">
     <div class="pacehead">
-      <label class="pacehave">You have <span style="font-family:'JetBrains Mono',monospace">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
+      <label class="pacehave">You have <span style="font-family:Figtree,system-ui,sans-serif">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
       <div class="paceleft" id="pace-left">R—<small> left</small></div>
     </div>
     <div class="bar"><span id="pace-bar" style="width:0%"></span></div>

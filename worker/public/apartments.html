@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#6C4CF5">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100E22" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F4FF" media="(prefers-color-scheme: light)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,15 +16,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261114c">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css?v=20261125-design1">
 <style>
   .zonekey { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
-  .zk { font-size: 12.5px; font-weight: 600; padding: 8px 13px; border-radius: 20px; display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); }
+  .zk { font-size: 12.5px; font-weight: 600; padding: 8px 13px; border-radius: var(--r-md); display: flex; align-items: center; gap: 7px; border: 1px solid var(--line); }
   .zk.ok { background: var(--home-soft); color: var(--home-ink); }
   .zk.mid { background: var(--car-soft); color: var(--car-ink); }
   .zk.far { background: var(--red-soft); color: var(--red); }
-  .ub { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 20px; letter-spacing: .03em; }
+  .ub { font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: var(--r-md); letter-spacing: .03em; }
   .ub.ok { background: var(--home-soft); color: var(--home-ink); }
   .ub.mid { background: var(--car-soft); color: var(--car-ink); }
   .ub.far { background: var(--red-soft); color: var(--red); }
@@ -32,48 +33,31 @@
   .cyclegroup.hide { display: none; }
   .cyclehead { display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px; padding-bottom: 9px; border-bottom: 1px solid var(--line); }
   .cyclehead h4 { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 19px; margin: 0; color: var(--home-ink); }
-  .cyclecount { font-family: "JetBrains Mono", monospace; font-size: 10.5px; font-weight: 600; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+  .cyclecount { font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 600; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .04em; }
   .cyclenote { font-size: 12px; color: var(--ink-soft); margin: 7px 0 14px; line-height: 1.45; }
   .hunt { margin-top: 34px; }
   .hunt h4 { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: 20px; margin: 0 0 4px; color: var(--home-ink); }
   .huntgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 14px; }
   @media (max-width: 780px) { .huntgrid { grid-template-columns: 1fr; } }
-  .hcol { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .hcol { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 20px; box-shadow: var(--shadow); }
   .hcol h5 { margin: 0 0 12px; font-size: 14px; }
   .hlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
   .hlist a { text-decoration: none; display: block; }
   .hlist .nm { font-weight: 600; font-size: 13.5px; }
-  .hlist .nm .arr { color: var(--home); font-family: "JetBrains Mono", monospace; }
+  .hlist .nm .arr { color: var(--home); font-family: "Figtree", system-ui, sans-serif; }
   .hlist .dd { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
   .hlist a:hover .nm { text-decoration: underline; }
   .cx-units { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
   @media (max-width: 480px) { .cx-units { grid-template-columns: 1fr; } }
-  .cx-unit { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .cx-unit { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 12px; }
   .cx-who { font-size: 13px; font-weight: 600; color: var(--home-ink); }
   .cx-spec { font-size: 12px; color: var(--ink-soft); margin: 4px 0 8px; line-height: 1.4; }
-  .cx-total { margin-top: 10px; font-family: "JetBrains Mono", monospace; font-size: 12.5px; font-weight: 600; color: var(--ink); }
+  .cx-total { margin-top: 10px; font-family: "Figtree", system-ui, sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink); }
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
-  <a class="brandmark" href="index.html">🪺 The Nest</a>
-  <a class="tab" href="index.html">Plan</a>
-  <a class="tab" href="tracker.html">Tracker</a>
-  <a class="tab" href="lounge.html">Lounge</a>
-  <a class="tab" href="bedroom.html">Bedroom</a>
-  <a class="tab" href="bathroom.html">Bathroom</a>
-  <a class="tab" href="water.html">Water</a>
-  <a class="tab" href="kitchen.html">Kitchen</a>
-  <a class="tab" href="office.html">Office</a>
-  <a class="tab" href="medical.html">Medical aid</a>
-  <a class="tab" href="cars.html">Cars</a>
-  <a class="tab" href="apartments.html" aria-current="page">Apartments</a>
-  <a class="tab" href="wifi.html">WiFi</a>
-  <a class="tab" href="recovery.html">Post-pregnancy</a>
-  <a class="tab" href="decided.html">Decided</a>
-  <a class="tab" href="findings.html">Findings</a>
-</div></nav>
-<script src="nav.js?v=20261117c"></script>
+<header class="nav"></header>
+<script src="nav.js?v=20261125-design1"></script>
 
 <div class="wrap">
   <header>
@@ -93,7 +77,7 @@
   </div>
 
   <details class="note" style="border-left:3px solid var(--good);margin:0 0 20px" id="baker-rd">
-    <summary style="cursor:pointer;font-family:'Bricolage Grotesque',serif;font-weight:600;font-size:18px;min-height:44px;display:flex;align-items:center">🏠 Where you live now: Unit 30, Victoria Square ▾</summary>
+    <summary style="cursor:pointer;font-family:'Bricolage Grotesque',serif;font-weight:600;font-size:18px;min-height: 48px;display:flex;align-items:center">🏠 Where you live now: Unit 30, Victoria Square ▾</summary>
     <p><b>📍 Address:</b> Unit 30, 114 Victoria Square, Eden Glen, Edenvale, 1613. Use this full line for couriers, Afrihost, SABC and the bank.</p>
     <p><b>The deal:</b> R11,900 a month, 1 Nov 2026 to 31 Oct 2027. 3-bed. Prepaid electricity and water. No pets. Josh is the tenant; private landlord Itumeleng Nthite. Lease allows anchoring wardrobes and drawers to the wall (fill the holes when you leave).</p>
     <p><b>Living there:</b> working from home and Mishka's courier deliveries are fine; just no shop or walk-in office. Mom is staying with you (11 Nov).</p>

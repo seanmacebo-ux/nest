@@ -91,9 +91,10 @@ try {
   assert.notEqual(await first.locator('#research').getAttribute('open'), null);
   await first.locator('#research > summary').click();
   assert.equal(await first.evaluate(()=>document.documentElement.scrollWidth > innerWidth),false);
-  await first.locator('.menubtn').click();
-  assert.equal(await first.locator('.navtile[aria-current=page]').innerText(),'🧴\nSkin');
-  await first.locator('.menubtn').click();
+  await first.locator('.bottom-bar button').click();
+  assert.equal(await first.locator('.navtile[aria-current=page]').innerText(),'Skin');
+  await first.locator('.sheet-close').click();
+  await first.waitForFunction(()=>!document.querySelector('#more-sheet').open);
   const tick='[data-tick="skin-bought-anua"]';
   await first.locator(tick).press('Space');
   await eventually(()=>JSON.parse(db.prepare('SELECT v FROM kv WHERE k=?').get('ticks')?.v || '{}')['skin-bought-anua']);
