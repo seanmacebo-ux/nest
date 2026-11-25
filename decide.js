@@ -12,8 +12,10 @@
 // Rejected cards fade and sink to the bottom of their list (CSS order).
 (() => {
   const KEY = 'nest_decide', PEND = 'nest_decide_pending', BOT = 'babybeanbot';
-  const get = k => { try { return JSON.parse(localStorage.getItem(k)) || {}; } catch (e) { return {}; } };
-  const put = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  // In the private app (not the GitHub Pages copy), choices go through NEST so both phones share them.
+  const APP = !/github\.io$/.test(location.hostname) && !!window.NEST;
+  const get = k => { if (APP) { const v = NEST._get(k, {}); return v && typeof v === 'object' ? v : {}; } try { return JSON.parse(localStorage.getItem(k)) || {}; } catch (e) { return {}; } };
+  const put = (k, v) => { if (APP) { NEST._set(k, v); return; } try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
   const state = el => get(KEY)[el.dataset.dk] ?? el.dataset.st ?? '';
 
   const paint = el => {
@@ -46,7 +48,7 @@
     const p = get(PEND), ks = Object.keys(p);
     if (!ks.length) { bar.classList.remove('on'); return; }
     const c = ks.filter(k => p[k].v === 'consider').length, r = ks.filter(k => p[k].v === 'reject').length, u = ks.length - c - r;
-    bar.innerHTML = `<span>${[c ? '🤔 ' + c : '', r ? '✕ ' + r : '', u ? '↩︎ ' + u : ''].filter(Boolean).join(' · ')} <small>only on this phone</small></span><button type="button" class="send">Send to The Nest →</button>`;
+    bar.innerHTML = `<span>${[c ? '🤔 ' + c : '', r ? '✕ ' + r : '', u ? '↩︎ ' + u : ''].filter(Boolean).join(' · ')} <small>${APP ? 'saved for both of you' : 'only on this phone'}</small></span><button type="button" class="send">${APP ? 'Send to Claude →' : 'Send to The Nest →'}</button>`;
     bar.classList.add('on');
   };
 
@@ -66,6 +68,17 @@
       });
     });
     const text = lines.join('\n');
+    if (APP) {
+      // Straight into the Ask Claude inbox, so Claude writes the picks into the pages for good.
+      const btn = bar.querySelector('.send'); if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      const fd = new FormData(); fd.append('text', text);
+      NEST._fetch('/api/requests', { method: 'POST', body: fd }).then(r => {
+        if (!r.ok) throw new Error();
+        put(PEND, {}); bar.innerHTML = '<span>Sent ✓ <small>Claude will add these to the pages</small></span>';
+        setTimeout(tray, 4000);
+      }).catch(() => { if (btn) { btn.disabled = false; btn.textContent = 'Try again →'; } });
+      return;
+    }
     try { navigator.clipboard && navigator.clipboard.writeText(text).catch(() => {}); } catch (e) {}
     put(PEND, {}); tray();
     window.location.href = 'tg://resolve?domain=' + BOT + '&text=' + encodeURIComponent(text);
@@ -85,5 +98,7 @@
   });
 
   document.addEventListener('DOMContentLoaded', () => { document.body.appendChild(bar); wire(); });
+  // The other phone's choices arrive with each sync.
+  window.addEventListener('nest:sync', () => wire());
   window.DECIDE = { wire };
 })();
