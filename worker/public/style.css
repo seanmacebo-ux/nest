@@ -1,5 +1,7 @@
 /* The Nest — shared design system */
 :root {
+  /* Our own light + dark palettes: stops phones (Chrome's auto dark mode) recolouring the site. */
+  color-scheme: light dark;
   /* palette: Lavender & Mint · design: Playful Bold (13 Nov 2026) */
   --ground: #F6F4FF; --surface: #FFFFFF; --surface-2: #ECE8FF;
   --ink: #1E1A3A; --ink-soft: #6B668F; --line: #E2DDF7;
