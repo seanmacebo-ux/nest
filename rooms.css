@@ -135,6 +135,8 @@
   .jump::-webkit-scrollbar { display: none; }
   .jump a { flex: none; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 8px 14px; min-height: 36px; display: flex; align-items: center; gap: 0; }
   .jump a.on { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+  /* The summary is populated by rooms.js; do not show its empty shell while it loads. */
+  .nest-app #hero:empty { display: none; }
   .hero { margin-top: 22px; background: var(--surface); border: 2px solid var(--good); border-radius: 20px; padding: clamp(18px,3vw,26px); box-shadow: var(--shadow); }
   .hero .lbl { color: var(--good); }
   .hero .big { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(40px,9vw,58px); line-height: 1; letter-spacing: -.02em; color: var(--accent); margin-top: 10px; }

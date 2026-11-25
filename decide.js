@@ -5,7 +5,8 @@
 //   - Any element with data-dk="<unique key>" (and data-dl="<label>") is a card.
 //     decide.js adds the two buttons into its .dec slot (or at the end).
 //   - Tapping marks the card straight away on this phone (stored in localStorage)
-//     and adds it to a "send" tray at the bottom of the screen.
+//     and syncs automatically in the private app. The public copy adds it
+//     to a "send" tray at the bottom of the screen.
 //   - "Send to The Nest" opens Telegram with ONE message listing every change,
 //     so The Nest writes them into the page data (data-st="consider|reject")
 //     and both phones see the same thing.
@@ -45,14 +46,16 @@
   // bottom tray: what's changed on this phone and not sent yet
   const bar = document.createElement('div'); bar.className = 'dectray'; bar.setAttribute('role', 'status');
   const tray = () => {
+    if (APP) return;
     const p = get(PEND), ks = Object.keys(p);
     if (!ks.length) { bar.classList.remove('on'); return; }
     const c = ks.filter(k => p[k].v === 'consider').length, r = ks.filter(k => p[k].v === 'reject').length, u = ks.length - c - r;
-    bar.innerHTML = `<span>${[c ? '🤔 ' + c : '', r ? '✕ ' + r : '', u ? '↩︎ ' + u : ''].filter(Boolean).join(' · ')} <small>${APP ? 'saved for both of you' : 'only on this phone'}</small></span><button type="button" class="send">${APP ? 'Send to Claude →' : 'Send to The Nest →'}</button>`;
+    bar.innerHTML = `<span>${[c ? '🤔 ' + c : '', r ? '✕ ' + r : '', u ? '↩︎ ' + u : ''].filter(Boolean).join(' · ')} <small>only on this phone</small></span><button type="button" class="send">Send to The Nest →</button>`;
     bar.classList.add('on');
   };
 
   const send = () => {
+    if (APP) return;
     const p = get(PEND), ks = Object.keys(p); if (!ks.length) return;
     // The tray collects taps from every page, so label each line by the room
     // in its key ("Room|thing|option"), not by whichever page Send was tapped on.
@@ -68,17 +71,6 @@
       });
     });
     const text = lines.join('\n');
-    if (APP) {
-      // Straight into the Ask Claude inbox, so Claude writes the picks into the pages for good.
-      const btn = bar.querySelector('.send'); if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-      const fd = new FormData(); fd.append('text', text);
-      NEST._fetch('/api/requests', { method: 'POST', body: fd }).then(r => {
-        if (!r.ok) throw new Error();
-        put(PEND, {}); bar.innerHTML = '<span>Sent ✓ <small>Claude will add these to the pages</small></span>';
-        setTimeout(tray, 4000);
-      }).catch(() => { if (btn) { btn.disabled = false; btn.textContent = 'Try again →'; } });
-      return;
-    }
     try { navigator.clipboard && navigator.clipboard.writeText(text).catch(() => {}); } catch (e) {}
     put(PEND, {}); tray();
     window.location.href = 'tg://resolve?domain=' + BOT + '&text=' + encodeURIComponent(text);
@@ -91,13 +83,15 @@
     e.preventDefault(); e.stopPropagation();
     const k = el.dataset.dk, cur = state(el), v = cur === b.dataset.dv ? '' : b.dataset.dv;
     const all = get(KEY); all[k] = v; put(KEY, all);
-    const p = get(PEND);
-    if (v === (el.dataset.st || '')) delete p[k]; else p[k] = { v, l: el.dataset.dl || k };
-    put(PEND, p);
+    if (!APP) {
+      const p = get(PEND);
+      if (v === (el.dataset.st || '')) delete p[k]; else p[k] = { v, l: el.dataset.dl || k };
+      put(PEND, p);
+    }
     paint(el); tray();
   });
 
-  document.addEventListener('DOMContentLoaded', () => { document.body.appendChild(bar); wire(); });
+  document.addEventListener('DOMContentLoaded', () => { if (!APP) document.body.appendChild(bar); wire(); });
   // The other phone's choices arrive with each sync.
   window.addEventListener('nest:sync', () => wire());
   window.DECIDE = { wire };

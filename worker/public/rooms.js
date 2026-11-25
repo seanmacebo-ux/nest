@@ -23,6 +23,7 @@ const BOUGHT={
   // thing (each has its own #anchor), a hero card with the total, then every
   // thing as its own section with its options showing. 🤔/✕ come from decide.js.
   const BOT = 'babybeanbot', SENT = 'nest_sent', ROOM = document.body.dataset.room;
+  const APP = !/github\.io$/.test(location.hostname) && !!window.NEST;
   const tg = t => 'tg://resolve?domain=' + BOT + '&text=' + encodeURIComponent(t);
   const web = 'https://t.me/' + BOT;
   const copy = t => {
@@ -32,7 +33,14 @@ const BOUGHT={
   };
   const toast = document.createElement('div'); toast.className = 'toast'; toast.setAttribute('role', 'status');
   document.body.appendChild(toast);
+  let toastTimer;
   const showToast = text => {
+    clearTimeout(toastTimer);
+    if (APP) {
+      toast.textContent = text; toast.classList.add('on');
+      toastTimer = setTimeout(() => toast.classList.remove('on'), 5000);
+      return;
+    }
     toast.innerHTML = '<b>Opening Telegram…</b> If the message box is empty, it\'s copied: just paste and send.<q></q><div class="tb"><a href="' + web + '">Open Telegram</a><button type="button" data-tcopy>Copy again</button><button type="button" data-tclose>Close</button></div>';
     toast.querySelector('q').textContent = text;
     toast.querySelector('[data-tcopy]').onclick = e => { e.stopPropagation(); copy(text); e.target.textContent = 'Copied ✓'; };
@@ -40,7 +48,26 @@ const BOUGHT={
     toast.classList.add('on');
   };
   const sent = () => { try { return JSON.parse(localStorage.getItem(SENT)) || {}; } catch (e) { return {}; } };
-  const go = (key, text) => { const s = sent(); s[key] = 1; localStorage.setItem(SENT, JSON.stringify(s)); copy(text); showToast(text); window.location.href = tg(text); };
+  const go = async (key, text, button) => {
+    if (APP) {
+      if (button.disabled) return false;
+      const label = button.textContent;
+      button.disabled = true; button.textContent = 'Sending…';
+      try {
+        const body = new FormData(); body.append('text', text);
+        const response = await NEST._fetch('/api/requests', { method: 'POST', body });
+        if (!response.ok) throw new Error('Could not send');
+        showToast('Sent to The Nest. Claude will pick this up shortly.');
+        return true;
+      } catch {
+        showToast('Could not send. Please try again when you are online.');
+        return false;
+      } finally { button.disabled = false; button.textContent = label; }
+    }
+    const s = sent(); s[key] = 1; localStorage.setItem(SENT, JSON.stringify(s));
+    copy(text); showToast(text); window.location.href = tg(text);
+    return true;
+  };
   const esc = x => String(x == null ? '' : x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
   const num = p => { const m = String(p).replace(/,/g,'').match(/\d+/); return m ? +m[0] : 0; };
   const fmt = n => 'R' + n.toLocaleString('en-ZA').replace(/\s/g, ',');
@@ -115,7 +142,18 @@ const BOUGHT={
 
   const box = document.getElementById('addtxt');
   document.querySelectorAll('.qchips button').forEach(c => c.addEventListener('click', () => { box.value = (box.value.trim() ? box.value.replace(/\s*$/, '') + '\n' : '') + c.dataset.q; box.focus(); }));
-  document.getElementById('addsend').addEventListener('click', () => { const t = box.value.trim(); if (!t) { box.focus(); return; } go('add:' + t, '🛒 Add to ' + ROOM + ':\n' + t); });
+  const addsend = document.getElementById('addsend');
+  if (APP) {
+    addsend.textContent = 'Send to The Nest →';
+    const sub = document.querySelector('header .sub');
+    sub.textContent = sub.textContent.replace('then tap Send so I save it for both of you.', 'your choices save automatically for both of you.');
+  }
+  addsend.addEventListener('click', async () => {
+    const t = box.value.trim(); if (!t) { box.focus(); return; }
+    if (await go('add:' + t, '🛒 Add to ' + ROOM + ':\n' + t, addsend)) {
+      if (APP && box.value.trim() === t) box.value = '';
+    }
+  });
   // ⚖️ compare: any item with 2+ options opens a side-by-side sheet (Sean, 16 Nov)
   const all = need.concat(maybe);
   const ov = document.createElement('div'); ov.className = 'cmp-ov'; ov.hidden = true;
@@ -182,13 +220,16 @@ const BOUGHT={
     }
   });
 
-  document.addEventListener('click', e => {
+  document.addEventListener('click', async e => {
     const b = e.target.closest('button'); if (!b || b.closest('.dec') || b.closest('.cmp-ov')) return;
     if (b.dataset.cmp) { cOpen(b.dataset.cmp); return; }
-    if (b.dataset.k) { b.classList.add('sent'); b.textContent = '✓ Sent'; go(b.dataset.k, '✅ Bought: ' + b.dataset.k); }
-    else if (b.dataset.done) go(b.dataset.done, '✅ Bought: ' + b.dataset.done);
-    else if (b.dataset.more) go('more:' + b.dataset.more, '🔎 More options please: ' + b.dataset.more);
-    else if (b.dataset.skip) go('skip:' + b.dataset.skip, "✕ Don't need: " + b.dataset.skip);
+    if (b.dataset.k) {
+      if (!APP) { b.classList.add('sent'); b.textContent = '✓ Sent'; }
+      if (await go(b.dataset.k, '✅ Bought: ' + b.dataset.k, b)) { b.classList.add('sent'); b.textContent = '✓ Sent'; }
+    }
+    else if (b.dataset.done) go(b.dataset.done, '✅ Bought: ' + b.dataset.done, b);
+    else if (b.dataset.more) go('more:' + b.dataset.more, '🔎 More options please: ' + b.dataset.more, b);
+    else if (b.dataset.skip) go('skip:' + b.dataset.skip, "✕ Don't need: " + b.dataset.skip, b);
   });
 
   // same as Medical aid: sticky offsets follow the nav, the pill in view lights up
