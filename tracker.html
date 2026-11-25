@@ -217,27 +217,25 @@
     { d: '2027-03-31', when: 'Early 2027', what: 'Learner\'s licence, then lessons', sub: 'Unlocks the car' },
     { d: '2027-06-30', when: '~Q2 2027', what: 'Driver\'s licence, then the car 🚗', sub: 'Shortlist on the Cars page' }
   ].sort((a, b) => a.d < b.d ? -1 : 1);
-  window.NEST_MILESTONES = M;
+  const ml = document.getElementById('mile');
+  const today = now.toISOString().slice(0, 10);
+  let nowSet = false;
+  ml.innerHTML = M.map(m => {
+    let cls = '';
+    if (m.d < today) cls = 'past';
+    else if (!nowSet) { cls = 'now'; nowSet = true; }
+    return `<li class="${cls}"><span class="when">${m.when}</span><span class="what">${m.what}${m.sub ? `<small>${m.sub}</small>` : ''}</span></li>`;
+  }).join('');
 
   // Saved picks
   function render(kind, elId, empty) {
     const items = window.NEST.saves(kind);
     const el = document.getElementById(elId);
     if (!items.length) { el.innerHTML = `<div class="emptysave">${empty}</div>`; return; }
-    el.replaceChildren(...items.map(x => {
-      const li = document.createElement('li'), a = document.createElement('a');
-      try { const url = new URL(x.url, location.href); a.href = ['https:', 'http:'].includes(url.protocol) ? url.href : '#'; } catch { a.href = '#'; }
-      a.target = '_blank'; a.rel = 'noopener noreferrer';
-      const label = document.createElement('span'); label.textContent = x.label;
-      const go = document.createElement('span'); go.className = 'go'; go.textContent = '↗';
-      a.append(label, go); li.append(a); return li;
-    }));
+    el.innerHTML = items.map(x => `<li><a href="${x.url || '#'}" target="_blank" rel="noopener noreferrer"><span>${x.label}</span><span class="go">↗</span></a></li>`).join('');
   }
-  function renderSaved() {
   render('car', 'savedcars', 'No cars saved yet — tap ♡ Save on the Cars page.');
   render('flat', 'savedflats', 'No flats saved yet — tap ♡ Save on the Apartments page.');
-  }
-  renderSaved(); window.addEventListener('nest:sync', renderSaved);
 })();
 
 // ===== Cash pacer =====
@@ -252,9 +250,9 @@
     { k:'car_pot',     label:'Car-deposit pot',      sub:'What you put away toward the car this month', amt:0 }
   ];
   const saved = window.NEST._get(KEY, {});
-  let have = Number.isFinite(+saved.have) && saved.have != null ? Math.max(0, +saved.have) : 52000;
+  let have = (saved.have != null) ? saved.have : 52000;
   const rs = saved.rows || {};
-  PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = Number.isFinite(+s.amt) && s.amt != null ? Math.max(0, +s.amt) : p.amt; });
+  PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = (s.amt != null) ? s.amt : p.amt; });
   function persist(){ window.NEST._set(KEY, { have: have, rows: Object.fromEntries(PACE.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }])) }); }
   function fmt(n){ const s = Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); return (n < 0 ? '-R' : 'R') + s; }
 
@@ -295,21 +293,7 @@
     document.getElementById('pace-msg').textContent = left < 0 ? ('Over by ' + fmt(-left)) : (left < 5000 ? 'Cutting it fine' : 'On track');
   }
   recalc();
-  window.addEventListener('nest:sync', () => {
-    const current = NEST._get(KEY, null); if (!current) return;
-    if (document.activeElement === haveInput || list.contains(document.activeElement)) return;
-    have = Number.isFinite(+current.have) ? Math.max(0, +current.have) : have;
-    haveInput.value = have;
-    PACE.forEach((p, i) => {
-      const row = current.rows?.[p.k]; if (!row) return;
-      p.on = !!row.on; p.amt = Number.isFinite(+row.amt) ? Math.max(0, +row.amt) : p.amt;
-      const el = list.children[i]; el.classList.toggle('on', p.on); el.classList.toggle('off', !p.on);
-      el.querySelector('input').value = p.amt;
-    });
-    recalc();
-  });
 })();
 </script>
-<script src="tracker-edit.js"></script>
 </body>
 </html>
