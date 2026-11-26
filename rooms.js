@@ -74,9 +74,9 @@
   const optHTML = (it, o) => {
     const key = it.name + ' — ' + o.n, on = sent()[key];
     const imp = o.imp, d = imp ? num(o.p) - num(imp.p) : 0;
-    return `<div class="opt ${o.pick ? 'pick' : ''}" data-dk="${esc((it.room || ROOM) + '|' + (it.srcName || it.name) + '|' + o.n)}" data-dl="${esc((it.srcName || it.name) + ': ' + o.n + ' (' + o.p + ', ' + o.s + ')')}" data-chosen="${!!it.fixedStatus&&o.pick===1}" data-st="${esc(o.st || '')}">
+    return `<div class="opt ${o.pick ? 'pick' : ''}" data-dk="${esc((it.room || ROOM) + '|' + (it.srcName || it.name) + '|' + o.n)}" data-dl="${esc((it.srcName || it.name) + ': ' + o.n + ' (' + o.p + ', ' + o.s + ')')}" data-st="${esc(o.st ?? (o.pick ? 'consider' : ''))}">
       <div class="opt-head">${photoHTML(it, o)}<div class="opt-info">
-        ${o.t || o.pick ? `<div class="ot">${esc((o.t || '⭐ Recommended').replace(/Pick/g, 'Recommended').replace(/pick/g, 'recommendation'))}</div>` : ''}
+        ${o.t || o.pick ? `<div class="ot">${esc((o.t || '⭐ Top pick').replace(/Pick/g, 'Top pick'))}</div>` : ''}
         <div class="on">${esc(o.n)}</div>
         <div class="opr">${esc(o.p)}</div>
         <div class="ometa">${esc(o.s)}${o.c ? ' · checked ' + esc(o.c) : ''}</div>
@@ -90,7 +90,7 @@
   const itemHTML = it => {
     const n = (it.o || []).length;
     const sub = [n ? n + ' option' + (n > 1 ? 's' : '') : '', it.price ? esc(it.price) : '', it.sub ? esc(it.sub) : ''].filter(Boolean).join(' · ');
-    return `<article class="room-item" data-item="${esc(NEST_ITEMS.id(ROOM,it.name))}"><div class="sec" id="${slug(short(it.name))}"><h2>${iconOf(it)} ${esc(it.name)}</h2>
+    return `<article class="room-item" data-item="${esc(NEST_ITEMS.id(ROOM,it.name))}"><div class="sec" id="${slug(short(it.name))}"><h2>${iconOf(it)} ${esc(it.name)}</h2>${it.o?.some(o=>o.pick)?'<span class="top-pick">⭐ Top pick</span>':''}
       <p>${sub ? `<span class="isub">${sub}</span>` : ''}${it.note ? ' ' + it.note : ''}${!n && !it.note ? ' No options yet. Tap 🔎 and I\'ll find some.' : ''}</p></div>
       ${n ? `<div class="opts">${it.o.map(o => optHTML(it, o)).join('')}</div>` : ''}
       <div class="iacts">${n > 1 ? `<button type="button" class="cmpb" data-cmp="${esc(it.name)}">⚖️ Compare side by side</button>` : ''}${n ? '' : `<button type="button" data-done="${esc(it.name)}">✓ Got it</button>`}<button type="button" data-more="${esc(it.srcName || it.name)}">🔎 More options</button><button type="button" data-skip="${esc(it.name)}">✕ Don't need it</button></div></article>`;
@@ -113,7 +113,7 @@
   });
   const jump=document.getElementById('jump');
   jump.setAttribute('aria-label','Filter by status');
-  jump.innerHTML=[['all','All'],...NEST_ITEMS.statuses].map(([k,l])=>`<button type="button" data-filter="${k}" aria-pressed="${k==='all'}">${k==='all'?l:l.split(' ').slice(1).join(' ')}</button>`).join('');
+  jump.innerHTML=[['all','All'],...NEST_ITEMS.statuses].map(([k,l])=>`<button type="button" class="status-${k}" data-filter="${k}" aria-pressed="${k==='all'}">${l}</button>`).join('');
   let filter='all';
   function regroup() {
     for (const card of cards) {

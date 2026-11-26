@@ -1,6 +1,6 @@
-// A single projection of existing room data and shared option choices. No KV migration.
+// A single projection of room data and saved choices; legacy records stay intact.
 (() => {
-  const statuses=[['need','🔎 Need'],['considering','🤔 Considering'],['decided','✅ Decided'],['bought','🧾 Bought']];
+  const statuses=[['need','🔎 Need'],['considering','🤔 Considering'],['bought','🧾 Bought']];
   const id=(room,name)=>room+'|'+name;
   const slug=t=>t.split(/[,(]/)[0].trim().toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const number=p=>Number((String(p).replace(/,/g,'').match(/\d+(?:\.\d+)?/)||['0'])[0]);
@@ -24,21 +24,23 @@
   items.push(...WIFI_ITEMS.map(it=>({...it,room:'WiFi',href:'wifi.html',id:id('WiFi',it.name)})));
   const choices=()=>window.NEST?NEST._get('nest_decide',{}):JSON.parse(localStorage.getItem('nest_decide')||'{}');
   const optionKey=(it,o)=>{const source=it.source||it;return source.room+'|'+source.name+'|'+o.n;};
-  const optionState=(key,fallback)=>choices()[key]??fallback??'';
+  const choiceState=(value,evidence)=>NEST.choiceState(value,evidence);
+  const optionState=(key,fallback,evidence)=>choiceState(choices()[key]??fallback??'',evidence);
   function status(it) {
     if(it.source)return status(it.source);
     if(it.boughtHTML)return 'bought';
-    if(it.fixedStatus)return it.fixedStatus;
+    if(it.paid||it.delivered)return 'bought';
     if(it.tick)return window.NEST?.isTicked(it.tick)?'bought':'need';
-    if((it.o||[]).some(o=>optionState(optionKey(it,o),o.st)==='consider'))return 'considering';
+    const states=(it.o||[]).map(o=>optionStatus(it,o));
+    if(states.includes('bought')||it.fixedStatus==='bought')return 'bought';
+    if(states.includes('considering')||choiceState(it.fixedStatus,it)==='consider')return 'considering';
     return 'need';
   }
   function optionStatus(it,o) {
-    const state=optionState(optionKey(it,o),o.st);
-    if(status(it)==='decided' && o.pick)return 'decided';
-    return state==='reject'?'reject':state==='consider'?'considering':'need';
+    const state=optionState(optionKey(it,o),o.st??(o.pick&&['Coffee table','Fridge','Washer'].includes(it.name)?'consider':''),{...it,...o});
+    return state==='bought'?'bought':state==='reject'?'reject':state==='consider'?'considering':'need';
   }
-  const price=it=>it.source?price(it.source):number(it.price || ((it.o||[]).find(o=>o.pick)||(it.o||[]).length===1&&it.o[0]||{}).p);
+  const price=it=>it.source?price(it.source):number(it.price || ((it.o||[]).find(o=>optionStatus(it,o)==='bought')||(it.o||[]).find(o=>o.pick)||(it.o||[]).length===1&&it.o[0]||{}).p);
   function totals(list) {
     return {total:list.reduce((n,x)=>n+price(x),0),monthly:list.reduce((n,x)=>n+(x.monthly||0),0),unpriced:list.filter(x=>!price(x)&&!x.monthly&&!x.tick).length};
   }
@@ -50,5 +52,5 @@
     const mine=items.filter(x=>!x.ref&&(!room||x.room===room)), counts=Object.fromEntries(statuses.map(([key])=>[key,mine.filter(x=>status(x)===key).length]));
     return {counts,toGo:mine.filter(x=>status(x)!=='bought').reduce((n,x)=>n+price(x),0),spent:mine.filter(x=>status(x)==='bought').reduce((n,x)=>n+price(x),0),unpriced:mine.filter(x=>!x.ref&&status(x)!=='bought'&&!price(x)&&!x.tick).length};
   }
-  window.NEST_ITEMS={items,statuses,id,slug,number,money,status,price,summary,totals,totalText,optionState,optionKey,optionStatus,label:key=>statuses.find(x=>x[0]===key)?.[1],forRoom:room=>items.filter(x=>x.room===room)};
+  window.NEST_ITEMS={items,statuses,id,slug,number,money,status,price,summary,totals,totalText,choiceState,optionState,optionKey,optionStatus,label:key=>statuses.find(x=>x[0]===key)?.[1],forRoom:room=>items.filter(x=>x.room===room)};
 })();

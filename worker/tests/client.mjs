@@ -55,3 +55,17 @@ sean._set('nest_todos_0',[{id:'a',title:'Changed A'},{id:'b',title:'B'}]);
 mishka._set('nest_todos_0',[{id:'a',title:'A'}]);await settle(sean);await settle(mishka);await settle(mishka);await pull(sean);
 assert.deepEqual(JSON.parse(JSON.stringify(sean._get('nest_todos_0'))),[{id:'a',title:'Changed A'}]);
 console.log('Client checks passed: two-phone migration, concurrent ticks/pacer/list edits, durable offline retries, note deletion.');
+
+// Legacy choice records sync unchanged; only their displayed status is normalized.
+const legacyChoices={
+ 'Lounge|Coffee table|Top':'decided',
+ 'Kitchen|Fridge|Top':{status:'decided',paid:true,note:'Keep receipt'},
+ 'Kitchen|Washer|Top':{v:'decided',delivered:true,note:'Keep delivery note'}
+};
+sean._set('nest_decide',legacyChoices);await settle(sean);await pull(mishka);
+assert.deepEqual(JSON.parse(JSON.stringify(mishka._get('nest_decide'))),legacyChoices);
+for(const [key,expected] of [['Lounge|Coffee table|Top','consider'],['Kitchen|Fridge|Top','bought'],['Kitchen|Washer|Top','bought']]) {
+ assert.equal(mishka.choiceState(mishka._get('nest_decide')[key]),expected);
+}
+assert.deepEqual(JSON.parse(JSON.stringify(mishka._get('nest_decide'))),legacyChoices);
+console.log('Legacy choice sync checks passed: unpaid -> Considering, paid/delivered -> Bought, original values and notes preserved.');

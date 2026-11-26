@@ -96,11 +96,11 @@ try {
     inventory.push(...expected.ids);
     assert.equal(await sean.locator('.room-item').count(),expected.n);
     assert.equal(await sean.locator('[data-dk]').count(),expected.options,'No product options lost or duplicated');
-    assert.equal(await sean.locator('.status-group').count(),4);
+    assert.equal(await sean.locator('.status-group').count(),3);
     assert.equal(await sean.locator('.status-group .room-item').count(),expected.ids.length);
     assert.equal(await sean.evaluate(()=>new Set([...document.querySelectorAll('[data-item]')].map(x=>x.dataset.item)).size),expected.n);
     counts[expected.room]={};
-    for(const status of ['need','considering','decided','bought']) {
+    for(const status of ['need','considering','bought']) {
       const group=sean.locator('.status-group[data-status='+status+']');
       counts[expected.room][status]=await group.locator('.room-item').count();
       await sean.locator('[data-filter='+status+']').click();
@@ -157,7 +157,7 @@ try {
   assert.equal(await sean.locator('#addtxt').inputValue(),'Keep this draft');
   assert.match(await sean.locator('.toast').innerText(),/Could not send/);
   await sean.unroute('**/api/requests');
-  const key=await sean.locator('[data-dk]').first().getAttribute('data-dk'), card=sean.locator('[data-dk="'+key+'"]');
+  const key=await sean.locator('[data-dk]:not(.is-consider)').first().getAttribute('data-dk'), card=sean.locator('[data-dk="'+key+'"]');
   await card.locator('[data-dv=consider]').click();
   assert.equal(await card.locator('xpath=ancestor::section[contains(@class,"status-group")]').getAttribute('data-status'),'considering');
   await eventually(()=>db.prepare('SELECT v FROM kv WHERE k=?').get('local:nest_decide')?.v.includes('consider'));
@@ -192,5 +192,5 @@ try {
   assert.match(await publicPage.locator('.toast').innerText(),/Opening Telegram/);
   assert.ok(await publicPage.evaluate(()=>JSON.parse(localStorage.getItem('nest_sent'))['add:Public test']));
   assert.deepEqual(errors,[]);
-  console.log('Room browser checks passed: 390x844 inventory conservation, four groups/filters, hub counts, aggregate uniqueness, compare, logged-in navigation, six-room layout, request enqueue/confirmation, failed-send draft, Sean/Mishka consider/reject/undo via Worker KV, no app send tray, public Telegram flow.');
+  console.log('Room browser checks passed: 390x844 inventory conservation, three groups/filters, hub counts, aggregate uniqueness, compare, logged-in navigation, six-room layout, request enqueue/confirmation, failed-send draft, Sean/Mishka consider/reject/undo via Worker KV, no app send tray, public Telegram flow.');
 } finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); db.close(); }

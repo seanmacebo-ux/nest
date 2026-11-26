@@ -12,7 +12,7 @@
       el.textContent=counts(s)+' · '+M.money(s.toGo)+' to go'+(s.unpriced?' · '+s.unpriced+' unpriced':'')+(room.g==='WiFi'?' · Evotel 120/120 live · R897/month':'');
     }
     const toBuy=document.getElementById('home-to-buy');
-    if(toBuy)toBuy.innerHTML='<b>Still to get:</b> '+M.items.filter(x=>!x.ref&&M.status(x)!=='bought').length+' items · <a href="list.html">Shopping</a> · <a href="decided.html?view=decided">'+M.summary().counts.decided+' chosen, not yet bought</a>.';
+    if(toBuy)toBuy.innerHTML='<b>Still to get:</b> '+M.items.filter(x=>!x.ref&&M.status(x)!=='bought').length+' items · <a href="list.html">Shopping</a> · <a href="decided.html?view=considering">'+M.summary().counts.considering+' considering</a>.';
     for(const [mount,name] of [['home-laptop','Laptop'],['home-couch','Couch']]) {
       const el=document.getElementById(mount),it=M.items.find(x=>x.name===name);
       if(el)el.innerHTML=M.label(M.status(it))+' · <b>'+name+':</b> '+it.detail+' · '+M.money(M.price(it));
@@ -23,7 +23,7 @@
     const tracker=document.getElementById('tracker-fibre');
     if(tracker)tracker.innerHTML='<span class="box">✓</span><span class="txt">'+M.label(M.status(fibre))+' · Fibre: done <small>'+fibre.note+' <a href="wifi.html">WiFi →</a></small></span>';
     const furniture=document.getElementById('tracker-furniture');
-    if(furniture)furniture.innerHTML='<span class="box"></span><span class="txt">Furniture board <small>'+['Lounge','Bedroom','Kitchen + dining'].map(room=>room+': '+counts(M.summary(room))).join('<br>')+'<br><a href="decided.html?view=decided">Chosen, not yet bought →</a> · <a href="list.html">Shopping →</a></small></span>';
+    if(furniture)furniture.innerHTML='<span class="box"></span><span class="txt">Furniture board <small>'+['Lounge','Bedroom','Kitchen + dining'].map(room=>room+': '+counts(M.summary(room))).join('<br>')+'<br><a href="decided.html?view=considering">Considering →</a> · <a href="list.html">Shopping →</a></small></span>';
     const wifi=document.getElementById('wifi-inventory');
     if(wifi)wifi.innerHTML='<b>WiFi · '+counts(M.summary('WiFi'))+'</b>'+M.forRoom('WiFi').map(it=>`<p data-item="${it.id}" data-status="${M.status(it)}">${M.label(M.status(it))} · ${it.name}${it.monthly?' · '+M.money(it.monthly)+'/month':''}</p>`).join('');
   }

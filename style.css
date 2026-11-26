@@ -146,7 +146,7 @@ a:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline
 .dec button[data-dv="consider"].on { background: var(--amber-soft); border-color: var(--amber); color: var(--ink); }
 .dec button[data-dv="reject"].on { background: var(--surface-2); border-color: var(--ink-soft); color: var(--ink-soft); }
 .is-consider { box-shadow: inset 0 0 0 2px var(--amber) !important; }
-.is-consider::before { content: "🤔 CONSIDERING"; display: block; font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--amber); margin-bottom: 6px; }
+.is-consider::before { content: "🤔 Considering"; display: block; font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--consider, var(--amber)); margin-bottom: 6px; }
 .is-reject { order: 99; opacity: .45; }
 .is-reject::before { content: "✕ REJECTED"; display: block; font-family: "Figtree", system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; color: var(--ink-soft); margin-bottom: 6px; }
 .is-reject .ow, .is-reject .of, .is-reject .lc-why, .is-reject .lc-warn, .is-reject p { display: none; }
@@ -216,12 +216,11 @@ h1 { font-family: "Bricolage Grotesque", Georgia, serif; }
 .price { font-size: var(--t-price); line-height: 20px; font-weight: 700; }
 .skin-actions button, .dectray .send, .btn, .btn2 { min-height: var(--tap); }
 
-/* One status vocabulary across rooms, Shopping and Decided. */
+/* One status vocabulary across rooms, Shopping and Overview. */
 .status-label { font-size:14px; font-weight:700; }
 .status-need { color:var(--car-ink); }
-.status-considering { color:var(--amber); }
-.status-decided { color:var(--accent); }
-.status-bought { color:var(--good); }
+.status-considering { color:var(--consider, var(--amber)); }
+.status-bought { color:var(--bought, var(--good)); }
 .status-reject { color:var(--ink-soft); }
 .status-legend { font-size:11px; white-space:normal; line-height:1.5; margin:16px 0 24px; }
 .status-group { margin:24px 0; min-width:0; }
@@ -249,16 +248,14 @@ h1 { font-family: "Bricolage Grotesque", Georgia, serif; }
 .group-total { color:var(--ink-soft); font-size:16px; }
 [hidden] { display:none !important; }
 #jump { flex-wrap:nowrap; }
-.status-decided { color:var(--primary, #6C4CF5); }
 .status-hub .room-counts span { display:inline; font:inherit; width:auto; height:auto; padding:0; border-radius:0; background:none; }
 #jump { gap:4px; }
 #jump button { font-size:12px; padding:8px; }
 .status-hub .room-counts span { white-space:nowrap; }
 /* Cross-room views stay reachable beneath the app header on a phone. */
 #views-switcher { position:sticky; top:calc(var(--topbar-h) + env(safe-area-inset-top) + 1px); z-index:15; background:var(--ground); padding:8px 0; }
-.view-segments { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:5px; }
-.view-segments button { grid-column:span 2; min-width:0; min-height:48px; padding:8px 4px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink); font:600 12px/1.4 Figtree,system-ui,sans-serif; cursor:pointer; }
-.view-segments button:nth-child(-n+2) { grid-column:span 3; }
+.view-segments { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; }
+.view-segments button { min-width:0; min-height:48px; padding:8px 4px; border:1px solid var(--line); border-radius:12px; background:var(--surface); color:var(--ink); font:600 12px/1.4 Figtree,system-ui,sans-serif; cursor:pointer; }
 .view-segments button[aria-pressed=true] { background:var(--accent); color:var(--ground); border-color:var(--accent); }
 .view-segments button span { display:inline-block; margin-left:3px; }
 .view-segments button:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }

@@ -1,6 +1,13 @@
 // The Nest — instant local saves, shared same-origin state and a durable outbox.
 // A static GitHub Pages copy keeps working when /api/kv is unavailable.
 window.NEST = {
+  // Project legacy choices without rewriting saved records or the sync outbox.
+  choiceState(value, evidence = {}) {
+    const record = value && typeof value === 'object' ? value : {};
+    const state = record.status ?? record.v ?? value;
+    if (state === 'decided') return record.paid || record.delivered || evidence.paid || evidence.delivered ? 'bought' : 'consider';
+    return state === 'considering' ? 'consider' : state;
+  },
   _rows: {}, _ready: false, _busy: false, _pulling: false, _reachable: false,
   _get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch { return d; } },
   _raw(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },

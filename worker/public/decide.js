@@ -17,10 +17,10 @@
   const APP = !/github\.io$/.test(location.hostname) && !!window.NEST;
   const get = k => { if (APP) { const v = NEST._get(k, {}); return v && typeof v === 'object' ? v : {}; } try { return JSON.parse(localStorage.getItem(k)) || {}; } catch (e) { return {}; } };
   const put = (k, v) => { if (APP) { NEST._set(k, v); return; } try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
-  const state = el => get(KEY)[el.dataset.dk] ?? el.dataset.st ?? '';
+  const state = el => NEST.choiceState(get(KEY)[el.dataset.dk] ?? el.dataset.st ?? '');
 
   const paint = el => {
-    const s = el.dataset.chosen === 'true' ? 'decided' : state(el);
+    const s = state(el);
     el.classList.toggle('is-consider', s === 'consider');
     el.classList.toggle('is-reject', s === 'reject');
     el.querySelectorAll('.dec button').forEach(b => {
@@ -37,8 +37,8 @@
         const d = document.createElement('div'); d.className = 'dec'; el.appendChild(d);
       }
       const slot = el.querySelector('.dec');
-      if (el.dataset.chosen === 'true') { slot.textContent = 'Chosen · not yet bought'; paint(el); return; }
-      if (!slot.children.length) slot.innerHTML = '<button type="button" data-dv="consider"></button><button type="button" data-dv="reject"></button>';
+      if (state(el) === 'bought') { slot.innerHTML = '<span class="status-label status-bought">🧾 Bought</span>'; paint(el); return; }
+      if (!slot.querySelector('button')) slot.innerHTML = '<button type="button" data-dv="consider"></button><button type="button" data-dv="reject"></button>';
       paint(el);
     });
     tray();
@@ -50,8 +50,8 @@
     if (APP) return;
     const p = get(PEND), ks = Object.keys(p);
     if (!ks.length) { bar.classList.remove('on'); return; }
-    const c = ks.filter(k => p[k].v === 'consider').length, r = ks.filter(k => p[k].v === 'reject').length, u = ks.length - c - r;
-    bar.innerHTML = `<span>${[c ? '🤔 ' + c : '', r ? '✕ ' + r : '', u ? '↩︎ ' + u : ''].filter(Boolean).join(' · ')} <small>only on this phone</small></span><button type="button" class="send">Send to The Nest →</button>`;
+    const c = ks.filter(k => NEST.choiceState(p[k]) === 'consider').length, r = ks.filter(k => NEST.choiceState(p[k]) === 'reject').length, b = ks.filter(k => NEST.choiceState(p[k]) === 'bought').length, u = ks.length - c - r - b;
+    bar.innerHTML = `<span>${[c ? '🤔 ' + c : '', b ? '🧾 ' + b : '', r ? '✕ ' + r : '', u ? '↩︎ ' + u : ''].filter(Boolean).join(' · ')} <small>only on this phone</small></span><button type="button" class="send">Send to The Nest →</button>`;
     bar.classList.add('on');
   };
 
@@ -64,8 +64,8 @@
     const tag = { flat: 'Apartments', car: 'Cars', newcar: 'Cars' };
     const where = k => { const r = k.includes('|') ? k.split('|')[0] : ''; return r ? (tag[r] || r.replace(' + ', ' & ')) : page; };
     const lines = ['🗳 Our choices'];
-    [['consider', '🤔 Consider:'], ['reject', '✕ Reject:'], ['', '↩︎ Undo:']].forEach(([v, head]) => {
-      const mine = ks.filter(k => p[k].v === v); if (!mine.length) return;
+    [['consider', '🤔 Considering:'], ['bought', '🧾 Bought:'], ['reject', '✕ Reject:'], ['', '↩︎ Undo:']].forEach(([v, head]) => {
+      const mine = ks.filter(k => NEST.choiceState(p[k]) === v); if (!mine.length) return;
       lines.push(head);
       [...new Set(mine.map(where))].forEach(w => {
         lines.push('  ' + w + ':', ...mine.filter(k => where(k) === w).map(k => '• ' + p[k].l));

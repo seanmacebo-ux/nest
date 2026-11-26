@@ -57,12 +57,12 @@ try {
   assert.deepEqual(await page.evaluate(async()=>await (await fetch('/api/me')).json()),{username:'sean'});
   assert.equal(await page.locator('#overview').getAttribute('data-active-view'),'considering');
   const legend=await page.locator('#status-legend').innerText();
-  assert.equal(legend,'🔎 Need · 🤔 Considering · ✅ Decided · 🧾 Bought');
-  for(const view of ['considering','need','decided','bought','all']) {
+  assert.equal(legend,'🔎 Need · 🤔 Considering · 🧾 Bought');
+  for(const view of ['considering','need','bought','all']) {
     await page.locator('[data-view='+view+']').click();
     const expected=await page.evaluate(view=>{
       const all=NEST_ITEMS.items.filter(x=>!x.ref), selected=all.filter(x=>view==='all'||NEST_ITEMS.status(x)===view);
-      return {ids:selected.map(x=>x.id).sort(),total:selected.reduce((n,x)=>n+NEST_ITEMS.price(x),0),counts:Object.fromEntries(['considering','need','decided','bought','all'].map(k=>[k,all.filter(x=>k==='all'||NEST_ITEMS.status(x)===k).length]))};
+      return {ids:selected.map(x=>x.id).sort(),total:selected.reduce((n,x)=>n+NEST_ITEMS.price(x),0),counts:Object.fromEntries(['considering','need','bought','all'].map(k=>[k,all.filter(x=>k==='all'||NEST_ITEMS.status(x)===k).length]))};
     },view);
     assert.deepEqual(await page.locator('.summary-item').evaluateAll(es=>es.map(e=>e.dataset.item).sort()),expected.ids);
     assert.equal(Number(await page.locator('[data-view-total]').getAttribute('data-view-total')),expected.total);
@@ -126,6 +126,12 @@ try {
     assert.equal(await comparison.locator('.view-option').count(),1);
     await page.locator('[data-view=all]').click();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+    // Clear the bed's comparison choices to exercise Need -> Considering.
+    await page.evaluate(()=>{
+      const it=NEST_ITEMS.items.find(x=>x.name==='Bed base or frame, Queen XL'), choices=NEST._get('nest_decide',{});
+      for(const o of it.o)choices[NEST_ITEMS.optionKey(it,o)]='';
+      NEST._set('nest_decide',choices);window.dispatchEvent(new Event('nest:choices'));
+    });
     await page.locator('[data-view=need]').click();
     const target=page.locator('.summary-item').filter({has:page.locator('[data-dv=consider]')}).first();
     const id=await target.getAttribute('data-item');await target.locator('[data-dv=consider]').first().click();
