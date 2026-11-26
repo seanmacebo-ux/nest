@@ -67,14 +67,6 @@ body .bottom-tab.active .tab-icon, body .bottom-tab[aria-expanded="true"] .tab-i
   background: color-mix(in srgb, var(--tone) 23%, var(--surface));
   box-shadow: 0 0 18px -6px color-mix(in srgb, var(--tone) 40%, transparent);
 }
-.navtile[href="tracker.html"] { --tone: var(--money); }
-.navtile[href="medical.html"], .navtile[href="skin.html"], .navtile[href="recovery.html"] { --tone: var(--health); }
-.navtile[href="cars.html"], .navtile[href="apartments.html"] { --tone: var(--travel); }
-.navtile[href="findings.html"] { --tone: var(--shopping); }
-body .navtile { color: var(--tone); background: color-mix(in srgb, var(--tone) 12%, var(--surface-2)); }
-body .navtile[aria-current] { background: color-mix(in srgb, var(--tone) 23%, var(--surface-2)); }
-body .more-sheet { background: var(--surface-2); }
-body .sheet-head { background: linear-gradient(110deg, color-mix(in srgb, var(--primary) 14%, var(--surface-2)), var(--surface-2)); }
 body .room-link, body .tile { background: linear-gradient(125deg, color-mix(in srgb, var(--tone) 10%, var(--surface)), var(--surface)); }
 .tile { --tone: var(--shopping); }
 .tile[href="ask.html"] { --tone: var(--primary); }
@@ -126,3 +118,37 @@ body .lc-act a { background: var(--car-soft); color: var(--car-ink); min-height:
   body .vb { color: var(--health); background: var(--baby-soft); }
 }
 body .acts button.got, body .acts button.got.sent { color: var(--bought); background: var(--good-soft); border-color: transparent; }
+
+/* More is a dark destination directory; each group owns one accent. */
+body .more-sheet { color-scheme: dark; color: #f5f2ff; background: #111020; border-color: #ffffff20; max-height: min(92dvh, 900px); box-shadow: 0 -20px 90px #0009; }
+.more-sheet[open] { animation: more-rise 320ms cubic-bezier(.16,1,.3,1); }
+.more-sheet::backdrop { background: #050411b8; backdrop-filter: blur(6px); animation: more-dim 240ms ease-out; }
+body .sheet-head { background: radial-gradient(ellipse at 15% 0%, #7750e830, transparent 75%), #151225; padding: 0 20px 16px; border-bottom: 1px solid #ffffff12; }
+.sheet-handle span { width: 38px; background: #8b819f; }
+.sheet-title h2 { font: 700 26px/1.2 "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -.6px; }
+.sheet-eyebrow { margin: 0 0 5px; color: #b8a0fb; font: 700 10px/1.3 Figtree, sans-serif; letter-spacing: .14em; }
+.sheet-caption { margin: 9px 0 0; color: #bcb4d1; font-size: 14px; }
+.sheet-close { color: #eee8ff; background: #ffffff0b; border: 1px solid #ffffff18; border-radius: 50%; flex: none; }
+.sheet-scroll { padding-top: 20px; scrollbar-width: thin; scrollbar-color: #756491 #111020; }
+.navgroup[data-group="us"] { --group: #bca0ff; --group-fill: #7545df; }
+.navgroup[data-group="flat"] { --group: #68e8d2; --group-fill: #138f8d; }
+.navgroup[data-group="life"] { --group: #ffa0c6; --group-fill: #b63979; }
+.navgroup-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+body .navgroup h3 { color: var(--group); font-size: 16px; margin: 0; display: flex; align-items: center; gap: 8px; }
+.navgroup h3::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--group); box-shadow: 0 0 12px var(--group-fill); }
+.navgroup-head > span { font-size: 11px; color: #bcb4d1; }
+.navlinks { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+body .navtile { position: relative; min-width: 0; min-height: 108px; padding: 12px; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; text-align: left; gap: 4px; color: #f5f2ff; border: 1px solid color-mix(in srgb, var(--group) 25%, #ffffff08); border-radius: 18px; background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--group-fill) 25%, transparent), transparent 90%), #1c192e; box-shadow: inset 0 1px #ffffff08; transition: transform 150ms ease, border-color 150ms ease; }
+.navtile-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.navtile-icon { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; color: var(--group); background: color-mix(in srgb, var(--group-fill) 30%, #171322); font-size: 21px; }
+.navtile-state { color: var(--group); font-size: 12px; font-weight: 700; }
+.navtile-label { font-size: 16px; line-height: 20px; font-weight: 700; }
+.navtile-sub { color: #c8c1db; font-size: 12px; line-height: 18px; white-space: nowrap; }
+body .navtile[aria-current] { border-color: var(--group); background: linear-gradient(120deg, color-mix(in srgb, var(--group-fill) 50%, #171322), #221c37); box-shadow: inset 3px 0 var(--group), 0 0 22px -10px var(--group-fill); }
+.more-sheet :focus-visible { outline: 2px solid #e0ceff; outline-offset: 3px; }
+.navtile:active { transform: scale(.97); }
+@media (hover: hover) { body .navtile:hover { border-color: var(--group); transform: translateY(-2px); } }
+.more-sheet .navlogout { color: #c8c1db; border: 1px solid #ffffff20; border-radius: 12px; width: 100%; justify-content: center; }
+@keyframes more-rise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes more-dim { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .more-sheet[open], .more-sheet::backdrop { animation: none; } body .navtile { transition: none; } }

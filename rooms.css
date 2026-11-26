@@ -243,3 +243,15 @@
 .acts a, .acts button, .qchips button, .iacts a, .iacts button { min-height: var(--tap); border-radius: var(--r-sm); }
 .addbox { border-radius: var(--r-md); }
 .cmp-sheet { border-radius: var(--r-lg) var(--r-lg) 0 0; background: var(--surface-2); box-shadow: var(--shadow-sheet); padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+
+/* Water: separate the explanation, evidence and progress controls. */
+[data-room="Water"] .wrap > header { margin-bottom: 24px; }
+.water-research { padding: 18px; margin: 0 0 24px; border: 1px solid var(--line); border-left: 3px solid var(--tone); border-radius: 16px; background: var(--surface); }
+.water-research h2 { margin: 0 0 8px; font-size: 17px; line-height: 1.4; }
+.water-research p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
+.water-research a { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; margin-top: 8px; font-size: 15px; font-weight: 600; color: var(--tone); }
+.water-help { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 12px; }
+[data-room="Water"] #jump { top: calc(var(--topbar-h) + env(safe-area-inset-top)); margin-top: 0; margin-bottom: 24px; background: var(--ground); backdrop-filter: none; gap: 6px; }
+[data-room="Water"] #jump button { min-height: 48px; font-size: 14px; padding: 8px 12px; }
+[data-room="Water"] .sec > p { font-size: 16px; line-height: 1.65; margin-top: 12px; }
+[data-room="Water"] .sec .isub { display: block; font-size: 14px; margin-bottom: 12px; }

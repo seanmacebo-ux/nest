@@ -28,11 +28,34 @@
   document.body.append(bar);
   const more = bar.querySelector('button');
   const sheet = document.createElement('dialog'); sheet.id='more-sheet'; sheet.className='more-sheet'; sheet.setAttribute('aria-labelledby','more-title');
-  sheet.innerHTML='<div class="sheet-head"><button class="sheet-handle" type="button" aria-label="Close More"><span></span></button><div class="sheet-title"><h2 id="more-title">More</h2><button class="sheet-close" type="button" aria-label="Close More">✕</button></div></div><div class="sheet-scroll"></div>';
+  sheet.innerHTML='<div class="sheet-head"><button class="sheet-handle" type="button" aria-label="Close More"><span></span></button><div class="sheet-title"><div><p class="sheet-eyebrow">THE NEST · YOUR WORLD</p><h2 id="more-title">More to explore</h2></div><button class="sheet-close" type="button" aria-label="Close More">✕</button></div><p class="sheet-caption">Our plans, our place, our everyday.</p></div><div class="sheet-scroll"></div>';
   const scroll = sheet.querySelector('.sheet-scroll');
-  for(const [group,links] of [['Us',[['index','Plan'],['tracker','Tracker'],['findings','Findings'],['list','Shopping']]],['Life',[['medical','Medical aid'],...(app ? [['skin','Skin']] : []),['cars','Cars'],['apartments','Apartments'],['recovery','Post-pregnancy']]]]) {
-    const section=document.createElement('section'); section.className='navgroup';
-    section.innerHTML='<h3>'+group+'</h3><div class="navlinks">'+links.map(([path,label])=>'<a class="navtile" href="'+path+'.html"'+(path===current?' aria-current="page"':'')+'>'+label+'</a>').join('')+'</div>';
+  const groups = [
+    ['Us', 'us', 'Plans & progress', [
+      ['index', 'Plan', 'Our next steps', '🧭'],
+      ['tracker', 'Tracker', 'Money & milestones', '📈'],
+      ['findings', 'Findings', 'Research & fact-checks', '🔎'],
+      ['list', 'Shopping', 'Our full buying list', '🛍️']
+    ]],
+    ['The flat', 'flat', 'Make it home', [
+      ['lounge', 'Lounge', 'Relax & unwind', '🛋️'],
+      ['bedroom', 'Bedroom', 'Sleep & storage', '🛏️'],
+      ['kitchen', 'Kitchen', 'Cook & gather', '🍳'],
+      ['bathroom', 'Bathroom', 'Daily essentials', '🛁'],
+      ['office', 'Office', 'Work & streaming', '💻'],
+      ['water', 'Water', 'Drink & filter', '💧'],
+      ['wifi', 'WiFi', 'Get connected', '📶']
+    ]],
+    ['Life', 'life', 'Look after the bigger things', [
+      ['medical', 'Medical aid', 'Cover & care', '🩺'],
+      ...(app ? [['skin', 'Skin', 'Routine & products', '🧴']] : []),
+      ['cars', 'Cars', 'Our next wheels', '🚗'],
+      ['apartments', 'Apartments', 'Find our place', '🏡']
+    ]]
+  ];
+  for(const [group, tone, hint, links] of groups) {
+    const section=document.createElement('section'); section.className='navgroup'; section.dataset.group=tone;
+    section.innerHTML='<div class="navgroup-head"><h3>'+group+'</h3><span>'+hint+'</span></div><div class="navlinks">'+links.map(([path,label,subtitle,icon])=>'<a class="navtile" href="'+path+'.html"'+(path===current?' aria-current="page"':'')+'><span class="navtile-top"><span class="navtile-icon" aria-hidden="true">'+icon+'</span><span class="navtile-state" aria-hidden="true">'+(path===current?'Here ✓':'↗')+'</span></span><span class="navtile-label">'+label+'</span><span class="navtile-sub">'+subtitle+'</span></a>').join('')+'</div>';
     scroll.append(section);
   }
   if(app) scroll.insertAdjacentHTML('beforeend','<a class="navlogout" href="/logout">Log out</a>');

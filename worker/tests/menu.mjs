@@ -3,7 +3,9 @@
 // CHROMIUM_PATH optionally selects an already installed browser.
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
-import {readFileSync} from 'node:fs';
+import {readFileSync, mkdirSync} from 'node:fs';
+const screenshotDir=process.env.NEST_SCREENSHOT_DIR || '/tmp/menu2';
+mkdirSync(screenshotDir,{recursive:true});
 import {DatabaseSync} from 'node:sqlite';
 import {pbkdf2Sync} from 'node:crypto';
 import worker from '../src/index.js';
@@ -87,9 +89,15 @@ try {
   await page.goto(base+'/index.html',{waitUntil:'networkidle'});
   assert.deepEqual(await page.locator('.bottom-tab > span:last-child').allTextContents(),['Home','Rooms','Overview','Ask','More']);
   await openMore();
-  assert.deepEqual(await page.locator('.navgroup h3').allTextContents(),['Us','Life']);
-  assert.deepEqual(await page.locator('.navgroup').nth(0).locator('a').allTextContents(),['Plan','Tracker','Findings','Shopping']);
-  assert.deepEqual(await page.locator('.navgroup').nth(1).locator('a').allTextContents(),['Medical aid','Skin','Cars','Apartments','Post-pregnancy']);
+  assert.deepEqual(await page.locator('.navgroup h3').allTextContents(),['Us','The flat','Life']);
+  assert.deepEqual(await page.locator('.navgroup').nth(0).locator('.navtile-label').allTextContents(),['Plan','Tracker','Findings','Shopping']);
+  assert.deepEqual(await page.locator('.navgroup').nth(2).locator('.navtile-label').allTextContents(),['Medical aid','Skin','Cars','Apartments']);
+  assert.deepEqual(await page.locator('.navgroup').nth(1).locator('.navtile-label').allTextContents(),['Lounge','Bedroom','Kitchen','Bathroom','Office','Water','WiFi']);
+  assert.equal(await page.locator('.navtile[href="recovery.html"]').count(),0);
+  for(const tile of await page.locator('.navtile').evaluateAll(as=>as.map(a=>({height:a.offsetHeight,icon:!!a.querySelector('.navtile-icon'),sub:a.querySelector('.navtile-sub').textContent,wraps:a.querySelector('.navtile-sub').scrollWidth>a.querySelector('.navtile-sub').clientWidth})))) {
+    assert.ok(tile.height>=100 && tile.icon && tile.sub);
+    assert.equal(tile.wraps,false,'Subtitle fits on one line: '+tile.sub);
+  }
   assert.equal(await page.locator('.navlogout').getAttribute('href'),'/logout');
   await closeMore();
   const destinations=[['index','Home'],['rooms','Rooms'],['decided','Overview'],['ask','Ask'],
@@ -107,9 +115,22 @@ try {
     const controls=await page.locator('.acts button, .acts a, .iacts button, .dec button, .clink, .sendbtn, #ask-form button, .skin-actions button, #shareBtn').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>({label:e.textContent.trim(),height:e.getBoundingClientRect().height})));
     for(const control of controls) assert.ok(control.height>=48,JSON.stringify(control));
     if(path==='rooms') assert.deepEqual(await page.locator('.room-link').evaluateAll(as=>as.map(a=>a.getAttribute('href'))),['lounge.html','bedroom.html','bathroom.html','water.html','kitchen.html','office.html','wifi.html']);
-    if(['index','office','skin','lounge'].includes(path)) await page.screenshot({path:(process.env.NEST_SCREENSHOT_DIR || '/tmp/design1')+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+(path==='index'?'home':path)+'.png'});
+    if(['index','office','skin','lounge'].includes(path)) await page.screenshot({path:screenshotDir+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+(path==='index'?'home':path)+'.png'});
+    if(path==='water') {
+      const positions=await page.evaluate(()=>{
+        const r=document.querySelector('.water-research').getBoundingClientRect(), j=document.querySelector('#jump').getBoundingClientRect();
+        return {researchBottom:r.bottom,filterTop:j.top,font:parseFloat(getComputedStyle(document.querySelector('.water-research p')).fontSize)};
+      });
+      assert.ok(positions.filterTop>=positions.researchBottom+24,'Water research clears filters');
+      assert.ok(positions.font>=16,'Readable Water intro');
+      await page.screenshot({path:screenshotDir+'/water.png'});
+      await page.locator('.room-item').first().scrollIntoViewIfNeeded();
+      assert.ok(await page.locator('#jump').evaluate(e=>getComputedStyle(e).backgroundColor!== 'rgba(0, 0, 0, 0)'),'Sticky filter has an opaque background');
+      await page.screenshot({path:screenshotDir+'/water-options.png'});
+      await page.evaluate(()=>scrollTo(0,0));
+    }
     await openMore();
-    if(['tracker','findings','medical','skin','cars','apartments','recovery'].includes(path)) assert.equal(await page.locator('.navtile[aria-current]').getAttribute('href'),path+'.html');
+    if(['tracker','findings','medical','skin','cars','apartments','index','list','lounge','bedroom','kitchen','bathroom','office','water','wifi'].includes(path)) assert.equal(await page.locator('.navtile[aria-current]').getAttribute('href'),path+'.html');
     for(const href of await page.locator('.navtile, .bottom-bar a').evaluateAll(as=>as.map(a=>a.getAttribute('href')))) visited.add(href);
     await closeMore();
     console.log(path+': 200; '+active+' highlighted; no overflow; content clears bar');
@@ -133,7 +154,9 @@ try {
   }
   await page.goto(base+'/office.html',{waitUntil:'networkidle'});
   await openMore();
-  await page.screenshot({path:(process.env.NEST_SCREENSHOT_DIR || '/tmp/design1')+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+'more-sheet.png'});
+  await page.screenshot({path:screenshotDir+'/'+(process.env.NEST_BASE_URL?'after-':'local-')+'more-sheet.png'});
+  await page.locator('.navgroup[data-group="life"]').scrollIntoViewIfNeeded();
+  await page.screenshot({path:screenshotDir+'/more-life.png'});
   // Modal focus remains in the sheet, and background scrolling is locked.
   for(let i=0;i<15;i++){await page.keyboard.press('Tab');assert.ok(await page.evaluate(()=>document.querySelector('#more-sheet').contains(document.activeElement)));}
   assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).overflow),'hidden');
