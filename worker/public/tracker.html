@@ -55,34 +55,9 @@
   .emptysave { font-size: 13.5px; color: var(--ink-soft); background: var(--surface); border: 1px dashed var(--line); border-radius: var(--r-sm); padding: 18px; }
 
   .pacer { border-top: 4px solid var(--home); }
-  .pacehead { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-  .pacehave { font-size: 14px; color: var(--ink-soft); font-weight: 600; display: flex; align-items: center; gap: 9px; }
-  .pacehave input { width: 118px; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 16px; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 7px 10px; background: var(--surface-2); color: var(--ink); }
-  .paceleft { font-family: "Bricolage Grotesque", serif; font-weight: 600; font-size: clamp(30px,6.5vw,46px); line-height: 1; letter-spacing: -.02em; color: var(--home); }
-  .paceleft small { font-size: 14px; color: var(--ink-soft); font-family: "Figtree", sans-serif; font-weight: 600; }
-  .paceleft.warn { color: var(--car-ink); } .paceleft.over { color: var(--red); }
-  .pacelist { list-style: none; margin: 16px 0 0; padding: 0; }
-  .pacerow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dotted var(--line); }
-  .pacerow:last-child { border-bottom: none; }
-  .pacerow.off { opacity: .45; }
-  .pacetoggle { flex: none; width: 20px; height: 20px; border-radius: var(--r-sm); border: 2px solid var(--accent); cursor: pointer; color: transparent; font-size: 12px; font-weight: 800; line-height: 16px; text-align: center; user-select: none; }
-  .pacerow.on .pacetoggle { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .paceinfo { flex: 1; min-width: 0; }
-  .paceinfo .pl { font-weight: 600; font-size: 14.5px; }
-  .paceinfo .ps { display: block; font-size: 12px; color: var(--ink-soft); margin-top: 2px; line-height: 1.4; }
-  .paceamt { flex: none; display: flex; align-items: center; gap: 3px; }
-  .paceamt > span { color: var(--ink-soft); font-family: "Figtree", system-ui, sans-serif; font-size: 13px; }
-  .paceamt input { width: 84px; text-align: right; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; font-size: 14px; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 6px 8px; background: var(--surface); color: var(--ink); }
-  .pacesum { display: flex; justify-content: space-between; margin-top: 15px; font-size: 13.5px; }
-  .pacesum b { font-family: "Figtree", system-ui, sans-serif; }
-  .ct { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14px; }
-  .ct th { text-align: left; font-family: "Figtree", system-ui, sans-serif; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); padding: 8px 12px; border-bottom: 1px solid var(--line); }
-  .ct td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
-  .ct td.amt { text-align: right; font-family: "Figtree", system-ui, sans-serif; font-weight: 600; color: var(--baby); white-space: nowrap; }
-  .ct tr:last-child td { border-bottom: none; }
-  .ct tr.hl td { background: var(--baby-soft); font-weight: 600; }
 </style>
 <link rel="stylesheet" href="vibrancy.css?v=20261125-design2">
+<link rel="stylesheet" href="tracker-money.css?v=20261126">
 </head>
 <body data-tone="money">
 <header class="nav"></header>
@@ -92,23 +67,10 @@
   <header>
     <div class="eyebrow"><span class="dot"></span> Sean &amp; Mishka · live tracker</div>
     <h1>Where <em>we're</em> at.</h1>
-    <p class="sub">The money, the milestones ahead, and a to-do list you tick off (it saves on your phone). Syncing between you and Mishka comes with The Nest.</p>
+    <p class="sub">Your money in motion, month by month. Plans, expenses and lists save here and sync between you and Mishka when connected.</p>
   </header>
 
-  <div class="sec"><h2>💸 This month's cash pacer</h2>
-    <p>You've got about R52k this month. Set each cost (rent, the FNB loan, groceries) and tick what you're actually paying, and watch what's <b>left over</b>. That leftover is your buffer + what rolls toward the car pot. It all saves on your phone — change the numbers anytime.</p></div>
-  <div class="panel pacer">
-    <div class="pacehead">
-      <label class="pacehave">You have <span style="font-family:Figtree,system-ui,sans-serif">R</span><input id="pace-have" type="number" inputmode="numeric" step="500" min="0"></label>
-      <div class="paceleft" id="pace-left">R—<small> left</small></div>
-    </div>
-    <div class="bar"><span id="pace-bar" style="width:0%"></span></div>
-    <div class="barlabels"><span>Allocated <b id="pace-spent">R0</b></span><span id="pace-msg"></span></div>
-    <ul class="pacelist" id="pacelist"></ul>
-    <div class="pacesum"><span>Total ticked</span><b id="pace-alloc">R0</b></div>
-    <div class="notewrap" style="margin-top:14px"><button class="notetoggle" type="button">💬 Money notes</button><textarea class="notebox" data-note-key="pacer-notes" placeholder="Jot anything — e.g. 'rent goes off on the 1st', 'couch balance on delivery', 'move R5k to the car pot this week'."></textarea></div>
-    <p style="margin:12px 0 0;font-size:12px;color:var(--ink-soft)">Overwrite any number with your real one.</p>
-  </div>
+  <section id="money" aria-label="Monthly money tracker"></section>
 
   <div class="sec"><h2>🗓️ Milestones ahead</h2>
     <p>The dates that drive everything.</p></div>
@@ -141,7 +103,7 @@
   </div>
 
   <div class="sec"><h2>✅ To-do — tap to tick off</h2>
-    <p>Ticks save on this device. Green when done.</p></div>
+    <p>Ticks save here and sync between you. Green when done.</p></div>
   <div class="panel">
     <ul class="todos">
       <li data-tick="t-learners"><span class="box"></span><span class="txt">Book learner's licence <small>Your guy / NaTIS — unlocks the car</small></span></li>
@@ -166,7 +128,7 @@
     </div>
   </div>
 
-  <div class="foot">TRACKER · saves on this device · shared sync arrives with The Nest · The Nest</div>
+  <div class="foot">TRACKER · saved here, shared between you · The Nest</div>
 </div>
 
 <script src="nest.js?v=20261112c"></script>
@@ -225,76 +187,8 @@
   renderSaved(); window.addEventListener('nest:sync', renderSaved);
 })();
 
-// ===== Cash pacer =====
-(function(){
-  const KEY = 'nest_pacer';
-  const PACE = [
-    { k:'rent',        label:'Our rent',             sub:'This month — your place / the new one (Baker Rd is R11,900 from 1 Nov)', amt:11900 },
-    { k:'mom_stop',    label:'Mom',                  sub:'Staying with you at Victoria Square. Put in anything extra you cover for her.', amt:0 },
-    { k:'fnb_loan',    label:'FNB personal loan',    sub:"R5,000 a month for 12 months (approved 2 Oct, DebiCheck from Mishka's FNB). Paid off around Oct 2027.", amt:5000 },
-    { k:'groceries',   label:'Groceries',            sub:'The two of you for the month',                            amt:4000 },
-    { k:'electricity', label:'Electricity + water',  sub:'Both prepaid at Victoria Square, and both on you',                                     amt:1500 },
-    { k:'car_pot',     label:'Car-deposit pot',      sub:'What you put away toward the car this month', amt:0 }
-  ];
-  const saved = window.NEST._get(KEY, {});
-  let have = Number.isFinite(+saved.have) && saved.have != null ? Math.max(0, +saved.have) : 52000;
-  const rs = saved.rows || {};
-  PACE.forEach(p => { const s = rs[p.k] || {}; p.on = (s.on != null) ? !!s.on : true; p.amt = Number.isFinite(+s.amt) && s.amt != null ? Math.max(0, +s.amt) : p.amt; });
-  function persist(){ window.NEST._set(KEY, { have: have, rows: Object.fromEntries(PACE.map(p => [p.k, { on: p.on ? 1 : 0, amt: p.amt }])) }); }
-  function fmt(n){ const s = Math.round(Math.abs(n)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); return (n < 0 ? '-R' : 'R') + s; }
-
-  const list = document.getElementById('pacelist');
-  list.innerHTML = PACE.map((p, i) => `
-    <li class="pacerow ${p.on ? 'on' : 'off'}" data-i="${i}">
-      <span class="pacetoggle" role="button" tabindex="0" aria-label="Toggle ${p.label}">✓</span>
-      <span class="paceinfo"><span class="pl">${p.label}</span><span class="ps">${p.sub}</span></span>
-      <span class="paceamt"><span>R</span><input type="number" inputmode="numeric" step="100" min="0" value="${p.amt}"></span>
-    </li>`).join('');
-
-  const haveInput = document.getElementById('pace-have');
-  haveInput.value = have;
-  haveInput.addEventListener('input', () => { have = +haveInput.value || 0; recalc(); persist(); });
-
-  list.querySelectorAll('.pacerow').forEach(row => {
-    const i = +row.dataset.i;
-    const tog = row.querySelector('.pacetoggle');
-    const inp = row.querySelector('.paceamt input');
-    const flip = () => { PACE[i].on = !PACE[i].on; row.classList.toggle('on', PACE[i].on); row.classList.toggle('off', !PACE[i].on); recalc(); persist(); };
-    tog.addEventListener('click', flip);
-    tog.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
-    inp.addEventListener('input', () => { PACE[i].amt = +inp.value || 0; recalc(); persist(); });
-  });
-
-  function recalc(){
-    const alloc = PACE.filter(p => p.on).reduce((s, p) => s + (+p.amt || 0), 0);
-    const left = have - alloc;
-    const leftEl = document.getElementById('pace-left');
-    leftEl.innerHTML = fmt(left) + '<small> left</small>';
-    leftEl.className = 'paceleft ' + (left < 0 ? 'over' : left < 5000 ? 'warn' : '');
-    document.getElementById('pace-alloc').textContent = fmt(alloc);
-    document.getElementById('pace-spent').textContent = fmt(alloc);
-    const pct = have > 0 ? Math.min(100, Math.round(alloc / have * 100)) : 0;
-    const bar = document.getElementById('pace-bar');
-    bar.style.width = pct + '%';
-    bar.style.background = left < 0 ? 'var(--red)' : (left < 5000 ? 'var(--car-ink)' : 'linear-gradient(90deg, var(--home), var(--baby))');
-    document.getElementById('pace-msg').textContent = left < 0 ? ('Over by ' + fmt(-left)) : (left < 5000 ? 'Cutting it fine' : 'On track');
-  }
-  recalc();
-  window.addEventListener('nest:sync', () => {
-    const current = NEST._get(KEY, null); if (!current) return;
-    if (document.activeElement === haveInput || list.contains(document.activeElement)) return;
-    have = Number.isFinite(+current.have) ? Math.max(0, +current.have) : have;
-    haveInput.value = have;
-    PACE.forEach((p, i) => {
-      const row = current.rows?.[p.k]; if (!row) return;
-      p.on = !!row.on; p.amt = Number.isFinite(+row.amt) ? Math.max(0, +row.amt) : p.amt;
-      const el = list.children[i]; el.classList.toggle('on', p.on); el.classList.toggle('off', !p.on);
-      el.querySelector('input').value = p.amt;
-    });
-    recalc();
-  });
-})();
 </script>
+<script src="tracker-money.js?v=20261126"></script>
 <script src="tracker-edit.js"></script>
 </body>
 </html>
