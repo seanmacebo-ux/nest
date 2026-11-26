@@ -20,7 +20,7 @@
   const state = el => get(KEY)[el.dataset.dk] ?? el.dataset.st ?? '';
 
   const paint = el => {
-    const s = state(el);
+    const s = el.dataset.chosen === 'true' ? 'decided' : state(el);
     el.classList.toggle('is-consider', s === 'consider');
     el.classList.toggle('is-reject', s === 'reject');
     el.querySelectorAll('.dec button').forEach(b => {
@@ -37,6 +37,7 @@
         const d = document.createElement('div'); d.className = 'dec'; el.appendChild(d);
       }
       const slot = el.querySelector('.dec');
+      if (el.dataset.chosen === 'true') { slot.textContent = 'Chosen · not yet bought'; paint(el); return; }
       if (!slot.children.length) slot.innerHTML = '<button type="button" data-dv="consider"></button><button type="button" data-dv="reject"></button>';
       paint(el);
     });

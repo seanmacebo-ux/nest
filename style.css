@@ -223,7 +223,7 @@ h1 { font-family: "Bricolage Grotesque", Georgia, serif; }
 .status-decided { color:var(--accent); }
 .status-bought { color:var(--good); }
 .status-reject { color:var(--ink-soft); }
-.status-legend { font-size:11px; white-space:nowrap; margin:16px 0 24px; }
+.status-legend { font-size:11px; white-space:normal; line-height:1.5; margin:16px 0 24px; }
 .status-group { margin:24px 0; min-width:0; }
 .status-group > h2 { font-size:18px; margin-bottom:12px; }
 .status-empty { color:var(--ink-soft); font-size:13px; }

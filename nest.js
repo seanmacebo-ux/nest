@@ -227,8 +227,8 @@ window.NEST = {
       paint();
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
-      el.addEventListener('click', e => { if (e.target.closest('button,a,input,textarea,select')) return; NEST.toggleTick(id); paint(); });
-      el.addEventListener('keydown', e => { if (e.target !== el) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); NEST.toggleTick(id); paint(); } });
+      el.addEventListener('click', e => { if (e.target.closest('button,a,input,textarea,select')) return; NEST.toggleTick(id); paint(); window.dispatchEvent(new Event('nest:sync')); });
+      el.addEventListener('keydown', e => { if (e.target !== el) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); NEST.toggleTick(id); paint(); window.dispatchEvent(new Event('nest:sync')); } });
     });
   },
 };

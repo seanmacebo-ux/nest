@@ -45,12 +45,12 @@
       <li>🏡 <b>Home: Unit 30, 114 Victoria Square, Baker Rd, Eden Glen.</b> 3-bed. Gate contacts with Lyn: Mishka is option 1, Sean option 2.</li>
       <li>👵 <b>Mom is staying with you</b> at Victoria Square for now.</li>
       <li>💡 <b>Water and electricity are both prepaid and on you,</b> on top of the rent.</li>
-      <li>🛜 <b>Fibre:</b> ✅ live. Evotel 120/120, tested 129 down / 134 up on 17 Nov. Billed through Afrihost (R897 a month).</li>
-      <li>💻 <b>Laptop:</b> ✅ arrived 5 Nov and set up as an everyday laptop. Streaming setup is on hold.</li>
+      <li id="home-fibre"></li>
+      <li id="home-laptop"></li>
       <li>📸 <b>Snag list (Annexure A):</b> was due 8 Nov. If it didn't go in, send it to the landlord anyway, with photos of the dry bathroom tap and the rotting bathroom plywood.</li>
-      <li>🛋️ <b>Couch:</b> ✅ delivered and fully paid (R11,599).</li>
+      <li id="home-couch"></li>
       <li>🔑 <b>Greenstone Ridge:</b> the R16,905 deposit comes back once Josh signs the release letter. Not back as of 2 Nov.</li>
-      <li>🛒 <b>Still to buy:</b> Queen XL bed base, dining table, side tables, microwave, kettle and more, each with options, sorted by room: <a href="#rooms">see the rooms</a>.</li>
+      <li id="home-to-buy"></li>
       <li>🪪 <b>Mishka's surname:</b> trip to Edenvale Home Affairs for a new Smart ID in her married name. R140. What to take is <a href="#surname">below</a>.</li>
       <li>🩺 <b>Medical aid:</b> Mishka joins first, ideally from 1 Dec, on a hospital plan: Discovery Essential Smart at R2,332 a month plus Turnberry gap cover (R190–R350). It covers Dr Moore's hospital, Park Lane, in full. Sean is added when his spousal visa comes through. See <a href="medical.html">Medical aid</a>.</li>
     </ul>
@@ -96,16 +96,17 @@
     </ul>
   </div>
 
+  <div id="home-inventory" class="panel"></div>
   <div class="sec" id="rooms"><h2>🏠 The flat, room by room</h2>
     <p>What's bought and what's still needed in each room. Tap a room.</p></div>
   <div class="tiles">
     <a class="tile home" href="ask.html"><div class="tt">💬 Ask Claude</div><div class="td">Ask a question, share a document or send a photo. Your answers stay here for both of you.</div><div class="go">Ask Claude →</div></a>
-    <a class="tile home" href="lounge.html"><div class="tt">🛋️ Lounge</div><div class="td">Couch, TV and stand are in. Still to get: coffee table, side tables, anti-tip straps.</div><div class="go">Open Lounge →</div></a>
-    <a class="tile home" href="bedroom.html"><div class="tt">🛏️ Bedroom</div><div class="td">Mattress and fan are in. Still to get: Queen XL bed base, bedside tables, bedding, curtain.</div><div class="go">Open Bedroom →</div></a>
-    <a class="tile home" href="bathroom.html"><div class="tt">🛁 Bathroom</div><div class="td">Weddell filter refills and a slightly wider shower head.</div><div class="go">Open Bathroom →</div></a>
-    <a class="tile home" href="water.html"><div class="tt">💧 Water</div><div class="td">Fixing our water: natural mineral water in glass (Aquamine is the local pick), a tap filter, the shower filter.</div><div class="go">Open Water →</div></a>
-    <a class="tile home" href="kitchen.html"><div class="tt">🍳 Kitchen + dining</div><div class="td">Dining table, microwave, kettle, pots, plates. Fridge and washer only if needed.</div><div class="go">Open Kitchen →</div></a>
-    <a class="tile home" href="office.html"><div class="tt">💻 Office + streaming</div><div class="td">Laptop is set up. Still to get: a wireless mic, monitor and mini PC.</div><div class="go">Open Office →</div></a>
+    <a class="tile home" href="lounge.html"><div class="tt">🛋️ Lounge</div><div class="td" data-inventory-room="lounge"></div><div class="go">Open Lounge →</div></a>
+    <a class="tile home" href="bedroom.html"><div class="tt">🛏️ Bedroom</div><div class="td" data-inventory-room="bedroom"></div><div class="go">Open Bedroom →</div></a>
+    <a class="tile home" href="bathroom.html"><div class="tt">🛁 Bathroom</div><div class="td" data-inventory-room="bathroom"></div><div class="go">Open Bathroom →</div></a>
+    <a class="tile home" href="water.html"><div class="tt">💧 Water</div><div class="td" data-inventory-room="water"></div><div class="go">Open Water →</div></a>
+    <a class="tile home" href="kitchen.html"><div class="tt">🍳 Kitchen + dining</div><div class="td" data-inventory-room="kitchen"></div><div class="go">Open Kitchen →</div></a>
+    <a class="tile home" href="office.html"><div class="tt">💻 Office + streaming</div><div class="td" data-inventory-room="office"></div><div class="go">Open Office →</div></a>
   </div>
 
   <div class="sec"><h2>Everything else</h2>
@@ -123,7 +124,7 @@
     </a>
     <a class="tile home" href="wifi.html">
       <div class="tt">🛜 WiFi</div>
-      <div class="td">✅ Live: Evotel fibre, 120/120. Tested 129 down / 134 up on 17 Nov.</div>
+      <div class="td" data-inventory-room="wifi"></div>
       <div class="go">Open WiFi →</div>
     </a>
     <a class="tile home" href="findings.html"><div class="tt">🧾 Findings</div><div class="td">Every check and calculation behind the picks: import maths, Desertcart, projectors, blinds, price re-checks.</div><div class="go">Open Findings →</div></a>
@@ -154,5 +155,6 @@
   });
 })();
 </script>
+<script src="nest.js"></script><script src="room-data.js"></script><script src="item-status.js"></script><script src="item-surfaces.js"></script>
 </body>
 </html>

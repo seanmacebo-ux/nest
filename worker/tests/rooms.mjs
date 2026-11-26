@@ -20,7 +20,7 @@ class Statement {
 }
 const salt = Buffer.from('room-browser-test');
 const hash = 'pbkdf2$100000$' + salt.toString('base64') + '$' + pbkdf2Sync('test-password', salt, 100000, 32, 'sha256').toString('base64');
-const root = new URL('../../', import.meta.url);
+const root = new URL('../public/', import.meta.url);
 const mime = {'.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.webp':'image/webp', '.png':'image/png'};
 async function asset(req) {
   const path = new URL(req.url).pathname;
@@ -97,7 +97,7 @@ try {
     assert.equal(await sean.locator('.room-item').count(),expected.n);
     assert.equal(await sean.locator('[data-dk]').count(),expected.options,'No product options lost or duplicated');
     assert.equal(await sean.locator('.status-group').count(),4);
-    assert.equal(await sean.locator('.status-group .room-item').count(),expected.n);
+    assert.equal(await sean.locator('.status-group .room-item').count(),expected.ids.length);
     assert.equal(await sean.evaluate(()=>new Set([...document.querySelectorAll('[data-item]')].map(x=>x.dataset.item)).size),expected.n);
     counts[expected.room]={};
     for(const status of ['need','considering','decided','bought']) {

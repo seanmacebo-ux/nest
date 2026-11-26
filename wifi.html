@@ -66,6 +66,7 @@
     <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-soft)">Ping wasn't on the screenshot. If calls or games ever stutter, check it under <b>View results history</b> in Speedtest, or run waveform.com/tools/bufferbloat.</p>
   </div>
 
+  <div id="wifi-inventory" class="panel"></div>
   <!-- ===================== WIFI ===================== -->
   <div class="sec" style="margin-top:28px"><h2>🛜 How we chose (for reference)</h2>
     <p>Short version: take a <b>100 down / 50 up</b> line, and spend on a <b>good router</b>. The router fixes the lag you feel, not the ISP.</p></div>
@@ -139,12 +140,12 @@
   <div class="panel" style="margin-top:14px">
     <div style="font-family:'Bricolage Grotesque',serif;font-weight:600;font-size:16px;color:var(--home-ink);margin-bottom:6px">✅ Steps, in order (tap to tick)</div>
     <ul class="todos">
-      <li data-tick="w-network"><span class="box"></span><span class="txt">Baker Rd's network: <b>Evotel</b> · unit is fibre ready (Sean, 26 Oct) <small><b>Confirmed 30 Oct:</b> Sean's photo of the wall box says <b>EVOtel</b>, and Afrihost's sign-up at <b>Unit 30, 114 Victoria Square, Eden Glen, Edenvale, 1613</b> shows Evotel as the only network. Packages it showed: 30/30 R547 · 60/60 R777 · 500/500 R1,297, with install + activation (usually R2,415) and a WiFi router (usually R999) included. 120/120 R897 sits under "View all speed options" (last seen 26 Oct). Order at that exact address.Checked live 26 Oct with Webafrica's all-network coverage map and TT Connect's own map. Baker Rd changes along its length: <b>Evotel</b> at the Victoria Square / Virgin Active end, Openserve in one middle stretch, TT Connect only at the far west end. The rows below the Evotel one are Openserve prices, kept in case the unit turns out to be elsewhere on Baker Rd. When you order at the unit address, Afrihost's sign-up confirms the network.</small></span></li>
+      <li class="done"><span class="box">✓</span><span class="txt">Fibre network confirmed: Evotel. Done, 30 Oct.</span></li>
       <li data-tick="w-cancel"><span class="box"></span><span class="txt">Cancel MWeb now <small>One full calendar month's notice, so you'll likely pay November too. Screenshot the cancellation. Dispute any later charges with MWeb first, then reverse the debit order through Capitec.</small></span></li>
       <li data-tick="w-router-return"><span class="box"></span><span class="txt">Return MWeb's router within 20 days of the line going off <small>Or they bill you for it.</small></span></li>
       <li data-tick="w-bufferbloat"><span class="box"></span><span class="txt">Run the bufferbloat test + send The Nest the grade <small>waveform.com/tools/bufferbloat. Then The Nest prices 2 SQM routers.</small></span></li>
-      <li data-tick="w-order"><span class="box"></span><span class="txt">Order the new line <small><b>✅ Done:</b> the Evotel fibre line is live (120/120, billed through Afrihost). Sean confirmed 17 Nov, with a speed test of 129 down / 134 up.</small></span></li>
-      <li data-tick="w-ups"><span class="box"></span><span class="txt">Mini UPS for the router: <b>✕ not getting it (your call, 17 Nov)</b> <small>Skipped Afrihost's R499 LinkQnet at sign-up (30 Oct). Takealot has the same 8,800mAh router UPS for less: R384 (4.5★, 2,562 reviews) or R594 (4.5★, 1,276 reviews), checked 30 Oct. It keeps the fibre box + router on for a few hours in a power cut.</small></span></li>
+      <li class="done"><span class="box">✓</span><span class="txt">Fibre ordered and live: Evotel 120/120. Tested 129 down / 134 up, 17 Nov.</span></li>
+      <li><span class="box"></span><span class="txt">Mini UPS for the router: <b>✕ not getting it (your call, 17 Nov)</b> <small>Skipped Afrihost's R499 LinkQnet at sign-up (30 Oct). Takealot has the same 8,800mAh router UPS for less: R384 (4.5★, 2,562 reviews) or R594 (4.5★, 1,276 reviews), checked 30 Oct. It keeps the fibre box + router on for a few hours in a power cut.</small></span></li>
     </ul>
   </div>
 
@@ -152,5 +153,6 @@
 </div>
 
 <script src="nest.js?v=20261112c"></script>
+<script src="room-data.js"></script><script src="item-status.js"></script><script src="item-surfaces.js"></script>
 </body>
 </html>

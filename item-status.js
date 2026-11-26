@@ -21,15 +21,7 @@
   DECISION_NOTES.forEach((note,i)=>{const it=items.find(x=>x.name===noteNames[i]);if(it)it.history=note;});
   // WiFi has a service and checklist rather than product alternatives. Historical
   // ISP comparisons stay on its page; they are not additional purchases.
-  const wifi=[
-    {name:'Evotel fibre 120/120',ic:'🛜',fixedStatus:'bought',monthly:897,note:'Live since mid-November. Afrihost billing in Mishka’s name. Router included.',recommended:'Afrihost · Evotel 120/120'},
-    {name:'Confirm fibre network',ic:'🛜',fixedStatus:'decided',note:'Evotel confirmed at Unit 30 on 30 October.'},
-    {name:'Cancel MWeb',ic:'📋',tick:'w-cancel',note:'One full calendar month’s notice. Keep the cancellation screenshot.'},
-    {name:'Return MWeb router',ic:'📦',tick:'w-router-return',note:'Within 20 days of the old line going off.'},
-    {name:'Run bufferbloat test',ic:'💻',tick:'w-bufferbloat',note:'Send The Nest the grade from waveform.com/tools/bufferbloat; then price two SQM routers.'},
-    {name:'Mini UPS for router',ic:'🔋',fixedStatus:'decided',note:'Not getting it: Sean’s decision, 17 November. No purchase planned.'}
-  ];
-  items.push(...wifi.map(it=>({...it,room:'WiFi',href:'wifi.html',id:id('WiFi',it.name)})));
+  items.push(...WIFI_ITEMS.map(it=>({...it,room:'WiFi',href:'wifi.html',id:id('WiFi',it.name)})));
   const choices=()=>window.NEST?NEST._get('nest_decide',{}):JSON.parse(localStorage.getItem('nest_decide')||'{}');
   const optionKey=(it,o)=>{const source=it.source||it;return source.room+'|'+source.name+'|'+o.n;};
   const optionState=(key,fallback)=>choices()[key]??fallback??'';
@@ -37,12 +29,7 @@
     if(it.source)return status(it.source);
     if(it.boughtHTML)return 'bought';
     if(it.fixedStatus)return it.fixedStatus;
-    if(it.tick)return window.NEST?.isTicked(it.tick)?'decided':'need';
-    // Explicitly chosen 20 Oct; recommendation stars alone never mean Decided.
-    if(it.name==='Coffee table') {
-      const chosen=(it.o||[]).find(o=>o.pick), key=chosen&&optionKey(it,chosen);
-      if(key && !Object.hasOwn(choices(),key))return 'decided';
-    }
+    if(it.tick)return window.NEST?.isTicked(it.tick)?'bought':'need';
     if((it.o||[]).some(o=>optionState(optionKey(it,o),o.st)==='consider'))return 'considering';
     return 'need';
   }
@@ -51,10 +38,17 @@
     if(status(it)==='decided' && o.pick)return 'decided';
     return state==='reject'?'reject':state==='consider'?'considering':'need';
   }
-  const price=it=>it.ref?0:number(it.price || ((it.o||[]).find(o=>o.pick)||(it.o||[]).length===1&&it.o[0]||{}).p);
-  function summary(room) {
-    const mine=items.filter(x=>x.room===room), counts=Object.fromEntries(statuses.map(([key])=>[key,mine.filter(x=>status(x)===key).length]));
-    return {counts,toGo:mine.filter(x=>status(x)!=='bought').reduce((n,x)=>n+price(x),0),spent:mine.filter(x=>status(x)==='bought').reduce((n,x)=>n+price(x),0),unpriced:mine.filter(x=>!x.ref&&status(x)!=='bought'&&!price(x)).length};
+  const price=it=>it.source?price(it.source):number(it.price || ((it.o||[]).find(o=>o.pick)||(it.o||[]).length===1&&it.o[0]||{}).p);
+  function totals(list) {
+    return {total:list.reduce((n,x)=>n+price(x),0),monthly:list.reduce((n,x)=>n+(x.monthly||0),0),unpriced:list.filter(x=>!price(x)&&!x.monthly&&!x.tick).length};
   }
-  window.NEST_ITEMS={items,statuses,id,slug,number,money,status,price,summary,optionState,optionKey,optionStatus,label:key=>statuses.find(x=>x[0]===key)?.[1],forRoom:room=>items.filter(x=>x.room===room)};
+  function totalText(list) {
+    const t=totals(list);
+    return (t.total?money(t.total):t.unpriced?'Prices not recorded':'No one-off cost recorded')+(t.monthly?' + '+money(t.monthly)+'/month':'')+(t.unpriced?' · '+t.unpriced+' unpriced':'');
+  }
+  function summary(room) {
+    const mine=items.filter(x=>!x.ref&&(!room||x.room===room)), counts=Object.fromEntries(statuses.map(([key])=>[key,mine.filter(x=>status(x)===key).length]));
+    return {counts,toGo:mine.filter(x=>status(x)!=='bought').reduce((n,x)=>n+price(x),0),spent:mine.filter(x=>status(x)==='bought').reduce((n,x)=>n+price(x),0),unpriced:mine.filter(x=>!x.ref&&status(x)!=='bought'&&!price(x)&&!x.tick).length};
+  }
+  window.NEST_ITEMS={items,statuses,id,slug,number,money,status,price,summary,totals,totalText,optionState,optionKey,optionStatus,label:key=>statuses.find(x=>x[0]===key)?.[1],forRoom:room=>items.filter(x=>x.room===room)};
 })();

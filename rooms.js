@@ -74,7 +74,7 @@
   const optHTML = (it, o) => {
     const key = it.name + ' — ' + o.n, on = sent()[key];
     const imp = o.imp, d = imp ? num(o.p) - num(imp.p) : 0;
-    return `<div class="opt ${o.pick ? 'pick' : ''}" data-dk="${esc((it.room || ROOM) + '|' + (it.srcName || it.name) + '|' + o.n)}" data-dl="${esc((it.srcName || it.name) + ': ' + o.n + ' (' + o.p + ', ' + o.s + ')')}" data-st="${esc(it.name==='Coffee table' && o.pick?'':o.st || '')}">
+    return `<div class="opt ${o.pick ? 'pick' : ''}" data-dk="${esc((it.room || ROOM) + '|' + (it.srcName || it.name) + '|' + o.n)}" data-dl="${esc((it.srcName || it.name) + ': ' + o.n + ' (' + o.p + ', ' + o.s + ')')}" data-chosen="${!!it.fixedStatus&&o.pick===1}" data-st="${esc(o.st || '')}">
       <div class="opt-head">${photoHTML(it, o)}<div class="opt-info">
         ${o.t || o.pick ? `<div class="ot">${esc((o.t || '⭐ Recommended').replace(/Pick/g, 'Recommended').replace(/pick/g, 'recommendation'))}</div>` : ''}
         <div class="on">${esc(o.n)}</div>
@@ -118,20 +118,21 @@
   function regroup() {
     for (const card of cards) {
       const item=roomItems.find(x=>x.id===card.dataset.item), status=NEST_ITEMS.status(item);
-      groups.find(g=>g.dataset.status===status).querySelector('.status-items').append(card);
+      if(item.ref) { needRoot.append(card); card.dataset.reference='true'; }
+      else groups.find(g=>g.dataset.status===status).querySelector('.status-items').append(card);
       let badge=card.querySelector(':scope > .item-status');
       if(!badge) { badge=document.createElement('div'); card.prepend(badge); }
-      badge.className='item-status status-label status-'+status; badge.textContent=NEST_ITEMS.label(status);
+      badge.className='item-status status-label status-'+status; badge.textContent=NEST_ITEMS.label(status)+(item.ref?' · reference only, counted in '+item.source.room:'');
+      card.hidden=!!item.ref&&filter!=='all'&&filter!==status;
       const opts=card.querySelector('.opts');
       if(opts) {
         let rejected=card.querySelector('.rejected');
         if(!rejected) { rejected=document.createElement('details'); rejected.className='rejected'; rejected.innerHTML='<summary>Rejected</summary><div class="opts"></div>'; opts.after(rejected); }
         for(const opt of card.querySelectorAll('[data-dk]')) {
-          const state=NEST_ITEMS.optionState(opt.dataset.dk,opt.dataset.st);
-          (state==='reject'?rejected.querySelector('.opts'):opts).append(opt);
+          const os=NEST_ITEMS.optionStatus(item,item.o.find(o=>NEST_ITEMS.optionKey(item,o)===opt.dataset.dk));
+          (os==='reject'?rejected.querySelector('.opts'):opts).append(opt);
           let tag=opt.querySelector('.option-status');
           if(!tag) { tag=document.createElement('div'); opt.prepend(tag); }
-          const os=NEST_ITEMS.optionStatus(item,item.o.find(o=>NEST_ITEMS.optionKey(item,o)===opt.dataset.dk));
           tag.className='option-status status-label status-'+os; tag.textContent=os==='reject'?'✕ Rejected':NEST_ITEMS.label(os);
         }
         const count=rejected.querySelectorAll('[data-dk]').length;
