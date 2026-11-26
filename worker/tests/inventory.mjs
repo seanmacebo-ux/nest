@@ -23,11 +23,10 @@ vm.runInContext(read('room-data.js')+read('item-status.js'),ctx);
 ctx.NEST_ITEMS=ctx.window.NEST_ITEMS;
 const M=ctx.NEST_ITEMS,canonical=M.items.filter(x=>!x.ref);
 const item=name=>M.items.find(x=>x.name===name);
-assert.deepEqual(JSON.parse(JSON.stringify(M.summary().counts)),{need:19,considering:16,bought:9});
-assert.deepEqual(Array.from(canonical.filter(x=>['Coffee table','Fridge','Washer'].includes(x.name)),x=>x.name).sort(),['Coffee table','Fridge','Washer']);
-assert.equal(M.totals(canonical.filter(x=>['Coffee table','Fridge','Washer'].includes(x.name))).total,14607);
-for(const name of ['Coffee table','Fridge','Washer'])assert.equal(M.status(item(name)),'considering',name);
-assert.match(item('Fridge').sub,/flat has no fridge/);assert.match(item('Washer').sub,/Mom/);
+assert.deepEqual(JSON.parse(JSON.stringify(M.summary().counts)),{need:19,considering:14,bought:11});
+assert.equal(M.totals(canonical.filter(x=>x.name==='Coffee table')).total,1609);
+assert.equal(M.status(item('Coffee table')),'considering');
+for(const name of ['Fridge','Washing machine'])assert.equal(M.status(item(name)),'bought',name);
 for(const name of ['TV','TV stand','Couch','Mattress','Pillows','Bedroom fan','Laptop','Ring light + tripod','Evotel fibre 120/120'])assert.equal(M.status(item(name)),'bought',name);
 assert.equal(item('Confirm fibre network'),undefined);assert.equal(item('Mini UPS for router'),undefined);
 assert.equal(M.price(item('TV stand')),1103.19);
@@ -67,7 +66,7 @@ vm.runInContext(read('overview.js'),ctx);await new Promise(resolve=>setTimeout(r
 assert.match(nodes['views-switcher'].innerHTML,/How this works: Need → Considering → Bought/);
 assert.doesNotMatch(nodes['views-switcher'].innerHTML,/Decided|data-view="decided"/);
 assert.equal((nodes['views-switcher'].innerHTML.match(/<button /g)||[]).length,4);
-for(const name of ['Coffee table','Fridge','Washer']) {
+for(const name of ['Coffee table']) {
  const card=nodes.overview.innerHTML.split('<article ').find(html=>html.includes('data-item="'+item(name).id+'"'));
  assert.match(card,/data-status="considering"/);assert.match(card,/class="top-pick">⭐ Top pick/);
 }
